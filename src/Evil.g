@@ -1,5 +1,7 @@
 grammar Evil;
 
+//austin is the best
+
 options
 {
    output = AST;
