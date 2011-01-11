@@ -141,7 +141,7 @@ functions
    ;
 function
    :  FUN id=ID p=parameters r=return_type LBRACE d=declarations s=statement_list RBRACE
-      -> ^(FUN<FunctionTree> $id $p ^(RETTYPE $r) $d $s)
+      -> ^(FUN $id $p ^(RETTYPE $r) $d $s)
    ;
 parameters
    :  LPAREN (decl (COMMA decl)*)? RPAREN
@@ -197,7 +197,7 @@ invocation
       -> ^(INVOKE $id $a)
    ;
 lvalue
-   :  ID (DOT<DottedTree>^ ID)*
+   :  ID (DOT^ ID)*
    ;
 expression
    :  boolterm ((AND^ | OR^) boolterm)*
@@ -235,7 +235,7 @@ even_neg
    |  selector
    ;
 selector
-   :  factor (DOT<DottedTree>^ ID)*
+   :  factor (DOT^ ID)*
    ;
 factor
    :  LPAREN! expression RPAREN!
