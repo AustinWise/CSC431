@@ -45,10 +45,12 @@ tokens
 @header
 {
    /* package declaration here */
+
 }
 @lexer::header
 {
    /* package declaration here */
+
 }
 
 /*

@@ -1,15 +1,18 @@
 FILES=Evil.java
+CLASSPATH=../lib/antlr-3.3-complete.jar
 
+Evil.class: ${FILES} output/EvilParser.java
+	mkdir -p bin
+	javac -classpath $(CLASSPATH) -d bin *.java output/*.java
 
-Evil.class : antlr.generated ${FILES}
-	javac *.java
+output/EvilParser.java: Evil.g
+	mkdir -p output
+	java -jar ../lib/antlr-3.3-complete.jar -o output Evil.g
 
-antlr.generated: antlr.generated.evil
-	touch antlr.generated
+clean:
+	rm bin/*
+	rm output/*
 
-antlr.generated.evil : Evil.g
-	java org.antlr.Tool Evil.g
-	touch antlr.generated.evil
+run: Evil.class
+	java -cp bin/:../lib/antlr-3.3-complete.jar Evil
 
-safe:
-	\cp *.g *.java ~/.431
