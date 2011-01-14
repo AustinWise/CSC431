@@ -26,6 +26,32 @@ options
 	{
 		System.out.println(msg);
 	}
+	
+	private static Type checkInvoke(String funSym, List<Type> args)
+	{
+		throw new Error("ryan loves turtles and checkInvoke is not done");
+	}
+		
+	private static Type getVar(SymbolTable stable, org.antlr.runtime.tree.CommonTree sym)
+	{
+		if (stable.exists(sym.getText()))
+		{
+			Type t = stable.getType(sym.getText());
+			if (t.isFun())
+				error(sym.getLine(), "sym '" + sym.getText() + "' is a fun and that does not fly");
+			return t;
+		}
+		error(sym.getLine(), "could not find symbol '" + sym.getText() + "'");
+		return null;
+	}
+		
+	private static Type getStruct(StructTypes stypes, org.antlr.runtime.tree.CommonTree sym)
+	{
+		if (stypes.isDefined(sym.getText()))
+			return Type.structType(sym.getText());
+		error(sym.getLine(), "could not find type '" + sym.getText() + "'");
+		return null;
+	}
 }
 
 program [StructTypes stypes, SymbolTable stable]
@@ -213,18 +239,18 @@ lvalue[StructTypes stypes,SymbolTable stable]
 	;
 
 expression[StructTypes stypes,SymbolTable stable]
-	: ^(AND expression[stypes,stable] expression[stypes,stable])
-	| ^(OR expression[stypes,stable] expression[stypes,stable])
-	| ^(EQ expression[stypes,stable] expression[stypes,stable])
-	| ^(LT expression[stypes,stable] expression[stypes,stable])
-	| ^(GT expression[stypes,stable] expression[stypes,stable])
-	| ^(NE expression[stypes,stable] expression[stypes,stable])
-	| ^(LE expression[stypes,stable] expression[stypes,stable])
-	| ^(GE expression[stypes,stable] expression[stypes,stable])
-	| ^(PLUS expression[stypes,stable] expression[stypes,stable])
-	| ^(MINUS expression[stypes,stable] expression[stypes,stable])
-	| ^(TIMES expression[stypes,stable] expression[stypes,stable])
-	| ^(DIVIDE expression[stypes,stable] expression[stypes,stable])
+	: ^(AND e1=expression[stypes,stable] e2=expression[stypes,stable])
+	| ^(OR e1=expression[stypes,stable] e2=expression[stypes,stable])
+	| ^(EQ e1=expression[stypes,stable] e2=expression[stypes,stable])
+	| ^(LT e1=expression[stypes,stable] e2=expression[stypes,stable])
+	| ^(GT e1=expression[stypes,stable] e2=expression[stypes,stable])
+	| ^(NE e1=expression[stypes,stable] e2=expression[stypes,stable])
+	| ^(LE e1=expression[stypes,stable] e2=expression[stypes,stable])
+	| ^(GE e1=expression[stypes,stable] e2=expression[stypes,stable])
+	| ^(PLUS e1=expression[stypes,stable] e2=expression[stypes,stable])
+	| ^(MINUS e1=expression[stypes,stable] e2=expression[stypes,stable])
+	| ^(TIMES e1=expression[stypes,stable] e2=expression[stypes,stable])
+	| ^(DIVIDE e1=expression[stypes,stable] e2=expression[stypes,stable])
 	| ^(NOT expression[stypes,stable])
 	| ^(NEG expression[stypes,stable])
 	| selector[stypes,stable]
@@ -235,13 +261,13 @@ selector[StructTypes stypes,SymbolTable stable]
 	| factor[stypes,stable]
 	;
 
-factor[StructTypes stypes,SymbolTable stable]
+factor[StructTypes stypes,SymbolTable stable] returns [Type t = null]
 	: ^(INVOKE ID arguments[stypes,stable])
-	| ID
-	| INTEGER
-	| TRUE
-	| FALSE
-	| ^(NEW ID)
+	| id=ID {$t = getVar($stable, $id);}
+	| INTEGER {$t = Type.intType();}
+	| TRUE {$t = Type.boolType();}
+	| FALSE{$t = Type.boolType();}
+	| ^(NEW id=ID) {$t = getStruct($stypes, $id);}
 	| NULL
 	;
 

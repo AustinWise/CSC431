@@ -41,6 +41,11 @@ class Type
 		return this.typeCode == TYPE_VOID;
 	}
 
+	public boolean isFun()
+	{
+		return this.typeCode == TYPE_FUN;
+	}
+
 	public static Type funType(List<Type> arguments, Type retType)
 	{
 		return new Type(arguments, retType);

@@ -37,4 +37,22 @@ class SymbolTable
 	{
 		return declares.containsKey(sym);
 	}
+
+	public Type getType(String sym)
+	{
+		if (declares.containsKey(sym))
+			return declares.get(sym);
+		if (parent == null)
+			throw new Error("dear god and heaven, what are you doing, '" + sym + "' is not defined in the symbol table, you should have caught this already!");
+		return parent.getType(sym);
+	}
+
+	public boolean exists(String sym)
+	{
+		if (declares.containsKey(sym))
+			return true;
+		if (parent == null)
+			return false;
+		return parent.exists(sym);
+	}
 }
