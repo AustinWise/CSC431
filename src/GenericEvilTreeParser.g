@@ -120,56 +120,74 @@ functions [StructTypes stypes,SymbolTable stable]
 	;
 
 function [StructTypes stypes,SymbolTable globalStable]
-@init {SymbolTable myStable = new SymbolTable($globalStable); }
-	: ^(FUN id=ID p=parameters[stypes, myStable] ^(RETTYPE r=return_type[stypes]) d=declarations[stypes, myStable] s=statement_list)
+@init {SymbolTable myStable = new SymbolTable($globalStable); ArrayList<Type> sparams = new ArrayList<Type>(); }
+	: ^(FUN id=ID p=parameters[stypes, myStable, sparams] ^(RETTYPE r=return_type[stypes]) d=declarations[stypes, myStable]
+	{
+		if ($globalStable.redef($id.text))
+		{
+			error($id.line, "redef function '" + $id + "'");
+		}
+		$globalStable.put($id.text, Type.funType(sparams, r));
+		myStable.isVoidFun = r.isVoid();
+	} s=statement_list)
+	{
+	}
 	;
 
-parameters [StructTypes stypes,SymbolTable stable]
-	: ^(PARAMS decl[stypes, stable]*)
+parameters [StructTypes stypes,SymbolTable stable, ArrayList<Type> sparams]
+	: ^(PARAMS param_decl[stypes, stable, sparams]*)
 	;
 	
-decl[StructTypes stypes, SymbolTable stable]
-   :  ^(DECL ^(TYPE tt=type[stypes]) id=ID) 
+param_decl[StructTypes stypes, SymbolTable stable, ArrayList<Type> sparams]
+   :  ^(DECL ^(TYPE tt=type[stypes]) id=ID)
+  {
+  	if ($stable.redef($id.text))
+  	{
+  		error($id.line, "redefinition of parameter '" + $id + "'");
+  	}
+  	$stable.putFormal($id.text, tt);
+  	$sparams.add(tt);
+  }
    ;
 
-return_type[StructTypes stypes]
-	: type[stypes]
-	| VOID
+return_type[StructTypes stypes] returns [Type retT = null]
+	: t=type[stypes]{$retT = t;} 
+	| VOID {$retT = Type.voidType(); }
 	;
 
-statement
-	: block
-	| assignment
-	| print
-	| read
-	| conditional
-	| loop
-	| delete
-	| ret
-	| invocation
+statement[StructTypes stypes,SymbolTable stable]
+	: block[stypes,stable]
+	| assignment[stypes,stable]
+	| print[stypes,stable]
+	| read[stypes,stable]
+	| conditional[stypes,stable]
+	| loop[stypes,stable]
+	| delete[stypes,stable]
+	| ret[stypes,stable]
+	| invocation[stypes,stable]
 	;
 
-block
+block[StructTypes stypes,SymbolTable stable]
 	: ^(BLOCK statement_list)
 	;
 
-statement_list
+statement_list[StructTypes stypes,SymbolTable stable]
 	: ^(STMTS statement*)
 	;
 
-assignment
+assignment[StructTypes stypes,SymbolTable stable]
 	: ^(ASSIGN expression lvalue)
 	;
 
-print
+print[StructTypes stypes,SymbolTable stable]
 	: ^(PRINT expression (ENDL)?)
 	;
 
-read
+read[StructTypes stypes,SymbolTable stable]
 	: ^(READ lvalue)
 	;
 
-conditional
+conditional[StructTypes stypes,SymbolTable stable]
 	: ^(IF expression block (block)?)
 	;
 

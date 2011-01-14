@@ -6,6 +6,8 @@ class SymbolTable
 	private Hashtable<String, Type> declares = new Hashtable<String, Type>();
 	private ArrayList<String> formals = new ArrayList<String>();
 
+	public boolean isVoidFun = false;
+
 	public SymbolTable()
 	{
 	}
@@ -18,6 +20,12 @@ class SymbolTable
 	public void put(String sym, Type t)
 	{
 		this.declares.put(sym, t);
+	}
+
+	public void putFormal(String sym, Type t)
+	{
+		this.put(sym, t);
+		this.formals.add(sym);
 	}
 
 	public boolean isFormal(String sym)

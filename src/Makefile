@@ -1,7 +1,7 @@
 FILES=Evil.java
 CLASSPATH=../lib/antlr-3.3-complete.jar
 
-bin/Evil.class: ${FILES} output/EvilParser.java output/GenericEvilTreeParser.java
+bin/Evil.class: ${FILES} output/EvilParser.java output/GenericEvilTreeParser.java *.java
 	mkdir -p bin
 	javac -classpath $(CLASSPATH) -d bin *.java output/*.java
 
