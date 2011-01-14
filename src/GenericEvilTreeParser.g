@@ -129,7 +129,7 @@ function [StructTypes stypes,SymbolTable globalStable]
 		}
 		$globalStable.put($id.text, Type.funType(sparams, r));
 		myStable.isVoidFun = r.isVoid();
-	} s=statement_list)
+	} s=statement_list[stypes,myStable])
 	{
 	}
 	;
@@ -168,75 +168,75 @@ statement[StructTypes stypes,SymbolTable stable]
 	;
 
 block[StructTypes stypes,SymbolTable stable]
-	: ^(BLOCK statement_list)
+	: ^(BLOCK statement_list[stypes,stable])
 	;
 
 statement_list[StructTypes stypes,SymbolTable stable]
-	: ^(STMTS statement*)
+	: ^(STMTS statement[stypes,stable]*)
 	;
 
 assignment[StructTypes stypes,SymbolTable stable]
-	: ^(ASSIGN expression lvalue)
+	: ^(ASSIGN expression[stypes,stable] lvalue[stypes,stable])
 	;
 
 print[StructTypes stypes,SymbolTable stable]
-	: ^(PRINT expression (ENDL)?)
+	: ^(PRINT expression[stypes,stable] (ENDL)?)
 	;
 
 read[StructTypes stypes,SymbolTable stable]
-	: ^(READ lvalue)
+	: ^(READ lvalue[stypes,stable])
 	;
 
 conditional[StructTypes stypes,SymbolTable stable]
-	: ^(IF expression block (block)?)
+	: ^(IF expression[stypes,stable] block[stypes,stable] (block[stypes,stable])?)
 	;
 
-loop
-	: ^(WHILE expression block expression)
+loop[StructTypes stypes,SymbolTable stable]
+	: ^(WHILE expression[stypes,stable] block[stypes,stable] expression[stypes,stable])
 	;
 
-delete
-	: ^(DELETE expression)
+delete[StructTypes stypes,SymbolTable stable]
+	: ^(DELETE expression[stypes,stable])
 	;
 
-ret
-	: ^(RETURN (expression)?)
+ret[StructTypes stypes,SymbolTable stable]
+	: ^(RETURN (expression[stypes,stable])?)
 	;
 
-invocation
-	: ^(INVOKE id=ID arguments)
+invocation[StructTypes stypes,SymbolTable stable]
+	: ^(INVOKE id=ID arguments[stypes,stable])
 	;
 
-lvalue
-	: ^(DOT lvalue ID)
+lvalue[StructTypes stypes,SymbolTable stable]
+	: ^(DOT lvalue[stypes,stable] ID)
 	| ID
 	;
 
-expression
-	: ^(AND expression expression)
-	| ^(OR expression expression)
-	| ^(EQ expression expression)
-	| ^(LT expression expression)
-	| ^(GT expression expression)
-	| ^(NE expression expression)
-	| ^(LE expression expression)
-	| ^(GE expression expression)
-	| ^(PLUS expression expression)
-	| ^(MINUS expression expression)
-	| ^(TIMES expression expression)
-	| ^(DIVIDE expression expression)
-	| ^(NOT expression)
-	| ^(NEG expression)
-	| selector
+expression[StructTypes stypes,SymbolTable stable]
+	: ^(AND expression[stypes,stable] expression[stypes,stable])
+	| ^(OR expression[stypes,stable] expression[stypes,stable])
+	| ^(EQ expression[stypes,stable] expression[stypes,stable])
+	| ^(LT expression[stypes,stable] expression[stypes,stable])
+	| ^(GT expression[stypes,stable] expression[stypes,stable])
+	| ^(NE expression[stypes,stable] expression[stypes,stable])
+	| ^(LE expression[stypes,stable] expression[stypes,stable])
+	| ^(GE expression[stypes,stable] expression[stypes,stable])
+	| ^(PLUS expression[stypes,stable] expression[stypes,stable])
+	| ^(MINUS expression[stypes,stable] expression[stypes,stable])
+	| ^(TIMES expression[stypes,stable] expression[stypes,stable])
+	| ^(DIVIDE expression[stypes,stable] expression[stypes,stable])
+	| ^(NOT expression[stypes,stable])
+	| ^(NEG expression[stypes,stable])
+	| selector[stypes,stable]
 	;
 
-selector
-	: ^(DOT selector ID)
-	| factor
+selector[StructTypes stypes,SymbolTable stable]
+	: ^(DOT selector[stypes,stable] ID)
+	| factor[stypes,stable]
 	;
 
-factor
-	: ^(INVOKE ID arguments)
+factor[StructTypes stypes,SymbolTable stable]
+	: ^(INVOKE ID arguments[stypes,stable])
 	| ID
 	| INTEGER
 	| TRUE
@@ -245,11 +245,11 @@ factor
 	| NULL
 	;
 
-arguments
-	: arg_list
+arguments[StructTypes stypes,SymbolTable stable]
+	: arg_list[stypes,stable]
 	;
 
-arg_list
-	: ^(ARGS expression+)
+arg_list[StructTypes stypes,SymbolTable stable]
+	: ^(ARGS expression[stypes,stable]+)
 	| ARGS
 	;
