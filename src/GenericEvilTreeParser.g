@@ -38,20 +38,38 @@ types [StructTypes stypes]
    ;
 
 type_declaration [StructTypes stypes]
-   :  ^(STRUCT id=ID nested_decl[stypes]) {wl("type " + $id);}
+@init {StructTypes.StructDef sdef = null;}
+   :  ^(STRUCT (id=ID) 
+   	{
+   		if ($stypes.isDefined($id.text))
+   		{
+   			error($id.line, "struct type already defined: '" + $id.text + "'");
+   		}
+   		sdef = $stypes.define($id.text);
+   	}
+         nested_decl[stypes, sdef]) 
+         	{
+         	}
    ;
 
-nested_decl [StructTypes stypes]
-   :  (decl[stypes] {wl("inside nested devl");} )+
+nested_decl [StructTypes stypes, StructTypes.StructDef sdef]
+   :  (decl[stypes, sdef])+
    ;
 
 types_sub [StructTypes stypes]
-   :  (type_declaration[stypes] types_sub[stypes]) {wl("types with less lol");}
-   | {wl("no more types_sub");}
+   :  (type_declaration[stypes] types_sub[stypes])
+   | {}
    ;
 
-decl [StructTypes stypes]
-   :  ^(DECL ^(TYPE type[stypes]) id=ID) {wl("decl id: " + $id);}
+decl [StructTypes stypes, StructTypes.StructDef sdef]
+   :  ^(DECL ^(TYPE tt=type[stypes]) id=ID) 
+	{	wl(tt.toString());
+		if($sdef.hasField($id.text))
+		{
+			error($id.line, "double field danger!: " + $id + " in struct: " + $sdef.getName());
+		}
+		$sdef.addField($id.text, tt);
+	}
    ;
 
 type [StructTypes stypes] returns [Type t = null]
