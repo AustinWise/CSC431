@@ -6,7 +6,7 @@ class SymbolTable
 	private Hashtable<String, Type> declares = new Hashtable<String, Type>();
 	private ArrayList<String> formals = new ArrayList<String>();
 
-	public boolean isVoidFun = false;
+	public Type returnType = null;
 
 	public SymbolTable()
 	{
