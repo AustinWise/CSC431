@@ -29,7 +29,7 @@ options
 }
 
 program [StructTypes stypes, SymbolTable stable]
-	: ^(PROGRAM (types[stypes] declarations[stypes, stable] FUNCS)) {wl("program");}
+	: ^(PROGRAM (types[stypes] declarations[stypes, stable] functions[stypes, stable])) {wl("program");}
 	;
 
 types [StructTypes stypes]
@@ -53,7 +53,7 @@ type_declaration [StructTypes stypes]
    ;
 
 nested_decl [StructTypes stypes, StructTypes.StructDef sdef]
-   :  (decl[stypes, sdef])+
+   :  (field_decl[stypes, sdef])+
    ;
 
 types_sub [StructTypes stypes]
@@ -61,7 +61,7 @@ types_sub [StructTypes stypes]
    | {}
    ;
 
-decl [StructTypes stypes, StructTypes.StructDef sdef]
+field_decl [StructTypes stypes, StructTypes.StructDef sdef]
    :  ^(DECL ^(TYPE tt=type[stypes]) id=ID) 
 	{
 		if($sdef.hasField($id.text))
@@ -114,3 +114,120 @@ id_list [Type t, SymbolTable stable]
 		}
 	)+
 ;
+
+functions [StructTypes stypes,SymbolTable stable]
+	: ^(FUNCS function[stypes, stable]*)
+	;
+
+function [StructTypes stypes,SymbolTable globalStable]
+@init {SymbolTable myStable = new SymbolTable($globalStable); }
+	: ^(FUN id=ID p=parameters[stypes, myStable] ^(RETTYPE r=return_type[stypes]) d=declarations[stypes, myStable] s=statement_list)
+	;
+
+parameters [StructTypes stypes,SymbolTable stable]
+	: ^(PARAMS decl[stypes, stable]*)
+	;
+	
+decl[StructTypes stypes, SymbolTable stable]
+   :  ^(DECL ^(TYPE tt=type[stypes]) id=ID) 
+   ;
+
+return_type[StructTypes stypes]
+	: type[stypes]
+	| VOID
+	;
+
+statement
+	: block
+	| assignment
+	| print
+	| read
+	| conditional
+	| loop
+	| delete
+	| ret
+	| invocation
+	;
+
+block
+	: ^(BLOCK statement_list)
+	;
+
+statement_list
+	: ^(STMTS statement*)
+	;
+
+assignment
+	: ^(ASSIGN expression lvalue)
+	;
+
+print
+	: ^(PRINT expression (ENDL)?)
+	;
+
+read
+	: ^(READ lvalue)
+	;
+
+conditional
+	: ^(IF expression block (block)?)
+	;
+
+loop
+	: ^(WHILE expression block expression)
+	;
+
+delete
+	: ^(DELETE expression)
+	;
+
+ret
+	: ^(RETURN (expression)?)
+	;
+
+invocation
+	: ^(INVOKE id=ID arguments)
+	;
+
+lvalue
+	: ^(DOT lvalue ID)
+	| ID
+	;
+
+expression
+	: ^(AND expression expression)
+	| ^(OR expression expression)
+	| ^(EQ expression expression)
+	| ^(LT expression expression)
+	| ^(GT expression expression)
+	| ^(NE expression expression)
+	| ^(LE expression expression)
+	| ^(GE expression expression)
+	| ^(PLUS expression expression)
+	| ^(MINUS expression expression)
+	| ^(TIMES expression expression)
+	| ^(DIVIDE expression expression)
+	| ^(NOT expression)
+	| ^(NEG expression)
+	| ^(DOT expression ID)
+	| factor
+	;
+
+factor
+	: ^(INVOKE ID arguments)
+	| ID
+	| INTEGER
+	| TRUE
+	| FALSE
+	| ^(NEW ID)
+	| NULL
+	;
+
+arguments
+	: arg_list
+	;
+
+arg_list
+	: ^(ARGS expression+)
+	| ARGS
+	;
