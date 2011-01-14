@@ -209,7 +209,11 @@ expression
 	| ^(DIVIDE expression expression)
 	| ^(NOT expression)
 	| ^(NEG expression)
-	| ^(DOT expression ID)
+	| selector
+	;
+
+selector
+	: ^(DOT selector ID)
 	| factor
 	;
 
