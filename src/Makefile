@@ -17,5 +17,5 @@ clean:
 	rm output/*
 
 run: Evil.class
-	java -cp bin/:../lib/antlr-3.3-complete.jar Evil
+	java -cp bin/:../lib/antlr-3.3-complete.jar Evil 1.ev
 

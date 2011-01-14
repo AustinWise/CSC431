@@ -23,6 +23,7 @@ public class Evil
       catch (org.antlr.runtime.RecognitionException e)
       {
          error(e.toString());
+	return;
       }
 
       CommonTree t = (CommonTree)ret.getTree();
@@ -34,21 +35,23 @@ public class Evil
       }
 
       /*
-         To create and invoke a tree parser.  Modify with the appropriate
-         name of the tree parser and the appropriate start rule.
+         create and invoke a tree parser
+	*/
       try
       {
          CommonTreeNodeStream nodes = new CommonTreeNodeStream(t);
          nodes.setTokenStream(tokens);
-         --TreeParserName-- tparser = new --TreeParserName--(nodes);
+         GenericEvilTreeParser tparser = new GenericEvilTreeParser(nodes);
 
-         tparser.--start rule--();
+	StructTypes stypes = new StructTypes();
+	SymbolTable stable = new SymbolTable();
+
+         tparser.program(stypes, stable);
       }
       catch (org.antlr.runtime.RecognitionException e)
       {
          error(e.toString());
       }
-      */
    }
 
    private static final String DISPLAYAST = "-displayAST";

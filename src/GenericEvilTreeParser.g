@@ -21,32 +21,37 @@ options
 		System.out.println(lineNum + ": " + errorMsg);
 		System.exit(1);
 	}
+
+	private static void wl(String msg)
+	{
+		System.out.println(msg);
+	}
 }
 
 program [StructTypes stypes, SymbolTable stable]
-	: ^(PROGRAM (t=types[stypes] d=declarations [stypes, stable] f=FUNCS))
+	: ^(PROGRAM (types[stypes] declarations[stypes, stable] FUNCS)) {wl("program");}
 	;
 
 types [StructTypes stypes]
-   :  ^(TYPES types_sub[stypes])
-   |  TYPES
+   :  ^(TYPES types_sub[stypes]) {wl("the proper types version");}
+   |  TYPES {wl("types lol");}
    ;
 
 type_declaration [StructTypes stypes]
-   :  STRUCT ID nested_decl[stypes]
+   :  ^(STRUCT id=ID nested_decl[stypes]) {wl("type " + $id);}
    ;
 
 nested_decl [StructTypes stypes]
-   :  (decl[stypes] )+
+   :  (decl[stypes] {wl("inside nested devl");} )+
    ;
 
 types_sub [StructTypes stypes]
-   :  type_declaration[stypes] types_sub[stypes]
-   | {}
+   :  (type_declaration[stypes] types_sub[stypes]) {wl("types with less lol");}
+   | {wl("no more types_sub");}
    ;
 
 decl [StructTypes stypes]
-   :  ^(DECL ^(TYPE type[stypes]) ID)
+   :  ^(DECL ^(TYPE type[stypes]) id=ID) {wl("decl id: " + $id);}
    ;
 
 type [StructTypes stypes] returns [Type t = null]
