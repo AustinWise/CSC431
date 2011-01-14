@@ -33,8 +33,8 @@ program [StructTypes stypes, SymbolTable stable]
 	;
 
 types [StructTypes stypes]
-   :  ^(TYPES types_sub[stypes]) {wl("the proper types version");}
-   |  TYPES {wl("types lol");}
+   :  ^(TYPES types_sub[stypes])
+   |  TYPES
    ;
 
 type_declaration [StructTypes stypes]
@@ -63,7 +63,7 @@ types_sub [StructTypes stypes]
 
 decl [StructTypes stypes, StructTypes.StructDef sdef]
    :  ^(DECL ^(TYPE tt=type[stypes]) id=ID) 
-	{	wl(tt.toString());
+	{
 		if($sdef.hasField($id.text))
 		{
 			error($id.line, "double field danger!: " + $id + " in struct: " + $sdef.getName());
