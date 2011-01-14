@@ -141,7 +141,19 @@ options
 }
 
 program [StructTypes stypes, SymbolTable stable]
-	: ^(PROGRAM (types[stypes] declarations[stypes, stable] functions[stypes, stable])) {wl("everything checks out");}
+	: ^(PROGRAM (types[stypes] declarations[stypes, stable] functions[stypes, stable])) 
+	{
+		if (!$stable.exists("main"))
+			error(-1, "main is missing");
+		Type mainT = $stable.getType("main");
+		if (!mainT.isFun())
+			error(-1, "main is not a function");
+		if (!mainT.getReturnType().isInt())
+			error(-1, "main needs to return int");
+		if (mainT.getArgs().size() != 0)
+			error(-1, "main needs to not have any args");
+		wl("everything checks out");
+	}
 	;
 
 types [StructTypes stypes]
@@ -243,6 +255,8 @@ function [StructTypes stypes,SymbolTable globalStable]
 		myStable.returnType = r;
 	} s=statement_list[stypes,myStable])
 	{
+		if (!s && !r.isVoid())
+			error($id.line, "function '" + $id.text + "' does not return");
 	}
 	;
 
