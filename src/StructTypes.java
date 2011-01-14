@@ -28,6 +28,11 @@ class StructTypes
 		{
 			types.put(f, t);
 		}
+
+		public Type getFieldType(String f)
+		{
+			return this.types.get(f);
+		}
 	}
 
 	public boolean isDefined(String sym)
@@ -40,6 +45,11 @@ class StructTypes
 		StructDef sdef = new StructDef(name);
 		this.definedTypes.put(name, sdef);
 		return sdef;
+	}
+
+	public StructDef get(String name)
+	{
+		return this.definedTypes.get(name);
 	}
 }
 

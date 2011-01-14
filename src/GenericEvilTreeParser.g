@@ -52,6 +52,92 @@ options
 		error(sym.getLine(), "could not find type '" + sym.getText() + "'");
 		return null;
 	}
+	
+	private static Type getFieldType(StructTypes stypes, Type maybeStruct, org.antlr.runtime.tree.CommonTree fieldId)
+	{
+		String sym = fieldId.getText();
+		if (!maybeStruct.isStruct())
+		{
+			error(fieldId.getLine(), "invalid selector '" + sym + "'");
+			return null;
+		}
+		
+		StructTypes.StructDef def = stypes.get(maybeStruct.getStructType());
+		
+		if (!def.hasField(sym))
+		{
+			error(fieldId.getLine(), "struct type '" + def.getName() + "' does not have a field '" + sym + "'");
+			return null;
+		}
+		
+		return def.getFieldType(sym);
+	}
+	
+	private static void ensureStructOrInt(Type e1, Type e2)
+	{
+		if (e1.getTypeCode() != e2.getTypeCode())
+			error(-1, "types in expression don't match");
+		if (e1.isStruct())
+			return;
+		ensureInt(e1, e2);
+	}
+	
+	private static void ensureInt(Type e1, Type e2)
+	{
+		ensureType(e1, e2, true);
+	}
+	
+	private static void ensureBool(Type e1, Type e2)
+	{
+		ensureType(e1, e2, false);
+	}
+	
+	private static void ensureType(Type e1, Type e2, boolean isInt)
+	{
+		boolean isGood = (isInt && e1.isInt() && e2.isInt()) || (!isInt && e1.isBool() && e2.isBool());
+		if (!isGood)
+			error(-1, "expression not " + (isInt ? "int" : "bool"));
+	}
+	
+	private static Type getFun(SymbolTable stable,org.antlr.runtime.tree.CommonTree funId, List<Type> argTypes)
+	{
+		String sym = funId.getText();
+		int line = funId.getLine();
+		if (!stable.exists(sym))
+		{
+			error(line, "function '" + sym + "' does not exist");
+			return null;
+		}
+		
+		Type fType = stable.getType(sym);
+		if (!fType.isFun())
+		{
+			error(line, "'" + sym + "' is not a function");
+			return null;
+		}
+		
+		List<Type> formals = fType.getArgs();
+		if (formals.size() != argTypes.size())
+		{
+			error(line, "argument number mis-match when calling '" + sym + "' (need " + formals.size() + ", have " + argTypes.size() + ")");
+			return null;
+		}
+		
+		for (int i = 0; i < formals.size(); i++)
+		{
+			Type t1, t2;
+			t1 = formals.get(i);
+			t2 = argTypes.get(i);
+			
+			if (!t1.canAssign(t2))
+			{
+				error(line, "arg " + i + " to function '" + sym + "' is not right");
+				return null;
+			}
+		}
+		
+		return fType.getReturnType();
+	}
 }
 
 program [StructTypes stypes, SymbolTable stable]
@@ -217,65 +303,65 @@ conditional[StructTypes stypes,SymbolTable stable]
 	: ^(IF expression[stypes,stable] block[stypes,stable] (block[stypes,stable])?)
 	;
 
-loop[StructTypes stypes,SymbolTable stable]
+loop[StructTypes stypes,SymbolTable stable] returns [boolean doesRet = false]
 	: ^(WHILE expression[stypes,stable] block[stypes,stable] expression[stypes,stable])
 	;
 
-delete[StructTypes stypes,SymbolTable stable]
+delete[StructTypes stypes,SymbolTable stable] returns [boolean doesRet = false]
 	: ^(DELETE expression[stypes,stable])
 	;
 
-ret[StructTypes stypes,SymbolTable stable]
+ret[StructTypes stypes,SymbolTable stable] returns [boolean doesRet = true]
 	: ^(RETURN (expression[stypes,stable])?)
 	;
 
-invocation[StructTypes stypes,SymbolTable stable]
+invocation[StructTypes stypes,SymbolTable stable] returns [boolean doesRet = false]
 	: ^(INVOKE id=ID arguments[stypes,stable])
 	;
 
-lvalue[StructTypes stypes,SymbolTable stable]
-	: ^(DOT lvalue[stypes,stable] ID)
-	| ID
+lvalue[StructTypes stypes,SymbolTable stable] returns [Type t = null]
+	: ^(DOT s=lvalue[stypes,stable] id=ID) { $t = getFieldType(stypes, s, $id); }
+	| id=ID { $t = getVar(stable, id); }
 	;
 
-expression[StructTypes stypes,SymbolTable stable]
-	: ^(AND e1=expression[stypes,stable] e2=expression[stypes,stable])
-	| ^(OR e1=expression[stypes,stable] e2=expression[stypes,stable])
-	| ^(EQ e1=expression[stypes,stable] e2=expression[stypes,stable])
-	| ^(LT e1=expression[stypes,stable] e2=expression[stypes,stable])
-	| ^(GT e1=expression[stypes,stable] e2=expression[stypes,stable])
-	| ^(NE e1=expression[stypes,stable] e2=expression[stypes,stable])
-	| ^(LE e1=expression[stypes,stable] e2=expression[stypes,stable])
-	| ^(GE e1=expression[stypes,stable] e2=expression[stypes,stable])
-	| ^(PLUS e1=expression[stypes,stable] e2=expression[stypes,stable])
-	| ^(MINUS e1=expression[stypes,stable] e2=expression[stypes,stable])
-	| ^(TIMES e1=expression[stypes,stable] e2=expression[stypes,stable])
-	| ^(DIVIDE e1=expression[stypes,stable] e2=expression[stypes,stable])
-	| ^(NOT expression[stypes,stable])
-	| ^(NEG expression[stypes,stable])
-	| selector[stypes,stable]
+expression[StructTypes stypes,SymbolTable stable] returns [Type t = null]
+	: ^(AND e1=expression[stypes,stable] e2=expression[stypes,stable]) {ensureBool(e1, e2); $t = Type.boolType();}
+	| ^(OR e1=expression[stypes,stable] e2=expression[stypes,stable]) {ensureBool(e1, e2); $t = Type.boolType();}
+	| ^(EQ e1=expression[stypes,stable] e2=expression[stypes,stable]) {ensureStructOrInt(e1, e2); $t = Type.boolType();}
+	| ^(LT e1=expression[stypes,stable] e2=expression[stypes,stable]) {ensureInt(e1, e2); $t = Type.boolType();}
+	| ^(GT e1=expression[stypes,stable] e2=expression[stypes,stable]) {ensureInt(e1, e2); $t = Type.boolType();}
+	| ^(NE e1=expression[stypes,stable] e2=expression[stypes,stable]) {ensureStructOrInt(e1, e2); $t = Type.boolType();}
+	| ^(LE e1=expression[stypes,stable] e2=expression[stypes,stable]) {ensureInt(e1, e2); $t = Type.boolType();}
+	| ^(GE e1=expression[stypes,stable] e2=expression[stypes,stable]) {ensureInt(e1, e2); $t = Type.boolType();}
+	| ^(PLUS e1=expression[stypes,stable] e2=expression[stypes,stable]) {ensureInt(e1, e2); $t = Type.intType();}
+	| ^(MINUS e1=expression[stypes,stable] e2=expression[stypes,stable]) {ensureInt(e1, e2); $t = Type.intType();}
+	| ^(TIMES e1=expression[stypes,stable] e2=expression[stypes,stable]) {ensureInt(e1, e2); $t = Type.intType();}
+	| ^(DIVIDE e1=expression[stypes,stable] e2=expression[stypes,stable]) {ensureInt(e1, e2); $t = Type.intType();}
+	| ^(NOT e=expression[stypes,stable]) {ensureBool(e, Type.boolType()); $t = Type.boolType();}
+	| ^(NEG e=expression[stypes,stable]) {ensureInt(e, Type.intType()); $t = Type.intType();}
+	| s=selector[stypes,stable] { $t = s; }
 	;
 
-selector[StructTypes stypes,SymbolTable stable]
-	: ^(DOT selector[stypes,stable] ID)
-	| factor[stypes,stable]
+selector[StructTypes stypes,SymbolTable stable] returns [Type t = null]
+	: ^(DOT s=selector[stypes,stable] id=ID) { $t = getFieldType(stypes, s, $id); }
+	| f=factor[stypes,stable] {$t = f;}
 	;
 
 factor[StructTypes stypes,SymbolTable stable] returns [Type t = null]
-	: ^(INVOKE ID arguments[stypes,stable])
+	: ^(INVOKE id=ID args=arguments[stypes,stable]) {$t = getFun($stable, $id,args); }
 	| id=ID {$t = getVar($stable, $id);}
 	| INTEGER {$t = Type.intType();}
 	| TRUE {$t = Type.boolType();}
 	| FALSE{$t = Type.boolType();}
 	| ^(NEW id=ID) {$t = getStruct($stypes, $id);}
-	| NULL
+	| NULL {$t = Type.nullType();}
 	;
 
-arguments[StructTypes stypes,SymbolTable stable]
-	: arg_list[stypes,stable]
+arguments[StructTypes stypes,SymbolTable stable] returns [ArrayList<Type> ret = null]
+	: args=arg_list[stypes,stable] {$ret = args; }
 	;
 
-arg_list[StructTypes stypes,SymbolTable stable]
-	: ^(ARGS expression[stypes,stable]+)
+arg_list[StructTypes stypes,SymbolTable stable] returns [ArrayList<Type> args = new ArrayList<Type>()]
+	: ^(ARGS (e=expression[stypes,stable]{$args.add(e);})+ )
 	| ARGS
 	;
