@@ -47,10 +47,20 @@
     <Compile Include="EvilLexer.cs" />
     <Compile Include="EvilParser.cs" />
     <Compile Include="GenericEvilTreeParser.cs" />
+    <Compile Include="IlGenWalker.cs" />
+    <Compile Include="ILOC\Instruction.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Instruction.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Compile Include="ILOC\Instruction.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Instruction.generated.cs</LastGenOutput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="StructTypes.cs" />
@@ -59,6 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Evil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CFG\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
