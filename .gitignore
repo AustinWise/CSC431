@@ -1,3 +1,9 @@
-bin
 output
-
+*.suo
+*proj.user
+bin
+obj
+bin/*
+obj/*
+*.cache
+*.tokens
