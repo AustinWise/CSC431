@@ -25,7 +25,6 @@ program [StructTypes stypes, SymbolTable stable]
 			error(-1, "main needs to return int");
 		if (mainT.getArgs().Count != 0)
 			error(-1, "main needs to not have any args");
-		wl("everything checks out");
 	}
 	;
 
@@ -84,7 +83,7 @@ type [StructTypes stypes] returns [Type t = null]
 
 declarations [StructTypes stypes, SymbolTable stable]
 	: ^(DECLS declaration[stypes,stable])
-	| { Console.WriteLine("There are no declarations"); }
+	| {}
 ;
 
 declaration [StructTypes stypes,SymbolTable stable]
