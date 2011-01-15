@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-01-15 11:48:46
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-01-15 13:44:21
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -7,6 +7,7 @@
 
 
    /* package declaration here */
+   
 
 
 
@@ -22,6 +23,8 @@ using HashMap = System.Collections.Generic.Dictionary<object, object>;
 using Antlr.Runtime.Tree;
 using RewriteRuleITokenStream = Antlr.Runtime.Tree.RewriteRuleTokenStream;
 
+namespace CSC431
+{
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "3.3 Nov 30, 2010 12:50:56")]
 [System.CLSCompliant(false)]
 public partial class EvilParser : Antlr.Runtime.Parser
@@ -153,7 +156,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_program() {}
 
     // $ANTLR start "program"
-    // Evil.g:104:1: program : t= types d= declarations f= functions EOF -> ^( PROGRAM $t $d $f) ;
+    // Evil.g:108:1: program : t= types d= declarations f= functions EOF -> ^( PROGRAM $t $d $f) ;
     [GrammarRule("program")]
     private EvilParser.program_return program()
     {
@@ -174,40 +177,40 @@ public partial class EvilParser : Antlr.Runtime.Parser
         RewriteRuleSubtreeStream stream_types=new RewriteRuleSubtreeStream(adaptor,"rule types");
         RewriteRuleSubtreeStream stream_declarations=new RewriteRuleSubtreeStream(adaptor,"rule declarations");
     	try { DebugEnterRule(GrammarFileName, "program");
-    	DebugLocation(104, 3);
+    	DebugLocation(108, 3);
     	try
     	{
-    		// Evil.g:105:4: (t= types d= declarations f= functions EOF -> ^( PROGRAM $t $d $f) )
+    		// Evil.g:109:4: (t= types d= declarations f= functions EOF -> ^( PROGRAM $t $d $f) )
     		DebugEnterAlt(1);
-    		// Evil.g:105:7: t= types d= declarations f= functions EOF
+    		// Evil.g:109:7: t= types d= declarations f= functions EOF
     		{
-    		DebugLocation(105, 8);
-    		PushFollow(Follow._types_in_program1052);
+    		DebugLocation(109, 8);
+    		PushFollow(Follow._types_in_program1066);
     		t=types();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_types.Add(t.Tree);
-    		DebugLocation(105, 16);
-    		PushFollow(Follow._declarations_in_program1056);
+    		DebugLocation(109, 16);
+    		PushFollow(Follow._declarations_in_program1070);
     		d=declarations();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_declarations.Add(d.Tree);
-    		DebugLocation(105, 31);
-    		PushFollow(Follow._functions_in_program1060);
+    		DebugLocation(109, 31);
+    		PushFollow(Follow._functions_in_program1074);
     		f=functions();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_functions.Add(f.Tree);
-    		DebugLocation(105, 42);
-    		EOF1=(IToken)Match(input,EOF,Follow._EOF_in_program1062); if (state.failed) return retval; 
+    		DebugLocation(109, 42);
+    		EOF1=(IToken)Match(input,EOF,Follow._EOF_in_program1076); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_EOF.Add(EOF1);
 
 
 
     		{
     		// AST REWRITE
-    		// elements: d, f, t
+    		// elements: f, t, d
     		// token labels: 
     		// rule labels: f, retval, d, t
     		// token list labels: 
@@ -221,20 +224,20 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		RewriteRuleSubtreeStream stream_t=new RewriteRuleSubtreeStream(adaptor,"rule t",t!=null?t.Tree:null);
 
     		root_0 = (object)adaptor.Nil();
-    		// 106:7: -> ^( PROGRAM $t $d $f)
+    		// 110:7: -> ^( PROGRAM $t $d $f)
     		{
-    			DebugLocation(106, 10);
-    			// Evil.g:106:10: ^( PROGRAM $t $d $f)
+    			DebugLocation(110, 10);
+    			// Evil.g:110:10: ^( PROGRAM $t $d $f)
     			{
     			object root_1 = (object)adaptor.Nil();
-    			DebugLocation(106, 12);
+    			DebugLocation(110, 12);
     			root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(PROGRAM, "PROGRAM"), root_1);
 
-    			DebugLocation(106, 20);
+    			DebugLocation(110, 20);
     			adaptor.AddChild(root_1, stream_t.NextTree());
-    			DebugLocation(106, 23);
+    			DebugLocation(110, 23);
     			adaptor.AddChild(root_1, stream_d.NextTree());
-    			DebugLocation(106, 26);
+    			DebugLocation(110, 26);
     			adaptor.AddChild(root_1, stream_f.NextTree());
 
     			adaptor.AddChild(root_0, root_1);
@@ -266,7 +269,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(107, 3);
+     	DebugLocation(111, 3);
     	} finally { DebugExitRule(GrammarFileName, "program"); }
     	return retval;
 
@@ -283,7 +286,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_types() {}
 
     // $ANTLR start "types"
-    // Evil.g:108:1: types : ( ( STRUCT ID LBRACE )=> types_sub -> ^( TYPES types_sub ) | -> TYPES );
+    // Evil.g:112:1: types : ( ( STRUCT ID LBRACE )=> types_sub -> ^( TYPES types_sub ) | -> TYPES );
     [GrammarRule("types")]
     private EvilParser.types_return types()
     {
@@ -297,10 +300,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
         RewriteRuleSubtreeStream stream_types_sub=new RewriteRuleSubtreeStream(adaptor,"rule types_sub");
     	try { DebugEnterRule(GrammarFileName, "types");
-    	DebugLocation(108, 3);
+    	DebugLocation(112, 3);
     	try
     	{
-    		// Evil.g:109:4: ( ( STRUCT ID LBRACE )=> types_sub -> ^( TYPES types_sub ) | -> TYPES )
+    		// Evil.g:113:4: ( ( STRUCT ID LBRACE )=> types_sub -> ^( TYPES types_sub ) | -> TYPES )
     		int alt1=2;
     		try { DebugEnterDecision(1, decisionCanBacktrack[1]);
     		switch (input.LA(1))
@@ -430,10 +433,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:109:7: ( STRUCT ID LBRACE )=> types_sub
+    			// Evil.g:113:7: ( STRUCT ID LBRACE )=> types_sub
     			{
-    			DebugLocation(109, 29);
-    			PushFollow(Follow._types_sub_in_types1108);
+    			DebugLocation(113, 29);
+    			PushFollow(Follow._types_sub_in_types1122);
     			types_sub2=types_sub();
     			PopFollow();
     			if (state.failed) return retval;
@@ -453,16 +456,16 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
     			root_0 = (object)adaptor.Nil();
-    			// 109:39: -> ^( TYPES types_sub )
+    			// 113:39: -> ^( TYPES types_sub )
     			{
-    				DebugLocation(109, 42);
-    				// Evil.g:109:42: ^( TYPES types_sub )
+    				DebugLocation(113, 42);
+    				// Evil.g:113:42: ^( TYPES types_sub )
     				{
     				object root_1 = (object)adaptor.Nil();
-    				DebugLocation(109, 44);
+    				DebugLocation(113, 44);
     				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(TYPES, "TYPES"), root_1);
 
-    				DebugLocation(109, 50);
+    				DebugLocation(113, 50);
     				adaptor.AddChild(root_1, stream_types_sub.NextTree());
 
     				adaptor.AddChild(root_0, root_1);
@@ -478,7 +481,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// Evil.g:110:7: 
+    			// Evil.g:114:7: 
     			{
 
     			{
@@ -494,9 +497,9 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
     			root_0 = (object)adaptor.Nil();
-    			// 110:7: -> TYPES
+    			// 114:7: -> TYPES
     			{
-    				DebugLocation(110, 10);
+    				DebugLocation(114, 10);
     				adaptor.AddChild(root_0, (object)adaptor.Create(TYPES, "TYPES"));
 
     			}
@@ -527,7 +530,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(111, 3);
+     	DebugLocation(115, 3);
     	} finally { DebugExitRule(GrammarFileName, "types"); }
     	return retval;
 
@@ -544,7 +547,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_types_sub() {}
 
     // $ANTLR start "types_sub"
-    // Evil.g:112:1: types_sub : ( ( STRUCT ID LBRACE )=> type_declaration types_sub | );
+    // Evil.g:116:1: types_sub : ( ( STRUCT ID LBRACE )=> type_declaration types_sub | );
     [GrammarRule("types_sub")]
     private EvilParser.types_sub_return types_sub()
     {
@@ -559,10 +562,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
 
     	try { DebugEnterRule(GrammarFileName, "types_sub");
-    	DebugLocation(112, 3);
+    	DebugLocation(116, 3);
     	try
     	{
-    		// Evil.g:113:4: ( ( STRUCT ID LBRACE )=> type_declaration types_sub | )
+    		// Evil.g:117:4: ( ( STRUCT ID LBRACE )=> type_declaration types_sub | )
     		int alt2=2;
     		try { DebugEnterDecision(2, decisionCanBacktrack[2]);
     		int LA2_0 = input.LA(1);
@@ -618,18 +621,18 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:113:7: ( STRUCT ID LBRACE )=> type_declaration types_sub
+    			// Evil.g:117:7: ( STRUCT ID LBRACE )=> type_declaration types_sub
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(113, 29);
-    			PushFollow(Follow._type_declaration_in_types_sub1151);
+    			DebugLocation(117, 29);
+    			PushFollow(Follow._type_declaration_in_types_sub1165);
     			type_declaration3=type_declaration();
     			PopFollow();
     			if (state.failed) return retval;
     			if ( (state.backtracking==0) ) adaptor.AddChild(root_0, type_declaration3.Tree);
-    			DebugLocation(113, 46);
-    			PushFollow(Follow._types_sub_in_types_sub1153);
+    			DebugLocation(117, 46);
+    			PushFollow(Follow._types_sub_in_types_sub1167);
     			types_sub4=types_sub();
     			PopFollow();
     			if (state.failed) return retval;
@@ -639,7 +642,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// Evil.g:115:4: 
+    			// Evil.g:119:4: 
     			{
     			root_0 = (object)adaptor.Nil();
 
@@ -665,7 +668,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(115, 3);
+     	DebugLocation(119, 3);
     	} finally { DebugExitRule(GrammarFileName, "types_sub"); }
     	return retval;
 
@@ -682,7 +685,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_type_declaration() {}
 
     // $ANTLR start "type_declaration"
-    // Evil.g:116:1: type_declaration : STRUCT ID LBRACE nested_decl RBRACE SEMI ;
+    // Evil.g:120:1: type_declaration : STRUCT ID LBRACE nested_decl RBRACE SEMI ;
     [GrammarRule("type_declaration")]
     private EvilParser.type_declaration_return type_declaration()
     {
@@ -706,39 +709,39 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object SEMI10_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "type_declaration");
-    	DebugLocation(116, 3);
+    	DebugLocation(120, 3);
     	try
     	{
-    		// Evil.g:117:4: ( STRUCT ID LBRACE nested_decl RBRACE SEMI )
+    		// Evil.g:121:4: ( STRUCT ID LBRACE nested_decl RBRACE SEMI )
     		DebugEnterAlt(1);
-    		// Evil.g:117:7: STRUCT ID LBRACE nested_decl RBRACE SEMI
+    		// Evil.g:121:7: STRUCT ID LBRACE nested_decl RBRACE SEMI
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(117, 13);
-    		STRUCT5=(IToken)Match(input,STRUCT,Follow._STRUCT_in_type_declaration1173); if (state.failed) return retval;
+    		DebugLocation(121, 13);
+    		STRUCT5=(IToken)Match(input,STRUCT,Follow._STRUCT_in_type_declaration1187); if (state.failed) return retval;
     		if ( (state.backtracking==0) ) {
     		STRUCT5_tree = (object)adaptor.Create(STRUCT5);
     		root_0 = (object)adaptor.BecomeRoot(STRUCT5_tree, root_0);
     		}
-    		DebugLocation(117, 15);
-    		ID6=(IToken)Match(input,ID,Follow._ID_in_type_declaration1176); if (state.failed) return retval;
+    		DebugLocation(121, 15);
+    		ID6=(IToken)Match(input,ID,Follow._ID_in_type_declaration1190); if (state.failed) return retval;
     		if ( state.backtracking==0 ) {
     		ID6_tree = (object)adaptor.Create(ID6);
     		adaptor.AddChild(root_0, ID6_tree);
     		}
-    		DebugLocation(117, 24);
-    		LBRACE7=(IToken)Match(input,LBRACE,Follow._LBRACE_in_type_declaration1178); if (state.failed) return retval;
-    		DebugLocation(117, 26);
-    		PushFollow(Follow._nested_decl_in_type_declaration1181);
+    		DebugLocation(121, 24);
+    		LBRACE7=(IToken)Match(input,LBRACE,Follow._LBRACE_in_type_declaration1192); if (state.failed) return retval;
+    		DebugLocation(121, 26);
+    		PushFollow(Follow._nested_decl_in_type_declaration1195);
     		nested_decl8=nested_decl();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) adaptor.AddChild(root_0, nested_decl8.Tree);
-    		DebugLocation(117, 44);
-    		RBRACE9=(IToken)Match(input,RBRACE,Follow._RBRACE_in_type_declaration1183); if (state.failed) return retval;
-    		DebugLocation(117, 50);
-    		SEMI10=(IToken)Match(input,SEMI,Follow._SEMI_in_type_declaration1186); if (state.failed) return retval;
+    		DebugLocation(121, 44);
+    		RBRACE9=(IToken)Match(input,RBRACE,Follow._RBRACE_in_type_declaration1197); if (state.failed) return retval;
+    		DebugLocation(121, 50);
+    		SEMI10=(IToken)Match(input,SEMI,Follow._SEMI_in_type_declaration1200); if (state.failed) return retval;
 
     		}
 
@@ -760,7 +763,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(118, 3);
+     	DebugLocation(122, 3);
     	} finally { DebugExitRule(GrammarFileName, "type_declaration"); }
     	return retval;
 
@@ -777,7 +780,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_nested_decl() {}
 
     // $ANTLR start "nested_decl"
-    // Evil.g:119:1: nested_decl : ( decl SEMI )+ ;
+    // Evil.g:123:1: nested_decl : ( decl SEMI )+ ;
     [GrammarRule("nested_decl")]
     private EvilParser.nested_decl_return nested_decl()
     {
@@ -793,17 +796,17 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object SEMI12_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "nested_decl");
-    	DebugLocation(119, 3);
+    	DebugLocation(123, 3);
     	try
     	{
-    		// Evil.g:120:4: ( ( decl SEMI )+ )
+    		// Evil.g:124:4: ( ( decl SEMI )+ )
     		DebugEnterAlt(1);
-    		// Evil.g:120:7: ( decl SEMI )+
+    		// Evil.g:124:7: ( decl SEMI )+
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(120, 7);
-    		// Evil.g:120:7: ( decl SEMI )+
+    		DebugLocation(124, 7);
+    		// Evil.g:124:7: ( decl SEMI )+
     		int cnt3=0;
     		try { DebugEnterSubRule(3);
     		while (true)
@@ -823,16 +826,16 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// Evil.g:120:8: decl SEMI
+    				// Evil.g:124:8: decl SEMI
     				{
-    				DebugLocation(120, 8);
-    				PushFollow(Follow._decl_in_nested_decl1203);
+    				DebugLocation(124, 8);
+    				PushFollow(Follow._decl_in_nested_decl1217);
     				decl11=decl();
     				PopFollow();
     				if (state.failed) return retval;
     				if ( (state.backtracking==0) ) adaptor.AddChild(root_0, decl11.Tree);
-    				DebugLocation(120, 17);
-    				SEMI12=(IToken)Match(input,SEMI,Follow._SEMI_in_nested_decl1205); if (state.failed) return retval;
+    				DebugLocation(124, 17);
+    				SEMI12=(IToken)Match(input,SEMI,Follow._SEMI_in_nested_decl1219); if (state.failed) return retval;
 
     				}
     				break;
@@ -874,7 +877,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(121, 3);
+     	DebugLocation(125, 3);
     	} finally { DebugExitRule(GrammarFileName, "nested_decl"); }
     	return retval;
 
@@ -891,7 +894,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_decl() {}
 
     // $ANTLR start "decl"
-    // Evil.g:122:1: decl : t= type i= ID -> ^( DECL ^( TYPE $t) $i) ;
+    // Evil.g:126:1: decl : t= type i= ID -> ^( DECL ^( TYPE $t) $i) ;
     [GrammarRule("decl")]
     private EvilParser.decl_return decl()
     {
@@ -908,28 +911,28 @@ public partial class EvilParser : Antlr.Runtime.Parser
         RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
         RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
     	try { DebugEnterRule(GrammarFileName, "decl");
-    	DebugLocation(122, 3);
+    	DebugLocation(126, 3);
     	try
     	{
-    		// Evil.g:123:4: (t= type i= ID -> ^( DECL ^( TYPE $t) $i) )
+    		// Evil.g:127:4: (t= type i= ID -> ^( DECL ^( TYPE $t) $i) )
     		DebugEnterAlt(1);
-    		// Evil.g:123:7: t= type i= ID
+    		// Evil.g:127:7: t= type i= ID
     		{
-    		DebugLocation(123, 8);
-    		PushFollow(Follow._type_in_decl1225);
+    		DebugLocation(127, 8);
+    		PushFollow(Follow._type_in_decl1239);
     		t=type();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_type.Add(t.Tree);
-    		DebugLocation(123, 15);
-    		i=(IToken)Match(input,ID,Follow._ID_in_decl1229); if (state.failed) return retval; 
+    		DebugLocation(127, 15);
+    		i=(IToken)Match(input,ID,Follow._ID_in_decl1243); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_ID.Add(i);
 
 
 
     		{
     		// AST REWRITE
-    		// elements: t, i
+    		// elements: i, t
     		// token labels: i
     		// rule labels: retval, t
     		// token list labels: 
@@ -942,28 +945,28 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		RewriteRuleSubtreeStream stream_t=new RewriteRuleSubtreeStream(adaptor,"rule t",t!=null?t.Tree:null);
 
     		root_0 = (object)adaptor.Nil();
-    		// 124:7: -> ^( DECL ^( TYPE $t) $i)
+    		// 128:7: -> ^( DECL ^( TYPE $t) $i)
     		{
-    			DebugLocation(124, 10);
-    			// Evil.g:124:10: ^( DECL ^( TYPE $t) $i)
+    			DebugLocation(128, 10);
+    			// Evil.g:128:10: ^( DECL ^( TYPE $t) $i)
     			{
     			object root_1 = (object)adaptor.Nil();
-    			DebugLocation(124, 12);
+    			DebugLocation(128, 12);
     			root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(DECL, "DECL"), root_1);
 
-    			DebugLocation(124, 17);
-    			// Evil.g:124:17: ^( TYPE $t)
+    			DebugLocation(128, 17);
+    			// Evil.g:128:17: ^( TYPE $t)
     			{
     			object root_2 = (object)adaptor.Nil();
-    			DebugLocation(124, 19);
+    			DebugLocation(128, 19);
     			root_2 = (object)adaptor.BecomeRoot((object)adaptor.Create(TYPE, "TYPE"), root_2);
 
-    			DebugLocation(124, 24);
+    			DebugLocation(128, 24);
     			adaptor.AddChild(root_2, stream_t.NextTree());
 
     			adaptor.AddChild(root_1, root_2);
     			}
-    			DebugLocation(124, 28);
+    			DebugLocation(128, 28);
     			adaptor.AddChild(root_1, stream_i.NextNode());
 
     			adaptor.AddChild(root_0, root_1);
@@ -995,7 +998,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(125, 3);
+     	DebugLocation(129, 3);
     	} finally { DebugExitRule(GrammarFileName, "decl"); }
     	return retval;
 
@@ -1012,7 +1015,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_type() {}
 
     // $ANTLR start "type"
-    // Evil.g:126:1: type : ( INT | BOOL | STRUCT ID );
+    // Evil.g:130:1: type : ( INT | BOOL | STRUCT ID );
     [GrammarRule("type")]
     private EvilParser.type_return type()
     {
@@ -1033,10 +1036,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object ID16_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "type");
-    	DebugLocation(126, 3);
+    	DebugLocation(130, 3);
     	try
     	{
-    		// Evil.g:127:4: ( INT | BOOL | STRUCT ID )
+    		// Evil.g:131:4: ( INT | BOOL | STRUCT ID )
     		int alt4=3;
     		try { DebugEnterDecision(4, decisionCanBacktrack[4]);
     		switch (input.LA(1))
@@ -1071,12 +1074,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:127:7: INT
+    			// Evil.g:131:7: INT
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(127, 7);
-    			INT13=(IToken)Match(input,INT,Follow._INT_in_type1266); if (state.failed) return retval;
+    			DebugLocation(131, 7);
+    			INT13=(IToken)Match(input,INT,Follow._INT_in_type1280); if (state.failed) return retval;
     			if ( state.backtracking==0 ) {
     			INT13_tree = (object)adaptor.Create(INT13);
     			adaptor.AddChild(root_0, INT13_tree);
@@ -1086,12 +1089,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// Evil.g:128:7: BOOL
+    			// Evil.g:132:7: BOOL
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(128, 7);
-    			BOOL14=(IToken)Match(input,BOOL,Follow._BOOL_in_type1274); if (state.failed) return retval;
+    			DebugLocation(132, 7);
+    			BOOL14=(IToken)Match(input,BOOL,Follow._BOOL_in_type1288); if (state.failed) return retval;
     			if ( state.backtracking==0 ) {
     			BOOL14_tree = (object)adaptor.Create(BOOL14);
     			adaptor.AddChild(root_0, BOOL14_tree);
@@ -1101,18 +1104,18 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// Evil.g:129:7: STRUCT ID
+    			// Evil.g:133:7: STRUCT ID
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(129, 13);
-    			STRUCT15=(IToken)Match(input,STRUCT,Follow._STRUCT_in_type1282); if (state.failed) return retval;
+    			DebugLocation(133, 13);
+    			STRUCT15=(IToken)Match(input,STRUCT,Follow._STRUCT_in_type1296); if (state.failed) return retval;
     			if ( (state.backtracking==0) ) {
     			STRUCT15_tree = (object)adaptor.Create(STRUCT15);
     			root_0 = (object)adaptor.BecomeRoot(STRUCT15_tree, root_0);
     			}
-    			DebugLocation(129, 15);
-    			ID16=(IToken)Match(input,ID,Follow._ID_in_type1285); if (state.failed) return retval;
+    			DebugLocation(133, 15);
+    			ID16=(IToken)Match(input,ID,Follow._ID_in_type1299); if (state.failed) return retval;
     			if ( state.backtracking==0 ) {
     			ID16_tree = (object)adaptor.Create(ID16);
     			adaptor.AddChild(root_0, ID16_tree);
@@ -1140,7 +1143,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(130, 3);
+     	DebugLocation(134, 3);
     	} finally { DebugExitRule(GrammarFileName, "type"); }
     	return retval;
 
@@ -1157,7 +1160,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_declarations() {}
 
     // $ANTLR start "declarations"
-    // Evil.g:131:1: declarations : ( declaration )* -> ^( DECLS ( declaration )* ) ;
+    // Evil.g:135:1: declarations : ( declaration )* -> ^( DECLS ( declaration )* ) ;
     [GrammarRule("declarations")]
     private EvilParser.declarations_return declarations()
     {
@@ -1171,15 +1174,15 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
         RewriteRuleSubtreeStream stream_declaration=new RewriteRuleSubtreeStream(adaptor,"rule declaration");
     	try { DebugEnterRule(GrammarFileName, "declarations");
-    	DebugLocation(131, 3);
+    	DebugLocation(135, 3);
     	try
     	{
-    		// Evil.g:132:4: ( ( declaration )* -> ^( DECLS ( declaration )* ) )
+    		// Evil.g:136:4: ( ( declaration )* -> ^( DECLS ( declaration )* ) )
     		DebugEnterAlt(1);
-    		// Evil.g:132:7: ( declaration )*
+    		// Evil.g:136:7: ( declaration )*
     		{
-    		DebugLocation(132, 7);
-    		// Evil.g:132:7: ( declaration )*
+    		DebugLocation(136, 7);
+    		// Evil.g:136:7: ( declaration )*
     		try { DebugEnterSubRule(5);
     		while (true)
     		{
@@ -1198,10 +1201,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// Evil.g:132:8: declaration
+    				// Evil.g:136:8: declaration
     				{
-    				DebugLocation(132, 8);
-    				PushFollow(Follow._declaration_in_declarations1301);
+    				DebugLocation(136, 8);
+    				PushFollow(Follow._declaration_in_declarations1315);
     				declaration17=declaration();
     				PopFollow();
     				if (state.failed) return retval;
@@ -1235,20 +1238,20 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
     		root_0 = (object)adaptor.Nil();
-    		// 132:22: -> ^( DECLS ( declaration )* )
+    		// 136:22: -> ^( DECLS ( declaration )* )
     		{
-    			DebugLocation(132, 25);
-    			// Evil.g:132:25: ^( DECLS ( declaration )* )
+    			DebugLocation(136, 25);
+    			// Evil.g:136:25: ^( DECLS ( declaration )* )
     			{
     			object root_1 = (object)adaptor.Nil();
-    			DebugLocation(132, 27);
+    			DebugLocation(136, 27);
     			root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(DECLS, "DECLS"), root_1);
 
-    			DebugLocation(132, 33);
-    			// Evil.g:132:33: ( declaration )*
+    			DebugLocation(136, 33);
+    			// Evil.g:136:33: ( declaration )*
     			while ( stream_declaration.HasNext )
     			{
-    				DebugLocation(132, 33);
+    				DebugLocation(136, 33);
     				adaptor.AddChild(root_1, stream_declaration.NextTree());
 
     			}
@@ -1283,7 +1286,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(133, 3);
+     	DebugLocation(137, 3);
     	} finally { DebugExitRule(GrammarFileName, "declarations"); }
     	return retval;
 
@@ -1300,7 +1303,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_declaration() {}
 
     // $ANTLR start "declaration"
-    // Evil.g:134:1: declaration : t= type ilist= id_list SEMI -> ^( DECLLIST ^( TYPE $t) $ilist) ;
+    // Evil.g:138:1: declaration : t= type ilist= id_list SEMI -> ^( DECLLIST ^( TYPE $t) $ilist) ;
     [GrammarRule("declaration")]
     private EvilParser.declaration_return declaration()
     {
@@ -1319,27 +1322,27 @@ public partial class EvilParser : Antlr.Runtime.Parser
         RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
         RewriteRuleSubtreeStream stream_id_list=new RewriteRuleSubtreeStream(adaptor,"rule id_list");
     	try { DebugEnterRule(GrammarFileName, "declaration");
-    	DebugLocation(134, 3);
+    	DebugLocation(138, 3);
     	try
     	{
-    		// Evil.g:135:4: (t= type ilist= id_list SEMI -> ^( DECLLIST ^( TYPE $t) $ilist) )
+    		// Evil.g:139:4: (t= type ilist= id_list SEMI -> ^( DECLLIST ^( TYPE $t) $ilist) )
     		DebugEnterAlt(1);
-    		// Evil.g:135:7: t= type ilist= id_list SEMI
+    		// Evil.g:139:7: t= type ilist= id_list SEMI
     		{
-    		DebugLocation(135, 8);
-    		PushFollow(Follow._type_in_declaration1329);
+    		DebugLocation(139, 8);
+    		PushFollow(Follow._type_in_declaration1343);
     		t=type();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_type.Add(t.Tree);
-    		DebugLocation(135, 19);
-    		PushFollow(Follow._id_list_in_declaration1333);
+    		DebugLocation(139, 19);
+    		PushFollow(Follow._id_list_in_declaration1347);
     		ilist=id_list();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_id_list.Add(ilist.Tree);
-    		DebugLocation(135, 28);
-    		SEMI18=(IToken)Match(input,SEMI,Follow._SEMI_in_declaration1335); if (state.failed) return retval; 
+    		DebugLocation(139, 28);
+    		SEMI18=(IToken)Match(input,SEMI,Follow._SEMI_in_declaration1349); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_SEMI.Add(SEMI18);
 
 
@@ -1359,28 +1362,28 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		RewriteRuleSubtreeStream stream_ilist=new RewriteRuleSubtreeStream(adaptor,"rule ilist",ilist!=null?ilist.Tree:null);
 
     		root_0 = (object)adaptor.Nil();
-    		// 136:7: -> ^( DECLLIST ^( TYPE $t) $ilist)
+    		// 140:7: -> ^( DECLLIST ^( TYPE $t) $ilist)
     		{
-    			DebugLocation(136, 10);
-    			// Evil.g:136:10: ^( DECLLIST ^( TYPE $t) $ilist)
+    			DebugLocation(140, 10);
+    			// Evil.g:140:10: ^( DECLLIST ^( TYPE $t) $ilist)
     			{
     			object root_1 = (object)adaptor.Nil();
-    			DebugLocation(136, 12);
+    			DebugLocation(140, 12);
     			root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(DECLLIST, "DECLLIST"), root_1);
 
-    			DebugLocation(136, 21);
-    			// Evil.g:136:21: ^( TYPE $t)
+    			DebugLocation(140, 21);
+    			// Evil.g:140:21: ^( TYPE $t)
     			{
     			object root_2 = (object)adaptor.Nil();
-    			DebugLocation(136, 23);
+    			DebugLocation(140, 23);
     			root_2 = (object)adaptor.BecomeRoot((object)adaptor.Create(TYPE, "TYPE"), root_2);
 
-    			DebugLocation(136, 28);
+    			DebugLocation(140, 28);
     			adaptor.AddChild(root_2, stream_t.NextTree());
 
     			adaptor.AddChild(root_1, root_2);
     			}
-    			DebugLocation(136, 32);
+    			DebugLocation(140, 32);
     			adaptor.AddChild(root_1, stream_ilist.NextTree());
 
     			adaptor.AddChild(root_0, root_1);
@@ -1412,7 +1415,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(137, 3);
+     	DebugLocation(141, 3);
     	} finally { DebugExitRule(GrammarFileName, "declaration"); }
     	return retval;
 
@@ -1429,7 +1432,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_id_list() {}
 
     // $ANTLR start "id_list"
-    // Evil.g:138:1: id_list : ID ( COMMA ID )* ;
+    // Evil.g:142:1: id_list : ID ( COMMA ID )* ;
     [GrammarRule("id_list")]
     private EvilParser.id_list_return id_list()
     {
@@ -1448,23 +1451,23 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object ID21_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "id_list");
-    	DebugLocation(138, 3);
+    	DebugLocation(142, 3);
     	try
     	{
-    		// Evil.g:139:4: ( ID ( COMMA ID )* )
+    		// Evil.g:143:4: ( ID ( COMMA ID )* )
     		DebugEnterAlt(1);
-    		// Evil.g:139:7: ID ( COMMA ID )*
+    		// Evil.g:143:7: ID ( COMMA ID )*
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(139, 7);
-    		ID19=(IToken)Match(input,ID,Follow._ID_in_id_list1372); if (state.failed) return retval;
+    		DebugLocation(143, 7);
+    		ID19=(IToken)Match(input,ID,Follow._ID_in_id_list1386); if (state.failed) return retval;
     		if ( state.backtracking==0 ) {
     		ID19_tree = (object)adaptor.Create(ID19);
     		adaptor.AddChild(root_0, ID19_tree);
     		}
-    		DebugLocation(139, 10);
-    		// Evil.g:139:10: ( COMMA ID )*
+    		DebugLocation(143, 10);
+    		// Evil.g:143:10: ( COMMA ID )*
     		try { DebugEnterSubRule(6);
     		while (true)
     		{
@@ -1483,12 +1486,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// Evil.g:139:11: COMMA ID
+    				// Evil.g:143:11: COMMA ID
     				{
-    				DebugLocation(139, 16);
-    				COMMA20=(IToken)Match(input,COMMA,Follow._COMMA_in_id_list1375); if (state.failed) return retval;
-    				DebugLocation(139, 18);
-    				ID21=(IToken)Match(input,ID,Follow._ID_in_id_list1378); if (state.failed) return retval;
+    				DebugLocation(143, 16);
+    				COMMA20=(IToken)Match(input,COMMA,Follow._COMMA_in_id_list1389); if (state.failed) return retval;
+    				DebugLocation(143, 18);
+    				ID21=(IToken)Match(input,ID,Follow._ID_in_id_list1392); if (state.failed) return retval;
     				if ( state.backtracking==0 ) {
     				ID21_tree = (object)adaptor.Create(ID21);
     				adaptor.AddChild(root_0, ID21_tree);
@@ -1528,7 +1531,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(140, 3);
+     	DebugLocation(144, 3);
     	} finally { DebugExitRule(GrammarFileName, "id_list"); }
     	return retval;
 
@@ -1545,7 +1548,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_functions() {}
 
     // $ANTLR start "functions"
-    // Evil.g:141:1: functions : ( function )* -> ^( FUNCS ( function )* ) ;
+    // Evil.g:145:1: functions : ( function )* -> ^( FUNCS ( function )* ) ;
     [GrammarRule("functions")]
     private EvilParser.functions_return functions()
     {
@@ -1559,15 +1562,15 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
         RewriteRuleSubtreeStream stream_function=new RewriteRuleSubtreeStream(adaptor,"rule function");
     	try { DebugEnterRule(GrammarFileName, "functions");
-    	DebugLocation(141, 3);
+    	DebugLocation(145, 3);
     	try
     	{
-    		// Evil.g:142:4: ( ( function )* -> ^( FUNCS ( function )* ) )
+    		// Evil.g:146:4: ( ( function )* -> ^( FUNCS ( function )* ) )
     		DebugEnterAlt(1);
-    		// Evil.g:142:7: ( function )*
+    		// Evil.g:146:7: ( function )*
     		{
-    		DebugLocation(142, 7);
-    		// Evil.g:142:7: ( function )*
+    		DebugLocation(146, 7);
+    		// Evil.g:146:7: ( function )*
     		try { DebugEnterSubRule(7);
     		while (true)
     		{
@@ -1586,10 +1589,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// Evil.g:142:7: function
+    				// Evil.g:146:7: function
     				{
-    				DebugLocation(142, 7);
-    				PushFollow(Follow._function_in_functions1395);
+    				DebugLocation(146, 7);
+    				PushFollow(Follow._function_in_functions1409);
     				function22=function();
     				PopFollow();
     				if (state.failed) return retval;
@@ -1623,20 +1626,20 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
     		root_0 = (object)adaptor.Nil();
-    		// 142:17: -> ^( FUNCS ( function )* )
+    		// 146:17: -> ^( FUNCS ( function )* )
     		{
-    			DebugLocation(142, 20);
-    			// Evil.g:142:20: ^( FUNCS ( function )* )
+    			DebugLocation(146, 20);
+    			// Evil.g:146:20: ^( FUNCS ( function )* )
     			{
     			object root_1 = (object)adaptor.Nil();
-    			DebugLocation(142, 22);
+    			DebugLocation(146, 22);
     			root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(FUNCS, "FUNCS"), root_1);
 
-    			DebugLocation(142, 28);
-    			// Evil.g:142:28: ( function )*
+    			DebugLocation(146, 28);
+    			// Evil.g:146:28: ( function )*
     			while ( stream_function.HasNext )
     			{
-    				DebugLocation(142, 28);
+    				DebugLocation(146, 28);
     				adaptor.AddChild(root_1, stream_function.NextTree());
 
     			}
@@ -1671,7 +1674,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(143, 3);
+     	DebugLocation(147, 3);
     	} finally { DebugExitRule(GrammarFileName, "functions"); }
     	return retval;
 
@@ -1688,7 +1691,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_function() {}
 
     // $ANTLR start "function"
-    // Evil.g:144:1: function : FUN id= ID p= parameters r= return_type LBRACE d= declarations s= statement_list RBRACE -> ^( FUN $id $p ^( RETTYPE $r) $d $s) ;
+    // Evil.g:148:1: function : FUN id= ID p= parameters r= return_type LBRACE d= declarations s= statement_list RBRACE -> ^( FUN $id $p ^( RETTYPE $r) $d $s) ;
     [GrammarRule("function")]
     private EvilParser.function_return function()
     {
@@ -1720,58 +1723,58 @@ public partial class EvilParser : Antlr.Runtime.Parser
         RewriteRuleSubtreeStream stream_return_type=new RewriteRuleSubtreeStream(adaptor,"rule return_type");
         RewriteRuleSubtreeStream stream_declarations=new RewriteRuleSubtreeStream(adaptor,"rule declarations");
     	try { DebugEnterRule(GrammarFileName, "function");
-    	DebugLocation(144, 3);
+    	DebugLocation(148, 3);
     	try
     	{
-    		// Evil.g:145:4: ( FUN id= ID p= parameters r= return_type LBRACE d= declarations s= statement_list RBRACE -> ^( FUN $id $p ^( RETTYPE $r) $d $s) )
+    		// Evil.g:149:4: ( FUN id= ID p= parameters r= return_type LBRACE d= declarations s= statement_list RBRACE -> ^( FUN $id $p ^( RETTYPE $r) $d $s) )
     		DebugEnterAlt(1);
-    		// Evil.g:145:7: FUN id= ID p= parameters r= return_type LBRACE d= declarations s= statement_list RBRACE
+    		// Evil.g:149:7: FUN id= ID p= parameters r= return_type LBRACE d= declarations s= statement_list RBRACE
     		{
-    		DebugLocation(145, 7);
-    		FUN23=(IToken)Match(input,FUN,Follow._FUN_in_function1420); if (state.failed) return retval; 
+    		DebugLocation(149, 7);
+    		FUN23=(IToken)Match(input,FUN,Follow._FUN_in_function1434); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_FUN.Add(FUN23);
 
-    		DebugLocation(145, 13);
-    		id=(IToken)Match(input,ID,Follow._ID_in_function1424); if (state.failed) return retval; 
+    		DebugLocation(149, 13);
+    		id=(IToken)Match(input,ID,Follow._ID_in_function1438); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_ID.Add(id);
 
-    		DebugLocation(145, 18);
-    		PushFollow(Follow._parameters_in_function1428);
+    		DebugLocation(149, 18);
+    		PushFollow(Follow._parameters_in_function1442);
     		p=parameters();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_parameters.Add(p.Tree);
-    		DebugLocation(145, 31);
-    		PushFollow(Follow._return_type_in_function1432);
+    		DebugLocation(149, 31);
+    		PushFollow(Follow._return_type_in_function1446);
     		r=return_type();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_return_type.Add(r.Tree);
-    		DebugLocation(145, 44);
-    		LBRACE24=(IToken)Match(input,LBRACE,Follow._LBRACE_in_function1434); if (state.failed) return retval; 
+    		DebugLocation(149, 44);
+    		LBRACE24=(IToken)Match(input,LBRACE,Follow._LBRACE_in_function1448); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_LBRACE.Add(LBRACE24);
 
-    		DebugLocation(145, 52);
-    		PushFollow(Follow._declarations_in_function1438);
+    		DebugLocation(149, 52);
+    		PushFollow(Follow._declarations_in_function1452);
     		d=declarations();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_declarations.Add(d.Tree);
-    		DebugLocation(145, 67);
-    		PushFollow(Follow._statement_list_in_function1442);
+    		DebugLocation(149, 67);
+    		PushFollow(Follow._statement_list_in_function1456);
     		s=statement_list();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_statement_list.Add(s.Tree);
-    		DebugLocation(145, 83);
-    		RBRACE25=(IToken)Match(input,RBRACE,Follow._RBRACE_in_function1444); if (state.failed) return retval; 
+    		DebugLocation(149, 83);
+    		RBRACE25=(IToken)Match(input,RBRACE,Follow._RBRACE_in_function1458); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_RBRACE.Add(RBRACE25);
 
 
 
     		{
     		// AST REWRITE
-    		// elements: d, s, id, p, FUN, r
+    		// elements: r, s, d, FUN, id, p
     		// token labels: id
     		// rule labels: retval, d, s, r, p
     		// token list labels: 
@@ -1787,34 +1790,34 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		RewriteRuleSubtreeStream stream_p=new RewriteRuleSubtreeStream(adaptor,"rule p",p!=null?p.Tree:null);
 
     		root_0 = (object)adaptor.Nil();
-    		// 146:7: -> ^( FUN $id $p ^( RETTYPE $r) $d $s)
+    		// 150:7: -> ^( FUN $id $p ^( RETTYPE $r) $d $s)
     		{
-    			DebugLocation(146, 10);
-    			// Evil.g:146:10: ^( FUN $id $p ^( RETTYPE $r) $d $s)
+    			DebugLocation(150, 10);
+    			// Evil.g:150:10: ^( FUN $id $p ^( RETTYPE $r) $d $s)
     			{
     			object root_1 = (object)adaptor.Nil();
-    			DebugLocation(146, 12);
+    			DebugLocation(150, 12);
     			root_1 = (object)adaptor.BecomeRoot(stream_FUN.NextNode(), root_1);
 
-    			DebugLocation(146, 16);
+    			DebugLocation(150, 16);
     			adaptor.AddChild(root_1, stream_id.NextNode());
-    			DebugLocation(146, 20);
+    			DebugLocation(150, 20);
     			adaptor.AddChild(root_1, stream_p.NextTree());
-    			DebugLocation(146, 23);
-    			// Evil.g:146:23: ^( RETTYPE $r)
+    			DebugLocation(150, 23);
+    			// Evil.g:150:23: ^( RETTYPE $r)
     			{
     			object root_2 = (object)adaptor.Nil();
-    			DebugLocation(146, 25);
+    			DebugLocation(150, 25);
     			root_2 = (object)adaptor.BecomeRoot((object)adaptor.Create(RETTYPE, "RETTYPE"), root_2);
 
-    			DebugLocation(146, 33);
+    			DebugLocation(150, 33);
     			adaptor.AddChild(root_2, stream_r.NextTree());
 
     			adaptor.AddChild(root_1, root_2);
     			}
-    			DebugLocation(146, 37);
+    			DebugLocation(150, 37);
     			adaptor.AddChild(root_1, stream_d.NextTree());
-    			DebugLocation(146, 40);
+    			DebugLocation(150, 40);
     			adaptor.AddChild(root_1, stream_s.NextTree());
 
     			adaptor.AddChild(root_0, root_1);
@@ -1846,7 +1849,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(147, 3);
+     	DebugLocation(151, 3);
     	} finally { DebugExitRule(GrammarFileName, "function"); }
     	return retval;
 
@@ -1863,7 +1866,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_parameters() {}
 
     // $ANTLR start "parameters"
-    // Evil.g:148:1: parameters : LPAREN ( decl ( COMMA decl )* )? RPAREN -> ^( PARAMS ( decl )* ) ;
+    // Evil.g:152:1: parameters : LPAREN ( decl ( COMMA decl )* )? RPAREN -> ^( PARAMS ( decl )* ) ;
     [GrammarRule("parameters")]
     private EvilParser.parameters_return parameters()
     {
@@ -1887,19 +1890,19 @@ public partial class EvilParser : Antlr.Runtime.Parser
         RewriteRuleITokenStream stream_LPAREN=new RewriteRuleITokenStream(adaptor,"token LPAREN");
         RewriteRuleSubtreeStream stream_decl=new RewriteRuleSubtreeStream(adaptor,"rule decl");
     	try { DebugEnterRule(GrammarFileName, "parameters");
-    	DebugLocation(148, 3);
+    	DebugLocation(152, 3);
     	try
     	{
-    		// Evil.g:149:4: ( LPAREN ( decl ( COMMA decl )* )? RPAREN -> ^( PARAMS ( decl )* ) )
+    		// Evil.g:153:4: ( LPAREN ( decl ( COMMA decl )* )? RPAREN -> ^( PARAMS ( decl )* ) )
     		DebugEnterAlt(1);
-    		// Evil.g:149:7: LPAREN ( decl ( COMMA decl )* )? RPAREN
+    		// Evil.g:153:7: LPAREN ( decl ( COMMA decl )* )? RPAREN
     		{
-    		DebugLocation(149, 7);
-    		LPAREN26=(IToken)Match(input,LPAREN,Follow._LPAREN_in_parameters1490); if (state.failed) return retval; 
+    		DebugLocation(153, 7);
+    		LPAREN26=(IToken)Match(input,LPAREN,Follow._LPAREN_in_parameters1504); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_LPAREN.Add(LPAREN26);
 
-    		DebugLocation(149, 14);
-    		// Evil.g:149:14: ( decl ( COMMA decl )* )?
+    		DebugLocation(153, 14);
+    		// Evil.g:153:14: ( decl ( COMMA decl )* )?
     		int alt9=2;
     		try { DebugEnterSubRule(9);
     		try { DebugEnterDecision(9, decisionCanBacktrack[9]);
@@ -1914,16 +1917,16 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:149:15: decl ( COMMA decl )*
+    			// Evil.g:153:15: decl ( COMMA decl )*
     			{
-    			DebugLocation(149, 15);
-    			PushFollow(Follow._decl_in_parameters1493);
+    			DebugLocation(153, 15);
+    			PushFollow(Follow._decl_in_parameters1507);
     			decl27=decl();
     			PopFollow();
     			if (state.failed) return retval;
     			if ( (state.backtracking==0) ) stream_decl.Add(decl27.Tree);
-    			DebugLocation(149, 20);
-    			// Evil.g:149:20: ( COMMA decl )*
+    			DebugLocation(153, 20);
+    			// Evil.g:153:20: ( COMMA decl )*
     			try { DebugEnterSubRule(8);
     			while (true)
     			{
@@ -1942,14 +1945,14 @@ public partial class EvilParser : Antlr.Runtime.Parser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// Evil.g:149:21: COMMA decl
+    					// Evil.g:153:21: COMMA decl
     					{
-    					DebugLocation(149, 21);
-    					COMMA28=(IToken)Match(input,COMMA,Follow._COMMA_in_parameters1496); if (state.failed) return retval; 
+    					DebugLocation(153, 21);
+    					COMMA28=(IToken)Match(input,COMMA,Follow._COMMA_in_parameters1510); if (state.failed) return retval; 
     					if ( (state.backtracking==0) ) stream_COMMA.Add(COMMA28);
 
-    					DebugLocation(149, 27);
-    					PushFollow(Follow._decl_in_parameters1498);
+    					DebugLocation(153, 27);
+    					PushFollow(Follow._decl_in_parameters1512);
     					decl29=decl();
     					PopFollow();
     					if (state.failed) return retval;
@@ -1975,8 +1978,8 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		}
     		} finally { DebugExitSubRule(9); }
 
-    		DebugLocation(149, 36);
-    		RPAREN30=(IToken)Match(input,RPAREN,Follow._RPAREN_in_parameters1504); if (state.failed) return retval; 
+    		DebugLocation(153, 36);
+    		RPAREN30=(IToken)Match(input,RPAREN,Follow._RPAREN_in_parameters1518); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_RPAREN.Add(RPAREN30);
 
 
@@ -1994,20 +1997,20 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
     		root_0 = (object)adaptor.Nil();
-    		// 150:7: -> ^( PARAMS ( decl )* )
+    		// 154:7: -> ^( PARAMS ( decl )* )
     		{
-    			DebugLocation(150, 10);
-    			// Evil.g:150:10: ^( PARAMS ( decl )* )
+    			DebugLocation(154, 10);
+    			// Evil.g:154:10: ^( PARAMS ( decl )* )
     			{
     			object root_1 = (object)adaptor.Nil();
-    			DebugLocation(150, 12);
+    			DebugLocation(154, 12);
     			root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(PARAMS, "PARAMS"), root_1);
 
-    			DebugLocation(150, 19);
-    			// Evil.g:150:19: ( decl )*
+    			DebugLocation(154, 19);
+    			// Evil.g:154:19: ( decl )*
     			while ( stream_decl.HasNext )
     			{
-    				DebugLocation(150, 19);
+    				DebugLocation(154, 19);
     				adaptor.AddChild(root_1, stream_decl.NextTree());
 
     			}
@@ -2042,7 +2045,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(151, 3);
+     	DebugLocation(155, 3);
     	} finally { DebugExitRule(GrammarFileName, "parameters"); }
     	return retval;
 
@@ -2059,7 +2062,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_return_type() {}
 
     // $ANTLR start "return_type"
-    // Evil.g:152:1: return_type : ( type | VOID );
+    // Evil.g:156:1: return_type : ( type | VOID );
     [GrammarRule("return_type")]
     private EvilParser.return_type_return return_type()
     {
@@ -2075,10 +2078,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object VOID32_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "return_type");
-    	DebugLocation(152, 3);
+    	DebugLocation(156, 3);
     	try
     	{
-    		// Evil.g:153:4: ( type | VOID )
+    		// Evil.g:157:4: ( type | VOID )
     		int alt10=2;
     		try { DebugEnterDecision(10, decisionCanBacktrack[10]);
     		int LA10_0 = input.LA(1);
@@ -2104,12 +2107,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:153:7: type
+    			// Evil.g:157:7: type
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(153, 7);
-    			PushFollow(Follow._type_in_return_type1534);
+    			DebugLocation(157, 7);
+    			PushFollow(Follow._type_in_return_type1548);
     			type31=type();
     			PopFollow();
     			if (state.failed) return retval;
@@ -2119,12 +2122,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// Evil.g:154:7: VOID
+    			// Evil.g:158:7: VOID
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(154, 7);
-    			VOID32=(IToken)Match(input,VOID,Follow._VOID_in_return_type1542); if (state.failed) return retval;
+    			DebugLocation(158, 7);
+    			VOID32=(IToken)Match(input,VOID,Follow._VOID_in_return_type1556); if (state.failed) return retval;
     			if ( state.backtracking==0 ) {
     			VOID32_tree = (object)adaptor.Create(VOID32);
     			adaptor.AddChild(root_0, VOID32_tree);
@@ -2152,7 +2155,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(155, 3);
+     	DebugLocation(159, 3);
     	} finally { DebugExitRule(GrammarFileName, "return_type"); }
     	return retval;
 
@@ -2169,7 +2172,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_statement() {}
 
     // $ANTLR start "statement"
-    // Evil.g:156:1: statement : ( block | ( lvalue ASSIGN )=> assignment | print | read | conditional | loop | delete | ret | ( ID LPAREN )=> invocation );
+    // Evil.g:160:1: statement : ( block | ( lvalue ASSIGN )=> assignment | print | read | conditional | loop | delete | ret | ( ID LPAREN )=> invocation );
     [GrammarRule("statement")]
     private EvilParser.statement_return statement()
     {
@@ -2191,10 +2194,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
 
     	try { DebugEnterRule(GrammarFileName, "statement");
-    	DebugLocation(156, 3);
+    	DebugLocation(160, 3);
     	try
     	{
-    		// Evil.g:157:4: ( block | ( lvalue ASSIGN )=> assignment | print | read | conditional | loop | delete | ret | ( ID LPAREN )=> invocation )
+    		// Evil.g:161:4: ( block | ( lvalue ASSIGN )=> assignment | print | read | conditional | loop | delete | ret | ( ID LPAREN )=> invocation )
     		int alt11=9;
     		try { DebugEnterDecision(11, decisionCanBacktrack[11]);
     		try
@@ -2211,12 +2214,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:157:7: block
+    			// Evil.g:161:7: block
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(157, 7);
-    			PushFollow(Follow._block_in_statement1557);
+    			DebugLocation(161, 7);
+    			PushFollow(Follow._block_in_statement1571);
     			block33=block();
     			PopFollow();
     			if (state.failed) return retval;
@@ -2226,12 +2229,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// Evil.g:158:7: ( lvalue ASSIGN )=> assignment
+    			// Evil.g:162:7: ( lvalue ASSIGN )=> assignment
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(158, 26);
-    			PushFollow(Follow._assignment_in_statement1573);
+    			DebugLocation(162, 26);
+    			PushFollow(Follow._assignment_in_statement1587);
     			assignment34=assignment();
     			PopFollow();
     			if (state.failed) return retval;
@@ -2241,12 +2244,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// Evil.g:159:7: print
+    			// Evil.g:163:7: print
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(159, 7);
-    			PushFollow(Follow._print_in_statement1581);
+    			DebugLocation(163, 7);
+    			PushFollow(Follow._print_in_statement1595);
     			print35=print();
     			PopFollow();
     			if (state.failed) return retval;
@@ -2256,12 +2259,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 4:
     			DebugEnterAlt(4);
-    			// Evil.g:160:7: read
+    			// Evil.g:164:7: read
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(160, 7);
-    			PushFollow(Follow._read_in_statement1589);
+    			DebugLocation(164, 7);
+    			PushFollow(Follow._read_in_statement1603);
     			read36=read();
     			PopFollow();
     			if (state.failed) return retval;
@@ -2271,12 +2274,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 5:
     			DebugEnterAlt(5);
-    			// Evil.g:161:7: conditional
+    			// Evil.g:165:7: conditional
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(161, 7);
-    			PushFollow(Follow._conditional_in_statement1597);
+    			DebugLocation(165, 7);
+    			PushFollow(Follow._conditional_in_statement1611);
     			conditional37=conditional();
     			PopFollow();
     			if (state.failed) return retval;
@@ -2286,12 +2289,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 6:
     			DebugEnterAlt(6);
-    			// Evil.g:162:7: loop
+    			// Evil.g:166:7: loop
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(162, 7);
-    			PushFollow(Follow._loop_in_statement1605);
+    			DebugLocation(166, 7);
+    			PushFollow(Follow._loop_in_statement1619);
     			loop38=loop();
     			PopFollow();
     			if (state.failed) return retval;
@@ -2301,12 +2304,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 7:
     			DebugEnterAlt(7);
-    			// Evil.g:163:7: delete
+    			// Evil.g:167:7: delete
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(163, 7);
-    			PushFollow(Follow._delete_in_statement1613);
+    			DebugLocation(167, 7);
+    			PushFollow(Follow._delete_in_statement1627);
     			delete39=delete();
     			PopFollow();
     			if (state.failed) return retval;
@@ -2316,12 +2319,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 8:
     			DebugEnterAlt(8);
-    			// Evil.g:164:7: ret
+    			// Evil.g:168:7: ret
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(164, 7);
-    			PushFollow(Follow._ret_in_statement1621);
+    			DebugLocation(168, 7);
+    			PushFollow(Follow._ret_in_statement1635);
     			ret40=ret();
     			PopFollow();
     			if (state.failed) return retval;
@@ -2331,12 +2334,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 9:
     			DebugEnterAlt(9);
-    			// Evil.g:165:7: ( ID LPAREN )=> invocation
+    			// Evil.g:169:7: ( ID LPAREN )=> invocation
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(165, 22);
-    			PushFollow(Follow._invocation_in_statement1637);
+    			DebugLocation(169, 22);
+    			PushFollow(Follow._invocation_in_statement1651);
     			invocation41=invocation();
     			PopFollow();
     			if (state.failed) return retval;
@@ -2364,7 +2367,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(166, 3);
+     	DebugLocation(170, 3);
     	} finally { DebugExitRule(GrammarFileName, "statement"); }
     	return retval;
 
@@ -2381,7 +2384,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_block() {}
 
     // $ANTLR start "block"
-    // Evil.g:167:1: block : LBRACE s= statement_list RBRACE -> ^( BLOCK $s) ;
+    // Evil.g:171:1: block : LBRACE s= statement_list RBRACE -> ^( BLOCK $s) ;
     [GrammarRule("block")]
     private EvilParser.block_return block()
     {
@@ -2401,25 +2404,25 @@ public partial class EvilParser : Antlr.Runtime.Parser
         RewriteRuleITokenStream stream_LBRACE=new RewriteRuleITokenStream(adaptor,"token LBRACE");
         RewriteRuleSubtreeStream stream_statement_list=new RewriteRuleSubtreeStream(adaptor,"rule statement_list");
     	try { DebugEnterRule(GrammarFileName, "block");
-    	DebugLocation(167, 3);
+    	DebugLocation(171, 3);
     	try
     	{
-    		// Evil.g:168:4: ( LBRACE s= statement_list RBRACE -> ^( BLOCK $s) )
+    		// Evil.g:172:4: ( LBRACE s= statement_list RBRACE -> ^( BLOCK $s) )
     		DebugEnterAlt(1);
-    		// Evil.g:168:7: LBRACE s= statement_list RBRACE
+    		// Evil.g:172:7: LBRACE s= statement_list RBRACE
     		{
-    		DebugLocation(168, 7);
-    		LBRACE42=(IToken)Match(input,LBRACE,Follow._LBRACE_in_block1652); if (state.failed) return retval; 
+    		DebugLocation(172, 7);
+    		LBRACE42=(IToken)Match(input,LBRACE,Follow._LBRACE_in_block1666); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_LBRACE.Add(LBRACE42);
 
-    		DebugLocation(168, 15);
-    		PushFollow(Follow._statement_list_in_block1656);
+    		DebugLocation(172, 15);
+    		PushFollow(Follow._statement_list_in_block1670);
     		s=statement_list();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_statement_list.Add(s.Tree);
-    		DebugLocation(168, 31);
-    		RBRACE43=(IToken)Match(input,RBRACE,Follow._RBRACE_in_block1658); if (state.failed) return retval; 
+    		DebugLocation(172, 31);
+    		RBRACE43=(IToken)Match(input,RBRACE,Follow._RBRACE_in_block1672); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_RBRACE.Add(RBRACE43);
 
 
@@ -2438,16 +2441,16 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		RewriteRuleSubtreeStream stream_s=new RewriteRuleSubtreeStream(adaptor,"rule s",s!=null?s.Tree:null);
 
     		root_0 = (object)adaptor.Nil();
-    		// 169:7: -> ^( BLOCK $s)
+    		// 173:7: -> ^( BLOCK $s)
     		{
-    			DebugLocation(169, 10);
-    			// Evil.g:169:10: ^( BLOCK $s)
+    			DebugLocation(173, 10);
+    			// Evil.g:173:10: ^( BLOCK $s)
     			{
     			object root_1 = (object)adaptor.Nil();
-    			DebugLocation(169, 12);
+    			DebugLocation(173, 12);
     			root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(BLOCK, "BLOCK"), root_1);
 
-    			DebugLocation(169, 18);
+    			DebugLocation(173, 18);
     			adaptor.AddChild(root_1, stream_s.NextTree());
 
     			adaptor.AddChild(root_0, root_1);
@@ -2479,7 +2482,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(170, 3);
+     	DebugLocation(174, 3);
     	} finally { DebugExitRule(GrammarFileName, "block"); }
     	return retval;
 
@@ -2496,7 +2499,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_statement_list() {}
 
     // $ANTLR start "statement_list"
-    // Evil.g:171:1: statement_list : ( statement )* -> ^( STMTS ( statement )* ) ;
+    // Evil.g:175:1: statement_list : ( statement )* -> ^( STMTS ( statement )* ) ;
     [GrammarRule("statement_list")]
     private EvilParser.statement_list_return statement_list()
     {
@@ -2510,15 +2513,15 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
         RewriteRuleSubtreeStream stream_statement=new RewriteRuleSubtreeStream(adaptor,"rule statement");
     	try { DebugEnterRule(GrammarFileName, "statement_list");
-    	DebugLocation(171, 3);
+    	DebugLocation(175, 3);
     	try
     	{
-    		// Evil.g:172:4: ( ( statement )* -> ^( STMTS ( statement )* ) )
+    		// Evil.g:176:4: ( ( statement )* -> ^( STMTS ( statement )* ) )
     		DebugEnterAlt(1);
-    		// Evil.g:172:7: ( statement )*
+    		// Evil.g:176:7: ( statement )*
     		{
-    		DebugLocation(172, 7);
-    		// Evil.g:172:7: ( statement )*
+    		DebugLocation(176, 7);
+    		// Evil.g:176:7: ( statement )*
     		try { DebugEnterSubRule(12);
     		while (true)
     		{
@@ -2537,10 +2540,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// Evil.g:172:8: statement
+    				// Evil.g:176:8: statement
     				{
-    				DebugLocation(172, 8);
-    				PushFollow(Follow._statement_in_statement_list1689);
+    				DebugLocation(176, 8);
+    				PushFollow(Follow._statement_in_statement_list1703);
     				statement44=statement();
     				PopFollow();
     				if (state.failed) return retval;
@@ -2574,20 +2577,20 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
     		root_0 = (object)adaptor.Nil();
-    		// 172:20: -> ^( STMTS ( statement )* )
+    		// 176:20: -> ^( STMTS ( statement )* )
     		{
-    			DebugLocation(172, 23);
-    			// Evil.g:172:23: ^( STMTS ( statement )* )
+    			DebugLocation(176, 23);
+    			// Evil.g:176:23: ^( STMTS ( statement )* )
     			{
     			object root_1 = (object)adaptor.Nil();
-    			DebugLocation(172, 25);
+    			DebugLocation(176, 25);
     			root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(STMTS, "STMTS"), root_1);
 
-    			DebugLocation(172, 31);
-    			// Evil.g:172:31: ( statement )*
+    			DebugLocation(176, 31);
+    			// Evil.g:176:31: ( statement )*
     			while ( stream_statement.HasNext )
     			{
-    				DebugLocation(172, 31);
+    				DebugLocation(176, 31);
     				adaptor.AddChild(root_1, stream_statement.NextTree());
 
     			}
@@ -2622,7 +2625,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(173, 3);
+     	DebugLocation(177, 3);
     	} finally { DebugExitRule(GrammarFileName, "statement_list"); }
     	return retval;
 
@@ -2639,7 +2642,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_assignment() {}
 
     // $ANTLR start "assignment"
-    // Evil.g:174:1: assignment : l= lvalue ASSIGN e= expression SEMI -> ^( ASSIGN $e $l) ;
+    // Evil.g:178:1: assignment : l= lvalue ASSIGN e= expression SEMI -> ^( ASSIGN $e $l) ;
     [GrammarRule("assignment")]
     private EvilParser.assignment_return assignment()
     {
@@ -2661,38 +2664,38 @@ public partial class EvilParser : Antlr.Runtime.Parser
         RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
         RewriteRuleSubtreeStream stream_lvalue=new RewriteRuleSubtreeStream(adaptor,"rule lvalue");
     	try { DebugEnterRule(GrammarFileName, "assignment");
-    	DebugLocation(174, 3);
+    	DebugLocation(178, 3);
     	try
     	{
-    		// Evil.g:175:4: (l= lvalue ASSIGN e= expression SEMI -> ^( ASSIGN $e $l) )
+    		// Evil.g:179:4: (l= lvalue ASSIGN e= expression SEMI -> ^( ASSIGN $e $l) )
     		DebugEnterAlt(1);
-    		// Evil.g:175:7: l= lvalue ASSIGN e= expression SEMI
+    		// Evil.g:179:7: l= lvalue ASSIGN e= expression SEMI
     		{
-    		DebugLocation(175, 8);
-    		PushFollow(Follow._lvalue_in_assignment1717);
+    		DebugLocation(179, 8);
+    		PushFollow(Follow._lvalue_in_assignment1731);
     		l=lvalue();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_lvalue.Add(l.Tree);
-    		DebugLocation(175, 16);
-    		ASSIGN45=(IToken)Match(input,ASSIGN,Follow._ASSIGN_in_assignment1719); if (state.failed) return retval; 
+    		DebugLocation(179, 16);
+    		ASSIGN45=(IToken)Match(input,ASSIGN,Follow._ASSIGN_in_assignment1733); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_ASSIGN.Add(ASSIGN45);
 
-    		DebugLocation(175, 24);
-    		PushFollow(Follow._expression_in_assignment1723);
+    		DebugLocation(179, 24);
+    		PushFollow(Follow._expression_in_assignment1737);
     		e=expression();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_expression.Add(e.Tree);
-    		DebugLocation(175, 36);
-    		SEMI46=(IToken)Match(input,SEMI,Follow._SEMI_in_assignment1725); if (state.failed) return retval; 
+    		DebugLocation(179, 36);
+    		SEMI46=(IToken)Match(input,SEMI,Follow._SEMI_in_assignment1739); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_SEMI.Add(SEMI46);
 
 
 
     		{
     		// AST REWRITE
-    		// elements: ASSIGN, e, l
+    		// elements: l, ASSIGN, e
     		// token labels: 
     		// rule labels: retval, e, l
     		// token list labels: 
@@ -2705,18 +2708,18 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		RewriteRuleSubtreeStream stream_l=new RewriteRuleSubtreeStream(adaptor,"rule l",l!=null?l.Tree:null);
 
     		root_0 = (object)adaptor.Nil();
-    		// 176:7: -> ^( ASSIGN $e $l)
+    		// 180:7: -> ^( ASSIGN $e $l)
     		{
-    			DebugLocation(176, 10);
-    			// Evil.g:176:10: ^( ASSIGN $e $l)
+    			DebugLocation(180, 10);
+    			// Evil.g:180:10: ^( ASSIGN $e $l)
     			{
     			object root_1 = (object)adaptor.Nil();
-    			DebugLocation(176, 12);
+    			DebugLocation(180, 12);
     			root_1 = (object)adaptor.BecomeRoot(stream_ASSIGN.NextNode(), root_1);
 
-    			DebugLocation(176, 19);
+    			DebugLocation(180, 19);
     			adaptor.AddChild(root_1, stream_e.NextTree());
-    			DebugLocation(176, 22);
+    			DebugLocation(180, 22);
     			adaptor.AddChild(root_1, stream_l.NextTree());
 
     			adaptor.AddChild(root_0, root_1);
@@ -2748,7 +2751,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(177, 3);
+     	DebugLocation(181, 3);
     	} finally { DebugExitRule(GrammarFileName, "assignment"); }
     	return retval;
 
@@ -2765,7 +2768,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_print() {}
 
     // $ANTLR start "print"
-    // Evil.g:178:1: print : PRINT expression ( ENDL )? SEMI ;
+    // Evil.g:182:1: print : PRINT expression ( ENDL )? SEMI ;
     [GrammarRule("print")]
     private EvilParser.print_return print()
     {
@@ -2785,29 +2788,29 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object SEMI50_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "print");
-    	DebugLocation(178, 3);
+    	DebugLocation(182, 3);
     	try
     	{
-    		// Evil.g:179:4: ( PRINT expression ( ENDL )? SEMI )
+    		// Evil.g:183:4: ( PRINT expression ( ENDL )? SEMI )
     		DebugEnterAlt(1);
-    		// Evil.g:179:7: PRINT expression ( ENDL )? SEMI
+    		// Evil.g:183:7: PRINT expression ( ENDL )? SEMI
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(179, 12);
-    		PRINT47=(IToken)Match(input,PRINT,Follow._PRINT_in_print1758); if (state.failed) return retval;
+    		DebugLocation(183, 12);
+    		PRINT47=(IToken)Match(input,PRINT,Follow._PRINT_in_print1772); if (state.failed) return retval;
     		if ( (state.backtracking==0) ) {
     		PRINT47_tree = (object)adaptor.Create(PRINT47);
     		root_0 = (object)adaptor.BecomeRoot(PRINT47_tree, root_0);
     		}
-    		DebugLocation(179, 14);
-    		PushFollow(Follow._expression_in_print1761);
+    		DebugLocation(183, 14);
+    		PushFollow(Follow._expression_in_print1775);
     		expression48=expression();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) adaptor.AddChild(root_0, expression48.Tree);
-    		DebugLocation(179, 25);
-    		// Evil.g:179:25: ( ENDL )?
+    		DebugLocation(183, 25);
+    		// Evil.g:183:25: ( ENDL )?
     		int alt13=2;
     		try { DebugEnterSubRule(13);
     		try { DebugEnterDecision(13, decisionCanBacktrack[13]);
@@ -2822,10 +2825,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:179:26: ENDL
+    			// Evil.g:183:26: ENDL
     			{
-    			DebugLocation(179, 26);
-    			ENDL49=(IToken)Match(input,ENDL,Follow._ENDL_in_print1764); if (state.failed) return retval;
+    			DebugLocation(183, 26);
+    			ENDL49=(IToken)Match(input,ENDL,Follow._ENDL_in_print1778); if (state.failed) return retval;
     			if ( state.backtracking==0 ) {
     			ENDL49_tree = (object)adaptor.Create(ENDL49);
     			adaptor.AddChild(root_0, ENDL49_tree);
@@ -2837,8 +2840,8 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		}
     		} finally { DebugExitSubRule(13); }
 
-    		DebugLocation(179, 37);
-    		SEMI50=(IToken)Match(input,SEMI,Follow._SEMI_in_print1768); if (state.failed) return retval;
+    		DebugLocation(183, 37);
+    		SEMI50=(IToken)Match(input,SEMI,Follow._SEMI_in_print1782); if (state.failed) return retval;
 
     		}
 
@@ -2860,7 +2863,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(180, 3);
+     	DebugLocation(184, 3);
     	} finally { DebugExitRule(GrammarFileName, "print"); }
     	return retval;
 
@@ -2877,7 +2880,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_read() {}
 
     // $ANTLR start "read"
-    // Evil.g:181:1: read : READ lvalue SEMI ;
+    // Evil.g:185:1: read : READ lvalue SEMI ;
     [GrammarRule("read")]
     private EvilParser.read_return read()
     {
@@ -2895,29 +2898,29 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object SEMI53_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "read");
-    	DebugLocation(181, 3);
+    	DebugLocation(185, 3);
     	try
     	{
-    		// Evil.g:182:4: ( READ lvalue SEMI )
+    		// Evil.g:186:4: ( READ lvalue SEMI )
     		DebugEnterAlt(1);
-    		// Evil.g:182:7: READ lvalue SEMI
+    		// Evil.g:186:7: READ lvalue SEMI
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(182, 11);
-    		READ51=(IToken)Match(input,READ,Follow._READ_in_read1784); if (state.failed) return retval;
+    		DebugLocation(186, 11);
+    		READ51=(IToken)Match(input,READ,Follow._READ_in_read1798); if (state.failed) return retval;
     		if ( (state.backtracking==0) ) {
     		READ51_tree = (object)adaptor.Create(READ51);
     		root_0 = (object)adaptor.BecomeRoot(READ51_tree, root_0);
     		}
-    		DebugLocation(182, 13);
-    		PushFollow(Follow._lvalue_in_read1787);
+    		DebugLocation(186, 13);
+    		PushFollow(Follow._lvalue_in_read1801);
     		lvalue52=lvalue();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) adaptor.AddChild(root_0, lvalue52.Tree);
-    		DebugLocation(182, 24);
-    		SEMI53=(IToken)Match(input,SEMI,Follow._SEMI_in_read1789); if (state.failed) return retval;
+    		DebugLocation(186, 24);
+    		SEMI53=(IToken)Match(input,SEMI,Follow._SEMI_in_read1803); if (state.failed) return retval;
 
     		}
 
@@ -2939,7 +2942,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(183, 3);
+     	DebugLocation(187, 3);
     	} finally { DebugExitRule(GrammarFileName, "read"); }
     	return retval;
 
@@ -2956,7 +2959,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_conditional() {}
 
     // $ANTLR start "conditional"
-    // Evil.g:184:1: conditional : IF LPAREN expression RPAREN block ( ELSE block )? ;
+    // Evil.g:188:1: conditional : IF LPAREN expression RPAREN block ( ELSE block )? ;
     [GrammarRule("conditional")]
     private EvilParser.conditional_return conditional()
     {
@@ -2980,39 +2983,39 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object ELSE59_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "conditional");
-    	DebugLocation(184, 3);
+    	DebugLocation(188, 3);
     	try
     	{
-    		// Evil.g:185:4: ( IF LPAREN expression RPAREN block ( ELSE block )? )
+    		// Evil.g:189:4: ( IF LPAREN expression RPAREN block ( ELSE block )? )
     		DebugEnterAlt(1);
-    		// Evil.g:185:7: IF LPAREN expression RPAREN block ( ELSE block )?
+    		// Evil.g:189:7: IF LPAREN expression RPAREN block ( ELSE block )?
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(185, 9);
-    		IF54=(IToken)Match(input,IF,Follow._IF_in_conditional1805); if (state.failed) return retval;
+    		DebugLocation(189, 9);
+    		IF54=(IToken)Match(input,IF,Follow._IF_in_conditional1819); if (state.failed) return retval;
     		if ( (state.backtracking==0) ) {
     		IF54_tree = (object)adaptor.Create(IF54);
     		root_0 = (object)adaptor.BecomeRoot(IF54_tree, root_0);
     		}
-    		DebugLocation(185, 17);
-    		LPAREN55=(IToken)Match(input,LPAREN,Follow._LPAREN_in_conditional1808); if (state.failed) return retval;
-    		DebugLocation(185, 19);
-    		PushFollow(Follow._expression_in_conditional1811);
+    		DebugLocation(189, 17);
+    		LPAREN55=(IToken)Match(input,LPAREN,Follow._LPAREN_in_conditional1822); if (state.failed) return retval;
+    		DebugLocation(189, 19);
+    		PushFollow(Follow._expression_in_conditional1825);
     		expression56=expression();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) adaptor.AddChild(root_0, expression56.Tree);
-    		DebugLocation(185, 36);
-    		RPAREN57=(IToken)Match(input,RPAREN,Follow._RPAREN_in_conditional1813); if (state.failed) return retval;
-    		DebugLocation(185, 38);
-    		PushFollow(Follow._block_in_conditional1816);
+    		DebugLocation(189, 36);
+    		RPAREN57=(IToken)Match(input,RPAREN,Follow._RPAREN_in_conditional1827); if (state.failed) return retval;
+    		DebugLocation(189, 38);
+    		PushFollow(Follow._block_in_conditional1830);
     		block58=block();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) adaptor.AddChild(root_0, block58.Tree);
-    		DebugLocation(185, 44);
-    		// Evil.g:185:44: ( ELSE block )?
+    		DebugLocation(189, 44);
+    		// Evil.g:189:44: ( ELSE block )?
     		int alt14=2;
     		try { DebugEnterSubRule(14);
     		try { DebugEnterDecision(14, decisionCanBacktrack[14]);
@@ -3027,12 +3030,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:185:45: ELSE block
+    			// Evil.g:189:45: ELSE block
     			{
-    			DebugLocation(185, 49);
-    			ELSE59=(IToken)Match(input,ELSE,Follow._ELSE_in_conditional1819); if (state.failed) return retval;
-    			DebugLocation(185, 51);
-    			PushFollow(Follow._block_in_conditional1822);
+    			DebugLocation(189, 49);
+    			ELSE59=(IToken)Match(input,ELSE,Follow._ELSE_in_conditional1833); if (state.failed) return retval;
+    			DebugLocation(189, 51);
+    			PushFollow(Follow._block_in_conditional1836);
     			block60=block();
     			PopFollow();
     			if (state.failed) return retval;
@@ -3065,7 +3068,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(186, 3);
+     	DebugLocation(190, 3);
     	} finally { DebugExitRule(GrammarFileName, "conditional"); }
     	return retval;
 
@@ -3082,7 +3085,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_loop() {}
 
     // $ANTLR start "loop"
-    // Evil.g:187:1: loop : WHILE LPAREN e= expression RPAREN b= block -> ^( WHILE $e $b $e) ;
+    // Evil.g:191:1: loop : WHILE LPAREN e= expression RPAREN b= block -> ^( WHILE $e $b $e) ;
     [GrammarRule("loop")]
     private EvilParser.loop_return loop()
     {
@@ -3107,33 +3110,33 @@ public partial class EvilParser : Antlr.Runtime.Parser
         RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
         RewriteRuleSubtreeStream stream_block=new RewriteRuleSubtreeStream(adaptor,"rule block");
     	try { DebugEnterRule(GrammarFileName, "loop");
-    	DebugLocation(187, 3);
+    	DebugLocation(191, 3);
     	try
     	{
-    		// Evil.g:188:4: ( WHILE LPAREN e= expression RPAREN b= block -> ^( WHILE $e $b $e) )
+    		// Evil.g:192:4: ( WHILE LPAREN e= expression RPAREN b= block -> ^( WHILE $e $b $e) )
     		DebugEnterAlt(1);
-    		// Evil.g:188:7: WHILE LPAREN e= expression RPAREN b= block
+    		// Evil.g:192:7: WHILE LPAREN e= expression RPAREN b= block
     		{
-    		DebugLocation(188, 7);
-    		WHILE61=(IToken)Match(input,WHILE,Follow._WHILE_in_loop1839); if (state.failed) return retval; 
+    		DebugLocation(192, 7);
+    		WHILE61=(IToken)Match(input,WHILE,Follow._WHILE_in_loop1853); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_WHILE.Add(WHILE61);
 
-    		DebugLocation(188, 13);
-    		LPAREN62=(IToken)Match(input,LPAREN,Follow._LPAREN_in_loop1841); if (state.failed) return retval; 
+    		DebugLocation(192, 13);
+    		LPAREN62=(IToken)Match(input,LPAREN,Follow._LPAREN_in_loop1855); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_LPAREN.Add(LPAREN62);
 
-    		DebugLocation(188, 21);
-    		PushFollow(Follow._expression_in_loop1845);
+    		DebugLocation(192, 21);
+    		PushFollow(Follow._expression_in_loop1859);
     		e=expression();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_expression.Add(e.Tree);
-    		DebugLocation(188, 33);
-    		RPAREN63=(IToken)Match(input,RPAREN,Follow._RPAREN_in_loop1847); if (state.failed) return retval; 
+    		DebugLocation(192, 33);
+    		RPAREN63=(IToken)Match(input,RPAREN,Follow._RPAREN_in_loop1861); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_RPAREN.Add(RPAREN63);
 
-    		DebugLocation(188, 41);
-    		PushFollow(Follow._block_in_loop1851);
+    		DebugLocation(192, 41);
+    		PushFollow(Follow._block_in_loop1865);
     		b=block();
     		PopFollow();
     		if (state.failed) return retval;
@@ -3142,7 +3145,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: e, b, e, WHILE
+    		// elements: b, e, e, WHILE
     		// token labels: 
     		// rule labels: retval, e, b
     		// token list labels: 
@@ -3155,20 +3158,20 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		RewriteRuleSubtreeStream stream_b=new RewriteRuleSubtreeStream(adaptor,"rule b",b!=null?b.Tree:null);
 
     		root_0 = (object)adaptor.Nil();
-    		// 189:7: -> ^( WHILE $e $b $e)
+    		// 193:7: -> ^( WHILE $e $b $e)
     		{
-    			DebugLocation(189, 10);
-    			// Evil.g:189:10: ^( WHILE $e $b $e)
+    			DebugLocation(193, 10);
+    			// Evil.g:193:10: ^( WHILE $e $b $e)
     			{
     			object root_1 = (object)adaptor.Nil();
-    			DebugLocation(189, 12);
+    			DebugLocation(193, 12);
     			root_1 = (object)adaptor.BecomeRoot(stream_WHILE.NextNode(), root_1);
 
-    			DebugLocation(189, 18);
+    			DebugLocation(193, 18);
     			adaptor.AddChild(root_1, stream_e.NextTree());
-    			DebugLocation(189, 21);
+    			DebugLocation(193, 21);
     			adaptor.AddChild(root_1, stream_b.NextTree());
-    			DebugLocation(189, 24);
+    			DebugLocation(193, 24);
     			adaptor.AddChild(root_1, stream_e.NextTree());
 
     			adaptor.AddChild(root_0, root_1);
@@ -3200,7 +3203,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(190, 3);
+     	DebugLocation(194, 3);
     	} finally { DebugExitRule(GrammarFileName, "loop"); }
     	return retval;
 
@@ -3217,7 +3220,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_delete() {}
 
     // $ANTLR start "delete"
-    // Evil.g:191:1: delete : DELETE expression SEMI ;
+    // Evil.g:195:1: delete : DELETE expression SEMI ;
     [GrammarRule("delete")]
     private EvilParser.delete_return delete()
     {
@@ -3235,29 +3238,29 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object SEMI66_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "delete");
-    	DebugLocation(191, 3);
+    	DebugLocation(195, 3);
     	try
     	{
-    		// Evil.g:192:4: ( DELETE expression SEMI )
+    		// Evil.g:196:4: ( DELETE expression SEMI )
     		DebugEnterAlt(1);
-    		// Evil.g:192:7: DELETE expression SEMI
+    		// Evil.g:196:7: DELETE expression SEMI
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(192, 13);
-    		DELETE64=(IToken)Match(input,DELETE,Follow._DELETE_in_delete1887); if (state.failed) return retval;
+    		DebugLocation(196, 13);
+    		DELETE64=(IToken)Match(input,DELETE,Follow._DELETE_in_delete1901); if (state.failed) return retval;
     		if ( (state.backtracking==0) ) {
     		DELETE64_tree = (object)adaptor.Create(DELETE64);
     		root_0 = (object)adaptor.BecomeRoot(DELETE64_tree, root_0);
     		}
-    		DebugLocation(192, 15);
-    		PushFollow(Follow._expression_in_delete1890);
+    		DebugLocation(196, 15);
+    		PushFollow(Follow._expression_in_delete1904);
     		expression65=expression();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) adaptor.AddChild(root_0, expression65.Tree);
-    		DebugLocation(192, 30);
-    		SEMI66=(IToken)Match(input,SEMI,Follow._SEMI_in_delete1892); if (state.failed) return retval;
+    		DebugLocation(196, 30);
+    		SEMI66=(IToken)Match(input,SEMI,Follow._SEMI_in_delete1906); if (state.failed) return retval;
 
     		}
 
@@ -3279,7 +3282,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(193, 3);
+     	DebugLocation(197, 3);
     	} finally { DebugExitRule(GrammarFileName, "delete"); }
     	return retval;
 
@@ -3296,7 +3299,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_ret() {}
 
     // $ANTLR start "ret"
-    // Evil.g:194:1: ret : RETURN ( expression )? SEMI ;
+    // Evil.g:198:1: ret : RETURN ( expression )? SEMI ;
     [GrammarRule("ret")]
     private EvilParser.ret_return ret()
     {
@@ -3314,23 +3317,23 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object SEMI69_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "ret");
-    	DebugLocation(194, 3);
+    	DebugLocation(198, 3);
     	try
     	{
-    		// Evil.g:195:4: ( RETURN ( expression )? SEMI )
+    		// Evil.g:199:4: ( RETURN ( expression )? SEMI )
     		DebugEnterAlt(1);
-    		// Evil.g:195:7: RETURN ( expression )? SEMI
+    		// Evil.g:199:7: RETURN ( expression )? SEMI
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(195, 13);
-    		RETURN67=(IToken)Match(input,RETURN,Follow._RETURN_in_ret1908); if (state.failed) return retval;
+    		DebugLocation(199, 13);
+    		RETURN67=(IToken)Match(input,RETURN,Follow._RETURN_in_ret1922); if (state.failed) return retval;
     		if ( (state.backtracking==0) ) {
     		RETURN67_tree = (object)adaptor.Create(RETURN67);
     		root_0 = (object)adaptor.BecomeRoot(RETURN67_tree, root_0);
     		}
-    		DebugLocation(195, 15);
-    		// Evil.g:195:15: ( expression )?
+    		DebugLocation(199, 15);
+    		// Evil.g:199:15: ( expression )?
     		int alt15=2;
     		try { DebugEnterSubRule(15);
     		try { DebugEnterDecision(15, decisionCanBacktrack[15]);
@@ -3345,10 +3348,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:195:16: expression
+    			// Evil.g:199:16: expression
     			{
-    			DebugLocation(195, 16);
-    			PushFollow(Follow._expression_in_ret1912);
+    			DebugLocation(199, 16);
+    			PushFollow(Follow._expression_in_ret1926);
     			expression68=expression();
     			PopFollow();
     			if (state.failed) return retval;
@@ -3360,8 +3363,8 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		}
     		} finally { DebugExitSubRule(15); }
 
-    		DebugLocation(195, 33);
-    		SEMI69=(IToken)Match(input,SEMI,Follow._SEMI_in_ret1916); if (state.failed) return retval;
+    		DebugLocation(199, 33);
+    		SEMI69=(IToken)Match(input,SEMI,Follow._SEMI_in_ret1930); if (state.failed) return retval;
 
     		}
 
@@ -3383,7 +3386,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(196, 3);
+     	DebugLocation(200, 3);
     	} finally { DebugExitRule(GrammarFileName, "ret"); }
     	return retval;
 
@@ -3400,7 +3403,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_invocation() {}
 
     // $ANTLR start "invocation"
-    // Evil.g:197:1: invocation : id= ID a= arguments SEMI -> ^( INVOKE $id $a) ;
+    // Evil.g:201:1: invocation : id= ID a= arguments SEMI -> ^( INVOKE $id $a) ;
     [GrammarRule("invocation")]
     private EvilParser.invocation_return invocation()
     {
@@ -3420,32 +3423,32 @@ public partial class EvilParser : Antlr.Runtime.Parser
         RewriteRuleITokenStream stream_SEMI=new RewriteRuleITokenStream(adaptor,"token SEMI");
         RewriteRuleSubtreeStream stream_arguments=new RewriteRuleSubtreeStream(adaptor,"rule arguments");
     	try { DebugEnterRule(GrammarFileName, "invocation");
-    	DebugLocation(197, 3);
+    	DebugLocation(201, 3);
     	try
     	{
-    		// Evil.g:198:4: (id= ID a= arguments SEMI -> ^( INVOKE $id $a) )
+    		// Evil.g:202:4: (id= ID a= arguments SEMI -> ^( INVOKE $id $a) )
     		DebugEnterAlt(1);
-    		// Evil.g:198:7: id= ID a= arguments SEMI
+    		// Evil.g:202:7: id= ID a= arguments SEMI
     		{
-    		DebugLocation(198, 9);
-    		id=(IToken)Match(input,ID,Follow._ID_in_invocation1934); if (state.failed) return retval; 
+    		DebugLocation(202, 9);
+    		id=(IToken)Match(input,ID,Follow._ID_in_invocation1948); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_ID.Add(id);
 
-    		DebugLocation(198, 14);
-    		PushFollow(Follow._arguments_in_invocation1938);
+    		DebugLocation(202, 14);
+    		PushFollow(Follow._arguments_in_invocation1952);
     		a=arguments();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) stream_arguments.Add(a.Tree);
-    		DebugLocation(198, 25);
-    		SEMI70=(IToken)Match(input,SEMI,Follow._SEMI_in_invocation1940); if (state.failed) return retval; 
+    		DebugLocation(202, 25);
+    		SEMI70=(IToken)Match(input,SEMI,Follow._SEMI_in_invocation1954); if (state.failed) return retval; 
     		if ( (state.backtracking==0) ) stream_SEMI.Add(SEMI70);
 
 
 
     		{
     		// AST REWRITE
-    		// elements: a, id
+    		// elements: id, a
     		// token labels: id
     		// rule labels: retval, a
     		// token list labels: 
@@ -3458,18 +3461,18 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		RewriteRuleSubtreeStream stream_a=new RewriteRuleSubtreeStream(adaptor,"rule a",a!=null?a.Tree:null);
 
     		root_0 = (object)adaptor.Nil();
-    		// 199:7: -> ^( INVOKE $id $a)
+    		// 203:7: -> ^( INVOKE $id $a)
     		{
-    			DebugLocation(199, 10);
-    			// Evil.g:199:10: ^( INVOKE $id $a)
+    			DebugLocation(203, 10);
+    			// Evil.g:203:10: ^( INVOKE $id $a)
     			{
     			object root_1 = (object)adaptor.Nil();
-    			DebugLocation(199, 12);
+    			DebugLocation(203, 12);
     			root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(INVOKE, "INVOKE"), root_1);
 
-    			DebugLocation(199, 19);
+    			DebugLocation(203, 19);
     			adaptor.AddChild(root_1, stream_id.NextNode());
-    			DebugLocation(199, 23);
+    			DebugLocation(203, 23);
     			adaptor.AddChild(root_1, stream_a.NextTree());
 
     			adaptor.AddChild(root_0, root_1);
@@ -3501,7 +3504,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(200, 3);
+     	DebugLocation(204, 3);
     	} finally { DebugExitRule(GrammarFileName, "invocation"); }
     	return retval;
 
@@ -3518,7 +3521,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_lvalue() {}
 
     // $ANTLR start "lvalue"
-    // Evil.g:201:1: lvalue : ID ( DOT ID )* ;
+    // Evil.g:205:1: lvalue : ID ( DOT ID )* ;
     [GrammarRule("lvalue")]
     private EvilParser.lvalue_return lvalue()
     {
@@ -3537,23 +3540,23 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object ID73_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "lvalue");
-    	DebugLocation(201, 3);
+    	DebugLocation(205, 3);
     	try
     	{
-    		// Evil.g:202:4: ( ID ( DOT ID )* )
+    		// Evil.g:206:4: ( ID ( DOT ID )* )
     		DebugEnterAlt(1);
-    		// Evil.g:202:7: ID ( DOT ID )*
+    		// Evil.g:206:7: ID ( DOT ID )*
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(202, 7);
-    		ID71=(IToken)Match(input,ID,Follow._ID_in_lvalue1973); if (state.failed) return retval;
+    		DebugLocation(206, 7);
+    		ID71=(IToken)Match(input,ID,Follow._ID_in_lvalue1987); if (state.failed) return retval;
     		if ( state.backtracking==0 ) {
     		ID71_tree = (object)adaptor.Create(ID71);
     		adaptor.AddChild(root_0, ID71_tree);
     		}
-    		DebugLocation(202, 10);
-    		// Evil.g:202:10: ( DOT ID )*
+    		DebugLocation(206, 10);
+    		// Evil.g:206:10: ( DOT ID )*
     		try { DebugEnterSubRule(16);
     		while (true)
     		{
@@ -3572,16 +3575,16 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// Evil.g:202:11: DOT ID
+    				// Evil.g:206:11: DOT ID
     				{
-    				DebugLocation(202, 14);
-    				DOT72=(IToken)Match(input,DOT,Follow._DOT_in_lvalue1976); if (state.failed) return retval;
+    				DebugLocation(206, 14);
+    				DOT72=(IToken)Match(input,DOT,Follow._DOT_in_lvalue1990); if (state.failed) return retval;
     				if ( (state.backtracking==0) ) {
     				DOT72_tree = (object)adaptor.Create(DOT72);
     				root_0 = (object)adaptor.BecomeRoot(DOT72_tree, root_0);
     				}
-    				DebugLocation(202, 16);
-    				ID73=(IToken)Match(input,ID,Follow._ID_in_lvalue1979); if (state.failed) return retval;
+    				DebugLocation(206, 16);
+    				ID73=(IToken)Match(input,ID,Follow._ID_in_lvalue1993); if (state.failed) return retval;
     				if ( state.backtracking==0 ) {
     				ID73_tree = (object)adaptor.Create(ID73);
     				adaptor.AddChild(root_0, ID73_tree);
@@ -3621,7 +3624,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(203, 3);
+     	DebugLocation(207, 3);
     	} finally { DebugExitRule(GrammarFileName, "lvalue"); }
     	return retval;
 
@@ -3638,7 +3641,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_expression() {}
 
     // $ANTLR start "expression"
-    // Evil.g:204:1: expression : boolterm ( ( AND | OR ) boolterm )* ;
+    // Evil.g:208:1: expression : boolterm ( ( AND | OR ) boolterm )* ;
     [GrammarRule("expression")]
     private EvilParser.expression_return expression()
     {
@@ -3657,23 +3660,23 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object OR76_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "expression");
-    	DebugLocation(204, 3);
+    	DebugLocation(208, 3);
     	try
     	{
-    		// Evil.g:205:4: ( boolterm ( ( AND | OR ) boolterm )* )
+    		// Evil.g:209:4: ( boolterm ( ( AND | OR ) boolterm )* )
     		DebugEnterAlt(1);
-    		// Evil.g:205:7: boolterm ( ( AND | OR ) boolterm )*
+    		// Evil.g:209:7: boolterm ( ( AND | OR ) boolterm )*
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(205, 7);
-    		PushFollow(Follow._boolterm_in_expression1996);
+    		DebugLocation(209, 7);
+    		PushFollow(Follow._boolterm_in_expression2010);
     		boolterm74=boolterm();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) adaptor.AddChild(root_0, boolterm74.Tree);
-    		DebugLocation(205, 16);
-    		// Evil.g:205:16: ( ( AND | OR ) boolterm )*
+    		DebugLocation(209, 16);
+    		// Evil.g:209:16: ( ( AND | OR ) boolterm )*
     		try { DebugEnterSubRule(18);
     		while (true)
     		{
@@ -3692,10 +3695,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// Evil.g:205:17: ( AND | OR ) boolterm
+    				// Evil.g:209:17: ( AND | OR ) boolterm
     				{
-    				DebugLocation(205, 17);
-    				// Evil.g:205:17: ( AND | OR )
+    				DebugLocation(209, 17);
+    				// Evil.g:209:17: ( AND | OR )
     				int alt17=2;
     				try { DebugEnterSubRule(17);
     				try { DebugEnterDecision(17, decisionCanBacktrack[17]);
@@ -3722,10 +3725,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// Evil.g:205:18: AND
+    					// Evil.g:209:18: AND
     					{
-    					DebugLocation(205, 21);
-    					AND75=(IToken)Match(input,AND,Follow._AND_in_expression2000); if (state.failed) return retval;
+    					DebugLocation(209, 21);
+    					AND75=(IToken)Match(input,AND,Follow._AND_in_expression2014); if (state.failed) return retval;
     					if ( (state.backtracking==0) ) {
     					AND75_tree = (object)adaptor.Create(AND75);
     					root_0 = (object)adaptor.BecomeRoot(AND75_tree, root_0);
@@ -3735,10 +3738,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     					break;
     				case 2:
     					DebugEnterAlt(2);
-    					// Evil.g:205:25: OR
+    					// Evil.g:209:25: OR
     					{
-    					DebugLocation(205, 27);
-    					OR76=(IToken)Match(input,OR,Follow._OR_in_expression2005); if (state.failed) return retval;
+    					DebugLocation(209, 27);
+    					OR76=(IToken)Match(input,OR,Follow._OR_in_expression2019); if (state.failed) return retval;
     					if ( (state.backtracking==0) ) {
     					OR76_tree = (object)adaptor.Create(OR76);
     					root_0 = (object)adaptor.BecomeRoot(OR76_tree, root_0);
@@ -3750,8 +3753,8 @@ public partial class EvilParser : Antlr.Runtime.Parser
     				}
     				} finally { DebugExitSubRule(17); }
 
-    				DebugLocation(205, 30);
-    				PushFollow(Follow._boolterm_in_expression2009);
+    				DebugLocation(209, 30);
+    				PushFollow(Follow._boolterm_in_expression2023);
     				boolterm77=boolterm();
     				PopFollow();
     				if (state.failed) return retval;
@@ -3791,7 +3794,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(206, 3);
+     	DebugLocation(210, 3);
     	} finally { DebugExitRule(GrammarFileName, "expression"); }
     	return retval;
 
@@ -3808,7 +3811,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_boolterm() {}
 
     // $ANTLR start "boolterm"
-    // Evil.g:207:1: boolterm : simple ( ( EQ | LT | GT | NE | LE | GE ) simple )? ;
+    // Evil.g:211:1: boolterm : simple ( ( EQ | LT | GT | NE | LE | GE ) simple )? ;
     [GrammarRule("boolterm")]
     private EvilParser.boolterm_return boolterm()
     {
@@ -3835,23 +3838,23 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object GE84_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "boolterm");
-    	DebugLocation(207, 3);
+    	DebugLocation(211, 3);
     	try
     	{
-    		// Evil.g:208:4: ( simple ( ( EQ | LT | GT | NE | LE | GE ) simple )? )
+    		// Evil.g:212:4: ( simple ( ( EQ | LT | GT | NE | LE | GE ) simple )? )
     		DebugEnterAlt(1);
-    		// Evil.g:208:7: simple ( ( EQ | LT | GT | NE | LE | GE ) simple )?
+    		// Evil.g:212:7: simple ( ( EQ | LT | GT | NE | LE | GE ) simple )?
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(208, 7);
-    		PushFollow(Follow._simple_in_boolterm2026);
+    		DebugLocation(212, 7);
+    		PushFollow(Follow._simple_in_boolterm2040);
     		simple78=simple();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) adaptor.AddChild(root_0, simple78.Tree);
-    		DebugLocation(208, 14);
-    		// Evil.g:208:14: ( ( EQ | LT | GT | NE | LE | GE ) simple )?
+    		DebugLocation(212, 14);
+    		// Evil.g:212:14: ( ( EQ | LT | GT | NE | LE | GE ) simple )?
     		int alt20=2;
     		try { DebugEnterSubRule(20);
     		try { DebugEnterDecision(20, decisionCanBacktrack[20]);
@@ -3866,10 +3869,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:208:15: ( EQ | LT | GT | NE | LE | GE ) simple
+    			// Evil.g:212:15: ( EQ | LT | GT | NE | LE | GE ) simple
     			{
-    			DebugLocation(208, 15);
-    			// Evil.g:208:15: ( EQ | LT | GT | NE | LE | GE )
+    			DebugLocation(212, 15);
+    			// Evil.g:212:15: ( EQ | LT | GT | NE | LE | GE )
     			int alt19=6;
     			try { DebugEnterSubRule(19);
     			try { DebugEnterDecision(19, decisionCanBacktrack[19]);
@@ -3920,10 +3923,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// Evil.g:208:16: EQ
+    				// Evil.g:212:16: EQ
     				{
-    				DebugLocation(208, 18);
-    				EQ79=(IToken)Match(input,EQ,Follow._EQ_in_boolterm2030); if (state.failed) return retval;
+    				DebugLocation(212, 18);
+    				EQ79=(IToken)Match(input,EQ,Follow._EQ_in_boolterm2044); if (state.failed) return retval;
     				if ( (state.backtracking==0) ) {
     				EQ79_tree = (object)adaptor.Create(EQ79);
     				root_0 = (object)adaptor.BecomeRoot(EQ79_tree, root_0);
@@ -3933,10 +3936,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     				break;
     			case 2:
     				DebugEnterAlt(2);
-    				// Evil.g:208:22: LT
+    				// Evil.g:212:22: LT
     				{
-    				DebugLocation(208, 24);
-    				LT80=(IToken)Match(input,LT,Follow._LT_in_boolterm2035); if (state.failed) return retval;
+    				DebugLocation(212, 24);
+    				LT80=(IToken)Match(input,LT,Follow._LT_in_boolterm2049); if (state.failed) return retval;
     				if ( (state.backtracking==0) ) {
     				LT80_tree = (object)adaptor.Create(LT80);
     				root_0 = (object)adaptor.BecomeRoot(LT80_tree, root_0);
@@ -3946,10 +3949,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     				break;
     			case 3:
     				DebugEnterAlt(3);
-    				// Evil.g:208:28: GT
+    				// Evil.g:212:28: GT
     				{
-    				DebugLocation(208, 30);
-    				GT81=(IToken)Match(input,GT,Follow._GT_in_boolterm2040); if (state.failed) return retval;
+    				DebugLocation(212, 30);
+    				GT81=(IToken)Match(input,GT,Follow._GT_in_boolterm2054); if (state.failed) return retval;
     				if ( (state.backtracking==0) ) {
     				GT81_tree = (object)adaptor.Create(GT81);
     				root_0 = (object)adaptor.BecomeRoot(GT81_tree, root_0);
@@ -3959,10 +3962,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     				break;
     			case 4:
     				DebugEnterAlt(4);
-    				// Evil.g:208:34: NE
+    				// Evil.g:212:34: NE
     				{
-    				DebugLocation(208, 36);
-    				NE82=(IToken)Match(input,NE,Follow._NE_in_boolterm2045); if (state.failed) return retval;
+    				DebugLocation(212, 36);
+    				NE82=(IToken)Match(input,NE,Follow._NE_in_boolterm2059); if (state.failed) return retval;
     				if ( (state.backtracking==0) ) {
     				NE82_tree = (object)adaptor.Create(NE82);
     				root_0 = (object)adaptor.BecomeRoot(NE82_tree, root_0);
@@ -3972,10 +3975,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     				break;
     			case 5:
     				DebugEnterAlt(5);
-    				// Evil.g:208:40: LE
+    				// Evil.g:212:40: LE
     				{
-    				DebugLocation(208, 42);
-    				LE83=(IToken)Match(input,LE,Follow._LE_in_boolterm2050); if (state.failed) return retval;
+    				DebugLocation(212, 42);
+    				LE83=(IToken)Match(input,LE,Follow._LE_in_boolterm2064); if (state.failed) return retval;
     				if ( (state.backtracking==0) ) {
     				LE83_tree = (object)adaptor.Create(LE83);
     				root_0 = (object)adaptor.BecomeRoot(LE83_tree, root_0);
@@ -3985,10 +3988,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     				break;
     			case 6:
     				DebugEnterAlt(6);
-    				// Evil.g:208:46: GE
+    				// Evil.g:212:46: GE
     				{
-    				DebugLocation(208, 48);
-    				GE84=(IToken)Match(input,GE,Follow._GE_in_boolterm2055); if (state.failed) return retval;
+    				DebugLocation(212, 48);
+    				GE84=(IToken)Match(input,GE,Follow._GE_in_boolterm2069); if (state.failed) return retval;
     				if ( (state.backtracking==0) ) {
     				GE84_tree = (object)adaptor.Create(GE84);
     				root_0 = (object)adaptor.BecomeRoot(GE84_tree, root_0);
@@ -4000,8 +4003,8 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			}
     			} finally { DebugExitSubRule(19); }
 
-    			DebugLocation(208, 51);
-    			PushFollow(Follow._simple_in_boolterm2059);
+    			DebugLocation(212, 51);
+    			PushFollow(Follow._simple_in_boolterm2073);
     			simple85=simple();
     			PopFollow();
     			if (state.failed) return retval;
@@ -4034,7 +4037,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(209, 3);
+     	DebugLocation(213, 3);
     	} finally { DebugExitRule(GrammarFileName, "boolterm"); }
     	return retval;
 
@@ -4051,7 +4054,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_simple() {}
 
     // $ANTLR start "simple"
-    // Evil.g:210:1: simple : term ( ( PLUS | MINUS ) term )* ;
+    // Evil.g:214:1: simple : term ( ( PLUS | MINUS ) term )* ;
     [GrammarRule("simple")]
     private EvilParser.simple_return simple()
     {
@@ -4070,23 +4073,23 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object MINUS88_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "simple");
-    	DebugLocation(210, 3);
+    	DebugLocation(214, 3);
     	try
     	{
-    		// Evil.g:211:4: ( term ( ( PLUS | MINUS ) term )* )
+    		// Evil.g:215:4: ( term ( ( PLUS | MINUS ) term )* )
     		DebugEnterAlt(1);
-    		// Evil.g:211:7: term ( ( PLUS | MINUS ) term )*
+    		// Evil.g:215:7: term ( ( PLUS | MINUS ) term )*
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(211, 7);
-    		PushFollow(Follow._term_in_simple2076);
+    		DebugLocation(215, 7);
+    		PushFollow(Follow._term_in_simple2090);
     		term86=term();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) adaptor.AddChild(root_0, term86.Tree);
-    		DebugLocation(211, 12);
-    		// Evil.g:211:12: ( ( PLUS | MINUS ) term )*
+    		DebugLocation(215, 12);
+    		// Evil.g:215:12: ( ( PLUS | MINUS ) term )*
     		try { DebugEnterSubRule(22);
     		while (true)
     		{
@@ -4105,10 +4108,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// Evil.g:211:13: ( PLUS | MINUS ) term
+    				// Evil.g:215:13: ( PLUS | MINUS ) term
     				{
-    				DebugLocation(211, 13);
-    				// Evil.g:211:13: ( PLUS | MINUS )
+    				DebugLocation(215, 13);
+    				// Evil.g:215:13: ( PLUS | MINUS )
     				int alt21=2;
     				try { DebugEnterSubRule(21);
     				try { DebugEnterDecision(21, decisionCanBacktrack[21]);
@@ -4135,10 +4138,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// Evil.g:211:14: PLUS
+    					// Evil.g:215:14: PLUS
     					{
-    					DebugLocation(211, 18);
-    					PLUS87=(IToken)Match(input,PLUS,Follow._PLUS_in_simple2080); if (state.failed) return retval;
+    					DebugLocation(215, 18);
+    					PLUS87=(IToken)Match(input,PLUS,Follow._PLUS_in_simple2094); if (state.failed) return retval;
     					if ( (state.backtracking==0) ) {
     					PLUS87_tree = (object)adaptor.Create(PLUS87);
     					root_0 = (object)adaptor.BecomeRoot(PLUS87_tree, root_0);
@@ -4148,10 +4151,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     					break;
     				case 2:
     					DebugEnterAlt(2);
-    					// Evil.g:211:22: MINUS
+    					// Evil.g:215:22: MINUS
     					{
-    					DebugLocation(211, 27);
-    					MINUS88=(IToken)Match(input,MINUS,Follow._MINUS_in_simple2085); if (state.failed) return retval;
+    					DebugLocation(215, 27);
+    					MINUS88=(IToken)Match(input,MINUS,Follow._MINUS_in_simple2099); if (state.failed) return retval;
     					if ( (state.backtracking==0) ) {
     					MINUS88_tree = (object)adaptor.Create(MINUS88);
     					root_0 = (object)adaptor.BecomeRoot(MINUS88_tree, root_0);
@@ -4163,8 +4166,8 @@ public partial class EvilParser : Antlr.Runtime.Parser
     				}
     				} finally { DebugExitSubRule(21); }
 
-    				DebugLocation(211, 30);
-    				PushFollow(Follow._term_in_simple2089);
+    				DebugLocation(215, 30);
+    				PushFollow(Follow._term_in_simple2103);
     				term89=term();
     				PopFollow();
     				if (state.failed) return retval;
@@ -4204,7 +4207,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(212, 3);
+     	DebugLocation(216, 3);
     	} finally { DebugExitRule(GrammarFileName, "simple"); }
     	return retval;
 
@@ -4221,7 +4224,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_term() {}
 
     // $ANTLR start "term"
-    // Evil.g:213:1: term : unary ( ( TIMES | DIVIDE ) unary )* ;
+    // Evil.g:217:1: term : unary ( ( TIMES | DIVIDE ) unary )* ;
     [GrammarRule("term")]
     private EvilParser.term_return term()
     {
@@ -4240,23 +4243,23 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object DIVIDE92_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "term");
-    	DebugLocation(213, 3);
+    	DebugLocation(217, 3);
     	try
     	{
-    		// Evil.g:214:4: ( unary ( ( TIMES | DIVIDE ) unary )* )
+    		// Evil.g:218:4: ( unary ( ( TIMES | DIVIDE ) unary )* )
     		DebugEnterAlt(1);
-    		// Evil.g:214:7: unary ( ( TIMES | DIVIDE ) unary )*
+    		// Evil.g:218:7: unary ( ( TIMES | DIVIDE ) unary )*
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(214, 7);
-    		PushFollow(Follow._unary_in_term2106);
+    		DebugLocation(218, 7);
+    		PushFollow(Follow._unary_in_term2120);
     		unary90=unary();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) adaptor.AddChild(root_0, unary90.Tree);
-    		DebugLocation(214, 13);
-    		// Evil.g:214:13: ( ( TIMES | DIVIDE ) unary )*
+    		DebugLocation(218, 13);
+    		// Evil.g:218:13: ( ( TIMES | DIVIDE ) unary )*
     		try { DebugEnterSubRule(24);
     		while (true)
     		{
@@ -4275,10 +4278,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// Evil.g:214:14: ( TIMES | DIVIDE ) unary
+    				// Evil.g:218:14: ( TIMES | DIVIDE ) unary
     				{
-    				DebugLocation(214, 14);
-    				// Evil.g:214:14: ( TIMES | DIVIDE )
+    				DebugLocation(218, 14);
+    				// Evil.g:218:14: ( TIMES | DIVIDE )
     				int alt23=2;
     				try { DebugEnterSubRule(23);
     				try { DebugEnterDecision(23, decisionCanBacktrack[23]);
@@ -4305,10 +4308,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// Evil.g:214:15: TIMES
+    					// Evil.g:218:15: TIMES
     					{
-    					DebugLocation(214, 20);
-    					TIMES91=(IToken)Match(input,TIMES,Follow._TIMES_in_term2110); if (state.failed) return retval;
+    					DebugLocation(218, 20);
+    					TIMES91=(IToken)Match(input,TIMES,Follow._TIMES_in_term2124); if (state.failed) return retval;
     					if ( (state.backtracking==0) ) {
     					TIMES91_tree = (object)adaptor.Create(TIMES91);
     					root_0 = (object)adaptor.BecomeRoot(TIMES91_tree, root_0);
@@ -4318,10 +4321,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     					break;
     				case 2:
     					DebugEnterAlt(2);
-    					// Evil.g:214:24: DIVIDE
+    					// Evil.g:218:24: DIVIDE
     					{
-    					DebugLocation(214, 30);
-    					DIVIDE92=(IToken)Match(input,DIVIDE,Follow._DIVIDE_in_term2115); if (state.failed) return retval;
+    					DebugLocation(218, 30);
+    					DIVIDE92=(IToken)Match(input,DIVIDE,Follow._DIVIDE_in_term2129); if (state.failed) return retval;
     					if ( (state.backtracking==0) ) {
     					DIVIDE92_tree = (object)adaptor.Create(DIVIDE92);
     					root_0 = (object)adaptor.BecomeRoot(DIVIDE92_tree, root_0);
@@ -4333,8 +4336,8 @@ public partial class EvilParser : Antlr.Runtime.Parser
     				}
     				} finally { DebugExitSubRule(23); }
 
-    				DebugLocation(214, 33);
-    				PushFollow(Follow._unary_in_term2119);
+    				DebugLocation(218, 33);
+    				PushFollow(Follow._unary_in_term2133);
     				unary93=unary();
     				PopFollow();
     				if (state.failed) return retval;
@@ -4374,7 +4377,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(215, 3);
+     	DebugLocation(219, 3);
     	} finally { DebugExitRule(GrammarFileName, "term"); }
     	return retval;
 
@@ -4391,7 +4394,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_unary() {}
 
     // $ANTLR start "unary"
-    // Evil.g:216:1: unary : ( NOT odd_not | MINUS odd_neg | selector );
+    // Evil.g:220:1: unary : ( NOT odd_not | MINUS odd_neg | selector );
     [GrammarRule("unary")]
     private EvilParser.unary_return unary()
     {
@@ -4411,10 +4414,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object MINUS96_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "unary");
-    	DebugLocation(216, 3);
+    	DebugLocation(220, 3);
     	try
     	{
-    		// Evil.g:217:4: ( NOT odd_not | MINUS odd_neg | selector )
+    		// Evil.g:221:4: ( NOT odd_not | MINUS odd_neg | selector )
     		int alt25=3;
     		try { DebugEnterDecision(25, decisionCanBacktrack[25]);
     		switch (input.LA(1))
@@ -4455,14 +4458,14 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:217:7: NOT odd_not
+    			// Evil.g:221:7: NOT odd_not
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(217, 10);
-    			NOT94=(IToken)Match(input,NOT,Follow._NOT_in_unary2136); if (state.failed) return retval;
-    			DebugLocation(217, 12);
-    			PushFollow(Follow._odd_not_in_unary2139);
+    			DebugLocation(221, 10);
+    			NOT94=(IToken)Match(input,NOT,Follow._NOT_in_unary2150); if (state.failed) return retval;
+    			DebugLocation(221, 12);
+    			PushFollow(Follow._odd_not_in_unary2153);
     			odd_not95=odd_not();
     			PopFollow();
     			if (state.failed) return retval;
@@ -4472,14 +4475,14 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// Evil.g:218:7: MINUS odd_neg
+    			// Evil.g:222:7: MINUS odd_neg
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(218, 12);
-    			MINUS96=(IToken)Match(input,MINUS,Follow._MINUS_in_unary2147); if (state.failed) return retval;
-    			DebugLocation(218, 14);
-    			PushFollow(Follow._odd_neg_in_unary2150);
+    			DebugLocation(222, 12);
+    			MINUS96=(IToken)Match(input,MINUS,Follow._MINUS_in_unary2161); if (state.failed) return retval;
+    			DebugLocation(222, 14);
+    			PushFollow(Follow._odd_neg_in_unary2164);
     			odd_neg97=odd_neg();
     			PopFollow();
     			if (state.failed) return retval;
@@ -4489,12 +4492,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// Evil.g:219:7: selector
+    			// Evil.g:223:7: selector
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(219, 7);
-    			PushFollow(Follow._selector_in_unary2158);
+    			DebugLocation(223, 7);
+    			PushFollow(Follow._selector_in_unary2172);
     			selector98=selector();
     			PopFollow();
     			if (state.failed) return retval;
@@ -4522,7 +4525,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(220, 3);
+     	DebugLocation(224, 3);
     	} finally { DebugExitRule(GrammarFileName, "unary"); }
     	return retval;
 
@@ -4539,7 +4542,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_odd_not() {}
 
     // $ANTLR start "odd_not"
-    // Evil.g:221:1: odd_not : ( NOT even_not | s= selector -> ^( NOT $s) );
+    // Evil.g:225:1: odd_not : ( NOT even_not | s= selector -> ^( NOT $s) );
     [GrammarRule("odd_not")]
     private EvilParser.odd_not_return odd_not()
     {
@@ -4556,10 +4559,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object NOT99_tree=null;
         RewriteRuleSubtreeStream stream_selector=new RewriteRuleSubtreeStream(adaptor,"rule selector");
     	try { DebugEnterRule(GrammarFileName, "odd_not");
-    	DebugLocation(221, 3);
+    	DebugLocation(225, 3);
     	try
     	{
-    		// Evil.g:222:4: ( NOT even_not | s= selector -> ^( NOT $s) )
+    		// Evil.g:226:4: ( NOT even_not | s= selector -> ^( NOT $s) )
     		int alt26=2;
     		try { DebugEnterDecision(26, decisionCanBacktrack[26]);
     		int LA26_0 = input.LA(1);
@@ -4585,14 +4588,14 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:222:7: NOT even_not
+    			// Evil.g:226:7: NOT even_not
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(222, 10);
-    			NOT99=(IToken)Match(input,NOT,Follow._NOT_in_odd_not2173); if (state.failed) return retval;
-    			DebugLocation(222, 12);
-    			PushFollow(Follow._even_not_in_odd_not2176);
+    			DebugLocation(226, 10);
+    			NOT99=(IToken)Match(input,NOT,Follow._NOT_in_odd_not2187); if (state.failed) return retval;
+    			DebugLocation(226, 12);
+    			PushFollow(Follow._even_not_in_odd_not2190);
     			even_not100=even_not();
     			PopFollow();
     			if (state.failed) return retval;
@@ -4602,10 +4605,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// Evil.g:223:7: s= selector
+    			// Evil.g:227:7: s= selector
     			{
-    			DebugLocation(223, 8);
-    			PushFollow(Follow._selector_in_odd_not2186);
+    			DebugLocation(227, 8);
+    			PushFollow(Follow._selector_in_odd_not2200);
     			s=selector();
     			PopFollow();
     			if (state.failed) return retval;
@@ -4626,16 +4629,16 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			RewriteRuleSubtreeStream stream_s=new RewriteRuleSubtreeStream(adaptor,"rule s",s!=null?s.Tree:null);
 
     			root_0 = (object)adaptor.Nil();
-    			// 224:7: -> ^( NOT $s)
+    			// 228:7: -> ^( NOT $s)
     			{
-    				DebugLocation(224, 10);
-    				// Evil.g:224:10: ^( NOT $s)
+    				DebugLocation(228, 10);
+    				// Evil.g:228:10: ^( NOT $s)
     				{
     				object root_1 = (object)adaptor.Nil();
-    				DebugLocation(224, 12);
+    				DebugLocation(228, 12);
     				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(NOT, "NOT"), root_1);
 
-    				DebugLocation(224, 16);
+    				DebugLocation(228, 16);
     				adaptor.AddChild(root_1, stream_s.NextTree());
 
     				adaptor.AddChild(root_0, root_1);
@@ -4669,7 +4672,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(225, 3);
+     	DebugLocation(229, 3);
     	} finally { DebugExitRule(GrammarFileName, "odd_not"); }
     	return retval;
 
@@ -4686,7 +4689,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_even_not() {}
 
     // $ANTLR start "even_not"
-    // Evil.g:226:1: even_not : ( NOT odd_not | selector );
+    // Evil.g:230:1: even_not : ( NOT odd_not | selector );
     [GrammarRule("even_not")]
     private EvilParser.even_not_return even_not()
     {
@@ -4703,10 +4706,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object NOT101_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "even_not");
-    	DebugLocation(226, 3);
+    	DebugLocation(230, 3);
     	try
     	{
-    		// Evil.g:227:4: ( NOT odd_not | selector )
+    		// Evil.g:231:4: ( NOT odd_not | selector )
     		int alt27=2;
     		try { DebugEnterDecision(27, decisionCanBacktrack[27]);
     		int LA27_0 = input.LA(1);
@@ -4732,14 +4735,14 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:227:7: NOT odd_not
+    			// Evil.g:231:7: NOT odd_not
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(227, 10);
-    			NOT101=(IToken)Match(input,NOT,Follow._NOT_in_even_not2216); if (state.failed) return retval;
-    			DebugLocation(227, 12);
-    			PushFollow(Follow._odd_not_in_even_not2219);
+    			DebugLocation(231, 10);
+    			NOT101=(IToken)Match(input,NOT,Follow._NOT_in_even_not2230); if (state.failed) return retval;
+    			DebugLocation(231, 12);
+    			PushFollow(Follow._odd_not_in_even_not2233);
     			odd_not102=odd_not();
     			PopFollow();
     			if (state.failed) return retval;
@@ -4749,12 +4752,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// Evil.g:228:7: selector
+    			// Evil.g:232:7: selector
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(228, 7);
-    			PushFollow(Follow._selector_in_even_not2227);
+    			DebugLocation(232, 7);
+    			PushFollow(Follow._selector_in_even_not2241);
     			selector103=selector();
     			PopFollow();
     			if (state.failed) return retval;
@@ -4782,7 +4785,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(229, 3);
+     	DebugLocation(233, 3);
     	} finally { DebugExitRule(GrammarFileName, "even_not"); }
     	return retval;
 
@@ -4799,7 +4802,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_odd_neg() {}
 
     // $ANTLR start "odd_neg"
-    // Evil.g:230:1: odd_neg : ( MINUS even_neg | s= selector -> ^( NEG $s) );
+    // Evil.g:234:1: odd_neg : ( MINUS even_neg | s= selector -> ^( NEG $s) );
     [GrammarRule("odd_neg")]
     private EvilParser.odd_neg_return odd_neg()
     {
@@ -4816,10 +4819,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object MINUS104_tree=null;
         RewriteRuleSubtreeStream stream_selector=new RewriteRuleSubtreeStream(adaptor,"rule selector");
     	try { DebugEnterRule(GrammarFileName, "odd_neg");
-    	DebugLocation(230, 3);
+    	DebugLocation(234, 3);
     	try
     	{
-    		// Evil.g:231:4: ( MINUS even_neg | s= selector -> ^( NEG $s) )
+    		// Evil.g:235:4: ( MINUS even_neg | s= selector -> ^( NEG $s) )
     		int alt28=2;
     		try { DebugEnterDecision(28, decisionCanBacktrack[28]);
     		int LA28_0 = input.LA(1);
@@ -4845,14 +4848,14 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:231:7: MINUS even_neg
+    			// Evil.g:235:7: MINUS even_neg
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(231, 12);
-    			MINUS104=(IToken)Match(input,MINUS,Follow._MINUS_in_odd_neg2242); if (state.failed) return retval;
-    			DebugLocation(231, 14);
-    			PushFollow(Follow._even_neg_in_odd_neg2245);
+    			DebugLocation(235, 12);
+    			MINUS104=(IToken)Match(input,MINUS,Follow._MINUS_in_odd_neg2256); if (state.failed) return retval;
+    			DebugLocation(235, 14);
+    			PushFollow(Follow._even_neg_in_odd_neg2259);
     			even_neg105=even_neg();
     			PopFollow();
     			if (state.failed) return retval;
@@ -4862,10 +4865,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// Evil.g:232:7: s= selector
+    			// Evil.g:236:7: s= selector
     			{
-    			DebugLocation(232, 8);
-    			PushFollow(Follow._selector_in_odd_neg2255);
+    			DebugLocation(236, 8);
+    			PushFollow(Follow._selector_in_odd_neg2269);
     			s=selector();
     			PopFollow();
     			if (state.failed) return retval;
@@ -4886,16 +4889,16 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			RewriteRuleSubtreeStream stream_s=new RewriteRuleSubtreeStream(adaptor,"rule s",s!=null?s.Tree:null);
 
     			root_0 = (object)adaptor.Nil();
-    			// 233:7: -> ^( NEG $s)
+    			// 237:7: -> ^( NEG $s)
     			{
-    				DebugLocation(233, 10);
-    				// Evil.g:233:10: ^( NEG $s)
+    				DebugLocation(237, 10);
+    				// Evil.g:237:10: ^( NEG $s)
     				{
     				object root_1 = (object)adaptor.Nil();
-    				DebugLocation(233, 12);
+    				DebugLocation(237, 12);
     				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(NEG, "NEG"), root_1);
 
-    				DebugLocation(233, 16);
+    				DebugLocation(237, 16);
     				adaptor.AddChild(root_1, stream_s.NextTree());
 
     				adaptor.AddChild(root_0, root_1);
@@ -4929,7 +4932,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(234, 3);
+     	DebugLocation(238, 3);
     	} finally { DebugExitRule(GrammarFileName, "odd_neg"); }
     	return retval;
 
@@ -4946,7 +4949,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_even_neg() {}
 
     // $ANTLR start "even_neg"
-    // Evil.g:235:1: even_neg : ( MINUS odd_neg | selector );
+    // Evil.g:239:1: even_neg : ( MINUS odd_neg | selector );
     [GrammarRule("even_neg")]
     private EvilParser.even_neg_return even_neg()
     {
@@ -4963,10 +4966,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object MINUS106_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "even_neg");
-    	DebugLocation(235, 3);
+    	DebugLocation(239, 3);
     	try
     	{
-    		// Evil.g:236:4: ( MINUS odd_neg | selector )
+    		// Evil.g:240:4: ( MINUS odd_neg | selector )
     		int alt29=2;
     		try { DebugEnterDecision(29, decisionCanBacktrack[29]);
     		int LA29_0 = input.LA(1);
@@ -4992,14 +4995,14 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:236:7: MINUS odd_neg
+    			// Evil.g:240:7: MINUS odd_neg
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(236, 12);
-    			MINUS106=(IToken)Match(input,MINUS,Follow._MINUS_in_even_neg2285); if (state.failed) return retval;
-    			DebugLocation(236, 14);
-    			PushFollow(Follow._odd_neg_in_even_neg2288);
+    			DebugLocation(240, 12);
+    			MINUS106=(IToken)Match(input,MINUS,Follow._MINUS_in_even_neg2299); if (state.failed) return retval;
+    			DebugLocation(240, 14);
+    			PushFollow(Follow._odd_neg_in_even_neg2302);
     			odd_neg107=odd_neg();
     			PopFollow();
     			if (state.failed) return retval;
@@ -5009,12 +5012,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// Evil.g:237:7: selector
+    			// Evil.g:241:7: selector
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(237, 7);
-    			PushFollow(Follow._selector_in_even_neg2296);
+    			DebugLocation(241, 7);
+    			PushFollow(Follow._selector_in_even_neg2310);
     			selector108=selector();
     			PopFollow();
     			if (state.failed) return retval;
@@ -5042,7 +5045,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(238, 3);
+     	DebugLocation(242, 3);
     	} finally { DebugExitRule(GrammarFileName, "even_neg"); }
     	return retval;
 
@@ -5059,7 +5062,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_selector() {}
 
     // $ANTLR start "selector"
-    // Evil.g:239:1: selector : factor ( DOT ID )* ;
+    // Evil.g:243:1: selector : factor ( DOT ID )* ;
     [GrammarRule("selector")]
     private EvilParser.selector_return selector()
     {
@@ -5077,23 +5080,23 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object ID111_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "selector");
-    	DebugLocation(239, 3);
+    	DebugLocation(243, 3);
     	try
     	{
-    		// Evil.g:240:4: ( factor ( DOT ID )* )
+    		// Evil.g:244:4: ( factor ( DOT ID )* )
     		DebugEnterAlt(1);
-    		// Evil.g:240:7: factor ( DOT ID )*
+    		// Evil.g:244:7: factor ( DOT ID )*
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(240, 7);
-    		PushFollow(Follow._factor_in_selector2311);
+    		DebugLocation(244, 7);
+    		PushFollow(Follow._factor_in_selector2325);
     		factor109=factor();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) adaptor.AddChild(root_0, factor109.Tree);
-    		DebugLocation(240, 14);
-    		// Evil.g:240:14: ( DOT ID )*
+    		DebugLocation(244, 14);
+    		// Evil.g:244:14: ( DOT ID )*
     		try { DebugEnterSubRule(30);
     		while (true)
     		{
@@ -5112,16 +5115,16 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// Evil.g:240:15: DOT ID
+    				// Evil.g:244:15: DOT ID
     				{
-    				DebugLocation(240, 18);
-    				DOT110=(IToken)Match(input,DOT,Follow._DOT_in_selector2314); if (state.failed) return retval;
+    				DebugLocation(244, 18);
+    				DOT110=(IToken)Match(input,DOT,Follow._DOT_in_selector2328); if (state.failed) return retval;
     				if ( (state.backtracking==0) ) {
     				DOT110_tree = (object)adaptor.Create(DOT110);
     				root_0 = (object)adaptor.BecomeRoot(DOT110_tree, root_0);
     				}
-    				DebugLocation(240, 20);
-    				ID111=(IToken)Match(input,ID,Follow._ID_in_selector2317); if (state.failed) return retval;
+    				DebugLocation(244, 20);
+    				ID111=(IToken)Match(input,ID,Follow._ID_in_selector2331); if (state.failed) return retval;
     				if ( state.backtracking==0 ) {
     				ID111_tree = (object)adaptor.Create(ID111);
     				adaptor.AddChild(root_0, ID111_tree);
@@ -5161,7 +5164,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(241, 3);
+     	DebugLocation(245, 3);
     	} finally { DebugExitRule(GrammarFileName, "selector"); }
     	return retval;
 
@@ -5178,7 +5181,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_factor() {}
 
     // $ANTLR start "factor"
-    // Evil.g:242:1: factor : ( LPAREN expression RPAREN | id= ID a= arguments -> ^( INVOKE $id $a) | ID | INTEGER | TRUE | FALSE | NEW ID | NULL );
+    // Evil.g:246:1: factor : ( LPAREN expression RPAREN | id= ID a= arguments -> ^( INVOKE $id $a) | ID | INTEGER | TRUE | FALSE | NEW ID | NULL );
     [GrammarRule("factor")]
     private EvilParser.factor_return factor()
     {
@@ -5214,10 +5217,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
         RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
         RewriteRuleSubtreeStream stream_arguments=new RewriteRuleSubtreeStream(adaptor,"rule arguments");
     	try { DebugEnterRule(GrammarFileName, "factor");
-    	DebugLocation(242, 3);
+    	DebugLocation(246, 3);
     	try
     	{
-    		// Evil.g:243:4: ( LPAREN expression RPAREN | id= ID a= arguments -> ^( INVOKE $id $a) | ID | INTEGER | TRUE | FALSE | NEW ID | NULL )
+    		// Evil.g:247:4: ( LPAREN expression RPAREN | id= ID a= arguments -> ^( INVOKE $id $a) | ID | INTEGER | TRUE | FALSE | NEW ID | NULL )
     		int alt31=8;
     		try { DebugEnterDecision(31, decisionCanBacktrack[31]);
     		try
@@ -5234,33 +5237,33 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:243:7: LPAREN expression RPAREN
+    			// Evil.g:247:7: LPAREN expression RPAREN
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(243, 13);
-    			LPAREN112=(IToken)Match(input,LPAREN,Follow._LPAREN_in_factor2334); if (state.failed) return retval;
-    			DebugLocation(243, 15);
-    			PushFollow(Follow._expression_in_factor2337);
+    			DebugLocation(247, 13);
+    			LPAREN112=(IToken)Match(input,LPAREN,Follow._LPAREN_in_factor2348); if (state.failed) return retval;
+    			DebugLocation(247, 15);
+    			PushFollow(Follow._expression_in_factor2351);
     			expression113=expression();
     			PopFollow();
     			if (state.failed) return retval;
     			if ( (state.backtracking==0) ) adaptor.AddChild(root_0, expression113.Tree);
-    			DebugLocation(243, 32);
-    			RPAREN114=(IToken)Match(input,RPAREN,Follow._RPAREN_in_factor2339); if (state.failed) return retval;
+    			DebugLocation(247, 32);
+    			RPAREN114=(IToken)Match(input,RPAREN,Follow._RPAREN_in_factor2353); if (state.failed) return retval;
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// Evil.g:244:7: id= ID a= arguments
+    			// Evil.g:248:7: id= ID a= arguments
     			{
-    			DebugLocation(244, 9);
-    			id=(IToken)Match(input,ID,Follow._ID_in_factor2350); if (state.failed) return retval; 
+    			DebugLocation(248, 9);
+    			id=(IToken)Match(input,ID,Follow._ID_in_factor2364); if (state.failed) return retval; 
     			if ( (state.backtracking==0) ) stream_ID.Add(id);
 
-    			DebugLocation(244, 14);
-    			PushFollow(Follow._arguments_in_factor2354);
+    			DebugLocation(248, 14);
+    			PushFollow(Follow._arguments_in_factor2368);
     			a=arguments();
     			PopFollow();
     			if (state.failed) return retval;
@@ -5269,7 +5272,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     			{
     			// AST REWRITE
-    			// elements: id, a
+    			// elements: a, id
     			// token labels: id
     			// rule labels: retval, a
     			// token list labels: 
@@ -5282,18 +5285,18 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			RewriteRuleSubtreeStream stream_a=new RewriteRuleSubtreeStream(adaptor,"rule a",a!=null?a.Tree:null);
 
     			root_0 = (object)adaptor.Nil();
-    			// 245:7: -> ^( INVOKE $id $a)
+    			// 249:7: -> ^( INVOKE $id $a)
     			{
-    				DebugLocation(245, 10);
-    				// Evil.g:245:10: ^( INVOKE $id $a)
+    				DebugLocation(249, 10);
+    				// Evil.g:249:10: ^( INVOKE $id $a)
     				{
     				object root_1 = (object)adaptor.Nil();
-    				DebugLocation(245, 12);
+    				DebugLocation(249, 12);
     				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(INVOKE, "INVOKE"), root_1);
 
-    				DebugLocation(245, 19);
+    				DebugLocation(249, 19);
     				adaptor.AddChild(root_1, stream_id.NextNode());
-    				DebugLocation(245, 23);
+    				DebugLocation(249, 23);
     				adaptor.AddChild(root_1, stream_a.NextTree());
 
     				adaptor.AddChild(root_0, root_1);
@@ -5309,12 +5312,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// Evil.g:246:7: ID
+    			// Evil.g:250:7: ID
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(246, 7);
-    			ID115=(IToken)Match(input,ID,Follow._ID_in_factor2380); if (state.failed) return retval;
+    			DebugLocation(250, 7);
+    			ID115=(IToken)Match(input,ID,Follow._ID_in_factor2394); if (state.failed) return retval;
     			if ( state.backtracking==0 ) {
     			ID115_tree = (object)adaptor.Create(ID115);
     			adaptor.AddChild(root_0, ID115_tree);
@@ -5324,12 +5327,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 4:
     			DebugEnterAlt(4);
-    			// Evil.g:247:7: INTEGER
+    			// Evil.g:251:7: INTEGER
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(247, 7);
-    			INTEGER116=(IToken)Match(input,INTEGER,Follow._INTEGER_in_factor2388); if (state.failed) return retval;
+    			DebugLocation(251, 7);
+    			INTEGER116=(IToken)Match(input,INTEGER,Follow._INTEGER_in_factor2402); if (state.failed) return retval;
     			if ( state.backtracking==0 ) {
     			INTEGER116_tree = (object)adaptor.Create(INTEGER116);
     			adaptor.AddChild(root_0, INTEGER116_tree);
@@ -5339,12 +5342,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 5:
     			DebugEnterAlt(5);
-    			// Evil.g:248:7: TRUE
+    			// Evil.g:252:7: TRUE
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(248, 7);
-    			TRUE117=(IToken)Match(input,TRUE,Follow._TRUE_in_factor2396); if (state.failed) return retval;
+    			DebugLocation(252, 7);
+    			TRUE117=(IToken)Match(input,TRUE,Follow._TRUE_in_factor2410); if (state.failed) return retval;
     			if ( state.backtracking==0 ) {
     			TRUE117_tree = (object)adaptor.Create(TRUE117);
     			adaptor.AddChild(root_0, TRUE117_tree);
@@ -5354,12 +5357,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 6:
     			DebugEnterAlt(6);
-    			// Evil.g:249:7: FALSE
+    			// Evil.g:253:7: FALSE
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(249, 7);
-    			FALSE118=(IToken)Match(input,FALSE,Follow._FALSE_in_factor2404); if (state.failed) return retval;
+    			DebugLocation(253, 7);
+    			FALSE118=(IToken)Match(input,FALSE,Follow._FALSE_in_factor2418); if (state.failed) return retval;
     			if ( state.backtracking==0 ) {
     			FALSE118_tree = (object)adaptor.Create(FALSE118);
     			adaptor.AddChild(root_0, FALSE118_tree);
@@ -5369,18 +5372,18 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 7:
     			DebugEnterAlt(7);
-    			// Evil.g:250:7: NEW ID
+    			// Evil.g:254:7: NEW ID
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(250, 10);
-    			NEW119=(IToken)Match(input,NEW,Follow._NEW_in_factor2412); if (state.failed) return retval;
+    			DebugLocation(254, 10);
+    			NEW119=(IToken)Match(input,NEW,Follow._NEW_in_factor2426); if (state.failed) return retval;
     			if ( (state.backtracking==0) ) {
     			NEW119_tree = (object)adaptor.Create(NEW119);
     			root_0 = (object)adaptor.BecomeRoot(NEW119_tree, root_0);
     			}
-    			DebugLocation(250, 12);
-    			ID120=(IToken)Match(input,ID,Follow._ID_in_factor2415); if (state.failed) return retval;
+    			DebugLocation(254, 12);
+    			ID120=(IToken)Match(input,ID,Follow._ID_in_factor2429); if (state.failed) return retval;
     			if ( state.backtracking==0 ) {
     			ID120_tree = (object)adaptor.Create(ID120);
     			adaptor.AddChild(root_0, ID120_tree);
@@ -5390,12 +5393,12 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 8:
     			DebugEnterAlt(8);
-    			// Evil.g:251:7: NULL
+    			// Evil.g:255:7: NULL
     			{
     			root_0 = (object)adaptor.Nil();
 
-    			DebugLocation(251, 7);
-    			NULL121=(IToken)Match(input,NULL,Follow._NULL_in_factor2423); if (state.failed) return retval;
+    			DebugLocation(255, 7);
+    			NULL121=(IToken)Match(input,NULL,Follow._NULL_in_factor2437); if (state.failed) return retval;
     			if ( state.backtracking==0 ) {
     			NULL121_tree = (object)adaptor.Create(NULL121);
     			adaptor.AddChild(root_0, NULL121_tree);
@@ -5423,7 +5426,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(252, 3);
+     	DebugLocation(256, 3);
     	} finally { DebugExitRule(GrammarFileName, "factor"); }
     	return retval;
 
@@ -5440,7 +5443,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_arguments() {}
 
     // $ANTLR start "arguments"
-    // Evil.g:253:1: arguments : LPAREN arg_list RPAREN ;
+    // Evil.g:257:1: arguments : LPAREN arg_list RPAREN ;
     [GrammarRule("arguments")]
     private EvilParser.arguments_return arguments()
     {
@@ -5458,25 +5461,25 @@ public partial class EvilParser : Antlr.Runtime.Parser
         object RPAREN124_tree=null;
 
     	try { DebugEnterRule(GrammarFileName, "arguments");
-    	DebugLocation(253, 3);
+    	DebugLocation(257, 3);
     	try
     	{
-    		// Evil.g:254:4: ( LPAREN arg_list RPAREN )
+    		// Evil.g:258:4: ( LPAREN arg_list RPAREN )
     		DebugEnterAlt(1);
-    		// Evil.g:254:7: LPAREN arg_list RPAREN
+    		// Evil.g:258:7: LPAREN arg_list RPAREN
     		{
     		root_0 = (object)adaptor.Nil();
 
-    		DebugLocation(254, 13);
-    		LPAREN122=(IToken)Match(input,LPAREN,Follow._LPAREN_in_arguments2438); if (state.failed) return retval;
-    		DebugLocation(254, 15);
-    		PushFollow(Follow._arg_list_in_arguments2441);
+    		DebugLocation(258, 13);
+    		LPAREN122=(IToken)Match(input,LPAREN,Follow._LPAREN_in_arguments2452); if (state.failed) return retval;
+    		DebugLocation(258, 15);
+    		PushFollow(Follow._arg_list_in_arguments2455);
     		arg_list123=arg_list();
     		PopFollow();
     		if (state.failed) return retval;
     		if ( (state.backtracking==0) ) adaptor.AddChild(root_0, arg_list123.Tree);
-    		DebugLocation(254, 30);
-    		RPAREN124=(IToken)Match(input,RPAREN,Follow._RPAREN_in_arguments2443); if (state.failed) return retval;
+    		DebugLocation(258, 30);
+    		RPAREN124=(IToken)Match(input,RPAREN,Follow._RPAREN_in_arguments2457); if (state.failed) return retval;
 
     		}
 
@@ -5498,7 +5501,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(255, 3);
+     	DebugLocation(259, 3);
     	} finally { DebugExitRule(GrammarFileName, "arguments"); }
     	return retval;
 
@@ -5515,7 +5518,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_arg_list() {}
 
     // $ANTLR start "arg_list"
-    // Evil.g:256:1: arg_list : ( expression ( COMMA expression )* -> ^( ARGS ( expression )+ ) | -> ARGS );
+    // Evil.g:260:1: arg_list : ( expression ( COMMA expression )* -> ^( ARGS ( expression )+ ) | -> ARGS );
     [GrammarRule("arg_list")]
     private EvilParser.arg_list_return arg_list()
     {
@@ -5533,10 +5536,10 @@ public partial class EvilParser : Antlr.Runtime.Parser
         RewriteRuleITokenStream stream_COMMA=new RewriteRuleITokenStream(adaptor,"token COMMA");
         RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
     	try { DebugEnterRule(GrammarFileName, "arg_list");
-    	DebugLocation(256, 3);
+    	DebugLocation(260, 3);
     	try
     	{
-    		// Evil.g:257:4: ( expression ( COMMA expression )* -> ^( ARGS ( expression )+ ) | -> ARGS )
+    		// Evil.g:261:4: ( expression ( COMMA expression )* -> ^( ARGS ( expression )+ ) | -> ARGS )
     		int alt33=2;
     		try { DebugEnterDecision(33, decisionCanBacktrack[33]);
     		int LA33_0 = input.LA(1);
@@ -5562,16 +5565,16 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:257:7: expression ( COMMA expression )*
+    			// Evil.g:261:7: expression ( COMMA expression )*
     			{
-    			DebugLocation(257, 7);
-    			PushFollow(Follow._expression_in_arg_list2459);
+    			DebugLocation(261, 7);
+    			PushFollow(Follow._expression_in_arg_list2473);
     			expression125=expression();
     			PopFollow();
     			if (state.failed) return retval;
     			if ( (state.backtracking==0) ) stream_expression.Add(expression125.Tree);
-    			DebugLocation(257, 18);
-    			// Evil.g:257:18: ( COMMA expression )*
+    			DebugLocation(261, 18);
+    			// Evil.g:261:18: ( COMMA expression )*
     			try { DebugEnterSubRule(32);
     			while (true)
     			{
@@ -5590,14 +5593,14 @@ public partial class EvilParser : Antlr.Runtime.Parser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// Evil.g:257:19: COMMA expression
+    					// Evil.g:261:19: COMMA expression
     					{
-    					DebugLocation(257, 19);
-    					COMMA126=(IToken)Match(input,COMMA,Follow._COMMA_in_arg_list2462); if (state.failed) return retval; 
+    					DebugLocation(261, 19);
+    					COMMA126=(IToken)Match(input,COMMA,Follow._COMMA_in_arg_list2476); if (state.failed) return retval; 
     					if ( (state.backtracking==0) ) stream_COMMA.Add(COMMA126);
 
-    					DebugLocation(257, 25);
-    					PushFollow(Follow._expression_in_arg_list2464);
+    					DebugLocation(261, 25);
+    					PushFollow(Follow._expression_in_arg_list2478);
     					expression127=expression();
     					PopFollow();
     					if (state.failed) return retval;
@@ -5631,23 +5634,23 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
     			root_0 = (object)adaptor.Nil();
-    			// 258:7: -> ^( ARGS ( expression )+ )
+    			// 262:7: -> ^( ARGS ( expression )+ )
     			{
-    				DebugLocation(258, 10);
-    				// Evil.g:258:10: ^( ARGS ( expression )+ )
+    				DebugLocation(262, 10);
+    				// Evil.g:262:10: ^( ARGS ( expression )+ )
     				{
     				object root_1 = (object)adaptor.Nil();
-    				DebugLocation(258, 12);
+    				DebugLocation(262, 12);
     				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(ARGS, "ARGS"), root_1);
 
-    				DebugLocation(258, 17);
+    				DebugLocation(262, 17);
     				if ( !(stream_expression.HasNext) )
     				{
     					throw new RewriteEarlyExitException();
     				}
     				while ( stream_expression.HasNext )
     				{
-    					DebugLocation(258, 17);
+    					DebugLocation(262, 17);
     					adaptor.AddChild(root_1, stream_expression.NextTree());
 
     				}
@@ -5666,7 +5669,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// Evil.g:260:7: 
+    			// Evil.g:264:7: 
     			{
 
     			{
@@ -5682,9 +5685,9 @@ public partial class EvilParser : Antlr.Runtime.Parser
     			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
     			root_0 = (object)adaptor.Nil();
-    			// 260:7: -> ARGS
+    			// 264:7: -> ARGS
     			{
-    				DebugLocation(260, 10);
+    				DebugLocation(264, 10);
     				adaptor.AddChild(root_0, (object)adaptor.Create(ARGS, "ARGS"));
 
     			}
@@ -5715,7 +5718,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	finally
     	{
         }
-     	DebugLocation(261, 3);
+     	DebugLocation(265, 3);
     	} finally { DebugExitRule(GrammarFileName, "arg_list"); }
     	return retval;
 
@@ -5728,16 +5731,16 @@ public partial class EvilParser : Antlr.Runtime.Parser
     // $ANTLR start synpred1_Evil
     public void synpred1_Evil_fragment()
     {
-    	// Evil.g:109:7: ( STRUCT ID LBRACE )
+    	// Evil.g:113:7: ( STRUCT ID LBRACE )
     	DebugEnterAlt(1);
-    	// Evil.g:109:8: STRUCT ID LBRACE
+    	// Evil.g:113:8: STRUCT ID LBRACE
     	{
-    	DebugLocation(109, 8);
-    	Match(input,STRUCT,Follow._STRUCT_in_synpred1_Evil1099); if (state.failed) return;
-    	DebugLocation(109, 15);
-    	Match(input,ID,Follow._ID_in_synpred1_Evil1101); if (state.failed) return;
-    	DebugLocation(109, 18);
-    	Match(input,LBRACE,Follow._LBRACE_in_synpred1_Evil1103); if (state.failed) return;
+    	DebugLocation(113, 8);
+    	Match(input,STRUCT,Follow._STRUCT_in_synpred1_Evil1113); if (state.failed) return;
+    	DebugLocation(113, 15);
+    	Match(input,ID,Follow._ID_in_synpred1_Evil1115); if (state.failed) return;
+    	DebugLocation(113, 18);
+    	Match(input,LBRACE,Follow._LBRACE_in_synpred1_Evil1117); if (state.failed) return;
 
     	}
     }
@@ -5749,16 +5752,16 @@ public partial class EvilParser : Antlr.Runtime.Parser
     // $ANTLR start synpred2_Evil
     public void synpred2_Evil_fragment()
     {
-    	// Evil.g:113:7: ( STRUCT ID LBRACE )
+    	// Evil.g:117:7: ( STRUCT ID LBRACE )
     	DebugEnterAlt(1);
-    	// Evil.g:113:8: STRUCT ID LBRACE
+    	// Evil.g:117:8: STRUCT ID LBRACE
     	{
-    	DebugLocation(113, 8);
-    	Match(input,STRUCT,Follow._STRUCT_in_synpred2_Evil1142); if (state.failed) return;
-    	DebugLocation(113, 15);
-    	Match(input,ID,Follow._ID_in_synpred2_Evil1144); if (state.failed) return;
-    	DebugLocation(113, 18);
-    	Match(input,LBRACE,Follow._LBRACE_in_synpred2_Evil1146); if (state.failed) return;
+    	DebugLocation(117, 8);
+    	Match(input,STRUCT,Follow._STRUCT_in_synpred2_Evil1156); if (state.failed) return;
+    	DebugLocation(117, 15);
+    	Match(input,ID,Follow._ID_in_synpred2_Evil1158); if (state.failed) return;
+    	DebugLocation(117, 18);
+    	Match(input,LBRACE,Follow._LBRACE_in_synpred2_Evil1160); if (state.failed) return;
 
     	}
     }
@@ -5770,17 +5773,17 @@ public partial class EvilParser : Antlr.Runtime.Parser
     // $ANTLR start synpred3_Evil
     public void synpred3_Evil_fragment()
     {
-    	// Evil.g:158:7: ( lvalue ASSIGN )
+    	// Evil.g:162:7: ( lvalue ASSIGN )
     	DebugEnterAlt(1);
-    	// Evil.g:158:8: lvalue ASSIGN
+    	// Evil.g:162:8: lvalue ASSIGN
     	{
-    	DebugLocation(158, 8);
-    	PushFollow(Follow._lvalue_in_synpred3_Evil1566);
+    	DebugLocation(162, 8);
+    	PushFollow(Follow._lvalue_in_synpred3_Evil1580);
     	lvalue();
     	PopFollow();
     	if (state.failed) return;
-    	DebugLocation(158, 15);
-    	Match(input,ASSIGN,Follow._ASSIGN_in_synpred3_Evil1568); if (state.failed) return;
+    	DebugLocation(162, 15);
+    	Match(input,ASSIGN,Follow._ASSIGN_in_synpred3_Evil1582); if (state.failed) return;
 
     	}
     }
@@ -5792,14 +5795,14 @@ public partial class EvilParser : Antlr.Runtime.Parser
     // $ANTLR start synpred4_Evil
     public void synpred4_Evil_fragment()
     {
-    	// Evil.g:165:7: ( ID LPAREN )
+    	// Evil.g:169:7: ( ID LPAREN )
     	DebugEnterAlt(1);
-    	// Evil.g:165:8: ID LPAREN
+    	// Evil.g:169:8: ID LPAREN
     	{
-    	DebugLocation(165, 8);
-    	Match(input,ID,Follow._ID_in_synpred4_Evil1630); if (state.failed) return;
-    	DebugLocation(165, 11);
-    	Match(input,LPAREN,Follow._LPAREN_in_synpred4_Evil1632); if (state.failed) return;
+    	DebugLocation(169, 8);
+    	Match(input,ID,Follow._ID_in_synpred4_Evil1644); if (state.failed) return;
+    	DebugLocation(169, 11);
+    	Match(input,LPAREN,Follow._LPAREN_in_synpred4_Evil1646); if (state.failed) return;
 
     	}
     }
@@ -5904,7 +5907,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 			this.transition = DFA11_transition;
 		}
 
-		public override string Description { get { return "156:1: statement : ( block | ( lvalue ASSIGN )=> assignment | print | read | conditional | loop | delete | ret | ( ID LPAREN )=> invocation );"; } }
+		public override string Description { get { return "160:1: statement : ( block | ( lvalue ASSIGN )=> assignment | print | read | conditional | loop | delete | ret | ( ID LPAREN )=> invocation );"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -6002,7 +6005,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 			this.transition = DFA31_transition;
 		}
 
-		public override string Description { get { return "242:1: factor : ( LPAREN expression RPAREN | id= ID a= arguments -> ^( INVOKE $id $a) | ID | INTEGER | TRUE | FALSE | NEW ID | NULL );"; } }
+		public override string Description { get { return "246:1: factor : ( LPAREN expression RPAREN | id= ID a= arguments -> ^( INVOKE $id $a) | ID | INTEGER | TRUE | FALSE | NEW ID | NULL );"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -6016,167 +6019,168 @@ public partial class EvilParser : Antlr.Runtime.Parser
 	#region Follow sets
 	private static class Follow
 	{
-		public static readonly BitSet _types_in_program1052 = new BitSet(new ulong[]{0x00000000000000F0UL});
-		public static readonly BitSet _declarations_in_program1056 = new BitSet(new ulong[]{0x0000000000000080UL});
-		public static readonly BitSet _functions_in_program1060 = new BitSet(new ulong[]{0x0000000000000000UL});
-		public static readonly BitSet _EOF_in_program1062 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _types_sub_in_types1108 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _type_declaration_in_types_sub1151 = new BitSet(new ulong[]{0x0000000000000010UL});
-		public static readonly BitSet _types_sub_in_types_sub1153 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _STRUCT_in_type_declaration1173 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_type_declaration1176 = new BitSet(new ulong[]{0x0000000800000000UL});
-		public static readonly BitSet _LBRACE_in_type_declaration1178 = new BitSet(new ulong[]{0x0000000000000070UL});
-		public static readonly BitSet _nested_decl_in_type_declaration1181 = new BitSet(new ulong[]{0x0000001000000000UL});
-		public static readonly BitSet _RBRACE_in_type_declaration1183 = new BitSet(new ulong[]{0x0000002000000000UL});
-		public static readonly BitSet _SEMI_in_type_declaration1186 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _decl_in_nested_decl1203 = new BitSet(new ulong[]{0x0000002000000000UL});
-		public static readonly BitSet _SEMI_in_nested_decl1205 = new BitSet(new ulong[]{0x0000000000000072UL});
-		public static readonly BitSet _type_in_decl1225 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_decl1229 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _INT_in_type1266 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _BOOL_in_type1274 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _STRUCT_in_type1282 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_type1285 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _declaration_in_declarations1301 = new BitSet(new ulong[]{0x0000000000000072UL});
-		public static readonly BitSet _type_in_declaration1329 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _id_list_in_declaration1333 = new BitSet(new ulong[]{0x0000002000000000UL});
-		public static readonly BitSet _SEMI_in_declaration1335 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _ID_in_id_list1372 = new BitSet(new ulong[]{0x0000004000000002UL});
-		public static readonly BitSet _COMMA_in_id_list1375 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_id_list1378 = new BitSet(new ulong[]{0x0000004000000002UL});
-		public static readonly BitSet _function_in_functions1395 = new BitSet(new ulong[]{0x0000000000000082UL});
-		public static readonly BitSet _FUN_in_function1420 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_function1424 = new BitSet(new ulong[]{0x0000008000000000UL});
-		public static readonly BitSet _parameters_in_function1428 = new BitSet(new ulong[]{0x0000000000000170UL});
-		public static readonly BitSet _return_type_in_function1432 = new BitSet(new ulong[]{0x0000000800000000UL});
-		public static readonly BitSet _LBRACE_in_function1434 = new BitSet(new ulong[]{0x010000180001DA70UL});
-		public static readonly BitSet _declarations_in_function1438 = new BitSet(new ulong[]{0x010000180001DA00UL});
-		public static readonly BitSet _statement_list_in_function1442 = new BitSet(new ulong[]{0x0000001000000000UL});
-		public static readonly BitSet _RBRACE_in_function1444 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _LPAREN_in_parameters1490 = new BitSet(new ulong[]{0x0000010000000070UL});
-		public static readonly BitSet _decl_in_parameters1493 = new BitSet(new ulong[]{0x0000014000000000UL});
-		public static readonly BitSet _COMMA_in_parameters1496 = new BitSet(new ulong[]{0x0000000000000070UL});
-		public static readonly BitSet _decl_in_parameters1498 = new BitSet(new ulong[]{0x0000014000000000UL});
-		public static readonly BitSet _RPAREN_in_parameters1504 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _type_in_return_type1534 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _VOID_in_return_type1542 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _block_in_statement1557 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _assignment_in_statement1573 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _print_in_statement1581 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _read_in_statement1589 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _conditional_in_statement1597 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _loop_in_statement1605 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _delete_in_statement1613 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _ret_in_statement1621 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _invocation_in_statement1637 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _LBRACE_in_block1652 = new BitSet(new ulong[]{0x010000180001DA00UL});
-		public static readonly BitSet _statement_list_in_block1656 = new BitSet(new ulong[]{0x0000001000000000UL});
-		public static readonly BitSet _RBRACE_in_block1658 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _statement_in_statement_list1689 = new BitSet(new ulong[]{0x010000080001DA02UL});
-		public static readonly BitSet _lvalue_in_assignment1717 = new BitSet(new ulong[]{0x0000020000000000UL});
-		public static readonly BitSet _ASSIGN_in_assignment1719 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _expression_in_assignment1723 = new BitSet(new ulong[]{0x0000002000000000UL});
-		public static readonly BitSet _SEMI_in_assignment1725 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _PRINT_in_print1758 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _expression_in_print1761 = new BitSet(new ulong[]{0x0000002000000400UL});
-		public static readonly BitSet _ENDL_in_print1764 = new BitSet(new ulong[]{0x0000002000000000UL});
-		public static readonly BitSet _SEMI_in_print1768 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _READ_in_read1784 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _lvalue_in_read1787 = new BitSet(new ulong[]{0x0000002000000000UL});
-		public static readonly BitSet _SEMI_in_read1789 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _IF_in_conditional1805 = new BitSet(new ulong[]{0x0000008000000000UL});
-		public static readonly BitSet _LPAREN_in_conditional1808 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _expression_in_conditional1811 = new BitSet(new ulong[]{0x0000010000000000UL});
-		public static readonly BitSet _RPAREN_in_conditional1813 = new BitSet(new ulong[]{0x0000000800000000UL});
-		public static readonly BitSet _block_in_conditional1816 = new BitSet(new ulong[]{0x0000000000002002UL});
-		public static readonly BitSet _ELSE_in_conditional1819 = new BitSet(new ulong[]{0x0000000800000000UL});
-		public static readonly BitSet _block_in_conditional1822 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _WHILE_in_loop1839 = new BitSet(new ulong[]{0x0000008000000000UL});
-		public static readonly BitSet _LPAREN_in_loop1841 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _expression_in_loop1845 = new BitSet(new ulong[]{0x0000010000000000UL});
-		public static readonly BitSet _RPAREN_in_loop1847 = new BitSet(new ulong[]{0x0000000800000000UL});
-		public static readonly BitSet _block_in_loop1851 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _DELETE_in_delete1887 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _expression_in_delete1890 = new BitSet(new ulong[]{0x0000002000000000UL});
-		public static readonly BitSet _SEMI_in_delete1892 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _RETURN_in_ret1908 = new BitSet(new ulong[]{0x039000A0001E0000UL});
-		public static readonly BitSet _expression_in_ret1912 = new BitSet(new ulong[]{0x0000002000000000UL});
-		public static readonly BitSet _SEMI_in_ret1916 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _ID_in_invocation1934 = new BitSet(new ulong[]{0x0000008000000000UL});
-		public static readonly BitSet _arguments_in_invocation1938 = new BitSet(new ulong[]{0x0000002000000000UL});
-		public static readonly BitSet _SEMI_in_invocation1940 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _ID_in_lvalue1973 = new BitSet(new ulong[]{0x0000040000000002UL});
-		public static readonly BitSet _DOT_in_lvalue1976 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_lvalue1979 = new BitSet(new ulong[]{0x0000040000000002UL});
-		public static readonly BitSet _boolterm_in_expression1996 = new BitSet(new ulong[]{0x0000180000000002UL});
-		public static readonly BitSet _AND_in_expression2000 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _OR_in_expression2005 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _boolterm_in_expression2009 = new BitSet(new ulong[]{0x0000180000000002UL});
-		public static readonly BitSet _simple_in_boolterm2026 = new BitSet(new ulong[]{0x0007E00000000002UL});
-		public static readonly BitSet _EQ_in_boolterm2030 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _LT_in_boolterm2035 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _GT_in_boolterm2040 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _NE_in_boolterm2045 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _LE_in_boolterm2050 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _GE_in_boolterm2055 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _simple_in_boolterm2059 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _term_in_simple2076 = new BitSet(new ulong[]{0x0018000000000002UL});
-		public static readonly BitSet _PLUS_in_simple2080 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _MINUS_in_simple2085 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _term_in_simple2089 = new BitSet(new ulong[]{0x0018000000000002UL});
-		public static readonly BitSet _unary_in_term2106 = new BitSet(new ulong[]{0x0060000000000002UL});
-		public static readonly BitSet _TIMES_in_term2110 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _DIVIDE_in_term2115 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _unary_in_term2119 = new BitSet(new ulong[]{0x0060000000000002UL});
-		public static readonly BitSet _NOT_in_unary2136 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _odd_not_in_unary2139 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _MINUS_in_unary2147 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _odd_neg_in_unary2150 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _selector_in_unary2158 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _NOT_in_odd_not2173 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _even_not_in_odd_not2176 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _selector_in_odd_not2186 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _NOT_in_even_not2216 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _odd_not_in_even_not2219 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _selector_in_even_not2227 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _MINUS_in_odd_neg2242 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _even_neg_in_odd_neg2245 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _selector_in_odd_neg2255 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _MINUS_in_even_neg2285 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _odd_neg_in_even_neg2288 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _selector_in_even_neg2296 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _factor_in_selector2311 = new BitSet(new ulong[]{0x0000040000000002UL});
-		public static readonly BitSet _DOT_in_selector2314 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_selector2317 = new BitSet(new ulong[]{0x0000040000000002UL});
-		public static readonly BitSet _LPAREN_in_factor2334 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _expression_in_factor2337 = new BitSet(new ulong[]{0x0000010000000000UL});
-		public static readonly BitSet _RPAREN_in_factor2339 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _ID_in_factor2350 = new BitSet(new ulong[]{0x0000008000000000UL});
-		public static readonly BitSet _arguments_in_factor2354 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _ID_in_factor2380 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _INTEGER_in_factor2388 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _TRUE_in_factor2396 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _FALSE_in_factor2404 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _NEW_in_factor2412 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_factor2415 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _NULL_in_factor2423 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _LPAREN_in_arguments2438 = new BitSet(new ulong[]{0x03900180001E0000UL});
-		public static readonly BitSet _arg_list_in_arguments2441 = new BitSet(new ulong[]{0x0000010000000000UL});
-		public static readonly BitSet _RPAREN_in_arguments2443 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _expression_in_arg_list2459 = new BitSet(new ulong[]{0x0000004000000002UL});
-		public static readonly BitSet _COMMA_in_arg_list2462 = new BitSet(new ulong[]{0x03900080001E0000UL});
-		public static readonly BitSet _expression_in_arg_list2464 = new BitSet(new ulong[]{0x0000004000000002UL});
-		public static readonly BitSet _STRUCT_in_synpred1_Evil1099 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_synpred1_Evil1101 = new BitSet(new ulong[]{0x0000000800000000UL});
-		public static readonly BitSet _LBRACE_in_synpred1_Evil1103 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _STRUCT_in_synpred2_Evil1142 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_synpred2_Evil1144 = new BitSet(new ulong[]{0x0000000800000000UL});
-		public static readonly BitSet _LBRACE_in_synpred2_Evil1146 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _lvalue_in_synpred3_Evil1566 = new BitSet(new ulong[]{0x0000020000000000UL});
-		public static readonly BitSet _ASSIGN_in_synpred3_Evil1568 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _ID_in_synpred4_Evil1630 = new BitSet(new ulong[]{0x0000008000000000UL});
-		public static readonly BitSet _LPAREN_in_synpred4_Evil1632 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _types_in_program1066 = new BitSet(new ulong[]{0x00000000000000F0UL});
+		public static readonly BitSet _declarations_in_program1070 = new BitSet(new ulong[]{0x0000000000000080UL});
+		public static readonly BitSet _functions_in_program1074 = new BitSet(new ulong[]{0x0000000000000000UL});
+		public static readonly BitSet _EOF_in_program1076 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _types_sub_in_types1122 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _type_declaration_in_types_sub1165 = new BitSet(new ulong[]{0x0000000000000010UL});
+		public static readonly BitSet _types_sub_in_types_sub1167 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _STRUCT_in_type_declaration1187 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_type_declaration1190 = new BitSet(new ulong[]{0x0000000800000000UL});
+		public static readonly BitSet _LBRACE_in_type_declaration1192 = new BitSet(new ulong[]{0x0000000000000070UL});
+		public static readonly BitSet _nested_decl_in_type_declaration1195 = new BitSet(new ulong[]{0x0000001000000000UL});
+		public static readonly BitSet _RBRACE_in_type_declaration1197 = new BitSet(new ulong[]{0x0000002000000000UL});
+		public static readonly BitSet _SEMI_in_type_declaration1200 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _decl_in_nested_decl1217 = new BitSet(new ulong[]{0x0000002000000000UL});
+		public static readonly BitSet _SEMI_in_nested_decl1219 = new BitSet(new ulong[]{0x0000000000000072UL});
+		public static readonly BitSet _type_in_decl1239 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_decl1243 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _INT_in_type1280 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _BOOL_in_type1288 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _STRUCT_in_type1296 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_type1299 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _declaration_in_declarations1315 = new BitSet(new ulong[]{0x0000000000000072UL});
+		public static readonly BitSet _type_in_declaration1343 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _id_list_in_declaration1347 = new BitSet(new ulong[]{0x0000002000000000UL});
+		public static readonly BitSet _SEMI_in_declaration1349 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _ID_in_id_list1386 = new BitSet(new ulong[]{0x0000004000000002UL});
+		public static readonly BitSet _COMMA_in_id_list1389 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_id_list1392 = new BitSet(new ulong[]{0x0000004000000002UL});
+		public static readonly BitSet _function_in_functions1409 = new BitSet(new ulong[]{0x0000000000000082UL});
+		public static readonly BitSet _FUN_in_function1434 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_function1438 = new BitSet(new ulong[]{0x0000008000000000UL});
+		public static readonly BitSet _parameters_in_function1442 = new BitSet(new ulong[]{0x0000000000000170UL});
+		public static readonly BitSet _return_type_in_function1446 = new BitSet(new ulong[]{0x0000000800000000UL});
+		public static readonly BitSet _LBRACE_in_function1448 = new BitSet(new ulong[]{0x010000180001DA70UL});
+		public static readonly BitSet _declarations_in_function1452 = new BitSet(new ulong[]{0x010000180001DA00UL});
+		public static readonly BitSet _statement_list_in_function1456 = new BitSet(new ulong[]{0x0000001000000000UL});
+		public static readonly BitSet _RBRACE_in_function1458 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _LPAREN_in_parameters1504 = new BitSet(new ulong[]{0x0000010000000070UL});
+		public static readonly BitSet _decl_in_parameters1507 = new BitSet(new ulong[]{0x0000014000000000UL});
+		public static readonly BitSet _COMMA_in_parameters1510 = new BitSet(new ulong[]{0x0000000000000070UL});
+		public static readonly BitSet _decl_in_parameters1512 = new BitSet(new ulong[]{0x0000014000000000UL});
+		public static readonly BitSet _RPAREN_in_parameters1518 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _type_in_return_type1548 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _VOID_in_return_type1556 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _block_in_statement1571 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _assignment_in_statement1587 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _print_in_statement1595 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _read_in_statement1603 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _conditional_in_statement1611 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _loop_in_statement1619 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _delete_in_statement1627 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _ret_in_statement1635 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _invocation_in_statement1651 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _LBRACE_in_block1666 = new BitSet(new ulong[]{0x010000180001DA00UL});
+		public static readonly BitSet _statement_list_in_block1670 = new BitSet(new ulong[]{0x0000001000000000UL});
+		public static readonly BitSet _RBRACE_in_block1672 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _statement_in_statement_list1703 = new BitSet(new ulong[]{0x010000080001DA02UL});
+		public static readonly BitSet _lvalue_in_assignment1731 = new BitSet(new ulong[]{0x0000020000000000UL});
+		public static readonly BitSet _ASSIGN_in_assignment1733 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _expression_in_assignment1737 = new BitSet(new ulong[]{0x0000002000000000UL});
+		public static readonly BitSet _SEMI_in_assignment1739 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _PRINT_in_print1772 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _expression_in_print1775 = new BitSet(new ulong[]{0x0000002000000400UL});
+		public static readonly BitSet _ENDL_in_print1778 = new BitSet(new ulong[]{0x0000002000000000UL});
+		public static readonly BitSet _SEMI_in_print1782 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _READ_in_read1798 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _lvalue_in_read1801 = new BitSet(new ulong[]{0x0000002000000000UL});
+		public static readonly BitSet _SEMI_in_read1803 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _IF_in_conditional1819 = new BitSet(new ulong[]{0x0000008000000000UL});
+		public static readonly BitSet _LPAREN_in_conditional1822 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _expression_in_conditional1825 = new BitSet(new ulong[]{0x0000010000000000UL});
+		public static readonly BitSet _RPAREN_in_conditional1827 = new BitSet(new ulong[]{0x0000000800000000UL});
+		public static readonly BitSet _block_in_conditional1830 = new BitSet(new ulong[]{0x0000000000002002UL});
+		public static readonly BitSet _ELSE_in_conditional1833 = new BitSet(new ulong[]{0x0000000800000000UL});
+		public static readonly BitSet _block_in_conditional1836 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _WHILE_in_loop1853 = new BitSet(new ulong[]{0x0000008000000000UL});
+		public static readonly BitSet _LPAREN_in_loop1855 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _expression_in_loop1859 = new BitSet(new ulong[]{0x0000010000000000UL});
+		public static readonly BitSet _RPAREN_in_loop1861 = new BitSet(new ulong[]{0x0000000800000000UL});
+		public static readonly BitSet _block_in_loop1865 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _DELETE_in_delete1901 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _expression_in_delete1904 = new BitSet(new ulong[]{0x0000002000000000UL});
+		public static readonly BitSet _SEMI_in_delete1906 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _RETURN_in_ret1922 = new BitSet(new ulong[]{0x039000A0001E0000UL});
+		public static readonly BitSet _expression_in_ret1926 = new BitSet(new ulong[]{0x0000002000000000UL});
+		public static readonly BitSet _SEMI_in_ret1930 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _ID_in_invocation1948 = new BitSet(new ulong[]{0x0000008000000000UL});
+		public static readonly BitSet _arguments_in_invocation1952 = new BitSet(new ulong[]{0x0000002000000000UL});
+		public static readonly BitSet _SEMI_in_invocation1954 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _ID_in_lvalue1987 = new BitSet(new ulong[]{0x0000040000000002UL});
+		public static readonly BitSet _DOT_in_lvalue1990 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_lvalue1993 = new BitSet(new ulong[]{0x0000040000000002UL});
+		public static readonly BitSet _boolterm_in_expression2010 = new BitSet(new ulong[]{0x0000180000000002UL});
+		public static readonly BitSet _AND_in_expression2014 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _OR_in_expression2019 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _boolterm_in_expression2023 = new BitSet(new ulong[]{0x0000180000000002UL});
+		public static readonly BitSet _simple_in_boolterm2040 = new BitSet(new ulong[]{0x0007E00000000002UL});
+		public static readonly BitSet _EQ_in_boolterm2044 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _LT_in_boolterm2049 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _GT_in_boolterm2054 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _NE_in_boolterm2059 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _LE_in_boolterm2064 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _GE_in_boolterm2069 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _simple_in_boolterm2073 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _term_in_simple2090 = new BitSet(new ulong[]{0x0018000000000002UL});
+		public static readonly BitSet _PLUS_in_simple2094 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _MINUS_in_simple2099 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _term_in_simple2103 = new BitSet(new ulong[]{0x0018000000000002UL});
+		public static readonly BitSet _unary_in_term2120 = new BitSet(new ulong[]{0x0060000000000002UL});
+		public static readonly BitSet _TIMES_in_term2124 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _DIVIDE_in_term2129 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _unary_in_term2133 = new BitSet(new ulong[]{0x0060000000000002UL});
+		public static readonly BitSet _NOT_in_unary2150 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _odd_not_in_unary2153 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _MINUS_in_unary2161 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _odd_neg_in_unary2164 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _selector_in_unary2172 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _NOT_in_odd_not2187 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _even_not_in_odd_not2190 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _selector_in_odd_not2200 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _NOT_in_even_not2230 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _odd_not_in_even_not2233 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _selector_in_even_not2241 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _MINUS_in_odd_neg2256 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _even_neg_in_odd_neg2259 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _selector_in_odd_neg2269 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _MINUS_in_even_neg2299 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _odd_neg_in_even_neg2302 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _selector_in_even_neg2310 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _factor_in_selector2325 = new BitSet(new ulong[]{0x0000040000000002UL});
+		public static readonly BitSet _DOT_in_selector2328 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_selector2331 = new BitSet(new ulong[]{0x0000040000000002UL});
+		public static readonly BitSet _LPAREN_in_factor2348 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _expression_in_factor2351 = new BitSet(new ulong[]{0x0000010000000000UL});
+		public static readonly BitSet _RPAREN_in_factor2353 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _ID_in_factor2364 = new BitSet(new ulong[]{0x0000008000000000UL});
+		public static readonly BitSet _arguments_in_factor2368 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _ID_in_factor2394 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _INTEGER_in_factor2402 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _TRUE_in_factor2410 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _FALSE_in_factor2418 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _NEW_in_factor2426 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_factor2429 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _NULL_in_factor2437 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _LPAREN_in_arguments2452 = new BitSet(new ulong[]{0x03900180001E0000UL});
+		public static readonly BitSet _arg_list_in_arguments2455 = new BitSet(new ulong[]{0x0000010000000000UL});
+		public static readonly BitSet _RPAREN_in_arguments2457 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _expression_in_arg_list2473 = new BitSet(new ulong[]{0x0000004000000002UL});
+		public static readonly BitSet _COMMA_in_arg_list2476 = new BitSet(new ulong[]{0x03900080001E0000UL});
+		public static readonly BitSet _expression_in_arg_list2478 = new BitSet(new ulong[]{0x0000004000000002UL});
+		public static readonly BitSet _STRUCT_in_synpred1_Evil1113 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_synpred1_Evil1115 = new BitSet(new ulong[]{0x0000000800000000UL});
+		public static readonly BitSet _LBRACE_in_synpred1_Evil1117 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _STRUCT_in_synpred2_Evil1156 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_synpred2_Evil1158 = new BitSet(new ulong[]{0x0000000800000000UL});
+		public static readonly BitSet _LBRACE_in_synpred2_Evil1160 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _lvalue_in_synpred3_Evil1580 = new BitSet(new ulong[]{0x0000020000000000UL});
+		public static readonly BitSet _ASSIGN_in_synpred3_Evil1582 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _ID_in_synpred4_Evil1644 = new BitSet(new ulong[]{0x0000008000000000UL});
+		public static readonly BitSet _LPAREN_in_synpred4_Evil1646 = new BitSet(new ulong[]{0x0000000000000002UL});
 
 	}
 	#endregion Follow sets
+}
 }

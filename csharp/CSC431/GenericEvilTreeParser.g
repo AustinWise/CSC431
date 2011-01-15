@@ -12,6 +12,8 @@ options
 
 }
 
+@namespace {CSC431}
+
 
 program [StructTypes stypes, SymbolTable stable]
 	: ^(PROGRAM (types[stypes] declarations[stypes, stable] functions[stypes, stable])) 

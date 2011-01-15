@@ -45,6 +45,7 @@ tokens
 @header
 {
    /* package declaration here */
+   
 
 }
 @lexer::header
@@ -52,6 +53,9 @@ tokens
    /* package declaration here */
 
 }
+
+@namespace {CSC431}
+@lexer::namespace {CSC431}
 
 /*
    Lexer Rules

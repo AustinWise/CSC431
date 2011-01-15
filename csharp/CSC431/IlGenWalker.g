@@ -7,6 +7,8 @@ options
    ASTLabelType=CommonTree;
 }
 
+@namespace {CSC431}
+
 program
 	: ^(PROGRAM (types declarations functions)) 
 	;

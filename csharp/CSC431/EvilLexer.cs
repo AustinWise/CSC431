@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-01-15 11:48:47
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-01-15 13:44:21
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -17,6 +17,8 @@ using Stack = System.Collections.Generic.Stack<object>;
 using List = System.Collections.IList;
 using ArrayList = System.Collections.Generic.List<object>;
 
+namespace CSC431
+{
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "3.3 Nov 30, 2010 12:50:56")]
 [System.CLSCompliant(false)]
 public partial class EvilLexer : Antlr.Runtime.Lexer
@@ -120,11 +122,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = STRUCT;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:12:8: ( 'struct' )
+    		// Evil.g:13:8: ( 'struct' )
     		DebugEnterAlt(1);
-    		// Evil.g:12:10: 'struct'
+    		// Evil.g:13:10: 'struct'
     		{
-    		DebugLocation(12, 10);
+    		DebugLocation(13, 10);
     		Match("struct"); 
 
 
@@ -151,11 +153,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = INT;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:13:5: ( 'int' )
+    		// Evil.g:14:5: ( 'int' )
     		DebugEnterAlt(1);
-    		// Evil.g:13:7: 'int'
+    		// Evil.g:14:7: 'int'
     		{
-    		DebugLocation(13, 7);
+    		DebugLocation(14, 7);
     		Match("int"); 
 
 
@@ -182,11 +184,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = BOOL;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:14:6: ( 'bool' )
+    		// Evil.g:15:6: ( 'bool' )
     		DebugEnterAlt(1);
-    		// Evil.g:14:8: 'bool'
+    		// Evil.g:15:8: 'bool'
     		{
-    		DebugLocation(14, 8);
+    		DebugLocation(15, 8);
     		Match("bool"); 
 
 
@@ -213,11 +215,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = FUN;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:15:5: ( 'fun' )
+    		// Evil.g:16:5: ( 'fun' )
     		DebugEnterAlt(1);
-    		// Evil.g:15:7: 'fun'
+    		// Evil.g:16:7: 'fun'
     		{
-    		DebugLocation(15, 7);
+    		DebugLocation(16, 7);
     		Match("fun"); 
 
 
@@ -244,11 +246,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = VOID;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:16:6: ( 'void' )
+    		// Evil.g:17:6: ( 'void' )
     		DebugEnterAlt(1);
-    		// Evil.g:16:8: 'void'
+    		// Evil.g:17:8: 'void'
     		{
-    		DebugLocation(16, 8);
+    		DebugLocation(17, 8);
     		Match("void"); 
 
 
@@ -275,11 +277,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = PRINT;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:17:7: ( 'print' )
+    		// Evil.g:18:7: ( 'print' )
     		DebugEnterAlt(1);
-    		// Evil.g:17:9: 'print'
+    		// Evil.g:18:9: 'print'
     		{
-    		DebugLocation(17, 9);
+    		DebugLocation(18, 9);
     		Match("print"); 
 
 
@@ -306,11 +308,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = ENDL;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:18:6: ( 'endl' )
+    		// Evil.g:19:6: ( 'endl' )
     		DebugEnterAlt(1);
-    		// Evil.g:18:8: 'endl'
+    		// Evil.g:19:8: 'endl'
     		{
-    		DebugLocation(18, 8);
+    		DebugLocation(19, 8);
     		Match("endl"); 
 
 
@@ -337,11 +339,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = READ;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:19:6: ( 'read' )
+    		// Evil.g:20:6: ( 'read' )
     		DebugEnterAlt(1);
-    		// Evil.g:19:8: 'read'
+    		// Evil.g:20:8: 'read'
     		{
-    		DebugLocation(19, 8);
+    		DebugLocation(20, 8);
     		Match("read"); 
 
 
@@ -368,11 +370,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = IF;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:20:4: ( 'if' )
+    		// Evil.g:21:4: ( 'if' )
     		DebugEnterAlt(1);
-    		// Evil.g:20:6: 'if'
+    		// Evil.g:21:6: 'if'
     		{
-    		DebugLocation(20, 6);
+    		DebugLocation(21, 6);
     		Match("if"); 
 
 
@@ -399,11 +401,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = ELSE;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:21:6: ( 'else' )
+    		// Evil.g:22:6: ( 'else' )
     		DebugEnterAlt(1);
-    		// Evil.g:21:8: 'else'
+    		// Evil.g:22:8: 'else'
     		{
-    		DebugLocation(21, 8);
+    		DebugLocation(22, 8);
     		Match("else"); 
 
 
@@ -430,11 +432,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = WHILE;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:22:7: ( 'while' )
+    		// Evil.g:23:7: ( 'while' )
     		DebugEnterAlt(1);
-    		// Evil.g:22:9: 'while'
+    		// Evil.g:23:9: 'while'
     		{
-    		DebugLocation(22, 9);
+    		DebugLocation(23, 9);
     		Match("while"); 
 
 
@@ -461,11 +463,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = DELETE;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:23:8: ( 'delete' )
+    		// Evil.g:24:8: ( 'delete' )
     		DebugEnterAlt(1);
-    		// Evil.g:23:10: 'delete'
+    		// Evil.g:24:10: 'delete'
     		{
-    		DebugLocation(23, 10);
+    		DebugLocation(24, 10);
     		Match("delete"); 
 
 
@@ -492,11 +494,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = RETURN;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:24:8: ( 'return' )
+    		// Evil.g:25:8: ( 'return' )
     		DebugEnterAlt(1);
-    		// Evil.g:24:10: 'return'
+    		// Evil.g:25:10: 'return'
     		{
-    		DebugLocation(24, 10);
+    		DebugLocation(25, 10);
     		Match("return"); 
 
 
@@ -523,11 +525,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = TRUE;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:25:6: ( 'true' )
+    		// Evil.g:26:6: ( 'true' )
     		DebugEnterAlt(1);
-    		// Evil.g:25:8: 'true'
+    		// Evil.g:26:8: 'true'
     		{
-    		DebugLocation(25, 8);
+    		DebugLocation(26, 8);
     		Match("true"); 
 
 
@@ -554,11 +556,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = FALSE;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:26:7: ( 'false' )
+    		// Evil.g:27:7: ( 'false' )
     		DebugEnterAlt(1);
-    		// Evil.g:26:9: 'false'
+    		// Evil.g:27:9: 'false'
     		{
-    		DebugLocation(26, 9);
+    		DebugLocation(27, 9);
     		Match("false"); 
 
 
@@ -585,11 +587,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = NEW;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:27:5: ( 'new' )
+    		// Evil.g:28:5: ( 'new' )
     		DebugEnterAlt(1);
-    		// Evil.g:27:7: 'new'
+    		// Evil.g:28:7: 'new'
     		{
-    		DebugLocation(27, 7);
+    		DebugLocation(28, 7);
     		Match("new"); 
 
 
@@ -616,11 +618,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = NULL;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:28:6: ( 'null' )
+    		// Evil.g:29:6: ( 'null' )
     		DebugEnterAlt(1);
-    		// Evil.g:28:8: 'null'
+    		// Evil.g:29:8: 'null'
     		{
-    		DebugLocation(28, 8);
+    		DebugLocation(29, 8);
     		Match("null"); 
 
 
@@ -647,11 +649,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = LBRACE;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:60:10: ( '{' )
+    		// Evil.g:64:10: ( '{' )
     		DebugEnterAlt(1);
-    		// Evil.g:60:13: '{'
+    		// Evil.g:64:13: '{'
     		{
-    		DebugLocation(60, 13);
+    		DebugLocation(64, 13);
     		Match('{'); 
 
     		}
@@ -677,11 +679,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = RBRACE;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:61:10: ( '}' )
+    		// Evil.g:65:10: ( '}' )
     		DebugEnterAlt(1);
-    		// Evil.g:61:13: '}'
+    		// Evil.g:65:13: '}'
     		{
-    		DebugLocation(61, 13);
+    		DebugLocation(65, 13);
     		Match('}'); 
 
     		}
@@ -707,11 +709,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = SEMI;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:62:10: ( ';' )
+    		// Evil.g:66:10: ( ';' )
     		DebugEnterAlt(1);
-    		// Evil.g:62:13: ';'
+    		// Evil.g:66:13: ';'
     		{
-    		DebugLocation(62, 13);
+    		DebugLocation(66, 13);
     		Match(';'); 
 
     		}
@@ -737,11 +739,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = COMMA;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:63:10: ( ',' )
+    		// Evil.g:67:10: ( ',' )
     		DebugEnterAlt(1);
-    		// Evil.g:63:13: ','
+    		// Evil.g:67:13: ','
     		{
-    		DebugLocation(63, 13);
+    		DebugLocation(67, 13);
     		Match(','); 
 
     		}
@@ -767,11 +769,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = LPAREN;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:64:10: ( '(' )
+    		// Evil.g:68:10: ( '(' )
     		DebugEnterAlt(1);
-    		// Evil.g:64:13: '('
+    		// Evil.g:68:13: '('
     		{
-    		DebugLocation(64, 13);
+    		DebugLocation(68, 13);
     		Match('('); 
 
     		}
@@ -797,11 +799,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = RPAREN;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:65:10: ( ')' )
+    		// Evil.g:69:10: ( ')' )
     		DebugEnterAlt(1);
-    		// Evil.g:65:13: ')'
+    		// Evil.g:69:13: ')'
     		{
-    		DebugLocation(65, 13);
+    		DebugLocation(69, 13);
     		Match(')'); 
 
     		}
@@ -827,11 +829,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = ASSIGN;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:66:10: ( '=' )
+    		// Evil.g:70:10: ( '=' )
     		DebugEnterAlt(1);
-    		// Evil.g:66:13: '='
+    		// Evil.g:70:13: '='
     		{
-    		DebugLocation(66, 13);
+    		DebugLocation(70, 13);
     		Match('='); 
 
     		}
@@ -857,11 +859,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = DOT;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:67:10: ( '.' )
+    		// Evil.g:71:10: ( '.' )
     		DebugEnterAlt(1);
-    		// Evil.g:67:13: '.'
+    		// Evil.g:71:13: '.'
     		{
-    		DebugLocation(67, 13);
+    		DebugLocation(71, 13);
     		Match('.'); 
 
     		}
@@ -887,11 +889,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = AND;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:68:10: ( '&&' )
+    		// Evil.g:72:10: ( '&&' )
     		DebugEnterAlt(1);
-    		// Evil.g:68:13: '&&'
+    		// Evil.g:72:13: '&&'
     		{
-    		DebugLocation(68, 13);
+    		DebugLocation(72, 13);
     		Match("&&"); 
 
 
@@ -918,11 +920,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = OR;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:69:10: ( '||' )
+    		// Evil.g:73:10: ( '||' )
     		DebugEnterAlt(1);
-    		// Evil.g:69:13: '||'
+    		// Evil.g:73:13: '||'
     		{
-    		DebugLocation(69, 13);
+    		DebugLocation(73, 13);
     		Match("||"); 
 
 
@@ -949,11 +951,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = EQ;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:70:10: ( '==' )
+    		// Evil.g:74:10: ( '==' )
     		DebugEnterAlt(1);
-    		// Evil.g:70:13: '=='
+    		// Evil.g:74:13: '=='
     		{
-    		DebugLocation(70, 13);
+    		DebugLocation(74, 13);
     		Match("=="); 
 
 
@@ -980,11 +982,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = LT;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:71:10: ( '<' )
+    		// Evil.g:75:10: ( '<' )
     		DebugEnterAlt(1);
-    		// Evil.g:71:13: '<'
+    		// Evil.g:75:13: '<'
     		{
-    		DebugLocation(71, 13);
+    		DebugLocation(75, 13);
     		Match('<'); 
 
     		}
@@ -1010,11 +1012,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = GT;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:72:10: ( '>' )
+    		// Evil.g:76:10: ( '>' )
     		DebugEnterAlt(1);
-    		// Evil.g:72:13: '>'
+    		// Evil.g:76:13: '>'
     		{
-    		DebugLocation(72, 13);
+    		DebugLocation(76, 13);
     		Match('>'); 
 
     		}
@@ -1040,11 +1042,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = NE;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:73:10: ( '!=' )
+    		// Evil.g:77:10: ( '!=' )
     		DebugEnterAlt(1);
-    		// Evil.g:73:13: '!='
+    		// Evil.g:77:13: '!='
     		{
-    		DebugLocation(73, 13);
+    		DebugLocation(77, 13);
     		Match("!="); 
 
 
@@ -1071,11 +1073,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = LE;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:74:10: ( '<=' )
+    		// Evil.g:78:10: ( '<=' )
     		DebugEnterAlt(1);
-    		// Evil.g:74:13: '<='
+    		// Evil.g:78:13: '<='
     		{
-    		DebugLocation(74, 13);
+    		DebugLocation(78, 13);
     		Match("<="); 
 
 
@@ -1102,11 +1104,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = GE;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:75:10: ( '>=' )
+    		// Evil.g:79:10: ( '>=' )
     		DebugEnterAlt(1);
-    		// Evil.g:75:13: '>='
+    		// Evil.g:79:13: '>='
     		{
-    		DebugLocation(75, 13);
+    		DebugLocation(79, 13);
     		Match(">="); 
 
 
@@ -1133,11 +1135,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = PLUS;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:76:10: ( '+' )
+    		// Evil.g:80:10: ( '+' )
     		DebugEnterAlt(1);
-    		// Evil.g:76:13: '+'
+    		// Evil.g:80:13: '+'
     		{
-    		DebugLocation(76, 13);
+    		DebugLocation(80, 13);
     		Match('+'); 
 
     		}
@@ -1163,11 +1165,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = MINUS;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:77:10: ( '-' )
+    		// Evil.g:81:10: ( '-' )
     		DebugEnterAlt(1);
-    		// Evil.g:77:13: '-'
+    		// Evil.g:81:13: '-'
     		{
-    		DebugLocation(77, 13);
+    		DebugLocation(81, 13);
     		Match('-'); 
 
     		}
@@ -1193,11 +1195,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = TIMES;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:78:10: ( '*' )
+    		// Evil.g:82:10: ( '*' )
     		DebugEnterAlt(1);
-    		// Evil.g:78:13: '*'
+    		// Evil.g:82:13: '*'
     		{
-    		DebugLocation(78, 13);
+    		DebugLocation(82, 13);
     		Match('*'); 
 
     		}
@@ -1223,11 +1225,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = DIVIDE;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:79:10: ( '/' )
+    		// Evil.g:83:10: ( '/' )
     		DebugEnterAlt(1);
-    		// Evil.g:79:13: '/'
+    		// Evil.g:83:13: '/'
     		{
-    		DebugLocation(79, 13);
+    		DebugLocation(83, 13);
     		Match('/'); 
 
     		}
@@ -1253,11 +1255,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = NOT;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:80:10: ( '!' )
+    		// Evil.g:84:10: ( '!' )
     		DebugEnterAlt(1);
-    		// Evil.g:80:13: '!'
+    		// Evil.g:84:13: '!'
     		{
-    		DebugLocation(80, 13);
+    		DebugLocation(84, 13);
     		Match('!'); 
 
     		}
@@ -1283,11 +1285,11 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = ID;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:82:10: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
+    		// Evil.g:86:10: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )* )
     		DebugEnterAlt(1);
-    		// Evil.g:82:13: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+    		// Evil.g:86:13: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
     		{
-    		DebugLocation(82, 13);
+    		DebugLocation(86, 13);
     		if ((input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z'))
     		{
     			input.Consume();
@@ -1300,8 +1302,8 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     			Recover(mse);
     			throw mse;}
 
-    		DebugLocation(82, 34);
-    		// Evil.g:82:34: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
+    		DebugLocation(86, 34);
+    		// Evil.g:86:34: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )*
     		try { DebugEnterSubRule(1);
     		while (true)
     		{
@@ -1322,7 +1324,7 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     				DebugEnterAlt(1);
     				// Evil.g:
     				{
-    				DebugLocation(82, 34);
+    				DebugLocation(86, 34);
     				if ((input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z'))
     				{
     					input.Consume();
@@ -1373,7 +1375,7 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = INTEGER;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:84:10: ( '0' | ( '1' .. '9' ) ( '0' .. '9' )* )
+    		// Evil.g:88:10: ( '0' | ( '1' .. '9' ) ( '0' .. '9' )* )
     		int alt3=2;
     		try { DebugEnterDecision(3, decisionCanBacktrack[3]);
     		int LA3_0 = input.LA(1);
@@ -1398,29 +1400,29 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// Evil.g:84:13: '0'
+    			// Evil.g:88:13: '0'
     			{
-    			DebugLocation(84, 13);
+    			DebugLocation(88, 13);
     			Match('0'); 
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// Evil.g:84:19: ( '1' .. '9' ) ( '0' .. '9' )*
+    			// Evil.g:88:19: ( '1' .. '9' ) ( '0' .. '9' )*
     			{
-    			DebugLocation(84, 19);
-    			// Evil.g:84:19: ( '1' .. '9' )
+    			DebugLocation(88, 19);
+    			// Evil.g:88:19: ( '1' .. '9' )
     			DebugEnterAlt(1);
-    			// Evil.g:84:20: '1' .. '9'
+    			// Evil.g:88:20: '1' .. '9'
     			{
-    			DebugLocation(84, 20);
+    			DebugLocation(88, 20);
     			MatchRange('1','9'); 
 
     			}
 
-    			DebugLocation(84, 30);
-    			// Evil.g:84:30: ( '0' .. '9' )*
+    			DebugLocation(88, 30);
+    			// Evil.g:88:30: ( '0' .. '9' )*
     			try { DebugEnterSubRule(2);
     			while (true)
     			{
@@ -1439,9 +1441,9 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// Evil.g:84:31: '0' .. '9'
+    					// Evil.g:88:31: '0' .. '9'
     					{
-    					DebugLocation(84, 31);
+    					DebugLocation(88, 31);
     					MatchRange('0','9'); 
 
     					}
@@ -1483,12 +1485,12 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = WS;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:86:10: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
+    		// Evil.g:90:10: ( ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+ )
     		DebugEnterAlt(1);
-    		// Evil.g:86:13: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+    		// Evil.g:90:13: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
     		{
-    		DebugLocation(86, 13);
-    		// Evil.g:86:13: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
+    		DebugLocation(90, 13);
+    		// Evil.g:90:13: ( ' ' | '\\t' | '\\f' | '\\r' | '\\n' )+
     		int cnt4=0;
     		try { DebugEnterSubRule(4);
     		while (true)
@@ -1510,7 +1512,7 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     				DebugEnterAlt(1);
     				// Evil.g:
     				{
-    				DebugLocation(86, 13);
+    				DebugLocation(90, 13);
     				if ((input.LA(1)>='\t' && input.LA(1)<='\n')||(input.LA(1)>='\f' && input.LA(1)<='\r')||input.LA(1)==' ')
     				{
     					input.Consume();
@@ -1542,7 +1544,7 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
 
     		} finally { DebugExitSubRule(4); }
 
-    		DebugLocation(92, 13);
+    		DebugLocation(96, 13);
     		 Skip(); 
 
     		}
@@ -1568,14 +1570,14 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     		{
     		int _type = COMMENT;
     		int _channel = DefaultTokenChannel;
-    		// Evil.g:95:10: ( '#' (~ '\\n' )* '\\n' )
+    		// Evil.g:99:10: ( '#' (~ '\\n' )* '\\n' )
     		DebugEnterAlt(1);
-    		// Evil.g:95:13: '#' (~ '\\n' )* '\\n'
+    		// Evil.g:99:13: '#' (~ '\\n' )* '\\n'
     		{
-    		DebugLocation(95, 13);
+    		DebugLocation(99, 13);
     		Match('#'); 
-    		DebugLocation(95, 17);
-    		// Evil.g:95:17: (~ '\\n' )*
+    		DebugLocation(99, 17);
+    		// Evil.g:99:17: (~ '\\n' )*
     		try { DebugEnterSubRule(5);
     		while (true)
     		{
@@ -1594,9 +1596,9 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// Evil.g:95:18: ~ '\\n'
+    				// Evil.g:99:18: ~ '\\n'
     				{
-    				DebugLocation(95, 18);
+    				DebugLocation(99, 18);
     				if ((input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\uFFFF'))
     				{
     					input.Consume();
@@ -1623,9 +1625,9 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
 
     		} finally { DebugExitSubRule(5); }
 
-    		DebugLocation(95, 26);
+    		DebugLocation(99, 26);
     		Match('\n'); 
-    		DebugLocation(96, 13);
+    		DebugLocation(100, 13);
     		 Skip(); 
 
     		}
@@ -2259,4 +2261,5 @@ public partial class EvilLexer : Antlr.Runtime.Lexer
  
 	#endregion
 
+}
 }

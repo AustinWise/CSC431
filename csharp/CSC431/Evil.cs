@@ -5,116 +5,120 @@ using Antlr.Runtime;
 using Antlr.Runtime.Tree;
 using System.IO;
 
-public class Evil
+namespace CSC431
 {
-    private static void printError(string msg)
+    public class Evil
     {
-        Console.WriteLine(msg);
-    }
-
-    public static void Main(String[] args)
-    {
-        parseParameters(args);
-
-        CommonTokenStream tokens = new CommonTokenStream(createLexer());
-        EvilParser parser = new EvilParser(tokens);
-        EvilParser.program_return ret = null;
-
-        try
+        private static void printError(string msg)
         {
-            ret = parser.Program();
-        }
-        catch (RecognitionException e)
-        {
-            error(e.ToString());
-            return;
+            Console.WriteLine(msg);
         }
 
-        CommonTree t = (CommonTree)ret.Tree;
-        if (_displayAST && t != null)
+        public static void Main(String[] args)
         {
-            DotTreeGenerator gen = new DotTreeGenerator();
-            var st = gen.ToDot(t);
-            Console.WriteLine(st);
-        }
+            args = new[] { "1.ev" };
+            parseParameters(args);
 
-        /*
-           create and invoke a tree parser
-      */
-        try
-        {
-            CommonTreeNodeStream nodes = new CommonTreeNodeStream(t);
-            nodes.TokenStream = tokens;
-            GenericEvilTreeParser tparser = new GenericEvilTreeParser(nodes);
+            CommonTokenStream tokens = new CommonTokenStream(createLexer());
+            EvilParser parser = new EvilParser(tokens);
+            EvilParser.program_return ret = null;
 
-            StructTypes stypes = new StructTypes();
-            SymbolTable stable = new SymbolTable();
-
-            tparser.Program(stypes, stable);
-        }
-        catch (RecognitionException e)
-        {
-            error(e.ToString());
-        }
-    }
-
-    private const String DISPLAYAST = "-displayAST";
-
-    private static String _inputFile = null;
-    private static bool _displayAST = false;
-
-    private static void parseParameters(String[] args)
-    {
-        for (int i = 0; i < args.Length; i++)
-        {
-            if (args[i].Equals(DISPLAYAST))
+            try
             {
-                _displayAST = true;
+                ret = parser.Program();
             }
-            else if (args[i][0] == '-')
+            catch (RecognitionException e)
             {
-                printError("unexpected option: " + args[i]);
-                Environment.Exit(1);
+                error(e.ToString());
+                return;
             }
-            else if (_inputFile != null)
+
+            CommonTree t = (CommonTree)ret.Tree;
+            if (_displayAST && t != null)
             {
-                printError("too many files specified");
-                Environment.Exit(1);
+                DotTreeGenerator gen = new DotTreeGenerator();
+                var st = gen.ToDot(t);
+                Console.WriteLine(st);
             }
-            else
+
+            /*
+               create and invoke a tree parser
+          */
+            try
             {
-                _inputFile = args[i];
+                CommonTreeNodeStream nodes = new CommonTreeNodeStream(t);
+                nodes.TokenStream = tokens;
+                GenericEvilTreeParser tparser = new GenericEvilTreeParser(nodes);
+
+                StructTypes stypes = new StructTypes();
+                SymbolTable stable = new SymbolTable();
+
+                tparser.Program(stypes, stable);
+            }
+            catch (RecognitionException e)
+            {
+                error(e.ToString());
             }
         }
-    }
 
+        private const String DISPLAYAST = "-displayAST";
 
-    private static void error(String msg)
-    {
-        printError(msg);
-        Environment.Exit(1);
-    }
+        private static String _inputFile = null;
+        private static bool _displayAST = false;
 
-    private static EvilLexer createLexer()
-    {
-        try
+        private static void parseParameters(String[] args)
         {
-            ANTLRInputStream input;
-            if (_inputFile == null)
+            for (int i = 0; i < args.Length; i++)
             {
-                input = new ANTLRInputStream(Console.OpenStandardInput());
+                if (args[i].Equals(DISPLAYAST))
+                {
+                    _displayAST = true;
+                }
+                else if (args[i][0] == '-')
+                {
+                    printError("unexpected option: " + args[i]);
+                    Environment.Exit(1);
+                }
+                else if (_inputFile != null)
+                {
+                    printError("too many files specified");
+                    Environment.Exit(1);
+                }
+                else
+                {
+                    _inputFile = args[i];
+                }
             }
-            else
-            {
-                input = new ANTLRInputStream(new FileStream(_inputFile, FileMode.Open));
-            }
-            return new EvilLexer(input);
         }
-        catch (IOException)
+
+
+        private static void error(String msg)
         {
-            Console.WriteLine("file not found: " + _inputFile);
+            printError(msg);
             Environment.Exit(1);
-            return null;
+        }
+
+        private static EvilLexer createLexer()
+        {
+            try
+            {
+                ANTLRInputStream input;
+                if (_inputFile == null)
+                {
+                    input = new ANTLRInputStream(Console.OpenStandardInput());
+                }
+                else
+                {
+                    input = new ANTLRInputStream(new FileStream(_inputFile, FileMode.Open));
+                }
+                return new EvilLexer(input);
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("file not found: " + _inputFile);
+                Environment.Exit(1);
+                return null;
+            }
         }
     }
 }

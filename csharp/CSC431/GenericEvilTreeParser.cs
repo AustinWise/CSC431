@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 GenericEvilTreeParser.g 2011-01-15 11:48:48
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 GenericEvilTreeParser.g 2011-01-15 13:44:22
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -17,6 +17,8 @@ using RewriteRuleITokenStream = Antlr.Runtime.Tree.RewriteRuleTokenStream;using 
 using List = System.Collections.IList;
 using ArrayList = System.Collections.Generic.List<object>;
 
+namespace CSC431
+{
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "3.3 Nov 30, 2010 12:50:56")]
 [System.CLSCompliant(false)]
 public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
@@ -123,41 +125,41 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_program() {}
 
     // $ANTLR start "program"
-    // GenericEvilTreeParser.g:16:1: program[StructTypes stypes, SymbolTable stable] : ^( PROGRAM ( types[stypes] declarations[stypes, stable] functions[stypes, stable] ) ) ;
+    // GenericEvilTreeParser.g:18:1: program[StructTypes stypes, SymbolTable stable] : ^( PROGRAM ( types[stypes] declarations[stypes, stable] functions[stypes, stable] ) ) ;
     [GrammarRule("program")]
     private void program(StructTypes stypes, SymbolTable stable)
     {
 
     	try { DebugEnterRule(GrammarFileName, "program");
-    	DebugLocation(16, 1);
+    	DebugLocation(18, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:17:2: ( ^( PROGRAM ( types[stypes] declarations[stypes, stable] functions[stypes, stable] ) ) )
+    		// GenericEvilTreeParser.g:19:2: ( ^( PROGRAM ( types[stypes] declarations[stypes, stable] functions[stypes, stable] ) ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:17:4: ^( PROGRAM ( types[stypes] declarations[stypes, stable] functions[stypes, stable] ) )
+    		// GenericEvilTreeParser.g:19:4: ^( PROGRAM ( types[stypes] declarations[stypes, stable] functions[stypes, stable] ) )
     		{
-    		DebugLocation(17, 4);
-    		DebugLocation(17, 6);
-    		Match(input,PROGRAM,Follow._PROGRAM_in_program52); 
+    		DebugLocation(19, 4);
+    		DebugLocation(19, 6);
+    		Match(input,PROGRAM,Follow._PROGRAM_in_program58); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(17, 14);
-    		// GenericEvilTreeParser.g:17:14: ( types[stypes] declarations[stypes, stable] functions[stypes, stable] )
+    		DebugLocation(19, 14);
+    		// GenericEvilTreeParser.g:19:14: ( types[stypes] declarations[stypes, stable] functions[stypes, stable] )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:17:15: types[stypes] declarations[stypes, stable] functions[stypes, stable]
+    		// GenericEvilTreeParser.g:19:15: types[stypes] declarations[stypes, stable] functions[stypes, stable]
     		{
-    		DebugLocation(17, 15);
-    		PushFollow(Follow._types_in_program55);
+    		DebugLocation(19, 15);
+    		PushFollow(Follow._types_in_program61);
     		types(stypes);
     		PopFollow();
 
-    		DebugLocation(17, 29);
-    		PushFollow(Follow._declarations_in_program58);
+    		DebugLocation(19, 29);
+    		PushFollow(Follow._declarations_in_program64);
     		declarations(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(17, 58);
-    		PushFollow(Follow._functions_in_program61);
+    		DebugLocation(19, 58);
+    		PushFollow(Follow._functions_in_program67);
     		functions(stypes, stable);
     		PopFollow();
 
@@ -166,7 +168,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(18, 2);
+    		DebugLocation(20, 2);
 
     				if (!stable.exists("main"))
     					error(-1, "main is missing");
@@ -190,7 +192,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(29, 1);
+     	DebugLocation(31, 1);
     	} finally { DebugExitRule(GrammarFileName, "program"); }
     	return;
 
@@ -202,16 +204,16 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_types() {}
 
     // $ANTLR start "types"
-    // GenericEvilTreeParser.g:31:1: types[StructTypes stypes] : ( ^( TYPES types_sub[stypes] ) | TYPES );
+    // GenericEvilTreeParser.g:33:1: types[StructTypes stypes] : ( ^( TYPES types_sub[stypes] ) | TYPES );
     [GrammarRule("types")]
     private void types(StructTypes stypes)
     {
 
     	try { DebugEnterRule(GrammarFileName, "types");
-    	DebugLocation(31, 3);
+    	DebugLocation(33, 3);
     	try
     	{
-    		// GenericEvilTreeParser.g:32:4: ( ^( TYPES types_sub[stypes] ) | TYPES )
+    		// GenericEvilTreeParser.g:34:4: ( ^( TYPES types_sub[stypes] ) | TYPES )
     		int alt1=2;
     		try { DebugEnterDecision(1, decisionCanBacktrack[1]);
     		int LA1_0 = input.LA(1);
@@ -248,17 +250,17 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:32:7: ^( TYPES types_sub[stypes] )
+    			// GenericEvilTreeParser.g:34:7: ^( TYPES types_sub[stypes] )
     			{
-    			DebugLocation(32, 7);
-    			DebugLocation(32, 9);
-    			Match(input,TYPES,Follow._TYPES_in_types85); 
+    			DebugLocation(34, 7);
+    			DebugLocation(34, 9);
+    			Match(input,TYPES,Follow._TYPES_in_types91); 
 
     			if (input.LA(1) == TokenTypes.Down)
     			{
     				Match(input, TokenTypes.Down, null); 
-    				DebugLocation(32, 15);
-    				PushFollow(Follow._types_sub_in_types87);
+    				DebugLocation(34, 15);
+    				PushFollow(Follow._types_sub_in_types93);
     				types_sub(stypes);
     				PopFollow();
 
@@ -270,10 +272,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:33:7: TYPES
+    			// GenericEvilTreeParser.g:35:7: TYPES
     			{
-    			DebugLocation(33, 7);
-    			Match(input,TYPES,Follow._TYPES_in_types97); 
+    			DebugLocation(35, 7);
+    			Match(input,TYPES,Follow._TYPES_in_types103); 
 
     			}
     			break;
@@ -288,7 +290,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(34, 3);
+     	DebugLocation(36, 3);
     	} finally { DebugExitRule(GrammarFileName, "types"); }
     	return;
 
@@ -300,7 +302,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_type_declaration() {}
 
     // $ANTLR start "type_declaration"
-    // GenericEvilTreeParser.g:36:1: type_declaration[StructTypes stypes] : ^( STRUCT (id= ID ) nested_decl[stypes, sdef] ) ;
+    // GenericEvilTreeParser.g:38:1: type_declaration[StructTypes stypes] : ^( STRUCT (id= ID ) nested_decl[stypes, sdef] ) ;
     [GrammarRule("type_declaration")]
     private void type_declaration(StructTypes stypes)
     {
@@ -309,29 +311,29 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 
         StructTypes.StructDef sdef = null;
     	try { DebugEnterRule(GrammarFileName, "type_declaration");
-    	DebugLocation(36, 3);
+    	DebugLocation(38, 3);
     	try
     	{
-    		// GenericEvilTreeParser.g:38:4: ( ^( STRUCT (id= ID ) nested_decl[stypes, sdef] ) )
+    		// GenericEvilTreeParser.g:40:4: ( ^( STRUCT (id= ID ) nested_decl[stypes, sdef] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:38:7: ^( STRUCT (id= ID ) nested_decl[stypes, sdef] )
+    		// GenericEvilTreeParser.g:40:7: ^( STRUCT (id= ID ) nested_decl[stypes, sdef] )
     		{
-    		DebugLocation(38, 7);
-    		DebugLocation(38, 9);
-    		Match(input,STRUCT,Follow._STRUCT_in_type_declaration121); 
+    		DebugLocation(40, 7);
+    		DebugLocation(40, 9);
+    		Match(input,STRUCT,Follow._STRUCT_in_type_declaration127); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(38, 16);
-    		// GenericEvilTreeParser.g:38:16: (id= ID )
+    		DebugLocation(40, 16);
+    		// GenericEvilTreeParser.g:40:16: (id= ID )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:38:17: id= ID
+    		// GenericEvilTreeParser.g:40:17: id= ID
     		{
-    		DebugLocation(38, 19);
-    		id=(CommonTree)Match(input,ID,Follow._ID_in_type_declaration126); 
+    		DebugLocation(40, 19);
+    		id=(CommonTree)Match(input,ID,Follow._ID_in_type_declaration132); 
 
     		}
 
-    		DebugLocation(39, 5);
+    		DebugLocation(41, 5);
 
     		   		if (stypes.isDefined((id!=null?id.Text:null)))
     		   		{
@@ -339,14 +341,14 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		   		}
     		   		sdef = stypes.define((id!=null?id.Text:null));
     		   	
-    		DebugLocation(46, 10);
-    		PushFollow(Follow._nested_decl_in_type_declaration145);
+    		DebugLocation(48, 10);
+    		PushFollow(Follow._nested_decl_in_type_declaration151);
     		nested_decl(stypes, sdef);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(47, 11);
+    		DebugLocation(49, 11);
 
     		         	
 
@@ -361,7 +363,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(49, 3);
+     	DebugLocation(51, 3);
     	} finally { DebugExitRule(GrammarFileName, "type_declaration"); }
     	return;
 
@@ -373,21 +375,21 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_nested_decl() {}
 
     // $ANTLR start "nested_decl"
-    // GenericEvilTreeParser.g:51:1: nested_decl[StructTypes stypes, StructTypes.StructDef sdef] : ( field_decl[stypes, sdef] )+ ;
+    // GenericEvilTreeParser.g:53:1: nested_decl[StructTypes stypes, StructTypes.StructDef sdef] : ( field_decl[stypes, sdef] )+ ;
     [GrammarRule("nested_decl")]
     private void nested_decl(StructTypes stypes, StructTypes.StructDef sdef)
     {
 
     	try { DebugEnterRule(GrammarFileName, "nested_decl");
-    	DebugLocation(51, 3);
+    	DebugLocation(53, 3);
     	try
     	{
-    		// GenericEvilTreeParser.g:52:4: ( ( field_decl[stypes, sdef] )+ )
+    		// GenericEvilTreeParser.g:54:4: ( ( field_decl[stypes, sdef] )+ )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:52:7: ( field_decl[stypes, sdef] )+
+    		// GenericEvilTreeParser.g:54:7: ( field_decl[stypes, sdef] )+
     		{
-    		DebugLocation(52, 7);
-    		// GenericEvilTreeParser.g:52:7: ( field_decl[stypes, sdef] )+
+    		DebugLocation(54, 7);
+    		// GenericEvilTreeParser.g:54:7: ( field_decl[stypes, sdef] )+
     		int cnt2=0;
     		try { DebugEnterSubRule(2);
     		while (true)
@@ -407,10 +409,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// GenericEvilTreeParser.g:52:8: field_decl[stypes, sdef]
+    				// GenericEvilTreeParser.g:54:8: field_decl[stypes, sdef]
     				{
-    				DebugLocation(52, 8);
-    				PushFollow(Follow._field_decl_in_nested_decl179);
+    				DebugLocation(54, 8);
+    				PushFollow(Follow._field_decl_in_nested_decl185);
     				field_decl(stypes, sdef);
     				PopFollow();
 
@@ -445,7 +447,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(53, 3);
+     	DebugLocation(55, 3);
     	} finally { DebugExitRule(GrammarFileName, "nested_decl"); }
     	return;
 
@@ -457,16 +459,16 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_types_sub() {}
 
     // $ANTLR start "types_sub"
-    // GenericEvilTreeParser.g:55:1: types_sub[StructTypes stypes] : ( ( type_declaration[stypes] types_sub[stypes] ) | );
+    // GenericEvilTreeParser.g:57:1: types_sub[StructTypes stypes] : ( ( type_declaration[stypes] types_sub[stypes] ) | );
     [GrammarRule("types_sub")]
     private void types_sub(StructTypes stypes)
     {
 
     	try { DebugEnterRule(GrammarFileName, "types_sub");
-    	DebugLocation(55, 3);
+    	DebugLocation(57, 3);
     	try
     	{
-    		// GenericEvilTreeParser.g:56:4: ( ( type_declaration[stypes] types_sub[stypes] ) | )
+    		// GenericEvilTreeParser.g:58:4: ( ( type_declaration[stypes] types_sub[stypes] ) | )
     		int alt3=2;
     		try { DebugEnterDecision(3, decisionCanBacktrack[3]);
     		int LA3_0 = input.LA(1);
@@ -491,20 +493,20 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:56:7: ( type_declaration[stypes] types_sub[stypes] )
+    			// GenericEvilTreeParser.g:58:7: ( type_declaration[stypes] types_sub[stypes] )
     			{
-    			DebugLocation(56, 7);
-    			// GenericEvilTreeParser.g:56:7: ( type_declaration[stypes] types_sub[stypes] )
+    			DebugLocation(58, 7);
+    			// GenericEvilTreeParser.g:58:7: ( type_declaration[stypes] types_sub[stypes] )
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:56:8: type_declaration[stypes] types_sub[stypes]
+    			// GenericEvilTreeParser.g:58:8: type_declaration[stypes] types_sub[stypes]
     			{
-    			DebugLocation(56, 8);
-    			PushFollow(Follow._type_declaration_in_types_sub201);
+    			DebugLocation(58, 8);
+    			PushFollow(Follow._type_declaration_in_types_sub207);
     			type_declaration(stypes);
     			PopFollow();
 
-    			DebugLocation(56, 33);
-    			PushFollow(Follow._types_sub_in_types_sub204);
+    			DebugLocation(58, 33);
+    			PushFollow(Follow._types_sub_in_types_sub210);
     			types_sub(stypes);
     			PopFollow();
 
@@ -516,9 +518,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:57:6: 
+    			// GenericEvilTreeParser.g:59:6: 
     			{
-    			DebugLocation(57, 6);
+    			DebugLocation(59, 6);
 
 
     			}
@@ -534,7 +536,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(58, 3);
+     	DebugLocation(60, 3);
     	} finally { DebugExitRule(GrammarFileName, "types_sub"); }
     	return;
 
@@ -546,7 +548,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_field_decl() {}
 
     // $ANTLR start "field_decl"
-    // GenericEvilTreeParser.g:60:1: field_decl[StructTypes stypes, StructTypes.StructDef sdef] : ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) ;
+    // GenericEvilTreeParser.g:62:1: field_decl[StructTypes stypes, StructTypes.StructDef sdef] : ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) ;
     [GrammarRule("field_decl")]
     private void field_decl(StructTypes stypes, StructTypes.StructDef sdef)
     {
@@ -555,35 +557,35 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         Type tt = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "field_decl");
-    	DebugLocation(60, 3);
+    	DebugLocation(62, 3);
     	try
     	{
-    		// GenericEvilTreeParser.g:61:4: ( ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) )
+    		// GenericEvilTreeParser.g:63:4: ( ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:61:7: ^( DECL ^( TYPE tt= type[stypes] ) id= ID )
+    		// GenericEvilTreeParser.g:63:7: ^( DECL ^( TYPE tt= type[stypes] ) id= ID )
     		{
-    		DebugLocation(61, 7);
-    		DebugLocation(61, 9);
-    		Match(input,DECL,Follow._DECL_in_field_decl232); 
+    		DebugLocation(63, 7);
+    		DebugLocation(63, 9);
+    		Match(input,DECL,Follow._DECL_in_field_decl238); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(61, 14);
-    		DebugLocation(61, 16);
-    		Match(input,TYPE,Follow._TYPE_in_field_decl235); 
+    		DebugLocation(63, 14);
+    		DebugLocation(63, 16);
+    		Match(input,TYPE,Follow._TYPE_in_field_decl241); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(61, 23);
-    		PushFollow(Follow._type_in_field_decl239);
+    		DebugLocation(63, 23);
+    		PushFollow(Follow._type_in_field_decl245);
     		tt=type(stypes);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(61, 40);
-    		id=(CommonTree)Match(input,ID,Follow._ID_in_field_decl245); 
+    		DebugLocation(63, 40);
+    		id=(CommonTree)Match(input,ID,Follow._ID_in_field_decl251); 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(62, 2);
+    		DebugLocation(64, 2);
 
     				if(sdef.hasField((id!=null?id.Text:null)))
     				{
@@ -603,7 +605,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(69, 3);
+     	DebugLocation(71, 3);
     	} finally { DebugExitRule(GrammarFileName, "field_decl"); }
     	return;
 
@@ -615,7 +617,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_type() {}
 
     // $ANTLR start "type"
-    // GenericEvilTreeParser.g:71:1: type[StructTypes stypes] returns [Type t = null] : ( INT | BOOL | ^( STRUCT id= ID ) );
+    // GenericEvilTreeParser.g:73:1: type[StructTypes stypes] returns [Type t = null] : ( INT | BOOL | ^( STRUCT id= ID ) );
     [GrammarRule("type")]
     private Type type(StructTypes stypes)
     {
@@ -625,10 +627,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         CommonTree id=null;
 
     	try { DebugEnterRule(GrammarFileName, "type");
-    	DebugLocation(71, 0);
+    	DebugLocation(73, 0);
     	try
     	{
-    		// GenericEvilTreeParser.g:72:2: ( INT | BOOL | ^( STRUCT id= ID ) )
+    		// GenericEvilTreeParser.g:74:2: ( INT | BOOL | ^( STRUCT id= ID ) )
     		int alt4=3;
     		try { DebugEnterDecision(4, decisionCanBacktrack[4]);
     		switch (input.LA(1))
@@ -662,40 +664,40 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:72:4: INT
+    			// GenericEvilTreeParser.g:74:4: INT
     			{
-    			DebugLocation(72, 4);
-    			Match(input,INT,Follow._INT_in_type269); 
-    			DebugLocation(72, 8);
+    			DebugLocation(74, 4);
+    			Match(input,INT,Follow._INT_in_type275); 
+    			DebugLocation(74, 8);
     			 t = Type.intType(); 
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:73:4: BOOL
+    			// GenericEvilTreeParser.g:75:4: BOOL
     			{
-    			DebugLocation(73, 4);
-    			Match(input,BOOL,Follow._BOOL_in_type276); 
-    			DebugLocation(73, 9);
+    			DebugLocation(75, 4);
+    			Match(input,BOOL,Follow._BOOL_in_type282); 
+    			DebugLocation(75, 9);
     			 t = Type.boolType(); 
 
     			}
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// GenericEvilTreeParser.g:74:4: ^( STRUCT id= ID )
+    			// GenericEvilTreeParser.g:76:4: ^( STRUCT id= ID )
     			{
-    			DebugLocation(74, 4);
-    			DebugLocation(74, 6);
-    			Match(input,STRUCT,Follow._STRUCT_in_type284); 
+    			DebugLocation(76, 4);
+    			DebugLocation(76, 6);
+    			Match(input,STRUCT,Follow._STRUCT_in_type290); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(74, 15);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_type288); 
+    			DebugLocation(76, 15);
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_type294); 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(75, 2);
+    			DebugLocation(77, 2);
 
     					if (!stypes.isDefined((id!=null?id.Text:null)))
     					{
@@ -717,7 +719,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(82, 0);
+     	DebugLocation(84, 0);
     	} finally { DebugExitRule(GrammarFileName, "type"); }
     	return t;
 
@@ -729,16 +731,16 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_declarations() {}
 
     // $ANTLR start "declarations"
-    // GenericEvilTreeParser.g:84:1: declarations[StructTypes stypes, SymbolTable stable] : ( ^( DECLS declaration[stypes,stable] ) | );
+    // GenericEvilTreeParser.g:86:1: declarations[StructTypes stypes, SymbolTable stable] : ( ^( DECLS declaration[stypes,stable] ) | );
     [GrammarRule("declarations")]
     private void declarations(StructTypes stypes, SymbolTable stable)
     {
 
     	try { DebugEnterRule(GrammarFileName, "declarations");
-    	DebugLocation(84, 0);
+    	DebugLocation(86, 0);
     	try
     	{
-    		// GenericEvilTreeParser.g:85:2: ( ^( DECLS declaration[stypes,stable] ) | )
+    		// GenericEvilTreeParser.g:87:2: ( ^( DECLS declaration[stypes,stable] ) | )
     		int alt5=2;
     		try { DebugEnterDecision(5, decisionCanBacktrack[5]);
     		int LA5_0 = input.LA(1);
@@ -763,17 +765,17 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:85:4: ^( DECLS declaration[stypes,stable] )
+    			// GenericEvilTreeParser.g:87:4: ^( DECLS declaration[stypes,stable] )
     			{
-    			DebugLocation(85, 4);
-    			DebugLocation(85, 6);
-    			Match(input,DECLS,Follow._DECLS_in_declarations305); 
+    			DebugLocation(87, 4);
+    			DebugLocation(87, 6);
+    			Match(input,DECLS,Follow._DECLS_in_declarations311); 
 
     			if (input.LA(1) == TokenTypes.Down)
     			{
     				Match(input, TokenTypes.Down, null); 
-    				DebugLocation(85, 12);
-    				PushFollow(Follow._declaration_in_declarations307);
+    				DebugLocation(87, 12);
+    				PushFollow(Follow._declaration_in_declarations313);
     				declaration(stypes, stable);
     				PopFollow();
 
@@ -785,9 +787,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:86:4: 
+    			// GenericEvilTreeParser.g:88:4: 
     			{
-    			DebugLocation(86, 4);
+    			DebugLocation(88, 4);
 
 
     			}
@@ -803,7 +805,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(87, 0);
+     	DebugLocation(89, 0);
     	} finally { DebugExitRule(GrammarFileName, "declarations"); }
     	return;
 
@@ -815,21 +817,21 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_declaration() {}
 
     // $ANTLR start "declaration"
-    // GenericEvilTreeParser.g:89:1: declaration[StructTypes stypes,SymbolTable stable] : ( decl_list[stypes,stable] )* ;
+    // GenericEvilTreeParser.g:91:1: declaration[StructTypes stypes,SymbolTable stable] : ( decl_list[stypes,stable] )* ;
     [GrammarRule("declaration")]
     private void declaration(StructTypes stypes, SymbolTable stable)
     {
 
     	try { DebugEnterRule(GrammarFileName, "declaration");
-    	DebugLocation(89, 0);
+    	DebugLocation(91, 0);
     	try
     	{
-    		// GenericEvilTreeParser.g:90:2: ( ( decl_list[stypes,stable] )* )
+    		// GenericEvilTreeParser.g:92:2: ( ( decl_list[stypes,stable] )* )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:90:4: ( decl_list[stypes,stable] )*
+    		// GenericEvilTreeParser.g:92:4: ( decl_list[stypes,stable] )*
     		{
-    		DebugLocation(90, 4);
-    		// GenericEvilTreeParser.g:90:4: ( decl_list[stypes,stable] )*
+    		DebugLocation(92, 4);
+    		// GenericEvilTreeParser.g:92:4: ( decl_list[stypes,stable] )*
     		try { DebugEnterSubRule(6);
     		while (true)
     		{
@@ -848,10 +850,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// GenericEvilTreeParser.g:90:5: decl_list[stypes,stable]
+    				// GenericEvilTreeParser.g:92:5: decl_list[stypes,stable]
     				{
-    				DebugLocation(90, 5);
-    				PushFollow(Follow._decl_list_in_declaration327);
+    				DebugLocation(92, 5);
+    				PushFollow(Follow._decl_list_in_declaration333);
     				decl_list(stypes, stable);
     				PopFollow();
 
@@ -881,7 +883,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(91, 0);
+     	DebugLocation(93, 0);
     	} finally { DebugExitRule(GrammarFileName, "declaration"); }
     	return;
 
@@ -893,7 +895,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_decl_list() {}
 
     // $ANTLR start "decl_list"
-    // GenericEvilTreeParser.g:93:1: decl_list[StructTypes stypes,SymbolTable stable] : ^( DECLLIST ^( TYPE t= type[stypes] ) id_list[t,stable] ) ;
+    // GenericEvilTreeParser.g:95:1: decl_list[StructTypes stypes,SymbolTable stable] : ^( DECLLIST ^( TYPE t= type[stypes] ) id_list[t,stable] ) ;
     [GrammarRule("decl_list")]
     private void decl_list(StructTypes stypes, SymbolTable stable)
     {
@@ -901,32 +903,32 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         Type t = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "decl_list");
-    	DebugLocation(93, 0);
+    	DebugLocation(95, 0);
     	try
     	{
-    		// GenericEvilTreeParser.g:94:2: ( ^( DECLLIST ^( TYPE t= type[stypes] ) id_list[t,stable] ) )
+    		// GenericEvilTreeParser.g:96:2: ( ^( DECLLIST ^( TYPE t= type[stypes] ) id_list[t,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:94:4: ^( DECLLIST ^( TYPE t= type[stypes] ) id_list[t,stable] )
+    		// GenericEvilTreeParser.g:96:4: ^( DECLLIST ^( TYPE t= type[stypes] ) id_list[t,stable] )
     		{
-    		DebugLocation(94, 4);
-    		DebugLocation(94, 6);
-    		Match(input,DECLLIST,Follow._DECLLIST_in_decl_list343); 
+    		DebugLocation(96, 4);
+    		DebugLocation(96, 6);
+    		Match(input,DECLLIST,Follow._DECLLIST_in_decl_list349); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(94, 15);
-    		DebugLocation(94, 17);
-    		Match(input,TYPE,Follow._TYPE_in_decl_list346); 
+    		DebugLocation(96, 15);
+    		DebugLocation(96, 17);
+    		Match(input,TYPE,Follow._TYPE_in_decl_list352); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(94, 23);
-    		PushFollow(Follow._type_in_decl_list350);
+    		DebugLocation(96, 23);
+    		PushFollow(Follow._type_in_decl_list356);
     		t=type(stypes);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(94, 38);
-    		PushFollow(Follow._id_list_in_decl_list354);
+    		DebugLocation(96, 38);
+    		PushFollow(Follow._id_list_in_decl_list360);
     		id_list(t, stable);
     		PopFollow();
 
@@ -944,7 +946,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(95, 0);
+     	DebugLocation(97, 0);
     	} finally { DebugExitRule(GrammarFileName, "decl_list"); }
     	return;
 
@@ -956,7 +958,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_id_list() {}
 
     // $ANTLR start "id_list"
-    // GenericEvilTreeParser.g:97:1: id_list[Type t, SymbolTable stable] : (id= ID )+ ;
+    // GenericEvilTreeParser.g:99:1: id_list[Type t, SymbolTable stable] : (id= ID )+ ;
     [GrammarRule("id_list")]
     private void id_list(Type t, SymbolTable stable)
     {
@@ -964,15 +966,15 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         CommonTree id=null;
 
     	try { DebugEnterRule(GrammarFileName, "id_list");
-    	DebugLocation(97, 0);
+    	DebugLocation(99, 0);
     	try
     	{
-    		// GenericEvilTreeParser.g:98:2: ( (id= ID )+ )
+    		// GenericEvilTreeParser.g:100:2: ( (id= ID )+ )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:98:4: (id= ID )+
+    		// GenericEvilTreeParser.g:100:4: (id= ID )+
     		{
-    		DebugLocation(98, 4);
-    		// GenericEvilTreeParser.g:98:4: (id= ID )+
+    		DebugLocation(100, 4);
+    		// GenericEvilTreeParser.g:100:4: (id= ID )+
     		int cnt7=0;
     		try { DebugEnterSubRule(7);
     		while (true)
@@ -992,11 +994,11 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// GenericEvilTreeParser.g:99:3: id= ID
+    				// GenericEvilTreeParser.g:101:3: id= ID
     				{
-    				DebugLocation(99, 5);
-    				id=(CommonTree)Match(input,ID,Follow._ID_in_id_list374); 
-    				DebugLocation(100, 3);
+    				DebugLocation(101, 5);
+    				id=(CommonTree)Match(input,ID,Follow._ID_in_id_list380); 
+    				DebugLocation(102, 3);
 
     							if (stable.redef((id!=null?id.Text:null)))
     							{
@@ -1039,7 +1041,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(112, 0);
+     	DebugLocation(114, 0);
     	} finally { DebugExitRule(GrammarFileName, "id_list"); }
     	return;
 
@@ -1051,28 +1053,28 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_functions() {}
 
     // $ANTLR start "functions"
-    // GenericEvilTreeParser.g:114:1: functions[StructTypes stypes,SymbolTable stable] : ^( FUNCS ( function[stypes, stable] )* ) ;
+    // GenericEvilTreeParser.g:116:1: functions[StructTypes stypes,SymbolTable stable] : ^( FUNCS ( function[stypes, stable] )* ) ;
     [GrammarRule("functions")]
     private void functions(StructTypes stypes, SymbolTable stable)
     {
 
     	try { DebugEnterRule(GrammarFileName, "functions");
-    	DebugLocation(114, 1);
+    	DebugLocation(116, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:115:2: ( ^( FUNCS ( function[stypes, stable] )* ) )
+    		// GenericEvilTreeParser.g:117:2: ( ^( FUNCS ( function[stypes, stable] )* ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:115:4: ^( FUNCS ( function[stypes, stable] )* )
+    		// GenericEvilTreeParser.g:117:4: ^( FUNCS ( function[stypes, stable] )* )
     		{
-    		DebugLocation(115, 4);
-    		DebugLocation(115, 6);
-    		Match(input,FUNCS,Follow._FUNCS_in_functions395); 
+    		DebugLocation(117, 4);
+    		DebugLocation(117, 6);
+    		Match(input,FUNCS,Follow._FUNCS_in_functions401); 
 
     		if (input.LA(1) == TokenTypes.Down)
     		{
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(115, 12);
-    			// GenericEvilTreeParser.g:115:12: ( function[stypes, stable] )*
+    			DebugLocation(117, 12);
+    			// GenericEvilTreeParser.g:117:12: ( function[stypes, stable] )*
     			try { DebugEnterSubRule(8);
     			while (true)
     			{
@@ -1091,10 +1093,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// GenericEvilTreeParser.g:115:12: function[stypes, stable]
+    					// GenericEvilTreeParser.g:117:12: function[stypes, stable]
     					{
-    					DebugLocation(115, 12);
-    					PushFollow(Follow._function_in_functions397);
+    					DebugLocation(117, 12);
+    					PushFollow(Follow._function_in_functions403);
     					function(stypes, stable);
     					PopFollow();
 
@@ -1127,7 +1129,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(116, 1);
+     	DebugLocation(118, 1);
     	} finally { DebugExitRule(GrammarFileName, "functions"); }
     	return;
 
@@ -1139,7 +1141,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_function() {}
 
     // $ANTLR start "function"
-    // GenericEvilTreeParser.g:118:1: function[StructTypes stypes,SymbolTable globalStable] : ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] ) ;
+    // GenericEvilTreeParser.g:120:1: function[StructTypes stypes,SymbolTable globalStable] : ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] ) ;
     [GrammarRule("function")]
     private void function(StructTypes stypes, SymbolTable globalStable)
     {
@@ -1150,43 +1152,43 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 
         SymbolTable myStable = new SymbolTable(globalStable); List<Type> sparams = new List<Type>(); 
     	try { DebugEnterRule(GrammarFileName, "function");
-    	DebugLocation(118, 1);
+    	DebugLocation(120, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:120:2: ( ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] ) )
+    		// GenericEvilTreeParser.g:122:2: ( ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:120:4: ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] )
+    		// GenericEvilTreeParser.g:122:4: ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] )
     		{
-    		DebugLocation(120, 4);
-    		DebugLocation(120, 6);
-    		Match(input,FUN,Follow._FUN_in_function419); 
+    		DebugLocation(122, 4);
+    		DebugLocation(122, 6);
+    		Match(input,FUN,Follow._FUN_in_function425); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(120, 12);
-    		id=(CommonTree)Match(input,ID,Follow._ID_in_function423); 
-    		DebugLocation(120, 17);
-    		PushFollow(Follow._parameters_in_function427);
+    		DebugLocation(122, 12);
+    		id=(CommonTree)Match(input,ID,Follow._ID_in_function429); 
+    		DebugLocation(122, 17);
+    		PushFollow(Follow._parameters_in_function433);
     		parameters(stypes, myStable, sparams);
     		PopFollow();
 
-    		DebugLocation(120, 56);
-    		DebugLocation(120, 58);
-    		Match(input,RETTYPE,Follow._RETTYPE_in_function431); 
+    		DebugLocation(122, 56);
+    		DebugLocation(122, 58);
+    		Match(input,RETTYPE,Follow._RETTYPE_in_function437); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(120, 67);
-    		PushFollow(Follow._return_type_in_function435);
+    		DebugLocation(122, 67);
+    		PushFollow(Follow._return_type_in_function441);
     		r=return_type(stypes);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(120, 90);
-    		PushFollow(Follow._declarations_in_function441);
+    		DebugLocation(122, 90);
+    		PushFollow(Follow._declarations_in_function447);
     		declarations(stypes, myStable);
     		PopFollow();
 
-    		DebugLocation(121, 2);
+    		DebugLocation(123, 2);
 
     				if (globalStable.redef((id!=null?id.Text:null)))
     				{
@@ -1195,14 +1197,14 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     				globalStable.put((id!=null?id.Text:null), Type.funType(sparams, r));
     				myStable.returnType = r;
     			
-    		DebugLocation(128, 5);
-    		PushFollow(Follow._statement_list_in_function449);
+    		DebugLocation(130, 5);
+    		PushFollow(Follow._statement_list_in_function455);
     		s=statement_list(stypes, myStable);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(129, 2);
+    		DebugLocation(131, 2);
 
     				if (!s && !r.isVoid())
     					error((id!=null?id.Line:0), "function '" + (id!=null?id.Text:null) + "' does not return");
@@ -1219,7 +1221,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(133, 1);
+     	DebugLocation(135, 1);
     	} finally { DebugExitRule(GrammarFileName, "function"); }
     	return;
 
@@ -1231,28 +1233,28 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_parameters() {}
 
     // $ANTLR start "parameters"
-    // GenericEvilTreeParser.g:135:1: parameters[StructTypes stypes,SymbolTable stable, List<Type> sparams] : ^( PARAMS ( param_decl[stypes, stable, sparams] )* ) ;
+    // GenericEvilTreeParser.g:137:1: parameters[StructTypes stypes,SymbolTable stable, List<Type> sparams] : ^( PARAMS ( param_decl[stypes, stable, sparams] )* ) ;
     [GrammarRule("parameters")]
     private void parameters(StructTypes stypes, SymbolTable stable, List<Type> sparams)
     {
 
     	try { DebugEnterRule(GrammarFileName, "parameters");
-    	DebugLocation(135, 1);
+    	DebugLocation(137, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:136:2: ( ^( PARAMS ( param_decl[stypes, stable, sparams] )* ) )
+    		// GenericEvilTreeParser.g:138:2: ( ^( PARAMS ( param_decl[stypes, stable, sparams] )* ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:136:4: ^( PARAMS ( param_decl[stypes, stable, sparams] )* )
+    		// GenericEvilTreeParser.g:138:4: ^( PARAMS ( param_decl[stypes, stable, sparams] )* )
     		{
-    		DebugLocation(136, 4);
-    		DebugLocation(136, 6);
-    		Match(input,PARAMS,Follow._PARAMS_in_parameters468); 
+    		DebugLocation(138, 4);
+    		DebugLocation(138, 6);
+    		Match(input,PARAMS,Follow._PARAMS_in_parameters474); 
 
     		if (input.LA(1) == TokenTypes.Down)
     		{
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(136, 13);
-    			// GenericEvilTreeParser.g:136:13: ( param_decl[stypes, stable, sparams] )*
+    			DebugLocation(138, 13);
+    			// GenericEvilTreeParser.g:138:13: ( param_decl[stypes, stable, sparams] )*
     			try { DebugEnterSubRule(9);
     			while (true)
     			{
@@ -1271,10 +1273,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// GenericEvilTreeParser.g:136:13: param_decl[stypes, stable, sparams]
+    					// GenericEvilTreeParser.g:138:13: param_decl[stypes, stable, sparams]
     					{
-    					DebugLocation(136, 13);
-    					PushFollow(Follow._param_decl_in_parameters470);
+    					DebugLocation(138, 13);
+    					PushFollow(Follow._param_decl_in_parameters476);
     					param_decl(stypes, stable, sparams);
     					PopFollow();
 
@@ -1307,7 +1309,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(137, 1);
+     	DebugLocation(139, 1);
     	} finally { DebugExitRule(GrammarFileName, "parameters"); }
     	return;
 
@@ -1319,7 +1321,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_param_decl() {}
 
     // $ANTLR start "param_decl"
-    // GenericEvilTreeParser.g:139:1: param_decl[StructTypes stypes, SymbolTable stable, List<Type> sparams] : ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) ;
+    // GenericEvilTreeParser.g:141:1: param_decl[StructTypes stypes, SymbolTable stable, List<Type> sparams] : ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) ;
     [GrammarRule("param_decl")]
     private void param_decl(StructTypes stypes, SymbolTable stable, List<Type> sparams)
     {
@@ -1328,35 +1330,35 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         Type tt = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "param_decl");
-    	DebugLocation(139, 3);
+    	DebugLocation(141, 3);
     	try
     	{
-    		// GenericEvilTreeParser.g:140:4: ( ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) )
+    		// GenericEvilTreeParser.g:142:4: ( ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:140:7: ^( DECL ^( TYPE tt= type[stypes] ) id= ID )
+    		// GenericEvilTreeParser.g:142:7: ^( DECL ^( TYPE tt= type[stypes] ) id= ID )
     		{
-    		DebugLocation(140, 7);
-    		DebugLocation(140, 9);
-    		Match(input,DECL,Follow._DECL_in_param_decl490); 
+    		DebugLocation(142, 7);
+    		DebugLocation(142, 9);
+    		Match(input,DECL,Follow._DECL_in_param_decl496); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(140, 14);
-    		DebugLocation(140, 16);
-    		Match(input,TYPE,Follow._TYPE_in_param_decl493); 
+    		DebugLocation(142, 14);
+    		DebugLocation(142, 16);
+    		Match(input,TYPE,Follow._TYPE_in_param_decl499); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(140, 23);
-    		PushFollow(Follow._type_in_param_decl497);
+    		DebugLocation(142, 23);
+    		PushFollow(Follow._type_in_param_decl503);
     		tt=type(stypes);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(140, 40);
-    		id=(CommonTree)Match(input,ID,Follow._ID_in_param_decl503); 
+    		DebugLocation(142, 40);
+    		id=(CommonTree)Match(input,ID,Follow._ID_in_param_decl509); 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(141, 3);
+    		DebugLocation(143, 3);
 
     		  	if (stable.redef((id!=null?id.Text:null)))
     		  	{
@@ -1377,7 +1379,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(149, 3);
+     	DebugLocation(151, 3);
     	} finally { DebugExitRule(GrammarFileName, "param_decl"); }
     	return;
 
@@ -1389,7 +1391,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_return_type() {}
 
     // $ANTLR start "return_type"
-    // GenericEvilTreeParser.g:151:1: return_type[StructTypes stypes] returns [Type retT = null] : (t= type[stypes] | VOID );
+    // GenericEvilTreeParser.g:153:1: return_type[StructTypes stypes] returns [Type retT = null] : (t= type[stypes] | VOID );
     [GrammarRule("return_type")]
     private Type return_type(StructTypes stypes)
     {
@@ -1399,10 +1401,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         Type t = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "return_type");
-    	DebugLocation(151, 1);
+    	DebugLocation(153, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:152:2: (t= type[stypes] | VOID )
+    		// GenericEvilTreeParser.g:154:2: (t= type[stypes] | VOID )
     		int alt10=2;
     		try { DebugEnterDecision(10, decisionCanBacktrack[10]);
     		int LA10_0 = input.LA(1);
@@ -1427,25 +1429,25 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:152:4: t= type[stypes]
+    			// GenericEvilTreeParser.g:154:4: t= type[stypes]
     			{
-    			DebugLocation(152, 5);
-    			PushFollow(Follow._type_in_return_type528);
+    			DebugLocation(154, 5);
+    			PushFollow(Follow._type_in_return_type534);
     			t=type(stypes);
     			PopFollow();
 
-    			DebugLocation(152, 18);
+    			DebugLocation(154, 18);
     			retT = t;
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:153:4: VOID
+    			// GenericEvilTreeParser.g:155:4: VOID
     			{
-    			DebugLocation(153, 4);
-    			Match(input,VOID,Follow._VOID_in_return_type536); 
-    			DebugLocation(153, 9);
+    			DebugLocation(155, 4);
+    			Match(input,VOID,Follow._VOID_in_return_type542); 
+    			DebugLocation(155, 9);
     			retT = Type.voidType(); 
 
     			}
@@ -1461,7 +1463,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(154, 1);
+     	DebugLocation(156, 1);
     	} finally { DebugExitRule(GrammarFileName, "return_type"); }
     	return retT;
 
@@ -1473,7 +1475,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_statement() {}
 
     // $ANTLR start "statement"
-    // GenericEvilTreeParser.g:156:1: statement[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : (s= block[stypes,stable] | s= assignment[stypes,stable] | s= print[stypes,stable] | s= read[stypes,stable] | s= conditional[stypes,stable] | s= loop[stypes,stable] | s= delete[stypes,stable] | s= ret[stypes,stable] | s= invocation[stypes,stable] );
+    // GenericEvilTreeParser.g:158:1: statement[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : (s= block[stypes,stable] | s= assignment[stypes,stable] | s= print[stypes,stable] | s= read[stypes,stable] | s= conditional[stypes,stable] | s= loop[stypes,stable] | s= delete[stypes,stable] | s= ret[stypes,stable] | s= invocation[stypes,stable] );
     [GrammarRule("statement")]
     private bool statement(StructTypes stypes, SymbolTable stable)
     {
@@ -1483,10 +1485,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         bool s = default(bool);
 
     	try { DebugEnterRule(GrammarFileName, "statement");
-    	DebugLocation(156, 1);
+    	DebugLocation(158, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:157:2: (s= block[stypes,stable] | s= assignment[stypes,stable] | s= print[stypes,stable] | s= read[stypes,stable] | s= conditional[stypes,stable] | s= loop[stypes,stable] | s= delete[stypes,stable] | s= ret[stypes,stable] | s= invocation[stypes,stable] )
+    		// GenericEvilTreeParser.g:159:2: (s= block[stypes,stable] | s= assignment[stypes,stable] | s= print[stypes,stable] | s= read[stypes,stable] | s= conditional[stypes,stable] | s= loop[stypes,stable] | s= delete[stypes,stable] | s= ret[stypes,stable] | s= invocation[stypes,stable] )
     		int alt11=9;
     		try { DebugEnterDecision(11, decisionCanBacktrack[11]);
     		switch (input.LA(1))
@@ -1550,39 +1552,11 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:157:4: s= block[stypes,stable]
-    			{
-    			DebugLocation(157, 5);
-    			PushFollow(Follow._block_in_statement556);
-    			s=block(stypes, stable);
-    			PopFollow();
-
-    			DebugLocation(157, 27);
-    			 doesRet = s; 
-
-    			}
-    			break;
-    		case 2:
-    			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:158:4: s= assignment[stypes,stable]
-    			{
-    			DebugLocation(158, 5);
-    			PushFollow(Follow._assignment_in_statement566);
-    			s=assignment(stypes, stable);
-    			PopFollow();
-
-    			DebugLocation(158, 32);
-    			 doesRet = s; 
-
-    			}
-    			break;
-    		case 3:
-    			DebugEnterAlt(3);
-    			// GenericEvilTreeParser.g:159:4: s= print[stypes,stable]
+    			// GenericEvilTreeParser.g:159:4: s= block[stypes,stable]
     			{
     			DebugLocation(159, 5);
-    			PushFollow(Follow._print_in_statement576);
-    			s=print(stypes, stable);
+    			PushFollow(Follow._block_in_statement562);
+    			s=block(stypes, stable);
     			PopFollow();
 
     			DebugLocation(159, 27);
@@ -1590,41 +1564,41 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 
     			}
     			break;
-    		case 4:
-    			DebugEnterAlt(4);
-    			// GenericEvilTreeParser.g:160:4: s= read[stypes,stable]
+    		case 2:
+    			DebugEnterAlt(2);
+    			// GenericEvilTreeParser.g:160:4: s= assignment[stypes,stable]
     			{
     			DebugLocation(160, 5);
-    			PushFollow(Follow._read_in_statement586);
-    			s=read(stypes, stable);
+    			PushFollow(Follow._assignment_in_statement572);
+    			s=assignment(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(160, 26);
+    			DebugLocation(160, 32);
     			 doesRet = s; 
 
     			}
     			break;
-    		case 5:
-    			DebugEnterAlt(5);
-    			// GenericEvilTreeParser.g:161:4: s= conditional[stypes,stable]
+    		case 3:
+    			DebugEnterAlt(3);
+    			// GenericEvilTreeParser.g:161:4: s= print[stypes,stable]
     			{
     			DebugLocation(161, 5);
-    			PushFollow(Follow._conditional_in_statement596);
-    			s=conditional(stypes, stable);
+    			PushFollow(Follow._print_in_statement582);
+    			s=print(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(161, 33);
+    			DebugLocation(161, 27);
     			 doesRet = s; 
 
     			}
     			break;
-    		case 6:
-    			DebugEnterAlt(6);
-    			// GenericEvilTreeParser.g:162:4: s= loop[stypes,stable]
+    		case 4:
+    			DebugEnterAlt(4);
+    			// GenericEvilTreeParser.g:162:4: s= read[stypes,stable]
     			{
     			DebugLocation(162, 5);
-    			PushFollow(Follow._loop_in_statement606);
-    			s=loop(stypes, stable);
+    			PushFollow(Follow._read_in_statement592);
+    			s=read(stypes, stable);
     			PopFollow();
 
     			DebugLocation(162, 26);
@@ -1632,44 +1606,72 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 
     			}
     			break;
-    		case 7:
-    			DebugEnterAlt(7);
-    			// GenericEvilTreeParser.g:163:4: s= delete[stypes,stable]
+    		case 5:
+    			DebugEnterAlt(5);
+    			// GenericEvilTreeParser.g:163:4: s= conditional[stypes,stable]
     			{
     			DebugLocation(163, 5);
-    			PushFollow(Follow._delete_in_statement616);
+    			PushFollow(Follow._conditional_in_statement602);
+    			s=conditional(stypes, stable);
+    			PopFollow();
+
+    			DebugLocation(163, 33);
+    			 doesRet = s; 
+
+    			}
+    			break;
+    		case 6:
+    			DebugEnterAlt(6);
+    			// GenericEvilTreeParser.g:164:4: s= loop[stypes,stable]
+    			{
+    			DebugLocation(164, 5);
+    			PushFollow(Follow._loop_in_statement612);
+    			s=loop(stypes, stable);
+    			PopFollow();
+
+    			DebugLocation(164, 26);
+    			 doesRet = s; 
+
+    			}
+    			break;
+    		case 7:
+    			DebugEnterAlt(7);
+    			// GenericEvilTreeParser.g:165:4: s= delete[stypes,stable]
+    			{
+    			DebugLocation(165, 5);
+    			PushFollow(Follow._delete_in_statement622);
     			s=delete(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(163, 28);
+    			DebugLocation(165, 28);
     			 doesRet = s; 
 
     			}
     			break;
     		case 8:
     			DebugEnterAlt(8);
-    			// GenericEvilTreeParser.g:164:4: s= ret[stypes,stable]
+    			// GenericEvilTreeParser.g:166:4: s= ret[stypes,stable]
     			{
-    			DebugLocation(164, 5);
-    			PushFollow(Follow._ret_in_statement626);
+    			DebugLocation(166, 5);
+    			PushFollow(Follow._ret_in_statement632);
     			s=ret(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(164, 25);
+    			DebugLocation(166, 25);
     			 doesRet = s; 
 
     			}
     			break;
     		case 9:
     			DebugEnterAlt(9);
-    			// GenericEvilTreeParser.g:165:4: s= invocation[stypes,stable]
+    			// GenericEvilTreeParser.g:167:4: s= invocation[stypes,stable]
     			{
-    			DebugLocation(165, 5);
-    			PushFollow(Follow._invocation_in_statement636);
+    			DebugLocation(167, 5);
+    			PushFollow(Follow._invocation_in_statement642);
     			s=invocation(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(165, 32);
+    			DebugLocation(167, 32);
     			 doesRet = s; 
 
     			}
@@ -1685,7 +1687,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(166, 1);
+     	DebugLocation(168, 1);
     	} finally { DebugExitRule(GrammarFileName, "statement"); }
     	return doesRet;
 
@@ -1697,7 +1699,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_block() {}
 
     // $ANTLR start "block"
-    // GenericEvilTreeParser.g:168:1: block[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( BLOCK s= statement_list[stypes,stable] ) ;
+    // GenericEvilTreeParser.g:170:1: block[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( BLOCK s= statement_list[stypes,stable] ) ;
     [GrammarRule("block")]
     private bool block(StructTypes stypes, SymbolTable stable)
     {
@@ -1707,26 +1709,26 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         bool s = default(bool);
 
     	try { DebugEnterRule(GrammarFileName, "block");
-    	DebugLocation(168, 1);
+    	DebugLocation(170, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:169:2: ( ^( BLOCK s= statement_list[stypes,stable] ) )
+    		// GenericEvilTreeParser.g:171:2: ( ^( BLOCK s= statement_list[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:169:4: ^( BLOCK s= statement_list[stypes,stable] )
+    		// GenericEvilTreeParser.g:171:4: ^( BLOCK s= statement_list[stypes,stable] )
     		{
-    		DebugLocation(169, 4);
-    		DebugLocation(169, 6);
-    		Match(input,BLOCK,Follow._BLOCK_in_block656); 
+    		DebugLocation(171, 4);
+    		DebugLocation(171, 6);
+    		Match(input,BLOCK,Follow._BLOCK_in_block662); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(169, 13);
-    		PushFollow(Follow._statement_list_in_block660);
+    		DebugLocation(171, 13);
+    		PushFollow(Follow._statement_list_in_block666);
     		s=statement_list(stypes, stable);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(169, 45);
+    		DebugLocation(171, 45);
     		 doesRet = s; 
 
     		}
@@ -1740,7 +1742,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(170, 1);
+     	DebugLocation(172, 1);
     	} finally { DebugExitRule(GrammarFileName, "block"); }
     	return doesRet;
 
@@ -1752,7 +1754,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_statement_list() {}
 
     // $ANTLR start "statement_list"
-    // GenericEvilTreeParser.g:172:1: statement_list[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( STMTS (s= statement[stypes,stable] )* ) ;
+    // GenericEvilTreeParser.g:174:1: statement_list[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( STMTS (s= statement[stypes,stable] )* ) ;
     [GrammarRule("statement_list")]
     private bool statement_list(StructTypes stypes, SymbolTable stable)
     {
@@ -1762,22 +1764,22 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         bool s = default(bool);
 
     	try { DebugEnterRule(GrammarFileName, "statement_list");
-    	DebugLocation(172, 1);
+    	DebugLocation(174, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:173:2: ( ^( STMTS (s= statement[stypes,stable] )* ) )
+    		// GenericEvilTreeParser.g:175:2: ( ^( STMTS (s= statement[stypes,stable] )* ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:173:4: ^( STMTS (s= statement[stypes,stable] )* )
+    		// GenericEvilTreeParser.g:175:4: ^( STMTS (s= statement[stypes,stable] )* )
     		{
-    		DebugLocation(173, 4);
-    		DebugLocation(173, 6);
-    		Match(input,STMTS,Follow._STMTS_in_statement_list681); 
+    		DebugLocation(175, 4);
+    		DebugLocation(175, 6);
+    		Match(input,STMTS,Follow._STMTS_in_statement_list687); 
 
     		if (input.LA(1) == TokenTypes.Down)
     		{
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(173, 12);
-    			// GenericEvilTreeParser.g:173:12: (s= statement[stypes,stable] )*
+    			DebugLocation(175, 12);
+    			// GenericEvilTreeParser.g:175:12: (s= statement[stypes,stable] )*
     			try { DebugEnterSubRule(12);
     			while (true)
     			{
@@ -1796,14 +1798,14 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// GenericEvilTreeParser.g:173:13: s= statement[stypes,stable]
+    					// GenericEvilTreeParser.g:175:13: s= statement[stypes,stable]
     					{
-    					DebugLocation(173, 14);
-    					PushFollow(Follow._statement_in_statement_list686);
+    					DebugLocation(175, 14);
+    					PushFollow(Follow._statement_in_statement_list692);
     					s=statement(stypes, stable);
     					PopFollow();
 
-    					DebugLocation(174, 3);
+    					DebugLocation(176, 3);
 
     								if (s)
     									doesRet = true;
@@ -1837,7 +1839,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(179, 1);
+     	DebugLocation(181, 1);
     	} finally { DebugExitRule(GrammarFileName, "statement_list"); }
     	return doesRet;
 
@@ -1849,7 +1851,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_assignment() {}
 
     // $ANTLR start "assignment"
-    // GenericEvilTreeParser.g:181:1: assignment[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] ) ;
+    // GenericEvilTreeParser.g:183:1: assignment[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] ) ;
     [GrammarRule("assignment")]
     private bool assignment(StructTypes stypes, SymbolTable stable)
     {
@@ -1857,25 +1859,25 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         bool doesRet =  false;
 
     	try { DebugEnterRule(GrammarFileName, "assignment");
-    	DebugLocation(181, 1);
+    	DebugLocation(183, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:182:2: ( ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] ) )
+    		// GenericEvilTreeParser.g:184:2: ( ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:182:4: ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] )
+    		// GenericEvilTreeParser.g:184:4: ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] )
     		{
-    		DebugLocation(182, 4);
-    		DebugLocation(182, 6);
-    		Match(input,ASSIGN,Follow._ASSIGN_in_assignment713); 
+    		DebugLocation(184, 4);
+    		DebugLocation(184, 6);
+    		Match(input,ASSIGN,Follow._ASSIGN_in_assignment719); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(182, 13);
-    		PushFollow(Follow._expression_in_assignment715);
+    		DebugLocation(184, 13);
+    		PushFollow(Follow._expression_in_assignment721);
     		expression(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(182, 39);
-    		PushFollow(Follow._lvalue_in_assignment718);
+    		DebugLocation(184, 39);
+    		PushFollow(Follow._lvalue_in_assignment724);
     		lvalue(stypes, stable);
     		PopFollow();
 
@@ -1893,7 +1895,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(183, 1);
+     	DebugLocation(185, 1);
     	} finally { DebugExitRule(GrammarFileName, "assignment"); }
     	return doesRet;
 
@@ -1905,7 +1907,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_print() {}
 
     // $ANTLR start "print"
-    // GenericEvilTreeParser.g:185:1: print[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( PRINT expression[stypes,stable] ( ENDL )? ) ;
+    // GenericEvilTreeParser.g:187:1: print[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( PRINT expression[stypes,stable] ( ENDL )? ) ;
     [GrammarRule("print")]
     private bool print(StructTypes stypes, SymbolTable stable)
     {
@@ -1913,25 +1915,25 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         bool doesRet =  false;
 
     	try { DebugEnterRule(GrammarFileName, "print");
-    	DebugLocation(185, 1);
+    	DebugLocation(187, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:186:2: ( ^( PRINT expression[stypes,stable] ( ENDL )? ) )
+    		// GenericEvilTreeParser.g:188:2: ( ^( PRINT expression[stypes,stable] ( ENDL )? ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:186:4: ^( PRINT expression[stypes,stable] ( ENDL )? )
+    		// GenericEvilTreeParser.g:188:4: ^( PRINT expression[stypes,stable] ( ENDL )? )
     		{
-    		DebugLocation(186, 4);
-    		DebugLocation(186, 6);
-    		Match(input,PRINT,Follow._PRINT_in_print737); 
+    		DebugLocation(188, 4);
+    		DebugLocation(188, 6);
+    		Match(input,PRINT,Follow._PRINT_in_print743); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(186, 12);
-    		PushFollow(Follow._expression_in_print739);
+    		DebugLocation(188, 12);
+    		PushFollow(Follow._expression_in_print745);
     		expression(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(186, 38);
-    		// GenericEvilTreeParser.g:186:38: ( ENDL )?
+    		DebugLocation(188, 38);
+    		// GenericEvilTreeParser.g:188:38: ( ENDL )?
     		int alt13=2;
     		try { DebugEnterSubRule(13);
     		try { DebugEnterDecision(13, decisionCanBacktrack[13]);
@@ -1946,10 +1948,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:186:39: ENDL
+    			// GenericEvilTreeParser.g:188:39: ENDL
     			{
-    			DebugLocation(186, 39);
-    			Match(input,ENDL,Follow._ENDL_in_print743); 
+    			DebugLocation(188, 39);
+    			Match(input,ENDL,Follow._ENDL_in_print749); 
 
     			}
     			break;
@@ -1971,7 +1973,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(187, 1);
+     	DebugLocation(189, 1);
     	} finally { DebugExitRule(GrammarFileName, "print"); }
     	return doesRet;
 
@@ -1983,7 +1985,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_read() {}
 
     // $ANTLR start "read"
-    // GenericEvilTreeParser.g:189:1: read[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( READ lvalue[stypes,stable] ) ;
+    // GenericEvilTreeParser.g:191:1: read[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( READ lvalue[stypes,stable] ) ;
     [GrammarRule("read")]
     private bool read(StructTypes stypes, SymbolTable stable)
     {
@@ -1991,20 +1993,20 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         bool doesRet =  false;
 
     	try { DebugEnterRule(GrammarFileName, "read");
-    	DebugLocation(189, 1);
+    	DebugLocation(191, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:190:2: ( ^( READ lvalue[stypes,stable] ) )
+    		// GenericEvilTreeParser.g:192:2: ( ^( READ lvalue[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:190:4: ^( READ lvalue[stypes,stable] )
+    		// GenericEvilTreeParser.g:192:4: ^( READ lvalue[stypes,stable] )
     		{
-    		DebugLocation(190, 4);
-    		DebugLocation(190, 6);
-    		Match(input,READ,Follow._READ_in_read763); 
+    		DebugLocation(192, 4);
+    		DebugLocation(192, 6);
+    		Match(input,READ,Follow._READ_in_read769); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(190, 11);
-    		PushFollow(Follow._lvalue_in_read765);
+    		DebugLocation(192, 11);
+    		PushFollow(Follow._lvalue_in_read771);
     		lvalue(stypes, stable);
     		PopFollow();
 
@@ -2022,7 +2024,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(191, 1);
+     	DebugLocation(193, 1);
     	} finally { DebugExitRule(GrammarFileName, "read"); }
     	return doesRet;
 
@@ -2034,7 +2036,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_conditional() {}
 
     // $ANTLR start "conditional"
-    // GenericEvilTreeParser.g:193:1: conditional[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? ) ;
+    // GenericEvilTreeParser.g:195:1: conditional[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? ) ;
     [GrammarRule("conditional")]
     private bool conditional(StructTypes stypes, SymbolTable stable)
     {
@@ -2047,30 +2049,30 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         bool b2 = default(bool);
 
     	try { DebugEnterRule(GrammarFileName, "conditional");
-    	DebugLocation(193, 1);
+    	DebugLocation(195, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:194:2: ( ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? ) )
+    		// GenericEvilTreeParser.g:196:2: ( ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:194:4: ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? )
+    		// GenericEvilTreeParser.g:196:4: ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? )
     		{
-    		DebugLocation(194, 4);
-    		DebugLocation(194, 7);
-    		w=(CommonTree)Match(input,IF,Follow._IF_in_conditional786); 
+    		DebugLocation(196, 4);
+    		DebugLocation(196, 7);
+    		w=(CommonTree)Match(input,IF,Follow._IF_in_conditional792); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(194, 12);
-    		PushFollow(Follow._expression_in_conditional790);
+    		DebugLocation(196, 12);
+    		PushFollow(Follow._expression_in_conditional796);
     		e=expression(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(194, 41);
-    		PushFollow(Follow._block_in_conditional795);
+    		DebugLocation(196, 41);
+    		PushFollow(Follow._block_in_conditional801);
     		b1=block(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(194, 63);
-    		// GenericEvilTreeParser.g:194:63: (b2= block[stypes,stable] )?
+    		DebugLocation(196, 63);
+    		// GenericEvilTreeParser.g:196:63: (b2= block[stypes,stable] )?
     		int alt14=2;
     		try { DebugEnterSubRule(14);
     		try { DebugEnterDecision(14, decisionCanBacktrack[14]);
@@ -2085,10 +2087,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:194:64: b2= block[stypes,stable]
+    			// GenericEvilTreeParser.g:196:64: b2= block[stypes,stable]
     			{
-    			DebugLocation(194, 66);
-    			PushFollow(Follow._block_in_conditional801);
+    			DebugLocation(196, 66);
+    			PushFollow(Follow._block_in_conditional807);
     			b2=block(stypes, stable);
     			PopFollow();
 
@@ -2101,7 +2103,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(195, 3);
+    		DebugLocation(197, 3);
 
     					if (!e.isBool())
     					{
@@ -2121,7 +2123,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(202, 1);
+     	DebugLocation(204, 1);
     	} finally { DebugExitRule(GrammarFileName, "conditional"); }
     	return doesRet;
 
@@ -2133,7 +2135,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_loop() {}
 
     // $ANTLR start "loop"
-    // GenericEvilTreeParser.g:204:1: loop[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] ) ;
+    // GenericEvilTreeParser.g:206:1: loop[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] ) ;
     [GrammarRule("loop")]
     private bool loop(StructTypes stypes, SymbolTable stable)
     {
@@ -2145,36 +2147,36 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         bool b = default(bool);
 
     	try { DebugEnterRule(GrammarFileName, "loop");
-    	DebugLocation(204, 1);
+    	DebugLocation(206, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:205:2: ( ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] ) )
+    		// GenericEvilTreeParser.g:207:2: ( ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:205:4: ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] )
+    		// GenericEvilTreeParser.g:207:4: ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] )
     		{
-    		DebugLocation(205, 4);
-    		DebugLocation(205, 7);
-    		w=(CommonTree)Match(input,WHILE,Follow._WHILE_in_loop828); 
+    		DebugLocation(207, 4);
+    		DebugLocation(207, 7);
+    		w=(CommonTree)Match(input,WHILE,Follow._WHILE_in_loop834); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(205, 19);
-    		PushFollow(Follow._expression_in_loop832);
+    		DebugLocation(207, 19);
+    		PushFollow(Follow._expression_in_loop838);
     		guard=expression(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(205, 47);
-    		PushFollow(Follow._block_in_loop837);
+    		DebugLocation(207, 47);
+    		PushFollow(Follow._block_in_loop843);
     		b=block(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(205, 69);
-    		PushFollow(Follow._expression_in_loop840);
+    		DebugLocation(207, 69);
+    		PushFollow(Follow._expression_in_loop846);
     		expression(stypes, stable);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(206, 3);
+    		DebugLocation(208, 3);
 
     					if (!guard.isBool())
     					{
@@ -2193,7 +2195,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(212, 1);
+     	DebugLocation(214, 1);
     	} finally { DebugExitRule(GrammarFileName, "loop"); }
     	return doesRet;
 
@@ -2205,7 +2207,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_delete() {}
 
     // $ANTLR start "delete"
-    // GenericEvilTreeParser.g:214:1: delete[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(d= DELETE e= expression[stypes,stable] ) ;
+    // GenericEvilTreeParser.g:216:1: delete[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(d= DELETE e= expression[stypes,stable] ) ;
     [GrammarRule("delete")]
     private bool delete(StructTypes stypes, SymbolTable stable)
     {
@@ -2216,26 +2218,26 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         Type e = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "delete");
-    	DebugLocation(214, 1);
+    	DebugLocation(216, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:215:2: ( ^(d= DELETE e= expression[stypes,stable] ) )
+    		// GenericEvilTreeParser.g:217:2: ( ^(d= DELETE e= expression[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:215:4: ^(d= DELETE e= expression[stypes,stable] )
+    		// GenericEvilTreeParser.g:217:4: ^(d= DELETE e= expression[stypes,stable] )
     		{
-    		DebugLocation(215, 4);
-    		DebugLocation(215, 7);
-    		d=(CommonTree)Match(input,DELETE,Follow._DELETE_in_delete865); 
+    		DebugLocation(217, 4);
+    		DebugLocation(217, 7);
+    		d=(CommonTree)Match(input,DELETE,Follow._DELETE_in_delete871); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(215, 16);
-    		PushFollow(Follow._expression_in_delete869);
+    		DebugLocation(217, 16);
+    		PushFollow(Follow._expression_in_delete875);
     		e=expression(stypes, stable);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(216, 3);
+    		DebugLocation(218, 3);
 
     					if (!e.isStruct())
     					{
@@ -2254,7 +2256,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(222, 1);
+     	DebugLocation(224, 1);
     	} finally { DebugExitRule(GrammarFileName, "delete"); }
     	return doesRet;
 
@@ -2266,7 +2268,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_ret() {}
 
     // $ANTLR start "ret"
-    // GenericEvilTreeParser.g:224:1: ret[StructTypes stypes,SymbolTable stable] returns [bool doesRet = true] : ^(r= RETURN (e= expression[stypes,stable] )? ) ;
+    // GenericEvilTreeParser.g:226:1: ret[StructTypes stypes,SymbolTable stable] returns [bool doesRet = true] : ^(r= RETURN (e= expression[stypes,stable] )? ) ;
     [GrammarRule("ret")]
     private bool ret(StructTypes stypes, SymbolTable stable)
     {
@@ -2277,22 +2279,22 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         Type e = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "ret");
-    	DebugLocation(224, 1);
+    	DebugLocation(226, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:225:2: ( ^(r= RETURN (e= expression[stypes,stable] )? ) )
+    		// GenericEvilTreeParser.g:227:2: ( ^(r= RETURN (e= expression[stypes,stable] )? ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:225:4: ^(r= RETURN (e= expression[stypes,stable] )? )
+    		// GenericEvilTreeParser.g:227:4: ^(r= RETURN (e= expression[stypes,stable] )? )
     		{
-    		DebugLocation(225, 4);
-    		DebugLocation(225, 7);
-    		r=(CommonTree)Match(input,RETURN,Follow._RETURN_in_ret895); 
+    		DebugLocation(227, 4);
+    		DebugLocation(227, 7);
+    		r=(CommonTree)Match(input,RETURN,Follow._RETURN_in_ret901); 
 
     		if (input.LA(1) == TokenTypes.Down)
     		{
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(225, 15);
-    			// GenericEvilTreeParser.g:225:15: (e= expression[stypes,stable] )?
+    			DebugLocation(227, 15);
+    			// GenericEvilTreeParser.g:227:15: (e= expression[stypes,stable] )?
     			int alt15=2;
     			try { DebugEnterSubRule(15);
     			try { DebugEnterDecision(15, decisionCanBacktrack[15]);
@@ -2307,10 +2309,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// GenericEvilTreeParser.g:225:16: e= expression[stypes,stable]
+    				// GenericEvilTreeParser.g:227:16: e= expression[stypes,stable]
     				{
-    				DebugLocation(225, 17);
-    				PushFollow(Follow._expression_in_ret900);
+    				DebugLocation(227, 17);
+    				PushFollow(Follow._expression_in_ret906);
     				e=expression(stypes, stable);
     				PopFollow();
 
@@ -2324,7 +2326,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 
     			Match(input, TokenTypes.Up, null); 
     		}
-    		DebugLocation(226, 3);
+    		DebugLocation(228, 3);
 
     					if (e==null)
     					{
@@ -2349,7 +2351,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(238, 1);
+     	DebugLocation(240, 1);
     	} finally { DebugExitRule(GrammarFileName, "ret"); }
     	return doesRet;
 
@@ -2361,7 +2363,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_invocation() {}
 
     // $ANTLR start "invocation"
-    // GenericEvilTreeParser.g:240:1: invocation[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( INVOKE id= ID args= arguments[stypes,stable] ) ;
+    // GenericEvilTreeParser.g:242:1: invocation[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( INVOKE id= ID args= arguments[stypes,stable] ) ;
     [GrammarRule("invocation")]
     private bool invocation(StructTypes stypes, SymbolTable stable)
     {
@@ -2372,28 +2374,28 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         List<Type> args = default(List<Type>);
 
     	try { DebugEnterRule(GrammarFileName, "invocation");
-    	DebugLocation(240, 1);
+    	DebugLocation(242, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:241:2: ( ^( INVOKE id= ID args= arguments[stypes,stable] ) )
+    		// GenericEvilTreeParser.g:243:2: ( ^( INVOKE id= ID args= arguments[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:241:4: ^( INVOKE id= ID args= arguments[stypes,stable] )
+    		// GenericEvilTreeParser.g:243:4: ^( INVOKE id= ID args= arguments[stypes,stable] )
     		{
-    		DebugLocation(241, 4);
-    		DebugLocation(241, 6);
-    		Match(input,INVOKE,Follow._INVOKE_in_invocation925); 
+    		DebugLocation(243, 4);
+    		DebugLocation(243, 6);
+    		Match(input,INVOKE,Follow._INVOKE_in_invocation931); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(241, 15);
-    		id=(CommonTree)Match(input,ID,Follow._ID_in_invocation929); 
-    		DebugLocation(241, 23);
-    		PushFollow(Follow._arguments_in_invocation933);
+    		DebugLocation(243, 15);
+    		id=(CommonTree)Match(input,ID,Follow._ID_in_invocation935); 
+    		DebugLocation(243, 23);
+    		PushFollow(Follow._arguments_in_invocation939);
     		args=arguments(stypes, stable);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(241, 50);
+    		DebugLocation(243, 50);
     		 getFun(stable, id,args); 
 
     		}
@@ -2407,7 +2409,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(242, 1);
+     	DebugLocation(244, 1);
     	} finally { DebugExitRule(GrammarFileName, "invocation"); }
     	return doesRet;
 
@@ -2419,7 +2421,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_lvalue() {}
 
     // $ANTLR start "lvalue"
-    // GenericEvilTreeParser.g:244:1: lvalue[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( DOT s= lvalue[stypes,stable] id= ID ) | id= ID );
+    // GenericEvilTreeParser.g:246:1: lvalue[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( DOT s= lvalue[stypes,stable] id= ID ) | id= ID );
     [GrammarRule("lvalue")]
     private Type lvalue(StructTypes stypes, SymbolTable stable)
     {
@@ -2430,10 +2432,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         Type s = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "lvalue");
-    	DebugLocation(244, 1);
+    	DebugLocation(246, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:245:2: ( ^( DOT s= lvalue[stypes,stable] id= ID ) | id= ID )
+    		// GenericEvilTreeParser.g:247:2: ( ^( DOT s= lvalue[stypes,stable] id= ID ) | id= ID )
     		int alt16=2;
     		try { DebugEnterDecision(16, decisionCanBacktrack[16]);
     		int LA16_0 = input.LA(1);
@@ -2458,34 +2460,34 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:245:4: ^( DOT s= lvalue[stypes,stable] id= ID )
+    			// GenericEvilTreeParser.g:247:4: ^( DOT s= lvalue[stypes,stable] id= ID )
     			{
-    			DebugLocation(245, 4);
-    			DebugLocation(245, 6);
-    			Match(input,DOT,Follow._DOT_in_lvalue954); 
+    			DebugLocation(247, 4);
+    			DebugLocation(247, 6);
+    			Match(input,DOT,Follow._DOT_in_lvalue960); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(245, 11);
-    			PushFollow(Follow._lvalue_in_lvalue958);
+    			DebugLocation(247, 11);
+    			PushFollow(Follow._lvalue_in_lvalue964);
     			s=lvalue(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(245, 36);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_lvalue963); 
+    			DebugLocation(247, 36);
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_lvalue969); 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(245, 41);
+    			DebugLocation(247, 41);
     			 t = getFieldType(stypes, s, id); 
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:246:4: id= ID
+    			// GenericEvilTreeParser.g:248:4: id= ID
     			{
-    			DebugLocation(246, 6);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_lvalue973); 
-    			DebugLocation(246, 10);
+    			DebugLocation(248, 6);
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_lvalue979); 
+    			DebugLocation(248, 10);
     			 t = getVar(stable, id); 
 
     			}
@@ -2501,7 +2503,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(247, 1);
+     	DebugLocation(249, 1);
     	} finally { DebugExitRule(GrammarFileName, "lvalue"); }
     	return t;
 
@@ -2513,7 +2515,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_expression() {}
 
     // $ANTLR start "expression"
-    // GenericEvilTreeParser.g:249:1: expression[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NOT e= expression[stypes,stable] ) | ^(a= NEG e= expression[stypes,stable] ) | s= selector[stypes,stable] );
+    // GenericEvilTreeParser.g:251:1: expression[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NOT e= expression[stypes,stable] ) | ^(a= NEG e= expression[stypes,stable] ) | s= selector[stypes,stable] );
     [GrammarRule("expression")]
     private Type expression(StructTypes stypes, SymbolTable stable)
     {
@@ -2527,10 +2529,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         Type s = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "expression");
-    	DebugLocation(249, 1);
+    	DebugLocation(251, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:250:2: ( ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NOT e= expression[stypes,stable] ) | ^(a= NEG e= expression[stypes,stable] ) | s= selector[stypes,stable] )
+    		// GenericEvilTreeParser.g:252:2: ( ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NOT e= expression[stypes,stable] ) | ^(a= NEG e= expression[stypes,stable] ) | s= selector[stypes,stable] )
     		int alt17=15;
     		try { DebugEnterDecision(17, decisionCanBacktrack[17]);
     		switch (input.LA(1))
@@ -2631,176 +2633,124 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:250:4: ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// GenericEvilTreeParser.g:252:4: ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(250, 4);
-    			DebugLocation(250, 7);
-    			a=(CommonTree)Match(input,AND,Follow._AND_in_expression994); 
+    			DebugLocation(252, 4);
+    			DebugLocation(252, 7);
+    			a=(CommonTree)Match(input,AND,Follow._AND_in_expression1000); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(250, 14);
-    			PushFollow(Follow._expression_in_expression998);
+    			DebugLocation(252, 14);
+    			PushFollow(Follow._expression_in_expression1004);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(250, 43);
-    			PushFollow(Follow._expression_in_expression1003);
+    			DebugLocation(252, 43);
+    			PushFollow(Follow._expression_in_expression1009);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(250, 71);
+    			DebugLocation(252, 71);
     			ensureBool((a!=null?a.Line:0), e1, e2); t = Type.boolType();
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:251:4: ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] )
-    			{
-    			DebugLocation(251, 4);
-    			DebugLocation(251, 7);
-    			a=(CommonTree)Match(input,OR,Follow._OR_in_expression1015); 
-
-    			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(251, 13);
-    			PushFollow(Follow._expression_in_expression1019);
-    			e1=expression(stypes, stable);
-    			PopFollow();
-
-    			DebugLocation(251, 42);
-    			PushFollow(Follow._expression_in_expression1024);
-    			e2=expression(stypes, stable);
-    			PopFollow();
-
-
-    			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(251, 70);
-    			ensureBool((a!=null?a.Line:0), e1, e2); t = Type.boolType();
-
-    			}
-    			break;
-    		case 3:
-    			DebugEnterAlt(3);
-    			// GenericEvilTreeParser.g:252:4: ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] )
-    			{
-    			DebugLocation(252, 4);
-    			DebugLocation(252, 7);
-    			a=(CommonTree)Match(input,EQ,Follow._EQ_in_expression1036); 
-
-    			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(252, 13);
-    			PushFollow(Follow._expression_in_expression1040);
-    			e1=expression(stypes, stable);
-    			PopFollow();
-
-    			DebugLocation(252, 42);
-    			PushFollow(Follow._expression_in_expression1045);
-    			e2=expression(stypes, stable);
-    			PopFollow();
-
-
-    			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(252, 70);
-    			ensureStructOrInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
-
-    			}
-    			break;
-    		case 4:
-    			DebugEnterAlt(4);
-    			// GenericEvilTreeParser.g:253:4: ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// GenericEvilTreeParser.g:253:4: ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(253, 4);
     			DebugLocation(253, 7);
-    			a=(CommonTree)Match(input,LT,Follow._LT_in_expression1057); 
+    			a=(CommonTree)Match(input,OR,Follow._OR_in_expression1021); 
 
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(253, 13);
-    			PushFollow(Follow._expression_in_expression1061);
+    			PushFollow(Follow._expression_in_expression1025);
     			e1=expression(stypes, stable);
     			PopFollow();
 
     			DebugLocation(253, 42);
-    			PushFollow(Follow._expression_in_expression1066);
+    			PushFollow(Follow._expression_in_expression1030);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(253, 70);
-    			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
+    			ensureBool((a!=null?a.Line:0), e1, e2); t = Type.boolType();
 
     			}
     			break;
-    		case 5:
-    			DebugEnterAlt(5);
-    			// GenericEvilTreeParser.g:254:4: ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    		case 3:
+    			DebugEnterAlt(3);
+    			// GenericEvilTreeParser.g:254:4: ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(254, 4);
     			DebugLocation(254, 7);
-    			a=(CommonTree)Match(input,GT,Follow._GT_in_expression1078); 
+    			a=(CommonTree)Match(input,EQ,Follow._EQ_in_expression1042); 
 
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(254, 13);
-    			PushFollow(Follow._expression_in_expression1082);
+    			PushFollow(Follow._expression_in_expression1046);
     			e1=expression(stypes, stable);
     			PopFollow();
 
     			DebugLocation(254, 42);
-    			PushFollow(Follow._expression_in_expression1087);
+    			PushFollow(Follow._expression_in_expression1051);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(254, 70);
-    			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
+    			ensureStructOrInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
 
     			}
     			break;
-    		case 6:
-    			DebugEnterAlt(6);
-    			// GenericEvilTreeParser.g:255:4: ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    		case 4:
+    			DebugEnterAlt(4);
+    			// GenericEvilTreeParser.g:255:4: ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(255, 4);
     			DebugLocation(255, 7);
-    			a=(CommonTree)Match(input,NE,Follow._NE_in_expression1099); 
+    			a=(CommonTree)Match(input,LT,Follow._LT_in_expression1063); 
 
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(255, 13);
-    			PushFollow(Follow._expression_in_expression1103);
+    			PushFollow(Follow._expression_in_expression1067);
     			e1=expression(stypes, stable);
     			PopFollow();
 
     			DebugLocation(255, 42);
-    			PushFollow(Follow._expression_in_expression1108);
+    			PushFollow(Follow._expression_in_expression1072);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(255, 70);
-    			ensureStructOrInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
+    			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
 
     			}
     			break;
-    		case 7:
-    			DebugEnterAlt(7);
-    			// GenericEvilTreeParser.g:256:4: ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    		case 5:
+    			DebugEnterAlt(5);
+    			// GenericEvilTreeParser.g:256:4: ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(256, 4);
     			DebugLocation(256, 7);
-    			a=(CommonTree)Match(input,LE,Follow._LE_in_expression1120); 
+    			a=(CommonTree)Match(input,GT,Follow._GT_in_expression1084); 
 
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(256, 13);
-    			PushFollow(Follow._expression_in_expression1124);
+    			PushFollow(Follow._expression_in_expression1088);
     			e1=expression(stypes, stable);
     			PopFollow();
 
     			DebugLocation(256, 42);
-    			PushFollow(Follow._expression_in_expression1129);
+    			PushFollow(Follow._expression_in_expression1093);
     			e2=expression(stypes, stable);
     			PopFollow();
 
@@ -2811,188 +2761,240 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 
     			}
     			break;
-    		case 8:
-    			DebugEnterAlt(8);
-    			// GenericEvilTreeParser.g:257:4: ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    		case 6:
+    			DebugEnterAlt(6);
+    			// GenericEvilTreeParser.g:257:4: ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(257, 4);
     			DebugLocation(257, 7);
-    			a=(CommonTree)Match(input,GE,Follow._GE_in_expression1141); 
+    			a=(CommonTree)Match(input,NE,Follow._NE_in_expression1105); 
 
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(257, 13);
-    			PushFollow(Follow._expression_in_expression1145);
+    			PushFollow(Follow._expression_in_expression1109);
     			e1=expression(stypes, stable);
     			PopFollow();
 
     			DebugLocation(257, 42);
-    			PushFollow(Follow._expression_in_expression1150);
+    			PushFollow(Follow._expression_in_expression1114);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(257, 70);
+    			ensureStructOrInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
+
+    			}
+    			break;
+    		case 7:
+    			DebugEnterAlt(7);
+    			// GenericEvilTreeParser.g:258:4: ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			{
+    			DebugLocation(258, 4);
+    			DebugLocation(258, 7);
+    			a=(CommonTree)Match(input,LE,Follow._LE_in_expression1126); 
+
+    			Match(input, TokenTypes.Down, null); 
+    			DebugLocation(258, 13);
+    			PushFollow(Follow._expression_in_expression1130);
+    			e1=expression(stypes, stable);
+    			PopFollow();
+
+    			DebugLocation(258, 42);
+    			PushFollow(Follow._expression_in_expression1135);
+    			e2=expression(stypes, stable);
+    			PopFollow();
+
+
+    			Match(input, TokenTypes.Up, null); 
+    			DebugLocation(258, 70);
+    			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
+
+    			}
+    			break;
+    		case 8:
+    			DebugEnterAlt(8);
+    			// GenericEvilTreeParser.g:259:4: ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			{
+    			DebugLocation(259, 4);
+    			DebugLocation(259, 7);
+    			a=(CommonTree)Match(input,GE,Follow._GE_in_expression1147); 
+
+    			Match(input, TokenTypes.Down, null); 
+    			DebugLocation(259, 13);
+    			PushFollow(Follow._expression_in_expression1151);
+    			e1=expression(stypes, stable);
+    			PopFollow();
+
+    			DebugLocation(259, 42);
+    			PushFollow(Follow._expression_in_expression1156);
+    			e2=expression(stypes, stable);
+    			PopFollow();
+
+
+    			Match(input, TokenTypes.Up, null); 
+    			DebugLocation(259, 70);
     			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
 
     			}
     			break;
     		case 9:
     			DebugEnterAlt(9);
-    			// GenericEvilTreeParser.g:258:4: ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// GenericEvilTreeParser.g:260:4: ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(258, 4);
-    			DebugLocation(258, 7);
-    			a=(CommonTree)Match(input,PLUS,Follow._PLUS_in_expression1162); 
+    			DebugLocation(260, 4);
+    			DebugLocation(260, 7);
+    			a=(CommonTree)Match(input,PLUS,Follow._PLUS_in_expression1168); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(258, 15);
-    			PushFollow(Follow._expression_in_expression1166);
+    			DebugLocation(260, 15);
+    			PushFollow(Follow._expression_in_expression1172);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(258, 44);
-    			PushFollow(Follow._expression_in_expression1171);
+    			DebugLocation(260, 44);
+    			PushFollow(Follow._expression_in_expression1177);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(258, 72);
+    			DebugLocation(260, 72);
     			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.intType();
 
     			}
     			break;
     		case 10:
     			DebugEnterAlt(10);
-    			// GenericEvilTreeParser.g:259:4: ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// GenericEvilTreeParser.g:261:4: ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(259, 4);
-    			DebugLocation(259, 7);
-    			a=(CommonTree)Match(input,MINUS,Follow._MINUS_in_expression1183); 
+    			DebugLocation(261, 4);
+    			DebugLocation(261, 7);
+    			a=(CommonTree)Match(input,MINUS,Follow._MINUS_in_expression1189); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(259, 16);
-    			PushFollow(Follow._expression_in_expression1187);
+    			DebugLocation(261, 16);
+    			PushFollow(Follow._expression_in_expression1193);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(259, 45);
-    			PushFollow(Follow._expression_in_expression1192);
+    			DebugLocation(261, 45);
+    			PushFollow(Follow._expression_in_expression1198);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(259, 73);
+    			DebugLocation(261, 73);
     			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.intType();
 
     			}
     			break;
     		case 11:
     			DebugEnterAlt(11);
-    			// GenericEvilTreeParser.g:260:4: ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// GenericEvilTreeParser.g:262:4: ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(260, 4);
-    			DebugLocation(260, 7);
-    			a=(CommonTree)Match(input,TIMES,Follow._TIMES_in_expression1204); 
+    			DebugLocation(262, 4);
+    			DebugLocation(262, 7);
+    			a=(CommonTree)Match(input,TIMES,Follow._TIMES_in_expression1210); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(260, 16);
-    			PushFollow(Follow._expression_in_expression1208);
+    			DebugLocation(262, 16);
+    			PushFollow(Follow._expression_in_expression1214);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(260, 45);
-    			PushFollow(Follow._expression_in_expression1213);
+    			DebugLocation(262, 45);
+    			PushFollow(Follow._expression_in_expression1219);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(260, 73);
+    			DebugLocation(262, 73);
     			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.intType();
 
     			}
     			break;
     		case 12:
     			DebugEnterAlt(12);
-    			// GenericEvilTreeParser.g:261:4: ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// GenericEvilTreeParser.g:263:4: ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(261, 4);
-    			DebugLocation(261, 7);
-    			a=(CommonTree)Match(input,DIVIDE,Follow._DIVIDE_in_expression1225); 
+    			DebugLocation(263, 4);
+    			DebugLocation(263, 7);
+    			a=(CommonTree)Match(input,DIVIDE,Follow._DIVIDE_in_expression1231); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(261, 17);
-    			PushFollow(Follow._expression_in_expression1229);
+    			DebugLocation(263, 17);
+    			PushFollow(Follow._expression_in_expression1235);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(261, 46);
-    			PushFollow(Follow._expression_in_expression1234);
+    			DebugLocation(263, 46);
+    			PushFollow(Follow._expression_in_expression1240);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(261, 74);
+    			DebugLocation(263, 74);
     			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.intType();
 
     			}
     			break;
     		case 13:
     			DebugEnterAlt(13);
-    			// GenericEvilTreeParser.g:262:4: ^(a= NOT e= expression[stypes,stable] )
+    			// GenericEvilTreeParser.g:264:4: ^(a= NOT e= expression[stypes,stable] )
     			{
-    			DebugLocation(262, 4);
-    			DebugLocation(262, 7);
-    			a=(CommonTree)Match(input,NOT,Follow._NOT_in_expression1246); 
+    			DebugLocation(264, 4);
+    			DebugLocation(264, 7);
+    			a=(CommonTree)Match(input,NOT,Follow._NOT_in_expression1252); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(262, 13);
-    			PushFollow(Follow._expression_in_expression1250);
+    			DebugLocation(264, 13);
+    			PushFollow(Follow._expression_in_expression1256);
     			e=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(262, 41);
+    			DebugLocation(264, 41);
     			ensureBool((a!=null?a.Line:0), e, Type.boolType()); t = Type.boolType();
 
     			}
     			break;
     		case 14:
     			DebugEnterAlt(14);
-    			// GenericEvilTreeParser.g:263:4: ^(a= NEG e= expression[stypes,stable] )
+    			// GenericEvilTreeParser.g:265:4: ^(a= NEG e= expression[stypes,stable] )
     			{
-    			DebugLocation(263, 4);
-    			DebugLocation(263, 7);
-    			a=(CommonTree)Match(input,NEG,Follow._NEG_in_expression1262); 
+    			DebugLocation(265, 4);
+    			DebugLocation(265, 7);
+    			a=(CommonTree)Match(input,NEG,Follow._NEG_in_expression1268); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(263, 13);
-    			PushFollow(Follow._expression_in_expression1266);
+    			DebugLocation(265, 13);
+    			PushFollow(Follow._expression_in_expression1272);
     			e=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(263, 41);
+    			DebugLocation(265, 41);
     			ensureInt((a!=null?a.Line:0), e, Type.intType()); t = Type.intType();
 
     			}
     			break;
     		case 15:
     			DebugEnterAlt(15);
-    			// GenericEvilTreeParser.g:264:4: s= selector[stypes,stable]
+    			// GenericEvilTreeParser.g:266:4: s= selector[stypes,stable]
     			{
-    			DebugLocation(264, 5);
-    			PushFollow(Follow._selector_in_expression1277);
+    			DebugLocation(266, 5);
+    			PushFollow(Follow._selector_in_expression1283);
     			s=selector(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(264, 30);
+    			DebugLocation(266, 30);
     			 t = s; 
 
     			}
@@ -3008,7 +3010,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(265, 1);
+     	DebugLocation(267, 1);
     	} finally { DebugExitRule(GrammarFileName, "expression"); }
     	return t;
 
@@ -3020,7 +3022,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_selector() {}
 
     // $ANTLR start "selector"
-    // GenericEvilTreeParser.g:267:1: selector[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( DOT s= selector[stypes,stable] id= ID ) | f= factor[stypes,stable] );
+    // GenericEvilTreeParser.g:269:1: selector[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( DOT s= selector[stypes,stable] id= ID ) | f= factor[stypes,stable] );
     [GrammarRule("selector")]
     private Type selector(StructTypes stypes, SymbolTable stable)
     {
@@ -3032,10 +3034,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         Type f = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "selector");
-    	DebugLocation(267, 1);
+    	DebugLocation(269, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:268:2: ( ^( DOT s= selector[stypes,stable] id= ID ) | f= factor[stypes,stable] )
+    		// GenericEvilTreeParser.g:270:2: ( ^( DOT s= selector[stypes,stable] id= ID ) | f= factor[stypes,stable] )
     		int alt18=2;
     		try { DebugEnterDecision(18, decisionCanBacktrack[18]);
     		int LA18_0 = input.LA(1);
@@ -3060,37 +3062,37 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:268:4: ^( DOT s= selector[stypes,stable] id= ID )
+    			// GenericEvilTreeParser.g:270:4: ^( DOT s= selector[stypes,stable] id= ID )
     			{
-    			DebugLocation(268, 4);
-    			DebugLocation(268, 6);
-    			Match(input,DOT,Follow._DOT_in_selector1297); 
+    			DebugLocation(270, 4);
+    			DebugLocation(270, 6);
+    			Match(input,DOT,Follow._DOT_in_selector1303); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(268, 11);
-    			PushFollow(Follow._selector_in_selector1301);
+    			DebugLocation(270, 11);
+    			PushFollow(Follow._selector_in_selector1307);
     			s=selector(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(268, 38);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_selector1306); 
+    			DebugLocation(270, 38);
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_selector1312); 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(268, 43);
+    			DebugLocation(270, 43);
     			 t = getFieldType(stypes, s, id); 
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:269:4: f= factor[stypes,stable]
+    			// GenericEvilTreeParser.g:271:4: f= factor[stypes,stable]
     			{
-    			DebugLocation(269, 5);
-    			PushFollow(Follow._factor_in_selector1316);
+    			DebugLocation(271, 5);
+    			PushFollow(Follow._factor_in_selector1322);
     			f=factor(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(269, 28);
+    			DebugLocation(271, 28);
     			t = f;
 
     			}
@@ -3106,7 +3108,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(270, 1);
+     	DebugLocation(272, 1);
     	} finally { DebugExitRule(GrammarFileName, "selector"); }
     	return t;
 
@@ -3118,7 +3120,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_factor() {}
 
     // $ANTLR start "factor"
-    // GenericEvilTreeParser.g:272:1: factor[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( INVOKE id= ID args= arguments[stypes,stable] ) | id= ID | INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL );
+    // GenericEvilTreeParser.g:274:1: factor[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( INVOKE id= ID args= arguments[stypes,stable] ) | id= ID | INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL );
     [GrammarRule("factor")]
     private Type factor(StructTypes stypes, SymbolTable stable)
     {
@@ -3129,10 +3131,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         List<Type> args = default(List<Type>);
 
     	try { DebugEnterRule(GrammarFileName, "factor");
-    	DebugLocation(272, 1);
+    	DebugLocation(274, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:273:2: ( ^( INVOKE id= ID args= arguments[stypes,stable] ) | id= ID | INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL )
+    		// GenericEvilTreeParser.g:275:2: ( ^( INVOKE id= ID args= arguments[stypes,stable] ) | id= ID | INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL )
     		int alt19=7;
     		try { DebugEnterDecision(19, decisionCanBacktrack[19]);
     		switch (input.LA(1))
@@ -3186,96 +3188,96 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:273:4: ^( INVOKE id= ID args= arguments[stypes,stable] )
+    			// GenericEvilTreeParser.g:275:4: ^( INVOKE id= ID args= arguments[stypes,stable] )
     			{
-    			DebugLocation(273, 4);
-    			DebugLocation(273, 6);
-    			Match(input,INVOKE,Follow._INVOKE_in_factor1336); 
+    			DebugLocation(275, 4);
+    			DebugLocation(275, 6);
+    			Match(input,INVOKE,Follow._INVOKE_in_factor1342); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(273, 15);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1340); 
-    			DebugLocation(273, 23);
-    			PushFollow(Follow._arguments_in_factor1344);
+    			DebugLocation(275, 15);
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1346); 
+    			DebugLocation(275, 23);
+    			PushFollow(Follow._arguments_in_factor1350);
     			args=arguments(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(273, 50);
+    			DebugLocation(275, 50);
     			t = getFun(stable, id,args); 
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:274:4: id= ID
+    			// GenericEvilTreeParser.g:276:4: id= ID
     			{
-    			DebugLocation(274, 6);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1355); 
-    			DebugLocation(274, 10);
+    			DebugLocation(276, 6);
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1361); 
+    			DebugLocation(276, 10);
     			t = getVar(stable, id);
 
     			}
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// GenericEvilTreeParser.g:275:4: INTEGER
+    			// GenericEvilTreeParser.g:277:4: INTEGER
     			{
-    			DebugLocation(275, 4);
-    			Match(input,INTEGER,Follow._INTEGER_in_factor1362); 
-    			DebugLocation(275, 12);
+    			DebugLocation(277, 4);
+    			Match(input,INTEGER,Follow._INTEGER_in_factor1368); 
+    			DebugLocation(277, 12);
     			t = Type.intType();
 
     			}
     			break;
     		case 4:
     			DebugEnterAlt(4);
-    			// GenericEvilTreeParser.g:276:4: TRUE
+    			// GenericEvilTreeParser.g:278:4: TRUE
     			{
-    			DebugLocation(276, 4);
-    			Match(input,TRUE,Follow._TRUE_in_factor1369); 
-    			DebugLocation(276, 9);
+    			DebugLocation(278, 4);
+    			Match(input,TRUE,Follow._TRUE_in_factor1375); 
+    			DebugLocation(278, 9);
     			t = Type.boolType();
 
     			}
     			break;
     		case 5:
     			DebugEnterAlt(5);
-    			// GenericEvilTreeParser.g:277:4: FALSE
+    			// GenericEvilTreeParser.g:279:4: FALSE
     			{
-    			DebugLocation(277, 4);
-    			Match(input,FALSE,Follow._FALSE_in_factor1376); 
-    			DebugLocation(277, 9);
+    			DebugLocation(279, 4);
+    			Match(input,FALSE,Follow._FALSE_in_factor1382); 
+    			DebugLocation(279, 9);
     			t = Type.boolType();
 
     			}
     			break;
     		case 6:
     			DebugEnterAlt(6);
-    			// GenericEvilTreeParser.g:278:4: ^( NEW id= ID )
+    			// GenericEvilTreeParser.g:280:4: ^( NEW id= ID )
     			{
-    			DebugLocation(278, 4);
-    			DebugLocation(278, 6);
-    			Match(input,NEW,Follow._NEW_in_factor1383); 
+    			DebugLocation(280, 4);
+    			DebugLocation(280, 6);
+    			Match(input,NEW,Follow._NEW_in_factor1389); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(278, 12);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1387); 
+    			DebugLocation(280, 12);
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1393); 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(278, 17);
+    			DebugLocation(280, 17);
     			t = getStruct(stypes, id);
 
     			}
     			break;
     		case 7:
     			DebugEnterAlt(7);
-    			// GenericEvilTreeParser.g:279:4: NULL
+    			// GenericEvilTreeParser.g:281:4: NULL
     			{
-    			DebugLocation(279, 4);
-    			Match(input,NULL,Follow._NULL_in_factor1395); 
-    			DebugLocation(279, 9);
+    			DebugLocation(281, 4);
+    			Match(input,NULL,Follow._NULL_in_factor1401); 
+    			DebugLocation(281, 9);
     			t = Type.nullType();
 
     			}
@@ -3291,7 +3293,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(280, 1);
+     	DebugLocation(282, 1);
     	} finally { DebugExitRule(GrammarFileName, "factor"); }
     	return t;
 
@@ -3303,7 +3305,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_arguments() {}
 
     // $ANTLR start "arguments"
-    // GenericEvilTreeParser.g:282:1: arguments[StructTypes stypes,SymbolTable stable] returns [List<Type> ret = null] : args= arg_list[stypes,stable] ;
+    // GenericEvilTreeParser.g:284:1: arguments[StructTypes stypes,SymbolTable stable] returns [List<Type> ret = null] : args= arg_list[stypes,stable] ;
     [GrammarRule("arguments")]
     private List<Type> arguments(StructTypes stypes, SymbolTable stable)
     {
@@ -3313,19 +3315,19 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         List<Type> args = default(List<Type>);
 
     	try { DebugEnterRule(GrammarFileName, "arguments");
-    	DebugLocation(282, 1);
+    	DebugLocation(284, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:283:2: (args= arg_list[stypes,stable] )
+    		// GenericEvilTreeParser.g:285:2: (args= arg_list[stypes,stable] )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:283:4: args= arg_list[stypes,stable]
+    		// GenericEvilTreeParser.g:285:4: args= arg_list[stypes,stable]
     		{
-    		DebugLocation(283, 8);
-    		PushFollow(Follow._arg_list_in_arguments1415);
+    		DebugLocation(285, 8);
+    		PushFollow(Follow._arg_list_in_arguments1421);
     		args=arg_list(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(283, 33);
+    		DebugLocation(285, 33);
     		ret = args; 
 
     		}
@@ -3339,7 +3341,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(284, 1);
+     	DebugLocation(286, 1);
     	} finally { DebugExitRule(GrammarFileName, "arguments"); }
     	return ret;
 
@@ -3351,7 +3353,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_arg_list() {}
 
     // $ANTLR start "arg_list"
-    // GenericEvilTreeParser.g:286:1: arg_list[StructTypes stypes,SymbolTable stable] returns [List<Type> args = new List<Type>()] : ( ^( ARGS (e= expression[stypes,stable] )+ ) | ARGS );
+    // GenericEvilTreeParser.g:288:1: arg_list[StructTypes stypes,SymbolTable stable] returns [List<Type> args = new List<Type>()] : ( ^( ARGS (e= expression[stypes,stable] )+ ) | ARGS );
     [GrammarRule("arg_list")]
     private List<Type> arg_list(StructTypes stypes, SymbolTable stable)
     {
@@ -3361,10 +3363,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
         Type e = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "arg_list");
-    	DebugLocation(286, 1);
+    	DebugLocation(288, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:287:2: ( ^( ARGS (e= expression[stypes,stable] )+ ) | ARGS )
+    		// GenericEvilTreeParser.g:289:2: ( ^( ARGS (e= expression[stypes,stable] )+ ) | ARGS )
     		int alt21=2;
     		try { DebugEnterDecision(21, decisionCanBacktrack[21]);
     		int LA21_0 = input.LA(1);
@@ -3401,15 +3403,15 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:287:4: ^( ARGS (e= expression[stypes,stable] )+ )
+    			// GenericEvilTreeParser.g:289:4: ^( ARGS (e= expression[stypes,stable] )+ )
     			{
-    			DebugLocation(287, 4);
-    			DebugLocation(287, 6);
-    			Match(input,ARGS,Follow._ARGS_in_arg_list1435); 
+    			DebugLocation(289, 4);
+    			DebugLocation(289, 6);
+    			Match(input,ARGS,Follow._ARGS_in_arg_list1441); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(287, 11);
-    			// GenericEvilTreeParser.g:287:11: (e= expression[stypes,stable] )+
+    			DebugLocation(289, 11);
+    			// GenericEvilTreeParser.g:289:11: (e= expression[stypes,stable] )+
     			int cnt20=0;
     			try { DebugEnterSubRule(20);
     			while (true)
@@ -3429,14 +3431,14 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// GenericEvilTreeParser.g:287:12: e= expression[stypes,stable]
+    					// GenericEvilTreeParser.g:289:12: e= expression[stypes,stable]
     					{
-    					DebugLocation(287, 13);
-    					PushFollow(Follow._expression_in_arg_list1440);
+    					DebugLocation(289, 13);
+    					PushFollow(Follow._expression_in_arg_list1446);
     					e=expression(stypes, stable);
     					PopFollow();
 
-    					DebugLocation(287, 39);
+    					DebugLocation(289, 39);
     					args.Add(e);
 
     					}
@@ -3464,10 +3466,10 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:288:4: ARGS
+    			// GenericEvilTreeParser.g:290:4: ARGS
     			{
-    			DebugLocation(288, 4);
-    			Match(input,ARGS,Follow._ARGS_in_arg_list1451); 
+    			DebugLocation(290, 4);
+    			Match(input,ARGS,Follow._ARGS_in_arg_list1457); 
 
     			}
     			break;
@@ -3482,7 +3484,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(289, 1);
+     	DebugLocation(291, 1);
     	} finally { DebugExitRule(GrammarFileName, "arg_list"); }
     	return args;
 
@@ -3492,152 +3494,153 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 	#region Follow sets
 	private static class Follow
 	{
-		public static readonly BitSet _PROGRAM_in_program52 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _types_in_program55 = new BitSet(new ulong[]{0x0000000003000000UL});
-		public static readonly BitSet _declarations_in_program58 = new BitSet(new ulong[]{0x0000000003000000UL});
-		public static readonly BitSet _functions_in_program61 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _TYPES_in_types85 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _types_sub_in_types87 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _TYPES_in_types97 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _STRUCT_in_type_declaration121 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _ID_in_type_declaration126 = new BitSet(new ulong[]{0x0000000004000000UL});
-		public static readonly BitSet _nested_decl_in_type_declaration145 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _field_decl_in_nested_decl179 = new BitSet(new ulong[]{0x0000000004000002UL});
-		public static readonly BitSet _type_declaration_in_types_sub201 = new BitSet(new ulong[]{0x0000000000000010UL});
-		public static readonly BitSet _types_sub_in_types_sub204 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _DECL_in_field_decl232 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _TYPE_in_field_decl235 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _type_in_field_decl239 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _ID_in_field_decl245 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _INT_in_type269 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _BOOL_in_type276 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _STRUCT_in_type284 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _ID_in_type288 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _DECLS_in_declarations305 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _declaration_in_declarations307 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _decl_list_in_declaration327 = new BitSet(new ulong[]{0x0000000008000002UL});
-		public static readonly BitSet _DECLLIST_in_decl_list343 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _TYPE_in_decl_list346 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _type_in_decl_list350 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _id_list_in_decl_list354 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _ID_in_id_list374 = new BitSet(new ulong[]{0x0100000000000002UL});
-		public static readonly BitSet _FUNCS_in_functions395 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _function_in_functions397 = new BitSet(new ulong[]{0x0000000000000088UL});
-		public static readonly BitSet _FUN_in_function419 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _ID_in_function423 = new BitSet(new ulong[]{0x0000000010000000UL});
-		public static readonly BitSet _parameters_in_function427 = new BitSet(new ulong[]{0x0000000020000000UL});
-		public static readonly BitSet _RETTYPE_in_function431 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _return_type_in_function435 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _declarations_in_function441 = new BitSet(new ulong[]{0x0000000080000000UL});
-		public static readonly BitSet _statement_list_in_function449 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _PARAMS_in_parameters468 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _param_decl_in_parameters470 = new BitSet(new ulong[]{0x0000000004000008UL});
-		public static readonly BitSet _DECL_in_param_decl490 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _TYPE_in_param_decl493 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _type_in_param_decl497 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _ID_in_param_decl503 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _type_in_return_type528 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _VOID_in_return_type536 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _block_in_statement556 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _assignment_in_statement566 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _print_in_statement576 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _read_in_statement586 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _conditional_in_statement596 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _loop_in_statement606 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _delete_in_statement616 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _ret_in_statement626 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _invocation_in_statement636 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _BLOCK_in_block656 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _statement_list_in_block660 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _STMTS_in_statement_list681 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _statement_in_statement_list686 = new BitSet(new ulong[]{0x000002014001DA08UL});
-		public static readonly BitSet _ASSIGN_in_assignment713 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_assignment715 = new BitSet(new ulong[]{0x0100040000000000UL});
-		public static readonly BitSet _lvalue_in_assignment718 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _PRINT_in_print737 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_print739 = new BitSet(new ulong[]{0x0000000000000408UL});
-		public static readonly BitSet _ENDL_in_print743 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _READ_in_read763 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _lvalue_in_read765 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _IF_in_conditional786 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_conditional790 = new BitSet(new ulong[]{0x0000000040000000UL});
-		public static readonly BitSet _block_in_conditional795 = new BitSet(new ulong[]{0x0000000040000008UL});
-		public static readonly BitSet _block_in_conditional801 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _WHILE_in_loop828 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_loop832 = new BitSet(new ulong[]{0x0000000040000000UL});
-		public static readonly BitSet _block_in_loop837 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_loop840 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _DELETE_in_delete865 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_delete869 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _RETURN_in_ret895 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_ret900 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _INVOKE_in_invocation925 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _ID_in_invocation929 = new BitSet(new ulong[]{0x0000000200000000UL});
-		public static readonly BitSet _arguments_in_invocation933 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _DOT_in_lvalue954 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _lvalue_in_lvalue958 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_lvalue963 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _ID_in_lvalue973 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _AND_in_expression994 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression998 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1003 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _OR_in_expression1015 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1019 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1024 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _EQ_in_expression1036 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1040 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1045 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _LT_in_expression1057 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1061 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1066 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _GT_in_expression1078 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1082 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1087 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _NE_in_expression1099 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1103 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1108 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _LE_in_expression1120 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1124 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1129 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _GE_in_expression1141 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1145 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1150 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _PLUS_in_expression1162 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1166 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1171 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _MINUS_in_expression1183 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1187 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1192 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _TIMES_in_expression1204 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1208 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1213 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _DIVIDE_in_expression1225 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1229 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1234 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _NOT_in_expression1246 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1250 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _NEG_in_expression1262 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1266 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _selector_in_expression1277 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _DOT_in_selector1297 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _selector_in_selector1301 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_selector1306 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _factor_in_selector1316 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _INVOKE_in_factor1336 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _ID_in_factor1340 = new BitSet(new ulong[]{0x0000000200000000UL});
-		public static readonly BitSet _arguments_in_factor1344 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _ID_in_factor1355 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _INTEGER_in_factor1362 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _TRUE_in_factor1369 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _FALSE_in_factor1376 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _NEW_in_factor1383 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _ID_in_factor1387 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _NULL_in_factor1395 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _arg_list_in_arguments1415 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _ARGS_in_arg_list1435 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_arg_list1440 = new BitSet(new ulong[]{0x03FFFC05001E0008UL});
-		public static readonly BitSet _ARGS_in_arg_list1451 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _PROGRAM_in_program58 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _types_in_program61 = new BitSet(new ulong[]{0x0000000003000000UL});
+		public static readonly BitSet _declarations_in_program64 = new BitSet(new ulong[]{0x0000000003000000UL});
+		public static readonly BitSet _functions_in_program67 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _TYPES_in_types91 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _types_sub_in_types93 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _TYPES_in_types103 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _STRUCT_in_type_declaration127 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _ID_in_type_declaration132 = new BitSet(new ulong[]{0x0000000004000000UL});
+		public static readonly BitSet _nested_decl_in_type_declaration151 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _field_decl_in_nested_decl185 = new BitSet(new ulong[]{0x0000000004000002UL});
+		public static readonly BitSet _type_declaration_in_types_sub207 = new BitSet(new ulong[]{0x0000000000000010UL});
+		public static readonly BitSet _types_sub_in_types_sub210 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _DECL_in_field_decl238 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _TYPE_in_field_decl241 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _type_in_field_decl245 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _ID_in_field_decl251 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _INT_in_type275 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _BOOL_in_type282 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _STRUCT_in_type290 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _ID_in_type294 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _DECLS_in_declarations311 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _declaration_in_declarations313 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _decl_list_in_declaration333 = new BitSet(new ulong[]{0x0000000008000002UL});
+		public static readonly BitSet _DECLLIST_in_decl_list349 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _TYPE_in_decl_list352 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _type_in_decl_list356 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _id_list_in_decl_list360 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _ID_in_id_list380 = new BitSet(new ulong[]{0x0100000000000002UL});
+		public static readonly BitSet _FUNCS_in_functions401 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _function_in_functions403 = new BitSet(new ulong[]{0x0000000000000088UL});
+		public static readonly BitSet _FUN_in_function425 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _ID_in_function429 = new BitSet(new ulong[]{0x0000000010000000UL});
+		public static readonly BitSet _parameters_in_function433 = new BitSet(new ulong[]{0x0000000020000000UL});
+		public static readonly BitSet _RETTYPE_in_function437 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _return_type_in_function441 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _declarations_in_function447 = new BitSet(new ulong[]{0x0000000080000000UL});
+		public static readonly BitSet _statement_list_in_function455 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _PARAMS_in_parameters474 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _param_decl_in_parameters476 = new BitSet(new ulong[]{0x0000000004000008UL});
+		public static readonly BitSet _DECL_in_param_decl496 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _TYPE_in_param_decl499 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _type_in_param_decl503 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _ID_in_param_decl509 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _type_in_return_type534 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _VOID_in_return_type542 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _block_in_statement562 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _assignment_in_statement572 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _print_in_statement582 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _read_in_statement592 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _conditional_in_statement602 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _loop_in_statement612 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _delete_in_statement622 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _ret_in_statement632 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _invocation_in_statement642 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _BLOCK_in_block662 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _statement_list_in_block666 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _STMTS_in_statement_list687 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _statement_in_statement_list692 = new BitSet(new ulong[]{0x000002014001DA08UL});
+		public static readonly BitSet _ASSIGN_in_assignment719 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_assignment721 = new BitSet(new ulong[]{0x0100040000000000UL});
+		public static readonly BitSet _lvalue_in_assignment724 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _PRINT_in_print743 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_print745 = new BitSet(new ulong[]{0x0000000000000408UL});
+		public static readonly BitSet _ENDL_in_print749 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _READ_in_read769 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _lvalue_in_read771 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _IF_in_conditional792 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_conditional796 = new BitSet(new ulong[]{0x0000000040000000UL});
+		public static readonly BitSet _block_in_conditional801 = new BitSet(new ulong[]{0x0000000040000008UL});
+		public static readonly BitSet _block_in_conditional807 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _WHILE_in_loop834 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_loop838 = new BitSet(new ulong[]{0x0000000040000000UL});
+		public static readonly BitSet _block_in_loop843 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_loop846 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _DELETE_in_delete871 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_delete875 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _RETURN_in_ret901 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_ret906 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _INVOKE_in_invocation931 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _ID_in_invocation935 = new BitSet(new ulong[]{0x0000000200000000UL});
+		public static readonly BitSet _arguments_in_invocation939 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _DOT_in_lvalue960 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _lvalue_in_lvalue964 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_lvalue969 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _ID_in_lvalue979 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _AND_in_expression1000 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1004 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1009 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _OR_in_expression1021 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1025 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1030 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _EQ_in_expression1042 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1046 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1051 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _LT_in_expression1063 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1067 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1072 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _GT_in_expression1084 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1088 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1093 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _NE_in_expression1105 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1109 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1114 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _LE_in_expression1126 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1130 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1135 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _GE_in_expression1147 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1151 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1156 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _PLUS_in_expression1168 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1172 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1177 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _MINUS_in_expression1189 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1193 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1198 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _TIMES_in_expression1210 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1214 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1219 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _DIVIDE_in_expression1231 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1235 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1240 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _NOT_in_expression1252 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1256 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _NEG_in_expression1268 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1272 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _selector_in_expression1283 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _DOT_in_selector1303 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _selector_in_selector1307 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_selector1312 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _factor_in_selector1322 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _INVOKE_in_factor1342 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _ID_in_factor1346 = new BitSet(new ulong[]{0x0000000200000000UL});
+		public static readonly BitSet _arguments_in_factor1350 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _ID_in_factor1361 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _INTEGER_in_factor1368 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _TRUE_in_factor1375 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _FALSE_in_factor1382 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _NEW_in_factor1389 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _ID_in_factor1393 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _NULL_in_factor1401 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _arg_list_in_arguments1421 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _ARGS_in_arg_list1441 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_arg_list1446 = new BitSet(new ulong[]{0x03FFFC05001E0008UL});
+		public static readonly BitSet _ARGS_in_arg_list1457 = new BitSet(new ulong[]{0x0000000000000002UL});
 
 	}
 	#endregion Follow sets
+}
 }
