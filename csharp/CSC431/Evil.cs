@@ -110,7 +110,7 @@ public class Evil
             }
             return new EvilLexer(input);
         }
-        catch (System.IO.IOException e)
+        catch (IOException)
         {
             Console.WriteLine("file not found: " + _inputFile);
             Environment.Exit(1);
