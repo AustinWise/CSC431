@@ -4,10 +4,11 @@ using System.Text;
 using Antlr.Runtime;
 using Antlr.Runtime.Tree;
 using System.IO;
+using CSC431.Steps;
 
 namespace CSC431
 {
-    public class Evil
+    public static class Evil
     {
         private static void printError(string msg)
         {
@@ -16,49 +17,18 @@ namespace CSC431
 
         public static void Main(String[] args)
         {
-            args = new[] { "1.ev" };
             parseParameters(args);
 
-            CommonTokenStream tokens = new CommonTokenStream(createLexer());
-            EvilParser parser = new EvilParser(tokens);
-            EvilParser.program_return ret = null;
+            var pipe = CreateLexer
+                .FollowWith(Parse);
 
-            try
-            {
-                ret = parser.Program();
-            }
-            catch (RecognitionException e)
-            {
-                error(e.ToString());
-                return;
-            }
+            if (_displayAST)
+                pipe.FollowWith(PrintAst);
 
-            CommonTree t = (CommonTree)ret.Tree;
-            if (_displayAST && t != null)
-            {
-                DotTreeGenerator gen = new DotTreeGenerator();
-                var st = gen.ToDot(t);
-                Console.WriteLine(st);
-            }
+            pipe.FollowWith(TypeCheck);
 
-            /*
-               create and invoke a tree parser
-          */
-            try
-            {
-                CommonTreeNodeStream nodes = new CommonTreeNodeStream(t);
-                nodes.TokenStream = tokens;
-                GenericEvilTreeParser tparser = new GenericEvilTreeParser(nodes);
 
-                StructTypes stypes = new StructTypes();
-                SymbolTable stable = new SymbolTable();
-
-                tparser.Program(stypes, stable);
-            }
-            catch (RecognitionException e)
-            {
-                error(e.ToString());
-            }
+            Step.DoAll(pipe);
         }
 
         private const String DISPLAYAST = "-displayAST";
@@ -98,7 +68,11 @@ namespace CSC431
             Environment.Exit(1);
         }
 
-        private static EvilLexer createLexer()
+        // -----------------------
+        // STEPS
+        // -----------------------
+
+        private static OutStep<EvilLexer> CreateLexer = new OutStep<EvilLexer>(() =>
         {
             try
             {
@@ -119,6 +93,45 @@ namespace CSC431
                 Environment.Exit(1);
                 return null;
             }
-        }
+        });
+
+        private static InOutStep<EvilLexer, Tuple<CommonTokenStream, CommonTree>> Parse = new InOutStep<EvilLexer, Tuple<CommonTokenStream, CommonTree>>((lexer) =>
+        {
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            EvilParser parser = new EvilParser(tokens);
+            EvilParser.program_return ret = null;
+
+            try
+            {
+                ret = parser.Program();
+            }
+            catch (RecognitionException e)
+            {
+                error(e.ToString());
+            }
+
+            CommonTree t = (CommonTree)ret.Tree;
+
+            return new Tuple<CommonTokenStream, CommonTree>(tokens, t);
+        });
+
+        private static InStep<Tuple<CommonTokenStream, CommonTree>> TypeCheck = new InStep<Tuple<CommonTokenStream, CommonTree>>(t =>
+        {
+            CommonTreeNodeStream nodes = new CommonTreeNodeStream(t.Item2);
+            nodes.TokenStream = t.Item1;
+            GenericEvilTreeParser tparser = new GenericEvilTreeParser(nodes);
+
+            StructTypes stypes = new StructTypes();
+            SymbolTable stable = new SymbolTable();
+
+            tparser.Program(stypes, stable);
+        });
+
+        private static InStep<Tuple<CommonTokenStream, CommonTree>> PrintAst = new InStep<Tuple<CommonTokenStream, CommonTree>>(t =>
+        {
+            DotTreeGenerator gen = new DotTreeGenerator();
+            var st = gen.ToDot(t.Item2);
+            Console.WriteLine(st);
+        });
     }
 }

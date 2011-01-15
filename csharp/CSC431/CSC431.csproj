@@ -38,6 +38,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -57,12 +58,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Compile Include="ILOC\Instruction.tt">
+    <None Include="ILOC\Instruction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
-    </Compile>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Steps\IInStep.cs" />
+    <Compile Include="Steps\InOutStep.cs" />
+    <Compile Include="Steps\InStep.cs" />
+    <Compile Include="Steps\IOutStep.cs" />
+    <Compile Include="Steps\OutStep.cs" />
+    <Compile Include="Steps\Step.cs" />
+    <Compile Include="Steps\TransformStep.cs" />
     <Compile Include="StructTypes.cs" />
     <Compile Include="SymbolTable.cs" />
     <Compile Include="Type.cs" />
