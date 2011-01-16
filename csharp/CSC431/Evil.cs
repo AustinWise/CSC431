@@ -31,6 +31,7 @@ namespace CSC431
 
             flow.FollowWith(CleanUpCfg).FollowWith(PrintCFG);
             //flow.FollowWith(PrintCFG);
+            
 
 
             Step.DoAll(pipe);
@@ -105,6 +106,7 @@ namespace CSC431
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             EvilParser parser = new EvilParser(tokens);
             EvilParser.program_return ret = null;
+            parser.TraceDestination = Console.Out;
 
             try
             {
@@ -114,6 +116,9 @@ namespace CSC431
             {
                 error(e.ToString());
             }
+
+            if (parser.NumberOfSyntaxErrors != 0)
+                error("syntax errors");
 
             CommonTree t = (CommonTree)ret.Tree;
 
@@ -125,11 +130,15 @@ namespace CSC431
             CommonTreeNodeStream nodes = new CommonTreeNodeStream(t.Item2);
             nodes.TokenStream = t.Item1;
             GenericEvilTreeParser tparser = new GenericEvilTreeParser(nodes);
+            tparser.TraceDestination = Console.Out;
 
             StructTypes stypes = new StructTypes();
             SymbolTable stable = new SymbolTable();
 
             tparser.Program(stypes, stable);
+
+            if (tparser.NumberOfSyntaxErrors != 0)
+                error("make cfg syntax error");
 
             return t;
         });
@@ -146,11 +155,13 @@ namespace CSC431
             CommonTreeNodeStream nodes = new CommonTreeNodeStream(t.Item2);
             nodes.TokenStream = t.Item1;
             IlGenWalker tparser = new IlGenWalker(nodes);
-
-            StructTypes stypes = new StructTypes();
-            SymbolTable stable = new SymbolTable();
+            tparser.TraceDestination = Console.Out;
 
             var c = tparser.Program() as CSC431.CFG.ProgramBlock;
+
+            if (tparser.NumberOfSyntaxErrors != 0)
+                error("make cfg syntax error");
+
             return c;
         });
 
