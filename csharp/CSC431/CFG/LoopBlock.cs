@@ -39,7 +39,7 @@ namespace CSC431.CFG
             isFixed = true;
 
             int reg = Instruction.VirtualRegister();
-            this.Condition.AddLine(new LoadiInstruction(reg, 1));
+            this.Condition.AddLine(new LoadiInstruction(1, reg));
             this.Condition.AddLine(new CompInstruction(condReg, reg));
             this.Condition.AddLine(new CbreqInstruction(Body.Label, next.Label));
 

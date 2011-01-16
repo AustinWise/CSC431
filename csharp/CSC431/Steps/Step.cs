@@ -49,6 +49,8 @@ namespace CSC431.Steps
 
                 if (isOut(s.GetType()))
                 {
+                    //it ~should~ be ok to use dynamic like this as the 
+                    //FollowWith functions should have ensured that types lined up
                     dynamic ds = s;
                     dynamic res = ds.Output;
                     foreach (var n in s.nexts)

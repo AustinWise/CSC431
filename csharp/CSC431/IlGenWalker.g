@@ -191,12 +191,12 @@ expression returns [BasicBlock b = new BasicBlock()]
 @init { int reg = Instruction.VirtualRegister(); $b.Reg = reg; }
 	: ^(AND e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new AndInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(OR e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new OrInstruction(e1.Reg, e2.Reg, reg)); }
-	| ^(EQ e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(reg, 0)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MoveqInstruction(reg, 1)); }
-	| ^(LT e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(reg, 0)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovltInstruction(reg, 1)); }
-	| ^(GT e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(reg, 0)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovgtInstruction(reg, 1)); }
-	| ^(NE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(reg, 0)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovneInstruction(reg, 1)); }
-	| ^(LE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(reg, 0)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovleInstruction(reg, 1)); }
-	| ^(GE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(reg, 0)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovgeInstruction(reg, 1)); }
+	| ^(EQ e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MoveqInstruction(1, reg)); }
+	| ^(LT e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovltInstruction(1, reg)); }
+	| ^(GT e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovgtInstruction(1, reg)); }
+	| ^(NE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovneInstruction(1, reg)); }
+	| ^(LE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovleInstruction(1, reg)); }
+	| ^(GE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovgeInstruction(1, reg)); }
 	| ^(PLUS e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new AddInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(MINUS e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new SubInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(TIMES e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new MultInstruction(e1.Reg, e2.Reg, reg)); }
@@ -215,11 +215,11 @@ factor returns [BasicBlock b = new BasicBlock()]
 @init { int reg = Instruction.VirtualRegister(); $b.Reg = reg; }
 	: ^(INVOKE id=ID regLocs=arguments[b]) {doInvoke($id.text, $b, regLocs); $b.Add(new LoadretInstruction(reg)); }
 	| id=ID {$b.Add(new MovInstruction(getVarReg($id.text), reg)); }
-	| i=INTEGER {$b.Add(new LoadiInstruction(reg, int.Parse($i.text))); }
-	| TRUE {$b.Add(new LoadiInstruction(reg, 1)); }
-	| FALSE {$b.Add(new LoadiInstruction(reg, 0)); }
+	| i=INTEGER {$b.Add(new LoadiInstruction(int.Parse($i.text), reg)); }
+	| TRUE {$b.Add(new LoadiInstruction(1, reg)); }
+	| FALSE {$b.Add(new LoadiInstruction(0, reg)); }
 	| ^(NEW ID)
-	| NULL {$b.Add(new LoadiInstruction(reg, 0)); }
+	| NULL {$b.Add(new LoadiInstruction(0, reg)); }
 	;
 
 arguments[BasicBlock b] returns [List<int> regLocs = new List<int>()]

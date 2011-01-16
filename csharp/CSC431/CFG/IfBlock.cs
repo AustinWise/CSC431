@@ -22,7 +22,7 @@ namespace CSC431.CFG
             this.FalseBody = falseBody;
 
             int reg = Instruction.VirtualRegister();
-            this.Condition.AddLine(new LoadiInstruction(reg, 1));
+            this.Condition.AddLine(new LoadiInstruction(1, reg));
             this.Condition.AddLine(new CompInstruction(condition.Reg, reg));
             this.Condition.AddLine(new CbreqInstruction(TrueBody.Label, FalseBody.Label));
         }

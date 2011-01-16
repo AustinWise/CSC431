@@ -9,92 +9,25 @@ foreach (var instr in InstrInfo.GetAll())
 {
     var className = instr.Name.Substring(1).Insert(0, char.ToUpper(instr.Name[0]).ToString()) + "Instruction";
 #>
-class <#=className #> : <#=instr.BaseClass #>
+class <#=className #> : Instruction
 {
 	public <#=className #>
+	(
 <#
-switch (instr.Type)
+instr.ForEachOperand((c, count, isLast) =>
 {
-    case InstrType.SingleReg:
-        {
-#>(int reg) : base("<#=instr.Name #>", reg)
+    Write("{0} {1}{2}", c.Type, c.LowerPrefix, count);
+    if (!isLast)
+        Write(",");
+});
+#>
+	) : base ("<#=instr.Name #>")
 	{
 <#
-}
-        break;
-    case InstrType.DoubleReg:
-        {
-#>(int rx, int ry) : base("<#=instr.Name #>", rx, ry)
-	{
-<#
-}
-        break;
-    case InstrType.TripleReg:
-        {
-#>(int rx, int ry, int rd) : base("<#=instr.Name #>", rx, ry, rd)
-	{
-<#
-}
-        break;
-    case InstrType.ImmediateSingleReg:
-        {
-#>(int reg, int val) : base("<#=instr.Name #>", reg, val)
-	{
-<#
-}
-        break;
-    case InstrType.ImmediateDoubleReg:
-        {
-#>(int rx, int i, int rd) : base("<#=instr.Name #>", rx, i, rd)
-	{
-<#
-}
-        break;
-    case InstrType.SingleLabel:
-        {
-#>(int label) : base("<#=instr.Name #>", label)
-	{
-<#
-}
-        break;
-    case InstrType.DoubleLabel:
-        {
-#>(int l1, int l2) : base("<#=instr.Name #>", l1, l2)
-	{
-<#
-}
-        break;
-    case InstrType.StringImmediateReg:
-        {
-#>(string str, int i, int reg) : base("<#=instr.Name #>", str, i, reg)
-	{
-<#
-}
-        break;
-    case InstrType.String:
-        {
-#>(string str) : base("<#=instr.Name #>", str)
-	{
-<#
-}
-        break;
-    case InstrType.NoArg:
-        {
-#>() : base("<#=instr.Name #>")
-	{
-<#
-}
-        break;
-    case InstrType.SingleRegImmediate:
-        {
-#>(int reg, int val) : base("<#=instr.Name #>", reg, val)
-	{
-<#
-}
-        break;
-    default:
-        throw new NotSupportedException();
-}
+instr.ForEachOperand((c, count, isLast) =>
+{
+    Write("this.{0}{1} = {2}{1};", c.UpperPrefix, count, c.LowerPrefix);
+});
 if (instr.IsSetCC)
 {
 #>
@@ -103,6 +36,32 @@ if (instr.IsSetCC)
 }
 #>
 	}
+
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    Write("public {1} {2}{0}{{ get; private set; }}", count, c.Type, c.UpperPrefix);
+});
+#>
+public override string ToString()
+{
+<#
+    int placeHolderCount = 1;
+    string formatStr = "{0}";
+instr.ForEachOperand((c, count, isLast) =>
+{
+    formatStr += " " + c.MilocPrefix + "{" + placeHolderCount++ + "}";
+    if (!isLast)
+        formatStr += ",";
+});
+Write("return string.Format(\"{0}\", Name", formatStr);
+instr.ForEachOperand((c, count, isLast) =>
+{
+    Write(", {0}{1}", c.UpperPrefix, count);
+});
+#>
+);
+}
 }
 
 
@@ -119,71 +78,44 @@ private enum InstrFlags : int
     SetCC = 1,
     UseCC = 2
 }
-private enum InstrType
+private class OperandType
 {
-    SingleReg,
-    DoubleReg,
-    TripleReg,
-    ImmediateSingleReg,
-    ImmediateDoubleReg,
-    SingleLabel,
-    DoubleLabel,
-    StringImmediateReg,
-    String,
-    NoArg,
-    SingleRegImmediate
+    private static Dictionary<char, OperandType> sTypes = new Dictionary<char, OperandType>();
+    static OperandType()
+    {
+        sTypes.Add('r', new OperandType() { LowerPrefix = "reg", UpperPrefix = "Reg", MilocPrefix = "r", Type = "int" });
+        sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "int" });
+        sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", MilocPrefix = "", Type = "int" });
+        sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", MilocPrefix = "", Type = "string" });
+    }
+
+    public string LowerPrefix { get; private set; }
+    public string UpperPrefix { get; private set; }
+    public string MilocPrefix { get; private set; }
+    public string Type { get; private set; }
+
+    public static OperandType Get(char letter)
+    {
+        return sTypes[letter];
+    }
 }
 private class InstrInfo
 {
-    public InstrInfo(InstrType type, string name)
+    public InstrInfo(String type, string name)
     {
         this.Type = type;
         this.Name = name;
     }
 
-    public InstrInfo(InstrType type, string name, InstrFlags flags)
+    public InstrInfo(String type, string name, InstrFlags flags)
         : this(type, name)
     {
         this.Flags = flags;
     }
 
     public InstrFlags Flags { get; private set; }
-    public InstrType Type { get; private set; }
+    public string Type { get; private set; }
     public string Name { get; private set; }
-    
-    public string BaseClass
-    {
-        get
-        {
-            switch (Type)
-            {
-                case InstrType.SingleReg:
-                    return "SingleRegisterInstruction";
-                case InstrType.DoubleReg:
-                    return "DoubleRegisterInstruction";
-                case InstrType.TripleReg:
-                    return "TripleRegisterInstruction";
-                case InstrType.ImmediateSingleReg:
-                    return "ImmediateSingleRegisterInstruction";
-                case InstrType.ImmediateDoubleReg:
-                    return "ImmediateDoubleRegisterInstruction";
-                case InstrType.SingleLabel:
-                    return "SingleLabelInstruction";
-                case InstrType.DoubleLabel:
-                    return "DoubleLabelInstruction";
-                case InstrType.StringImmediateReg:
-                    return "StringImmediateRegisterInstruction";
-                case InstrType.String:
-                    return "StringInstruction";
-                case InstrType.NoArg:
-                    return "NoArgInstruction";
-                case InstrType.SingleRegImmediate:
-                    return "SingleRegisterImmediateInstruction";
-                default:
-                    throw new NotSupportedException();
-            }
-        }
-    }
 
     public bool IsSetCC
     {
@@ -193,39 +125,51 @@ private class InstrInfo
         }
     }
 
+    public void ForEachOperand(Action<OperandType, int, bool> f)
+    {
+        var count = new Dictionary<char, int>();
+        for (int i = 0; i < Type.Length; i++)
+        {
+            char c = Type[i];
+            if (!count.ContainsKey(c))
+                count[c] = 0;
+            f(OperandType.Get(c), count[c]++, i == Type.Length - 1);
+        }
+    }
+
     public static InstrInfo[] GetAll()
     {
         return new[]
             {
-                new InstrInfo(InstrType.TripleReg, "add"),
-                new InstrInfo(InstrType.ImmediateDoubleReg, "addi"),
-                new InstrInfo(InstrType.TripleReg, "div"),
-                new InstrInfo(InstrType.TripleReg, "mult"),
-                new InstrInfo(InstrType.TripleReg, "sub"),
-                new InstrInfo(InstrType.ImmediateDoubleReg, "rsubi"),
-                new InstrInfo(InstrType.TripleReg, "and"),
-                new InstrInfo(InstrType.TripleReg, "or"),
-                new InstrInfo(InstrType.ImmediateDoubleReg, "xori"),
-                new InstrInfo(InstrType.ImmediateSingleReg, "loadi"),
-                new InstrInfo(InstrType.SingleReg, "print"),
-                new InstrInfo(InstrType.SingleReg, "println"),
-                new InstrInfo(InstrType.SingleReg, "read"),
-                new InstrInfo(InstrType.DoubleReg, "comp", InstrFlags.SetCC),
-                new InstrInfo(InstrType.DoubleReg, "mov"),
-                new InstrInfo(InstrType.ImmediateSingleReg, "moveq", InstrFlags.UseCC),
-                new InstrInfo(InstrType.ImmediateSingleReg, "movge", InstrFlags.UseCC),
-                new InstrInfo(InstrType.ImmediateSingleReg, "movgt", InstrFlags.UseCC),
-                new InstrInfo(InstrType.ImmediateSingleReg, "movle", InstrFlags.UseCC),
-                new InstrInfo(InstrType.ImmediateSingleReg, "movlt", InstrFlags.UseCC),
-                new InstrInfo(InstrType.ImmediateSingleReg, "movne", InstrFlags.UseCC),
-                new InstrInfo(InstrType.SingleLabel, "jumpi"),
-                new InstrInfo(InstrType.DoubleLabel, "cbreq"),
-                new InstrInfo(InstrType.StringImmediateReg, "loadinargument"),
-                new InstrInfo(InstrType.String, "call"),
-                new InstrInfo(InstrType.NoArg, "ret"),
-                new InstrInfo(InstrType.SingleReg, "storeret"),
-                new InstrInfo(InstrType.SingleRegImmediate, "storeoutargument"),
-                new InstrInfo(InstrType.SingleReg, "loadret"),
+                new InstrInfo("rrr", "add"),
+                new InstrInfo("rir", "addi"),
+                new InstrInfo("rrr", "div"),
+                new InstrInfo("rrr", "mult"),
+                new InstrInfo("rrr", "sub"),
+                new InstrInfo("rir", "rsubi"),
+                new InstrInfo("rrr", "and"),
+                new InstrInfo("rrr", "or"),
+                new InstrInfo("rir", "xori"),
+                new InstrInfo("ir", "loadi"),
+                new InstrInfo("r", "print"),
+                new InstrInfo("r", "println"),
+                new InstrInfo("r", "read"),
+                new InstrInfo("rr", "comp", InstrFlags.SetCC),
+                new InstrInfo("rr", "mov"),
+                new InstrInfo("ir", "moveq", InstrFlags.UseCC),
+                new InstrInfo("ir", "movge", InstrFlags.UseCC),
+                new InstrInfo("ir", "movgt", InstrFlags.UseCC),
+                new InstrInfo("ir", "movle", InstrFlags.UseCC),
+                new InstrInfo("ir", "movlt", InstrFlags.UseCC),
+                new InstrInfo("ir", "movne", InstrFlags.UseCC),
+                new InstrInfo("l", "jumpi"),
+                new InstrInfo("ll", "cbreq"),
+                new InstrInfo("sir", "loadinargument"),
+                new InstrInfo("s", "call"),
+                new InstrInfo("", "ret"),
+                new InstrInfo("r", "storeret"),
+                new InstrInfo("ri", "storeoutargument"),
+                new InstrInfo("r", "loadret"),
             };
     }
 }

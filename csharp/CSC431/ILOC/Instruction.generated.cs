@@ -1,293 +1,467 @@
 ﻿namespace CSC431.ILOC
 {
 
-class AddInstruction : TripleRegisterInstruction
+class AddInstruction : Instruction
 {
 	public AddInstruction
-(int rx, int ry, int rd) : base("add", rx, ry, rd)
+	(
+int reg0,int reg1,int reg2	) : base ("add")
 	{
-	}
+this.Reg0 = reg0;this.Reg1 = reg1;this.Reg2 = reg2;	}
+
+public int Reg0{ get; private set; }public int Reg1{ get; private set; }public int Reg2{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, r{2}, r{3}", Name, Reg0, Reg1, Reg2);
+}
 }
 
 
 
-class AddiInstruction : ImmediateDoubleRegisterInstruction
+class AddiInstruction : Instruction
 {
 	public AddiInstruction
-(int rx, int i, int rd) : base("addi", rx, i, rd)
+	(
+int reg0,int immed0,int reg1	) : base ("addi")
 	{
-	}
+this.Reg0 = reg0;this.Immed0 = immed0;this.Reg1 = reg1;	}
+
+public int Reg0{ get; private set; }public int Immed0{ get; private set; }public int Reg1{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, {2}, r{3}", Name, Reg0, Immed0, Reg1);
+}
 }
 
 
 
-class DivInstruction : TripleRegisterInstruction
+class DivInstruction : Instruction
 {
 	public DivInstruction
-(int rx, int ry, int rd) : base("div", rx, ry, rd)
+	(
+int reg0,int reg1,int reg2	) : base ("div")
 	{
-	}
+this.Reg0 = reg0;this.Reg1 = reg1;this.Reg2 = reg2;	}
+
+public int Reg0{ get; private set; }public int Reg1{ get; private set; }public int Reg2{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, r{2}, r{3}", Name, Reg0, Reg1, Reg2);
+}
 }
 
 
 
-class MultInstruction : TripleRegisterInstruction
+class MultInstruction : Instruction
 {
 	public MultInstruction
-(int rx, int ry, int rd) : base("mult", rx, ry, rd)
+	(
+int reg0,int reg1,int reg2	) : base ("mult")
 	{
-	}
+this.Reg0 = reg0;this.Reg1 = reg1;this.Reg2 = reg2;	}
+
+public int Reg0{ get; private set; }public int Reg1{ get; private set; }public int Reg2{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, r{2}, r{3}", Name, Reg0, Reg1, Reg2);
+}
 }
 
 
 
-class SubInstruction : TripleRegisterInstruction
+class SubInstruction : Instruction
 {
 	public SubInstruction
-(int rx, int ry, int rd) : base("sub", rx, ry, rd)
+	(
+int reg0,int reg1,int reg2	) : base ("sub")
 	{
-	}
+this.Reg0 = reg0;this.Reg1 = reg1;this.Reg2 = reg2;	}
+
+public int Reg0{ get; private set; }public int Reg1{ get; private set; }public int Reg2{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, r{2}, r{3}", Name, Reg0, Reg1, Reg2);
+}
 }
 
 
 
-class RsubiInstruction : ImmediateDoubleRegisterInstruction
+class RsubiInstruction : Instruction
 {
 	public RsubiInstruction
-(int rx, int i, int rd) : base("rsubi", rx, i, rd)
+	(
+int reg0,int immed0,int reg1	) : base ("rsubi")
 	{
-	}
+this.Reg0 = reg0;this.Immed0 = immed0;this.Reg1 = reg1;	}
+
+public int Reg0{ get; private set; }public int Immed0{ get; private set; }public int Reg1{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, {2}, r{3}", Name, Reg0, Immed0, Reg1);
+}
 }
 
 
 
-class AndInstruction : TripleRegisterInstruction
+class AndInstruction : Instruction
 {
 	public AndInstruction
-(int rx, int ry, int rd) : base("and", rx, ry, rd)
+	(
+int reg0,int reg1,int reg2	) : base ("and")
 	{
-	}
+this.Reg0 = reg0;this.Reg1 = reg1;this.Reg2 = reg2;	}
+
+public int Reg0{ get; private set; }public int Reg1{ get; private set; }public int Reg2{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, r{2}, r{3}", Name, Reg0, Reg1, Reg2);
+}
 }
 
 
 
-class OrInstruction : TripleRegisterInstruction
+class OrInstruction : Instruction
 {
 	public OrInstruction
-(int rx, int ry, int rd) : base("or", rx, ry, rd)
+	(
+int reg0,int reg1,int reg2	) : base ("or")
 	{
-	}
+this.Reg0 = reg0;this.Reg1 = reg1;this.Reg2 = reg2;	}
+
+public int Reg0{ get; private set; }public int Reg1{ get; private set; }public int Reg2{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, r{2}, r{3}", Name, Reg0, Reg1, Reg2);
+}
 }
 
 
 
-class XoriInstruction : ImmediateDoubleRegisterInstruction
+class XoriInstruction : Instruction
 {
 	public XoriInstruction
-(int rx, int i, int rd) : base("xori", rx, i, rd)
+	(
+int reg0,int immed0,int reg1	) : base ("xori")
 	{
-	}
+this.Reg0 = reg0;this.Immed0 = immed0;this.Reg1 = reg1;	}
+
+public int Reg0{ get; private set; }public int Immed0{ get; private set; }public int Reg1{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, {2}, r{3}", Name, Reg0, Immed0, Reg1);
+}
 }
 
 
 
-class LoadiInstruction : ImmediateSingleRegisterInstruction
+class LoadiInstruction : Instruction
 {
 	public LoadiInstruction
-(int reg, int val) : base("loadi", reg, val)
+	(
+int immed0,int reg0	) : base ("loadi")
 	{
-	}
+this.Immed0 = immed0;this.Reg0 = reg0;	}
+
+public int Immed0{ get; private set; }public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
+}
 }
 
 
 
-class PrintInstruction : SingleRegisterInstruction
+class PrintInstruction : Instruction
 {
 	public PrintInstruction
-(int reg) : base("print", reg)
+	(
+int reg0	) : base ("print")
 	{
-	}
+this.Reg0 = reg0;	}
+
+public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}", Name, Reg0);
+}
 }
 
 
 
-class PrintlnInstruction : SingleRegisterInstruction
+class PrintlnInstruction : Instruction
 {
 	public PrintlnInstruction
-(int reg) : base("println", reg)
+	(
+int reg0	) : base ("println")
 	{
-	}
+this.Reg0 = reg0;	}
+
+public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}", Name, Reg0);
+}
 }
 
 
 
-class ReadInstruction : SingleRegisterInstruction
+class ReadInstruction : Instruction
 {
 	public ReadInstruction
-(int reg) : base("read", reg)
+	(
+int reg0	) : base ("read")
 	{
-	}
+this.Reg0 = reg0;	}
+
+public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}", Name, Reg0);
+}
 }
 
 
 
-class CompInstruction : DoubleRegisterInstruction
+class CompInstruction : Instruction
 {
 	public CompInstruction
-(int rx, int ry) : base("comp", rx, ry)
+	(
+int reg0,int reg1	) : base ("comp")
 	{
-		this.CcSet = true;
+this.Reg0 = reg0;this.Reg1 = reg1;		this.CcSet = true;
 	}
+
+public int Reg0{ get; private set; }public int Reg1{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, r{2}", Name, Reg0, Reg1);
+}
 }
 
 
 
-class MovInstruction : DoubleRegisterInstruction
+class MovInstruction : Instruction
 {
 	public MovInstruction
-(int rx, int ry) : base("mov", rx, ry)
+	(
+int reg0,int reg1	) : base ("mov")
 	{
-	}
+this.Reg0 = reg0;this.Reg1 = reg1;	}
+
+public int Reg0{ get; private set; }public int Reg1{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, r{2}", Name, Reg0, Reg1);
+}
 }
 
 
 
-class MoveqInstruction : ImmediateSingleRegisterInstruction
+class MoveqInstruction : Instruction
 {
 	public MoveqInstruction
-(int reg, int val) : base("moveq", reg, val)
+	(
+int immed0,int reg0	) : base ("moveq")
 	{
-	}
+this.Immed0 = immed0;this.Reg0 = reg0;	}
+
+public int Immed0{ get; private set; }public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
+}
 }
 
 
 
-class MovgeInstruction : ImmediateSingleRegisterInstruction
+class MovgeInstruction : Instruction
 {
 	public MovgeInstruction
-(int reg, int val) : base("movge", reg, val)
+	(
+int immed0,int reg0	) : base ("movge")
 	{
-	}
+this.Immed0 = immed0;this.Reg0 = reg0;	}
+
+public int Immed0{ get; private set; }public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
+}
 }
 
 
 
-class MovgtInstruction : ImmediateSingleRegisterInstruction
+class MovgtInstruction : Instruction
 {
 	public MovgtInstruction
-(int reg, int val) : base("movgt", reg, val)
+	(
+int immed0,int reg0	) : base ("movgt")
 	{
-	}
+this.Immed0 = immed0;this.Reg0 = reg0;	}
+
+public int Immed0{ get; private set; }public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
+}
 }
 
 
 
-class MovleInstruction : ImmediateSingleRegisterInstruction
+class MovleInstruction : Instruction
 {
 	public MovleInstruction
-(int reg, int val) : base("movle", reg, val)
+	(
+int immed0,int reg0	) : base ("movle")
 	{
-	}
+this.Immed0 = immed0;this.Reg0 = reg0;	}
+
+public int Immed0{ get; private set; }public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
+}
 }
 
 
 
-class MovltInstruction : ImmediateSingleRegisterInstruction
+class MovltInstruction : Instruction
 {
 	public MovltInstruction
-(int reg, int val) : base("movlt", reg, val)
+	(
+int immed0,int reg0	) : base ("movlt")
 	{
-	}
+this.Immed0 = immed0;this.Reg0 = reg0;	}
+
+public int Immed0{ get; private set; }public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
+}
 }
 
 
 
-class MovneInstruction : ImmediateSingleRegisterInstruction
+class MovneInstruction : Instruction
 {
 	public MovneInstruction
-(int reg, int val) : base("movne", reg, val)
+	(
+int immed0,int reg0	) : base ("movne")
 	{
-	}
+this.Immed0 = immed0;this.Reg0 = reg0;	}
+
+public int Immed0{ get; private set; }public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
+}
 }
 
 
 
-class JumpiInstruction : SingleLabelInstruction
+class JumpiInstruction : Instruction
 {
 	public JumpiInstruction
-(int label) : base("jumpi", label)
+	(
+int label0	) : base ("jumpi")
 	{
-	}
+this.Label0 = label0;	}
+
+public int Label0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} L{1}", Name, Label0);
+}
 }
 
 
 
-class CbreqInstruction : DoubleLabelInstruction
+class CbreqInstruction : Instruction
 {
 	public CbreqInstruction
-(int l1, int l2) : base("cbreq", l1, l2)
+	(
+int label0,int label1	) : base ("cbreq")
 	{
-	}
+this.Label0 = label0;this.Label1 = label1;	}
+
+public int Label0{ get; private set; }public int Label1{ get; private set; }public override string ToString()
+{
+return string.Format("{0} L{1}, L{2}", Name, Label0, Label1);
+}
 }
 
 
 
-class LoadinargumentInstruction : StringImmediateRegisterInstruction
+class LoadinargumentInstruction : Instruction
 {
 	public LoadinargumentInstruction
-(string str, int i, int reg) : base("loadinargument", str, i, reg)
+	(
+string str0,int immed0,int reg0	) : base ("loadinargument")
 	{
-	}
+this.Str0 = str0;this.Immed0 = immed0;this.Reg0 = reg0;	}
+
+public string Str0{ get; private set; }public int Immed0{ get; private set; }public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} {1}, {2}, r{3}", Name, Str0, Immed0, Reg0);
+}
 }
 
 
 
-class CallInstruction : StringInstruction
+class CallInstruction : Instruction
 {
 	public CallInstruction
-(string str) : base("call", str)
+	(
+string str0	) : base ("call")
 	{
-	}
+this.Str0 = str0;	}
+
+public string Str0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} {1}", Name, Str0);
+}
 }
 
 
 
-class RetInstruction : NoArgInstruction
+class RetInstruction : Instruction
 {
 	public RetInstruction
-() : base("ret")
+	(
+	) : base ("ret")
 	{
 	}
+
+public override string ToString()
+{
+return string.Format("{0}", Name);
+}
 }
 
 
 
-class StoreretInstruction : SingleRegisterInstruction
+class StoreretInstruction : Instruction
 {
 	public StoreretInstruction
-(int reg) : base("storeret", reg)
+	(
+int reg0	) : base ("storeret")
 	{
-	}
+this.Reg0 = reg0;	}
+
+public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}", Name, Reg0);
+}
 }
 
 
 
-class StoreoutargumentInstruction : SingleRegisterImmediateInstruction
+class StoreoutargumentInstruction : Instruction
 {
 	public StoreoutargumentInstruction
-(int reg, int val) : base("storeoutargument", reg, val)
+	(
+int reg0,int immed0	) : base ("storeoutargument")
 	{
-	}
+this.Reg0 = reg0;this.Immed0 = immed0;	}
+
+public int Reg0{ get; private set; }public int Immed0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, {2}", Name, Reg0, Immed0);
+}
 }
 
 
 
-class LoadretInstruction : SingleRegisterInstruction
+class LoadretInstruction : Instruction
 {
 	public LoadretInstruction
-(int reg) : base("loadret", reg)
+	(
+int reg0	) : base ("loadret")
 	{
-	}
+this.Reg0 = reg0;	}
+
+public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}", Name, Reg0);
+}
 }
 
 

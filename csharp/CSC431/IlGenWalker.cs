@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-01-16 07:04:12
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-01-16 10:04:43
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -2628,7 +2628,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(194, 38);
-    			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(reg, 0)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MoveqInstruction(reg, 1)); 
+    			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(0, reg)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MoveqInstruction(1, reg)); 
 
     			}
     			break;
@@ -2654,7 +2654,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(195, 38);
-    			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(reg, 0)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovltInstruction(reg, 1)); 
+    			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(0, reg)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovltInstruction(1, reg)); 
 
     			}
     			break;
@@ -2680,7 +2680,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(196, 38);
-    			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(reg, 0)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovgtInstruction(reg, 1)); 
+    			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(0, reg)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovgtInstruction(1, reg)); 
 
     			}
     			break;
@@ -2706,7 +2706,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(197, 38);
-    			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(reg, 0)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovneInstruction(reg, 1)); 
+    			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(0, reg)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovneInstruction(1, reg)); 
 
     			}
     			break;
@@ -2732,7 +2732,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(198, 38);
-    			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(reg, 0)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovleInstruction(reg, 1)); 
+    			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(0, reg)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovleInstruction(1, reg)); 
 
     			}
     			break;
@@ -2758,7 +2758,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(199, 38);
-    			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(reg, 0)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovgeInstruction(reg, 1)); 
+    			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(0, reg)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovgeInstruction(1, reg)); 
 
     			}
     			break;
@@ -3146,7 +3146,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			DebugLocation(218, 5);
     			i=(CommonTree)Match(input,INTEGER,Follow._INTEGER_in_factor1184); 
     			DebugLocation(218, 14);
-    			b.Add(new LoadiInstruction(reg, int.Parse((i!=null?i.Text:null)))); 
+    			b.Add(new LoadiInstruction(int.Parse((i!=null?i.Text:null)), reg)); 
 
     			}
     			break;
@@ -3157,7 +3157,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			DebugLocation(219, 4);
     			Match(input,TRUE,Follow._TRUE_in_factor1191); 
     			DebugLocation(219, 9);
-    			b.Add(new LoadiInstruction(reg, 1)); 
+    			b.Add(new LoadiInstruction(1, reg)); 
 
     			}
     			break;
@@ -3168,7 +3168,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			DebugLocation(220, 4);
     			Match(input,FALSE,Follow._FALSE_in_factor1198); 
     			DebugLocation(220, 10);
-    			b.Add(new LoadiInstruction(reg, 0)); 
+    			b.Add(new LoadiInstruction(0, reg)); 
 
     			}
     			break;
@@ -3195,7 +3195,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			DebugLocation(222, 4);
     			Match(input,NULL,Follow._NULL_in_factor1214); 
     			DebugLocation(222, 9);
-    			b.Add(new LoadiInstruction(reg, 0)); 
+    			b.Add(new LoadiInstruction(0, reg)); 
 
     			}
     			break;
