@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Antlr.Runtime.Tree;
+using CSC431.CFG;
 
 
 namespace CSC431
 {
+    public partial class IlGenWalker
+    {
+        public object Program()
+        {
+            return this.program();
+        }
+    }
+
     public partial class EvilParser
     {
         public EvilParser.program_return Program()

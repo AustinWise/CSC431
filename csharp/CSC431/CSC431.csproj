@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>3021</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -44,11 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CFG\BasicBlock.cs" />
+    <Compile Include="CFG\FunctionBlock.cs" />
+    <Compile Include="CFG\IfBlock.cs" />
+    <Compile Include="CFG\LoopBlock.cs" />
+    <Compile Include="CFG\MultiBlock.cs" />
+    <Compile Include="CFG\Node.cs" />
+    <Compile Include="CFG\ProgramBlock.cs" />
+    <Compile Include="CFG\SeqBlock.cs" />
     <Compile Include="EvilPartials.cs" />
     <Compile Include="EvilLexer.cs" />
     <Compile Include="EvilParser.cs" />
     <Compile Include="GenericEvilTreeParser.cs" />
     <Compile Include="IlGenWalker.cs" />
+    <Compile Include="ILOC\Instruction.cs" />
     <Compile Include="ILOC\Instruction.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -78,9 +88,7 @@
   <ItemGroup>
     <Compile Include="Evil.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CFG\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

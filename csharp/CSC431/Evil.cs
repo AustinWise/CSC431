@@ -5,6 +5,7 @@ using Antlr.Runtime;
 using Antlr.Runtime.Tree;
 using System.IO;
 using CSC431.Steps;
+using CSC431.CFG;
 
 namespace CSC431
 {
@@ -25,7 +26,11 @@ namespace CSC431
             if (_displayAST)
                 pipe.FollowWith(PrintAst);
 
-            pipe.FollowWith(TypeCheck);
+            var flow = pipe.FollowWith(TypeCheck)
+                .FollowWith(MakeCFG);
+
+            flow.FollowWith(CleanUpCfg).FollowWith(PrintCFG);
+            //flow.FollowWith(PrintCFG);
 
 
             Step.DoAll(pipe);
@@ -115,7 +120,7 @@ namespace CSC431
             return new Tuple<CommonTokenStream, CommonTree>(tokens, t);
         });
 
-        private static InStep<Tuple<CommonTokenStream, CommonTree>> TypeCheck = new InStep<Tuple<CommonTokenStream, CommonTree>>(t =>
+        private static TransformStep<Tuple<CommonTokenStream, CommonTree>> TypeCheck = new TransformStep<Tuple<CommonTokenStream, CommonTree>>(t =>
         {
             CommonTreeNodeStream nodes = new CommonTreeNodeStream(t.Item2);
             nodes.TokenStream = t.Item1;
@@ -125,6 +130,8 @@ namespace CSC431
             SymbolTable stable = new SymbolTable();
 
             tparser.Program(stypes, stable);
+
+            return t;
         });
 
         private static InStep<Tuple<CommonTokenStream, CommonTree>> PrintAst = new InStep<Tuple<CommonTokenStream, CommonTree>>(t =>
@@ -132,6 +139,67 @@ namespace CSC431
             DotTreeGenerator gen = new DotTreeGenerator();
             var st = gen.ToDot(t.Item2);
             Console.WriteLine(st);
+        });
+
+        private static InOutStep<Tuple<CommonTokenStream, CommonTree>, ProgramBlock> MakeCFG = new InOutStep<Tuple<CommonTokenStream, CommonTree>, ProgramBlock>(t =>
+        {
+            CommonTreeNodeStream nodes = new CommonTreeNodeStream(t.Item2);
+            nodes.TokenStream = t.Item1;
+            IlGenWalker tparser = new IlGenWalker(nodes);
+
+            StructTypes stypes = new StructTypes();
+            SymbolTable stable = new SymbolTable();
+
+            var c = tparser.Program() as CSC431.CFG.ProgramBlock;
+            return c;
+        });
+
+        private static TransformStep<ProgramBlock> CleanUpCfg = new TransformStep<ProgramBlock>(c =>
+        {
+            c.Visit(n =>
+                {
+                    if (n is BasicBlock)
+                    {
+                        ((BasicBlock)n).Merge();
+                    }
+                });
+
+            return c;
+        });
+
+        private static InStep<ProgramBlock> PrintCFG = new InStep<ProgramBlock>(c =>
+        {
+            c.Visit(n =>
+            {
+                if (n is ProgramBlock)
+                {
+                    Console.WriteLine("prog");
+                }
+                else if (n is BasicBlock)
+                {
+                    Console.WriteLine("bb");
+                }
+                else if (n is SeqBlock)
+                {
+                    Console.WriteLine("seq");
+                }
+                else if (n is IfBlock)
+                {
+                    Console.WriteLine("if");
+                }
+                else if (n is LoopBlock)
+                {
+                    Console.WriteLine("loop");
+                }
+                else if (n is FunctionBlock)
+                {
+                    Console.WriteLine("fun:" + (n as FunctionBlock).Name);
+                }
+                else if (n is MultiBlock)
+                {
+                    Console.WriteLine("mb");
+                }
+            });
         });
     }
 }

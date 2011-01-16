@@ -7,10 +7,15 @@ options
    ASTLabelType=CommonTree;
 }
 
+@header
+{
+using CSC431.CFG;
+}
+
 @namespace {CSC431}
 
-program
-	: ^(PROGRAM (types declarations functions)) 
+program returns [ProgramBlock prog]
+	: ^(PROGRAM (types declarations funs=functions)) {$prog = new ProgramBlock(funs);}
 	;
 
 types
@@ -59,12 +64,13 @@ id_list
 	: (ID)+
 ;
 
-functions
-	: ^(FUNCS function*)
+functions returns [List<FunctionBlock> funs = new List<FunctionBlock>()]
+	: ^(FUNCS (f=function{$funs.Add(f);})*)
 	;
 
-function
-	: ^(FUN ID parameters ^(RETTYPE return_type) declarations statement_list)
+function returns [FunctionBlock f]
+@init {SeqBlock body = new SeqBlock();}
+	: ^(FUN id=ID parameters ^(RETTYPE return_type) declarations statement_list[body]) { $f = new FunctionBlock($id.text, body); }
 	;
 
 parameters
@@ -80,56 +86,59 @@ return_type
 	| VOID
 	;
 
-statement
-	: block
-	| assignment
-	| print
-	| read
-	| conditional
-	| loop
-	| delete
-	| ret
-	| invocation
+statement returns [Node node]
+	: s=block {$node = s;}
+	| b=assignment {$node = b;}
+	| b=print {$node = b;}
+	| b=read {$node = b;}
+	| c=conditional {$node = c;}
+	| l=loop {$node = l;}
+	| b=delete {$node = b;}
+	| b=ret {$node = b;}
+	| b=invocation {$node = b;}
 	;
 
-block
-	: ^(BLOCK statement_list)
+block returns [SeqBlock b = new SeqBlock()]
+	: ^(BLOCK statement_list[$b])
 	;
 
-statement_list
-	: ^(STMTS (statement
+statement_list[SeqBlock b]
+	: ^(STMTS (s=statement
+		{
+			$b.Add(s);
+		}
 	)*)
 	;
 
-assignment
+assignment returns [BasicBlock b = new BasicBlock()]
 	: ^(ASSIGN expression lvalue)
 	;
 
-print
+print returns [BasicBlock b = new BasicBlock()]
 	: ^(PRINT expression (ENDL)?)
 	;
 
-read
+read returns [BasicBlock b = new BasicBlock()]
 	: ^(READ lvalue)
 	;
 
-conditional
-	: ^(IF expression block (block)?)
+conditional returns [IfBlock b]
+	: ^(IF e=expression t=block (f=block)?) {$b = new IfBlock(e, t, f ?? new SeqBlock()); }
 	;
 
-loop
-	: ^(WHILE expression block expression)
+loop returns [LoopBlock b]
+	: ^(WHILE e=expression body=block expression) {$b = new LoopBlock(e, body); }
 	;
 
-delete
+delete returns [BasicBlock b = new BasicBlock()]
 	: ^(DELETE expression)
 	;
 
-ret
+ret returns [BasicBlock b = new BasicBlock()]
 	: ^(RETURN (expression)?)
 	;
 
-invocation
+invocation returns [BasicBlock b = new BasicBlock()]
 	: ^(INVOKE ID arguments)
 	;
 
@@ -138,7 +147,7 @@ lvalue
 	| ID
 	;
 
-expression
+expression returns [BasicBlock b = new BasicBlock()]
 	: ^(AND expression expression)
 	| ^(OR expression expression)
 	| ^(EQ expression expression)
