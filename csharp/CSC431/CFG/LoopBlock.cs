@@ -19,9 +19,9 @@ namespace CSC431.CFG
 
             this.Condition = condition.ToMulti();
             this.Body = body;
-            this.Body.SetNext(condition);
 
-            body.Add(new JumpiInstruction(this.Condition.Label));
+            this.Body.Add(new JumpiInstruction(this.Condition.Label));
+            this.Body.SetNext(condition);
 
             this.Condition.PrintLabel = true;
             this.Body.PrintLabel = true;
@@ -37,14 +37,16 @@ namespace CSC431.CFG
             if (isFixed)
                 throw new Exception("next was already set");
             isFixed = true;
-            Condition.SetNext(next);
-
-            next.PrintLabel = true;
 
             int reg = Instruction.VirtualRegister();
             this.Condition.AddLine(new LoadiInstruction(reg, 1));
             this.Condition.AddLine(new CompInstruction(condReg, reg));
             this.Condition.AddLine(new CbreqInstruction(Body.Label, next.Label));
+
+            Condition.SetNext(next);
+
+            next.PrintLabel = true;
+
         }
 
         public override bool IsFixedUp

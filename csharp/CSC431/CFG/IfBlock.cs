@@ -37,10 +37,10 @@ namespace CSC431.CFG
             if (isFixed)
                 throw new Exception("next was already set");
             isFixed = true;
+            TrueBody.Add(new JumpiInstruction(next.Label));
             TrueBody.SetNext(next);
             FalseBody.SetNext(next);
 
-            TrueBody.Add(new JumpiInstruction(next.Label));
             next.PrintLabel = true;
         }
 
