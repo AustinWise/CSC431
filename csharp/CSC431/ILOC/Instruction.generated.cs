@@ -202,5 +202,25 @@ class MovneInstruction : ImmediateSingleRegisterInstruction
 
 
 
+class JumpiInstruction : SingleLabelInstruction
+{
+	public JumpiInstruction
+(int label) : base("jumpi", label)
+	{
+	}
+}
+
+
+
+class CbreqInstruction : DoubleLabelInstruction
+{
+	public CbreqInstruction
+(int l1, int l2) : base("cbreq", l1, l2)
+	{
+	}
+}
+
+
+
 
 }

@@ -24,7 +24,7 @@ namespace CSC431.CFG
             throw new NotSupportedException();
         }
 
-        public override void Print(System.IO.TextWriter tw)
+        protected override void PrintCore(System.IO.TextWriter tw)
         {
             foreach (var f in Functions)
             {

@@ -2,29 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CSC431.ILOC;
 
 namespace CSC431.CFG
 {
     public class IfBlock : Node
     {
-        private MultiBlock condition;
-        private SeqBlock trueBody;
-        private SeqBlock falseBody;
+        private MultiBlock Condition;
+        private SeqBlock TrueBody;
+        private SeqBlock FalseBody;
         private bool isFixed = false;
 
         public IfBlock(BasicBlock condition, SeqBlock trueBody, SeqBlock falseBody)
         {
-            //TODO: need to add jump instrs
-            this.condition = condition.ToMulti();
-            this.trueBody = trueBody;
-            this.falseBody = falseBody;
-            this.condition.SetNext(trueBody);
-            this.condition.SetNext(falseBody);
+            this.Condition = condition.ToMulti();
+            this.Condition.SetNext(trueBody);
+            this.Condition.SetNext(falseBody);
+            this.TrueBody = trueBody;
+            this.FalseBody = falseBody;
+
+            int reg = Instruction.VirtualRegister();
+            this.Condition.AddLine(new LoadiInstruction(reg, 1));
+            this.Condition.AddLine(new CompInstruction(condition.Reg, reg));
+            this.Condition.AddLine(new CbreqInstruction(TrueBody.Label, FalseBody.Label));
         }
 
         public override Node[] Nexts
         {
-            get { return new Node[] { condition }; }
+            get { return new Node[] { Condition }; }
         }
 
         public override void SetNext(Node next)
@@ -32,30 +37,29 @@ namespace CSC431.CFG
             if (isFixed)
                 throw new Exception("next was already set");
             isFixed = true;
-            trueBody.SetNext(next);
-            falseBody.SetNext(next);
+            TrueBody.SetNext(next);
+            FalseBody.SetNext(next);
+
+            TrueBody.Add(new JumpiInstruction(next.Label));
+            next.PrintLabel = true;
         }
 
         public override bool IsFixedUp
         {
             get
             {
-                return isFixed;
+                return isFixed && Nexts.Length == 1;
             }
         }
 
-        public override void Print(System.IO.TextWriter tw)
+        protected override void PrintCore(System.IO.TextWriter tw)
         {
-            condition.Print(tw);
-            tw.WriteLine("L{0}:", trueBody.Label);
-            trueBody.Print(tw);
-            tw.WriteLine("L{0}:", falseBody.Label);
-            falseBody.Print(tw);
+            TrueBody.PrintLabel = true;
+            FalseBody.PrintLabel = true;
 
-            if (Nexts.Length != 1)
-                throw new Exception("wut");
-
-            tw.WriteLine("L{0}:", Nexts[0].Label);
+            Condition.Print(tw);
+            TrueBody.Print(tw);
+            FalseBody.Print(tw);
         }
     }
 }

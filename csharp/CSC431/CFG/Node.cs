@@ -16,6 +16,7 @@ namespace CSC431.CFG
             this.Label = Interlocked.Increment(ref LabelCounter);
         }
 
+        public bool PrintLabel { get; set; }
         public int Label { get; private set; }
 
         public abstract Node[] Nexts { get; }
@@ -51,6 +52,13 @@ namespace CSC431.CFG
             }
         }
 
-        public abstract void Print(TextWriter tw);
+        public void Print(TextWriter tw)
+        {
+            if (PrintLabel)
+                tw.WriteLine("L{0}:", Label);
+            PrintCore(tw);
+        }
+
+        protected abstract void PrintCore(TextWriter tw);
     }
 }

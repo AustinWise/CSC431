@@ -30,26 +30,25 @@ namespace CSC431.CFG
                 throw new Exception("next was already set");
             isFixed = true;
             condition.SetNext(next);
+
+            //TODO: more fixing up
+            next.PrintLabel = true;
         }
 
         public override bool IsFixedUp
         {
             get
             {
-                return isFixed;
+                return isFixed && Nexts.Length == 1;
             }
         }
 
-        public override void Print(System.IO.TextWriter tw)
+        protected override void PrintCore(System.IO.TextWriter tw)
         {
-            tw.WriteLine("L{0}:", condition.Label);
+            condition.PrintLabel = true;
+            body.PrintLabel = true;
+
             condition.Print(tw);
-            tw.WriteLine("L{0}:", body.Label);
-
-            if (Nexts.Length != 1)
-                throw new Exception("wut");
-
-            tw.WriteLine("L{0}:", Nexts[0].Label);
         }
     }
 }

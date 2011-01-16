@@ -71,7 +71,7 @@ functions returns [List<FunctionBlock> funs = new List<FunctionBlock>()]
 
 function returns [FunctionBlock f]
 @init {SeqBlock body = new SeqBlock();}
-	: ^(FUN id=ID parameters ^(RETTYPE return_type) declarations statement_list[body]) { $f = new FunctionBlock($id.text, body); }
+	: ^(FUN id=ID parameters ^(RETTYPE return_type) declarations statement_list[body]) { body.SetNext(new BasicBlock()); $f = new FunctionBlock($id.text, body); }
 	;
 
 parameters
@@ -150,18 +150,18 @@ lvalue
 
 expression returns [BasicBlock b = new BasicBlock()]
 @init { int reg = Instruction.VirtualRegister(); $b.Reg = reg; }
-	: ^(AND e1=expression e2=expression)
-	| ^(OR e1=expression e2=expression)
-	| ^(EQ e1=expression e2=expression)
+	: ^(AND e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new AndInstruction(e1.Reg, e2.Reg, reg)); }
+	| ^(OR e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new OrInstruction(e1.Reg, e2.Reg, reg)); }
+	| ^(EQ e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(reg, 0)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MoveqInstruction(reg, 1)); }
 	| ^(LT e1=expression e2=expression)
 	| ^(GT e1=expression e2=expression)
 	| ^(NE e1=expression e2=expression)
 	| ^(LE e1=expression e2=expression)
 	| ^(GE e1=expression e2=expression)
 	| ^(PLUS e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new AddInstruction(e1.Reg, e2.Reg, reg)); }
-	| ^(MINUS e1=expression e2=expression)
-	| ^(TIMES e1=expression e2=expression)
-	| ^(DIVIDE e1=expression e2=expression)
+	| ^(MINUS e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new SubInstruction(e1.Reg, e2.Reg, reg)); }
+	| ^(TIMES e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new MultInstruction(e1.Reg, e2.Reg, reg)); }
+	| ^(DIVIDE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new DivInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(NOT e=expression)
 	| ^(NEG e=expression)
 	| s=selector { $b = s; }
@@ -173,14 +173,14 @@ selector returns [BasicBlock b]
 	;
 
 factor returns [BasicBlock b = new BasicBlock()]
-@init { int reg = Instruction.VirtualRegister(); }
+@init { int reg = Instruction.VirtualRegister(); $b.Reg = reg; }
 	: ^(INVOKE ID arguments)
 	| ID
-	| i=INTEGER {$b.Add(new LoadiInstruction(reg, int.Parse($i.text))); $b.Reg = reg; }
-	| TRUE
-	| FALSE
+	| i=INTEGER {$b.Add(new LoadiInstruction(reg, int.Parse($i.text))); }
+	| TRUE {$b.Add(new LoadiInstruction(reg, 1)); }
+	| FALSE {$b.Add(new LoadiInstruction(reg, 0)); }
 	| ^(NEW ID)
-	| NULL
+	| NULL {$b.Add(new LoadiInstruction(reg, 0)); }
 	;
 
 arguments

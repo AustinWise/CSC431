@@ -50,15 +50,29 @@ switch (instr.Type)
 <#
 }
         break;
+    case InstrType.SingleLabel:
+        {
+#>(int label) : base("<#=instr.Name #>", label)
+	{
+<#
+}
+        break;
+    case InstrType.DoubleLabel:
+        {
+#>(int l1, int l2) : base("<#=instr.Name #>", l1, l2)
+	{
+<#
+}
+        break;
     default:
         throw new NotSupportedException();
 }
-    if (instr.IsSetCC)
-    {
+if (instr.IsSetCC)
+{
 #>
 		this.CcSet = true;
 <#
-    }
+}
 #>
 	}
 }
@@ -83,7 +97,9 @@ private enum InstrType
     DoubleReg,
     TripleReg,
     ImmediateSingleReg,
-    ImmediateDoubleReg    
+    ImmediateDoubleReg,
+    SingleLabel,
+    DoubleLabel
 }
 private class InstrInfo
 {
@@ -119,6 +135,10 @@ private class InstrInfo
                     return "ImmediateSingleRegisterInstruction";
                 case InstrType.ImmediateDoubleReg:
                     return "ImmediateDoubleRegisterInstruction";
+                case InstrType.SingleLabel:
+                    return "SingleLabelInstruction";
+                case InstrType.DoubleLabel:
+                    return "DoubleLabelInstruction";
                 default:
                     throw new NotSupportedException();
             }
@@ -156,7 +176,9 @@ private class InstrInfo
                 new InstrInfo(InstrType.ImmediateSingleReg, "movgt", InstrFlags.UseCC),
                 new InstrInfo(InstrType.ImmediateSingleReg, "movle", InstrFlags.UseCC),
                 new InstrInfo(InstrType.ImmediateSingleReg, "movlt", InstrFlags.UseCC),
-                new InstrInfo(InstrType.ImmediateSingleReg, "movne", InstrFlags.UseCC)
+                new InstrInfo(InstrType.ImmediateSingleReg, "movne", InstrFlags.UseCC),
+                new InstrInfo(InstrType.SingleLabel, "jumpi"),
+                new InstrInfo(InstrType.DoubleLabel, "cbreq", InstrFlags.UseCC)
             };
     }
 }

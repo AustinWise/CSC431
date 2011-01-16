@@ -167,13 +167,13 @@ namespace CSC431
 
         private static TransformStep<ProgramBlock> CleanUpCfg = new TransformStep<ProgramBlock>(c =>
         {
-            //c.Visit(n =>
-            //    {
-            //        if (n is BasicBlock)
-            //        {
-            //            ((BasicBlock)n).Merge();
-            //        }
-            //    });
+            c.Visit(n =>
+                {
+                    if (!n.IsFixedUp)
+                    {
+                        throw new Exception("not all nodes are fixed up.");
+                    }
+                });
 
             return c;
         });

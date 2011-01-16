@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CSC431.ILOC;
 
 namespace CSC431.CFG
 {
@@ -27,6 +28,13 @@ namespace CSC431.CFG
             this.last = n;
         }
 
+        public void Add(Instruction n)
+        {
+            var b = new BasicBlock();
+            b.Add(n);
+            this.Add(b);
+        }
+
         public override Node[] Nexts
         {
             get { return new Node[] { nodes[0] }; }
@@ -48,7 +56,7 @@ namespace CSC431.CFG
             }
         }
 
-        public override void Print(System.IO.TextWriter tw)
+        protected override void PrintCore(System.IO.TextWriter tw)
         {
             foreach (var n in nodes)
             {
