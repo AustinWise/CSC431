@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CSC431.CFG
 {
-    class MultiBlock : Node
+    public class MultiBlock : Node
     {
         public MultiBlock()
         {
@@ -33,6 +33,14 @@ namespace CSC431.CFG
         public override void SetNext(Node next)
         {
             nexts.Add(next);
+        }
+
+        public override void Print(System.IO.TextWriter tw)
+        {
+            foreach (var l in this.code)
+            {
+                tw.WriteLine(l.ToString());
+            }
         }
     }
 }

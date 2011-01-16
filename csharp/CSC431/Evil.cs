@@ -167,50 +167,20 @@ namespace CSC431
 
         private static TransformStep<ProgramBlock> CleanUpCfg = new TransformStep<ProgramBlock>(c =>
         {
-            c.Visit(n =>
-                {
-                    if (n is BasicBlock)
-                    {
-                        ((BasicBlock)n).Merge();
-                    }
-                });
+            //c.Visit(n =>
+            //    {
+            //        if (n is BasicBlock)
+            //        {
+            //            ((BasicBlock)n).Merge();
+            //        }
+            //    });
 
             return c;
         });
 
         private static InStep<ProgramBlock> PrintCFG = new InStep<ProgramBlock>(c =>
         {
-            c.Visit(n =>
-            {
-                if (n is ProgramBlock)
-                {
-                    Console.WriteLine("prog");
-                }
-                else if (n is BasicBlock)
-                {
-                    Console.WriteLine("bb");
-                }
-                else if (n is SeqBlock)
-                {
-                    Console.WriteLine("seq");
-                }
-                else if (n is IfBlock)
-                {
-                    Console.WriteLine("if");
-                }
-                else if (n is LoopBlock)
-                {
-                    Console.WriteLine("loop");
-                }
-                else if (n is FunctionBlock)
-                {
-                    Console.WriteLine("fun:" + (n as FunctionBlock).Name);
-                }
-                else if (n is MultiBlock)
-                {
-                    Console.WriteLine("mb");
-                }
-            });
+            c.Print(Console.Out);
         });
     }
 }

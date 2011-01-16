@@ -58,12 +58,16 @@
     <Compile Include="EvilParser.cs" />
     <Compile Include="GenericEvilTreeParser.cs" />
     <Compile Include="IlGenWalker.cs" />
+    <Compile Include="ILOC\ArithmeticImmediateInstruction.cs" />
+    <Compile Include="ILOC\ArithmeticInstruction.cs" />
+    <Compile Include="ILOC\ImmediateInstruction.cs" />
     <Compile Include="ILOC\Instruction.cs" />
     <Compile Include="ILOC\Instruction.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Instruction.tt</DependentUpon>
     </Compile>
+    <Compile Include="ILOC\SingleRegisterInstruction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

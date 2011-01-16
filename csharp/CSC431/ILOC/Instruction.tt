@@ -1,2 +1,109 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ output extension=".generated.cs" #>
+<#@ Import Namespace="System.Collections.Generic" #>
+namespace CSC431.ILOC
+{
+
+<#
+foreach (var instr in InstrInfo.GetAll())
+{
+    var className = instr.Name.Substring(1).Insert(0, char.ToUpper(instr.Name[0]).ToString()) + "Instruction";
+#>
+class <#=className #> : <#=instr.BaseClass #>
+{
+	public <#=className #>
+<#
+switch (instr.Type)
+{
+    case 'a':
+        {
+#>(int rx, int ry, int rd) : base("<#=instr.Name #>", rx, ry, rd)
+	{
+<#
+}
+        break;
+    case 'i':
+        {
+#>(int rx, int i, int rd) : base("<#=instr.Name #>", rx, i, rd)
+	{
+<#
+}
+        break;
+    case 'l':
+        {
+#>(int reg, int val) : base("<#=instr.Name #>", reg, val)
+	{
+<#
+}
+        break;
+    case '1':
+        {
+#>(int reg) : base("<#=instr.Name #>", reg)
+	{
+<#
+}
+        break;
+    default:
+        throw new NotSupportedException();
+}
+#>
+	}
+}
+
+
+
+<#
+}
+#>
+
+}
+<#+
+private class InstrInfo
+{
+    public InstrInfo(char type, string name)
+    {
+        this.Type = type;
+        this.Name = name;
+    }
+
+    public char Type { get; private set; }
+    public string Name { get; private set; }
+    public string BaseClass
+    {
+        get
+        {
+            switch (Type)
+            {
+                case 'a':
+                    return "ArithmeticInstruction";
+                case 'i':
+                    return "ArithmeticImmediateInstruction";
+                case 'l':
+                    return "ImmediateInstruction";
+                case '1':
+                    return "SingleRegisterInstruction";
+                default:
+                    throw new NotSupportedException();
+            }
+        }
+    }
+
+    public static InstrInfo[] GetAll()
+    {
+        return new[]
+            {
+                new InstrInfo('a', "add"),
+                new InstrInfo('i', "addi"),
+                new InstrInfo('a', "div"),
+                new InstrInfo('a', "mult"),
+                new InstrInfo('a', "sub"),
+                new InstrInfo('i', "rsubi"),
+                new InstrInfo('a', "and"),
+                new InstrInfo('a', "or"),
+                new InstrInfo('i', "xori"),
+                new InstrInfo('l', "loadi"),
+                new InstrInfo('1', "print")
+            };
+    }
+}
+#>

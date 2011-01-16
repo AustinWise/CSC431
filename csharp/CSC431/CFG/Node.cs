@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.IO;
 
 namespace CSC431.CFG
 {
-    abstract class Node
+    public abstract class Node
     {
         private static int LabelCounter = 0;
 
@@ -49,5 +50,7 @@ namespace CSC431.CFG
                 n.VisitInner(seen, fun);
             }
         }
+
+        public abstract void Print(TextWriter tw);
     }
 }

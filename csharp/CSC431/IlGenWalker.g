@@ -10,6 +10,7 @@ options
 @header
 {
 using CSC431.CFG;
+using CSC431.ILOC;
 }
 
 @namespace {CSC431}
@@ -115,7 +116,7 @@ assignment returns [BasicBlock b = new BasicBlock()]
 	;
 
 print returns [BasicBlock b = new BasicBlock()]
-	: ^(PRINT expression (ENDL)?)
+	: ^(PRINT e=expression (ENDL)?) {$b.Add(e); $b.Add(new PrintInstruction(e.Reg));}
 	;
 
 read returns [BasicBlock b = new BasicBlock()]
@@ -148,32 +149,34 @@ lvalue
 	;
 
 expression returns [BasicBlock b = new BasicBlock()]
-	: ^(AND expression expression)
-	| ^(OR expression expression)
-	| ^(EQ expression expression)
-	| ^(LT expression expression)
-	| ^(GT expression expression)
-	| ^(NE expression expression)
-	| ^(LE expression expression)
-	| ^(GE expression expression)
-	| ^(PLUS expression expression)
-	| ^(MINUS expression expression)
-	| ^(TIMES expression expression)
-	| ^(DIVIDE expression expression)
+@init { int reg = Instruction.VirtualRegister(); $b.Reg = reg; }
+	: ^(AND e1=expression e2=expression)
+	| ^(OR e1=expression e2=expression)
+	| ^(EQ e1=expression e2=expression)
+	| ^(LT e1=expression e2=expression)
+	| ^(GT e1=expression e2=expression)
+	| ^(NE e1=expression e2=expression)
+	| ^(LE e1=expression e2=expression)
+	| ^(GE e1=expression e2=expression)
+	| ^(PLUS e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new AddInstruction(e1.Reg, e2.Reg, reg)); }
+	| ^(MINUS e1=expression e2=expression)
+	| ^(TIMES e1=expression e2=expression)
+	| ^(DIVIDE e1=expression e2=expression)
 	| ^(NOT e=expression)
 	| ^(NEG e=expression)
-	| s=selector
+	| s=selector { $b = s; }
 	;
 
-selector
+selector returns [BasicBlock b]
 	: ^(DOT selector ID)
-	| factor
+	| f=factor {$b = f;}
 	;
 
-factor
+factor returns [BasicBlock b = new BasicBlock()]
+@init { int reg = Instruction.VirtualRegister(); }
 	: ^(INVOKE ID arguments)
 	| ID
-	| INTEGER
+	| i=INTEGER {$b.Add(new LoadiInstruction(reg, int.Parse($i.text))); $b.Reg = reg; }
 	| TRUE
 	| FALSE
 	| ^(NEW ID)

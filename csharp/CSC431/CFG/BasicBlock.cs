@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CSC431.CFG
 {
-    class BasicBlock : Node
+    public class BasicBlock : Node
     {
         private Node next;
         private List<CSC431.ILOC.Instruction> code = new List<ILOC.Instruction>();
@@ -17,7 +17,7 @@ namespace CSC431.CFG
         /// <remarks>
         /// Only valid when creating the inital control flow graph, may be lost later.
         /// </remarks>
-        public int ExpressionRegister
+        public int Reg
         {
             get
             {
@@ -31,9 +31,13 @@ namespace CSC431.CFG
             }
         }
 
-        public void AddLine(CSC431.ILOC.Instruction line)
+        public void Add(CSC431.ILOC.Instruction line)
         {
             code.Add(line);
+        }
+        public void Add(BasicBlock lines)
+        {
+            code.AddRange(lines.code);
         }
 
         public override Node[] Nexts
@@ -62,10 +66,18 @@ namespace CSC431.CFG
         public void Merge()
         {
             BasicBlock other;
-            if ((other = next as BasicBlock) != null)
+            while ((other = next as BasicBlock) != null)
             {
                 this.code.AddRange(other.code);
                 this.next = other.next;
+            }
+        }
+
+        public override void Print(System.IO.TextWriter tw)
+        {
+            foreach (var l in this.code)
+            {
+                tw.WriteLine(l.ToString());
             }
         }
     }

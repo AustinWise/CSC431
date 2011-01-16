@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CSC431.CFG
 {
-    class SeqBlock : Node
+    public class SeqBlock : Node
     {
         private List<Node> nodes = new List<Node>();
         private Node last;
@@ -19,6 +19,9 @@ namespace CSC431.CFG
 
         public void Add(Node n)
         {
+            if (n is BasicBlock)
+                ((BasicBlock)n).Merge();
+
             this.last.SetNext(n);
             this.nodes.Add(n);
             this.last = n;
@@ -42,6 +45,14 @@ namespace CSC431.CFG
             get
             {
                 return isFixed;
+            }
+        }
+
+        public override void Print(System.IO.TextWriter tw)
+        {
+            foreach (var n in nodes)
+            {
+                n.Print(tw);
             }
         }
     }
