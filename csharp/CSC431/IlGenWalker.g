@@ -138,7 +138,14 @@ assignment returns [BasicBlock b = new BasicBlock()]
 	;
 
 print returns [BasicBlock b = new BasicBlock()]
-	: ^(PRINT e=expression (ENDL)?) {$b.Add(e); $b.Add(new PrintInstruction(e.Reg));}
+	: ^(PRINT e=expression (el=ENDL)?) 
+		{
+			$b.Add(e);
+			if (el == null)
+				$b.Add(new PrintInstruction(e.Reg));
+			else
+				$b.Add(new PrintlnInstruction(e.Reg));
+		}
 	;
 
 read returns [BasicBlock b = new BasicBlock()]
@@ -162,6 +169,7 @@ ret returns [BasicBlock b = new BasicBlock()]
 		{
 			if (e != null)
 			{
+				$b.Add(e);
 				$b.Add(new StoreretInstruction(e.Reg));
 			}
 			$b.Add(new RetInstruction());
