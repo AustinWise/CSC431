@@ -9,8 +9,11 @@ namespace CSC431.CFG
     {
         private Node next;
         private List<CSC431.ILOC.Instruction> code = new List<ILOC.Instruction>();
+        
+        public const int InvalidReg = -1;
+        public const int CCNotReg = -2;
 
-        private int register = -1;
+        private int register = InvalidReg;
         /// <summary>
         /// Used when there is a single expression in a basic block to record which register has the expression result in it.
         /// </summary>

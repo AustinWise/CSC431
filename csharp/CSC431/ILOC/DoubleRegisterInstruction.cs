@@ -19,7 +19,7 @@ namespace CSC431.ILOC
 
         public override string ToString()
         {
-            return string.Format("{0} r{1}, r{2}", Rx, Ry);
+            return string.Format("{0} r{1}, r{2}", Name, Rx, Ry);
         }
     }
 }

@@ -20,5 +20,6 @@ namespace CSC431.ILOC
         }
 
         public string Name { get; private set; }
+        public bool CcSet { get; protected set; }
     }
 }

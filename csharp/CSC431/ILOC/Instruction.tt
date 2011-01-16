@@ -15,28 +15,35 @@ class <#=className #> : <#=instr.BaseClass #>
 <#
 switch (instr.Type)
 {
-    case '1':
+    case InstrType.SingleReg:
         {
 #>(int reg) : base("<#=instr.Name #>", reg)
 	{
 <#
 }
         break;
-    case '3':
+    case InstrType.DoubleReg:
+        {
+#>(int rx, int ry) : base("<#=instr.Name #>", rx, ry)
+	{
+<#
+}
+        break;
+    case InstrType.TripleReg:
         {
 #>(int rx, int ry, int rd) : base("<#=instr.Name #>", rx, ry, rd)
 	{
 <#
 }
         break;
-    case 'i':
+    case InstrType.ImmediateSingleReg:
         {
 #>(int reg, int val) : base("<#=instr.Name #>", reg, val)
 	{
 <#
 }
         break;
-    case 'o':
+    case InstrType.ImmediateDoubleReg:
         {
 #>(int rx, int i, int rd) : base("<#=instr.Name #>", rx, i, rd)
 	{
@@ -46,6 +53,12 @@ switch (instr.Type)
     default:
         throw new NotSupportedException();
 }
+    if (instr.IsSetCC)
+    {
+#>
+		this.CcSet = true;
+<#
+    }
 #>
 	}
 }
@@ -58,31 +71,53 @@ switch (instr.Type)
 
 }
 <#+
+[Flags]
+private enum InstrFlags : int
+{
+    SetCC = 1,
+    UseCC = 2
+}
+private enum InstrType
+{
+    SingleReg,
+    DoubleReg,
+    TripleReg,
+    ImmediateSingleReg,
+    ImmediateDoubleReg    
+}
 private class InstrInfo
 {
-    public InstrInfo(char type, string name)
+    public InstrInfo(InstrType type, string name)
     {
         this.Type = type;
         this.Name = name;
     }
 
-    public char Type { get; private set; }
+    public InstrInfo(InstrType type, string name, InstrFlags flags)
+        : this(type, name)
+    {
+        this.Flags = flags;
+    }
+
+    public InstrFlags Flags { get; private set; }
+    public InstrType Type { get; private set; }
     public string Name { get; private set; }
+    
     public string BaseClass
     {
         get
         {
             switch (Type)
             {
-                case '1':
+                case InstrType.SingleReg:
                     return "SingleRegisterInstruction";
-                case '2':
+                case InstrType.DoubleReg:
                     return "DoubleRegisterInstruction";
-                case '3':
+                case InstrType.TripleReg:
                     return "TripleRegisterInstruction";
-                case 'i':
+                case InstrType.ImmediateSingleReg:
                     return "ImmediateSingleRegisterInstruction";
-                case 'o':
+                case InstrType.ImmediateDoubleReg:
                     return "ImmediateDoubleRegisterInstruction";
                 default:
                     throw new NotSupportedException();
@@ -90,22 +125,38 @@ private class InstrInfo
         }
     }
 
+    public bool IsSetCC
+    {
+        get
+        {
+            return ((Flags & InstrFlags.SetCC) != 0);
+        }
+    }
+
     public static InstrInfo[] GetAll()
     {
         return new[]
             {
-                new InstrInfo('3', "add"),
-                new InstrInfo('o', "addi"),
-                new InstrInfo('3', "div"),
-                new InstrInfo('3', "mult"),
-                new InstrInfo('3', "sub"),
-                new InstrInfo('o', "rsubi"),
-                new InstrInfo('3', "and"),
-                new InstrInfo('3', "or"),
-                new InstrInfo('o', "xori"),
-                new InstrInfo('i', "loadi"),
-                new InstrInfo('1', "print"),
-                new InstrInfo('1', "read")
+                new InstrInfo(InstrType.TripleReg, "add"),
+                new InstrInfo(InstrType.ImmediateDoubleReg, "addi"),
+                new InstrInfo(InstrType.TripleReg, "div"),
+                new InstrInfo(InstrType.TripleReg, "mult"),
+                new InstrInfo(InstrType.TripleReg, "sub"),
+                new InstrInfo(InstrType.ImmediateDoubleReg, "rsubi"),
+                new InstrInfo(InstrType.TripleReg, "and"),
+                new InstrInfo(InstrType.TripleReg, "or"),
+                new InstrInfo(InstrType.ImmediateDoubleReg, "xori"),
+                new InstrInfo(InstrType.ImmediateSingleReg, "loadi"),
+                new InstrInfo(InstrType.SingleReg, "print"),
+                new InstrInfo(InstrType.SingleReg, "read"),
+                new InstrInfo(InstrType.DoubleReg, "comp", InstrFlags.SetCC),
+                new InstrInfo(InstrType.DoubleReg, "mov"),
+                new InstrInfo(InstrType.ImmediateSingleReg, "moveq", InstrFlags.UseCC),
+                new InstrInfo(InstrType.ImmediateSingleReg, "movge", InstrFlags.UseCC),
+                new InstrInfo(InstrType.ImmediateSingleReg, "movgt", InstrFlags.UseCC),
+                new InstrInfo(InstrType.ImmediateSingleReg, "movle", InstrFlags.UseCC),
+                new InstrInfo(InstrType.ImmediateSingleReg, "movlt", InstrFlags.UseCC),
+                new InstrInfo(InstrType.ImmediateSingleReg, "movne", InstrFlags.UseCC)
             };
     }
 }
