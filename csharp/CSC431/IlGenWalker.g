@@ -69,7 +69,7 @@ decl_list[Dictionary<string, int> map]
 ;
 
 id_list[List<string> ids]
-	: (id=ID)+ {$ids.Add($id.text);}
+	: (id=ID {$ids.Add($id.text);} )+ 
 ;
 
 functions returns [List<FunctionBlock> funs = new List<FunctionBlock>()]
@@ -79,18 +79,29 @@ functions returns [List<FunctionBlock> funs = new List<FunctionBlock>()]
 function returns [FunctionBlock f]
 @init
 	{
-		SeqBlock body = new SeqBlock();
 		localMap.Clear();
+		
+		SeqBlock body = new SeqBlock();
+		BasicBlock argLoadBlock = new BasicBlock();
+		body.Add(argLoadBlock);
 	}
-	: ^(FUN id=ID parameters ^(RETTYPE return_type) declarations[localMap] statement_list[body]) { body.SetNext(new BasicBlock()); $f = new FunctionBlock($id.text, body); }
+	: ^(FUN id=ID parameters[argLoadBlock] ^(RETTYPE return_type) declarations[localMap] statement_list[body])
+		{
+			BasicBlock returnBlock = new BasicBlock();
+			returnBlock.Add(new RetInstruction());
+			body.Add(returnBlock);
+			body.SetNext(new BasicBlock());
+			$f = new FunctionBlock($id.text, body);
+		}
 	;
 
-parameters
-	: ^(PARAMS param_decl*)
+parameters[BasicBlock b]
+@init {int ndx = 0;}
+	: ^(PARAMS (param_decl[$b,ndx] {ndx++;})*)
 	;
 	
-param_decl
-   :  ^(DECL ^(TYPE type) id=ID) {argMap[$id.text] = Instruction.VirtualRegister();}
+param_decl[BasicBlock b, int ndx]
+   :  ^(DECL ^(TYPE type) id=ID) {int reg; argMap[$id.text] = reg = Instruction.VirtualRegister(); $b.Add(new LoadinargumentInstruction($id.text, ndx, reg));}
    ;
 
 return_type
@@ -131,7 +142,7 @@ print returns [BasicBlock b = new BasicBlock()]
 	;
 
 read returns [BasicBlock b = new BasicBlock()]
-	: ^(READ lvalue)
+	: ^(READ dest=lvalue) { $b.Add(new ReadInstruction(dest)); }
 	;
 
 conditional returns [IfBlock b]
@@ -147,11 +158,18 @@ delete returns [BasicBlock b = new BasicBlock()]
 	;
 
 ret returns [BasicBlock b = new BasicBlock()]
-	: ^(RETURN (expression)?)
+	: ^(RETURN (e=expression)?) 
+		{
+			if (e != null)
+			{
+				$b.Add(new StoreretInstruction(e.Reg));
+			}
+			$b.Add(new RetInstruction());
+		}
 	;
 
 invocation returns [BasicBlock b = new BasicBlock()]
-	: ^(INVOKE ID arguments)
+	: ^(INVOKE id=ID regLocs=arguments[$b]) {doInvoke($id.text, $b, regLocs); }
 	;
 
 //TODO: make lvalue also support structs
@@ -186,7 +204,7 @@ selector returns [BasicBlock b]
 
 factor returns [BasicBlock b = new BasicBlock()]
 @init { int reg = Instruction.VirtualRegister(); $b.Reg = reg; }
-	: ^(INVOKE ID arguments)
+	: ^(INVOKE id=ID regLocs=arguments[b]) {doInvoke($id.text, $b, regLocs); $b.Add(new LoadretInstruction(reg)); }
 	| id=ID {$b.Add(new MovInstruction(getVarReg($id.text), reg)); }
 	| i=INTEGER {$b.Add(new LoadiInstruction(reg, int.Parse($i.text))); }
 	| TRUE {$b.Add(new LoadiInstruction(reg, 1)); }
@@ -195,11 +213,11 @@ factor returns [BasicBlock b = new BasicBlock()]
 	| NULL {$b.Add(new LoadiInstruction(reg, 0)); }
 	;
 
-arguments
-	: arg_list
+arguments[BasicBlock b] returns [List<int> regLocs = new List<int>()]
+	: arg_list[$b, $regLocs]
 	;
 
-arg_list
-	: ^(ARGS (expression)+ )
+arg_list [BasicBlock b, List<int> regLocs]
+	: ^(ARGS (e=expression {$b.Add(e); $regLocs.Add(e.Reg);} )+ )
 	| ARGS
 	;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Antlr.Runtime.Tree;
 using CSC431.CFG;
+using CSC431.ILOC;
 
 
 namespace CSC431
@@ -26,6 +27,15 @@ namespace CSC431
             if (argMap.ContainsKey(name))
                 return argMap[name];
             return globalMap[name];
+        }
+
+        private void doInvoke(string id, BasicBlock b, List<int> regLocs)
+        {
+            for (int i = 0; i < regLocs.Count; i++)
+            {
+                b.Add(new StoreoutargumentInstruction(regLocs[i], i));
+            }
+            b.Add(new CallInstruction(id));
         }
     }
 

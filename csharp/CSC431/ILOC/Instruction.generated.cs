@@ -111,6 +111,16 @@ class PrintInstruction : SingleRegisterInstruction
 
 
 
+class PrintlnInstruction : SingleRegisterInstruction
+{
+	public PrintlnInstruction
+(int reg) : base("println", reg)
+	{
+	}
+}
+
+
+
 class ReadInstruction : SingleRegisterInstruction
 {
 	public ReadInstruction
@@ -216,6 +226,66 @@ class CbreqInstruction : DoubleLabelInstruction
 {
 	public CbreqInstruction
 (int l1, int l2) : base("cbreq", l1, l2)
+	{
+	}
+}
+
+
+
+class LoadinargumentInstruction : StringImmediateRegisterInstruction
+{
+	public LoadinargumentInstruction
+(string str, int i, int reg) : base("loadinargument", str, i, reg)
+	{
+	}
+}
+
+
+
+class CallInstruction : StringInstruction
+{
+	public CallInstruction
+(string str) : base("call", str)
+	{
+	}
+}
+
+
+
+class RetInstruction : NoArgInstruction
+{
+	public RetInstruction
+() : base("ret")
+	{
+	}
+}
+
+
+
+class StoreretInstruction : SingleRegisterInstruction
+{
+	public StoreretInstruction
+(int reg) : base("storeret", reg)
+	{
+	}
+}
+
+
+
+class StoreoutargumentInstruction : SingleRegisterImmediateInstruction
+{
+	public StoreoutargumentInstruction
+(int reg, int val) : base("storeoutargument", reg, val)
+	{
+	}
+}
+
+
+
+class LoadretInstruction : SingleRegisterInstruction
+{
+	public LoadretInstruction
+(int reg) : base("loadret", reg)
 	{
 	}
 }

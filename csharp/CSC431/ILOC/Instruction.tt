@@ -64,6 +64,34 @@ switch (instr.Type)
 <#
 }
         break;
+    case InstrType.StringImmediateReg:
+        {
+#>(string str, int i, int reg) : base("<#=instr.Name #>", str, i, reg)
+	{
+<#
+}
+        break;
+    case InstrType.String:
+        {
+#>(string str) : base("<#=instr.Name #>", str)
+	{
+<#
+}
+        break;
+    case InstrType.NoArg:
+        {
+#>() : base("<#=instr.Name #>")
+	{
+<#
+}
+        break;
+    case InstrType.SingleRegImmediate:
+        {
+#>(int reg, int val) : base("<#=instr.Name #>", reg, val)
+	{
+<#
+}
+        break;
     default:
         throw new NotSupportedException();
 }
@@ -99,7 +127,11 @@ private enum InstrType
     ImmediateSingleReg,
     ImmediateDoubleReg,
     SingleLabel,
-    DoubleLabel
+    DoubleLabel,
+    StringImmediateReg,
+    String,
+    NoArg,
+    SingleRegImmediate
 }
 private class InstrInfo
 {
@@ -139,6 +171,14 @@ private class InstrInfo
                     return "SingleLabelInstruction";
                 case InstrType.DoubleLabel:
                     return "DoubleLabelInstruction";
+                case InstrType.StringImmediateReg:
+                    return "StringImmediateRegisterInstruction";
+                case InstrType.String:
+                    return "StringInstruction";
+                case InstrType.NoArg:
+                    return "NoArgInstruction";
+                case InstrType.SingleRegImmediate:
+                    return "SingleRegisterImmediateInstruction";
                 default:
                     throw new NotSupportedException();
             }
@@ -168,6 +208,7 @@ private class InstrInfo
                 new InstrInfo(InstrType.ImmediateDoubleReg, "xori"),
                 new InstrInfo(InstrType.ImmediateSingleReg, "loadi"),
                 new InstrInfo(InstrType.SingleReg, "print"),
+                new InstrInfo(InstrType.SingleReg, "println"),
                 new InstrInfo(InstrType.SingleReg, "read"),
                 new InstrInfo(InstrType.DoubleReg, "comp", InstrFlags.SetCC),
                 new InstrInfo(InstrType.DoubleReg, "mov"),
@@ -178,7 +219,13 @@ private class InstrInfo
                 new InstrInfo(InstrType.ImmediateSingleReg, "movlt", InstrFlags.UseCC),
                 new InstrInfo(InstrType.ImmediateSingleReg, "movne", InstrFlags.UseCC),
                 new InstrInfo(InstrType.SingleLabel, "jumpi"),
-                new InstrInfo(InstrType.DoubleLabel, "cbreq", InstrFlags.UseCC)
+                new InstrInfo(InstrType.DoubleLabel, "cbreq"),
+                new InstrInfo(InstrType.StringImmediateReg, "loadinargument"),
+                new InstrInfo(InstrType.String, "call"),
+                new InstrInfo(InstrType.NoArg, "ret"),
+                new InstrInfo(InstrType.SingleReg, "storeret"),
+                new InstrInfo(InstrType.SingleRegImmediate, "storeoutargument"),
+                new InstrInfo(InstrType.SingleReg, "loadret"),
             };
     }
 }

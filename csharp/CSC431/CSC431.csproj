@@ -68,8 +68,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Instruction.tt</DependentUpon>
     </Compile>
+    <Compile Include="ILOC\NoArgInstruction.cs" />
     <Compile Include="ILOC\SingleLabelInstruction.cs" />
+    <Compile Include="ILOC\SingleRegisterImmediateInstruction.cs" />
     <Compile Include="ILOC\SingleRegisterInstruction.cs" />
+    <Compile Include="ILOC\StringImmediateRegisterInstruction.cs" />
+    <Compile Include="ILOC\StringInstruction.cs" />
     <Compile Include="ILOC\TripleRegisterInstruction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
