@@ -16,7 +16,7 @@ using CSC431.ILOC;
 @namespace {CSC431}
 
 program returns [ProgramBlock prog]
-	: ^(PROGRAM (types declarations funs=functions)) {$prog = new ProgramBlock(funs);}
+	: ^(PROGRAM (types declarations[globalMap] funs=functions)) {$prog = new ProgramBlock(funs);}
 	;
 
 types
@@ -48,21 +48,28 @@ type
 	| ^(STRUCT ID)
 ;
 
-declarations
-	: ^(DECLS declaration)
+declarations[Dictionary<string, int> map]
+	: ^(DECLS declaration[$map])
 	| 
 ;
 
-declaration
-	: (decl_list)*
+declaration[Dictionary<string, int> map]
+	: (decl_list[$map])*
 ;
 
-decl_list
-	: ^(DECLLIST ^(TYPE type) id_list)
+decl_list[Dictionary<string, int> map]
+@init { var ids = new List<string>(); }
+	: ^(DECLLIST ^(TYPE type) id_list[ids])
+		{
+			foreach (var id in ids)
+			{
+				$map[id] = Instruction.VirtualRegister();
+			}
+		}
 ;
 
-id_list
-	: (ID)+
+id_list[List<string> ids]
+	: (id=ID)+ {$ids.Add($id.text);}
 ;
 
 functions returns [List<FunctionBlock> funs = new List<FunctionBlock>()]
@@ -70,8 +77,12 @@ functions returns [List<FunctionBlock> funs = new List<FunctionBlock>()]
 	;
 
 function returns [FunctionBlock f]
-@init {SeqBlock body = new SeqBlock();}
-	: ^(FUN id=ID parameters ^(RETTYPE return_type) declarations statement_list[body]) { body.SetNext(new BasicBlock()); $f = new FunctionBlock($id.text, body); }
+@init
+	{
+		SeqBlock body = new SeqBlock();
+		localMap.Clear();
+	}
+	: ^(FUN id=ID parameters ^(RETTYPE return_type) declarations[localMap] statement_list[body]) { body.SetNext(new BasicBlock()); $f = new FunctionBlock($id.text, body); }
 	;
 
 parameters
@@ -79,7 +90,7 @@ parameters
 	;
 	
 param_decl
-   :  ^(DECL ^(TYPE type) ID)
+   :  ^(DECL ^(TYPE type) id=ID) {argMap[$id.text] = Instruction.VirtualRegister();}
    ;
 
 return_type
@@ -112,7 +123,7 @@ statement_list[SeqBlock b]
 	;
 
 assignment returns [BasicBlock b = new BasicBlock()]
-	: ^(ASSIGN expression lvalue)
+	: ^(ASSIGN e=expression dest=lvalue) {$b.Add(e); $b.Add(new MovInstruction(e.Reg, dest)); }
 	;
 
 print returns [BasicBlock b = new BasicBlock()]
@@ -143,9 +154,10 @@ invocation returns [BasicBlock b = new BasicBlock()]
 	: ^(INVOKE ID arguments)
 	;
 
-lvalue
+//TODO: make lvalue also support structs
+lvalue returns [int dest]
 	: ^(DOT lvalue ID)
-	| ID
+	| id=ID {$dest = getVarReg($id.text); }
 	;
 
 expression returns [BasicBlock b = new BasicBlock()]
@@ -153,16 +165,16 @@ expression returns [BasicBlock b = new BasicBlock()]
 	: ^(AND e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new AndInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(OR e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new OrInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(EQ e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(reg, 0)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MoveqInstruction(reg, 1)); }
-	| ^(LT e1=expression e2=expression)
-	| ^(GT e1=expression e2=expression)
-	| ^(NE e1=expression e2=expression)
-	| ^(LE e1=expression e2=expression)
-	| ^(GE e1=expression e2=expression)
+	| ^(LT e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(reg, 0)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovltInstruction(reg, 1)); }
+	| ^(GT e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(reg, 0)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovgtInstruction(reg, 1)); }
+	| ^(NE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(reg, 0)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovneInstruction(reg, 1)); }
+	| ^(LE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(reg, 0)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovleInstruction(reg, 1)); }
+	| ^(GE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(reg, 0)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovgeInstruction(reg, 1)); }
 	| ^(PLUS e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new AddInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(MINUS e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new SubInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(TIMES e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new MultInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(DIVIDE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new DivInstruction(e1.Reg, e2.Reg, reg)); }
-	| ^(NOT e=expression)
+	| ^(NOT e=expression) { $b.Add(e); $b.Add(new XoriInstruction(e.Reg, 1, reg)); }
 	| ^(NEG e=expression)
 	| s=selector { $b = s; }
 	;
@@ -175,7 +187,7 @@ selector returns [BasicBlock b]
 factor returns [BasicBlock b = new BasicBlock()]
 @init { int reg = Instruction.VirtualRegister(); $b.Reg = reg; }
 	: ^(INVOKE ID arguments)
-	| ID
+	| id=ID {$b.Add(new MovInstruction(getVarReg($id.text), reg)); }
 	| i=INTEGER {$b.Add(new LoadiInstruction(reg, int.Parse($i.text))); }
 	| TRUE {$b.Add(new LoadiInstruction(reg, 1)); }
 	| FALSE {$b.Add(new LoadiInstruction(reg, 0)); }

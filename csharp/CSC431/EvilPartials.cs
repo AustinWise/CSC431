@@ -10,9 +10,22 @@ namespace CSC431
 {
     public partial class IlGenWalker
     {
+        private Dictionary<string, int> globalMap = new Dictionary<string, int>();
+        private Dictionary<string, int> localMap = new Dictionary<string, int>();
+        private Dictionary<string, int> argMap = new Dictionary<string, int>();
+
         public object Program()
         {
             return this.program();
+        }
+
+        private int getVarReg(string name)
+        {
+            if (localMap.ContainsKey(name))
+                return localMap[name];
+            if (argMap.ContainsKey(name))
+                return argMap[name];
+            return globalMap[name];
         }
     }
 

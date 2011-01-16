@@ -2,26 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CSC431.ILOC;
 
 namespace CSC431.CFG
 {
     public class LoopBlock : Node
     {
-        private MultiBlock condition;
-        private SeqBlock body;
+        private MultiBlock Condition;
+        private SeqBlock Body;
         private bool isFixed = false;
+        private int condReg;
 
         public LoopBlock(BasicBlock condition, SeqBlock body)
         {
-            //TODO: add jump instructions
-            this.condition = condition.ToMulti();
-            this.body = body;
-            this.body.SetNext(condition);
+            this.condReg = condition.Reg;
+
+            this.Condition = condition.ToMulti();
+            this.Body = body;
+            this.Body.SetNext(condition);
+
+            body.Add(new JumpiInstruction(this.Condition.Label));
+
+            this.Condition.PrintLabel = true;
+            this.Body.PrintLabel = true;
         }
 
         public override Node[] Nexts
         {
-            get { return new Node[] { condition }; }
+            get { return new Node[] { Condition }; }
         }
 
         public override void SetNext(Node next)
@@ -29,10 +37,14 @@ namespace CSC431.CFG
             if (isFixed)
                 throw new Exception("next was already set");
             isFixed = true;
-            condition.SetNext(next);
+            Condition.SetNext(next);
 
-            //TODO: more fixing up
             next.PrintLabel = true;
+
+            int reg = Instruction.VirtualRegister();
+            this.Condition.AddLine(new LoadiInstruction(reg, 1));
+            this.Condition.AddLine(new CompInstruction(condReg, reg));
+            this.Condition.AddLine(new CbreqInstruction(Body.Label, next.Label));
         }
 
         public override bool IsFixedUp
@@ -45,10 +57,11 @@ namespace CSC431.CFG
 
         protected override void PrintCore(System.IO.TextWriter tw)
         {
-            condition.PrintLabel = true;
-            body.PrintLabel = true;
+            Condition.PrintLabel = true;
+            Body.PrintLabel = true;
 
-            condition.Print(tw);
+            Condition.Print(tw);
+            Body.Print(tw);
         }
     }
 }
