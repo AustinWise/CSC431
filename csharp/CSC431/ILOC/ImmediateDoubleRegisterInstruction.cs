@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CSC431.ILOC
+﻿namespace CSC431.ILOC
 {
-    public class ArithmeticImmediateInstruction : Instruction
+    public class ImmediateDoubleRegisterInstruction : Instruction
     {
-        public ArithmeticImmediateInstruction(string name, int rx, int i, int rd)
+        public ImmediateDoubleRegisterInstruction(string name, int rx, int i, int rd)
             : base(name)
         {
             this.Rx = rx;

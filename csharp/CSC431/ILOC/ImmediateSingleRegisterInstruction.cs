@@ -5,9 +5,9 @@ using System.Text;
 
 namespace CSC431.ILOC
 {
-    public class ImmediateInstruction : Instruction
+    public class ImmediateSingleRegisterInstruction : Instruction
     {
-        public ImmediateInstruction(string name, int reg, int val)
+        public ImmediateSingleRegisterInstruction(string name, int reg, int val)
             : base(name)
         {
             this.Reg = reg;

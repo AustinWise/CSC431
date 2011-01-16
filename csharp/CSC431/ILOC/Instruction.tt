@@ -15,7 +15,14 @@ class <#=className #> : <#=instr.BaseClass #>
 <#
 switch (instr.Type)
 {
-    case 'a':
+    case '1':
+        {
+#>(int reg) : base("<#=instr.Name #>", reg)
+	{
+<#
+}
+        break;
+    case '3':
         {
 #>(int rx, int ry, int rd) : base("<#=instr.Name #>", rx, ry, rd)
 	{
@@ -24,21 +31,14 @@ switch (instr.Type)
         break;
     case 'i':
         {
-#>(int rx, int i, int rd) : base("<#=instr.Name #>", rx, i, rd)
-	{
-<#
-}
-        break;
-    case 'l':
-        {
 #>(int reg, int val) : base("<#=instr.Name #>", reg, val)
 	{
 <#
 }
         break;
-    case '1':
+    case 'o':
         {
-#>(int reg) : base("<#=instr.Name #>", reg)
+#>(int rx, int i, int rd) : base("<#=instr.Name #>", rx, i, rd)
 	{
 <#
 }
@@ -74,14 +74,16 @@ private class InstrInfo
         {
             switch (Type)
             {
-                case 'a':
-                    return "ArithmeticInstruction";
-                case 'i':
-                    return "ArithmeticImmediateInstruction";
-                case 'l':
-                    return "ImmediateInstruction";
                 case '1':
                     return "SingleRegisterInstruction";
+                case '2':
+                    return "DoubleRegisterInstruction";
+                case '3':
+                    return "TripleRegisterInstruction";
+                case 'i':
+                    return "ImmediateSingleRegisterInstruction";
+                case 'o':
+                    return "ImmediateDoubleRegisterInstruction";
                 default:
                     throw new NotSupportedException();
             }
@@ -92,17 +94,18 @@ private class InstrInfo
     {
         return new[]
             {
-                new InstrInfo('a', "add"),
-                new InstrInfo('i', "addi"),
-                new InstrInfo('a', "div"),
-                new InstrInfo('a', "mult"),
-                new InstrInfo('a', "sub"),
-                new InstrInfo('i', "rsubi"),
-                new InstrInfo('a', "and"),
-                new InstrInfo('a', "or"),
-                new InstrInfo('i', "xori"),
-                new InstrInfo('l', "loadi"),
-                new InstrInfo('1', "print")
+                new InstrInfo('3', "add"),
+                new InstrInfo('o', "addi"),
+                new InstrInfo('3', "div"),
+                new InstrInfo('3', "mult"),
+                new InstrInfo('3', "sub"),
+                new InstrInfo('o', "rsubi"),
+                new InstrInfo('3', "and"),
+                new InstrInfo('3', "or"),
+                new InstrInfo('o', "xori"),
+                new InstrInfo('i', "loadi"),
+                new InstrInfo('1', "print"),
+                new InstrInfo('1', "read")
             };
     }
 }

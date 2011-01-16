@@ -58,9 +58,9 @@
     <Compile Include="EvilParser.cs" />
     <Compile Include="GenericEvilTreeParser.cs" />
     <Compile Include="IlGenWalker.cs" />
-    <Compile Include="ILOC\ArithmeticImmediateInstruction.cs" />
-    <Compile Include="ILOC\ArithmeticInstruction.cs" />
-    <Compile Include="ILOC\ImmediateInstruction.cs" />
+    <Compile Include="ILOC\DoubleRegisterInstruction.cs" />
+    <Compile Include="ILOC\ImmediateDoubleRegisterInstruction.cs" />
+    <Compile Include="ILOC\ImmediateSingleRegisterInstruction.cs" />
     <Compile Include="ILOC\Instruction.cs" />
     <Compile Include="ILOC\Instruction.generated.cs">
       <AutoGen>True</AutoGen>
@@ -68,14 +68,15 @@
       <DependentUpon>Instruction.tt</DependentUpon>
     </Compile>
     <Compile Include="ILOC\SingleRegisterInstruction.cs" />
+    <Compile Include="ILOC\TripleRegisterInstruction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ILOC\Instruction.tt">
+    <Compile Include="ILOC\Instruction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
-    </None>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Steps\IInStep.cs" />
