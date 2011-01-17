@@ -34,6 +34,15 @@ namespace CSC431.CFG
             }
         }
 
+        /// <summary>
+        /// Contains the type of struct that <see cref="Reg"/> points to.  Null/empty string
+        /// means that Reg does not contain a pointer to a struct.
+        /// </summary>
+        /// <remarks>
+        /// This is for use in the selector and lvalue rules.
+        /// </remarks>
+        public string StructType { get; set; }
+
         public void Add(CSC431.ILOC.Instruction line)
         {
             code.Add(line);

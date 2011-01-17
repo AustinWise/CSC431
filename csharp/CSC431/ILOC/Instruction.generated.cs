@@ -466,5 +466,69 @@ return string.Format("{0} r{1}", Name, Reg0);
 
 
 
+class StoreaiInstruction : Instruction
+{
+	public StoreaiInstruction
+	(
+int reg0,int reg1,string str0	) : base ("storeai")
+	{
+this.Reg0 = reg0;this.Reg1 = reg1;this.Str0 = str0;	}
+
+public int Reg0{ get; private set; }public int Reg1{ get; private set; }public string Str0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, r{2}, {3}", Name, Reg0, Reg1, Str0);
+}
+}
+
+
+
+class LoadaiInstruction : Instruction
+{
+	public LoadaiInstruction
+	(
+int reg0,string str0,int reg1	) : base ("loadai")
+	{
+this.Reg0 = reg0;this.Str0 = str0;this.Reg1 = reg1;	}
+
+public int Reg0{ get; private set; }public string Str0{ get; private set; }public int Reg1{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}, {2}, r{3}", Name, Reg0, Str0, Reg1);
+}
+}
+
+
+
+class NewInstruction : Instruction
+{
+	public NewInstruction
+	(
+string str0,string[] arr0,int reg0	) : base ("new")
+	{
+this.Str0 = str0;this.Arr0 = arr0;this.Reg0 = reg0;	}
+
+public string Str0{ get; private set; }public string[] Arr0{ get; private set; }public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} {1}, [{2}], r{3}", Name, Str0, string.Join(", ", Arr0), Reg0);
+}
+}
+
+
+
+class DelInstruction : Instruction
+{
+	public DelInstruction
+	(
+int reg0	) : base ("del")
+	{
+this.Reg0 = reg0;	}
+
+public int Reg0{ get; private set; }public override string ToString()
+{
+return string.Format("{0} r{1}", Name, Reg0);
+}
+}
+
+
+
 
 }

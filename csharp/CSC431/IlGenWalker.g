@@ -17,7 +17,7 @@ using CSC431.ILOC;
 @namespace {CSC431}
 
 program returns [ProgramBlock prog]
-	: ^(PROGRAM (types declarations[globalMap] funs=functions)) {$prog = new ProgramBlock(funs);}
+	: ^(PROGRAM (types declarations[globalMap,globalStructMap] funs=functions)) {$prog = new ProgramBlock(funs);}
 	;
 
 types
@@ -26,12 +26,13 @@ types
    ;
 
 type_declaration
-   :  ^(STRUCT (ID)
-         nested_decl)
+@init {List<StructMember> members = new List<StructMember>();}
+   :  ^(STRUCT (id=ID)
+         nested_decl[members]) { structMap[$id.text] = members; }
    ;
 
-nested_decl
-   :  (field_decl)+
+nested_decl[List<StructMember> members]
+   :  (field_decl[$members])+
    ;
 
 types_sub
@@ -39,32 +40,40 @@ types_sub
    | 
    ;
 
-field_decl
-   :  ^(DECL ^(TYPE type) ID) 
+field_decl[List<StructMember> members]
+   :  ^(DECL ^(TYPE t=type) id=ID) 
+   	{
+   		if (t != null)
+   			members.Add(new StructMember($id.text, t));
+   		else
+   			members.Add(new StructMember($id.text));
+   	}
    ;
 
-type
+type returns [String type = null;]
 	: INT
 	| BOOL
-	| ^(STRUCT ID)
+	| ^(STRUCT id=ID) {$type = $id.text;}
 ;
 
-declarations[Dictionary<string, int> map]
-	: ^(DECLS declaration[$map])
+declarations[Dictionary<string, int> map, Dictionary<string, string> typeMap]
+	: ^(DECLS declaration[$map,$typeMap])
 	| 
 ;
 
-declaration[Dictionary<string, int> map]
-	: (decl_list[$map])*
+declaration[Dictionary<string, int> map, Dictionary<string, string> typeMap]
+	: (decl_list[$map,$typeMap])*
 ;
 
-decl_list[Dictionary<string, int> map]
+decl_list[Dictionary<string, int> map, Dictionary<string, string> typeMap]
 @init { var ids = new List<string>(); }
-	: ^(DECLLIST ^(TYPE type) id_list[ids])
+	: ^(DECLLIST ^(TYPE t=type) id_list[ids])
 		{
 			foreach (var id in ids)
 			{
 				$map[id] = Instruction.VirtualRegister();
+				if (t != null)
+					$typeMap[id] = t;
 			}
 		}
 ;
@@ -81,12 +90,13 @@ function returns [FunctionBlock f]
 @init
 	{
 		localMap.Clear();
+		localStructMap.Clear();
 		
 		SeqBlock body = new SeqBlock();
 		BasicBlock argLoadBlock = new BasicBlock();
 		body.Add(argLoadBlock);
 	}
-	: ^(FUN id=ID parameters[argLoadBlock] ^(RETTYPE return_type) declarations[localMap] statement_list[body])
+	: ^(FUN id=ID parameters[argLoadBlock] ^(RETTYPE return_type) declarations[localMap,localStructMap] statement_list[body])
 		{
 			BasicBlock returnBlock = new BasicBlock();
 			returnBlock.Add(new RetInstruction());
@@ -162,7 +172,7 @@ loop returns [LoopBlock b]
 	;
 
 delete returns [BasicBlock b = new BasicBlock()]
-	: ^(DELETE expression)
+	: ^(DELETE e=expression) {$b.Add(e); $b.Add(new DelInstruction(e.Reg));}
 	;
 
 ret returns [BasicBlock b = new BasicBlock()]
@@ -207,18 +217,30 @@ expression returns [BasicBlock b = new BasicBlock()]
 	;
 
 selector returns [BasicBlock b]
-	: ^(DOT selector ID)
+	: ^(DOT s=selector id=ID)
+		{
+			$b = new BasicBlock();
+			int reg = Instruction.VirtualRegister();
+			$b.Reg = reg;
+			$b.Add(s);
+			$b.Add(new LoadaiInstruction(s.Reg, $id.text, reg));
+			$b.StructType = getMemberType(s.StructType, $id.text);
+		}
 	| f=factor {$b = f;}
 	;
 
 factor returns [BasicBlock b = new BasicBlock()]
 @init { int reg = Instruction.VirtualRegister(); $b.Reg = reg; }
 	: ^(INVOKE id=ID regLocs=arguments[b]) {doInvoke($id.text, $b, regLocs); $b.Add(new LoadretInstruction(reg)); }
-	| id=ID {$b.Add(new MovInstruction(getVarReg($id.text), reg)); }
+	| id=ID
+		{
+			$b.Add(new MovInstruction(getVarReg($id.text), reg));
+			$b.StructType = getVarType($id.text);
+		}
 	| i=INTEGER {$b.Add(new LoadiInstruction(int.Parse($i.text), reg)); }
 	| TRUE {$b.Add(new LoadiInstruction(1, reg)); }
 	| FALSE {$b.Add(new LoadiInstruction(0, reg)); }
-	| ^(NEW ID)
+	| ^(NEW id=ID) {$b.Add(new NewInstruction($id.text, getFields($id.text), reg)); $b.StructType = $id.text; }
 	| NULL {$b.Add(new LoadiInstruction(0, reg)); }
 	;
 

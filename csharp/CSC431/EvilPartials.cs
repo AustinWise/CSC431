@@ -11,9 +11,14 @@ namespace CSC431
 {
     public partial class IlGenWalker
     {
+        //for getting the types of vars
+        private Dictionary<string, string> globalStructMap = new Dictionary<string, string>();
+        private Dictionary<string, string> localStructMap = new Dictionary<string, string>();
+
         private Dictionary<string, int> globalMap = new Dictionary<string, int>();
         private Dictionary<string, int> localMap = new Dictionary<string, int>();
         private Dictionary<string, int> argMap = new Dictionary<string, int>();
+        private Dictionary<string, List<StructMember>> structMap = new Dictionary<string, List<StructMember>>();
 
         public object Program()
         {
@@ -36,6 +41,51 @@ namespace CSC431
                 b.Add(new StoreoutargumentInstruction(regLocs[i], i));
             }
             b.Add(new CallInstruction(id));
+        }
+
+        private string getMemberType(string structType, string fieldName)
+        {
+            var s = structMap[structType];
+            foreach (var m in s)
+            {
+                if (m.Name == fieldName)
+                    return m.StructType;
+            }
+            throw new KeyNotFoundException();
+        }
+
+        private string[] getFields(string structType)
+        {
+            return structMap[structType].Select(s => s.Name).ToArray();
+        }
+
+        private string getVarType(string id)
+        {
+            if (localStructMap.ContainsKey(id))
+                return localStructMap[id];
+            if (globalStructMap.ContainsKey(id))
+                return globalStructMap[id];
+            return null;
+        }
+
+        private class StructMember
+        {
+            public StructMember(string name)
+            {
+                this.Name = name;
+                this.IsStruct = false;
+            }
+
+            public StructMember(string name, string structName)
+            {
+                this.Name = name;
+                this.IsStruct = true;
+                this.StructType = structName;
+            }
+
+            public string Name { get; private set; }
+            public bool IsStruct { get; private set; }
+            public string StructType { get; private set; }
         }
     }
 
@@ -108,6 +158,8 @@ namespace CSC431
 
         private static void ensureStructOrInt(int line, Type e1, Type e2)
         {
+            if ((e1.isStruct() && e2.isNull()) || (e2.isStruct() && e1.isNull()))
+                return;
             if (e1.getTypeCode() != e2.getTypeCode())
                 error(line, "types in expression don't match");
             if (e1.isStruct())

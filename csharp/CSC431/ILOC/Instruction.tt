@@ -46,18 +46,23 @@ instr.ForEachOperand((c, count, isLast) =>
 public override string ToString()
 {
 <#
-    int placeHolderCount = 1;
-    string formatStr = "{0}";
+int placeHolderCount = 1;
+string formatStr = "{0}";
 instr.ForEachOperand((c, count, isLast) =>
 {
-    formatStr += " " + c.MilocPrefix + "{" + placeHolderCount++ + "}";
+    formatStr += " " + c.MilocPrefix + "{" + placeHolderCount++ + "}" + c.MilocPostfix;
     if (!isLast)
         formatStr += ",";
 });
 Write("return string.Format(\"{0}\", Name", formatStr);
 instr.ForEachOperand((c, count, isLast) =>
 {
-    Write(", {0}{1}", c.UpperPrefix, count);
+    string field = c.UpperPrefix + count;
+    Write(", ");
+    if (string.IsNullOrEmpty(c.SpecialConversion))
+        Write(field);
+    else
+        Write(c.SpecialConversion, field);
 });
 #>
 );
@@ -85,14 +90,17 @@ private class OperandType
     {
         sTypes.Add('r', new OperandType() { LowerPrefix = "reg", UpperPrefix = "Reg", MilocPrefix = "r", Type = "int" });
         sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "int" });
-        sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", MilocPrefix = "", Type = "int" });
-        sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", MilocPrefix = "", Type = "string" });
+        sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", Type = "int" });
+        sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", Type = "string" });
+        sTypes.Add('a', new OperandType() { LowerPrefix = "arr", UpperPrefix = "Arr", MilocPrefix = "[", MilocPostfix = "]", Type = "string[]", SpecialConversion = "string.Join(\", \", {0})" });
     }
 
     public string LowerPrefix { get; private set; }
     public string UpperPrefix { get; private set; }
     public string MilocPrefix { get; private set; }
+    public string MilocPostfix { get; private set; }
     public string Type { get; private set; }
+    public string SpecialConversion { get; private set; }
 
     public static OperandType Get(char letter)
     {
@@ -170,6 +178,10 @@ private class InstrInfo
                 new InstrInfo("r", "storeret"),
                 new InstrInfo("ri", "storeoutargument"),
                 new InstrInfo("r", "loadret"),
+                new InstrInfo("rrs", "storeai"),
+                new InstrInfo("rsr", "loadai"),
+                new InstrInfo("sar", "new"),
+                new InstrInfo("r", "del"),
             };
     }
 }
