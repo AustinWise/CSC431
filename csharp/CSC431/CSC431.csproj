@@ -45,30 +45,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CFG\BasicBlock.cs" />
-    <Compile Include="CFG\FunctionBlock.cs" />
-    <Compile Include="CFG\IfBlock.cs" />
-    <Compile Include="CFG\LoopBlock.cs" />
-    <Compile Include="CFG\MultiBlock.cs" />
-    <Compile Include="CFG\Node.cs" />
-    <Compile Include="CFG\ProgramBlock.cs" />
-    <Compile Include="CFG\SeqBlock.cs" />
-    <Compile Include="EvilPartials.cs" />
-    <Compile Include="EvilLexer.cs" />
-    <Compile Include="EvilParser.cs" />
-    <Compile Include="GenericEvilTreeParser.cs" />
-    <Compile Include="IlGenWalker.cs" />
-    <Compile Include="ILOC\Instruction.cs" />
-    <Compile Include="ILOC\Instruction.generated.cs">
+    <Compile Include="EvilException.cs" />
+    <Compile Include="IL\BasicBlock.cs" />
+    <Compile Include="IL\FunctionBlock.cs" />
+    <Compile Include="IL\IfBlock.cs" />
+    <Compile Include="IL\IlGenWalker.cs" />
+    <Compile Include="IL\IlGenWalker.mine.cs" />
+    <Compile Include="IlSteps.cs" />
+    <Compile Include="IL\LoopBlock.cs" />
+    <Compile Include="IL\MultiBlock.cs" />
+    <Compile Include="IL\Node.cs" />
+    <Compile Include="IL\ProgramBlock.cs" />
+    <Compile Include="IL\SeqBlock.cs" />
+    <Compile Include="FrontEndSteps.cs" />
+    <Compile Include="FrontEnd\TypeChecker.cs" />
+    <Compile Include="FrontEnd\TypeChecker.mine.cs" />
+    <Compile Include="IL\Instruction.cs" />
+    <Compile Include="IL\Instruction.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Instruction.tt</DependentUpon>
     </Compile>
+    <Compile Include="FrontEnd\EvilLexer.cs" />
+    <Compile Include="FrontEnd\EvilParser.cs" />
+    <Compile Include="FrontEnd\EvilParser.mine.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ILOC\Instruction.tt">
+    <None Include="IL\Instruction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
     </None>
@@ -81,9 +87,9 @@
     <Compile Include="Steps\OutStep.cs" />
     <Compile Include="Steps\Step.cs" />
     <Compile Include="Steps\TransformStep.cs" />
-    <Compile Include="StructTypes.cs" />
-    <Compile Include="SymbolTable.cs" />
-    <Compile Include="Type.cs" />
+    <Compile Include="FrontEnd\StructTypes.cs" />
+    <Compile Include="FrontEnd\SymbolTable.cs" />
+    <Compile Include="FrontEnd\Type.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Evil.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CSC431.Steps
 {
-    class InStep<T> : Step, IInStep<T>
+    public class InStep<T> : Step, IInStep<T>
     {
         public InStep(Action<T> fun)
         {

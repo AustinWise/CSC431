@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 GenericEvilTreeParser.g 2011-01-16 10:04:42
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 TypeChecker.g 2011-01-18 04:22:53
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -17,11 +17,11 @@ using RewriteRuleITokenStream = Antlr.Runtime.Tree.RewriteRuleTokenStream;using 
 using List = System.Collections.IList;
 using ArrayList = System.Collections.Generic.List<object>;
 
-namespace CSC431
+namespace CSC431.FrontEnd
 {
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "3.3 Nov 30, 2010 12:50:56")]
 [System.CLSCompliant(false)]
-public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
+public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
 {
 	internal static readonly string[] tokenNames = new string[] {
 		"<invalid>", "<EOR>", "<DOWN>", "<UP>", "STRUCT", "INT", "BOOL", "FUN", "VOID", "PRINT", "ENDL", "READ", "IF", "ELSE", "WHILE", "DELETE", "RETURN", "TRUE", "FALSE", "NEW", "NULL", "PROGRAM", "TYPES", "TYPE", "DECLS", "FUNCS", "DECL", "DECLLIST", "PARAMS", "RETTYPE", "BLOCK", "STMTS", "INVOKE", "ARGS", "NEG", "LBRACE", "RBRACE", "SEMI", "COMMA", "LPAREN", "RPAREN", "ASSIGN", "DOT", "AND", "OR", "EQ", "LT", "GT", "NE", "LE", "GE", "PLUS", "MINUS", "TIMES", "DIVIDE", "NOT", "ID", "INTEGER", "WS", "COMMENT"
@@ -99,11 +99,11 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 	#else
 		private static readonly bool[] decisionCanBacktrack = new bool[0];
 	#endif
-	public GenericEvilTreeParser( ITreeNodeStream input )
+	public TypeChecker( ITreeNodeStream input )
 		: this( input, new RecognizerSharedState() )
 	{
 	}
-	public GenericEvilTreeParser(ITreeNodeStream input, RecognizerSharedState state)
+	public TypeChecker(ITreeNodeStream input, RecognizerSharedState state)
 		: base(input, state)
 	{
 
@@ -111,8 +111,8 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 	}
 		
 
-	public override string[] TokenNames { get { return GenericEvilTreeParser.tokenNames; } }
-	public override string GrammarFileName { get { return "GenericEvilTreeParser.g"; } }
+	public override string[] TokenNames { get { return TypeChecker.tokenNames; } }
+	public override string GrammarFileName { get { return "TypeChecker.g"; } }
 
 
 
@@ -125,7 +125,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_program() {}
 
     // $ANTLR start "program"
-    // GenericEvilTreeParser.g:18:1: program[StructTypes stypes, SymbolTable stable] : ^( PROGRAM ( types[stypes] declarations[stypes, stable] functions[stypes, stable] ) ) ;
+    // TypeChecker.g:18:1: program[StructTypes stypes, SymbolTable stable] : ^( PROGRAM ( types[stypes] declarations[stypes, stable] functions[stypes, stable] ) ) ;
     [GrammarRule("program")]
     private void program(StructTypes stypes, SymbolTable stable)
     {
@@ -134,9 +134,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(18, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:19:2: ( ^( PROGRAM ( types[stypes] declarations[stypes, stable] functions[stypes, stable] ) ) )
+    		// TypeChecker.g:19:2: ( ^( PROGRAM ( types[stypes] declarations[stypes, stable] functions[stypes, stable] ) ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:19:4: ^( PROGRAM ( types[stypes] declarations[stypes, stable] functions[stypes, stable] ) )
+    		// TypeChecker.g:19:4: ^( PROGRAM ( types[stypes] declarations[stypes, stable] functions[stypes, stable] ) )
     		{
     		DebugLocation(19, 4);
     		DebugLocation(19, 6);
@@ -144,9 +144,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 
     		Match(input, TokenTypes.Down, null); 
     		DebugLocation(19, 14);
-    		// GenericEvilTreeParser.g:19:14: ( types[stypes] declarations[stypes, stable] functions[stypes, stable] )
+    		// TypeChecker.g:19:14: ( types[stypes] declarations[stypes, stable] functions[stypes, stable] )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:19:15: types[stypes] declarations[stypes, stable] functions[stypes, stable]
+    		// TypeChecker.g:19:15: types[stypes] declarations[stypes, stable] functions[stypes, stable]
     		{
     		DebugLocation(19, 15);
     		PushFollow(Follow._types_in_program61);
@@ -204,7 +204,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_types() {}
 
     // $ANTLR start "types"
-    // GenericEvilTreeParser.g:33:1: types[StructTypes stypes] : ( ^( TYPES types_sub[stypes] ) | TYPES );
+    // TypeChecker.g:33:1: types[StructTypes stypes] : ( ^( TYPES types_sub[stypes] ) | TYPES );
     [GrammarRule("types")]
     private void types(StructTypes stypes)
     {
@@ -213,7 +213,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(33, 3);
     	try
     	{
-    		// GenericEvilTreeParser.g:34:4: ( ^( TYPES types_sub[stypes] ) | TYPES )
+    		// TypeChecker.g:34:4: ( ^( TYPES types_sub[stypes] ) | TYPES )
     		int alt1=2;
     		try { DebugEnterDecision(1, decisionCanBacktrack[1]);
     		int LA1_0 = input.LA(1);
@@ -250,7 +250,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:34:7: ^( TYPES types_sub[stypes] )
+    			// TypeChecker.g:34:7: ^( TYPES types_sub[stypes] )
     			{
     			DebugLocation(34, 7);
     			DebugLocation(34, 9);
@@ -272,7 +272,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:35:7: TYPES
+    			// TypeChecker.g:35:7: TYPES
     			{
     			DebugLocation(35, 7);
     			Match(input,TYPES,Follow._TYPES_in_types103); 
@@ -302,7 +302,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_type_declaration() {}
 
     // $ANTLR start "type_declaration"
-    // GenericEvilTreeParser.g:38:1: type_declaration[StructTypes stypes] : ^( STRUCT (id= ID ) nested_decl[stypes, sdef] ) ;
+    // TypeChecker.g:38:1: type_declaration[StructTypes stypes] : ^( STRUCT (id= ID ) nested_decl[stypes, sdef] ) ;
     [GrammarRule("type_declaration")]
     private void type_declaration(StructTypes stypes)
     {
@@ -314,9 +314,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(38, 3);
     	try
     	{
-    		// GenericEvilTreeParser.g:40:4: ( ^( STRUCT (id= ID ) nested_decl[stypes, sdef] ) )
+    		// TypeChecker.g:40:4: ( ^( STRUCT (id= ID ) nested_decl[stypes, sdef] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:40:7: ^( STRUCT (id= ID ) nested_decl[stypes, sdef] )
+    		// TypeChecker.g:40:7: ^( STRUCT (id= ID ) nested_decl[stypes, sdef] )
     		{
     		DebugLocation(40, 7);
     		DebugLocation(40, 9);
@@ -324,9 +324,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 
     		Match(input, TokenTypes.Down, null); 
     		DebugLocation(40, 16);
-    		// GenericEvilTreeParser.g:40:16: (id= ID )
+    		// TypeChecker.g:40:16: (id= ID )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:40:17: id= ID
+    		// TypeChecker.g:40:17: id= ID
     		{
     		DebugLocation(40, 19);
     		id=(CommonTree)Match(input,ID,Follow._ID_in_type_declaration132); 
@@ -375,7 +375,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_nested_decl() {}
 
     // $ANTLR start "nested_decl"
-    // GenericEvilTreeParser.g:53:1: nested_decl[StructTypes stypes, StructTypes.StructDef sdef] : ( field_decl[stypes, sdef] )+ ;
+    // TypeChecker.g:53:1: nested_decl[StructTypes stypes, StructTypes.StructDef sdef] : ( field_decl[stypes, sdef] )+ ;
     [GrammarRule("nested_decl")]
     private void nested_decl(StructTypes stypes, StructTypes.StructDef sdef)
     {
@@ -384,12 +384,12 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(53, 3);
     	try
     	{
-    		// GenericEvilTreeParser.g:54:4: ( ( field_decl[stypes, sdef] )+ )
+    		// TypeChecker.g:54:4: ( ( field_decl[stypes, sdef] )+ )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:54:7: ( field_decl[stypes, sdef] )+
+    		// TypeChecker.g:54:7: ( field_decl[stypes, sdef] )+
     		{
     		DebugLocation(54, 7);
-    		// GenericEvilTreeParser.g:54:7: ( field_decl[stypes, sdef] )+
+    		// TypeChecker.g:54:7: ( field_decl[stypes, sdef] )+
     		int cnt2=0;
     		try { DebugEnterSubRule(2);
     		while (true)
@@ -409,7 +409,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// GenericEvilTreeParser.g:54:8: field_decl[stypes, sdef]
+    				// TypeChecker.g:54:8: field_decl[stypes, sdef]
     				{
     				DebugLocation(54, 8);
     				PushFollow(Follow._field_decl_in_nested_decl185);
@@ -459,7 +459,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_types_sub() {}
 
     // $ANTLR start "types_sub"
-    // GenericEvilTreeParser.g:57:1: types_sub[StructTypes stypes] : ( ( type_declaration[stypes] types_sub[stypes] ) | );
+    // TypeChecker.g:57:1: types_sub[StructTypes stypes] : ( ( type_declaration[stypes] types_sub[stypes] ) | );
     [GrammarRule("types_sub")]
     private void types_sub(StructTypes stypes)
     {
@@ -468,7 +468,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(57, 3);
     	try
     	{
-    		// GenericEvilTreeParser.g:58:4: ( ( type_declaration[stypes] types_sub[stypes] ) | )
+    		// TypeChecker.g:58:4: ( ( type_declaration[stypes] types_sub[stypes] ) | )
     		int alt3=2;
     		try { DebugEnterDecision(3, decisionCanBacktrack[3]);
     		int LA3_0 = input.LA(1);
@@ -493,12 +493,12 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:58:7: ( type_declaration[stypes] types_sub[stypes] )
+    			// TypeChecker.g:58:7: ( type_declaration[stypes] types_sub[stypes] )
     			{
     			DebugLocation(58, 7);
-    			// GenericEvilTreeParser.g:58:7: ( type_declaration[stypes] types_sub[stypes] )
+    			// TypeChecker.g:58:7: ( type_declaration[stypes] types_sub[stypes] )
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:58:8: type_declaration[stypes] types_sub[stypes]
+    			// TypeChecker.g:58:8: type_declaration[stypes] types_sub[stypes]
     			{
     			DebugLocation(58, 8);
     			PushFollow(Follow._type_declaration_in_types_sub207);
@@ -518,7 +518,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:59:6: 
+    			// TypeChecker.g:59:6: 
     			{
     			DebugLocation(59, 6);
 
@@ -548,7 +548,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_field_decl() {}
 
     // $ANTLR start "field_decl"
-    // GenericEvilTreeParser.g:62:1: field_decl[StructTypes stypes, StructTypes.StructDef sdef] : ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) ;
+    // TypeChecker.g:62:1: field_decl[StructTypes stypes, StructTypes.StructDef sdef] : ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) ;
     [GrammarRule("field_decl")]
     private void field_decl(StructTypes stypes, StructTypes.StructDef sdef)
     {
@@ -560,9 +560,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(62, 3);
     	try
     	{
-    		// GenericEvilTreeParser.g:63:4: ( ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) )
+    		// TypeChecker.g:63:4: ( ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:63:7: ^( DECL ^( TYPE tt= type[stypes] ) id= ID )
+    		// TypeChecker.g:63:7: ^( DECL ^( TYPE tt= type[stypes] ) id= ID )
     		{
     		DebugLocation(63, 7);
     		DebugLocation(63, 9);
@@ -617,7 +617,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_type() {}
 
     // $ANTLR start "type"
-    // GenericEvilTreeParser.g:73:1: type[StructTypes stypes] returns [Type t = null] : ( INT | BOOL | ^( STRUCT id= ID ) );
+    // TypeChecker.g:73:1: type[StructTypes stypes] returns [Type t = null] : ( INT | BOOL | ^( STRUCT id= ID ) );
     [GrammarRule("type")]
     private Type type(StructTypes stypes)
     {
@@ -630,7 +630,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(73, 0);
     	try
     	{
-    		// GenericEvilTreeParser.g:74:2: ( INT | BOOL | ^( STRUCT id= ID ) )
+    		// TypeChecker.g:74:2: ( INT | BOOL | ^( STRUCT id= ID ) )
     		int alt4=3;
     		try { DebugEnterDecision(4, decisionCanBacktrack[4]);
     		switch (input.LA(1))
@@ -664,7 +664,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:74:4: INT
+    			// TypeChecker.g:74:4: INT
     			{
     			DebugLocation(74, 4);
     			Match(input,INT,Follow._INT_in_type275); 
@@ -675,7 +675,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:75:4: BOOL
+    			// TypeChecker.g:75:4: BOOL
     			{
     			DebugLocation(75, 4);
     			Match(input,BOOL,Follow._BOOL_in_type282); 
@@ -686,7 +686,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// GenericEvilTreeParser.g:76:4: ^( STRUCT id= ID )
+    			// TypeChecker.g:76:4: ^( STRUCT id= ID )
     			{
     			DebugLocation(76, 4);
     			DebugLocation(76, 6);
@@ -731,7 +731,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_declarations() {}
 
     // $ANTLR start "declarations"
-    // GenericEvilTreeParser.g:86:1: declarations[StructTypes stypes, SymbolTable stable] : ( ^( DECLS declaration[stypes,stable] ) | );
+    // TypeChecker.g:86:1: declarations[StructTypes stypes, SymbolTable stable] : ( ^( DECLS declaration[stypes,stable] ) | );
     [GrammarRule("declarations")]
     private void declarations(StructTypes stypes, SymbolTable stable)
     {
@@ -740,7 +740,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(86, 0);
     	try
     	{
-    		// GenericEvilTreeParser.g:87:2: ( ^( DECLS declaration[stypes,stable] ) | )
+    		// TypeChecker.g:87:2: ( ^( DECLS declaration[stypes,stable] ) | )
     		int alt5=2;
     		try { DebugEnterDecision(5, decisionCanBacktrack[5]);
     		int LA5_0 = input.LA(1);
@@ -765,7 +765,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:87:4: ^( DECLS declaration[stypes,stable] )
+    			// TypeChecker.g:87:4: ^( DECLS declaration[stypes,stable] )
     			{
     			DebugLocation(87, 4);
     			DebugLocation(87, 6);
@@ -787,7 +787,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:88:4: 
+    			// TypeChecker.g:88:4: 
     			{
     			DebugLocation(88, 4);
 
@@ -817,7 +817,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_declaration() {}
 
     // $ANTLR start "declaration"
-    // GenericEvilTreeParser.g:91:1: declaration[StructTypes stypes,SymbolTable stable] : ( decl_list[stypes,stable] )* ;
+    // TypeChecker.g:91:1: declaration[StructTypes stypes,SymbolTable stable] : ( decl_list[stypes,stable] )* ;
     [GrammarRule("declaration")]
     private void declaration(StructTypes stypes, SymbolTable stable)
     {
@@ -826,12 +826,12 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(91, 0);
     	try
     	{
-    		// GenericEvilTreeParser.g:92:2: ( ( decl_list[stypes,stable] )* )
+    		// TypeChecker.g:92:2: ( ( decl_list[stypes,stable] )* )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:92:4: ( decl_list[stypes,stable] )*
+    		// TypeChecker.g:92:4: ( decl_list[stypes,stable] )*
     		{
     		DebugLocation(92, 4);
-    		// GenericEvilTreeParser.g:92:4: ( decl_list[stypes,stable] )*
+    		// TypeChecker.g:92:4: ( decl_list[stypes,stable] )*
     		try { DebugEnterSubRule(6);
     		while (true)
     		{
@@ -850,7 +850,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// GenericEvilTreeParser.g:92:5: decl_list[stypes,stable]
+    				// TypeChecker.g:92:5: decl_list[stypes,stable]
     				{
     				DebugLocation(92, 5);
     				PushFollow(Follow._decl_list_in_declaration333);
@@ -895,7 +895,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_decl_list() {}
 
     // $ANTLR start "decl_list"
-    // GenericEvilTreeParser.g:95:1: decl_list[StructTypes stypes,SymbolTable stable] : ^( DECLLIST ^( TYPE t= type[stypes] ) id_list[t,stable] ) ;
+    // TypeChecker.g:95:1: decl_list[StructTypes stypes,SymbolTable stable] : ^( DECLLIST ^( TYPE t= type[stypes] ) id_list[t,stable] ) ;
     [GrammarRule("decl_list")]
     private void decl_list(StructTypes stypes, SymbolTable stable)
     {
@@ -906,9 +906,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(95, 0);
     	try
     	{
-    		// GenericEvilTreeParser.g:96:2: ( ^( DECLLIST ^( TYPE t= type[stypes] ) id_list[t,stable] ) )
+    		// TypeChecker.g:96:2: ( ^( DECLLIST ^( TYPE t= type[stypes] ) id_list[t,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:96:4: ^( DECLLIST ^( TYPE t= type[stypes] ) id_list[t,stable] )
+    		// TypeChecker.g:96:4: ^( DECLLIST ^( TYPE t= type[stypes] ) id_list[t,stable] )
     		{
     		DebugLocation(96, 4);
     		DebugLocation(96, 6);
@@ -958,7 +958,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_id_list() {}
 
     // $ANTLR start "id_list"
-    // GenericEvilTreeParser.g:99:1: id_list[Type t, SymbolTable stable] : (id= ID )+ ;
+    // TypeChecker.g:99:1: id_list[Type t, SymbolTable stable] : (id= ID )+ ;
     [GrammarRule("id_list")]
     private void id_list(Type t, SymbolTable stable)
     {
@@ -969,12 +969,12 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(99, 0);
     	try
     	{
-    		// GenericEvilTreeParser.g:100:2: ( (id= ID )+ )
+    		// TypeChecker.g:100:2: ( (id= ID )+ )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:100:4: (id= ID )+
+    		// TypeChecker.g:100:4: (id= ID )+
     		{
     		DebugLocation(100, 4);
-    		// GenericEvilTreeParser.g:100:4: (id= ID )+
+    		// TypeChecker.g:100:4: (id= ID )+
     		int cnt7=0;
     		try { DebugEnterSubRule(7);
     		while (true)
@@ -994,7 +994,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// GenericEvilTreeParser.g:101:3: id= ID
+    				// TypeChecker.g:101:3: id= ID
     				{
     				DebugLocation(101, 5);
     				id=(CommonTree)Match(input,ID,Follow._ID_in_id_list380); 
@@ -1053,7 +1053,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_functions() {}
 
     // $ANTLR start "functions"
-    // GenericEvilTreeParser.g:116:1: functions[StructTypes stypes,SymbolTable stable] : ^( FUNCS ( function[stypes, stable] )* ) ;
+    // TypeChecker.g:116:1: functions[StructTypes stypes,SymbolTable stable] : ^( FUNCS ( function[stypes, stable] )* ) ;
     [GrammarRule("functions")]
     private void functions(StructTypes stypes, SymbolTable stable)
     {
@@ -1062,9 +1062,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(116, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:117:2: ( ^( FUNCS ( function[stypes, stable] )* ) )
+    		// TypeChecker.g:117:2: ( ^( FUNCS ( function[stypes, stable] )* ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:117:4: ^( FUNCS ( function[stypes, stable] )* )
+    		// TypeChecker.g:117:4: ^( FUNCS ( function[stypes, stable] )* )
     		{
     		DebugLocation(117, 4);
     		DebugLocation(117, 6);
@@ -1074,7 +1074,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(117, 12);
-    			// GenericEvilTreeParser.g:117:12: ( function[stypes, stable] )*
+    			// TypeChecker.g:117:12: ( function[stypes, stable] )*
     			try { DebugEnterSubRule(8);
     			while (true)
     			{
@@ -1093,7 +1093,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// GenericEvilTreeParser.g:117:12: function[stypes, stable]
+    					// TypeChecker.g:117:12: function[stypes, stable]
     					{
     					DebugLocation(117, 12);
     					PushFollow(Follow._function_in_functions403);
@@ -1141,7 +1141,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_function() {}
 
     // $ANTLR start "function"
-    // GenericEvilTreeParser.g:120:1: function[StructTypes stypes,SymbolTable globalStable] : ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] ) ;
+    // TypeChecker.g:120:1: function[StructTypes stypes,SymbolTable globalStable] : ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] ) ;
     [GrammarRule("function")]
     private void function(StructTypes stypes, SymbolTable globalStable)
     {
@@ -1155,9 +1155,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(120, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:122:2: ( ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] ) )
+    		// TypeChecker.g:122:2: ( ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:122:4: ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] )
+    		// TypeChecker.g:122:4: ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] )
     		{
     		DebugLocation(122, 4);
     		DebugLocation(122, 6);
@@ -1233,7 +1233,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_parameters() {}
 
     // $ANTLR start "parameters"
-    // GenericEvilTreeParser.g:137:1: parameters[StructTypes stypes,SymbolTable stable, List<Type> sparams] : ^( PARAMS ( param_decl[stypes, stable, sparams] )* ) ;
+    // TypeChecker.g:137:1: parameters[StructTypes stypes,SymbolTable stable, List<Type> sparams] : ^( PARAMS ( param_decl[stypes, stable, sparams] )* ) ;
     [GrammarRule("parameters")]
     private void parameters(StructTypes stypes, SymbolTable stable, List<Type> sparams)
     {
@@ -1242,9 +1242,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(137, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:138:2: ( ^( PARAMS ( param_decl[stypes, stable, sparams] )* ) )
+    		// TypeChecker.g:138:2: ( ^( PARAMS ( param_decl[stypes, stable, sparams] )* ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:138:4: ^( PARAMS ( param_decl[stypes, stable, sparams] )* )
+    		// TypeChecker.g:138:4: ^( PARAMS ( param_decl[stypes, stable, sparams] )* )
     		{
     		DebugLocation(138, 4);
     		DebugLocation(138, 6);
@@ -1254,7 +1254,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(138, 13);
-    			// GenericEvilTreeParser.g:138:13: ( param_decl[stypes, stable, sparams] )*
+    			// TypeChecker.g:138:13: ( param_decl[stypes, stable, sparams] )*
     			try { DebugEnterSubRule(9);
     			while (true)
     			{
@@ -1273,7 +1273,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// GenericEvilTreeParser.g:138:13: param_decl[stypes, stable, sparams]
+    					// TypeChecker.g:138:13: param_decl[stypes, stable, sparams]
     					{
     					DebugLocation(138, 13);
     					PushFollow(Follow._param_decl_in_parameters476);
@@ -1321,7 +1321,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_param_decl() {}
 
     // $ANTLR start "param_decl"
-    // GenericEvilTreeParser.g:141:1: param_decl[StructTypes stypes, SymbolTable stable, List<Type> sparams] : ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) ;
+    // TypeChecker.g:141:1: param_decl[StructTypes stypes, SymbolTable stable, List<Type> sparams] : ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) ;
     [GrammarRule("param_decl")]
     private void param_decl(StructTypes stypes, SymbolTable stable, List<Type> sparams)
     {
@@ -1333,9 +1333,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(141, 3);
     	try
     	{
-    		// GenericEvilTreeParser.g:142:4: ( ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) )
+    		// TypeChecker.g:142:4: ( ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:142:7: ^( DECL ^( TYPE tt= type[stypes] ) id= ID )
+    		// TypeChecker.g:142:7: ^( DECL ^( TYPE tt= type[stypes] ) id= ID )
     		{
     		DebugLocation(142, 7);
     		DebugLocation(142, 9);
@@ -1391,7 +1391,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_return_type() {}
 
     // $ANTLR start "return_type"
-    // GenericEvilTreeParser.g:153:1: return_type[StructTypes stypes] returns [Type retT = null] : (t= type[stypes] | VOID );
+    // TypeChecker.g:153:1: return_type[StructTypes stypes] returns [Type retT = null] : (t= type[stypes] | VOID );
     [GrammarRule("return_type")]
     private Type return_type(StructTypes stypes)
     {
@@ -1404,7 +1404,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(153, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:154:2: (t= type[stypes] | VOID )
+    		// TypeChecker.g:154:2: (t= type[stypes] | VOID )
     		int alt10=2;
     		try { DebugEnterDecision(10, decisionCanBacktrack[10]);
     		int LA10_0 = input.LA(1);
@@ -1429,7 +1429,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:154:4: t= type[stypes]
+    			// TypeChecker.g:154:4: t= type[stypes]
     			{
     			DebugLocation(154, 5);
     			PushFollow(Follow._type_in_return_type534);
@@ -1443,7 +1443,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:155:4: VOID
+    			// TypeChecker.g:155:4: VOID
     			{
     			DebugLocation(155, 4);
     			Match(input,VOID,Follow._VOID_in_return_type542); 
@@ -1475,7 +1475,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_statement() {}
 
     // $ANTLR start "statement"
-    // GenericEvilTreeParser.g:158:1: statement[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : (s= block[stypes,stable] | s= assignment[stypes,stable] | s= print[stypes,stable] | s= read[stypes,stable] | s= conditional[stypes,stable] | s= loop[stypes,stable] | s= delete[stypes,stable] | s= ret[stypes,stable] | s= invocation[stypes,stable] );
+    // TypeChecker.g:158:1: statement[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : (s= block[stypes,stable] | s= assignment[stypes,stable] | s= print[stypes,stable] | s= read[stypes,stable] | s= conditional[stypes,stable] | s= loop[stypes,stable] | s= delete[stypes,stable] | s= ret[stypes,stable] | s= invocation[stypes,stable] );
     [GrammarRule("statement")]
     private bool statement(StructTypes stypes, SymbolTable stable)
     {
@@ -1488,7 +1488,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(158, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:159:2: (s= block[stypes,stable] | s= assignment[stypes,stable] | s= print[stypes,stable] | s= read[stypes,stable] | s= conditional[stypes,stable] | s= loop[stypes,stable] | s= delete[stypes,stable] | s= ret[stypes,stable] | s= invocation[stypes,stable] )
+    		// TypeChecker.g:159:2: (s= block[stypes,stable] | s= assignment[stypes,stable] | s= print[stypes,stable] | s= read[stypes,stable] | s= conditional[stypes,stable] | s= loop[stypes,stable] | s= delete[stypes,stable] | s= ret[stypes,stable] | s= invocation[stypes,stable] )
     		int alt11=9;
     		try { DebugEnterDecision(11, decisionCanBacktrack[11]);
     		switch (input.LA(1))
@@ -1552,7 +1552,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:159:4: s= block[stypes,stable]
+    			// TypeChecker.g:159:4: s= block[stypes,stable]
     			{
     			DebugLocation(159, 5);
     			PushFollow(Follow._block_in_statement562);
@@ -1566,7 +1566,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:160:4: s= assignment[stypes,stable]
+    			// TypeChecker.g:160:4: s= assignment[stypes,stable]
     			{
     			DebugLocation(160, 5);
     			PushFollow(Follow._assignment_in_statement572);
@@ -1580,7 +1580,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// GenericEvilTreeParser.g:161:4: s= print[stypes,stable]
+    			// TypeChecker.g:161:4: s= print[stypes,stable]
     			{
     			DebugLocation(161, 5);
     			PushFollow(Follow._print_in_statement582);
@@ -1594,7 +1594,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 4:
     			DebugEnterAlt(4);
-    			// GenericEvilTreeParser.g:162:4: s= read[stypes,stable]
+    			// TypeChecker.g:162:4: s= read[stypes,stable]
     			{
     			DebugLocation(162, 5);
     			PushFollow(Follow._read_in_statement592);
@@ -1608,7 +1608,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 5:
     			DebugEnterAlt(5);
-    			// GenericEvilTreeParser.g:163:4: s= conditional[stypes,stable]
+    			// TypeChecker.g:163:4: s= conditional[stypes,stable]
     			{
     			DebugLocation(163, 5);
     			PushFollow(Follow._conditional_in_statement602);
@@ -1622,7 +1622,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 6:
     			DebugEnterAlt(6);
-    			// GenericEvilTreeParser.g:164:4: s= loop[stypes,stable]
+    			// TypeChecker.g:164:4: s= loop[stypes,stable]
     			{
     			DebugLocation(164, 5);
     			PushFollow(Follow._loop_in_statement612);
@@ -1636,7 +1636,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 7:
     			DebugEnterAlt(7);
-    			// GenericEvilTreeParser.g:165:4: s= delete[stypes,stable]
+    			// TypeChecker.g:165:4: s= delete[stypes,stable]
     			{
     			DebugLocation(165, 5);
     			PushFollow(Follow._delete_in_statement622);
@@ -1650,7 +1650,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 8:
     			DebugEnterAlt(8);
-    			// GenericEvilTreeParser.g:166:4: s= ret[stypes,stable]
+    			// TypeChecker.g:166:4: s= ret[stypes,stable]
     			{
     			DebugLocation(166, 5);
     			PushFollow(Follow._ret_in_statement632);
@@ -1664,7 +1664,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 9:
     			DebugEnterAlt(9);
-    			// GenericEvilTreeParser.g:167:4: s= invocation[stypes,stable]
+    			// TypeChecker.g:167:4: s= invocation[stypes,stable]
     			{
     			DebugLocation(167, 5);
     			PushFollow(Follow._invocation_in_statement642);
@@ -1699,7 +1699,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_block() {}
 
     // $ANTLR start "block"
-    // GenericEvilTreeParser.g:170:1: block[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( BLOCK s= statement_list[stypes,stable] ) ;
+    // TypeChecker.g:170:1: block[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( BLOCK s= statement_list[stypes,stable] ) ;
     [GrammarRule("block")]
     private bool block(StructTypes stypes, SymbolTable stable)
     {
@@ -1712,9 +1712,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(170, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:171:2: ( ^( BLOCK s= statement_list[stypes,stable] ) )
+    		// TypeChecker.g:171:2: ( ^( BLOCK s= statement_list[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:171:4: ^( BLOCK s= statement_list[stypes,stable] )
+    		// TypeChecker.g:171:4: ^( BLOCK s= statement_list[stypes,stable] )
     		{
     		DebugLocation(171, 4);
     		DebugLocation(171, 6);
@@ -1754,7 +1754,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_statement_list() {}
 
     // $ANTLR start "statement_list"
-    // GenericEvilTreeParser.g:174:1: statement_list[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( STMTS (s= statement[stypes,stable] )* ) ;
+    // TypeChecker.g:174:1: statement_list[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( STMTS (s= statement[stypes,stable] )* ) ;
     [GrammarRule("statement_list")]
     private bool statement_list(StructTypes stypes, SymbolTable stable)
     {
@@ -1767,9 +1767,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(174, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:175:2: ( ^( STMTS (s= statement[stypes,stable] )* ) )
+    		// TypeChecker.g:175:2: ( ^( STMTS (s= statement[stypes,stable] )* ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:175:4: ^( STMTS (s= statement[stypes,stable] )* )
+    		// TypeChecker.g:175:4: ^( STMTS (s= statement[stypes,stable] )* )
     		{
     		DebugLocation(175, 4);
     		DebugLocation(175, 6);
@@ -1779,7 +1779,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(175, 12);
-    			// GenericEvilTreeParser.g:175:12: (s= statement[stypes,stable] )*
+    			// TypeChecker.g:175:12: (s= statement[stypes,stable] )*
     			try { DebugEnterSubRule(12);
     			while (true)
     			{
@@ -1798,7 +1798,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// GenericEvilTreeParser.g:175:13: s= statement[stypes,stable]
+    					// TypeChecker.g:175:13: s= statement[stypes,stable]
     					{
     					DebugLocation(175, 14);
     					PushFollow(Follow._statement_in_statement_list692);
@@ -1851,7 +1851,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_assignment() {}
 
     // $ANTLR start "assignment"
-    // GenericEvilTreeParser.g:183:1: assignment[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] ) ;
+    // TypeChecker.g:183:1: assignment[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] ) ;
     [GrammarRule("assignment")]
     private bool assignment(StructTypes stypes, SymbolTable stable)
     {
@@ -1862,9 +1862,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(183, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:184:2: ( ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] ) )
+    		// TypeChecker.g:184:2: ( ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:184:4: ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] )
+    		// TypeChecker.g:184:4: ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] )
     		{
     		DebugLocation(184, 4);
     		DebugLocation(184, 6);
@@ -1907,7 +1907,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_print() {}
 
     // $ANTLR start "print"
-    // GenericEvilTreeParser.g:187:1: print[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( PRINT expression[stypes,stable] ( ENDL )? ) ;
+    // TypeChecker.g:187:1: print[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( PRINT expression[stypes,stable] ( ENDL )? ) ;
     [GrammarRule("print")]
     private bool print(StructTypes stypes, SymbolTable stable)
     {
@@ -1918,9 +1918,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(187, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:188:2: ( ^( PRINT expression[stypes,stable] ( ENDL )? ) )
+    		// TypeChecker.g:188:2: ( ^( PRINT expression[stypes,stable] ( ENDL )? ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:188:4: ^( PRINT expression[stypes,stable] ( ENDL )? )
+    		// TypeChecker.g:188:4: ^( PRINT expression[stypes,stable] ( ENDL )? )
     		{
     		DebugLocation(188, 4);
     		DebugLocation(188, 6);
@@ -1933,7 +1933,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		PopFollow();
 
     		DebugLocation(188, 38);
-    		// GenericEvilTreeParser.g:188:38: ( ENDL )?
+    		// TypeChecker.g:188:38: ( ENDL )?
     		int alt13=2;
     		try { DebugEnterSubRule(13);
     		try { DebugEnterDecision(13, decisionCanBacktrack[13]);
@@ -1948,7 +1948,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:188:39: ENDL
+    			// TypeChecker.g:188:39: ENDL
     			{
     			DebugLocation(188, 39);
     			Match(input,ENDL,Follow._ENDL_in_print749); 
@@ -1985,7 +1985,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_read() {}
 
     // $ANTLR start "read"
-    // GenericEvilTreeParser.g:191:1: read[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( READ lvalue[stypes,stable] ) ;
+    // TypeChecker.g:191:1: read[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( READ lvalue[stypes,stable] ) ;
     [GrammarRule("read")]
     private bool read(StructTypes stypes, SymbolTable stable)
     {
@@ -1996,9 +1996,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(191, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:192:2: ( ^( READ lvalue[stypes,stable] ) )
+    		// TypeChecker.g:192:2: ( ^( READ lvalue[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:192:4: ^( READ lvalue[stypes,stable] )
+    		// TypeChecker.g:192:4: ^( READ lvalue[stypes,stable] )
     		{
     		DebugLocation(192, 4);
     		DebugLocation(192, 6);
@@ -2036,7 +2036,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_conditional() {}
 
     // $ANTLR start "conditional"
-    // GenericEvilTreeParser.g:195:1: conditional[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? ) ;
+    // TypeChecker.g:195:1: conditional[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? ) ;
     [GrammarRule("conditional")]
     private bool conditional(StructTypes stypes, SymbolTable stable)
     {
@@ -2052,9 +2052,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(195, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:196:2: ( ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? ) )
+    		// TypeChecker.g:196:2: ( ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:196:4: ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? )
+    		// TypeChecker.g:196:4: ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? )
     		{
     		DebugLocation(196, 4);
     		DebugLocation(196, 7);
@@ -2072,7 +2072,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		PopFollow();
 
     		DebugLocation(196, 63);
-    		// GenericEvilTreeParser.g:196:63: (b2= block[stypes,stable] )?
+    		// TypeChecker.g:196:63: (b2= block[stypes,stable] )?
     		int alt14=2;
     		try { DebugEnterSubRule(14);
     		try { DebugEnterDecision(14, decisionCanBacktrack[14]);
@@ -2087,7 +2087,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:196:64: b2= block[stypes,stable]
+    			// TypeChecker.g:196:64: b2= block[stypes,stable]
     			{
     			DebugLocation(196, 66);
     			PushFollow(Follow._block_in_conditional807);
@@ -2135,7 +2135,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_loop() {}
 
     // $ANTLR start "loop"
-    // GenericEvilTreeParser.g:206:1: loop[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] ) ;
+    // TypeChecker.g:206:1: loop[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] ) ;
     [GrammarRule("loop")]
     private bool loop(StructTypes stypes, SymbolTable stable)
     {
@@ -2150,9 +2150,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(206, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:207:2: ( ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] ) )
+    		// TypeChecker.g:207:2: ( ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:207:4: ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] )
+    		// TypeChecker.g:207:4: ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] )
     		{
     		DebugLocation(207, 4);
     		DebugLocation(207, 7);
@@ -2207,7 +2207,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_delete() {}
 
     // $ANTLR start "delete"
-    // GenericEvilTreeParser.g:216:1: delete[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(d= DELETE e= expression[stypes,stable] ) ;
+    // TypeChecker.g:216:1: delete[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(d= DELETE e= expression[stypes,stable] ) ;
     [GrammarRule("delete")]
     private bool delete(StructTypes stypes, SymbolTable stable)
     {
@@ -2221,9 +2221,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(216, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:217:2: ( ^(d= DELETE e= expression[stypes,stable] ) )
+    		// TypeChecker.g:217:2: ( ^(d= DELETE e= expression[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:217:4: ^(d= DELETE e= expression[stypes,stable] )
+    		// TypeChecker.g:217:4: ^(d= DELETE e= expression[stypes,stable] )
     		{
     		DebugLocation(217, 4);
     		DebugLocation(217, 7);
@@ -2268,7 +2268,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_ret() {}
 
     // $ANTLR start "ret"
-    // GenericEvilTreeParser.g:226:1: ret[StructTypes stypes,SymbolTable stable] returns [bool doesRet = true] : ^(r= RETURN (e= expression[stypes,stable] )? ) ;
+    // TypeChecker.g:226:1: ret[StructTypes stypes,SymbolTable stable] returns [bool doesRet = true] : ^(r= RETURN (e= expression[stypes,stable] )? ) ;
     [GrammarRule("ret")]
     private bool ret(StructTypes stypes, SymbolTable stable)
     {
@@ -2282,9 +2282,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(226, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:227:2: ( ^(r= RETURN (e= expression[stypes,stable] )? ) )
+    		// TypeChecker.g:227:2: ( ^(r= RETURN (e= expression[stypes,stable] )? ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:227:4: ^(r= RETURN (e= expression[stypes,stable] )? )
+    		// TypeChecker.g:227:4: ^(r= RETURN (e= expression[stypes,stable] )? )
     		{
     		DebugLocation(227, 4);
     		DebugLocation(227, 7);
@@ -2294,7 +2294,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(227, 15);
-    			// GenericEvilTreeParser.g:227:15: (e= expression[stypes,stable] )?
+    			// TypeChecker.g:227:15: (e= expression[stypes,stable] )?
     			int alt15=2;
     			try { DebugEnterSubRule(15);
     			try { DebugEnterDecision(15, decisionCanBacktrack[15]);
@@ -2309,7 +2309,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// GenericEvilTreeParser.g:227:16: e= expression[stypes,stable]
+    				// TypeChecker.g:227:16: e= expression[stypes,stable]
     				{
     				DebugLocation(227, 17);
     				PushFollow(Follow._expression_in_ret906);
@@ -2363,7 +2363,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_invocation() {}
 
     // $ANTLR start "invocation"
-    // GenericEvilTreeParser.g:242:1: invocation[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( INVOKE id= ID args= arguments[stypes,stable] ) ;
+    // TypeChecker.g:242:1: invocation[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( INVOKE id= ID args= arguments[stypes,stable] ) ;
     [GrammarRule("invocation")]
     private bool invocation(StructTypes stypes, SymbolTable stable)
     {
@@ -2377,9 +2377,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(242, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:243:2: ( ^( INVOKE id= ID args= arguments[stypes,stable] ) )
+    		// TypeChecker.g:243:2: ( ^( INVOKE id= ID args= arguments[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:243:4: ^( INVOKE id= ID args= arguments[stypes,stable] )
+    		// TypeChecker.g:243:4: ^( INVOKE id= ID args= arguments[stypes,stable] )
     		{
     		DebugLocation(243, 4);
     		DebugLocation(243, 6);
@@ -2421,7 +2421,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_lvalue() {}
 
     // $ANTLR start "lvalue"
-    // GenericEvilTreeParser.g:246:1: lvalue[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( DOT s= lvalue[stypes,stable] id= ID ) | id= ID );
+    // TypeChecker.g:246:1: lvalue[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( DOT s= lvalue[stypes,stable] id= ID ) | id= ID );
     [GrammarRule("lvalue")]
     private Type lvalue(StructTypes stypes, SymbolTable stable)
     {
@@ -2435,7 +2435,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(246, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:247:2: ( ^( DOT s= lvalue[stypes,stable] id= ID ) | id= ID )
+    		// TypeChecker.g:247:2: ( ^( DOT s= lvalue[stypes,stable] id= ID ) | id= ID )
     		int alt16=2;
     		try { DebugEnterDecision(16, decisionCanBacktrack[16]);
     		int LA16_0 = input.LA(1);
@@ -2460,7 +2460,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:247:4: ^( DOT s= lvalue[stypes,stable] id= ID )
+    			// TypeChecker.g:247:4: ^( DOT s= lvalue[stypes,stable] id= ID )
     			{
     			DebugLocation(247, 4);
     			DebugLocation(247, 6);
@@ -2483,7 +2483,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:248:4: id= ID
+    			// TypeChecker.g:248:4: id= ID
     			{
     			DebugLocation(248, 6);
     			id=(CommonTree)Match(input,ID,Follow._ID_in_lvalue979); 
@@ -2515,7 +2515,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_expression() {}
 
     // $ANTLR start "expression"
-    // GenericEvilTreeParser.g:251:1: expression[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NOT e= expression[stypes,stable] ) | ^(a= NEG e= expression[stypes,stable] ) | s= selector[stypes,stable] );
+    // TypeChecker.g:251:1: expression[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NOT e= expression[stypes,stable] ) | ^(a= NEG e= expression[stypes,stable] ) | s= selector[stypes,stable] );
     [GrammarRule("expression")]
     private Type expression(StructTypes stypes, SymbolTable stable)
     {
@@ -2532,7 +2532,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(251, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:252:2: ( ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NOT e= expression[stypes,stable] ) | ^(a= NEG e= expression[stypes,stable] ) | s= selector[stypes,stable] )
+    		// TypeChecker.g:252:2: ( ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NOT e= expression[stypes,stable] ) | ^(a= NEG e= expression[stypes,stable] ) | s= selector[stypes,stable] )
     		int alt17=15;
     		try { DebugEnterDecision(17, decisionCanBacktrack[17]);
     		switch (input.LA(1))
@@ -2633,7 +2633,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:252:4: ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:252:4: ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(252, 4);
     			DebugLocation(252, 7);
@@ -2659,7 +2659,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:253:4: ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:253:4: ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(253, 4);
     			DebugLocation(253, 7);
@@ -2685,7 +2685,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// GenericEvilTreeParser.g:254:4: ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:254:4: ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(254, 4);
     			DebugLocation(254, 7);
@@ -2711,7 +2711,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 4:
     			DebugEnterAlt(4);
-    			// GenericEvilTreeParser.g:255:4: ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:255:4: ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(255, 4);
     			DebugLocation(255, 7);
@@ -2737,7 +2737,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 5:
     			DebugEnterAlt(5);
-    			// GenericEvilTreeParser.g:256:4: ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:256:4: ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(256, 4);
     			DebugLocation(256, 7);
@@ -2763,7 +2763,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 6:
     			DebugEnterAlt(6);
-    			// GenericEvilTreeParser.g:257:4: ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:257:4: ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(257, 4);
     			DebugLocation(257, 7);
@@ -2789,7 +2789,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 7:
     			DebugEnterAlt(7);
-    			// GenericEvilTreeParser.g:258:4: ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:258:4: ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(258, 4);
     			DebugLocation(258, 7);
@@ -2815,7 +2815,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 8:
     			DebugEnterAlt(8);
-    			// GenericEvilTreeParser.g:259:4: ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:259:4: ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(259, 4);
     			DebugLocation(259, 7);
@@ -2841,7 +2841,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 9:
     			DebugEnterAlt(9);
-    			// GenericEvilTreeParser.g:260:4: ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:260:4: ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(260, 4);
     			DebugLocation(260, 7);
@@ -2867,7 +2867,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 10:
     			DebugEnterAlt(10);
-    			// GenericEvilTreeParser.g:261:4: ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:261:4: ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(261, 4);
     			DebugLocation(261, 7);
@@ -2893,7 +2893,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 11:
     			DebugEnterAlt(11);
-    			// GenericEvilTreeParser.g:262:4: ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:262:4: ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(262, 4);
     			DebugLocation(262, 7);
@@ -2919,7 +2919,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 12:
     			DebugEnterAlt(12);
-    			// GenericEvilTreeParser.g:263:4: ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:263:4: ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
     			DebugLocation(263, 4);
     			DebugLocation(263, 7);
@@ -2945,7 +2945,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 13:
     			DebugEnterAlt(13);
-    			// GenericEvilTreeParser.g:264:4: ^(a= NOT e= expression[stypes,stable] )
+    			// TypeChecker.g:264:4: ^(a= NOT e= expression[stypes,stable] )
     			{
     			DebugLocation(264, 4);
     			DebugLocation(264, 7);
@@ -2966,7 +2966,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 14:
     			DebugEnterAlt(14);
-    			// GenericEvilTreeParser.g:265:4: ^(a= NEG e= expression[stypes,stable] )
+    			// TypeChecker.g:265:4: ^(a= NEG e= expression[stypes,stable] )
     			{
     			DebugLocation(265, 4);
     			DebugLocation(265, 7);
@@ -2987,7 +2987,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 15:
     			DebugEnterAlt(15);
-    			// GenericEvilTreeParser.g:266:4: s= selector[stypes,stable]
+    			// TypeChecker.g:266:4: s= selector[stypes,stable]
     			{
     			DebugLocation(266, 5);
     			PushFollow(Follow._selector_in_expression1283);
@@ -3022,7 +3022,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_selector() {}
 
     // $ANTLR start "selector"
-    // GenericEvilTreeParser.g:269:1: selector[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( DOT s= selector[stypes,stable] id= ID ) | f= factor[stypes,stable] );
+    // TypeChecker.g:269:1: selector[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( DOT s= selector[stypes,stable] id= ID ) | f= factor[stypes,stable] );
     [GrammarRule("selector")]
     private Type selector(StructTypes stypes, SymbolTable stable)
     {
@@ -3037,7 +3037,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(269, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:270:2: ( ^( DOT s= selector[stypes,stable] id= ID ) | f= factor[stypes,stable] )
+    		// TypeChecker.g:270:2: ( ^( DOT s= selector[stypes,stable] id= ID ) | f= factor[stypes,stable] )
     		int alt18=2;
     		try { DebugEnterDecision(18, decisionCanBacktrack[18]);
     		int LA18_0 = input.LA(1);
@@ -3062,7 +3062,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:270:4: ^( DOT s= selector[stypes,stable] id= ID )
+    			// TypeChecker.g:270:4: ^( DOT s= selector[stypes,stable] id= ID )
     			{
     			DebugLocation(270, 4);
     			DebugLocation(270, 6);
@@ -3085,7 +3085,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:271:4: f= factor[stypes,stable]
+    			// TypeChecker.g:271:4: f= factor[stypes,stable]
     			{
     			DebugLocation(271, 5);
     			PushFollow(Follow._factor_in_selector1322);
@@ -3120,7 +3120,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_factor() {}
 
     // $ANTLR start "factor"
-    // GenericEvilTreeParser.g:274:1: factor[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( INVOKE id= ID args= arguments[stypes,stable] ) | id= ID | INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL );
+    // TypeChecker.g:274:1: factor[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( INVOKE id= ID args= arguments[stypes,stable] ) | id= ID | INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL );
     [GrammarRule("factor")]
     private Type factor(StructTypes stypes, SymbolTable stable)
     {
@@ -3134,7 +3134,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(274, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:275:2: ( ^( INVOKE id= ID args= arguments[stypes,stable] ) | id= ID | INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL )
+    		// TypeChecker.g:275:2: ( ^( INVOKE id= ID args= arguments[stypes,stable] ) | id= ID | INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL )
     		int alt19=7;
     		try { DebugEnterDecision(19, decisionCanBacktrack[19]);
     		switch (input.LA(1))
@@ -3188,7 +3188,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:275:4: ^( INVOKE id= ID args= arguments[stypes,stable] )
+    			// TypeChecker.g:275:4: ^( INVOKE id= ID args= arguments[stypes,stable] )
     			{
     			DebugLocation(275, 4);
     			DebugLocation(275, 6);
@@ -3211,7 +3211,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:276:4: id= ID
+    			// TypeChecker.g:276:4: id= ID
     			{
     			DebugLocation(276, 6);
     			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1361); 
@@ -3222,7 +3222,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// GenericEvilTreeParser.g:277:4: INTEGER
+    			// TypeChecker.g:277:4: INTEGER
     			{
     			DebugLocation(277, 4);
     			Match(input,INTEGER,Follow._INTEGER_in_factor1368); 
@@ -3233,7 +3233,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 4:
     			DebugEnterAlt(4);
-    			// GenericEvilTreeParser.g:278:4: TRUE
+    			// TypeChecker.g:278:4: TRUE
     			{
     			DebugLocation(278, 4);
     			Match(input,TRUE,Follow._TRUE_in_factor1375); 
@@ -3244,7 +3244,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 5:
     			DebugEnterAlt(5);
-    			// GenericEvilTreeParser.g:279:4: FALSE
+    			// TypeChecker.g:279:4: FALSE
     			{
     			DebugLocation(279, 4);
     			Match(input,FALSE,Follow._FALSE_in_factor1382); 
@@ -3255,7 +3255,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 6:
     			DebugEnterAlt(6);
-    			// GenericEvilTreeParser.g:280:4: ^( NEW id= ID )
+    			// TypeChecker.g:280:4: ^( NEW id= ID )
     			{
     			DebugLocation(280, 4);
     			DebugLocation(280, 6);
@@ -3273,7 +3273,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 7:
     			DebugEnterAlt(7);
-    			// GenericEvilTreeParser.g:281:4: NULL
+    			// TypeChecker.g:281:4: NULL
     			{
     			DebugLocation(281, 4);
     			Match(input,NULL,Follow._NULL_in_factor1401); 
@@ -3305,7 +3305,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_arguments() {}
 
     // $ANTLR start "arguments"
-    // GenericEvilTreeParser.g:284:1: arguments[StructTypes stypes,SymbolTable stable] returns [List<Type> ret = null] : args= arg_list[stypes,stable] ;
+    // TypeChecker.g:284:1: arguments[StructTypes stypes,SymbolTable stable] returns [List<Type> ret = null] : args= arg_list[stypes,stable] ;
     [GrammarRule("arguments")]
     private List<Type> arguments(StructTypes stypes, SymbolTable stable)
     {
@@ -3318,9 +3318,9 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(284, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:285:2: (args= arg_list[stypes,stable] )
+    		// TypeChecker.g:285:2: (args= arg_list[stypes,stable] )
     		DebugEnterAlt(1);
-    		// GenericEvilTreeParser.g:285:4: args= arg_list[stypes,stable]
+    		// TypeChecker.g:285:4: args= arg_list[stypes,stable]
     		{
     		DebugLocation(285, 8);
     		PushFollow(Follow._arg_list_in_arguments1421);
@@ -3353,7 +3353,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_arg_list() {}
 
     // $ANTLR start "arg_list"
-    // GenericEvilTreeParser.g:288:1: arg_list[StructTypes stypes,SymbolTable stable] returns [List<Type> args = new List<Type>()] : ( ^( ARGS (e= expression[stypes,stable] )+ ) | ARGS );
+    // TypeChecker.g:288:1: arg_list[StructTypes stypes,SymbolTable stable] returns [List<Type> args = new List<Type>()] : ( ^( ARGS (e= expression[stypes,stable] )+ ) | ARGS );
     [GrammarRule("arg_list")]
     private List<Type> arg_list(StructTypes stypes, SymbolTable stable)
     {
@@ -3366,7 +3366,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(288, 1);
     	try
     	{
-    		// GenericEvilTreeParser.g:289:2: ( ^( ARGS (e= expression[stypes,stable] )+ ) | ARGS )
+    		// TypeChecker.g:289:2: ( ^( ARGS (e= expression[stypes,stable] )+ ) | ARGS )
     		int alt21=2;
     		try { DebugEnterDecision(21, decisionCanBacktrack[21]);
     		int LA21_0 = input.LA(1);
@@ -3403,7 +3403,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// GenericEvilTreeParser.g:289:4: ^( ARGS (e= expression[stypes,stable] )+ )
+    			// TypeChecker.g:289:4: ^( ARGS (e= expression[stypes,stable] )+ )
     			{
     			DebugLocation(289, 4);
     			DebugLocation(289, 6);
@@ -3411,7 +3411,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
 
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(289, 11);
-    			// GenericEvilTreeParser.g:289:11: (e= expression[stypes,stable] )+
+    			// TypeChecker.g:289:11: (e= expression[stypes,stable] )+
     			int cnt20=0;
     			try { DebugEnterSubRule(20);
     			while (true)
@@ -3431,7 +3431,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// GenericEvilTreeParser.g:289:12: e= expression[stypes,stable]
+    					// TypeChecker.g:289:12: e= expression[stypes,stable]
     					{
     					DebugLocation(289, 13);
     					PushFollow(Follow._expression_in_arg_list1446);
@@ -3466,7 +3466,7 @@ public partial class GenericEvilTreeParser : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// GenericEvilTreeParser.g:290:4: ARGS
+    			// TypeChecker.g:290:4: ARGS
     			{
     			DebugLocation(290, 4);
     			Match(input,ARGS,Follow._ARGS_in_arg_list1457); 

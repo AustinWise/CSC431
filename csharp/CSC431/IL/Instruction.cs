@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace CSC431.ILOC
+namespace CSC431.IL
 {
     public class Instruction
     {

@@ -1,0 +1,48 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using CSC431.Steps;
+using Antlr.Runtime;
+using Antlr.Runtime.Tree;
+using CSC431.IL;
+
+namespace CSC431
+{
+    public static class IlSteps
+    {
+
+        public static InOutStep<Tuple<CommonTokenStream, CommonTree>, ProgramBlock> MakeCFG = new InOutStep<Tuple<CommonTokenStream, CommonTree>, ProgramBlock>(t =>
+        {
+            CommonTreeNodeStream nodes = new CommonTreeNodeStream(t.Item2);
+            nodes.TokenStream = t.Item1;
+            IlGenWalker tparser = new IlGenWalker(nodes);
+            tparser.TraceDestination = Console.Out;
+
+            var c = tparser.Program() as CSC431.IL.ProgramBlock;
+
+            if (tparser.NumberOfSyntaxErrors != 0)
+                throw new EvilException("make cfg syntax error");
+
+            return c;
+        });
+
+        public static TransformStep<ProgramBlock> CleanUpCfg = new TransformStep<ProgramBlock>(c =>
+        {
+            c.Visit(n =>
+            {
+                if (!n.IsFixedUp)
+                {
+                    throw new Exception("not all nodes are fixed up.");
+                }
+            });
+
+            return c;
+        });
+
+        public static InStep<ProgramBlock> PrintCFG = new InStep<ProgramBlock>(c =>
+        {
+            c.Print(Console.Out);
+        });
+    }
+}

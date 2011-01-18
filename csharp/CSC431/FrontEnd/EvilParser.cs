@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-01-16 10:04:40
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-01-18 04:22:52
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -23,7 +23,7 @@ using HashMap = System.Collections.Generic.Dictionary<object, object>;
 using Antlr.Runtime.Tree;
 using RewriteRuleITokenStream = Antlr.Runtime.Tree.RewriteRuleTokenStream;
 
-namespace CSC431
+namespace CSC431.FrontEnd
 {
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "3.3 Nov 30, 2010 12:50:56")]
 [System.CLSCompliant(false)]
@@ -210,7 +210,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: f, d, t
+    		// elements: d, f, t
     		// token labels: 
     		// rule labels: f, retval, d, t
     		// token list labels: 
@@ -1774,7 +1774,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: s, FUN, p, r, id, d
+    		// elements: d, s, id, p, FUN, r
     		// token labels: id
     		// rule labels: retval, d, s, r, p
     		// token list labels: 

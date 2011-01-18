@@ -1,7 +1,7 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ output extension=".generated.cs" #>
 <#@ Import Namespace="System.Collections.Generic" #>
-namespace CSC431.ILOC
+namespace CSC431.IL
 {
 
 <#

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CSC431.ILOC;
+using CSC431.IL;
 
-namespace CSC431.CFG
+namespace CSC431.IL
 {
     public class IfBlock : Node
     {

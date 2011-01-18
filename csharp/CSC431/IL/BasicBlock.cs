@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CSC431.CFG
+namespace CSC431.IL
 {
     public class BasicBlock : Node
     {
         private Node next;
-        private List<CSC431.ILOC.Instruction> code = new List<ILOC.Instruction>();
+        private List<CSC431.IL.Instruction> code = new List<IL.Instruction>();
         
         public const int InvalidReg = -1;
         public const int CCNotReg = -2;
@@ -43,7 +43,7 @@ namespace CSC431.CFG
         /// </remarks>
         public string StructType { get; set; }
 
-        public void Add(CSC431.ILOC.Instruction line)
+        public void Add(CSC431.IL.Instruction line)
         {
             code.Add(line);
         }

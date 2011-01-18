@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CSC431.Steps
 {
-    class TransformStep<T> : InOutStep<T, T>
+    public class TransformStep<T> : InOutStep<T, T>
     {
         public TransformStep(Func<T, T> fun)
             : base(fun)

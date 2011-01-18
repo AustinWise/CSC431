@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace CSC431
+namespace CSC431.FrontEnd
 {
     public class StructTypes
     {

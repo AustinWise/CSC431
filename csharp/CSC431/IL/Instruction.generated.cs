@@ -1,4 +1,4 @@
-﻿namespace CSC431.ILOC
+﻿namespace CSC431.IL
 {
 
 class AddInstruction : Instruction

@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-01-16 10:04:41
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-01-18 04:22:52
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -17,7 +17,7 @@ using Stack = System.Collections.Generic.Stack<object>;
 using List = System.Collections.IList;
 using ArrayList = System.Collections.Generic.List<object>;
 
-namespace CSC431
+namespace CSC431.FrontEnd
 {
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "3.3 Nov 30, 2010 12:50:56")]
 [System.CLSCompliant(false)]

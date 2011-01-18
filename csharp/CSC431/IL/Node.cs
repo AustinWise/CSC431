@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.IO;
 
-namespace CSC431.CFG
+namespace CSC431.IL
 {
     public abstract class Node
     {

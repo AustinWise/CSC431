@@ -54,8 +54,8 @@ tokens
 
 }
 
-@namespace {CSC431}
-@lexer::namespace {CSC431}
+@namespace {CSC431.FrontEnd}
+@lexer::namespace {CSC431.FrontEnd}
 
 /*
    Lexer Rules

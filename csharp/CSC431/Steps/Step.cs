@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CSC431.Steps
 {
-    abstract class Step
+    public abstract class Step
     {
         protected abstract void Process();
 

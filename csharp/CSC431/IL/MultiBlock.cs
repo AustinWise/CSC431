@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CSC431.CFG
+namespace CSC431.IL
 {
     public class MultiBlock : Node
     {
         public MultiBlock()
         {
-            this.code = new List<ILOC.Instruction>();
+            this.code = new List<IL.Instruction>();
         }
 
-        public MultiBlock(List<ILOC.Instruction> code)
+        public MultiBlock(List<IL.Instruction> code)
         {
             this.code = code;
         }
 
-        private List<CSC431.ILOC.Instruction> code;
+        private List<CSC431.IL.Instruction> code;
         private List<Node> nexts = new List<Node>();
 
-        public void AddLine(CSC431.ILOC.Instruction line)
+        public void AddLine(CSC431.IL.Instruction line)
         {
             code.Add(line);
         }
