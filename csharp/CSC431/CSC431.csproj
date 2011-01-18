@@ -92,7 +92,7 @@
     <Compile Include="FrontEnd\Type.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Evil.cs" />
+    <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

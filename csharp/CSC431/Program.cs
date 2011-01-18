@@ -5,7 +5,7 @@ using CSC431.Steps;
 
 namespace CSC431
 {
-    public static class Evil
+    public static class Program
     {
         public static void Main(String[] args)
         {
@@ -23,7 +23,14 @@ namespace CSC431
 
             flow.FollowWith(IlSteps.CleanUpCfg).FollowWith(IlSteps.PrintCFG);
 
-            Step.DoAll(pipe);
+            try
+            {
+                Step.DoAll(pipe);
+            }
+            catch (EvilException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
