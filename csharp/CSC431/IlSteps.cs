@@ -12,14 +12,14 @@ namespace CSC431
     public static class IlSteps
     {
 
-        public static InOutStep<Tuple<CommonTokenStream, CommonTree>, ProgramBlock> MakeCFG = new InOutStep<Tuple<CommonTokenStream, CommonTree>, ProgramBlock>(t =>
+        public static InOutStep<Tuple<CommonTokenStream, CommonTree>, ProgramBlock<MilocInstruction>> MakeCFG = new InOutStep<Tuple<CommonTokenStream, CommonTree>, ProgramBlock<MilocInstruction>>(t =>
         {
             CommonTreeNodeStream nodes = new CommonTreeNodeStream(t.Item2);
             nodes.TokenStream = t.Item1;
             IlGenWalker tparser = new IlGenWalker(nodes);
             tparser.TraceDestination = Console.Out;
 
-            var c = tparser.Program() as CSC431.IL.ProgramBlock;
+            var c = tparser.Program();
 
             if (tparser.NumberOfSyntaxErrors != 0)
                 throw new EvilException("make cfg syntax error");
@@ -27,7 +27,7 @@ namespace CSC431
             return c;
         });
 
-        public static TransformStep<ProgramBlock> CleanUpCfg = new TransformStep<ProgramBlock>(c =>
+        public static TransformStep<ProgramBlock<MilocInstruction>> CleanUpCfg = new TransformStep<ProgramBlock<MilocInstruction>>(c =>
         {
             c.Visit(n =>
             {
@@ -40,7 +40,7 @@ namespace CSC431
             return c;
         });
 
-        public static InStep<ProgramBlock> PrintCFG = new InStep<ProgramBlock>(c =>
+        public static InStep<ProgramBlock<MilocInstruction>> PrintCFG = new InStep<ProgramBlock<MilocInstruction>>(c =>
         {
             c.Print(Console.Out);
         });

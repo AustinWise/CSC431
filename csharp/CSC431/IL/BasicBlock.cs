@@ -5,11 +5,11 @@ using System.Text;
 
 namespace CSC431.IL
 {
-    public class BasicBlock : Node
+    public class BasicBlock<T> : Node<T> where T : Instruction
     {
-        private Node next;
-        private List<CSC431.IL.Instruction> code = new List<IL.Instruction>();
-        
+        private Node<T> next;
+        private List<T> code = new List<T>();
+
         public const int InvalidReg = -1;
         public const int CCNotReg = -2;
 
@@ -43,33 +43,33 @@ namespace CSC431.IL
         /// </remarks>
         public string StructType { get; set; }
 
-        public void Add(CSC431.IL.Instruction line)
+        public void Add(T line)
         {
             code.Add(line);
         }
-        public void Add(BasicBlock lines)
+        public void Add(BasicBlock<T> lines)
         {
             code.AddRange(lines.code);
         }
 
-        public override Node[] Nexts
+        public override Node<T>[] Nexts
         {
             get
             {
                 if (next == null)
-                    return new Node[0];
-                return new Node[] { next };
+                    return new Node<T>[0];
+                return new Node<T>[] { next };
             }
         }
 
-        public override void SetNext(Node next)
+        public override void SetNext(Node<T> next)
         {
             this.next = next;
         }
 
-        public MultiBlock ToMulti()
+        public MultiBlock<T> ToMulti()
         {
-            var b = new MultiBlock(this.code);
+            var b = new MultiBlock<T>(this.Label, this.code);
             if (next != null)
                 b.SetNext(next);
             return b;
@@ -77,8 +77,8 @@ namespace CSC431.IL
 
         public void Merge()
         {
-            BasicBlock other;
-            while ((other = next as BasicBlock) != null)
+            BasicBlock<T> other;
+            while ((other = next as BasicBlock<T>) != null)
             {
                 this.code.AddRange(other.code);
                 this.next = other.next;

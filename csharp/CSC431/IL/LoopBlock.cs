@@ -6,43 +6,40 @@ using CSC431.IL;
 
 namespace CSC431.IL
 {
-    public class LoopBlock : Node
+    public class LoopBlock<T> : Node<T> where T : Instruction
     {
-        private MultiBlock Condition;
-        private SeqBlock Body;
+        private MultiBlock<T> Condition;
+        private SeqBlock<T> Body;
+        private Label<T> NextLabel;
         private bool isFixed = false;
         private int condReg;
 
-        public LoopBlock(BasicBlock condition, SeqBlock body)
+        public LoopBlock(BasicBlock<T> condition, SeqBlock<T> body, Label<T> nextLabel)
         {
             this.condReg = condition.Reg;
 
             this.Condition = condition.ToMulti();
             this.Body = body;
+            this.NextLabel = nextLabel;
 
-            this.Body.Add(new JumpiInstruction(this.Condition.Label));
             this.Body.SetNext(condition);
 
             this.Condition.PrintLabel = true;
             this.Body.PrintLabel = true;
         }
 
-        public override Node[] Nexts
+        public override Node<T>[] Nexts
         {
-            get { return new Node[] { Condition }; }
+            get { return new Node<T>[] { Condition }; }
         }
 
-        public override void SetNext(Node next)
+        public override void SetNext(Node<T> next)
         {
             if (isFixed)
                 throw new Exception("next was already set");
             isFixed = true;
 
-            int reg = Instruction.VirtualRegister();
-            this.Condition.AddLine(new LoadiInstruction(1, reg));
-            this.Condition.AddLine(new CompInstruction(condReg, reg));
-            this.Condition.AddLine(new CbreqInstruction(Body.Label, next.Label));
-
+            NextLabel.Mark(next);
             Condition.SetNext(next);
 
             next.PrintLabel = true;

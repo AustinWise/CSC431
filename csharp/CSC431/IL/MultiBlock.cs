@@ -5,32 +5,34 @@ using System.Text;
 
 namespace CSC431.IL
 {
-    public class MultiBlock : Node
+    public class MultiBlock<T> : Node<T> where T : Instruction
     {
-        public MultiBlock()
+        public MultiBlock(int label)
         {
-            this.code = new List<IL.Instruction>();
+            this.code = new List<T>();
+            this.Label = label;
         }
 
-        public MultiBlock(List<IL.Instruction> code)
+        public MultiBlock(int label, List<T> code)
         {
             this.code = code;
+            this.Label = label;
         }
 
-        private List<CSC431.IL.Instruction> code;
-        private List<Node> nexts = new List<Node>();
+        private List<T> code;
+        private List<Node<T>> nexts = new List<Node<T>>();
 
-        public void AddLine(CSC431.IL.Instruction line)
+        public void AddLine(T line)
         {
             code.Add(line);
         }
 
-        public override Node[] Nexts
+        public override Node<T>[] Nexts
         {
             get { return nexts.ToArray(); }
         }
 
-        public override void SetNext(Node next)
+        public override void SetNext(Node<T> next)
         {
             nexts.Add(next);
         }

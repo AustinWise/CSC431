@@ -1,7 +1,7 @@
 ﻿namespace CSC431.IL
 {
 
-class AddInstruction : Instruction
+class AddInstruction : MilocInstruction
 {
 	public AddInstruction
 	(
@@ -17,7 +17,7 @@ return string.Format("{0} r{1}, r{2}, r{3}", Name, Reg0, Reg1, Reg2);
 
 
 
-class AddiInstruction : Instruction
+class AddiInstruction : MilocInstruction
 {
 	public AddiInstruction
 	(
@@ -33,7 +33,7 @@ return string.Format("{0} r{1}, {2}, r{3}", Name, Reg0, Immed0, Reg1);
 
 
 
-class DivInstruction : Instruction
+class DivInstruction : MilocInstruction
 {
 	public DivInstruction
 	(
@@ -49,7 +49,7 @@ return string.Format("{0} r{1}, r{2}, r{3}", Name, Reg0, Reg1, Reg2);
 
 
 
-class MultInstruction : Instruction
+class MultInstruction : MilocInstruction
 {
 	public MultInstruction
 	(
@@ -65,7 +65,7 @@ return string.Format("{0} r{1}, r{2}, r{3}", Name, Reg0, Reg1, Reg2);
 
 
 
-class SubInstruction : Instruction
+class SubInstruction : MilocInstruction
 {
 	public SubInstruction
 	(
@@ -81,7 +81,7 @@ return string.Format("{0} r{1}, r{2}, r{3}", Name, Reg0, Reg1, Reg2);
 
 
 
-class RsubiInstruction : Instruction
+class RsubiInstruction : MilocInstruction
 {
 	public RsubiInstruction
 	(
@@ -97,7 +97,7 @@ return string.Format("{0} r{1}, {2}, r{3}", Name, Reg0, Immed0, Reg1);
 
 
 
-class AndInstruction : Instruction
+class AndInstruction : MilocInstruction
 {
 	public AndInstruction
 	(
@@ -113,7 +113,7 @@ return string.Format("{0} r{1}, r{2}, r{3}", Name, Reg0, Reg1, Reg2);
 
 
 
-class OrInstruction : Instruction
+class OrInstruction : MilocInstruction
 {
 	public OrInstruction
 	(
@@ -129,7 +129,7 @@ return string.Format("{0} r{1}, r{2}, r{3}", Name, Reg0, Reg1, Reg2);
 
 
 
-class XoriInstruction : Instruction
+class XoriInstruction : MilocInstruction
 {
 	public XoriInstruction
 	(
@@ -145,7 +145,7 @@ return string.Format("{0} r{1}, {2}, r{3}", Name, Reg0, Immed0, Reg1);
 
 
 
-class LoadiInstruction : Instruction
+class LoadiInstruction : MilocInstruction
 {
 	public LoadiInstruction
 	(
@@ -161,7 +161,7 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
 
 
 
-class PrintInstruction : Instruction
+class PrintInstruction : MilocInstruction
 {
 	public PrintInstruction
 	(
@@ -177,7 +177,7 @@ return string.Format("{0} r{1}", Name, Reg0);
 
 
 
-class PrintlnInstruction : Instruction
+class PrintlnInstruction : MilocInstruction
 {
 	public PrintlnInstruction
 	(
@@ -193,7 +193,7 @@ return string.Format("{0} r{1}", Name, Reg0);
 
 
 
-class ReadInstruction : Instruction
+class ReadInstruction : MilocInstruction
 {
 	public ReadInstruction
 	(
@@ -209,7 +209,7 @@ return string.Format("{0} r{1}", Name, Reg0);
 
 
 
-class CompInstruction : Instruction
+class CompInstruction : MilocInstruction
 {
 	public CompInstruction
 	(
@@ -226,7 +226,7 @@ return string.Format("{0} r{1}, r{2}", Name, Reg0, Reg1);
 
 
 
-class MovInstruction : Instruction
+class MovInstruction : MilocInstruction
 {
 	public MovInstruction
 	(
@@ -242,7 +242,7 @@ return string.Format("{0} r{1}, r{2}", Name, Reg0, Reg1);
 
 
 
-class MoveqInstruction : Instruction
+class MoveqInstruction : MilocInstruction
 {
 	public MoveqInstruction
 	(
@@ -258,7 +258,7 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
 
 
 
-class MovgeInstruction : Instruction
+class MovgeInstruction : MilocInstruction
 {
 	public MovgeInstruction
 	(
@@ -274,7 +274,7 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
 
 
 
-class MovgtInstruction : Instruction
+class MovgtInstruction : MilocInstruction
 {
 	public MovgtInstruction
 	(
@@ -290,7 +290,7 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
 
 
 
-class MovleInstruction : Instruction
+class MovleInstruction : MilocInstruction
 {
 	public MovleInstruction
 	(
@@ -306,7 +306,7 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
 
 
 
-class MovltInstruction : Instruction
+class MovltInstruction : MilocInstruction
 {
 	public MovltInstruction
 	(
@@ -322,7 +322,7 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
 
 
 
-class MovneInstruction : Instruction
+class MovneInstruction : MilocInstruction
 {
 	public MovneInstruction
 	(
@@ -338,15 +338,15 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, Reg0);
 
 
 
-class JumpiInstruction : Instruction
+class JumpiInstruction : MilocInstruction
 {
 	public JumpiInstruction
 	(
-int label0	) : base ("jumpi")
+Label<MilocInstruction> label0	) : base ("jumpi")
 	{
 this.Label0 = label0;	}
 
-public int Label0{ get; private set; }public override string ToString()
+public Label<MilocInstruction> Label0{ get; private set; }public override string ToString()
 {
 return string.Format("{0} L{1}", Name, Label0);
 }
@@ -354,15 +354,15 @@ return string.Format("{0} L{1}", Name, Label0);
 
 
 
-class CbreqInstruction : Instruction
+class CbreqInstruction : MilocInstruction
 {
 	public CbreqInstruction
 	(
-int label0,int label1	) : base ("cbreq")
+Label<MilocInstruction> label0,Label<MilocInstruction> label1	) : base ("cbreq")
 	{
 this.Label0 = label0;this.Label1 = label1;	}
 
-public int Label0{ get; private set; }public int Label1{ get; private set; }public override string ToString()
+public Label<MilocInstruction> Label0{ get; private set; }public Label<MilocInstruction> Label1{ get; private set; }public override string ToString()
 {
 return string.Format("{0} L{1}, L{2}", Name, Label0, Label1);
 }
@@ -370,7 +370,7 @@ return string.Format("{0} L{1}, L{2}", Name, Label0, Label1);
 
 
 
-class LoadinargumentInstruction : Instruction
+class LoadinargumentInstruction : MilocInstruction
 {
 	public LoadinargumentInstruction
 	(
@@ -386,7 +386,7 @@ return string.Format("{0} {1}, {2}, r{3}", Name, Str0, Immed0, Reg0);
 
 
 
-class CallInstruction : Instruction
+class CallInstruction : MilocInstruction
 {
 	public CallInstruction
 	(
@@ -402,7 +402,7 @@ return string.Format("{0} {1}", Name, Str0);
 
 
 
-class RetInstruction : Instruction
+class RetInstruction : MilocInstruction
 {
 	public RetInstruction
 	(
@@ -418,7 +418,7 @@ return string.Format("{0}", Name);
 
 
 
-class StoreretInstruction : Instruction
+class StoreretInstruction : MilocInstruction
 {
 	public StoreretInstruction
 	(
@@ -434,7 +434,7 @@ return string.Format("{0} r{1}", Name, Reg0);
 
 
 
-class StoreoutargumentInstruction : Instruction
+class StoreoutargumentInstruction : MilocInstruction
 {
 	public StoreoutargumentInstruction
 	(
@@ -450,7 +450,7 @@ return string.Format("{0} r{1}, {2}", Name, Reg0, Immed0);
 
 
 
-class LoadretInstruction : Instruction
+class LoadretInstruction : MilocInstruction
 {
 	public LoadretInstruction
 	(
@@ -466,7 +466,7 @@ return string.Format("{0} r{1}", Name, Reg0);
 
 
 
-class StoreaiInstruction : Instruction
+class StoreaiInstruction : MilocInstruction
 {
 	public StoreaiInstruction
 	(
@@ -482,7 +482,7 @@ return string.Format("{0} r{1}, r{2}, {3}", Name, Reg0, Reg1, Str0);
 
 
 
-class LoadaiInstruction : Instruction
+class LoadaiInstruction : MilocInstruction
 {
 	public LoadaiInstruction
 	(
@@ -498,7 +498,7 @@ return string.Format("{0} r{1}, {2}, r{3}", Name, Reg0, Str0, Reg1);
 
 
 
-class NewInstruction : Instruction
+class NewInstruction : MilocInstruction
 {
 	public NewInstruction
 	(
@@ -514,7 +514,7 @@ return string.Format("{0} {1}, [{2}], r{3}", Name, Str0, string.Join(", ", Arr0)
 
 
 
-class DelInstruction : Instruction
+class DelInstruction : MilocInstruction
 {
 	public DelInstruction
 	(

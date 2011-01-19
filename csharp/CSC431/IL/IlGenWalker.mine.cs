@@ -16,7 +16,7 @@ namespace CSC431.IL
         private Dictionary<string, int> argMap = new Dictionary<string, int>();
         private Dictionary<string, List<StructMember>> structMap = new Dictionary<string, List<StructMember>>();
 
-        public object Program()
+        public ProgramBlock<MilocInstruction> Program()
         {
             return this.program();
         }
@@ -30,7 +30,7 @@ namespace CSC431.IL
             return globalMap[name];
         }
 
-        private void doInvoke(string id, BasicBlock b, List<int> regLocs)
+        private void doInvoke(string id, BasicBlock<MilocInstruction> b, List<int> regLocs)
         {
             for (int i = 0; i < regLocs.Count; i++)
             {

@@ -6,40 +6,38 @@ using CSC431.IL;
 
 namespace CSC431.IL
 {
-    public class IfBlock : Node
+    public class IfBlock<T> : Node<T> where T : Instruction
     {
-        private MultiBlock Condition;
-        private SeqBlock TrueBody;
-        private SeqBlock FalseBody;
+        private MultiBlock<T> Condition;
+        private SeqBlock<T> TrueBody;
+        private SeqBlock<T> FalseBody;
+        private Label<T> NextLabel;
         private bool isFixed = false;
 
-        public IfBlock(BasicBlock condition, SeqBlock trueBody, SeqBlock falseBody)
+        public IfBlock(BasicBlock<T> condition, SeqBlock<T> trueBody, SeqBlock<T> falseBody, Label<T> nextLabel)
         {
             this.Condition = condition.ToMulti();
             this.Condition.SetNext(trueBody);
             this.Condition.SetNext(falseBody);
             this.TrueBody = trueBody;
             this.FalseBody = falseBody;
-
-            int reg = Instruction.VirtualRegister();
-            this.Condition.AddLine(new LoadiInstruction(1, reg));
-            this.Condition.AddLine(new CompInstruction(condition.Reg, reg));
-            this.Condition.AddLine(new CbreqInstruction(TrueBody.Label, FalseBody.Label));
+            this.NextLabel = nextLabel;
         }
 
-        public override Node[] Nexts
+        public override Node<T>[] Nexts
         {
-            get { return new Node[] { Condition }; }
+            get { return new Node<T>[] { Condition }; }
         }
 
-        public override void SetNext(Node next)
+        public override void SetNext(Node<T> next)
         {
             if (isFixed)
                 throw new Exception("next was already set");
             isFixed = true;
-            TrueBody.Add(new JumpiInstruction(next.Label));
+
             TrueBody.SetNext(next);
             FalseBody.SetNext(next);
+            NextLabel.Mark(next);
 
             next.PrintLabel = true;
         }

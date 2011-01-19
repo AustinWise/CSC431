@@ -52,7 +52,9 @@
     <Compile Include="IL\IlGenWalker.cs" />
     <Compile Include="IL\IlGenWalker.mine.cs" />
     <Compile Include="IlSteps.cs" />
+    <Compile Include="IL\Label.cs" />
     <Compile Include="IL\LoopBlock.cs" />
+    <Compile Include="IL\MilocInstruction.cs" />
     <Compile Include="IL\MultiBlock.cs" />
     <Compile Include="IL\Node.cs" />
     <Compile Include="IL\ProgramBlock.cs" />

@@ -7,7 +7,7 @@ using System.IO;
 
 namespace CSC431.IL
 {
-    public abstract class Node
+    public abstract class Node<T> where T : Instruction
     {
         private static int LabelCounter = 0;
 
@@ -17,11 +17,11 @@ namespace CSC431.IL
         }
 
         public bool PrintLabel { get; set; }
-        public int Label { get; private set; }
+        public int Label { get; protected set; }
 
-        public abstract Node[] Nexts { get; }
+        public abstract Node<T>[] Nexts { get; }
 
-        abstract public void SetNext(Node next);
+        abstract public void SetNext(Node<T> next);
 
         /// <summary>
         /// Indicates that there the tree is ready to use.
@@ -34,12 +34,12 @@ namespace CSC431.IL
             }
         }
 
-        public void Visit(Action<Node> fun)
+        public void Visit(Action<Node<T>> fun)
         {
-            VisitInner(new List<Node>(), fun);
+            VisitInner(new List<Node<T>>(), fun);
         }
 
-        private void VisitInner(List<Node> seen, Action<Node> fun)
+        private void VisitInner(List<Node<T>> seen, Action<Node<T>> fun)
         {
             if (seen.Contains(this))
                 return;

@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-01-18 04:22:54
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-01-19 06:19:48
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -125,14 +125,14 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_program() {}
 
     // $ANTLR start "program"
-    // IlGenWalker.g:17:1: program returns [ProgramBlock prog] : ^( PROGRAM ( types declarations[globalMap,globalStructMap] funs= functions ) ) ;
+    // IlGenWalker.g:17:1: program returns [ProgramBlock<MilocInstruction> prog] : ^( PROGRAM ( types declarations[globalMap,globalStructMap] funs= functions ) ) ;
     [GrammarRule("program")]
-    private ProgramBlock program()
+    private ProgramBlock<MilocInstruction> program()
     {
 
-        ProgramBlock prog = default(ProgramBlock);
+        ProgramBlock<MilocInstruction> prog = default(ProgramBlock<MilocInstruction>);
 
-        List<FunctionBlock> funs = default(List<FunctionBlock>);
+        List<FunctionBlock<MilocInstruction>> funs = default(List<FunctionBlock<MilocInstruction>>);
 
     	try { DebugEnterRule(GrammarFileName, "program");
     	DebugLocation(17, 1);
@@ -173,7 +173,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 
     		Match(input, TokenTypes.Up, null); 
     		DebugLocation(18, 78);
-    		prog = new ProgramBlock(funs);
+    		prog = new ProgramBlock<MilocInstruction>(funs);
 
     		}
 
@@ -1021,14 +1021,14 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_functions() {}
 
     // $ANTLR start "functions"
-    // IlGenWalker.g:83:1: functions returns [List<FunctionBlock> funs = new List<FunctionBlock>()] : ^( FUNCS (f= function )* ) ;
+    // IlGenWalker.g:83:1: functions returns [List<FunctionBlock<MilocInstruction>> funs = new List<FunctionBlock<MilocInstruction>>()] : ^( FUNCS (f= function )* ) ;
     [GrammarRule("functions")]
-    private List<FunctionBlock> functions()
+    private List<FunctionBlock<MilocInstruction>> functions()
     {
 
-        List<FunctionBlock> funs =  new List<FunctionBlock>();
+        List<FunctionBlock<MilocInstruction>> funs =  new List<FunctionBlock<MilocInstruction>>();
 
-        FunctionBlock f = default(FunctionBlock);
+        FunctionBlock<MilocInstruction> f = default(FunctionBlock<MilocInstruction>);
 
     	try { DebugEnterRule(GrammarFileName, "functions");
     	DebugLocation(83, 1);
@@ -1115,12 +1115,12 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_function() {}
 
     // $ANTLR start "function"
-    // IlGenWalker.g:87:1: function returns [FunctionBlock f] : ^( FUN id= ID parameters[argLoadBlock] ^( RETTYPE return_type ) declarations[localMap,localStructMap] statement_list[body] ) ;
+    // IlGenWalker.g:87:1: function returns [FunctionBlock<MilocInstruction> f] : ^( FUN id= ID parameters[argLoadBlock] ^( RETTYPE return_type ) declarations[localMap,localStructMap] statement_list[body] ) ;
     [GrammarRule("function")]
-    private FunctionBlock function()
+    private FunctionBlock<MilocInstruction> function()
     {
 
-        FunctionBlock f = default(FunctionBlock);
+        FunctionBlock<MilocInstruction> f = default(FunctionBlock<MilocInstruction>);
 
         CommonTree id=null;
 
@@ -1128,8 +1128,8 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
         		localMap.Clear();
         		localStructMap.Clear();
         		
-        		SeqBlock body = new SeqBlock();
-        		BasicBlock argLoadBlock = new BasicBlock();
+        		SeqBlock<MilocInstruction> body = new SeqBlock<MilocInstruction>();
+        		BasicBlock<MilocInstruction> argLoadBlock = new BasicBlock<MilocInstruction>();
         		body.Add(argLoadBlock);
         	
     	try { DebugEnterRule(GrammarFileName, "function");
@@ -1178,11 +1178,11 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     		Match(input, TokenTypes.Up, null); 
     		DebugLocation(98, 3);
 
-    					BasicBlock returnBlock = new BasicBlock();
+    					BasicBlock<MilocInstruction> returnBlock = new BasicBlock<MilocInstruction>();
     					returnBlock.Add(new RetInstruction());
     					body.Add(returnBlock);
-    					body.SetNext(new BasicBlock());
-    					f = new FunctionBlock((id!=null?id.Text:null), body);
+    					body.SetNext(new BasicBlock<MilocInstruction>());
+    					f = new FunctionBlock<MilocInstruction>((id!=null?id.Text:null), body);
     				
 
     		}
@@ -1208,9 +1208,9 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_parameters() {}
 
     // $ANTLR start "parameters"
-    // IlGenWalker.g:107:1: parameters[BasicBlock b] : ^( PARAMS ( param_decl[$b,ndx] )* ) ;
+    // IlGenWalker.g:107:1: parameters[BasicBlock<MilocInstruction> b] : ^( PARAMS ( param_decl[$b,ndx] )* ) ;
     [GrammarRule("parameters")]
-    private void parameters(BasicBlock b)
+    private void parameters(BasicBlock<MilocInstruction> b)
     {
 
         int ndx = 0;
@@ -1299,9 +1299,9 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_param_decl() {}
 
     // $ANTLR start "param_decl"
-    // IlGenWalker.g:112:1: param_decl[BasicBlock b, int ndx] : ^( DECL ^( TYPE type ) id= ID ) ;
+    // IlGenWalker.g:112:1: param_decl[BasicBlock<MilocInstruction> b, int ndx] : ^( DECL ^( TYPE type ) id= ID ) ;
     [GrammarRule("param_decl")]
-    private void param_decl(BasicBlock b, int ndx)
+    private void param_decl(BasicBlock<MilocInstruction> b, int ndx)
     {
 
         CommonTree id=null;
@@ -1437,17 +1437,17 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_statement() {}
 
     // $ANTLR start "statement"
-    // IlGenWalker.g:121:1: statement returns [Node node] : (s= block | b= assignment | b= print | b= read | c= conditional | l= loop | b= delete | b= ret | b= invocation );
+    // IlGenWalker.g:121:1: statement returns [Node<MilocInstruction> node] : (s= block | b= assignment | b= print | b= read | c= conditional | l= loop | b= delete | b= ret | b= invocation );
     [GrammarRule("statement")]
-    private Node statement()
+    private Node<MilocInstruction> statement()
     {
 
-        Node node = default(Node);
+        Node<MilocInstruction> node = default(Node<MilocInstruction>);
 
-        SeqBlock s = default(SeqBlock);
-        BasicBlock b = default(BasicBlock);
-        IfBlock c = default(IfBlock);
-        LoopBlock l = default(LoopBlock);
+        SeqBlock<MilocInstruction> s = default(SeqBlock<MilocInstruction>);
+        BasicBlock<MilocInstruction> b = default(BasicBlock<MilocInstruction>);
+        IfBlock<MilocInstruction> c = default(IfBlock<MilocInstruction>);
+        LoopBlock<MilocInstruction> l = default(LoopBlock<MilocInstruction>);
 
     	try { DebugEnterRule(GrammarFileName, "statement");
     	DebugLocation(121, 1);
@@ -1664,12 +1664,12 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_block() {}
 
     // $ANTLR start "block"
-    // IlGenWalker.g:133:1: block returns [SeqBlock b = new SeqBlock()] : ^( BLOCK statement_list[$b] ) ;
+    // IlGenWalker.g:133:1: block returns [SeqBlock<MilocInstruction> b = new SeqBlock<MilocInstruction>()] : ^( BLOCK statement_list[$b] ) ;
     [GrammarRule("block")]
-    private SeqBlock block()
+    private SeqBlock<MilocInstruction> block()
     {
 
-        SeqBlock b =  new SeqBlock();
+        SeqBlock<MilocInstruction> b =  new SeqBlock<MilocInstruction>();
 
     	try { DebugEnterRule(GrammarFileName, "block");
     	DebugLocation(133, 1);
@@ -1715,12 +1715,12 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_statement_list() {}
 
     // $ANTLR start "statement_list"
-    // IlGenWalker.g:137:1: statement_list[SeqBlock b] : ^( STMTS (s= statement )* ) ;
+    // IlGenWalker.g:137:1: statement_list[SeqBlock<MilocInstruction> b] : ^( STMTS (s= statement )* ) ;
     [GrammarRule("statement_list")]
-    private void statement_list(SeqBlock b)
+    private void statement_list(SeqBlock<MilocInstruction> b)
     {
 
-        Node s = default(Node);
+        Node<MilocInstruction> s = default(Node<MilocInstruction>);
 
     	try { DebugEnterRule(GrammarFileName, "statement_list");
     	DebugLocation(137, 1);
@@ -1809,14 +1809,14 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_assignment() {}
 
     // $ANTLR start "assignment"
-    // IlGenWalker.g:145:1: assignment returns [BasicBlock b = new BasicBlock()] : ^( ASSIGN e= expression dest= lvalue ) ;
+    // IlGenWalker.g:145:1: assignment returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()] : ^( ASSIGN e= expression dest= lvalue ) ;
     [GrammarRule("assignment")]
-    private BasicBlock assignment()
+    private BasicBlock<MilocInstruction> assignment()
     {
 
-        BasicBlock b =  new BasicBlock();
+        BasicBlock<MilocInstruction> b =  new BasicBlock<MilocInstruction>();
 
-        BasicBlock e = default(BasicBlock);
+        BasicBlock<MilocInstruction> e = default(BasicBlock<MilocInstruction>);
         int dest = default(int);
 
     	try { DebugEnterRule(GrammarFileName, "assignment");
@@ -1870,15 +1870,15 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_print() {}
 
     // $ANTLR start "print"
-    // IlGenWalker.g:149:1: print returns [BasicBlock b = new BasicBlock()] : ^( PRINT e= expression (el= ENDL )? ) ;
+    // IlGenWalker.g:149:1: print returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()] : ^( PRINT e= expression (el= ENDL )? ) ;
     [GrammarRule("print")]
-    private BasicBlock print()
+    private BasicBlock<MilocInstruction> print()
     {
 
-        BasicBlock b =  new BasicBlock();
+        BasicBlock<MilocInstruction> b =  new BasicBlock<MilocInstruction>();
 
         CommonTree el=null;
-        BasicBlock e = default(BasicBlock);
+        BasicBlock<MilocInstruction> e = default(BasicBlock<MilocInstruction>);
 
     	try { DebugEnterRule(GrammarFileName, "print");
     	DebugLocation(149, 1);
@@ -1959,12 +1959,12 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_read() {}
 
     // $ANTLR start "read"
-    // IlGenWalker.g:160:1: read returns [BasicBlock b = new BasicBlock()] : ^( READ dest= lvalue ) ;
+    // IlGenWalker.g:160:1: read returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()] : ^( READ dest= lvalue ) ;
     [GrammarRule("read")]
-    private BasicBlock read()
+    private BasicBlock<MilocInstruction> read()
     {
 
-        BasicBlock b =  new BasicBlock();
+        BasicBlock<MilocInstruction> b =  new BasicBlock<MilocInstruction>();
 
         int dest = default(int);
 
@@ -2014,42 +2014,43 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_conditional() {}
 
     // $ANTLR start "conditional"
-    // IlGenWalker.g:164:1: conditional returns [IfBlock b] : ^( IF e= expression t= block (f= block )? ) ;
+    // IlGenWalker.g:164:1: conditional returns [IfBlock<MilocInstruction> b] : ^( IF e= expression t= block (f= block )? ) ;
     [GrammarRule("conditional")]
-    private IfBlock conditional()
+    private IfBlock<MilocInstruction> conditional()
     {
 
-        IfBlock b = default(IfBlock);
+        IfBlock<MilocInstruction> b = default(IfBlock<MilocInstruction>);
 
-        BasicBlock e = default(BasicBlock);
-        SeqBlock t = default(SeqBlock);
-        SeqBlock f = default(SeqBlock);
+        BasicBlock<MilocInstruction> e = default(BasicBlock<MilocInstruction>);
+        SeqBlock<MilocInstruction> t = default(SeqBlock<MilocInstruction>);
+        SeqBlock<MilocInstruction> f = default(SeqBlock<MilocInstruction>);
 
+         var lab = new Label<MilocInstruction>(); 
     	try { DebugEnterRule(GrammarFileName, "conditional");
     	DebugLocation(164, 1);
     	try
     	{
-    		// IlGenWalker.g:165:2: ( ^( IF e= expression t= block (f= block )? ) )
+    		// IlGenWalker.g:166:2: ( ^( IF e= expression t= block (f= block )? ) )
     		DebugEnterAlt(1);
-    		// IlGenWalker.g:165:4: ^( IF e= expression t= block (f= block )? )
+    		// IlGenWalker.g:166:4: ^( IF e= expression t= block (f= block )? )
     		{
-    		DebugLocation(165, 4);
-    		DebugLocation(165, 6);
-    		Match(input,IF,Follow._IF_in_conditional732); 
+    		DebugLocation(166, 4);
+    		DebugLocation(166, 6);
+    		Match(input,IF,Follow._IF_in_conditional737); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(165, 10);
-    		PushFollow(Follow._expression_in_conditional736);
+    		DebugLocation(166, 10);
+    		PushFollow(Follow._expression_in_conditional741);
     		e=expression();
     		PopFollow();
 
-    		DebugLocation(165, 23);
-    		PushFollow(Follow._block_in_conditional740);
+    		DebugLocation(166, 23);
+    		PushFollow(Follow._block_in_conditional745);
     		t=block();
     		PopFollow();
 
-    		DebugLocation(165, 30);
-    		// IlGenWalker.g:165:30: (f= block )?
+    		DebugLocation(166, 30);
+    		// IlGenWalker.g:166:30: (f= block )?
     		int alt14=2;
     		try { DebugEnterSubRule(14);
     		try { DebugEnterDecision(14, decisionCanBacktrack[14]);
@@ -2064,10 +2065,10 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// IlGenWalker.g:165:31: f= block
+    			// IlGenWalker.g:166:31: f= block
     			{
-    			DebugLocation(165, 32);
-    			PushFollow(Follow._block_in_conditional745);
+    			DebugLocation(166, 32);
+    			PushFollow(Follow._block_in_conditional750);
     			f=block();
     			PopFollow();
 
@@ -2080,8 +2081,20 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(165, 42);
-    		b = new IfBlock(e, t, f ?? new SeqBlock()); 
+    		DebugLocation(167, 3);
+
+    					int reg = Instruction.VirtualRegister();
+    					f = f ?? new SeqBlock<MilocInstruction>();
+    					
+    					e.Add(new LoadiInstruction(1, reg));
+    					e.Add(new CompInstruction(e.Reg, reg));
+    					e.Add(new CbreqInstruction(t.Label, f.Label));
+    					
+    					t.Add(new JumpiInstruction(lab));
+    					f.Add(new JumpiInstruction(lab));
+    					
+    					b = new IfBlock<MilocInstruction>(e, t, f ?? new SeqBlock<MilocInstruction>(), lab);
+    				
 
     		}
 
@@ -2094,7 +2107,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(166, 1);
+     	DebugLocation(180, 1);
     	} finally { DebugExitRule(GrammarFileName, "conditional"); }
     	return b;
 
@@ -2106,48 +2119,58 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_loop() {}
 
     // $ANTLR start "loop"
-    // IlGenWalker.g:168:1: loop returns [LoopBlock b] : ^( WHILE e= expression body= block expression ) ;
+    // IlGenWalker.g:182:1: loop returns [LoopBlock<MilocInstruction> b] : ^( WHILE e= expression body= block expression ) ;
     [GrammarRule("loop")]
-    private LoopBlock loop()
+    private LoopBlock<MilocInstruction> loop()
     {
 
-        LoopBlock b = default(LoopBlock);
+        LoopBlock<MilocInstruction> b = default(LoopBlock<MilocInstruction>);
 
-        BasicBlock e = default(BasicBlock);
-        SeqBlock body = default(SeqBlock);
+        BasicBlock<MilocInstruction> e = default(BasicBlock<MilocInstruction>);
+        SeqBlock<MilocInstruction> body = default(SeqBlock<MilocInstruction>);
 
+         var lab = new Label<MilocInstruction>(); 
     	try { DebugEnterRule(GrammarFileName, "loop");
-    	DebugLocation(168, 1);
+    	DebugLocation(182, 1);
     	try
     	{
-    		// IlGenWalker.g:169:2: ( ^( WHILE e= expression body= block expression ) )
+    		// IlGenWalker.g:184:2: ( ^( WHILE e= expression body= block expression ) )
     		DebugEnterAlt(1);
-    		// IlGenWalker.g:169:4: ^( WHILE e= expression body= block expression )
+    		// IlGenWalker.g:184:4: ^( WHILE e= expression body= block expression )
     		{
-    		DebugLocation(169, 4);
-    		DebugLocation(169, 6);
-    		Match(input,WHILE,Follow._WHILE_in_loop766); 
+    		DebugLocation(184, 4);
+    		DebugLocation(184, 6);
+    		Match(input,WHILE,Follow._WHILE_in_loop778); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(169, 13);
-    		PushFollow(Follow._expression_in_loop770);
+    		DebugLocation(184, 13);
+    		PushFollow(Follow._expression_in_loop782);
     		e=expression();
     		PopFollow();
 
-    		DebugLocation(169, 29);
-    		PushFollow(Follow._block_in_loop774);
+    		DebugLocation(184, 29);
+    		PushFollow(Follow._block_in_loop786);
     		body=block();
     		PopFollow();
 
-    		DebugLocation(169, 36);
-    		PushFollow(Follow._expression_in_loop776);
+    		DebugLocation(184, 36);
+    		PushFollow(Follow._expression_in_loop788);
     		expression();
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(169, 48);
-    		b = new LoopBlock(e, body); 
+    		DebugLocation(185, 3);
+
+    					body.Add(new JumpiInstruction(e.Label));
+    					
+    					int reg = Instruction.VirtualRegister();
+    					e.Add(new LoadiInstruction(1, reg));
+    					e.Add(new CompInstruction(e.Reg, reg));
+    					e.Add(new CbreqInstruction(body.Label, lab));			
+    					
+    					b = new LoopBlock<MilocInstruction>(e, body, lab);
+    				
 
     		}
 
@@ -2160,7 +2183,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(170, 1);
+     	DebugLocation(195, 1);
     	} finally { DebugExitRule(GrammarFileName, "loop"); }
     	return b;
 
@@ -2172,36 +2195,36 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_delete() {}
 
     // $ANTLR start "delete"
-    // IlGenWalker.g:172:1: delete returns [BasicBlock b = new BasicBlock()] : ^( DELETE e= expression ) ;
+    // IlGenWalker.g:197:1: delete returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()] : ^( DELETE e= expression ) ;
     [GrammarRule("delete")]
-    private BasicBlock delete()
+    private BasicBlock<MilocInstruction> delete()
     {
 
-        BasicBlock b =  new BasicBlock();
+        BasicBlock<MilocInstruction> b =  new BasicBlock<MilocInstruction>();
 
-        BasicBlock e = default(BasicBlock);
+        BasicBlock<MilocInstruction> e = default(BasicBlock<MilocInstruction>);
 
     	try { DebugEnterRule(GrammarFileName, "delete");
-    	DebugLocation(172, 1);
+    	DebugLocation(197, 1);
     	try
     	{
-    		// IlGenWalker.g:173:2: ( ^( DELETE e= expression ) )
+    		// IlGenWalker.g:198:2: ( ^( DELETE e= expression ) )
     		DebugEnterAlt(1);
-    		// IlGenWalker.g:173:4: ^( DELETE e= expression )
+    		// IlGenWalker.g:198:4: ^( DELETE e= expression )
     		{
-    		DebugLocation(173, 4);
-    		DebugLocation(173, 6);
-    		Match(input,DELETE,Follow._DELETE_in_delete795); 
+    		DebugLocation(198, 4);
+    		DebugLocation(198, 6);
+    		Match(input,DELETE,Follow._DELETE_in_delete809); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(173, 14);
-    		PushFollow(Follow._expression_in_delete799);
+    		DebugLocation(198, 14);
+    		PushFollow(Follow._expression_in_delete813);
     		e=expression();
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(173, 27);
+    		DebugLocation(198, 27);
     		b.Add(e); b.Add(new DelInstruction(e.Reg));
 
     		}
@@ -2215,7 +2238,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(174, 1);
+     	DebugLocation(199, 1);
     	} finally { DebugExitRule(GrammarFileName, "delete"); }
     	return b;
 
@@ -2227,32 +2250,32 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_ret() {}
 
     // $ANTLR start "ret"
-    // IlGenWalker.g:176:1: ret returns [BasicBlock b = new BasicBlock()] : ^( RETURN (e= expression )? ) ;
+    // IlGenWalker.g:201:1: ret returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()] : ^( RETURN (e= expression )? ) ;
     [GrammarRule("ret")]
-    private BasicBlock ret()
+    private BasicBlock<MilocInstruction> ret()
     {
 
-        BasicBlock b =  new BasicBlock();
+        BasicBlock<MilocInstruction> b =  new BasicBlock<MilocInstruction>();
 
-        BasicBlock e = default(BasicBlock);
+        BasicBlock<MilocInstruction> e = default(BasicBlock<MilocInstruction>);
 
     	try { DebugEnterRule(GrammarFileName, "ret");
-    	DebugLocation(176, 1);
+    	DebugLocation(201, 1);
     	try
     	{
-    		// IlGenWalker.g:177:2: ( ^( RETURN (e= expression )? ) )
+    		// IlGenWalker.g:202:2: ( ^( RETURN (e= expression )? ) )
     		DebugEnterAlt(1);
-    		// IlGenWalker.g:177:4: ^( RETURN (e= expression )? )
+    		// IlGenWalker.g:202:4: ^( RETURN (e= expression )? )
     		{
-    		DebugLocation(177, 4);
-    		DebugLocation(177, 6);
-    		Match(input,RETURN,Follow._RETURN_in_ret818); 
+    		DebugLocation(202, 4);
+    		DebugLocation(202, 6);
+    		Match(input,RETURN,Follow._RETURN_in_ret832); 
 
     		if (input.LA(1) == TokenTypes.Down)
     		{
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(177, 13);
-    			// IlGenWalker.g:177:13: (e= expression )?
+    			DebugLocation(202, 13);
+    			// IlGenWalker.g:202:13: (e= expression )?
     			int alt15=2;
     			try { DebugEnterSubRule(15);
     			try { DebugEnterDecision(15, decisionCanBacktrack[15]);
@@ -2267,10 +2290,10 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// IlGenWalker.g:177:14: e= expression
+    				// IlGenWalker.g:202:14: e= expression
     				{
-    				DebugLocation(177, 15);
-    				PushFollow(Follow._expression_in_ret823);
+    				DebugLocation(202, 15);
+    				PushFollow(Follow._expression_in_ret837);
     				e=expression();
     				PopFollow();
 
@@ -2284,7 +2307,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 
     			Match(input, TokenTypes.Up, null); 
     		}
-    		DebugLocation(178, 3);
+    		DebugLocation(203, 3);
 
     					if (e != null)
     					{
@@ -2305,7 +2328,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(186, 1);
+     	DebugLocation(211, 1);
     	} finally { DebugExitRule(GrammarFileName, "ret"); }
     	return b;
 
@@ -2317,39 +2340,39 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_invocation() {}
 
     // $ANTLR start "invocation"
-    // IlGenWalker.g:188:1: invocation returns [BasicBlock b = new BasicBlock()] : ^( INVOKE id= ID regLocs= arguments[$b] ) ;
+    // IlGenWalker.g:213:1: invocation returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()] : ^( INVOKE id= ID regLocs= arguments[$b] ) ;
     [GrammarRule("invocation")]
-    private BasicBlock invocation()
+    private BasicBlock<MilocInstruction> invocation()
     {
 
-        BasicBlock b =  new BasicBlock();
+        BasicBlock<MilocInstruction> b =  new BasicBlock<MilocInstruction>();
 
         CommonTree id=null;
         List<int> regLocs = default(List<int>);
 
     	try { DebugEnterRule(GrammarFileName, "invocation");
-    	DebugLocation(188, 1);
+    	DebugLocation(213, 1);
     	try
     	{
-    		// IlGenWalker.g:189:2: ( ^( INVOKE id= ID regLocs= arguments[$b] ) )
+    		// IlGenWalker.g:214:2: ( ^( INVOKE id= ID regLocs= arguments[$b] ) )
     		DebugEnterAlt(1);
-    		// IlGenWalker.g:189:4: ^( INVOKE id= ID regLocs= arguments[$b] )
+    		// IlGenWalker.g:214:4: ^( INVOKE id= ID regLocs= arguments[$b] )
     		{
-    		DebugLocation(189, 4);
-    		DebugLocation(189, 6);
-    		Match(input,INVOKE,Follow._INVOKE_in_invocation847); 
+    		DebugLocation(214, 4);
+    		DebugLocation(214, 6);
+    		Match(input,INVOKE,Follow._INVOKE_in_invocation861); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(189, 15);
-    		id=(CommonTree)Match(input,ID,Follow._ID_in_invocation851); 
-    		DebugLocation(189, 26);
-    		PushFollow(Follow._arguments_in_invocation855);
+    		DebugLocation(214, 15);
+    		id=(CommonTree)Match(input,ID,Follow._ID_in_invocation865); 
+    		DebugLocation(214, 26);
+    		PushFollow(Follow._arguments_in_invocation869);
     		regLocs=arguments(b);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(189, 42);
+    		DebugLocation(214, 42);
     		doInvoke((id!=null?id.Text:null), b, regLocs); 
 
     		}
@@ -2363,7 +2386,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(190, 1);
+     	DebugLocation(215, 1);
     	} finally { DebugExitRule(GrammarFileName, "invocation"); }
     	return b;
 
@@ -2375,7 +2398,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_lvalue() {}
 
     // $ANTLR start "lvalue"
-    // IlGenWalker.g:193:1: lvalue returns [int dest] : ( ^( DOT lvalue ID ) | id= ID );
+    // IlGenWalker.g:218:1: lvalue returns [int dest] : ( ^( DOT lvalue ID ) | id= ID );
     [GrammarRule("lvalue")]
     private int lvalue()
     {
@@ -2385,10 +2408,10 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
         CommonTree id=null;
 
     	try { DebugEnterRule(GrammarFileName, "lvalue");
-    	DebugLocation(193, 1);
+    	DebugLocation(218, 1);
     	try
     	{
-    		// IlGenWalker.g:194:2: ( ^( DOT lvalue ID ) | id= ID )
+    		// IlGenWalker.g:219:2: ( ^( DOT lvalue ID ) | id= ID )
     		int alt16=2;
     		try { DebugEnterDecision(16, decisionCanBacktrack[16]);
     		int LA16_0 = input.LA(1);
@@ -2413,20 +2436,20 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// IlGenWalker.g:194:4: ^( DOT lvalue ID )
+    			// IlGenWalker.g:219:4: ^( DOT lvalue ID )
     			{
-    			DebugLocation(194, 4);
-    			DebugLocation(194, 6);
-    			Match(input,DOT,Follow._DOT_in_lvalue876); 
+    			DebugLocation(219, 4);
+    			DebugLocation(219, 6);
+    			Match(input,DOT,Follow._DOT_in_lvalue890); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(194, 10);
-    			PushFollow(Follow._lvalue_in_lvalue878);
+    			DebugLocation(219, 10);
+    			PushFollow(Follow._lvalue_in_lvalue892);
     			lvalue();
     			PopFollow();
 
-    			DebugLocation(194, 17);
-    			Match(input,ID,Follow._ID_in_lvalue880); 
+    			DebugLocation(219, 17);
+    			Match(input,ID,Follow._ID_in_lvalue894); 
 
     			Match(input, TokenTypes.Up, null); 
 
@@ -2434,11 +2457,11 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// IlGenWalker.g:195:4: id= ID
+    			// IlGenWalker.g:220:4: id= ID
     			{
-    			DebugLocation(195, 6);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_lvalue888); 
-    			DebugLocation(195, 10);
+    			DebugLocation(220, 6);
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_lvalue902); 
+    			DebugLocation(220, 10);
     			dest = getVarReg((id!=null?id.Text:null)); 
 
     			}
@@ -2454,7 +2477,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(196, 1);
+     	DebugLocation(221, 1);
     	} finally { DebugExitRule(GrammarFileName, "lvalue"); }
     	return dest;
 
@@ -2466,24 +2489,24 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_expression() {}
 
     // $ANTLR start "expression"
-    // IlGenWalker.g:198:1: expression returns [BasicBlock b = new BasicBlock()] : ( ^( AND e1= expression e2= expression ) | ^( OR e1= expression e2= expression ) | ^( EQ e1= expression e2= expression ) | ^( LT e1= expression e2= expression ) | ^( GT e1= expression e2= expression ) | ^( NE e1= expression e2= expression ) | ^( LE e1= expression e2= expression ) | ^( GE e1= expression e2= expression ) | ^( PLUS e1= expression e2= expression ) | ^( MINUS e1= expression e2= expression ) | ^( TIMES e1= expression e2= expression ) | ^( DIVIDE e1= expression e2= expression ) | ^( NOT e= expression ) | ^( NEG e= expression ) | s= selector );
+    // IlGenWalker.g:223:1: expression returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()] : ( ^( AND e1= expression e2= expression ) | ^( OR e1= expression e2= expression ) | ^( EQ e1= expression e2= expression ) | ^( LT e1= expression e2= expression ) | ^( GT e1= expression e2= expression ) | ^( NE e1= expression e2= expression ) | ^( LE e1= expression e2= expression ) | ^( GE e1= expression e2= expression ) | ^( PLUS e1= expression e2= expression ) | ^( MINUS e1= expression e2= expression ) | ^( TIMES e1= expression e2= expression ) | ^( DIVIDE e1= expression e2= expression ) | ^( NOT e= expression ) | ^( NEG e= expression ) | s= selector );
     [GrammarRule("expression")]
-    private BasicBlock expression()
+    private BasicBlock<MilocInstruction> expression()
     {
 
-        BasicBlock b =  new BasicBlock();
+        BasicBlock<MilocInstruction> b =  new BasicBlock<MilocInstruction>();
 
-        BasicBlock e1 = default(BasicBlock);
-        BasicBlock e2 = default(BasicBlock);
-        BasicBlock e = default(BasicBlock);
-        BasicBlock s = default(BasicBlock);
+        BasicBlock<MilocInstruction> e1 = default(BasicBlock<MilocInstruction>);
+        BasicBlock<MilocInstruction> e2 = default(BasicBlock<MilocInstruction>);
+        BasicBlock<MilocInstruction> e = default(BasicBlock<MilocInstruction>);
+        BasicBlock<MilocInstruction> s = default(BasicBlock<MilocInstruction>);
 
          int reg = Instruction.VirtualRegister(); b.Reg = reg; 
     	try { DebugEnterRule(GrammarFileName, "expression");
-    	DebugLocation(198, 1);
+    	DebugLocation(223, 1);
     	try
     	{
-    		// IlGenWalker.g:200:2: ( ^( AND e1= expression e2= expression ) | ^( OR e1= expression e2= expression ) | ^( EQ e1= expression e2= expression ) | ^( LT e1= expression e2= expression ) | ^( GT e1= expression e2= expression ) | ^( NE e1= expression e2= expression ) | ^( LE e1= expression e2= expression ) | ^( GE e1= expression e2= expression ) | ^( PLUS e1= expression e2= expression ) | ^( MINUS e1= expression e2= expression ) | ^( TIMES e1= expression e2= expression ) | ^( DIVIDE e1= expression e2= expression ) | ^( NOT e= expression ) | ^( NEG e= expression ) | s= selector )
+    		// IlGenWalker.g:225:2: ( ^( AND e1= expression e2= expression ) | ^( OR e1= expression e2= expression ) | ^( EQ e1= expression e2= expression ) | ^( LT e1= expression e2= expression ) | ^( GT e1= expression e2= expression ) | ^( NE e1= expression e2= expression ) | ^( LE e1= expression e2= expression ) | ^( GE e1= expression e2= expression ) | ^( PLUS e1= expression e2= expression ) | ^( MINUS e1= expression e2= expression ) | ^( TIMES e1= expression e2= expression ) | ^( DIVIDE e1= expression e2= expression ) | ^( NOT e= expression ) | ^( NEG e= expression ) | s= selector )
     		int alt17=15;
     		try { DebugEnterDecision(17, decisionCanBacktrack[17]);
     		switch (input.LA(1))
@@ -2584,348 +2607,348 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// IlGenWalker.g:200:4: ^( AND e1= expression e2= expression )
+    			// IlGenWalker.g:225:4: ^( AND e1= expression e2= expression )
     			{
-    			DebugLocation(200, 4);
-    			DebugLocation(200, 6);
-    			Match(input,AND,Follow._AND_in_expression911); 
+    			DebugLocation(225, 4);
+    			DebugLocation(225, 6);
+    			Match(input,AND,Follow._AND_in_expression925); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(200, 12);
-    			PushFollow(Follow._expression_in_expression915);
+    			DebugLocation(225, 12);
+    			PushFollow(Follow._expression_in_expression929);
     			e1=expression();
     			PopFollow();
 
-    			DebugLocation(200, 26);
-    			PushFollow(Follow._expression_in_expression919);
+    			DebugLocation(225, 26);
+    			PushFollow(Follow._expression_in_expression933);
     			e2=expression();
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(200, 39);
+    			DebugLocation(225, 39);
     			 b.Add(e1); b.Add(e2); b.Add(new AndInstruction(e1.Reg, e2.Reg, reg)); 
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// IlGenWalker.g:201:4: ^( OR e1= expression e2= expression )
+    			// IlGenWalker.g:226:4: ^( OR e1= expression e2= expression )
     			{
-    			DebugLocation(201, 4);
-    			DebugLocation(201, 6);
-    			Match(input,OR,Follow._OR_in_expression928); 
+    			DebugLocation(226, 4);
+    			DebugLocation(226, 6);
+    			Match(input,OR,Follow._OR_in_expression942); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(201, 11);
-    			PushFollow(Follow._expression_in_expression932);
+    			DebugLocation(226, 11);
+    			PushFollow(Follow._expression_in_expression946);
     			e1=expression();
     			PopFollow();
 
-    			DebugLocation(201, 25);
-    			PushFollow(Follow._expression_in_expression936);
+    			DebugLocation(226, 25);
+    			PushFollow(Follow._expression_in_expression950);
     			e2=expression();
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(201, 38);
+    			DebugLocation(226, 38);
     			 b.Add(e1); b.Add(e2); b.Add(new OrInstruction(e1.Reg, e2.Reg, reg)); 
 
     			}
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// IlGenWalker.g:202:4: ^( EQ e1= expression e2= expression )
+    			// IlGenWalker.g:227:4: ^( EQ e1= expression e2= expression )
     			{
-    			DebugLocation(202, 4);
-    			DebugLocation(202, 6);
-    			Match(input,EQ,Follow._EQ_in_expression945); 
+    			DebugLocation(227, 4);
+    			DebugLocation(227, 6);
+    			Match(input,EQ,Follow._EQ_in_expression959); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(202, 11);
-    			PushFollow(Follow._expression_in_expression949);
+    			DebugLocation(227, 11);
+    			PushFollow(Follow._expression_in_expression963);
     			e1=expression();
     			PopFollow();
 
-    			DebugLocation(202, 25);
-    			PushFollow(Follow._expression_in_expression953);
+    			DebugLocation(227, 25);
+    			PushFollow(Follow._expression_in_expression967);
     			e2=expression();
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(202, 38);
+    			DebugLocation(227, 38);
     			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(0, reg)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MoveqInstruction(1, reg)); 
 
     			}
     			break;
     		case 4:
     			DebugEnterAlt(4);
-    			// IlGenWalker.g:203:4: ^( LT e1= expression e2= expression )
+    			// IlGenWalker.g:228:4: ^( LT e1= expression e2= expression )
     			{
-    			DebugLocation(203, 4);
-    			DebugLocation(203, 6);
-    			Match(input,LT,Follow._LT_in_expression962); 
+    			DebugLocation(228, 4);
+    			DebugLocation(228, 6);
+    			Match(input,LT,Follow._LT_in_expression976); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(203, 11);
-    			PushFollow(Follow._expression_in_expression966);
+    			DebugLocation(228, 11);
+    			PushFollow(Follow._expression_in_expression980);
     			e1=expression();
     			PopFollow();
 
-    			DebugLocation(203, 25);
-    			PushFollow(Follow._expression_in_expression970);
+    			DebugLocation(228, 25);
+    			PushFollow(Follow._expression_in_expression984);
     			e2=expression();
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(203, 38);
+    			DebugLocation(228, 38);
     			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(0, reg)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovltInstruction(1, reg)); 
 
     			}
     			break;
     		case 5:
     			DebugEnterAlt(5);
-    			// IlGenWalker.g:204:4: ^( GT e1= expression e2= expression )
+    			// IlGenWalker.g:229:4: ^( GT e1= expression e2= expression )
     			{
-    			DebugLocation(204, 4);
-    			DebugLocation(204, 6);
-    			Match(input,GT,Follow._GT_in_expression979); 
+    			DebugLocation(229, 4);
+    			DebugLocation(229, 6);
+    			Match(input,GT,Follow._GT_in_expression993); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(204, 11);
-    			PushFollow(Follow._expression_in_expression983);
+    			DebugLocation(229, 11);
+    			PushFollow(Follow._expression_in_expression997);
     			e1=expression();
     			PopFollow();
 
-    			DebugLocation(204, 25);
-    			PushFollow(Follow._expression_in_expression987);
+    			DebugLocation(229, 25);
+    			PushFollow(Follow._expression_in_expression1001);
     			e2=expression();
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(204, 38);
+    			DebugLocation(229, 38);
     			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(0, reg)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovgtInstruction(1, reg)); 
 
     			}
     			break;
     		case 6:
     			DebugEnterAlt(6);
-    			// IlGenWalker.g:205:4: ^( NE e1= expression e2= expression )
+    			// IlGenWalker.g:230:4: ^( NE e1= expression e2= expression )
     			{
-    			DebugLocation(205, 4);
-    			DebugLocation(205, 6);
-    			Match(input,NE,Follow._NE_in_expression996); 
+    			DebugLocation(230, 4);
+    			DebugLocation(230, 6);
+    			Match(input,NE,Follow._NE_in_expression1010); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(205, 11);
-    			PushFollow(Follow._expression_in_expression1000);
+    			DebugLocation(230, 11);
+    			PushFollow(Follow._expression_in_expression1014);
     			e1=expression();
     			PopFollow();
 
-    			DebugLocation(205, 25);
-    			PushFollow(Follow._expression_in_expression1004);
+    			DebugLocation(230, 25);
+    			PushFollow(Follow._expression_in_expression1018);
     			e2=expression();
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(205, 38);
+    			DebugLocation(230, 38);
     			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(0, reg)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovneInstruction(1, reg)); 
 
     			}
     			break;
     		case 7:
     			DebugEnterAlt(7);
-    			// IlGenWalker.g:206:4: ^( LE e1= expression e2= expression )
+    			// IlGenWalker.g:231:4: ^( LE e1= expression e2= expression )
     			{
-    			DebugLocation(206, 4);
-    			DebugLocation(206, 6);
-    			Match(input,LE,Follow._LE_in_expression1013); 
+    			DebugLocation(231, 4);
+    			DebugLocation(231, 6);
+    			Match(input,LE,Follow._LE_in_expression1027); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(206, 11);
-    			PushFollow(Follow._expression_in_expression1017);
+    			DebugLocation(231, 11);
+    			PushFollow(Follow._expression_in_expression1031);
     			e1=expression();
     			PopFollow();
 
-    			DebugLocation(206, 25);
-    			PushFollow(Follow._expression_in_expression1021);
+    			DebugLocation(231, 25);
+    			PushFollow(Follow._expression_in_expression1035);
     			e2=expression();
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(206, 38);
+    			DebugLocation(231, 38);
     			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(0, reg)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovleInstruction(1, reg)); 
 
     			}
     			break;
     		case 8:
     			DebugEnterAlt(8);
-    			// IlGenWalker.g:207:4: ^( GE e1= expression e2= expression )
+    			// IlGenWalker.g:232:4: ^( GE e1= expression e2= expression )
     			{
-    			DebugLocation(207, 4);
-    			DebugLocation(207, 6);
-    			Match(input,GE,Follow._GE_in_expression1030); 
+    			DebugLocation(232, 4);
+    			DebugLocation(232, 6);
+    			Match(input,GE,Follow._GE_in_expression1044); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(207, 11);
-    			PushFollow(Follow._expression_in_expression1034);
+    			DebugLocation(232, 11);
+    			PushFollow(Follow._expression_in_expression1048);
     			e1=expression();
     			PopFollow();
 
-    			DebugLocation(207, 25);
-    			PushFollow(Follow._expression_in_expression1038);
+    			DebugLocation(232, 25);
+    			PushFollow(Follow._expression_in_expression1052);
     			e2=expression();
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(207, 38);
+    			DebugLocation(232, 38);
     			 b.Add(e1); b.Add(e2); b.Add(new LoadiInstruction(0, reg)); b.Add(new CompInstruction(e1.Reg, e2.Reg)); b.Add(new MovgeInstruction(1, reg)); 
 
     			}
     			break;
     		case 9:
     			DebugEnterAlt(9);
-    			// IlGenWalker.g:208:4: ^( PLUS e1= expression e2= expression )
+    			// IlGenWalker.g:233:4: ^( PLUS e1= expression e2= expression )
     			{
-    			DebugLocation(208, 4);
-    			DebugLocation(208, 6);
-    			Match(input,PLUS,Follow._PLUS_in_expression1047); 
+    			DebugLocation(233, 4);
+    			DebugLocation(233, 6);
+    			Match(input,PLUS,Follow._PLUS_in_expression1061); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(208, 13);
-    			PushFollow(Follow._expression_in_expression1051);
+    			DebugLocation(233, 13);
+    			PushFollow(Follow._expression_in_expression1065);
     			e1=expression();
     			PopFollow();
 
-    			DebugLocation(208, 27);
-    			PushFollow(Follow._expression_in_expression1055);
+    			DebugLocation(233, 27);
+    			PushFollow(Follow._expression_in_expression1069);
     			e2=expression();
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(208, 40);
+    			DebugLocation(233, 40);
     			 b.Add(e1); b.Add(e2); b.Add(new AddInstruction(e1.Reg, e2.Reg, reg)); 
 
     			}
     			break;
     		case 10:
     			DebugEnterAlt(10);
-    			// IlGenWalker.g:209:4: ^( MINUS e1= expression e2= expression )
+    			// IlGenWalker.g:234:4: ^( MINUS e1= expression e2= expression )
     			{
-    			DebugLocation(209, 4);
-    			DebugLocation(209, 6);
-    			Match(input,MINUS,Follow._MINUS_in_expression1064); 
+    			DebugLocation(234, 4);
+    			DebugLocation(234, 6);
+    			Match(input,MINUS,Follow._MINUS_in_expression1078); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(209, 14);
-    			PushFollow(Follow._expression_in_expression1068);
+    			DebugLocation(234, 14);
+    			PushFollow(Follow._expression_in_expression1082);
     			e1=expression();
     			PopFollow();
 
-    			DebugLocation(209, 28);
-    			PushFollow(Follow._expression_in_expression1072);
+    			DebugLocation(234, 28);
+    			PushFollow(Follow._expression_in_expression1086);
     			e2=expression();
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(209, 41);
+    			DebugLocation(234, 41);
     			 b.Add(e1); b.Add(e2); b.Add(new SubInstruction(e1.Reg, e2.Reg, reg)); 
 
     			}
     			break;
     		case 11:
     			DebugEnterAlt(11);
-    			// IlGenWalker.g:210:4: ^( TIMES e1= expression e2= expression )
+    			// IlGenWalker.g:235:4: ^( TIMES e1= expression e2= expression )
     			{
-    			DebugLocation(210, 4);
-    			DebugLocation(210, 6);
-    			Match(input,TIMES,Follow._TIMES_in_expression1081); 
+    			DebugLocation(235, 4);
+    			DebugLocation(235, 6);
+    			Match(input,TIMES,Follow._TIMES_in_expression1095); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(210, 14);
-    			PushFollow(Follow._expression_in_expression1085);
+    			DebugLocation(235, 14);
+    			PushFollow(Follow._expression_in_expression1099);
     			e1=expression();
     			PopFollow();
 
-    			DebugLocation(210, 28);
-    			PushFollow(Follow._expression_in_expression1089);
+    			DebugLocation(235, 28);
+    			PushFollow(Follow._expression_in_expression1103);
     			e2=expression();
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(210, 41);
+    			DebugLocation(235, 41);
     			 b.Add(e1); b.Add(e2); b.Add(new MultInstruction(e1.Reg, e2.Reg, reg)); 
 
     			}
     			break;
     		case 12:
     			DebugEnterAlt(12);
-    			// IlGenWalker.g:211:4: ^( DIVIDE e1= expression e2= expression )
+    			// IlGenWalker.g:236:4: ^( DIVIDE e1= expression e2= expression )
     			{
-    			DebugLocation(211, 4);
-    			DebugLocation(211, 6);
-    			Match(input,DIVIDE,Follow._DIVIDE_in_expression1098); 
+    			DebugLocation(236, 4);
+    			DebugLocation(236, 6);
+    			Match(input,DIVIDE,Follow._DIVIDE_in_expression1112); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(211, 15);
-    			PushFollow(Follow._expression_in_expression1102);
+    			DebugLocation(236, 15);
+    			PushFollow(Follow._expression_in_expression1116);
     			e1=expression();
     			PopFollow();
 
-    			DebugLocation(211, 29);
-    			PushFollow(Follow._expression_in_expression1106);
+    			DebugLocation(236, 29);
+    			PushFollow(Follow._expression_in_expression1120);
     			e2=expression();
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(211, 42);
+    			DebugLocation(236, 42);
     			 b.Add(e1); b.Add(e2); b.Add(new DivInstruction(e1.Reg, e2.Reg, reg)); 
 
     			}
     			break;
     		case 13:
     			DebugEnterAlt(13);
-    			// IlGenWalker.g:212:4: ^( NOT e= expression )
+    			// IlGenWalker.g:237:4: ^( NOT e= expression )
     			{
-    			DebugLocation(212, 4);
-    			DebugLocation(212, 6);
-    			Match(input,NOT,Follow._NOT_in_expression1115); 
+    			DebugLocation(237, 4);
+    			DebugLocation(237, 6);
+    			Match(input,NOT,Follow._NOT_in_expression1129); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(212, 11);
-    			PushFollow(Follow._expression_in_expression1119);
+    			DebugLocation(237, 11);
+    			PushFollow(Follow._expression_in_expression1133);
     			e=expression();
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(212, 24);
+    			DebugLocation(237, 24);
     			 b.Add(e); b.Add(new XoriInstruction(e.Reg, 1, reg)); 
 
     			}
     			break;
     		case 14:
     			DebugEnterAlt(14);
-    			// IlGenWalker.g:213:4: ^( NEG e= expression )
+    			// IlGenWalker.g:238:4: ^( NEG e= expression )
     			{
-    			DebugLocation(213, 4);
-    			DebugLocation(213, 6);
-    			Match(input,NEG,Follow._NEG_in_expression1128); 
+    			DebugLocation(238, 4);
+    			DebugLocation(238, 6);
+    			Match(input,NEG,Follow._NEG_in_expression1142); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(213, 11);
-    			PushFollow(Follow._expression_in_expression1132);
+    			DebugLocation(238, 11);
+    			PushFollow(Follow._expression_in_expression1146);
     			e=expression();
     			PopFollow();
 
@@ -2936,14 +2959,14 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 15:
     			DebugEnterAlt(15);
-    			// IlGenWalker.g:214:4: s= selector
+    			// IlGenWalker.g:239:4: s= selector
     			{
-    			DebugLocation(214, 5);
-    			PushFollow(Follow._selector_in_expression1140);
+    			DebugLocation(239, 5);
+    			PushFollow(Follow._selector_in_expression1154);
     			s=selector();
     			PopFollow();
 
-    			DebugLocation(214, 15);
+    			DebugLocation(239, 15);
     			 b = s; 
 
     			}
@@ -2959,7 +2982,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(215, 1);
+     	DebugLocation(240, 1);
     	} finally { DebugExitRule(GrammarFileName, "expression"); }
     	return b;
 
@@ -2971,22 +2994,22 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_selector() {}
 
     // $ANTLR start "selector"
-    // IlGenWalker.g:217:1: selector returns [BasicBlock b] : ( ^( DOT s= selector id= ID ) | f= factor );
+    // IlGenWalker.g:242:1: selector returns [BasicBlock<MilocInstruction> b] : ( ^( DOT s= selector id= ID ) | f= factor );
     [GrammarRule("selector")]
-    private BasicBlock selector()
+    private BasicBlock<MilocInstruction> selector()
     {
 
-        BasicBlock b = default(BasicBlock);
+        BasicBlock<MilocInstruction> b = default(BasicBlock<MilocInstruction>);
 
         CommonTree id=null;
-        BasicBlock s = default(BasicBlock);
-        BasicBlock f = default(BasicBlock);
+        BasicBlock<MilocInstruction> s = default(BasicBlock<MilocInstruction>);
+        BasicBlock<MilocInstruction> f = default(BasicBlock<MilocInstruction>);
 
     	try { DebugEnterRule(GrammarFileName, "selector");
-    	DebugLocation(217, 1);
+    	DebugLocation(242, 1);
     	try
     	{
-    		// IlGenWalker.g:218:2: ( ^( DOT s= selector id= ID ) | f= factor )
+    		// IlGenWalker.g:243:2: ( ^( DOT s= selector id= ID ) | f= factor )
     		int alt18=2;
     		try { DebugEnterDecision(18, decisionCanBacktrack[18]);
     		int LA18_0 = input.LA(1);
@@ -3011,25 +3034,25 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// IlGenWalker.g:218:4: ^( DOT s= selector id= ID )
+    			// IlGenWalker.g:243:4: ^( DOT s= selector id= ID )
     			{
-    			DebugLocation(218, 4);
-    			DebugLocation(218, 6);
-    			Match(input,DOT,Follow._DOT_in_selector1158); 
+    			DebugLocation(243, 4);
+    			DebugLocation(243, 6);
+    			Match(input,DOT,Follow._DOT_in_selector1172); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(218, 11);
-    			PushFollow(Follow._selector_in_selector1162);
+    			DebugLocation(243, 11);
+    			PushFollow(Follow._selector_in_selector1176);
     			s=selector();
     			PopFollow();
 
-    			DebugLocation(218, 23);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_selector1166); 
+    			DebugLocation(243, 23);
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_selector1180); 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(219, 3);
+    			DebugLocation(244, 3);
 
-    						b = new BasicBlock();
+    						b = new BasicBlock<MilocInstruction>();
     						int reg = Instruction.VirtualRegister();
     						b.Reg = reg;
     						b.Add(s);
@@ -3041,14 +3064,14 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// IlGenWalker.g:227:4: f= factor
+    			// IlGenWalker.g:252:4: f= factor
     			{
-    			DebugLocation(227, 5);
-    			PushFollow(Follow._factor_in_selector1178);
+    			DebugLocation(252, 5);
+    			PushFollow(Follow._factor_in_selector1192);
     			f=factor();
     			PopFollow();
 
-    			DebugLocation(227, 13);
+    			DebugLocation(252, 13);
     			b = f;
 
     			}
@@ -3064,7 +3087,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(228, 1);
+     	DebugLocation(253, 1);
     	} finally { DebugExitRule(GrammarFileName, "selector"); }
     	return b;
 
@@ -3076,12 +3099,12 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_factor() {}
 
     // $ANTLR start "factor"
-    // IlGenWalker.g:230:1: factor returns [BasicBlock b = new BasicBlock()] : ( ^( INVOKE id= ID regLocs= arguments[b] ) | id= ID | i= INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL );
+    // IlGenWalker.g:255:1: factor returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()] : ( ^( INVOKE id= ID regLocs= arguments[b] ) | id= ID | i= INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL );
     [GrammarRule("factor")]
-    private BasicBlock factor()
+    private BasicBlock<MilocInstruction> factor()
     {
 
-        BasicBlock b =  new BasicBlock();
+        BasicBlock<MilocInstruction> b =  new BasicBlock<MilocInstruction>();
 
         CommonTree id=null;
         CommonTree i=null;
@@ -3089,10 +3112,10 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 
          int reg = Instruction.VirtualRegister(); b.Reg = reg; 
     	try { DebugEnterRule(GrammarFileName, "factor");
-    	DebugLocation(230, 1);
+    	DebugLocation(255, 1);
     	try
     	{
-    		// IlGenWalker.g:232:2: ( ^( INVOKE id= ID regLocs= arguments[b] ) | id= ID | i= INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL )
+    		// IlGenWalker.g:257:2: ( ^( INVOKE id= ID regLocs= arguments[b] ) | id= ID | i= INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL )
     		int alt19=7;
     		try { DebugEnterDecision(19, decisionCanBacktrack[19]);
     		switch (input.LA(1))
@@ -3146,34 +3169,34 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// IlGenWalker.g:232:4: ^( INVOKE id= ID regLocs= arguments[b] )
+    			// IlGenWalker.g:257:4: ^( INVOKE id= ID regLocs= arguments[b] )
     			{
-    			DebugLocation(232, 4);
-    			DebugLocation(232, 6);
-    			Match(input,INVOKE,Follow._INVOKE_in_factor1201); 
+    			DebugLocation(257, 4);
+    			DebugLocation(257, 6);
+    			Match(input,INVOKE,Follow._INVOKE_in_factor1215); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(232, 15);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1205); 
-    			DebugLocation(232, 26);
-    			PushFollow(Follow._arguments_in_factor1209);
+    			DebugLocation(257, 15);
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1219); 
+    			DebugLocation(257, 26);
+    			PushFollow(Follow._arguments_in_factor1223);
     			regLocs=arguments(b);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(232, 41);
+    			DebugLocation(257, 41);
     			doInvoke((id!=null?id.Text:null), b, regLocs); b.Add(new LoadretInstruction(reg)); 
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// IlGenWalker.g:233:4: id= ID
+    			// IlGenWalker.g:258:4: id= ID
     			{
-    			DebugLocation(233, 6);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1220); 
-    			DebugLocation(234, 3);
+    			DebugLocation(258, 6);
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1234); 
+    			DebugLocation(259, 3);
 
     						b.Add(new MovInstruction(getVarReg((id!=null?id.Text:null)), reg));
     						b.StructType = getVarType((id!=null?id.Text:null));
@@ -3183,62 +3206,62 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// IlGenWalker.g:238:4: i= INTEGER
+    			// IlGenWalker.g:263:4: i= INTEGER
     			{
-    			DebugLocation(238, 5);
-    			i=(CommonTree)Match(input,INTEGER,Follow._INTEGER_in_factor1231); 
-    			DebugLocation(238, 14);
+    			DebugLocation(263, 5);
+    			i=(CommonTree)Match(input,INTEGER,Follow._INTEGER_in_factor1245); 
+    			DebugLocation(263, 14);
     			b.Add(new LoadiInstruction(int.Parse((i!=null?i.Text:null)), reg)); 
 
     			}
     			break;
     		case 4:
     			DebugEnterAlt(4);
-    			// IlGenWalker.g:239:4: TRUE
+    			// IlGenWalker.g:264:4: TRUE
     			{
-    			DebugLocation(239, 4);
-    			Match(input,TRUE,Follow._TRUE_in_factor1238); 
-    			DebugLocation(239, 9);
+    			DebugLocation(264, 4);
+    			Match(input,TRUE,Follow._TRUE_in_factor1252); 
+    			DebugLocation(264, 9);
     			b.Add(new LoadiInstruction(1, reg)); 
 
     			}
     			break;
     		case 5:
     			DebugEnterAlt(5);
-    			// IlGenWalker.g:240:4: FALSE
+    			// IlGenWalker.g:265:4: FALSE
     			{
-    			DebugLocation(240, 4);
-    			Match(input,FALSE,Follow._FALSE_in_factor1245); 
-    			DebugLocation(240, 10);
+    			DebugLocation(265, 4);
+    			Match(input,FALSE,Follow._FALSE_in_factor1259); 
+    			DebugLocation(265, 10);
     			b.Add(new LoadiInstruction(0, reg)); 
 
     			}
     			break;
     		case 6:
     			DebugEnterAlt(6);
-    			// IlGenWalker.g:241:4: ^( NEW id= ID )
+    			// IlGenWalker.g:266:4: ^( NEW id= ID )
     			{
-    			DebugLocation(241, 4);
-    			DebugLocation(241, 6);
-    			Match(input,NEW,Follow._NEW_in_factor1253); 
+    			DebugLocation(266, 4);
+    			DebugLocation(266, 6);
+    			Match(input,NEW,Follow._NEW_in_factor1267); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(241, 12);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1257); 
+    			DebugLocation(266, 12);
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1271); 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(241, 17);
+    			DebugLocation(266, 17);
     			b.Add(new NewInstruction((id!=null?id.Text:null), getFields((id!=null?id.Text:null)), reg)); b.StructType = (id!=null?id.Text:null); 
 
     			}
     			break;
     		case 7:
     			DebugEnterAlt(7);
-    			// IlGenWalker.g:242:4: NULL
+    			// IlGenWalker.g:267:4: NULL
     			{
-    			DebugLocation(242, 4);
-    			Match(input,NULL,Follow._NULL_in_factor1265); 
-    			DebugLocation(242, 9);
+    			DebugLocation(267, 4);
+    			Match(input,NULL,Follow._NULL_in_factor1279); 
+    			DebugLocation(267, 9);
     			b.Add(new LoadiInstruction(0, reg)); 
 
     			}
@@ -3254,7 +3277,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(243, 1);
+     	DebugLocation(268, 1);
     	} finally { DebugExitRule(GrammarFileName, "factor"); }
     	return b;
 
@@ -3266,23 +3289,23 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_arguments() {}
 
     // $ANTLR start "arguments"
-    // IlGenWalker.g:245:1: arguments[BasicBlock b] returns [List<int> regLocs = new List<int>()] : arg_list[$b, $regLocs] ;
+    // IlGenWalker.g:270:1: arguments[BasicBlock<MilocInstruction> b] returns [List<int> regLocs = new List<int>()] : arg_list[$b, $regLocs] ;
     [GrammarRule("arguments")]
-    private List<int> arguments(BasicBlock b)
+    private List<int> arguments(BasicBlock<MilocInstruction> b)
     {
 
         List<int> regLocs =  new List<int>();
 
     	try { DebugEnterRule(GrammarFileName, "arguments");
-    	DebugLocation(245, 1);
+    	DebugLocation(270, 1);
     	try
     	{
-    		// IlGenWalker.g:246:2: ( arg_list[$b, $regLocs] )
+    		// IlGenWalker.g:271:2: ( arg_list[$b, $regLocs] )
     		DebugEnterAlt(1);
-    		// IlGenWalker.g:246:4: arg_list[$b, $regLocs]
+    		// IlGenWalker.g:271:4: arg_list[$b, $regLocs]
     		{
-    		DebugLocation(246, 4);
-    		PushFollow(Follow._arg_list_in_arguments1283);
+    		DebugLocation(271, 4);
+    		PushFollow(Follow._arg_list_in_arguments1297);
     		arg_list(b, regLocs);
     		PopFollow();
 
@@ -3298,7 +3321,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(247, 1);
+     	DebugLocation(272, 1);
     	} finally { DebugExitRule(GrammarFileName, "arguments"); }
     	return regLocs;
 
@@ -3310,18 +3333,18 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_arg_list() {}
 
     // $ANTLR start "arg_list"
-    // IlGenWalker.g:249:1: arg_list[BasicBlock b, List<int> regLocs] : ( ^( ARGS (e= expression )+ ) | ARGS );
+    // IlGenWalker.g:274:1: arg_list[BasicBlock<MilocInstruction> b, List<int> regLocs] : ( ^( ARGS (e= expression )+ ) | ARGS );
     [GrammarRule("arg_list")]
-    private void arg_list(BasicBlock b, List<int> regLocs)
+    private void arg_list(BasicBlock<MilocInstruction> b, List<int> regLocs)
     {
 
-        BasicBlock e = default(BasicBlock);
+        BasicBlock<MilocInstruction> e = default(BasicBlock<MilocInstruction>);
 
     	try { DebugEnterRule(GrammarFileName, "arg_list");
-    	DebugLocation(249, 1);
+    	DebugLocation(274, 1);
     	try
     	{
-    		// IlGenWalker.g:250:2: ( ^( ARGS (e= expression )+ ) | ARGS )
+    		// IlGenWalker.g:275:2: ( ^( ARGS (e= expression )+ ) | ARGS )
     		int alt21=2;
     		try { DebugEnterDecision(21, decisionCanBacktrack[21]);
     		int LA21_0 = input.LA(1);
@@ -3358,15 +3381,15 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// IlGenWalker.g:250:4: ^( ARGS (e= expression )+ )
+    			// IlGenWalker.g:275:4: ^( ARGS (e= expression )+ )
     			{
-    			DebugLocation(250, 4);
-    			DebugLocation(250, 6);
-    			Match(input,ARGS,Follow._ARGS_in_arg_list1298); 
+    			DebugLocation(275, 4);
+    			DebugLocation(275, 6);
+    			Match(input,ARGS,Follow._ARGS_in_arg_list1312); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(250, 11);
-    			// IlGenWalker.g:250:11: (e= expression )+
+    			DebugLocation(275, 11);
+    			// IlGenWalker.g:275:11: (e= expression )+
     			int cnt20=0;
     			try { DebugEnterSubRule(20);
     			while (true)
@@ -3386,14 +3409,14 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// IlGenWalker.g:250:12: e= expression
+    					// IlGenWalker.g:275:12: e= expression
     					{
-    					DebugLocation(250, 13);
-    					PushFollow(Follow._expression_in_arg_list1303);
+    					DebugLocation(275, 13);
+    					PushFollow(Follow._expression_in_arg_list1317);
     					e=expression();
     					PopFollow();
 
-    					DebugLocation(250, 25);
+    					DebugLocation(275, 25);
     					b.Add(e); regLocs.Add(e.Reg);
 
     					}
@@ -3421,10 +3444,10 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// IlGenWalker.g:251:4: ARGS
+    			// IlGenWalker.g:276:4: ARGS
     			{
-    			DebugLocation(251, 4);
-    			Match(input,ARGS,Follow._ARGS_in_arg_list1315); 
+    			DebugLocation(276, 4);
+    			Match(input,ARGS,Follow._ARGS_in_arg_list1329); 
 
     			}
     			break;
@@ -3439,7 +3462,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(252, 1);
+     	DebugLocation(277, 1);
     	} finally { DebugExitRule(GrammarFileName, "arg_list"); }
     	return;
 
@@ -3516,84 +3539,84 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 		public static readonly BitSet _ENDL_in_print685 = new BitSet(new ulong[]{0x0000000000000008UL});
 		public static readonly BitSet _READ_in_read709 = new BitSet(new ulong[]{0x0000000000000004UL});
 		public static readonly BitSet _lvalue_in_read713 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _IF_in_conditional732 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_conditional736 = new BitSet(new ulong[]{0x0000000040000000UL});
-		public static readonly BitSet _block_in_conditional740 = new BitSet(new ulong[]{0x0000000040000008UL});
-		public static readonly BitSet _block_in_conditional745 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _WHILE_in_loop766 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_loop770 = new BitSet(new ulong[]{0x0000000040000000UL});
-		public static readonly BitSet _block_in_loop774 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_loop776 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _DELETE_in_delete795 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_delete799 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _RETURN_in_ret818 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_ret823 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _INVOKE_in_invocation847 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _ID_in_invocation851 = new BitSet(new ulong[]{0x0000000200000000UL});
-		public static readonly BitSet _arguments_in_invocation855 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _DOT_in_lvalue876 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _lvalue_in_lvalue878 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_lvalue880 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _ID_in_lvalue888 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _AND_in_expression911 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression915 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression919 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _OR_in_expression928 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression932 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression936 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _EQ_in_expression945 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression949 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression953 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _LT_in_expression962 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression966 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression970 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _GT_in_expression979 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression983 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression987 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _NE_in_expression996 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1000 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1004 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _LE_in_expression1013 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1017 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1021 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _GE_in_expression1030 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1034 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1038 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _PLUS_in_expression1047 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1051 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1055 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _MINUS_in_expression1064 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1068 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1072 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _TIMES_in_expression1081 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1085 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1089 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _DIVIDE_in_expression1098 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1102 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
-		public static readonly BitSet _expression_in_expression1106 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _NOT_in_expression1115 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1119 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _NEG_in_expression1128 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_expression1132 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _selector_in_expression1140 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _DOT_in_selector1158 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _selector_in_selector1162 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_selector1166 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _factor_in_selector1178 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _INVOKE_in_factor1201 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _ID_in_factor1205 = new BitSet(new ulong[]{0x0000000200000000UL});
-		public static readonly BitSet _arguments_in_factor1209 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _ID_in_factor1220 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _INTEGER_in_factor1231 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _TRUE_in_factor1238 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _FALSE_in_factor1245 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _NEW_in_factor1253 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _ID_in_factor1257 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _NULL_in_factor1265 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _arg_list_in_arguments1283 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _ARGS_in_arg_list1298 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_arg_list1303 = new BitSet(new ulong[]{0x03FFFC05001E0008UL});
-		public static readonly BitSet _ARGS_in_arg_list1315 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _IF_in_conditional737 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_conditional741 = new BitSet(new ulong[]{0x0000000040000000UL});
+		public static readonly BitSet _block_in_conditional745 = new BitSet(new ulong[]{0x0000000040000008UL});
+		public static readonly BitSet _block_in_conditional750 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _WHILE_in_loop778 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_loop782 = new BitSet(new ulong[]{0x0000000040000000UL});
+		public static readonly BitSet _block_in_loop786 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_loop788 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _DELETE_in_delete809 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_delete813 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _RETURN_in_ret832 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_ret837 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _INVOKE_in_invocation861 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _ID_in_invocation865 = new BitSet(new ulong[]{0x0000000200000000UL});
+		public static readonly BitSet _arguments_in_invocation869 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _DOT_in_lvalue890 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _lvalue_in_lvalue892 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_lvalue894 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _ID_in_lvalue902 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _AND_in_expression925 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression929 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression933 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _OR_in_expression942 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression946 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression950 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _EQ_in_expression959 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression963 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression967 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _LT_in_expression976 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression980 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression984 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _GT_in_expression993 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression997 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1001 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _NE_in_expression1010 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1014 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1018 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _LE_in_expression1027 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1031 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1035 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _GE_in_expression1044 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1048 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1052 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _PLUS_in_expression1061 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1065 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1069 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _MINUS_in_expression1078 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1082 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1086 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _TIMES_in_expression1095 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1099 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1103 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _DIVIDE_in_expression1112 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1116 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_expression1120 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _NOT_in_expression1129 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1133 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _NEG_in_expression1142 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_expression1146 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _selector_in_expression1154 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _DOT_in_selector1172 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _selector_in_selector1176 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_selector1180 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _factor_in_selector1192 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _INVOKE_in_factor1215 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _ID_in_factor1219 = new BitSet(new ulong[]{0x0000000200000000UL});
+		public static readonly BitSet _arguments_in_factor1223 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _ID_in_factor1234 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _INTEGER_in_factor1245 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _TRUE_in_factor1252 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _FALSE_in_factor1259 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _NEW_in_factor1267 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _ID_in_factor1271 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _NULL_in_factor1279 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _arg_list_in_arguments1297 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _ARGS_in_arg_list1312 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_arg_list1317 = new BitSet(new ulong[]{0x03FFFC05001E0008UL});
+		public static readonly BitSet _ARGS_in_arg_list1329 = new BitSet(new ulong[]{0x0000000000000002UL});
 
 	}
 	#endregion Follow sets
