@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.IO;
 
-namespace CSC431.IL
+namespace CSC431.CFG
 {
     public abstract class Node<T> where T : Instruction
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CSC431.IL
+namespace CSC431.CFG
 {
     public class Label<T> where T : Instruction
     {

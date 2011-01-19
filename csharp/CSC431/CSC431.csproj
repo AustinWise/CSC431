@@ -46,23 +46,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EvilException.cs" />
-    <Compile Include="IL\BasicBlock.cs" />
-    <Compile Include="IL\FunctionBlock.cs" />
-    <Compile Include="IL\IfBlock.cs" />
+    <Compile Include="CFG\BasicBlock.cs" />
+    <Compile Include="CFG\FunctionBlock.cs" />
+    <Compile Include="CFG\IfBlock.cs" />
     <Compile Include="IL\IlGenWalker.cs" />
     <Compile Include="IL\IlGenWalker.mine.cs" />
     <Compile Include="IlSteps.cs" />
-    <Compile Include="IL\Label.cs" />
-    <Compile Include="IL\LoopBlock.cs" />
-    <Compile Include="IL\MilocInstruction.cs" />
-    <Compile Include="IL\MultiBlock.cs" />
-    <Compile Include="IL\Node.cs" />
-    <Compile Include="IL\ProgramBlock.cs" />
-    <Compile Include="IL\SeqBlock.cs" />
+    <Compile Include="CFG\Label.cs" />
+    <Compile Include="CFG\LoopBlock.cs" />
+    <Compile Include="CFG\MilocInstruction.cs" />
+    <Compile Include="CFG\MultiBlock.cs" />
+    <Compile Include="CFG\Node.cs" />
+    <Compile Include="CFG\ProgramBlock.cs" />
+    <Compile Include="CFG\SeqBlock.cs" />
     <Compile Include="FrontEndSteps.cs" />
     <Compile Include="FrontEnd\TypeChecker.cs" />
     <Compile Include="FrontEnd\TypeChecker.mine.cs" />
-    <Compile Include="IL\Instruction.cs" />
+    <Compile Include="CFG\Instruction.cs" />
     <Compile Include="IL\Instruction.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

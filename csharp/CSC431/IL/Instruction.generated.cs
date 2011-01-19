@@ -1,4 +1,6 @@
-﻿namespace CSC431.IL
+﻿using CSC431.CFG;
+
+namespace CSC431.IL
 {
 
 class AddInstruction : MilocInstruction

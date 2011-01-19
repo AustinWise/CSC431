@@ -2,30 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CSC431.IL;
+using CSC431.CFG;
 
-namespace CSC431.IL
+namespace CSC431.CFG
 {
-    public class LoopBlock<T> : Node<T> where T : Instruction
+    public class IfBlock<T> : Node<T> where T : Instruction
     {
         private MultiBlock<T> Condition;
-        private SeqBlock<T> Body;
+        private SeqBlock<T> TrueBody;
+        private SeqBlock<T> FalseBody;
         private Label<T> NextLabel;
         private bool isFixed = false;
-        private int condReg;
 
-        public LoopBlock(BasicBlock<T> condition, SeqBlock<T> body, Label<T> nextLabel)
+        public IfBlock(BasicBlock<T> condition, SeqBlock<T> trueBody, SeqBlock<T> falseBody, Label<T> nextLabel)
         {
-            this.condReg = condition.Reg;
-
             this.Condition = condition.ToMulti();
-            this.Body = body;
+            this.Condition.SetNext(trueBody);
+            this.Condition.SetNext(falseBody);
+            this.TrueBody = trueBody;
+            this.FalseBody = falseBody;
             this.NextLabel = nextLabel;
-
-            this.Body.SetNext(condition);
-
-            this.Condition.PrintLabel = true;
-            this.Body.PrintLabel = true;
         }
 
         public override Node<T>[] Nexts
@@ -39,11 +35,11 @@ namespace CSC431.IL
                 throw new Exception("next was already set");
             isFixed = true;
 
+            TrueBody.SetNext(next);
+            FalseBody.SetNext(next);
             NextLabel.Mark(next);
-            Condition.SetNext(next);
 
             next.PrintLabel = true;
-
         }
 
         public override bool IsFixedUp
@@ -56,11 +52,12 @@ namespace CSC431.IL
 
         protected override void PrintCore(System.IO.TextWriter tw)
         {
-            Condition.PrintLabel = true;
-            Body.PrintLabel = true;
+            TrueBody.PrintLabel = true;
+            FalseBody.PrintLabel = true;
 
             Condition.Print(tw);
-            Body.Print(tw);
+            TrueBody.Print(tw);
+            FalseBody.Print(tw);
         }
     }
 }

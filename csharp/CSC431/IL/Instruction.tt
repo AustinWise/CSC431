@@ -1,6 +1,8 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ output extension=".generated.cs" #>
 <#@ Import Namespace="System.Collections.Generic" #>
+using CSC431.CFG;
+
 namespace CSC431.IL
 {
 
