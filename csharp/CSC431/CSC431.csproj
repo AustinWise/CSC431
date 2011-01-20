@@ -80,20 +80,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
     </None>
-    <None Include="Stack\Instruction.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Instruction.generated.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Stack\Instruction.generated.cs">
-      <DependentUpon>Instruction.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <Compile Include="StackSteps.cs" />
     <Compile Include="Stack\StackGen.cs" />
     <Compile Include="Stack\StackGen.mine.cs" />
     <Compile Include="Stack\StackInstruction.cs" />
+    <Compile Include="Stack\VarArg.cs" />
+    <Compile Include="Stack\VarBase.cs" />
+    <Compile Include="Stack\VarField.cs" />
+    <Compile Include="Stack\VarLocal.cs" />
     <Compile Include="Steps\IInStep.cs" />
     <Compile Include="Steps\InOutStep.cs" />
     <Compile Include="Steps\InStep.cs" />
