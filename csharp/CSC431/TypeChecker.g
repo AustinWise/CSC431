@@ -181,7 +181,7 @@ statement_list[StructTypes stypes,SymbolTable stable] returns [bool doesRet = fa
 	;
 
 assignment[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false]
-	: ^(ASSIGN expression[stypes,stable] lvalue[stypes,stable])
+	: ^(ASSIGN lvalue[stypes,stable] expression[stypes,stable])
 	;
 
 print[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false]

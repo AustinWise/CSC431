@@ -49,10 +49,10 @@ field_decl[List<StructMember> members]
    	}
    ;
 
-type returns [String type = null;]
+type returns [String rt = null;]
 	: INT
 	| BOOL
-	| ^(STRUCT id=ID) {$type = $id.text;}
+	| ^(STRUCT id=ID) {$rt = $id.text;}
 ;
 
 declarations[Dictionary<string, int> map, Dictionary<string, string> typeMap]
@@ -111,7 +111,15 @@ parameters[BasicBlock<MilocInstruction> b]
 	;
 	
 param_decl[BasicBlock<MilocInstruction> b, int ndx]
-   :  ^(DECL ^(TYPE type) id=ID) {int reg; argMap[$id.text] = reg = Instruction.VirtualRegister(); $b.Add(new LoadinargumentInstruction($id.text, ndx, reg));}
+   :  ^(DECL ^(TYPE t=type) id=ID)
+   	{
+   		int reg;
+   		argMap[$id.text] = reg = Instruction.VirtualRegister();
+   		$b.Add(new LoadinargumentInstruction($id.text, ndx, reg));
+   		
+   		if (t != null)
+   			localStructMap[$id.text] = t;
+   	}
    ;
 
 return_type

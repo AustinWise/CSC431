@@ -82,6 +82,7 @@ instr.ForEachOperand((c, count, isLast) =>
 [Flags]
 private enum InstrFlags : int
 {
+    None = 0,
     SetCC = 1,
     UseCC = 2
 }
