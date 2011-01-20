@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-01-18 04:22:52
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-01-20 00:03:00
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -2642,7 +2642,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     protected virtual void Leave_assignment() {}
 
     // $ANTLR start "assignment"
-    // Evil.g:178:1: assignment : l= lvalue ASSIGN e= expression SEMI -> ^( ASSIGN $e $l) ;
+    // Evil.g:178:1: assignment : l= lvalue ASSIGN e= expression SEMI -> ^( ASSIGN $l $e) ;
     [GrammarRule("assignment")]
     private EvilParser.assignment_return assignment()
     {
@@ -2667,7 +2667,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
     	DebugLocation(178, 3);
     	try
     	{
-    		// Evil.g:179:4: (l= lvalue ASSIGN e= expression SEMI -> ^( ASSIGN $e $l) )
+    		// Evil.g:179:4: (l= lvalue ASSIGN e= expression SEMI -> ^( ASSIGN $l $e) )
     		DebugEnterAlt(1);
     		// Evil.g:179:7: l= lvalue ASSIGN e= expression SEMI
     		{
@@ -2695,7 +2695,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: ASSIGN, e, l
+    		// elements: ASSIGN, l, e
     		// token labels: 
     		// rule labels: retval, e, l
     		// token list labels: 
@@ -2708,19 +2708,19 @@ public partial class EvilParser : Antlr.Runtime.Parser
     		RewriteRuleSubtreeStream stream_l=new RewriteRuleSubtreeStream(adaptor,"rule l",l!=null?l.Tree:null);
 
     		root_0 = (object)adaptor.Nil();
-    		// 180:7: -> ^( ASSIGN $e $l)
+    		// 180:7: -> ^( ASSIGN $l $e)
     		{
     			DebugLocation(180, 10);
-    			// Evil.g:180:10: ^( ASSIGN $e $l)
+    			// Evil.g:180:10: ^( ASSIGN $l $e)
     			{
     			object root_1 = (object)adaptor.Nil();
     			DebugLocation(180, 12);
     			root_1 = (object)adaptor.BecomeRoot(stream_ASSIGN.NextNode(), root_1);
 
     			DebugLocation(180, 19);
-    			adaptor.AddChild(root_1, stream_e.NextTree());
-    			DebugLocation(180, 22);
     			adaptor.AddChild(root_1, stream_l.NextTree());
+    			DebugLocation(180, 22);
+    			adaptor.AddChild(root_1, stream_e.NextTree());
 
     			adaptor.AddChild(root_0, root_1);
     			}

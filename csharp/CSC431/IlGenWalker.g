@@ -144,7 +144,7 @@ statement_list[SeqBlock<MilocInstruction> b]
 	;
 
 assignment returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()]
-	: ^(ASSIGN e=expression dest=lvalue) {$b.Add(e); $b.Add(new MovInstruction(e.Reg, dest)); }
+	: ^(ASSIGN dest=lvalue e=expression) {$b.Add(e); $b.Add(new MovInstruction(e.Reg, dest)); }
 	;
 
 print returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()]

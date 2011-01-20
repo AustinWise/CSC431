@@ -177,7 +177,7 @@ statement_list
    ;
 assignment
    :  l=lvalue ASSIGN e=expression SEMI
-      -> ^(ASSIGN $e $l)
+      -> ^(ASSIGN $l $e)
    ;
 print
    :  PRINT^ expression (ENDL)? SEMI!

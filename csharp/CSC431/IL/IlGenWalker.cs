@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-01-19 06:36:26
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-01-20 00:03:03
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -1810,37 +1810,37 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_assignment() {}
 
     // $ANTLR start "assignment"
-    // IlGenWalker.g:146:1: assignment returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()] : ^( ASSIGN e= expression dest= lvalue ) ;
+    // IlGenWalker.g:146:1: assignment returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()] : ^( ASSIGN dest= lvalue e= expression ) ;
     [GrammarRule("assignment")]
     private BasicBlock<MilocInstruction> assignment()
     {
 
         BasicBlock<MilocInstruction> b =  new BasicBlock<MilocInstruction>();
 
-        BasicBlock<MilocInstruction> e = default(BasicBlock<MilocInstruction>);
         int dest = default(int);
+        BasicBlock<MilocInstruction> e = default(BasicBlock<MilocInstruction>);
 
     	try { DebugEnterRule(GrammarFileName, "assignment");
     	DebugLocation(146, 1);
     	try
     	{
-    		// IlGenWalker.g:147:2: ( ^( ASSIGN e= expression dest= lvalue ) )
+    		// IlGenWalker.g:147:2: ( ^( ASSIGN dest= lvalue e= expression ) )
     		DebugEnterAlt(1);
-    		// IlGenWalker.g:147:4: ^( ASSIGN e= expression dest= lvalue )
+    		// IlGenWalker.g:147:4: ^( ASSIGN dest= lvalue e= expression )
     		{
     		DebugLocation(147, 4);
     		DebugLocation(147, 6);
     		Match(input,ASSIGN,Follow._ASSIGN_in_assignment649); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(147, 14);
-    		PushFollow(Follow._expression_in_assignment653);
-    		e=expression();
+    		DebugLocation(147, 17);
+    		PushFollow(Follow._lvalue_in_assignment653);
+    		dest=lvalue();
     		PopFollow();
 
-    		DebugLocation(147, 30);
-    		PushFollow(Follow._lvalue_in_assignment657);
-    		dest=lvalue();
+    		DebugLocation(147, 26);
+    		PushFollow(Follow._expression_in_assignment657);
+    		e=expression();
     		PopFollow();
 
 
@@ -3533,8 +3533,8 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 		public static readonly BitSet _STMTS_in_statement_list619 = new BitSet(new ulong[]{0x0000000000000004UL});
 		public static readonly BitSet _statement_in_statement_list624 = new BitSet(new ulong[]{0x000002014001DA08UL});
 		public static readonly BitSet _ASSIGN_in_assignment649 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_assignment653 = new BitSet(new ulong[]{0x0100040000000000UL});
-		public static readonly BitSet _lvalue_in_assignment657 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _lvalue_in_assignment653 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_assignment657 = new BitSet(new ulong[]{0x0000000000000008UL});
 		public static readonly BitSet _PRINT_in_print676 = new BitSet(new ulong[]{0x0000000000000004UL});
 		public static readonly BitSet _expression_in_print680 = new BitSet(new ulong[]{0x0000000000000408UL});
 		public static readonly BitSet _ENDL_in_print685 = new BitSet(new ulong[]{0x0000000000000008UL});

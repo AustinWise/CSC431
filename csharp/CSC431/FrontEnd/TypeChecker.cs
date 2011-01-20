@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 TypeChecker.g 2011-01-18 04:22:53
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 TypeChecker.g 2011-01-20 00:04:35
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -1851,7 +1851,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_assignment() {}
 
     // $ANTLR start "assignment"
-    // TypeChecker.g:183:1: assignment[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] ) ;
+    // TypeChecker.g:183:1: assignment[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( ASSIGN lvalue[stypes,stable] expression[stypes,stable] ) ;
     [GrammarRule("assignment")]
     private bool assignment(StructTypes stypes, SymbolTable stable)
     {
@@ -1862,9 +1862,9 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	DebugLocation(183, 1);
     	try
     	{
-    		// TypeChecker.g:184:2: ( ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] ) )
+    		// TypeChecker.g:184:2: ( ^( ASSIGN lvalue[stypes,stable] expression[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:184:4: ^( ASSIGN expression[stypes,stable] lvalue[stypes,stable] )
+    		// TypeChecker.g:184:4: ^( ASSIGN lvalue[stypes,stable] expression[stypes,stable] )
     		{
     		DebugLocation(184, 4);
     		DebugLocation(184, 6);
@@ -1872,13 +1872,13 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
 
     		Match(input, TokenTypes.Down, null); 
     		DebugLocation(184, 13);
-    		PushFollow(Follow._expression_in_assignment721);
-    		expression(stypes, stable);
+    		PushFollow(Follow._lvalue_in_assignment721);
+    		lvalue(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(184, 39);
-    		PushFollow(Follow._lvalue_in_assignment724);
-    		lvalue(stypes, stable);
+    		DebugLocation(184, 35);
+    		PushFollow(Follow._expression_in_assignment724);
+    		expression(stypes, stable);
     		PopFollow();
 
 
@@ -3554,8 +3554,8 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
 		public static readonly BitSet _STMTS_in_statement_list687 = new BitSet(new ulong[]{0x0000000000000004UL});
 		public static readonly BitSet _statement_in_statement_list692 = new BitSet(new ulong[]{0x000002014001DA08UL});
 		public static readonly BitSet _ASSIGN_in_assignment719 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_assignment721 = new BitSet(new ulong[]{0x0100040000000000UL});
-		public static readonly BitSet _lvalue_in_assignment724 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _lvalue_in_assignment721 = new BitSet(new ulong[]{0x03FFFC05001E0000UL});
+		public static readonly BitSet _expression_in_assignment724 = new BitSet(new ulong[]{0x0000000000000008UL});
 		public static readonly BitSet _PRINT_in_print743 = new BitSet(new ulong[]{0x0000000000000004UL});
 		public static readonly BitSet _expression_in_print745 = new BitSet(new ulong[]{0x0000000000000408UL});
 		public static readonly BitSet _ENDL_in_print749 = new BitSet(new ulong[]{0x0000000000000008UL});

@@ -107,7 +107,7 @@ statement_list
 	;
 
 assignment
-	: ^(ASSIGN expression lvalue)
+	: ^(ASSIGN lvalue expression)
 	;
 
 print
