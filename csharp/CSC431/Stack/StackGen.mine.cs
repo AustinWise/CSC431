@@ -29,7 +29,7 @@ namespace CSC431.Stack
 
         public void Program()
         {
-            AssemblyName aName = new AssemblyName("EvilProgram");
+            AssemblyName aName = new AssemblyName(Options.ClrExec);
             AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(aName, AssemblyBuilderAccess.RunAndSave);
             programModule = ab.DefineDynamicModule(aName.Name, aName.Name + ".exe", true);
             programType = programModule.DefineType("Program", TypeAttributes.Public);
@@ -157,7 +157,7 @@ namespace CSC431.Stack
             il.Emit(OpCodes.Ret);
         }
 
-        public static int fun()
+        public static int readIntPrototype()
         {
             var cin = Console.In;
             StringBuilder sb = new StringBuilder();

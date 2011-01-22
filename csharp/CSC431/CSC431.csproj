@@ -80,6 +80,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
     </None>
+    <Compile Include="NDesk.Options.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="StackSteps.cs" />

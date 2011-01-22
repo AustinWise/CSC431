@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Antlr.Runtime;
+using NDesk.Options;
 
 namespace CSC431
 {
@@ -15,30 +16,32 @@ namespace CSC431
             DisplayAST = false;
         }
 
-        private const String DISPLAYAST = "-displayAST";
-
         public static String InputFile { get; set; }
         public static bool DisplayAST { get; set; }
+        public static bool DumpIL { get; set; }
+        public static string ClrExec { get; set; }
 
         public static void ParseParameters(String[] args)
         {
-            for (int i = 0; i < args.Length; i++)
+            var os = new OptionSet()
             {
-                if (args[i].Equals(DISPLAYAST))
-                {
-                    DisplayAST = true;
-                }
-                else if (args[i][0] == '-')
-                {
-                    throw new Exception("unexpected option: " + args[i]);
-                }
+                {"displayAST", v=> DisplayAST = v != null},
+                {"dumpIL", v=> DumpIL = v != null},
+                {"clrExe=", v=> ClrExec = v},
+            };
+
+            var extras = os.Parse(args);
+            foreach (var e in extras)
+            {
+                if (e.StartsWith("-"))
+                    throw new EvilException("unexpected option: " + e);
                 else if (InputFile != null)
                 {
-                    throw new Exception("too many files specified");
+                    throw new EvilException("too many files specified");
                 }
                 else
                 {
-                    InputFile = args[i];
+                    InputFile = e;
                 }
             }
         }

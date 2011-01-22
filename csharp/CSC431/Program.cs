@@ -9,7 +9,15 @@ namespace CSC431
     {
         public static void Main(String[] args)
         {
-            Options.ParseParameters(args);
+            try
+            {
+                Options.ParseParameters(args);
+            }
+            catch (EvilException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
 
             var pipe = FrontEndSteps.CreateLexer
                 .FollowWith(FrontEndSteps.Parse);
@@ -18,10 +26,13 @@ namespace CSC431
                 pipe.FollowWith(FrontEndSteps.PrintAst);
 
             var typeChecked = pipe.FollowWith(FrontEndSteps.TypeCheck);
-            var flow = typeChecked.FollowWith(IlSteps.MakeCFG);
-            flow.FollowWith(IlSteps.CleanUpCfg).FollowWith(IlSteps.PrintCFG);
+            var flow = typeChecked.FollowWith(IlSteps.MakeCFG).FollowWith(IlSteps.CleanUpCfg);
 
-            typeChecked.FollowWith(StackSteps.MakeClrExe);
+            if (Options.DumpIL)
+                flow.FollowWith(IlSteps.PrintCFG);
+
+            if (!string.IsNullOrEmpty(Options.ClrExec))
+                typeChecked.FollowWith(StackSteps.MakeClrExe);
 
             try
             {
