@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace CSC431.CFG
 {
-    public class Instruction
+    public abstract class Instruction
     {
         private static int VirtualRegisterCounter = 0;
         public static int VirtualRegister()
@@ -21,5 +21,7 @@ namespace CSC431.CFG
 
         public string Name { get; private set; }
         public bool CcSet { get; protected set; }
+        public abstract int[] SourceRegs { get; }
+        public abstract int[] DestRegs { get; }
     }
 }

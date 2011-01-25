@@ -42,9 +42,48 @@ if (instr.IsSetCC)
 <#
 instr.ForEachOperand((c, count, isLast) =>
 {
-    Write("public {1} {2}{0}{{ get; private set; }}", count, c.Type, c.UpperPrefix);
+    WriteLine("public {1} {2}{0}{{ get; private set; }}", count, c.Type, c.UpperPrefix);
 });
 #>
+
+public override int[] SourceRegs
+{
+	get
+	{
+		return new int[] {
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (!c.IsSource)
+        return;
+    Write("{1}{0}", count, c.UpperPrefix);
+    if (!isLast)
+        Write(", ");
+});
+#>
+		};
+	}
+}
+
+public override int[] DestRegs
+{
+	get
+	{
+		return new int[] {
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (!c.IsTarget)
+        return;
+    Write("{1}{0}", count, c.UpperPrefix);
+    if (!isLast)
+        Write(", ");
+});
+#>
+		};
+	}
+}
+
 public override string ToString()
 {
 <#
@@ -91,9 +130,9 @@ private class OperandType
     private static Dictionary<char, OperandType> sTypes = new Dictionary<char, OperandType>();
     static OperandType()
     {
-        sTypes.Add('r', new OperandType() { LowerPrefix = "reg", UpperPrefix = "Reg", MilocPrefix = "r", Type = "int" });
-        sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "int" });
-        sTypes.Add('L', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "Label<MilocInstruction>" });
+        sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", MilocPrefix = "r", Type = "int", IsSource = true });
+        sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", MilocPrefix = "r", Type = "int", IsTarget = true });
+        sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "Label<MilocInstruction>" });
         sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", Type = "int" });
         sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", Type = "string" });
         sTypes.Add('a', new OperandType() { LowerPrefix = "arr", UpperPrefix = "Arr", MilocPrefix = "[", MilocPostfix = "]", Type = "string[]", SpecialConversion = "string.Join(\", \", {0})" });
@@ -105,6 +144,8 @@ private class OperandType
     public string MilocPostfix { get; private set; }
     public string Type { get; private set; }
     public string SpecialConversion { get; private set; }
+    public bool IsSource { get; private set; }
+    public bool IsTarget { get; private set; }
 
     public static OperandType Get(char letter)
     {
@@ -153,38 +194,38 @@ private class InstrInfo
     {
         return new[]
             {
-                new InstrInfo("rrr", "add"),
-                new InstrInfo("rir", "addi"),
-                new InstrInfo("rrr", "div"),
-                new InstrInfo("rrr", "mult"),
-                new InstrInfo("rrr", "sub"),
-                new InstrInfo("rir", "rsubi"),
-                new InstrInfo("rrr", "and"),
-                new InstrInfo("rrr", "or"),
-                new InstrInfo("rir", "xori"),
-                new InstrInfo("ir", "loadi"),
+                new InstrInfo("rrR", "add"),
+                new InstrInfo("riR", "addi"),
+                new InstrInfo("rrR", "div"),
+                new InstrInfo("rrR", "mult"),
+                new InstrInfo("rrR", "sub"),
+                new InstrInfo("riR", "rsubi"),
+                new InstrInfo("rrR", "and"),
+                new InstrInfo("rrR", "or"),
+                new InstrInfo("riR", "xori"),
+                new InstrInfo("iR", "loadi"),
                 new InstrInfo("r", "print"),
                 new InstrInfo("r", "println"),
                 new InstrInfo("r", "read"),
                 new InstrInfo("rr", "comp", InstrFlags.SetCC),
-                new InstrInfo("rr", "mov"),
-                new InstrInfo("ir", "moveq", InstrFlags.UseCC),
-                new InstrInfo("ir", "movge", InstrFlags.UseCC),
-                new InstrInfo("ir", "movgt", InstrFlags.UseCC),
-                new InstrInfo("ir", "movle", InstrFlags.UseCC),
-                new InstrInfo("ir", "movlt", InstrFlags.UseCC),
-                new InstrInfo("ir", "movne", InstrFlags.UseCC),
-                new InstrInfo("L", "jumpi"),
-                new InstrInfo("LL", "cbreq"),
-                new InstrInfo("sir", "loadinargument"),
+                new InstrInfo("rR", "mov"),
+                new InstrInfo("iR", "moveq", InstrFlags.UseCC),
+                new InstrInfo("iR", "movge", InstrFlags.UseCC),
+                new InstrInfo("iR", "movgt", InstrFlags.UseCC),
+                new InstrInfo("iR", "movle", InstrFlags.UseCC),
+                new InstrInfo("iR", "movlt", InstrFlags.UseCC),
+                new InstrInfo("iR", "movne", InstrFlags.UseCC),
+                new InstrInfo("l", "jumpi"),
+                new InstrInfo("ll", "cbreq"),
+                new InstrInfo("siR", "loadinargument"),
                 new InstrInfo("s", "call"),
                 new InstrInfo("", "ret"),
                 new InstrInfo("r", "storeret"),
                 new InstrInfo("ri", "storeoutargument"),
-                new InstrInfo("r", "loadret"),
+                new InstrInfo("R", "loadret"),
                 new InstrInfo("rrs", "storeai"),
-                new InstrInfo("rsr", "loadai"),
-                new InstrInfo("sar", "new"),
+                new InstrInfo("rsR", "loadai"),
+                new InstrInfo("saR", "new"),
                 new InstrInfo("r", "del"),
             };
     }
