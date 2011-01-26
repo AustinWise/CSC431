@@ -72,6 +72,7 @@
     <Compile Include="FrontEnd\EvilParser.cs" />
     <Compile Include="FrontEnd\EvilParser.mine.cs" />
     <Compile Include="IL\VarBase.cs" />
+    <Compile Include="IL\VarField.cs" />
     <Compile Include="IL\VarGlobal.cs" />
     <Compile Include="IL\VarReg.cs" />
     <Compile Include="Options.cs" />
@@ -79,10 +80,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Compile Include="IL\Instruction.tt">
+    <Content Include="IL\Instruction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
-    </Compile>
+    </Content>
     <Compile Include="NDesk.Options.cs" />
   </ItemGroup>
   <ItemGroup>
