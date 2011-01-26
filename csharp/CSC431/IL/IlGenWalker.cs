@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-01-24 17:58:38
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-01-25 20:23:21
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -3065,7 +3065,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     						int reg = Instruction.VirtualRegister();
     						b.Reg = reg;
     						b.Add(s);
-    						b.Add(new LoadaiInstruction(s.Reg, (id!=null?id.Text:null), reg));
+    						b.Add(new LoadaiFieldInstruction(s.Reg, (id!=null?id.Text:null), reg));
     						b.StructType = getMemberType(s.StructType, (id!=null?id.Text:null));
     					
 

@@ -255,7 +255,7 @@ selector returns [BasicBlock<MilocInstruction> b]
 			int reg = Instruction.VirtualRegister();
 			$b.Reg = reg;
 			$b.Add(s);
-			$b.Add(new LoadaiInstruction(s.Reg, $id.text, reg));
+			$b.Add(new LoadaiFieldInstruction(s.Reg, $id.text, reg));
 			$b.StructType = getMemberType(s.StructType, $id.text);
 		}
 	| f=factor {$b = f;}

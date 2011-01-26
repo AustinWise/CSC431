@@ -1116,9 +1116,9 @@ return string.Format("{0} r{1}, r{2}, {3}", Name, RegSource0, RegSource1, Str0);
 
 
 
-class LoadaiInstruction : MilocInstruction
+class LoadaiFieldInstruction : MilocInstruction
 {
-	public LoadaiInstruction
+	public LoadaiFieldInstruction
 	(
 int regSource0,string str0,int regDest0	) : base ("loadai")
 	{
@@ -1149,6 +1149,43 @@ RegDest0		};
 public override string ToString()
 {
 return string.Format("{0} r{1}, {2}, r{3}", Name, RegSource0, Str0, RegDest0);
+}
+}
+
+
+
+class LoadaiVarInstruction : MilocInstruction
+{
+	public LoadaiVarInstruction
+	(
+string str0,int regDest0	) : base ("loadai")
+	{
+this.Str0 = str0;this.RegDest0 = regDest0;	}
+
+public string Str0{ get; private set; }
+public int RegDest0{ get; private set; }
+
+public override int[] SourceRegs
+{
+	get
+	{
+		return new int[] {
+		};
+	}
+}
+
+public override int[] DestRegs
+{
+	get
+	{
+		return new int[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} rarp, {1}, r{2}", Name, 0, Str0, RegDest0);
 }
 }
 

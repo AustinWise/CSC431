@@ -9,7 +9,7 @@ namespace CSC431.IL
 <#
 foreach (var instr in InstrInfo.GetAll())
 {
-    var className = instr.Name.Substring(1).Insert(0, char.ToUpper(instr.Name[0]).ToString()) + "Instruction";
+    var className = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString()) + "Instruction";
 #>
 class <#=className #> : MilocInstruction
 {
@@ -18,6 +18,8 @@ class <#=className #> : MilocInstruction
 <#
 instr.ForEachOperand((c, count, isLast) =>
 {
+    if (c.IsConstant)
+        return;
     Write("{0} {1}{2}", c.Type, c.LowerPrefix, count);
     if (!isLast)
         Write(",");
@@ -28,6 +30,8 @@ instr.ForEachOperand((c, count, isLast) =>
 <#
 instr.ForEachOperand((c, count, isLast) =>
 {
+    if (c.IsConstant)
+        return;
     Write("this.{0}{1} = {2}{1};", c.UpperPrefix, count, c.LowerPrefix);
 });
 if (instr.IsSetCC)
@@ -42,6 +46,8 @@ if (instr.IsSetCC)
 <#
 instr.ForEachOperand((c, count, isLast) =>
 {
+    if (c.IsConstant)
+        return;
     WriteLine("public {1} {2}{0}{{ get; private set; }}", count, c.Type, c.UpperPrefix);
 });
 #>
@@ -91,7 +97,10 @@ int placeHolderCount = 1;
 string formatStr = "{0}";
 instr.ForEachOperand((c, count, isLast) =>
 {
-    formatStr += " " + c.MilocPrefix + "{" + placeHolderCount++ + "}" + c.MilocPostfix;
+    if (c.IsConstant)
+        formatStr += " " + c.ConstantValue;
+    else
+        formatStr += " " + c.MilocPrefix + "{" + placeHolderCount++ + "}" + c.MilocPostfix;
     if (!isLast)
         formatStr += ",";
 });
@@ -136,6 +145,7 @@ private class OperandType
         sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", Type = "int" });
         sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", Type = "string" });
         sTypes.Add('a', new OperandType() { LowerPrefix = "arr", UpperPrefix = "Arr", MilocPrefix = "[", MilocPostfix = "]", Type = "string[]", SpecialConversion = "string.Join(\", \", {0})" });
+        sTypes.Add('k', new OperandType() { ConstantValue = "rarp" });
     }
 
     public string LowerPrefix { get; private set; }
@@ -147,6 +157,15 @@ private class OperandType
     public bool IsSource { get; private set; }
     public bool IsTarget { get; private set; }
 
+    public string ConstantValue { get; private set; }
+    public bool IsConstant
+    {
+        get
+        {
+            return ConstantValue != null;
+        }
+    }
+
     public static OperandType Get(char letter)
     {
         return sTypes[letter];
@@ -155,9 +174,15 @@ private class OperandType
 private class InstrInfo
 {
     public InstrInfo(String type, string name)
+        : this(type, name, name)
+    {
+    }
+
+    public InstrInfo(String type, string name, string className)
     {
         this.Type = type;
         this.Name = name;
+        this.ClassName = className;
     }
 
     public InstrInfo(String type, string name, InstrFlags flags)
@@ -169,6 +194,7 @@ private class InstrInfo
     public InstrFlags Flags { get; private set; }
     public string Type { get; private set; }
     public string Name { get; private set; }
+    public string ClassName { get; private set; }
 
     public bool IsSetCC
     {
@@ -224,7 +250,8 @@ private class InstrInfo
                 new InstrInfo("ri", "storeoutargument"),
                 new InstrInfo("R", "loadret"),
                 new InstrInfo("rrs", "storeai"),
-                new InstrInfo("rsR", "loadai"),
+                new InstrInfo("rsR", "loadai", "loadaiField"),
+                new InstrInfo("ksR", "loadai", "loadaiVar"),
                 new InstrInfo("sR", "loadglobal"),
                 new InstrInfo("rs", "storeglobal"),
                 new InstrInfo("saR", "new"),
