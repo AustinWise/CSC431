@@ -1154,6 +1154,80 @@ return string.Format("{0} r{1}, {2}, r{3}", Name, RegSource0, Str0, RegDest0);
 
 
 
+class LoadglobalInstruction : MilocInstruction
+{
+	public LoadglobalInstruction
+	(
+string str0,int regDest0	) : base ("loadglobal")
+	{
+this.Str0 = str0;this.RegDest0 = regDest0;	}
+
+public string Str0{ get; private set; }
+public int RegDest0{ get; private set; }
+
+public override int[] SourceRegs
+{
+	get
+	{
+		return new int[] {
+		};
+	}
+}
+
+public override int[] DestRegs
+{
+	get
+	{
+		return new int[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} {1}, r{2}", Name, Str0, RegDest0);
+}
+}
+
+
+
+class StoreglobalInstruction : MilocInstruction
+{
+	public StoreglobalInstruction
+	(
+int regSource0,string str0	) : base ("storeglobal")
+	{
+this.RegSource0 = regSource0;this.Str0 = str0;	}
+
+public int RegSource0{ get; private set; }
+public string Str0{ get; private set; }
+
+public override int[] SourceRegs
+{
+	get
+	{
+		return new int[] {
+RegSource0, 		};
+	}
+}
+
+public override int[] DestRegs
+{
+	get
+	{
+		return new int[] {
+		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} r{1}, {2}", Name, RegSource0, Str0);
+}
+}
+
+
+
 class NewInstruction : MilocInstruction
 {
 	public NewInstruction

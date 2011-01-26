@@ -55,16 +55,16 @@ type returns [String rt = null;]
 	| ^(STRUCT id=ID) {$rt = $id.text;}
 ;
 
-declarations[Dictionary<string, int> map, Dictionary<string, string> typeMap]
+declarations[Dictionary<string, VarBase> map, Dictionary<string, string> typeMap]
 	: ^(DECLS declaration[$map,$typeMap])
 	| 
 ;
 
-declaration[Dictionary<string, int> map, Dictionary<string, string> typeMap]
+declaration[Dictionary<string, VarBase> map, Dictionary<string, string> typeMap]
 	: (decl_list[$map,$typeMap])*
 ;
 
-decl_list[Dictionary<string, int> map, Dictionary<string, string> typeMap]
+decl_list[Dictionary<string, VarBase> map, Dictionary<string, string> typeMap]
 @init { var ids = new List<string>(); }
 	: ^(DECLLIST ^(TYPE t=type) id_list[ids])
 		{
@@ -114,7 +114,7 @@ param_decl[BasicBlock<MilocInstruction> b, int ndx]
    :  ^(DECL ^(TYPE t=type) id=ID)
    	{
    		int reg;
-   		argMap[$id.text] = reg = Instruction.VirtualRegister();
+   		localMap[$id.text] = reg = Instruction.VirtualRegister();
    		$b.Add(new LoadinargumentInstruction($id.text, ndx, reg));
    		
    		if (t != null)
@@ -266,7 +266,7 @@ factor returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction
 	: ^(INVOKE id=ID regLocs=arguments[b]) {doInvoke($id.text, $b, regLocs); $b.Add(new LoadretInstruction(reg)); }
 	| id=ID
 		{
-			$b.Add(new MovInstruction(getVarReg($id.text), reg));
+			$b = getVarReg($id.text).Load(reg);
 			$b.StructType = getVarType($id.text);
 		}
 	| i=INTEGER {$b.Add(new LoadiInstruction(int.Parse($i.text), reg)); }

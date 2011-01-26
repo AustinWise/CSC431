@@ -12,9 +12,8 @@ namespace CSC431.IL
         private Dictionary<string, string> globalStructMap = new Dictionary<string, string>();
         private Dictionary<string, string> localStructMap = new Dictionary<string, string>();
 
-        private Dictionary<string, int> globalMap = new Dictionary<string, int>();
-        private Dictionary<string, int> localMap = new Dictionary<string, int>();
-        private Dictionary<string, int> argMap = new Dictionary<string, int>();
+        private Dictionary<string, VarBase> globalMap = new Dictionary<string, VarBase>();
+        private Dictionary<string, VarBase> localMap = new Dictionary<string, VarBase>();
         private Dictionary<string, List<StructMember>> structMap = new Dictionary<string, List<StructMember>>();
 
         public ProgramBlock<MilocInstruction> Program()
@@ -22,12 +21,10 @@ namespace CSC431.IL
             return this.program();
         }
 
-        private int getVarReg(string name)
+        private VarBase getVarReg(string name)
         {
             if (localMap.ContainsKey(name))
                 return localMap[name];
-            if (argMap.ContainsKey(name))
-                return argMap[name];
             return globalMap[name];
         }
 

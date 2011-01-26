@@ -225,6 +225,8 @@ private class InstrInfo
                 new InstrInfo("R", "loadret"),
                 new InstrInfo("rrs", "storeai"),
                 new InstrInfo("rsR", "loadai"),
+                new InstrInfo("sR", "loadglobal"),
+                new InstrInfo("rs", "storeglobal"),
                 new InstrInfo("saR", "new"),
                 new InstrInfo("r", "del"),
             };

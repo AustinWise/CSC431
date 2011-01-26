@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-01-20 05:58:39
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-01-24 17:58:38
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -703,9 +703,9 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_declarations() {}
 
     // $ANTLR start "declarations"
-    // IlGenWalker.g:58:1: declarations[Dictionary<string, int> map, Dictionary<string, string> typeMap] : ( ^( DECLS declaration[$map,$typeMap] ) | );
+    // IlGenWalker.g:58:1: declarations[Dictionary<string, VarBase> map, Dictionary<string, string> typeMap] : ( ^( DECLS declaration[$map,$typeMap] ) | );
     [GrammarRule("declarations")]
-    private void declarations(Dictionary<string, int> map, Dictionary<string, string> typeMap)
+    private void declarations(Dictionary<string, VarBase> map, Dictionary<string, string> typeMap)
     {
 
     	try { DebugEnterRule(GrammarFileName, "declarations");
@@ -786,9 +786,9 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_declaration() {}
 
     // $ANTLR start "declaration"
-    // IlGenWalker.g:63:1: declaration[Dictionary<string, int> map, Dictionary<string, string> typeMap] : ( decl_list[$map,$typeMap] )* ;
+    // IlGenWalker.g:63:1: declaration[Dictionary<string, VarBase> map, Dictionary<string, string> typeMap] : ( decl_list[$map,$typeMap] )* ;
     [GrammarRule("declaration")]
-    private void declaration(Dictionary<string, int> map, Dictionary<string, string> typeMap)
+    private void declaration(Dictionary<string, VarBase> map, Dictionary<string, string> typeMap)
     {
 
     	try { DebugEnterRule(GrammarFileName, "declaration");
@@ -864,9 +864,9 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_decl_list() {}
 
     // $ANTLR start "decl_list"
-    // IlGenWalker.g:67:1: decl_list[Dictionary<string, int> map, Dictionary<string, string> typeMap] : ^( DECLLIST ^( TYPE t= type ) id_list[ids] ) ;
+    // IlGenWalker.g:67:1: decl_list[Dictionary<string, VarBase> map, Dictionary<string, string> typeMap] : ^( DECLLIST ^( TYPE t= type ) id_list[ids] ) ;
     [GrammarRule("decl_list")]
-    private void decl_list(Dictionary<string, int> map, Dictionary<string, string> typeMap)
+    private void decl_list(Dictionary<string, VarBase> map, Dictionary<string, string> typeMap)
     {
 
         String t = default(String);
@@ -1340,7 +1340,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     		DebugLocation(115, 5);
 
     		   		int reg;
-    		   		argMap[(id!=null?id.Text:null)] = reg = Instruction.VirtualRegister();
+    		   		localMap[(id!=null?id.Text:null)] = reg = Instruction.VirtualRegister();
     		   		b.Add(new LoadinargumentInstruction((id!=null?id.Text:null), ndx, reg));
     		   		
     		   		if (t != null)
@@ -3207,7 +3207,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1240); 
     			DebugLocation(268, 3);
 
-    						b.Add(new MovInstruction(getVarReg((id!=null?id.Text:null)), reg));
+    						b = getVarReg((id!=null?id.Text:null)).Load(reg);
     						b.StructType = getVarType((id!=null?id.Text:null));
     					
 

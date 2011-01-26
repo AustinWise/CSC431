@@ -6,10 +6,5 @@
       <PropertyName>Host</PropertyName>
       <Value>VisualStudio</Value>
     </TransformationPropertyValue>
-    <TransformationPropertyValue>
-      <FileName>Stack\Instruction.tt</FileName>
-      <PropertyName>Host</PropertyName>
-      <Value>VisualStudio</Value>
-    </TransformationPropertyValue>
   </Values>
 </TransformationPropertyValues>

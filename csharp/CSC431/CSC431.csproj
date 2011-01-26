@@ -54,7 +54,7 @@
     <Compile Include="IlSteps.cs" />
     <Compile Include="CFG\Label.cs" />
     <Compile Include="CFG\LoopBlock.cs" />
-    <Compile Include="CFG\MilocInstruction.cs" />
+    <Compile Include="IL\MilocInstruction.cs" />
     <Compile Include="CFG\MultiBlock.cs" />
     <Compile Include="CFG\Node.cs" />
     <Compile Include="CFG\ProgramBlock.cs" />
@@ -71,15 +71,18 @@
     <Compile Include="FrontEnd\EvilLexer.cs" />
     <Compile Include="FrontEnd\EvilParser.cs" />
     <Compile Include="FrontEnd\EvilParser.mine.cs" />
+    <Compile Include="IL\VarBase.cs" />
+    <Compile Include="IL\VarGlobal.cs" />
+    <Compile Include="IL\VarReg.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="IL\Instruction.tt">
+    <Compile Include="IL\Instruction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
-    </None>
+    </Compile>
     <Compile Include="NDesk.Options.cs" />
   </ItemGroup>
   <ItemGroup>
