@@ -71,6 +71,7 @@
     <Compile Include="FrontEnd\EvilLexer.cs" />
     <Compile Include="FrontEnd\EvilParser.cs" />
     <Compile Include="FrontEnd\EvilParser.mine.cs" />
+    <Compile Include="IL\VarArg.cs" />
     <Compile Include="IL\VarBase.cs" />
     <Compile Include="IL\VarField.cs" />
     <Compile Include="IL\VarGlobal.cs" />

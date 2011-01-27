@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 TypeChecker.g 2011-01-25 20:23:20
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 TypeChecker.g 2011-01-27 00:24:55
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -1000,6 +1000,11 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     				id=(CommonTree)Match(input,ID,Follow._ID_in_id_list380); 
     				DebugLocation(102, 3);
 
+    							if ((id!=null?id.Text:null) == CSC431.IL.MilocInstruction.ReadGlobalName)
+    							{
+    								throw new EvilException("invalid variable name");
+    							}
+    							
     							if (stable.redef((id!=null?id.Text:null)))
     							{
     								error((id!=null?id.Line:0), "redefinition of variable '" + id + "'");
@@ -1041,7 +1046,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(114, 0);
+     	DebugLocation(119, 0);
     	} finally { DebugExitRule(GrammarFileName, "id_list"); }
     	return;
 
@@ -1053,28 +1058,28 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_functions() {}
 
     // $ANTLR start "functions"
-    // TypeChecker.g:116:1: functions[StructTypes stypes,SymbolTable stable] : ^( FUNCS ( function[stypes, stable] )* ) ;
+    // TypeChecker.g:121:1: functions[StructTypes stypes,SymbolTable stable] : ^( FUNCS ( function[stypes, stable] )* ) ;
     [GrammarRule("functions")]
     private void functions(StructTypes stypes, SymbolTable stable)
     {
 
     	try { DebugEnterRule(GrammarFileName, "functions");
-    	DebugLocation(116, 1);
+    	DebugLocation(121, 1);
     	try
     	{
-    		// TypeChecker.g:117:2: ( ^( FUNCS ( function[stypes, stable] )* ) )
+    		// TypeChecker.g:122:2: ( ^( FUNCS ( function[stypes, stable] )* ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:117:4: ^( FUNCS ( function[stypes, stable] )* )
+    		// TypeChecker.g:122:4: ^( FUNCS ( function[stypes, stable] )* )
     		{
-    		DebugLocation(117, 4);
-    		DebugLocation(117, 6);
+    		DebugLocation(122, 4);
+    		DebugLocation(122, 6);
     		Match(input,FUNCS,Follow._FUNCS_in_functions401); 
 
     		if (input.LA(1) == TokenTypes.Down)
     		{
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(117, 12);
-    			// TypeChecker.g:117:12: ( function[stypes, stable] )*
+    			DebugLocation(122, 12);
+    			// TypeChecker.g:122:12: ( function[stypes, stable] )*
     			try { DebugEnterSubRule(8);
     			while (true)
     			{
@@ -1093,9 +1098,9 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// TypeChecker.g:117:12: function[stypes, stable]
+    					// TypeChecker.g:122:12: function[stypes, stable]
     					{
-    					DebugLocation(117, 12);
+    					DebugLocation(122, 12);
     					PushFollow(Follow._function_in_functions403);
     					function(stypes, stable);
     					PopFollow();
@@ -1129,7 +1134,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(118, 1);
+     	DebugLocation(123, 1);
     	} finally { DebugExitRule(GrammarFileName, "functions"); }
     	return;
 
@@ -1141,7 +1146,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_function() {}
 
     // $ANTLR start "function"
-    // TypeChecker.g:120:1: function[StructTypes stypes,SymbolTable globalStable] : ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] ) ;
+    // TypeChecker.g:125:1: function[StructTypes stypes,SymbolTable globalStable] : ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] ) ;
     [GrammarRule("function")]
     private void function(StructTypes stypes, SymbolTable globalStable)
     {
@@ -1152,43 +1157,43 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
 
         SymbolTable myStable = new SymbolTable(globalStable); List<Type> sparams = new List<Type>(); 
     	try { DebugEnterRule(GrammarFileName, "function");
-    	DebugLocation(120, 1);
+    	DebugLocation(125, 1);
     	try
     	{
-    		// TypeChecker.g:122:2: ( ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] ) )
+    		// TypeChecker.g:127:2: ( ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:122:4: ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] )
+    		// TypeChecker.g:127:4: ^( FUN id= ID p= parameters[stypes, myStable, sparams] ^( RETTYPE r= return_type[stypes] ) d= declarations[stypes, myStable] s= statement_list[stypes,myStable] )
     		{
-    		DebugLocation(122, 4);
-    		DebugLocation(122, 6);
+    		DebugLocation(127, 4);
+    		DebugLocation(127, 6);
     		Match(input,FUN,Follow._FUN_in_function425); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(122, 12);
+    		DebugLocation(127, 12);
     		id=(CommonTree)Match(input,ID,Follow._ID_in_function429); 
-    		DebugLocation(122, 17);
+    		DebugLocation(127, 17);
     		PushFollow(Follow._parameters_in_function433);
     		parameters(stypes, myStable, sparams);
     		PopFollow();
 
-    		DebugLocation(122, 56);
-    		DebugLocation(122, 58);
+    		DebugLocation(127, 56);
+    		DebugLocation(127, 58);
     		Match(input,RETTYPE,Follow._RETTYPE_in_function437); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(122, 67);
+    		DebugLocation(127, 67);
     		PushFollow(Follow._return_type_in_function441);
     		r=return_type(stypes);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(122, 90);
+    		DebugLocation(127, 90);
     		PushFollow(Follow._declarations_in_function447);
     		declarations(stypes, myStable);
     		PopFollow();
 
-    		DebugLocation(123, 2);
+    		DebugLocation(128, 2);
 
     				if (globalStable.redef((id!=null?id.Text:null)))
     				{
@@ -1197,14 +1202,14 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     				globalStable.put((id!=null?id.Text:null), Type.funType(sparams, r));
     				myStable.returnType = r;
     			
-    		DebugLocation(130, 5);
+    		DebugLocation(135, 5);
     		PushFollow(Follow._statement_list_in_function455);
     		s=statement_list(stypes, myStable);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(131, 2);
+    		DebugLocation(136, 2);
 
     				if (!s && !r.isVoid())
     					error((id!=null?id.Line:0), "function '" + (id!=null?id.Text:null) + "' does not return");
@@ -1221,7 +1226,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(135, 1);
+     	DebugLocation(140, 1);
     	} finally { DebugExitRule(GrammarFileName, "function"); }
     	return;
 
@@ -1233,28 +1238,28 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_parameters() {}
 
     // $ANTLR start "parameters"
-    // TypeChecker.g:137:1: parameters[StructTypes stypes,SymbolTable stable, List<Type> sparams] : ^( PARAMS ( param_decl[stypes, stable, sparams] )* ) ;
+    // TypeChecker.g:142:1: parameters[StructTypes stypes,SymbolTable stable, List<Type> sparams] : ^( PARAMS ( param_decl[stypes, stable, sparams] )* ) ;
     [GrammarRule("parameters")]
     private void parameters(StructTypes stypes, SymbolTable stable, List<Type> sparams)
     {
 
     	try { DebugEnterRule(GrammarFileName, "parameters");
-    	DebugLocation(137, 1);
+    	DebugLocation(142, 1);
     	try
     	{
-    		// TypeChecker.g:138:2: ( ^( PARAMS ( param_decl[stypes, stable, sparams] )* ) )
+    		// TypeChecker.g:143:2: ( ^( PARAMS ( param_decl[stypes, stable, sparams] )* ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:138:4: ^( PARAMS ( param_decl[stypes, stable, sparams] )* )
+    		// TypeChecker.g:143:4: ^( PARAMS ( param_decl[stypes, stable, sparams] )* )
     		{
-    		DebugLocation(138, 4);
-    		DebugLocation(138, 6);
+    		DebugLocation(143, 4);
+    		DebugLocation(143, 6);
     		Match(input,PARAMS,Follow._PARAMS_in_parameters474); 
 
     		if (input.LA(1) == TokenTypes.Down)
     		{
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(138, 13);
-    			// TypeChecker.g:138:13: ( param_decl[stypes, stable, sparams] )*
+    			DebugLocation(143, 13);
+    			// TypeChecker.g:143:13: ( param_decl[stypes, stable, sparams] )*
     			try { DebugEnterSubRule(9);
     			while (true)
     			{
@@ -1273,9 +1278,9 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// TypeChecker.g:138:13: param_decl[stypes, stable, sparams]
+    					// TypeChecker.g:143:13: param_decl[stypes, stable, sparams]
     					{
-    					DebugLocation(138, 13);
+    					DebugLocation(143, 13);
     					PushFollow(Follow._param_decl_in_parameters476);
     					param_decl(stypes, stable, sparams);
     					PopFollow();
@@ -1309,7 +1314,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(139, 1);
+     	DebugLocation(144, 1);
     	} finally { DebugExitRule(GrammarFileName, "parameters"); }
     	return;
 
@@ -1321,7 +1326,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_param_decl() {}
 
     // $ANTLR start "param_decl"
-    // TypeChecker.g:141:1: param_decl[StructTypes stypes, SymbolTable stable, List<Type> sparams] : ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) ;
+    // TypeChecker.g:146:1: param_decl[StructTypes stypes, SymbolTable stable, List<Type> sparams] : ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) ;
     [GrammarRule("param_decl")]
     private void param_decl(StructTypes stypes, SymbolTable stable, List<Type> sparams)
     {
@@ -1330,35 +1335,35 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         Type tt = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "param_decl");
-    	DebugLocation(141, 3);
+    	DebugLocation(146, 3);
     	try
     	{
-    		// TypeChecker.g:142:4: ( ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) )
+    		// TypeChecker.g:147:4: ( ^( DECL ^( TYPE tt= type[stypes] ) id= ID ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:142:7: ^( DECL ^( TYPE tt= type[stypes] ) id= ID )
+    		// TypeChecker.g:147:7: ^( DECL ^( TYPE tt= type[stypes] ) id= ID )
     		{
-    		DebugLocation(142, 7);
-    		DebugLocation(142, 9);
+    		DebugLocation(147, 7);
+    		DebugLocation(147, 9);
     		Match(input,DECL,Follow._DECL_in_param_decl496); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(142, 14);
-    		DebugLocation(142, 16);
+    		DebugLocation(147, 14);
+    		DebugLocation(147, 16);
     		Match(input,TYPE,Follow._TYPE_in_param_decl499); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(142, 23);
+    		DebugLocation(147, 23);
     		PushFollow(Follow._type_in_param_decl503);
     		tt=type(stypes);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(142, 40);
+    		DebugLocation(147, 40);
     		id=(CommonTree)Match(input,ID,Follow._ID_in_param_decl509); 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(143, 3);
+    		DebugLocation(148, 3);
 
     		  	if (stable.redef((id!=null?id.Text:null)))
     		  	{
@@ -1379,7 +1384,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(151, 3);
+     	DebugLocation(156, 3);
     	} finally { DebugExitRule(GrammarFileName, "param_decl"); }
     	return;
 
@@ -1391,7 +1396,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_return_type() {}
 
     // $ANTLR start "return_type"
-    // TypeChecker.g:153:1: return_type[StructTypes stypes] returns [Type retT = null] : (t= type[stypes] | VOID );
+    // TypeChecker.g:158:1: return_type[StructTypes stypes] returns [Type retT = null] : (t= type[stypes] | VOID );
     [GrammarRule("return_type")]
     private Type return_type(StructTypes stypes)
     {
@@ -1401,10 +1406,10 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         Type t = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "return_type");
-    	DebugLocation(153, 1);
+    	DebugLocation(158, 1);
     	try
     	{
-    		// TypeChecker.g:154:2: (t= type[stypes] | VOID )
+    		// TypeChecker.g:159:2: (t= type[stypes] | VOID )
     		int alt10=2;
     		try { DebugEnterDecision(10, decisionCanBacktrack[10]);
     		int LA10_0 = input.LA(1);
@@ -1429,25 +1434,25 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// TypeChecker.g:154:4: t= type[stypes]
+    			// TypeChecker.g:159:4: t= type[stypes]
     			{
-    			DebugLocation(154, 5);
+    			DebugLocation(159, 5);
     			PushFollow(Follow._type_in_return_type534);
     			t=type(stypes);
     			PopFollow();
 
-    			DebugLocation(154, 18);
+    			DebugLocation(159, 18);
     			retT = t;
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// TypeChecker.g:155:4: VOID
+    			// TypeChecker.g:160:4: VOID
     			{
-    			DebugLocation(155, 4);
+    			DebugLocation(160, 4);
     			Match(input,VOID,Follow._VOID_in_return_type542); 
-    			DebugLocation(155, 9);
+    			DebugLocation(160, 9);
     			retT = Type.voidType(); 
 
     			}
@@ -1463,7 +1468,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(156, 1);
+     	DebugLocation(161, 1);
     	} finally { DebugExitRule(GrammarFileName, "return_type"); }
     	return retT;
 
@@ -1475,7 +1480,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_statement() {}
 
     // $ANTLR start "statement"
-    // TypeChecker.g:158:1: statement[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : (s= block[stypes,stable] | s= assignment[stypes,stable] | s= print[stypes,stable] | s= read[stypes,stable] | s= conditional[stypes,stable] | s= loop[stypes,stable] | s= delete[stypes,stable] | s= ret[stypes,stable] | s= invocation[stypes,stable] );
+    // TypeChecker.g:163:1: statement[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : (s= block[stypes,stable] | s= assignment[stypes,stable] | s= print[stypes,stable] | s= read[stypes,stable] | s= conditional[stypes,stable] | s= loop[stypes,stable] | s= delete[stypes,stable] | s= ret[stypes,stable] | s= invocation[stypes,stable] );
     [GrammarRule("statement")]
     private bool statement(StructTypes stypes, SymbolTable stable)
     {
@@ -1485,10 +1490,10 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         bool s = default(bool);
 
     	try { DebugEnterRule(GrammarFileName, "statement");
-    	DebugLocation(158, 1);
+    	DebugLocation(163, 1);
     	try
     	{
-    		// TypeChecker.g:159:2: (s= block[stypes,stable] | s= assignment[stypes,stable] | s= print[stypes,stable] | s= read[stypes,stable] | s= conditional[stypes,stable] | s= loop[stypes,stable] | s= delete[stypes,stable] | s= ret[stypes,stable] | s= invocation[stypes,stable] )
+    		// TypeChecker.g:164:2: (s= block[stypes,stable] | s= assignment[stypes,stable] | s= print[stypes,stable] | s= read[stypes,stable] | s= conditional[stypes,stable] | s= loop[stypes,stable] | s= delete[stypes,stable] | s= ret[stypes,stable] | s= invocation[stypes,stable] )
     		int alt11=9;
     		try { DebugEnterDecision(11, decisionCanBacktrack[11]);
     		switch (input.LA(1))
@@ -1552,126 +1557,126 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// TypeChecker.g:159:4: s= block[stypes,stable]
+    			// TypeChecker.g:164:4: s= block[stypes,stable]
     			{
-    			DebugLocation(159, 5);
+    			DebugLocation(164, 5);
     			PushFollow(Follow._block_in_statement562);
     			s=block(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(159, 27);
+    			DebugLocation(164, 27);
     			 doesRet = s; 
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// TypeChecker.g:160:4: s= assignment[stypes,stable]
+    			// TypeChecker.g:165:4: s= assignment[stypes,stable]
     			{
-    			DebugLocation(160, 5);
+    			DebugLocation(165, 5);
     			PushFollow(Follow._assignment_in_statement572);
     			s=assignment(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(160, 32);
+    			DebugLocation(165, 32);
     			 doesRet = s; 
 
     			}
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// TypeChecker.g:161:4: s= print[stypes,stable]
+    			// TypeChecker.g:166:4: s= print[stypes,stable]
     			{
-    			DebugLocation(161, 5);
+    			DebugLocation(166, 5);
     			PushFollow(Follow._print_in_statement582);
     			s=print(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(161, 27);
+    			DebugLocation(166, 27);
     			 doesRet = s; 
 
     			}
     			break;
     		case 4:
     			DebugEnterAlt(4);
-    			// TypeChecker.g:162:4: s= read[stypes,stable]
+    			// TypeChecker.g:167:4: s= read[stypes,stable]
     			{
-    			DebugLocation(162, 5);
+    			DebugLocation(167, 5);
     			PushFollow(Follow._read_in_statement592);
     			s=read(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(162, 26);
+    			DebugLocation(167, 26);
     			 doesRet = s; 
 
     			}
     			break;
     		case 5:
     			DebugEnterAlt(5);
-    			// TypeChecker.g:163:4: s= conditional[stypes,stable]
+    			// TypeChecker.g:168:4: s= conditional[stypes,stable]
     			{
-    			DebugLocation(163, 5);
+    			DebugLocation(168, 5);
     			PushFollow(Follow._conditional_in_statement602);
     			s=conditional(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(163, 33);
+    			DebugLocation(168, 33);
     			 doesRet = s; 
 
     			}
     			break;
     		case 6:
     			DebugEnterAlt(6);
-    			// TypeChecker.g:164:4: s= loop[stypes,stable]
+    			// TypeChecker.g:169:4: s= loop[stypes,stable]
     			{
-    			DebugLocation(164, 5);
+    			DebugLocation(169, 5);
     			PushFollow(Follow._loop_in_statement612);
     			s=loop(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(164, 26);
+    			DebugLocation(169, 26);
     			 doesRet = s; 
 
     			}
     			break;
     		case 7:
     			DebugEnterAlt(7);
-    			// TypeChecker.g:165:4: s= delete[stypes,stable]
+    			// TypeChecker.g:170:4: s= delete[stypes,stable]
     			{
-    			DebugLocation(165, 5);
+    			DebugLocation(170, 5);
     			PushFollow(Follow._delete_in_statement622);
     			s=delete(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(165, 28);
+    			DebugLocation(170, 28);
     			 doesRet = s; 
 
     			}
     			break;
     		case 8:
     			DebugEnterAlt(8);
-    			// TypeChecker.g:166:4: s= ret[stypes,stable]
+    			// TypeChecker.g:171:4: s= ret[stypes,stable]
     			{
-    			DebugLocation(166, 5);
+    			DebugLocation(171, 5);
     			PushFollow(Follow._ret_in_statement632);
     			s=ret(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(166, 25);
+    			DebugLocation(171, 25);
     			 doesRet = s; 
 
     			}
     			break;
     		case 9:
     			DebugEnterAlt(9);
-    			// TypeChecker.g:167:4: s= invocation[stypes,stable]
+    			// TypeChecker.g:172:4: s= invocation[stypes,stable]
     			{
-    			DebugLocation(167, 5);
+    			DebugLocation(172, 5);
     			PushFollow(Follow._invocation_in_statement642);
     			s=invocation(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(167, 32);
+    			DebugLocation(172, 32);
     			 doesRet = s; 
 
     			}
@@ -1687,7 +1692,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(168, 1);
+     	DebugLocation(173, 1);
     	} finally { DebugExitRule(GrammarFileName, "statement"); }
     	return doesRet;
 
@@ -1699,7 +1704,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_block() {}
 
     // $ANTLR start "block"
-    // TypeChecker.g:170:1: block[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( BLOCK s= statement_list[stypes,stable] ) ;
+    // TypeChecker.g:175:1: block[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( BLOCK s= statement_list[stypes,stable] ) ;
     [GrammarRule("block")]
     private bool block(StructTypes stypes, SymbolTable stable)
     {
@@ -1709,26 +1714,26 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         bool s = default(bool);
 
     	try { DebugEnterRule(GrammarFileName, "block");
-    	DebugLocation(170, 1);
+    	DebugLocation(175, 1);
     	try
     	{
-    		// TypeChecker.g:171:2: ( ^( BLOCK s= statement_list[stypes,stable] ) )
+    		// TypeChecker.g:176:2: ( ^( BLOCK s= statement_list[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:171:4: ^( BLOCK s= statement_list[stypes,stable] )
+    		// TypeChecker.g:176:4: ^( BLOCK s= statement_list[stypes,stable] )
     		{
-    		DebugLocation(171, 4);
-    		DebugLocation(171, 6);
+    		DebugLocation(176, 4);
+    		DebugLocation(176, 6);
     		Match(input,BLOCK,Follow._BLOCK_in_block662); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(171, 13);
+    		DebugLocation(176, 13);
     		PushFollow(Follow._statement_list_in_block666);
     		s=statement_list(stypes, stable);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(171, 45);
+    		DebugLocation(176, 45);
     		 doesRet = s; 
 
     		}
@@ -1742,7 +1747,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(172, 1);
+     	DebugLocation(177, 1);
     	} finally { DebugExitRule(GrammarFileName, "block"); }
     	return doesRet;
 
@@ -1754,7 +1759,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_statement_list() {}
 
     // $ANTLR start "statement_list"
-    // TypeChecker.g:174:1: statement_list[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( STMTS (s= statement[stypes,stable] )* ) ;
+    // TypeChecker.g:179:1: statement_list[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( STMTS (s= statement[stypes,stable] )* ) ;
     [GrammarRule("statement_list")]
     private bool statement_list(StructTypes stypes, SymbolTable stable)
     {
@@ -1764,22 +1769,22 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         bool s = default(bool);
 
     	try { DebugEnterRule(GrammarFileName, "statement_list");
-    	DebugLocation(174, 1);
+    	DebugLocation(179, 1);
     	try
     	{
-    		// TypeChecker.g:175:2: ( ^( STMTS (s= statement[stypes,stable] )* ) )
+    		// TypeChecker.g:180:2: ( ^( STMTS (s= statement[stypes,stable] )* ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:175:4: ^( STMTS (s= statement[stypes,stable] )* )
+    		// TypeChecker.g:180:4: ^( STMTS (s= statement[stypes,stable] )* )
     		{
-    		DebugLocation(175, 4);
-    		DebugLocation(175, 6);
+    		DebugLocation(180, 4);
+    		DebugLocation(180, 6);
     		Match(input,STMTS,Follow._STMTS_in_statement_list687); 
 
     		if (input.LA(1) == TokenTypes.Down)
     		{
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(175, 12);
-    			// TypeChecker.g:175:12: (s= statement[stypes,stable] )*
+    			DebugLocation(180, 12);
+    			// TypeChecker.g:180:12: (s= statement[stypes,stable] )*
     			try { DebugEnterSubRule(12);
     			while (true)
     			{
@@ -1798,14 +1803,14 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// TypeChecker.g:175:13: s= statement[stypes,stable]
+    					// TypeChecker.g:180:13: s= statement[stypes,stable]
     					{
-    					DebugLocation(175, 14);
+    					DebugLocation(180, 14);
     					PushFollow(Follow._statement_in_statement_list692);
     					s=statement(stypes, stable);
     					PopFollow();
 
-    					DebugLocation(176, 3);
+    					DebugLocation(181, 3);
 
     								if (s)
     									doesRet = true;
@@ -1839,7 +1844,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(181, 1);
+     	DebugLocation(186, 1);
     	} finally { DebugExitRule(GrammarFileName, "statement_list"); }
     	return doesRet;
 
@@ -1851,7 +1856,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_assignment() {}
 
     // $ANTLR start "assignment"
-    // TypeChecker.g:183:1: assignment[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( ASSIGN lvalue[stypes,stable] expression[stypes,stable] ) ;
+    // TypeChecker.g:188:1: assignment[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( ASSIGN lvalue[stypes,stable] expression[stypes,stable] ) ;
     [GrammarRule("assignment")]
     private bool assignment(StructTypes stypes, SymbolTable stable)
     {
@@ -1859,24 +1864,24 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         bool doesRet =  false;
 
     	try { DebugEnterRule(GrammarFileName, "assignment");
-    	DebugLocation(183, 1);
+    	DebugLocation(188, 1);
     	try
     	{
-    		// TypeChecker.g:184:2: ( ^( ASSIGN lvalue[stypes,stable] expression[stypes,stable] ) )
+    		// TypeChecker.g:189:2: ( ^( ASSIGN lvalue[stypes,stable] expression[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:184:4: ^( ASSIGN lvalue[stypes,stable] expression[stypes,stable] )
+    		// TypeChecker.g:189:4: ^( ASSIGN lvalue[stypes,stable] expression[stypes,stable] )
     		{
-    		DebugLocation(184, 4);
-    		DebugLocation(184, 6);
+    		DebugLocation(189, 4);
+    		DebugLocation(189, 6);
     		Match(input,ASSIGN,Follow._ASSIGN_in_assignment719); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(184, 13);
+    		DebugLocation(189, 13);
     		PushFollow(Follow._lvalue_in_assignment721);
     		lvalue(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(184, 35);
+    		DebugLocation(189, 35);
     		PushFollow(Follow._expression_in_assignment724);
     		expression(stypes, stable);
     		PopFollow();
@@ -1895,7 +1900,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(185, 1);
+     	DebugLocation(190, 1);
     	} finally { DebugExitRule(GrammarFileName, "assignment"); }
     	return doesRet;
 
@@ -1907,7 +1912,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_print() {}
 
     // $ANTLR start "print"
-    // TypeChecker.g:187:1: print[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( PRINT expression[stypes,stable] ( ENDL )? ) ;
+    // TypeChecker.g:192:1: print[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( PRINT expression[stypes,stable] ( ENDL )? ) ;
     [GrammarRule("print")]
     private bool print(StructTypes stypes, SymbolTable stable)
     {
@@ -1915,25 +1920,25 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         bool doesRet =  false;
 
     	try { DebugEnterRule(GrammarFileName, "print");
-    	DebugLocation(187, 1);
+    	DebugLocation(192, 1);
     	try
     	{
-    		// TypeChecker.g:188:2: ( ^( PRINT expression[stypes,stable] ( ENDL )? ) )
+    		// TypeChecker.g:193:2: ( ^( PRINT expression[stypes,stable] ( ENDL )? ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:188:4: ^( PRINT expression[stypes,stable] ( ENDL )? )
+    		// TypeChecker.g:193:4: ^( PRINT expression[stypes,stable] ( ENDL )? )
     		{
-    		DebugLocation(188, 4);
-    		DebugLocation(188, 6);
+    		DebugLocation(193, 4);
+    		DebugLocation(193, 6);
     		Match(input,PRINT,Follow._PRINT_in_print743); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(188, 12);
+    		DebugLocation(193, 12);
     		PushFollow(Follow._expression_in_print745);
     		expression(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(188, 38);
-    		// TypeChecker.g:188:38: ( ENDL )?
+    		DebugLocation(193, 38);
+    		// TypeChecker.g:193:38: ( ENDL )?
     		int alt13=2;
     		try { DebugEnterSubRule(13);
     		try { DebugEnterDecision(13, decisionCanBacktrack[13]);
@@ -1948,9 +1953,9 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// TypeChecker.g:188:39: ENDL
+    			// TypeChecker.g:193:39: ENDL
     			{
-    			DebugLocation(188, 39);
+    			DebugLocation(193, 39);
     			Match(input,ENDL,Follow._ENDL_in_print749); 
 
     			}
@@ -1973,7 +1978,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(189, 1);
+     	DebugLocation(194, 1);
     	} finally { DebugExitRule(GrammarFileName, "print"); }
     	return doesRet;
 
@@ -1985,7 +1990,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_read() {}
 
     // $ANTLR start "read"
-    // TypeChecker.g:191:1: read[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( READ lvalue[stypes,stable] ) ;
+    // TypeChecker.g:196:1: read[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( READ lvalue[stypes,stable] ) ;
     [GrammarRule("read")]
     private bool read(StructTypes stypes, SymbolTable stable)
     {
@@ -1993,19 +1998,19 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         bool doesRet =  false;
 
     	try { DebugEnterRule(GrammarFileName, "read");
-    	DebugLocation(191, 1);
+    	DebugLocation(196, 1);
     	try
     	{
-    		// TypeChecker.g:192:2: ( ^( READ lvalue[stypes,stable] ) )
+    		// TypeChecker.g:197:2: ( ^( READ lvalue[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:192:4: ^( READ lvalue[stypes,stable] )
+    		// TypeChecker.g:197:4: ^( READ lvalue[stypes,stable] )
     		{
-    		DebugLocation(192, 4);
-    		DebugLocation(192, 6);
+    		DebugLocation(197, 4);
+    		DebugLocation(197, 6);
     		Match(input,READ,Follow._READ_in_read769); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(192, 11);
+    		DebugLocation(197, 11);
     		PushFollow(Follow._lvalue_in_read771);
     		lvalue(stypes, stable);
     		PopFollow();
@@ -2024,7 +2029,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(193, 1);
+     	DebugLocation(198, 1);
     	} finally { DebugExitRule(GrammarFileName, "read"); }
     	return doesRet;
 
@@ -2036,7 +2041,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_conditional() {}
 
     // $ANTLR start "conditional"
-    // TypeChecker.g:195:1: conditional[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? ) ;
+    // TypeChecker.g:200:1: conditional[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? ) ;
     [GrammarRule("conditional")]
     private bool conditional(StructTypes stypes, SymbolTable stable)
     {
@@ -2049,30 +2054,30 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         bool b2 = default(bool);
 
     	try { DebugEnterRule(GrammarFileName, "conditional");
-    	DebugLocation(195, 1);
+    	DebugLocation(200, 1);
     	try
     	{
-    		// TypeChecker.g:196:2: ( ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? ) )
+    		// TypeChecker.g:201:2: ( ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:196:4: ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? )
+    		// TypeChecker.g:201:4: ^(w= IF e= expression[stypes,stable] b1= block[stypes,stable] (b2= block[stypes,stable] )? )
     		{
-    		DebugLocation(196, 4);
-    		DebugLocation(196, 7);
+    		DebugLocation(201, 4);
+    		DebugLocation(201, 7);
     		w=(CommonTree)Match(input,IF,Follow._IF_in_conditional792); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(196, 12);
+    		DebugLocation(201, 12);
     		PushFollow(Follow._expression_in_conditional796);
     		e=expression(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(196, 41);
+    		DebugLocation(201, 41);
     		PushFollow(Follow._block_in_conditional801);
     		b1=block(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(196, 63);
-    		// TypeChecker.g:196:63: (b2= block[stypes,stable] )?
+    		DebugLocation(201, 63);
+    		// TypeChecker.g:201:63: (b2= block[stypes,stable] )?
     		int alt14=2;
     		try { DebugEnterSubRule(14);
     		try { DebugEnterDecision(14, decisionCanBacktrack[14]);
@@ -2087,9 +2092,9 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// TypeChecker.g:196:64: b2= block[stypes,stable]
+    			// TypeChecker.g:201:64: b2= block[stypes,stable]
     			{
-    			DebugLocation(196, 66);
+    			DebugLocation(201, 66);
     			PushFollow(Follow._block_in_conditional807);
     			b2=block(stypes, stable);
     			PopFollow();
@@ -2103,7 +2108,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(197, 3);
+    		DebugLocation(202, 3);
 
     					if (!e.isBool())
     					{
@@ -2123,7 +2128,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(204, 1);
+     	DebugLocation(209, 1);
     	} finally { DebugExitRule(GrammarFileName, "conditional"); }
     	return doesRet;
 
@@ -2135,7 +2140,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_loop() {}
 
     // $ANTLR start "loop"
-    // TypeChecker.g:206:1: loop[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] ) ;
+    // TypeChecker.g:211:1: loop[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] ) ;
     [GrammarRule("loop")]
     private bool loop(StructTypes stypes, SymbolTable stable)
     {
@@ -2147,36 +2152,36 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         bool b = default(bool);
 
     	try { DebugEnterRule(GrammarFileName, "loop");
-    	DebugLocation(206, 1);
+    	DebugLocation(211, 1);
     	try
     	{
-    		// TypeChecker.g:207:2: ( ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] ) )
+    		// TypeChecker.g:212:2: ( ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:207:4: ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] )
+    		// TypeChecker.g:212:4: ^(w= WHILE guard= expression[stypes,stable] b= block[stypes,stable] expression[stypes,stable] )
     		{
-    		DebugLocation(207, 4);
-    		DebugLocation(207, 7);
+    		DebugLocation(212, 4);
+    		DebugLocation(212, 7);
     		w=(CommonTree)Match(input,WHILE,Follow._WHILE_in_loop834); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(207, 19);
+    		DebugLocation(212, 19);
     		PushFollow(Follow._expression_in_loop838);
     		guard=expression(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(207, 47);
+    		DebugLocation(212, 47);
     		PushFollow(Follow._block_in_loop843);
     		b=block(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(207, 69);
+    		DebugLocation(212, 69);
     		PushFollow(Follow._expression_in_loop846);
     		expression(stypes, stable);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(208, 3);
+    		DebugLocation(213, 3);
 
     					if (!guard.isBool())
     					{
@@ -2195,7 +2200,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(214, 1);
+     	DebugLocation(219, 1);
     	} finally { DebugExitRule(GrammarFileName, "loop"); }
     	return doesRet;
 
@@ -2207,7 +2212,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_delete() {}
 
     // $ANTLR start "delete"
-    // TypeChecker.g:216:1: delete[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(d= DELETE e= expression[stypes,stable] ) ;
+    // TypeChecker.g:221:1: delete[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^(d= DELETE e= expression[stypes,stable] ) ;
     [GrammarRule("delete")]
     private bool delete(StructTypes stypes, SymbolTable stable)
     {
@@ -2218,26 +2223,26 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         Type e = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "delete");
-    	DebugLocation(216, 1);
+    	DebugLocation(221, 1);
     	try
     	{
-    		// TypeChecker.g:217:2: ( ^(d= DELETE e= expression[stypes,stable] ) )
+    		// TypeChecker.g:222:2: ( ^(d= DELETE e= expression[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:217:4: ^(d= DELETE e= expression[stypes,stable] )
+    		// TypeChecker.g:222:4: ^(d= DELETE e= expression[stypes,stable] )
     		{
-    		DebugLocation(217, 4);
-    		DebugLocation(217, 7);
+    		DebugLocation(222, 4);
+    		DebugLocation(222, 7);
     		d=(CommonTree)Match(input,DELETE,Follow._DELETE_in_delete871); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(217, 16);
+    		DebugLocation(222, 16);
     		PushFollow(Follow._expression_in_delete875);
     		e=expression(stypes, stable);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(218, 3);
+    		DebugLocation(223, 3);
 
     					if (!e.isStruct())
     					{
@@ -2256,7 +2261,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(224, 1);
+     	DebugLocation(229, 1);
     	} finally { DebugExitRule(GrammarFileName, "delete"); }
     	return doesRet;
 
@@ -2268,7 +2273,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_ret() {}
 
     // $ANTLR start "ret"
-    // TypeChecker.g:226:1: ret[StructTypes stypes,SymbolTable stable] returns [bool doesRet = true] : ^(r= RETURN (e= expression[stypes,stable] )? ) ;
+    // TypeChecker.g:231:1: ret[StructTypes stypes,SymbolTable stable] returns [bool doesRet = true] : ^(r= RETURN (e= expression[stypes,stable] )? ) ;
     [GrammarRule("ret")]
     private bool ret(StructTypes stypes, SymbolTable stable)
     {
@@ -2279,22 +2284,22 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         Type e = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "ret");
-    	DebugLocation(226, 1);
+    	DebugLocation(231, 1);
     	try
     	{
-    		// TypeChecker.g:227:2: ( ^(r= RETURN (e= expression[stypes,stable] )? ) )
+    		// TypeChecker.g:232:2: ( ^(r= RETURN (e= expression[stypes,stable] )? ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:227:4: ^(r= RETURN (e= expression[stypes,stable] )? )
+    		// TypeChecker.g:232:4: ^(r= RETURN (e= expression[stypes,stable] )? )
     		{
-    		DebugLocation(227, 4);
-    		DebugLocation(227, 7);
+    		DebugLocation(232, 4);
+    		DebugLocation(232, 7);
     		r=(CommonTree)Match(input,RETURN,Follow._RETURN_in_ret901); 
 
     		if (input.LA(1) == TokenTypes.Down)
     		{
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(227, 15);
-    			// TypeChecker.g:227:15: (e= expression[stypes,stable] )?
+    			DebugLocation(232, 15);
+    			// TypeChecker.g:232:15: (e= expression[stypes,stable] )?
     			int alt15=2;
     			try { DebugEnterSubRule(15);
     			try { DebugEnterDecision(15, decisionCanBacktrack[15]);
@@ -2309,9 +2314,9 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     			{
     			case 1:
     				DebugEnterAlt(1);
-    				// TypeChecker.g:227:16: e= expression[stypes,stable]
+    				// TypeChecker.g:232:16: e= expression[stypes,stable]
     				{
-    				DebugLocation(227, 17);
+    				DebugLocation(232, 17);
     				PushFollow(Follow._expression_in_ret906);
     				e=expression(stypes, stable);
     				PopFollow();
@@ -2326,7 +2331,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
 
     			Match(input, TokenTypes.Up, null); 
     		}
-    		DebugLocation(228, 3);
+    		DebugLocation(233, 3);
 
     					if (e==null)
     					{
@@ -2351,7 +2356,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(240, 1);
+     	DebugLocation(245, 1);
     	} finally { DebugExitRule(GrammarFileName, "ret"); }
     	return doesRet;
 
@@ -2363,7 +2368,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_invocation() {}
 
     // $ANTLR start "invocation"
-    // TypeChecker.g:242:1: invocation[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( INVOKE id= ID args= arguments[stypes,stable] ) ;
+    // TypeChecker.g:247:1: invocation[StructTypes stypes,SymbolTable stable] returns [bool doesRet = false] : ^( INVOKE id= ID args= arguments[stypes,stable] ) ;
     [GrammarRule("invocation")]
     private bool invocation(StructTypes stypes, SymbolTable stable)
     {
@@ -2374,28 +2379,28 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         List<Type> args = default(List<Type>);
 
     	try { DebugEnterRule(GrammarFileName, "invocation");
-    	DebugLocation(242, 1);
+    	DebugLocation(247, 1);
     	try
     	{
-    		// TypeChecker.g:243:2: ( ^( INVOKE id= ID args= arguments[stypes,stable] ) )
+    		// TypeChecker.g:248:2: ( ^( INVOKE id= ID args= arguments[stypes,stable] ) )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:243:4: ^( INVOKE id= ID args= arguments[stypes,stable] )
+    		// TypeChecker.g:248:4: ^( INVOKE id= ID args= arguments[stypes,stable] )
     		{
-    		DebugLocation(243, 4);
-    		DebugLocation(243, 6);
+    		DebugLocation(248, 4);
+    		DebugLocation(248, 6);
     		Match(input,INVOKE,Follow._INVOKE_in_invocation931); 
 
     		Match(input, TokenTypes.Down, null); 
-    		DebugLocation(243, 15);
+    		DebugLocation(248, 15);
     		id=(CommonTree)Match(input,ID,Follow._ID_in_invocation935); 
-    		DebugLocation(243, 23);
+    		DebugLocation(248, 23);
     		PushFollow(Follow._arguments_in_invocation939);
     		args=arguments(stypes, stable);
     		PopFollow();
 
 
     		Match(input, TokenTypes.Up, null); 
-    		DebugLocation(243, 50);
+    		DebugLocation(248, 50);
     		 getFun(stable, id,args); 
 
     		}
@@ -2409,7 +2414,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(244, 1);
+     	DebugLocation(249, 1);
     	} finally { DebugExitRule(GrammarFileName, "invocation"); }
     	return doesRet;
 
@@ -2421,7 +2426,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_lvalue() {}
 
     // $ANTLR start "lvalue"
-    // TypeChecker.g:246:1: lvalue[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( DOT s= lvalue[stypes,stable] id= ID ) | id= ID );
+    // TypeChecker.g:251:1: lvalue[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( DOT s= lvalue[stypes,stable] id= ID ) | id= ID );
     [GrammarRule("lvalue")]
     private Type lvalue(StructTypes stypes, SymbolTable stable)
     {
@@ -2432,10 +2437,10 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         Type s = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "lvalue");
-    	DebugLocation(246, 1);
+    	DebugLocation(251, 1);
     	try
     	{
-    		// TypeChecker.g:247:2: ( ^( DOT s= lvalue[stypes,stable] id= ID ) | id= ID )
+    		// TypeChecker.g:252:2: ( ^( DOT s= lvalue[stypes,stable] id= ID ) | id= ID )
     		int alt16=2;
     		try { DebugEnterDecision(16, decisionCanBacktrack[16]);
     		int LA16_0 = input.LA(1);
@@ -2460,34 +2465,34 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// TypeChecker.g:247:4: ^( DOT s= lvalue[stypes,stable] id= ID )
+    			// TypeChecker.g:252:4: ^( DOT s= lvalue[stypes,stable] id= ID )
     			{
-    			DebugLocation(247, 4);
-    			DebugLocation(247, 6);
+    			DebugLocation(252, 4);
+    			DebugLocation(252, 6);
     			Match(input,DOT,Follow._DOT_in_lvalue960); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(247, 11);
+    			DebugLocation(252, 11);
     			PushFollow(Follow._lvalue_in_lvalue964);
     			s=lvalue(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(247, 36);
+    			DebugLocation(252, 36);
     			id=(CommonTree)Match(input,ID,Follow._ID_in_lvalue969); 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(247, 41);
+    			DebugLocation(252, 41);
     			 t = getFieldType(stypes, s, id); 
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// TypeChecker.g:248:4: id= ID
+    			// TypeChecker.g:253:4: id= ID
     			{
-    			DebugLocation(248, 6);
+    			DebugLocation(253, 6);
     			id=(CommonTree)Match(input,ID,Follow._ID_in_lvalue979); 
-    			DebugLocation(248, 10);
+    			DebugLocation(253, 10);
     			 t = getVar(stable, id); 
 
     			}
@@ -2503,7 +2508,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(249, 1);
+     	DebugLocation(254, 1);
     	} finally { DebugExitRule(GrammarFileName, "lvalue"); }
     	return t;
 
@@ -2515,7 +2520,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_expression() {}
 
     // $ANTLR start "expression"
-    // TypeChecker.g:251:1: expression[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NOT e= expression[stypes,stable] ) | ^(a= NEG e= expression[stypes,stable] ) | s= selector[stypes,stable] );
+    // TypeChecker.g:256:1: expression[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NOT e= expression[stypes,stable] ) | ^(a= NEG e= expression[stypes,stable] ) | s= selector[stypes,stable] );
     [GrammarRule("expression")]
     private Type expression(StructTypes stypes, SymbolTable stable)
     {
@@ -2529,10 +2534,10 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         Type s = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "expression");
-    	DebugLocation(251, 1);
+    	DebugLocation(256, 1);
     	try
     	{
-    		// TypeChecker.g:252:2: ( ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NOT e= expression[stypes,stable] ) | ^(a= NEG e= expression[stypes,stable] ) | s= selector[stypes,stable] )
+    		// TypeChecker.g:257:2: ( ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] ) | ^(a= NOT e= expression[stypes,stable] ) | ^(a= NEG e= expression[stypes,stable] ) | s= selector[stypes,stable] )
     		int alt17=15;
     		try { DebugEnterDecision(17, decisionCanBacktrack[17]);
     		switch (input.LA(1))
@@ -2633,368 +2638,368 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// TypeChecker.g:252:4: ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:257:4: ^(a= AND e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(252, 4);
-    			DebugLocation(252, 7);
+    			DebugLocation(257, 4);
+    			DebugLocation(257, 7);
     			a=(CommonTree)Match(input,AND,Follow._AND_in_expression1000); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(252, 14);
+    			DebugLocation(257, 14);
     			PushFollow(Follow._expression_in_expression1004);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(252, 43);
+    			DebugLocation(257, 43);
     			PushFollow(Follow._expression_in_expression1009);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(252, 71);
+    			DebugLocation(257, 71);
     			ensureBool((a!=null?a.Line:0), e1, e2); t = Type.boolType();
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// TypeChecker.g:253:4: ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:258:4: ^(a= OR e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(253, 4);
-    			DebugLocation(253, 7);
+    			DebugLocation(258, 4);
+    			DebugLocation(258, 7);
     			a=(CommonTree)Match(input,OR,Follow._OR_in_expression1021); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(253, 13);
+    			DebugLocation(258, 13);
     			PushFollow(Follow._expression_in_expression1025);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(253, 42);
+    			DebugLocation(258, 42);
     			PushFollow(Follow._expression_in_expression1030);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(253, 70);
+    			DebugLocation(258, 70);
     			ensureBool((a!=null?a.Line:0), e1, e2); t = Type.boolType();
 
     			}
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// TypeChecker.g:254:4: ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:259:4: ^(a= EQ e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(254, 4);
-    			DebugLocation(254, 7);
+    			DebugLocation(259, 4);
+    			DebugLocation(259, 7);
     			a=(CommonTree)Match(input,EQ,Follow._EQ_in_expression1042); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(254, 13);
+    			DebugLocation(259, 13);
     			PushFollow(Follow._expression_in_expression1046);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(254, 42);
+    			DebugLocation(259, 42);
     			PushFollow(Follow._expression_in_expression1051);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(254, 70);
+    			DebugLocation(259, 70);
     			ensureStructOrInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
 
     			}
     			break;
     		case 4:
     			DebugEnterAlt(4);
-    			// TypeChecker.g:255:4: ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:260:4: ^(a= LT e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(255, 4);
-    			DebugLocation(255, 7);
+    			DebugLocation(260, 4);
+    			DebugLocation(260, 7);
     			a=(CommonTree)Match(input,LT,Follow._LT_in_expression1063); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(255, 13);
+    			DebugLocation(260, 13);
     			PushFollow(Follow._expression_in_expression1067);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(255, 42);
+    			DebugLocation(260, 42);
     			PushFollow(Follow._expression_in_expression1072);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(255, 70);
+    			DebugLocation(260, 70);
     			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
 
     			}
     			break;
     		case 5:
     			DebugEnterAlt(5);
-    			// TypeChecker.g:256:4: ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:261:4: ^(a= GT e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(256, 4);
-    			DebugLocation(256, 7);
+    			DebugLocation(261, 4);
+    			DebugLocation(261, 7);
     			a=(CommonTree)Match(input,GT,Follow._GT_in_expression1084); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(256, 13);
+    			DebugLocation(261, 13);
     			PushFollow(Follow._expression_in_expression1088);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(256, 42);
+    			DebugLocation(261, 42);
     			PushFollow(Follow._expression_in_expression1093);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(256, 70);
+    			DebugLocation(261, 70);
     			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
 
     			}
     			break;
     		case 6:
     			DebugEnterAlt(6);
-    			// TypeChecker.g:257:4: ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:262:4: ^(a= NE e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(257, 4);
-    			DebugLocation(257, 7);
+    			DebugLocation(262, 4);
+    			DebugLocation(262, 7);
     			a=(CommonTree)Match(input,NE,Follow._NE_in_expression1105); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(257, 13);
+    			DebugLocation(262, 13);
     			PushFollow(Follow._expression_in_expression1109);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(257, 42);
+    			DebugLocation(262, 42);
     			PushFollow(Follow._expression_in_expression1114);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(257, 70);
+    			DebugLocation(262, 70);
     			ensureStructOrInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
 
     			}
     			break;
     		case 7:
     			DebugEnterAlt(7);
-    			// TypeChecker.g:258:4: ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:263:4: ^(a= LE e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(258, 4);
-    			DebugLocation(258, 7);
+    			DebugLocation(263, 4);
+    			DebugLocation(263, 7);
     			a=(CommonTree)Match(input,LE,Follow._LE_in_expression1126); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(258, 13);
+    			DebugLocation(263, 13);
     			PushFollow(Follow._expression_in_expression1130);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(258, 42);
+    			DebugLocation(263, 42);
     			PushFollow(Follow._expression_in_expression1135);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(258, 70);
+    			DebugLocation(263, 70);
     			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
 
     			}
     			break;
     		case 8:
     			DebugEnterAlt(8);
-    			// TypeChecker.g:259:4: ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:264:4: ^(a= GE e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(259, 4);
-    			DebugLocation(259, 7);
+    			DebugLocation(264, 4);
+    			DebugLocation(264, 7);
     			a=(CommonTree)Match(input,GE,Follow._GE_in_expression1147); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(259, 13);
+    			DebugLocation(264, 13);
     			PushFollow(Follow._expression_in_expression1151);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(259, 42);
+    			DebugLocation(264, 42);
     			PushFollow(Follow._expression_in_expression1156);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(259, 70);
+    			DebugLocation(264, 70);
     			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.boolType();
 
     			}
     			break;
     		case 9:
     			DebugEnterAlt(9);
-    			// TypeChecker.g:260:4: ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:265:4: ^(a= PLUS e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(260, 4);
-    			DebugLocation(260, 7);
+    			DebugLocation(265, 4);
+    			DebugLocation(265, 7);
     			a=(CommonTree)Match(input,PLUS,Follow._PLUS_in_expression1168); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(260, 15);
+    			DebugLocation(265, 15);
     			PushFollow(Follow._expression_in_expression1172);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(260, 44);
+    			DebugLocation(265, 44);
     			PushFollow(Follow._expression_in_expression1177);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(260, 72);
+    			DebugLocation(265, 72);
     			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.intType();
 
     			}
     			break;
     		case 10:
     			DebugEnterAlt(10);
-    			// TypeChecker.g:261:4: ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:266:4: ^(a= MINUS e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(261, 4);
-    			DebugLocation(261, 7);
+    			DebugLocation(266, 4);
+    			DebugLocation(266, 7);
     			a=(CommonTree)Match(input,MINUS,Follow._MINUS_in_expression1189); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(261, 16);
+    			DebugLocation(266, 16);
     			PushFollow(Follow._expression_in_expression1193);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(261, 45);
+    			DebugLocation(266, 45);
     			PushFollow(Follow._expression_in_expression1198);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(261, 73);
+    			DebugLocation(266, 73);
     			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.intType();
 
     			}
     			break;
     		case 11:
     			DebugEnterAlt(11);
-    			// TypeChecker.g:262:4: ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:267:4: ^(a= TIMES e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(262, 4);
-    			DebugLocation(262, 7);
+    			DebugLocation(267, 4);
+    			DebugLocation(267, 7);
     			a=(CommonTree)Match(input,TIMES,Follow._TIMES_in_expression1210); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(262, 16);
+    			DebugLocation(267, 16);
     			PushFollow(Follow._expression_in_expression1214);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(262, 45);
+    			DebugLocation(267, 45);
     			PushFollow(Follow._expression_in_expression1219);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(262, 73);
+    			DebugLocation(267, 73);
     			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.intType();
 
     			}
     			break;
     		case 12:
     			DebugEnterAlt(12);
-    			// TypeChecker.g:263:4: ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] )
+    			// TypeChecker.g:268:4: ^(a= DIVIDE e1= expression[stypes,stable] e2= expression[stypes,stable] )
     			{
-    			DebugLocation(263, 4);
-    			DebugLocation(263, 7);
+    			DebugLocation(268, 4);
+    			DebugLocation(268, 7);
     			a=(CommonTree)Match(input,DIVIDE,Follow._DIVIDE_in_expression1231); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(263, 17);
+    			DebugLocation(268, 17);
     			PushFollow(Follow._expression_in_expression1235);
     			e1=expression(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(263, 46);
+    			DebugLocation(268, 46);
     			PushFollow(Follow._expression_in_expression1240);
     			e2=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(263, 74);
+    			DebugLocation(268, 74);
     			ensureInt((a!=null?a.Line:0), e1, e2); t = Type.intType();
 
     			}
     			break;
     		case 13:
     			DebugEnterAlt(13);
-    			// TypeChecker.g:264:4: ^(a= NOT e= expression[stypes,stable] )
+    			// TypeChecker.g:269:4: ^(a= NOT e= expression[stypes,stable] )
     			{
-    			DebugLocation(264, 4);
-    			DebugLocation(264, 7);
+    			DebugLocation(269, 4);
+    			DebugLocation(269, 7);
     			a=(CommonTree)Match(input,NOT,Follow._NOT_in_expression1252); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(264, 13);
+    			DebugLocation(269, 13);
     			PushFollow(Follow._expression_in_expression1256);
     			e=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(264, 41);
+    			DebugLocation(269, 41);
     			ensureBool((a!=null?a.Line:0), e, Type.boolType()); t = Type.boolType();
 
     			}
     			break;
     		case 14:
     			DebugEnterAlt(14);
-    			// TypeChecker.g:265:4: ^(a= NEG e= expression[stypes,stable] )
+    			// TypeChecker.g:270:4: ^(a= NEG e= expression[stypes,stable] )
     			{
-    			DebugLocation(265, 4);
-    			DebugLocation(265, 7);
+    			DebugLocation(270, 4);
+    			DebugLocation(270, 7);
     			a=(CommonTree)Match(input,NEG,Follow._NEG_in_expression1268); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(265, 13);
+    			DebugLocation(270, 13);
     			PushFollow(Follow._expression_in_expression1272);
     			e=expression(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(265, 41);
+    			DebugLocation(270, 41);
     			ensureInt((a!=null?a.Line:0), e, Type.intType()); t = Type.intType();
 
     			}
     			break;
     		case 15:
     			DebugEnterAlt(15);
-    			// TypeChecker.g:266:4: s= selector[stypes,stable]
+    			// TypeChecker.g:271:4: s= selector[stypes,stable]
     			{
-    			DebugLocation(266, 5);
+    			DebugLocation(271, 5);
     			PushFollow(Follow._selector_in_expression1283);
     			s=selector(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(266, 30);
+    			DebugLocation(271, 30);
     			 t = s; 
 
     			}
@@ -3010,7 +3015,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(267, 1);
+     	DebugLocation(272, 1);
     	} finally { DebugExitRule(GrammarFileName, "expression"); }
     	return t;
 
@@ -3022,7 +3027,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_selector() {}
 
     // $ANTLR start "selector"
-    // TypeChecker.g:269:1: selector[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( DOT s= selector[stypes,stable] id= ID ) | f= factor[stypes,stable] );
+    // TypeChecker.g:274:1: selector[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( DOT s= selector[stypes,stable] id= ID ) | f= factor[stypes,stable] );
     [GrammarRule("selector")]
     private Type selector(StructTypes stypes, SymbolTable stable)
     {
@@ -3034,10 +3039,10 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         Type f = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "selector");
-    	DebugLocation(269, 1);
+    	DebugLocation(274, 1);
     	try
     	{
-    		// TypeChecker.g:270:2: ( ^( DOT s= selector[stypes,stable] id= ID ) | f= factor[stypes,stable] )
+    		// TypeChecker.g:275:2: ( ^( DOT s= selector[stypes,stable] id= ID ) | f= factor[stypes,stable] )
     		int alt18=2;
     		try { DebugEnterDecision(18, decisionCanBacktrack[18]);
     		int LA18_0 = input.LA(1);
@@ -3062,37 +3067,37 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// TypeChecker.g:270:4: ^( DOT s= selector[stypes,stable] id= ID )
+    			// TypeChecker.g:275:4: ^( DOT s= selector[stypes,stable] id= ID )
     			{
-    			DebugLocation(270, 4);
-    			DebugLocation(270, 6);
+    			DebugLocation(275, 4);
+    			DebugLocation(275, 6);
     			Match(input,DOT,Follow._DOT_in_selector1303); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(270, 11);
+    			DebugLocation(275, 11);
     			PushFollow(Follow._selector_in_selector1307);
     			s=selector(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(270, 38);
+    			DebugLocation(275, 38);
     			id=(CommonTree)Match(input,ID,Follow._ID_in_selector1312); 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(270, 43);
+    			DebugLocation(275, 43);
     			 t = getFieldType(stypes, s, id); 
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// TypeChecker.g:271:4: f= factor[stypes,stable]
+    			// TypeChecker.g:276:4: f= factor[stypes,stable]
     			{
-    			DebugLocation(271, 5);
+    			DebugLocation(276, 5);
     			PushFollow(Follow._factor_in_selector1322);
     			f=factor(stypes, stable);
     			PopFollow();
 
-    			DebugLocation(271, 28);
+    			DebugLocation(276, 28);
     			t = f;
 
     			}
@@ -3108,7 +3113,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(272, 1);
+     	DebugLocation(277, 1);
     	} finally { DebugExitRule(GrammarFileName, "selector"); }
     	return t;
 
@@ -3120,7 +3125,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_factor() {}
 
     // $ANTLR start "factor"
-    // TypeChecker.g:274:1: factor[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( INVOKE id= ID args= arguments[stypes,stable] ) | id= ID | INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL );
+    // TypeChecker.g:279:1: factor[StructTypes stypes,SymbolTable stable] returns [Type t = null] : ( ^( INVOKE id= ID args= arguments[stypes,stable] ) | id= ID | INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL );
     [GrammarRule("factor")]
     private Type factor(StructTypes stypes, SymbolTable stable)
     {
@@ -3131,10 +3136,10 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         List<Type> args = default(List<Type>);
 
     	try { DebugEnterRule(GrammarFileName, "factor");
-    	DebugLocation(274, 1);
+    	DebugLocation(279, 1);
     	try
     	{
-    		// TypeChecker.g:275:2: ( ^( INVOKE id= ID args= arguments[stypes,stable] ) | id= ID | INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL )
+    		// TypeChecker.g:280:2: ( ^( INVOKE id= ID args= arguments[stypes,stable] ) | id= ID | INTEGER | TRUE | FALSE | ^( NEW id= ID ) | NULL )
     		int alt19=7;
     		try { DebugEnterDecision(19, decisionCanBacktrack[19]);
     		switch (input.LA(1))
@@ -3188,96 +3193,96 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// TypeChecker.g:275:4: ^( INVOKE id= ID args= arguments[stypes,stable] )
+    			// TypeChecker.g:280:4: ^( INVOKE id= ID args= arguments[stypes,stable] )
     			{
-    			DebugLocation(275, 4);
-    			DebugLocation(275, 6);
+    			DebugLocation(280, 4);
+    			DebugLocation(280, 6);
     			Match(input,INVOKE,Follow._INVOKE_in_factor1342); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(275, 15);
+    			DebugLocation(280, 15);
     			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1346); 
-    			DebugLocation(275, 23);
+    			DebugLocation(280, 23);
     			PushFollow(Follow._arguments_in_factor1350);
     			args=arguments(stypes, stable);
     			PopFollow();
 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(275, 50);
+    			DebugLocation(280, 50);
     			t = getFun(stable, id,args); 
 
     			}
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// TypeChecker.g:276:4: id= ID
+    			// TypeChecker.g:281:4: id= ID
     			{
-    			DebugLocation(276, 6);
+    			DebugLocation(281, 6);
     			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1361); 
-    			DebugLocation(276, 10);
+    			DebugLocation(281, 10);
     			t = getVar(stable, id);
 
     			}
     			break;
     		case 3:
     			DebugEnterAlt(3);
-    			// TypeChecker.g:277:4: INTEGER
+    			// TypeChecker.g:282:4: INTEGER
     			{
-    			DebugLocation(277, 4);
+    			DebugLocation(282, 4);
     			Match(input,INTEGER,Follow._INTEGER_in_factor1368); 
-    			DebugLocation(277, 12);
+    			DebugLocation(282, 12);
     			t = Type.intType();
 
     			}
     			break;
     		case 4:
     			DebugEnterAlt(4);
-    			// TypeChecker.g:278:4: TRUE
+    			// TypeChecker.g:283:4: TRUE
     			{
-    			DebugLocation(278, 4);
+    			DebugLocation(283, 4);
     			Match(input,TRUE,Follow._TRUE_in_factor1375); 
-    			DebugLocation(278, 9);
+    			DebugLocation(283, 9);
     			t = Type.boolType();
 
     			}
     			break;
     		case 5:
     			DebugEnterAlt(5);
-    			// TypeChecker.g:279:4: FALSE
+    			// TypeChecker.g:284:4: FALSE
     			{
-    			DebugLocation(279, 4);
+    			DebugLocation(284, 4);
     			Match(input,FALSE,Follow._FALSE_in_factor1382); 
-    			DebugLocation(279, 9);
+    			DebugLocation(284, 9);
     			t = Type.boolType();
 
     			}
     			break;
     		case 6:
     			DebugEnterAlt(6);
-    			// TypeChecker.g:280:4: ^( NEW id= ID )
+    			// TypeChecker.g:285:4: ^( NEW id= ID )
     			{
-    			DebugLocation(280, 4);
-    			DebugLocation(280, 6);
+    			DebugLocation(285, 4);
+    			DebugLocation(285, 6);
     			Match(input,NEW,Follow._NEW_in_factor1389); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(280, 12);
+    			DebugLocation(285, 12);
     			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1393); 
 
     			Match(input, TokenTypes.Up, null); 
-    			DebugLocation(280, 17);
+    			DebugLocation(285, 17);
     			t = getStruct(stypes, id);
 
     			}
     			break;
     		case 7:
     			DebugEnterAlt(7);
-    			// TypeChecker.g:281:4: NULL
+    			// TypeChecker.g:286:4: NULL
     			{
-    			DebugLocation(281, 4);
+    			DebugLocation(286, 4);
     			Match(input,NULL,Follow._NULL_in_factor1401); 
-    			DebugLocation(281, 9);
+    			DebugLocation(286, 9);
     			t = Type.nullType();
 
     			}
@@ -3293,7 +3298,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(282, 1);
+     	DebugLocation(287, 1);
     	} finally { DebugExitRule(GrammarFileName, "factor"); }
     	return t;
 
@@ -3305,7 +3310,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_arguments() {}
 
     // $ANTLR start "arguments"
-    // TypeChecker.g:284:1: arguments[StructTypes stypes,SymbolTable stable] returns [List<Type> ret = null] : args= arg_list[stypes,stable] ;
+    // TypeChecker.g:289:1: arguments[StructTypes stypes,SymbolTable stable] returns [List<Type> ret = null] : args= arg_list[stypes,stable] ;
     [GrammarRule("arguments")]
     private List<Type> arguments(StructTypes stypes, SymbolTable stable)
     {
@@ -3315,19 +3320,19 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         List<Type> args = default(List<Type>);
 
     	try { DebugEnterRule(GrammarFileName, "arguments");
-    	DebugLocation(284, 1);
+    	DebugLocation(289, 1);
     	try
     	{
-    		// TypeChecker.g:285:2: (args= arg_list[stypes,stable] )
+    		// TypeChecker.g:290:2: (args= arg_list[stypes,stable] )
     		DebugEnterAlt(1);
-    		// TypeChecker.g:285:4: args= arg_list[stypes,stable]
+    		// TypeChecker.g:290:4: args= arg_list[stypes,stable]
     		{
-    		DebugLocation(285, 8);
+    		DebugLocation(290, 8);
     		PushFollow(Follow._arg_list_in_arguments1421);
     		args=arg_list(stypes, stable);
     		PopFollow();
 
-    		DebugLocation(285, 33);
+    		DebugLocation(290, 33);
     		ret = args; 
 
     		}
@@ -3341,7 +3346,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(286, 1);
+     	DebugLocation(291, 1);
     	} finally { DebugExitRule(GrammarFileName, "arguments"); }
     	return ret;
 
@@ -3353,7 +3358,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     protected virtual void Leave_arg_list() {}
 
     // $ANTLR start "arg_list"
-    // TypeChecker.g:288:1: arg_list[StructTypes stypes,SymbolTable stable] returns [List<Type> args = new List<Type>()] : ( ^( ARGS (e= expression[stypes,stable] )+ ) | ARGS );
+    // TypeChecker.g:293:1: arg_list[StructTypes stypes,SymbolTable stable] returns [List<Type> args = new List<Type>()] : ( ^( ARGS (e= expression[stypes,stable] )+ ) | ARGS );
     [GrammarRule("arg_list")]
     private List<Type> arg_list(StructTypes stypes, SymbolTable stable)
     {
@@ -3363,10 +3368,10 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
         Type e = default(Type);
 
     	try { DebugEnterRule(GrammarFileName, "arg_list");
-    	DebugLocation(288, 1);
+    	DebugLocation(293, 1);
     	try
     	{
-    		// TypeChecker.g:289:2: ( ^( ARGS (e= expression[stypes,stable] )+ ) | ARGS )
+    		// TypeChecker.g:294:2: ( ^( ARGS (e= expression[stypes,stable] )+ ) | ARGS )
     		int alt21=2;
     		try { DebugEnterDecision(21, decisionCanBacktrack[21]);
     		int LA21_0 = input.LA(1);
@@ -3403,15 +3408,15 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     		{
     		case 1:
     			DebugEnterAlt(1);
-    			// TypeChecker.g:289:4: ^( ARGS (e= expression[stypes,stable] )+ )
+    			// TypeChecker.g:294:4: ^( ARGS (e= expression[stypes,stable] )+ )
     			{
-    			DebugLocation(289, 4);
-    			DebugLocation(289, 6);
+    			DebugLocation(294, 4);
+    			DebugLocation(294, 6);
     			Match(input,ARGS,Follow._ARGS_in_arg_list1441); 
 
     			Match(input, TokenTypes.Down, null); 
-    			DebugLocation(289, 11);
-    			// TypeChecker.g:289:11: (e= expression[stypes,stable] )+
+    			DebugLocation(294, 11);
+    			// TypeChecker.g:294:11: (e= expression[stypes,stable] )+
     			int cnt20=0;
     			try { DebugEnterSubRule(20);
     			while (true)
@@ -3431,14 +3436,14 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     				{
     				case 1:
     					DebugEnterAlt(1);
-    					// TypeChecker.g:289:12: e= expression[stypes,stable]
+    					// TypeChecker.g:294:12: e= expression[stypes,stable]
     					{
-    					DebugLocation(289, 13);
+    					DebugLocation(294, 13);
     					PushFollow(Follow._expression_in_arg_list1446);
     					e=expression(stypes, stable);
     					PopFollow();
 
-    					DebugLocation(289, 39);
+    					DebugLocation(294, 39);
     					args.Add(e);
 
     					}
@@ -3466,9 +3471,9 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     			break;
     		case 2:
     			DebugEnterAlt(2);
-    			// TypeChecker.g:290:4: ARGS
+    			// TypeChecker.g:295:4: ARGS
     			{
-    			DebugLocation(290, 4);
+    			DebugLocation(295, 4);
     			Match(input,ARGS,Follow._ARGS_in_arg_list1457); 
 
     			}
@@ -3484,7 +3489,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
     	finally
     	{
         }
-     	DebugLocation(291, 1);
+     	DebugLocation(296, 1);
     	} finally { DebugExitRule(GrammarFileName, "arg_list"); }
     	return args;
 

@@ -8,6 +8,8 @@ namespace CSC431.IL
 {
     public abstract class MilocInstruction : Instruction
     {
+        public const string ReadGlobalName = "ReadGlobalVarHopefullyNoProgramHasAVarNamedThisBecauseThenThingsWillBeScrewedUp";
+
         public MilocInstruction(string name)
             : base(name)
         {

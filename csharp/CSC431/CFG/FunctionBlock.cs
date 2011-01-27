@@ -9,11 +9,13 @@ namespace CSC431.CFG
     {
         public string Name { get; private set; }
         public SeqBlock<T> Body { get; private set; }
+        public List<string> Locals { get; private set; }
 
         public FunctionBlock(string name, SeqBlock<T> body)
         {
             this.Name = name;
             this.Body = body;
+            this.Locals = new List<string>();
         }
 
         public override Node<T>[] Nexts

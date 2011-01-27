@@ -100,15 +100,21 @@ instr.ForEachOperand((c, count, isLast) =>
     if (c.IsConstant)
         formatStr += " " + c.ConstantValue;
     else
-        formatStr += " " + c.MilocPrefix + "{" + placeHolderCount++ + "}" + c.MilocPostfix;
+        formatStr += " " + c.MilocPrefix + "{" + placeHolderCount + "}" + c.MilocPostfix;
     if (!isLast)
         formatStr += ",";
+    placeHolderCount++;
 });
 Write("return string.Format(\"{0}\", Name", formatStr);
 instr.ForEachOperand((c, count, isLast) =>
 {
     string field = c.UpperPrefix + count;
     Write(", ");
+    if (c.IsConstant)
+    {
+        Write("null");
+        return;
+    }
     if (string.IsNullOrEmpty(c.SpecialConversion))
         Write(field);
     else
@@ -249,11 +255,13 @@ private class InstrInfo
                 new InstrInfo("r", "storeret"),
                 new InstrInfo("ri", "storeoutargument"),
                 new InstrInfo("R", "loadret"),
-                new InstrInfo("rrs", "storeai"),
+                new InstrInfo("rrs", "storeai", "storeaiField"),
+                new InstrInfo("rks", "storeai", "storeaiVar"),
                 new InstrInfo("rsR", "loadai", "loadaiField"),
                 new InstrInfo("ksR", "loadai", "loadaiVar"),
                 new InstrInfo("sR", "loadglobal"),
                 new InstrInfo("rs", "storeglobal"),
+                new InstrInfo("sR", "computeglobaladdress"),
                 new InstrInfo("saR", "new"),
                 new InstrInfo("r", "del"),
             };

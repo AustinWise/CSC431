@@ -7,8 +7,8 @@ namespace CSC431.IL
     {
         private int reg;
 
-        public VarReg(int reg)
-            : base()
+        public VarReg(int reg, string type)
+            : base(type)
         {
             this.reg = reg;
         }

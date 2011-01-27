@@ -1078,9 +1078,9 @@ return string.Format("{0} r{1}", Name, RegDest0);
 
 
 
-class StoreaiInstruction : MilocInstruction
+class StoreaiFieldInstruction : MilocInstruction
 {
-	public StoreaiInstruction
+	public StoreaiFieldInstruction
 	(
 int regSource0,int regSource1,string str0	) : base ("storeai")
 	{
@@ -1111,6 +1111,43 @@ public override int[] DestRegs
 public override string ToString()
 {
 return string.Format("{0} r{1}, r{2}, {3}", Name, RegSource0, RegSource1, Str0);
+}
+}
+
+
+
+class StoreaiVarInstruction : MilocInstruction
+{
+	public StoreaiVarInstruction
+	(
+int regSource0,string str0	) : base ("storeai")
+	{
+this.RegSource0 = regSource0;this.Str0 = str0;	}
+
+public int RegSource0{ get; private set; }
+public string Str0{ get; private set; }
+
+public override int[] SourceRegs
+{
+	get
+	{
+		return new int[] {
+RegSource0, 		};
+	}
+}
+
+public override int[] DestRegs
+{
+	get
+	{
+		return new int[] {
+		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} r{1}, rarp, {3}", Name, RegSource0, null, Str0);
 }
 }
 
@@ -1185,7 +1222,7 @@ RegDest0		};
 
 public override string ToString()
 {
-return string.Format("{0} rarp, {1}, r{2}", Name, 0, Str0, RegDest0);
+return string.Format("{0} rarp, {2}, r{3}", Name, null, Str0, RegDest0);
 }
 }
 
@@ -1260,6 +1297,43 @@ public override int[] DestRegs
 public override string ToString()
 {
 return string.Format("{0} r{1}, {2}", Name, RegSource0, Str0);
+}
+}
+
+
+
+class ComputeglobaladdressInstruction : MilocInstruction
+{
+	public ComputeglobaladdressInstruction
+	(
+string str0,int regDest0	) : base ("computeglobaladdress")
+	{
+this.Str0 = str0;this.RegDest0 = regDest0;	}
+
+public string Str0{ get; private set; }
+public int RegDest0{ get; private set; }
+
+public override int[] SourceRegs
+{
+	get
+	{
+		return new int[] {
+		};
+	}
+}
+
+public override int[] DestRegs
+{
+	get
+	{
+		return new int[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} {1}, r{2}", Name, Str0, RegDest0);
 }
 }
 

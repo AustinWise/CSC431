@@ -30,6 +30,13 @@ namespace CSC431.CFG
             {
                 tw.WriteLine("@function {0}", f.Name);
             }
+            foreach (var f in Functions)
+            {
+                foreach (var l in f.Locals)
+                {
+                    tw.WriteLine("@local {0}:{1}", f.Name, l);
+                }
+            }
 
             tw.WriteLine();
 

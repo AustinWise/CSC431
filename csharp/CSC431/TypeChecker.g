@@ -100,6 +100,11 @@ id_list [Type t, SymbolTable stable]
 	: (
 		id=ID
 		{
+			if ($id.text == CSC431.IL.MilocInstruction.ReadGlobalName)
+			{
+				throw new EvilException("invalid variable name");
+			}
+			
 			if ($stable.redef($id.text))
 			{
 				error($id.line, "redefinition of variable '" + $id + "'");

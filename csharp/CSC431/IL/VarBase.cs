@@ -6,8 +6,9 @@ namespace CSC431.IL
 {
     abstract class VarBase
     {
-        public VarBase()
+        public VarBase(string type)
         {
+            this.Type = type;
         }
 
         /// <summary>
@@ -21,5 +22,7 @@ namespace CSC431.IL
         /// </summary>
         /// <param name="il"></param>
         public abstract BasicBlock<MilocInstruction> Load(int target);
+
+        public string Type { get; private set; }
     }
 }

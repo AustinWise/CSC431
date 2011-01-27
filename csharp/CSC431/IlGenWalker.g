@@ -16,7 +16,7 @@ options
 @namespace {CSC431.IL}
 
 program returns [ProgramBlock<MilocInstruction> prog]
-	: ^(PROGRAM (types declarations[globalMap,globalStructMap] funs=functions)) {$prog = new ProgramBlock<MilocInstruction>(funs);}
+	: ^(PROGRAM (types declarations[false,globalStructMap] funs=functions)) {$prog = new ProgramBlock<MilocInstruction>(funs);}
 	;
 
 types
@@ -55,22 +55,29 @@ type returns [String rt = null;]
 	| ^(STRUCT id=ID) {$rt = $id.text;}
 ;
 
-declarations[Dictionary<string, VarBase> map, Dictionary<string, string> typeMap]
-	: ^(DECLS declaration[$map,$typeMap])
+declarations[bool isLocal, Dictionary<string, string> typeMap]
+	: ^(DECLS declaration[$isLocal,$typeMap])
 	| 
 ;
 
-declaration[Dictionary<string, VarBase> map, Dictionary<string, string> typeMap]
-	: (decl_list[$map,$typeMap])*
+declaration[bool isLocal, Dictionary<string, string> typeMap]
+	: (decl_list[$isLocal,$typeMap])*
 ;
 
-decl_list[Dictionary<string, VarBase> map, Dictionary<string, string> typeMap]
+decl_list[bool isLocal, Dictionary<string, string> typeMap]
 @init { var ids = new List<string>(); }
 	: ^(DECLLIST ^(TYPE t=type) id_list[ids])
 		{
 			foreach (var id in ids)
 			{
-				$map[id] = Instruction.VirtualRegister();
+				if (isLocal)
+				{
+					localMap.Add(id, new VarLocal(id, t));
+				}
+				else
+				{
+					globalMap.Add(id, new VarGlobal(id, t));
+				}
 				if (t != null)
 					$typeMap[id] = t;
 			}
@@ -95,13 +102,19 @@ function returns [FunctionBlock<MilocInstruction> f]
 		BasicBlock<MilocInstruction> argLoadBlock = new BasicBlock<MilocInstruction>();
 		body.Add(argLoadBlock);
 	}
-	: ^(FUN id=ID parameters[argLoadBlock] ^(RETTYPE return_type) declarations[localMap,localStructMap] statement_list[body])
+	: ^(FUN id=ID parameters[argLoadBlock] ^(RETTYPE return_type) declarations[true,localStructMap] statement_list[body])
 		{
 			BasicBlock<MilocInstruction> returnBlock = new BasicBlock<MilocInstruction>();
 			returnBlock.Add(new RetInstruction());
 			body.Add(returnBlock);
 			body.SetNext(new BasicBlock<MilocInstruction>());
 			$f = new FunctionBlock<MilocInstruction>($id.text, body);
+			foreach (var l in localMap)
+			{
+				if (!(l.Value is VarLocal))
+					continue;
+				f.Locals.Add(l.Key);
+			}
 		}
 	;
 
@@ -113,9 +126,7 @@ parameters[BasicBlock<MilocInstruction> b]
 param_decl[BasicBlock<MilocInstruction> b, int ndx]
    :  ^(DECL ^(TYPE t=type) id=ID)
    	{
-   		int reg;
-   		localMap[$id.text] = reg = Instruction.VirtualRegister();
-   		$b.Add(new LoadinargumentInstruction($id.text, ndx, reg));
+   		localMap[$id.text] = new VarArg($id.text, ndx, t);
    		
    		if (t != null)
    			localStructMap[$id.text] = t;
@@ -152,7 +163,11 @@ statement_list[SeqBlock<MilocInstruction> b]
 	;
 
 assignment returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()]
-	: ^(ASSIGN dest=lvalue e=expression) {$b.Add(e); $b.Add(new MovInstruction(e.Reg, dest)); }
+	: ^(ASSIGN dest=lvalue[b] e=expression)
+		{
+			$b.Add(e);
+			$b.Add(dest.Store(e.Reg));
+		}
 	;
 
 print returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()]
@@ -167,7 +182,15 @@ print returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>
 	;
 
 read returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()]
-	: ^(READ dest=lvalue) { $b.Add(new ReadInstruction(dest)); }
+	: ^(READ dest=lvalue[b])
+		{
+			int addressReg = Instruction.VirtualRegister();
+			int valueReg = Instruction.VirtualRegister();
+			$b.Add(new ComputeglobaladdressInstruction(MilocInstruction.ReadGlobalName, addressReg));
+			$b.Add(new ReadInstruction(addressReg));
+			$b.Add(new LoadglobalInstruction(MilocInstruction.ReadGlobalName, valueReg));
+			$b.Add(dest.Store(valueReg));
+		}
 	;
 
 conditional returns [IfBlock<MilocInstruction> b]
@@ -224,8 +247,14 @@ invocation returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruc
 	;
 
 //TODO: make lvalue also support structs
-lvalue returns [int dest]
-	: ^(DOT lvalue ID)
+lvalue[BasicBlock<MilocInstruction> b] returns [VarBase dest]
+	: ^(DOT lv=lvalue[b] id=ID)
+		{
+			var reg = Instruction.VirtualRegister();
+			b.Add(lv.Load(reg));
+			$dest = new VarField($id.text, reg, getMemberType(lv.Type, $id.text));
+			
+		}
 	| id=ID {$dest = getVarReg($id.text); }
 	;
 
