@@ -21,7 +21,14 @@ namespace CSC431.CFG
         public void Add(Node<T> n)
         {
             if (n is BasicBlock<T>)
+            {
                 ((BasicBlock<T>)n).Merge();
+                if (last is BasicBlock<T>)
+                {
+                    (last as BasicBlock<T>).Add(n as BasicBlock<T>);
+                    return;
+                }
+            }
 
             this.last.SetNext(n.FirstNode);
             this.nodes.Add(n);

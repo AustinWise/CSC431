@@ -44,7 +44,6 @@ namespace CSC431.CFG
             Condition.SetNext(next.FirstNode);
 
             next.PrintLabel = true;
-
         }
 
         public override bool IsFixedUp
