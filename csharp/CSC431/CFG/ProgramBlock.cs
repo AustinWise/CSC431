@@ -46,5 +46,10 @@ namespace CSC431.CFG
                 tw.WriteLine();
             }
         }
+
+        public override Node<T> FirstNode
+        {
+            get { throw new NotSupportedException(); }
+        }
     }
 }

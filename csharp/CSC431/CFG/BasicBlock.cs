@@ -7,7 +7,7 @@ namespace CSC431.CFG
 {
     public class BasicBlock<T> : Node<T> where T : Instruction
     {
-        private Node<T> next;
+        private List<Node<T>> nexts = new List<Node<T>>();
         private List<T> code = new List<T>();
 
         public const int InvalidReg = -1;
@@ -56,32 +56,23 @@ namespace CSC431.CFG
         {
             get
             {
-                if (next == null)
-                    return new Node<T>[0];
-                return new Node<T>[] { next };
+                return nexts.ToArray();
             }
         }
 
         public override void SetNext(Node<T> next)
         {
-            this.next = next;
-        }
-
-        public MultiBlock<T> ToMulti()
-        {
-            var b = new MultiBlock<T>(this.Label, this.code);
-            if (next != null)
-                b.SetNext(next);
-            return b;
+            this.nexts.Add(next);
         }
 
         public void Merge()
         {
             BasicBlock<T> other;
-            while ((other = next as BasicBlock<T>) != null)
+            while (this.nexts.Count == 1 && (other = nexts[0] as BasicBlock<T>) != null)
             {
                 this.code.AddRange(other.code);
-                this.next = other.next;
+                this.nexts.Clear();
+                this.nexts.AddRange(other.nexts);
             }
         }
 
@@ -91,6 +82,11 @@ namespace CSC431.CFG
             {
                 tw.WriteLine(l.ToString());
             }
+        }
+
+        public override Node<T> FirstNode
+        {
+            get { return this; }
         }
     }
 }

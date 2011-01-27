@@ -8,7 +8,7 @@ namespace CSC431.CFG
 {
     public class IfBlock<T> : Node<T> where T : Instruction
     {
-        private MultiBlock<T> Condition;
+        private BasicBlock<T> Condition;
         private SeqBlock<T> TrueBody;
         private SeqBlock<T> FalseBody;
         private Label<T> NextLabel;
@@ -16,9 +16,9 @@ namespace CSC431.CFG
 
         public IfBlock(BasicBlock<T> condition, SeqBlock<T> trueBody, SeqBlock<T> falseBody, Label<T> nextLabel)
         {
-            this.Condition = condition.ToMulti();
-            this.Condition.SetNext(trueBody);
-            this.Condition.SetNext(falseBody);
+            this.Condition = condition;
+            this.Condition.SetNext(trueBody.FirstNode);
+            this.Condition.SetNext(falseBody.FirstNode);
             this.TrueBody = trueBody;
             this.FalseBody = falseBody;
             this.NextLabel = nextLabel;
@@ -35,8 +35,8 @@ namespace CSC431.CFG
                 throw new Exception("next was already set");
             isFixed = true;
 
-            TrueBody.SetNext(next);
-            FalseBody.SetNext(next);
+            TrueBody.SetNext(next.FirstNode);
+            FalseBody.SetNext(next.FirstNode);
             NextLabel.Mark(next);
 
             next.PrintLabel = true;
@@ -58,6 +58,11 @@ namespace CSC431.CFG
             Condition.Print(tw);
             TrueBody.Print(tw);
             FalseBody.Print(tw);
+        }
+
+        public override Node<T> FirstNode
+        {
+            get { return Condition; }
         }
     }
 }

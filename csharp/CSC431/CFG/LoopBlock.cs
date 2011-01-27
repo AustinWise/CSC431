@@ -8,7 +8,7 @@ namespace CSC431.CFG
 {
     public class LoopBlock<T> : Node<T> where T : Instruction
     {
-        private MultiBlock<T> Condition;
+        private BasicBlock<T> Condition;
         private SeqBlock<T> Body;
         private Label<T> NextLabel;
         private bool isFixed = false;
@@ -18,7 +18,7 @@ namespace CSC431.CFG
         {
             this.condReg = condition.Reg;
 
-            this.Condition = condition.ToMulti();
+            this.Condition = condition;
             this.Body = body;
             this.NextLabel = nextLabel;
 
@@ -39,8 +39,8 @@ namespace CSC431.CFG
                 throw new Exception("next was already set");
             isFixed = true;
 
-            NextLabel.Mark(next);
-            Condition.SetNext(next);
+            NextLabel.Mark(next.FirstNode);
+            Condition.SetNext(next.FirstNode);
 
             next.PrintLabel = true;
 
@@ -61,6 +61,11 @@ namespace CSC431.CFG
 
             Condition.Print(tw);
             Body.Print(tw);
+        }
+
+        public override Node<T> FirstNode
+        {
+            get { return Condition; }
         }
     }
 }

@@ -23,7 +23,7 @@ namespace CSC431.CFG
             if (n is BasicBlock<T>)
                 ((BasicBlock<T>)n).Merge();
 
-            this.last.SetNext(n);
+            this.last.SetNext(n.FirstNode);
             this.nodes.Add(n);
             this.last = n;
         }
@@ -37,7 +37,7 @@ namespace CSC431.CFG
 
         public override Node<T>[] Nexts
         {
-            get { return new Node<T>[] { nodes[0] }; }
+            get { return nodes[0].Nexts; }
         }
 
         public override void SetNext(Node<T> next)
@@ -45,7 +45,7 @@ namespace CSC431.CFG
             if (isFixed)
                 throw new Exception("can't set last twice.");
             isFixed = true;
-            this.last.SetNext(next);
+            this.last.SetNext(next.FirstNode);
         }
 
         public override bool IsFixedUp
@@ -62,6 +62,11 @@ namespace CSC431.CFG
             {
                 n.Print(tw);
             }
+        }
+
+        public override Node<T> FirstNode
+        {
+            get { return this.nodes[0].FirstNode; }
         }
     }
 }

@@ -55,7 +55,6 @@
     <Compile Include="CFG\Label.cs" />
     <Compile Include="CFG\LoopBlock.cs" />
     <Compile Include="IL\MilocInstruction.cs" />
-    <Compile Include="CFG\MultiBlock.cs" />
     <Compile Include="CFG\Node.cs" />
     <Compile Include="CFG\ProgramBlock.cs" />
     <Compile Include="CFG\SeqBlock.cs" />

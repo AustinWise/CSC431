@@ -20,6 +20,7 @@ namespace CSC431.CFG
         public int Label { get; protected set; }
 
         public abstract Node<T>[] Nexts { get; }
+        public abstract Node<T> FirstNode { get; }
 
         abstract public void SetNext(Node<T> next);
 

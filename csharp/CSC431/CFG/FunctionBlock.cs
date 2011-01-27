@@ -20,7 +20,7 @@ namespace CSC431.CFG
 
         public override Node<T>[] Nexts
         {
-            get { return new Node<T>[] { Body }; }
+            get { return Body.Nexts; }
         }
 
         public override void SetNext(Node<T> next)
@@ -32,6 +32,32 @@ namespace CSC431.CFG
         {
             tw.WriteLine("{0}:", Name);
             Body.Print(tw);
+        }
+
+        public override Node<T> FirstNode
+        {
+            get { return Body.FirstNode; }
+        }
+
+        public void VistBlocks(Action<Node<T>> fun)
+        {
+            var seen = new List<Node<T>>();
+            var q = new Queue<Node<T>>();
+            q.Enqueue(this.FirstNode);
+            seen.Add(this.FirstNode);
+            while (q.Count != 0)
+            {
+                var node = q.Dequeue();
+                fun(node);
+                foreach (var next in node.Nexts)
+                {
+                    if (!seen.Contains(next))
+                    {
+                        seen.Add(next);
+                        q.Enqueue(next);
+                    }
+                }
+            }
         }
     }
 }
