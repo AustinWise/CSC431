@@ -22,7 +22,8 @@ namespace CSC431.CFG
             this.Body = body;
             this.NextLabel = nextLabel;
 
-            this.Body.SetNext(condition);
+            this.Body.SetNext(this.Condition.FirstNode);
+            this.Condition.SetNext(this.Body.FirstNode);
 
             this.Condition.PrintLabel = true;
             this.Body.PrintLabel = true;
