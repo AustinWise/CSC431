@@ -75,5 +75,15 @@ namespace CSC431.CFG
         {
             get { return this.nodes[0].FirstNode; }
         }
+
+        protected override Node<Target> ConvertCore<Target>(IInstructionConverter<T, Target> conv)
+        {
+            var copy = new SeqBlock<Target>();
+            foreach (var n in nodes)
+            {
+                copy.Add(n.Convert(conv));
+            }
+            return copy;
+        }
     }
 }

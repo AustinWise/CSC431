@@ -2,6 +2,8 @@
 <#@ output extension=".generated.cs" #>
 <#@ Import Namespace="System.Collections.Generic" #>
 using CSC431.CFG;
+using System;
+using System.Collections.Generic;
 
 namespace CSC431.IL
 {
@@ -11,7 +13,7 @@ foreach (var instr in InstrInfo.GetAll())
 {
     var className = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString()) + "Instruction";
 #>
-class <#=className #> : MilocInstruction
+public class <#=className #> : MilocInstruction
 {
 	public <#=className #>
 	(
@@ -130,6 +132,62 @@ instr.ForEachOperand((c, count, isLast) =>
 <#
 }
 #>
+public interface IMilocTranslator<T> where T : Instruction
+{
+
+<#
+    foreach (var instr in InstrInfo.GetAll())
+    {
+        var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
+        var className = name + "Instruction";
+#>
+	IEnumerable<T> <#= name #>(<#= className #> s);
+<#
+    }
+#>
+}
+
+public class MilocIdentityTranslator : IMilocTranslator<MilocInstruction>
+{
+
+<#
+    foreach (var instr in InstrInfo.GetAll())
+    {
+        var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
+        var className = name + "Instruction";
+#>
+	public IEnumerable<MilocInstruction> <#= name #>(<#= className #> s) { yield return s; }
+<#
+    }
+#>
+}
+
+public class MilocConverter<T> : IInstructionConverter<MilocInstruction, T>
+	where T : Instruction
+{
+	private IMilocTranslator<T> translator;
+	public MilocConverter(IMilocTranslator<T> translator)
+	{
+		this.translator = translator;
+	}
+
+	public IEnumerable<T> Convert(MilocInstruction s)
+	{
+
+<#
+    foreach (var instr in InstrInfo.GetAll())
+    {
+        var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
+        var className = name + "Instruction";
+#>
+		if (s is <#= className #>)
+			return translator.<#= name #>(s as <#= className #>);
+<#
+    }
+#>
+		throw new NotSupportedException();
+	}
+}
 
 }
 <#+

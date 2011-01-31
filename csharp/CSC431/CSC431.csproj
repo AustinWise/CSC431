@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CFG\IInstructionConverter.cs" />
     <Compile Include="EvilException.cs" />
     <Compile Include="CFG\BasicBlock.cs" />
     <Compile Include="CFG\FunctionBlock.cs" />

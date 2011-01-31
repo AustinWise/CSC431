@@ -88,5 +88,14 @@ namespace CSC431.CFG
         {
             get { return this; }
         }
+
+        protected override Node<Target> ConvertCore<Target>(IInstructionConverter<T, Target> conv)
+        {
+            var copy = new BasicBlock<Target>();
+            copy.code.AddRange(code.SelectMany(i => conv.Convert(i)));
+            copy.Reg = this.register;
+            copy.StructType = StructType;
+            return copy;
+        }
     }
 }

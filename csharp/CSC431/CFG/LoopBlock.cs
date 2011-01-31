@@ -67,5 +67,10 @@ namespace CSC431.CFG
         {
             get { return Condition; }
         }
+
+        protected override Node<Target> ConvertCore<Target>(IInstructionConverter<T, Target> conv)
+        {
+            return new LoopBlock<Target>(Condition.Convert(conv) as BasicBlock<Target>, Body.Convert(conv) as SeqBlock<Target>, new Label<Target>());
+        }
     }
 }

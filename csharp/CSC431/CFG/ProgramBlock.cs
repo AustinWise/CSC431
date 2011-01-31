@@ -9,9 +9,9 @@ namespace CSC431.CFG
     {
         public List<FunctionBlock<T>> Functions { get; private set; }
 
-        public ProgramBlock(List<FunctionBlock<T>> funs)
+        public ProgramBlock(IEnumerable<FunctionBlock<T>> funs)
         {
-            this.Functions = funs;
+            this.Functions = funs.ToList();
         }
 
         public override Node<T>[] Nexts
@@ -50,6 +50,11 @@ namespace CSC431.CFG
         public override Node<T> FirstNode
         {
             get { throw new NotSupportedException(); }
+        }
+
+        protected override Node<Target> ConvertCore<Target>(IInstructionConverter<T, Target> conv)
+        {
+            return new ProgramBlock<Target>(from f in Functions select f.Convert(conv) as FunctionBlock<Target>);
         }
     }
 }

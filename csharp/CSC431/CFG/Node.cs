@@ -61,5 +61,14 @@ namespace CSC431.CFG
         }
 
         protected abstract void PrintCore(TextWriter tw);
+
+        public Node<Target> Convert<Target>(IInstructionConverter<T, Target> conv) where Target : Instruction
+        {
+            var copy = this.ConvertCore(conv);
+            copy.Label = Label;
+            return copy;
+        }
+
+        protected abstract Node<Target> ConvertCore<Target>(IInstructionConverter<T, Target> conv) where Target : Instruction;
     }
 }
