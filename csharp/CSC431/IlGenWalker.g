@@ -102,9 +102,16 @@ function returns [FunctionBlock<MilocInstruction> f]
 		BasicBlock<MilocInstruction> argLoadBlock = new BasicBlock<MilocInstruction>();
 		body.Add(argLoadBlock);
 	}
-	: ^(FUN id=ID parameters[argLoadBlock] ^(RETTYPE isVoid=return_type) declarations[true,localStructMap] statement_list[body])
+	: ^(FUN id=ID parameters[argLoadBlock] ^(RETTYPE retType=return_type)
+			{
+				if (!string.IsNullOrEmpty(retType))
+				{
+					functionStructMap[$id.text] = retType;
+				}
+			}
+		declarations[true,localStructMap] statement_list[body])
 		{
-			if (isVoid)
+			if (retType == "<void>")
 			{
 				BasicBlock<MilocInstruction> returnBlock = new BasicBlock<MilocInstruction>();
 				returnBlock.Add(new RetInstruction());
@@ -139,9 +146,9 @@ param_decl[BasicBlock<MilocInstruction> b, int ndx]
    	}
    ;
 
-return_type returns [bool isVoid = false]
-	: type
-	| VOID {$isVoid = true;}
+return_type returns [string retType = null]
+	: t=type {$retType = t;}
+	| VOID {$retType = "<void>";}
 	;
 
 statement returns [Node<MilocInstruction> node]
@@ -299,7 +306,15 @@ selector returns [BasicBlock<MilocInstruction> b]
 
 factor returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()]
 @init { int reg = Instruction.VirtualRegister(); $b.Reg = reg; }
-	: ^(INVOKE id=ID regLocs=arguments[b]) {doInvoke($id.text, $b, regLocs); $b.Add(new LoadretInstruction(reg)); }
+	: ^(INVOKE id=ID regLocs=arguments[b])
+		{
+			doInvoke($id.text, $b, regLocs);
+			$b.Add(new LoadretInstruction(reg));
+			if (functionStructMap.ContainsKey($id.text))
+			{
+				$b.StructType = functionStructMap[$id.text];
+			}
+		}
 	| id=ID
 		{
 			$b = getVarReg($id.text).Load(reg);

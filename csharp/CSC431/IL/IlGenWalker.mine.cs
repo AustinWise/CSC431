@@ -11,6 +11,7 @@ namespace CSC431.IL
         //for getting the types of vars
         private Dictionary<string, string> globalStructMap = new Dictionary<string, string>();
         private Dictionary<string, string> localStructMap = new Dictionary<string, string>();
+        private Dictionary<string, string> functionStructMap = new Dictionary<string, string>();
 
         private Dictionary<string, VarBase> globalMap = new Dictionary<string, VarBase>();
         private Dictionary<string, VarBase> localMap = new Dictionary<string, VarBase>();
