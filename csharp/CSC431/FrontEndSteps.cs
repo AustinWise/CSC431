@@ -29,9 +29,7 @@ namespace CSC431
             }
             catch (IOException)
             {
-                Console.WriteLine("file not found: " + Options.InputFile);
-                Environment.Exit(1);
-                return null;
+                throw new EvilException("file not found: " + (Options.InputFile ?? "<stdin>"));
             }
         });
 
@@ -72,7 +70,7 @@ namespace CSC431
             tparser.Program(stypes, stable);
 
             if (tparser.NumberOfSyntaxErrors != 0)
-                throw new EvilException("make cfg syntax error");
+                throw new EvilException("type check error");
 
             return t;
         });

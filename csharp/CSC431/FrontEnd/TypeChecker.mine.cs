@@ -15,13 +15,7 @@ namespace CSC431.FrontEnd
 
         private static void error(int lineNum, String errorMsg)
         {
-            Console.WriteLine(lineNum + ": " + errorMsg);
-            Environment.Exit(1);
-        }
-
-        private static void wl(String msg)
-        {
-            Console.WriteLine(msg);
+            throw new EvilException(lineNum + ": " + errorMsg);
         }
 
         private static Type getVar(SymbolTable stable, CommonTree sym)

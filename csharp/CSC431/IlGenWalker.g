@@ -129,7 +129,10 @@ parameters[BasicBlock<MilocInstruction> b]
 param_decl[BasicBlock<MilocInstruction> b, int ndx]
    :  ^(DECL ^(TYPE t=type) id=ID)
    	{
-   		localMap[$id.text] = new VarArg($id.text, ndx, t);
+   		int regDest = Instruction.VirtualRegister();
+   		$b.Add(new LoadinargumentInstruction($id.text, ndx, regDest));
+   		$b.Add(new StoreaiVarInstruction(regDest, $id.text));
+   		localMap[$id.text] = new VarLocal($id.text, t);
    		
    		if (t != null)
    			localStructMap[$id.text] = t;
