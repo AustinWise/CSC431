@@ -102,11 +102,14 @@ function returns [FunctionBlock<MilocInstruction> f]
 		BasicBlock<MilocInstruction> argLoadBlock = new BasicBlock<MilocInstruction>();
 		body.Add(argLoadBlock);
 	}
-	: ^(FUN id=ID parameters[argLoadBlock] ^(RETTYPE return_type) declarations[true,localStructMap] statement_list[body])
+	: ^(FUN id=ID parameters[argLoadBlock] ^(RETTYPE isVoid=return_type) declarations[true,localStructMap] statement_list[body])
 		{
-			BasicBlock<MilocInstruction> returnBlock = new BasicBlock<MilocInstruction>();
-			returnBlock.Add(new RetInstruction());
-			body.Add(returnBlock);
+			if (isVoid)
+			{
+				BasicBlock<MilocInstruction> returnBlock = new BasicBlock<MilocInstruction>();
+				returnBlock.Add(new RetInstruction());
+				body.Add(returnBlock);
+			}
 			body.SetNext(new BasicBlock<MilocInstruction>());
 			$f = new FunctionBlock<MilocInstruction>($id.text, body);
 			foreach (var l in localMap)
@@ -133,9 +136,9 @@ param_decl[BasicBlock<MilocInstruction> b, int ndx]
    	}
    ;
 
-return_type
+return_type returns [bool isVoid = false]
 	: type
-	| VOID
+	| VOID {$isVoid = true;}
 	;
 
 statement returns [Node<MilocInstruction> node]
@@ -238,7 +241,8 @@ ret returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()
 				$b.Add(e);
 				$b.Add(new StoreretInstruction(e.Reg));
 			}
-			$b.Add(new RetInstruction());
+			else
+				$b.Add(new RetInstruction());
 		}
 	;
 
@@ -252,7 +256,7 @@ lvalue[BasicBlock<MilocInstruction> b] returns [VarBase dest]
 		{
 			var reg = Instruction.VirtualRegister();
 			b.Add(lv.Load(reg));
-			$dest = new VarField($id.text, reg, getMemberType(lv.Type, $id.text));
+			$dest = new VarField($id.text, reg, getMemberType(lv.Type, $id.text), getFieldIndex(lv.Type, $id.text));
 			
 		}
 	| id=ID {$dest = getVarReg($id.text); }
@@ -284,7 +288,7 @@ selector returns [BasicBlock<MilocInstruction> b]
 			int reg = Instruction.VirtualRegister();
 			$b.Reg = reg;
 			$b.Add(s);
-			$b.Add(new LoadaiFieldInstruction(s.Reg, $id.text, reg));
+			$b.Add(new LoadaiFieldInstruction(s.Reg, $id.text, reg) { FieldIndex = getFieldIndex(s.StructType, $id.text) });
 			$b.StructType = getMemberType(s.StructType, $id.text);
 		}
 	| f=factor {$b = f;}

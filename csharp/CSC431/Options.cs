@@ -20,6 +20,7 @@ namespace CSC431
         public static bool DisplayAST { get; set; }
         public static bool DumpIL { get; set; }
         public static string ClrExec { get; set; }
+        public static bool Llvm { get; set; }
 
         public static void ParseParameters(String[] args)
         {
@@ -28,6 +29,7 @@ namespace CSC431
                 {"displayAST", v=> DisplayAST = v != null},
                 {"dumpIL", v=> DumpIL = v != null},
                 {"clrExe=", v=> ClrExec = v},
+                {"llvm", v=> Llvm = v != null},
             };
 
             var extras = os.Parse(args);

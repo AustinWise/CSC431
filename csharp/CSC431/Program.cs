@@ -9,7 +9,7 @@ namespace CSC431
     {
         public static void Main(String[] args)
         {
-            args = new[] { "test.ev", "-dumpIL" };
+            args = new[] { "test.ev", "-llvm" };
             try
             {
                 Options.ParseParameters(args);
@@ -31,6 +31,9 @@ namespace CSC431
 
             if (Options.DumpIL)
                 flow.FollowWith(IlSteps.PrintCFG);
+
+            if (Options.Llvm)
+                flow.FollowWith(LlvmSteps.ConvertToLlvm).FollowWith(LlvmSteps.PrintCFG);
 
             if (!string.IsNullOrEmpty(Options.ClrExec))
                 typeChecked.FollowWith(StackSteps.MakeClrExe);

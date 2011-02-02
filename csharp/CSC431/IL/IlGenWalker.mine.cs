@@ -62,6 +62,17 @@ namespace CSC431.IL
             return null;
         }
 
+        private int getFieldIndex(string structType, string fieldName)
+        {
+            var s = structMap[structType];
+            for (int i = 0; i < s.Count; i++)
+            {
+                if (s[i].Name == fieldName)
+                    return i;
+            }
+            throw new KeyNotFoundException();
+        }
+
         private class StructMember
         {
             public StructMember(string name)

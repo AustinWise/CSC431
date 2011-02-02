@@ -13,7 +13,7 @@ foreach (var instr in InstrInfo.GetAll())
 {
     var className = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString()) + "Instruction";
 #>
-public class <#=className #> : MilocInstruction
+public partial class <#=className #> : MilocInstruction
 {
 	public <#=className #>
 	(
@@ -141,7 +141,7 @@ public interface IMilocTranslator<T> where T : Instruction
         var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
         var className = name + "Instruction";
 #>
-	IEnumerable<T> <#= name #>(<#= className #> s);
+	IEnumerable<T> <#= name #>(<#= className #> s, InstructionStream<MilocInstruction> stream);
 <#
     }
 #>
@@ -156,7 +156,7 @@ public class MilocIdentityTranslator : IMilocTranslator<MilocInstruction>
         var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
         var className = name + "Instruction";
 #>
-	public IEnumerable<MilocInstruction> <#= name #>(<#= className #> s) { yield return s; }
+	public IEnumerable<MilocInstruction> <#= name #>(<#= className #> s, InstructionStream<MilocInstruction> stream) { yield return s; }
 <#
     }
 #>
@@ -171,21 +171,29 @@ public class MilocConverter<T> : IInstructionConverter<MilocInstruction, T>
 		this.translator = translator;
 	}
 
-	public IEnumerable<T> Convert(MilocInstruction s)
+	public IEnumerable<T> Convert(InstructionStream<MilocInstruction> s)
 	{
-
+		while (s.More)
+		{
+			var cur = s.Consume();
 <#
     foreach (var instr in InstrInfo.GetAll())
     {
         var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
         var className = name + "Instruction";
 #>
-		if (s is <#= className #>)
-			return translator.<#= name #>(s as <#= className #>);
+			if (cur is <#= className #>)
+			{
+				var conv = cur as <#= className #>;
+				foreach (var newInstr in translator.<#= name #>(conv, s))
+					yield return newInstr;
+				continue;
+			}
 <#
     }
 #>
-		throw new NotSupportedException();
+			throw new NotSupportedException();
+		}
 	}
 }
 

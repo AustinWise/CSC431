@@ -92,7 +92,7 @@ namespace CSC431.CFG
         protected override Node<Target> ConvertCore<Target>(IInstructionConverter<T, Target> conv)
         {
             var copy = new BasicBlock<Target>();
-            copy.code.AddRange(code.SelectMany(i => conv.Convert(i)));
+            copy.code.AddRange(conv.Convert(new InstructionStream<T>(code)));
             copy.Reg = this.register;
             copy.StructType = StructType;
             return copy;

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace CSC431.IL
 {
 
-public class AddInstruction : MilocInstruction
+public partial class AddInstruction : MilocInstruction
 {
 	public AddInstruction
 	(
@@ -43,7 +43,7 @@ return string.Format("{0} r{1}, r{2}, r{3}", Name, RegSource0, RegSource1, RegDe
 
 
 
-public class AddiInstruction : MilocInstruction
+public partial class AddiInstruction : MilocInstruction
 {
 	public AddiInstruction
 	(
@@ -81,7 +81,7 @@ return string.Format("{0} r{1}, {2}, r{3}", Name, RegSource0, Immed0, RegDest0);
 
 
 
-public class DivInstruction : MilocInstruction
+public partial class DivInstruction : MilocInstruction
 {
 	public DivInstruction
 	(
@@ -119,7 +119,7 @@ return string.Format("{0} r{1}, r{2}, r{3}", Name, RegSource0, RegSource1, RegDe
 
 
 
-public class MultInstruction : MilocInstruction
+public partial class MultInstruction : MilocInstruction
 {
 	public MultInstruction
 	(
@@ -157,7 +157,7 @@ return string.Format("{0} r{1}, r{2}, r{3}", Name, RegSource0, RegSource1, RegDe
 
 
 
-public class SubInstruction : MilocInstruction
+public partial class SubInstruction : MilocInstruction
 {
 	public SubInstruction
 	(
@@ -195,7 +195,7 @@ return string.Format("{0} r{1}, r{2}, r{3}", Name, RegSource0, RegSource1, RegDe
 
 
 
-public class RsubiInstruction : MilocInstruction
+public partial class RsubiInstruction : MilocInstruction
 {
 	public RsubiInstruction
 	(
@@ -233,7 +233,7 @@ return string.Format("{0} r{1}, {2}, r{3}", Name, RegSource0, Immed0, RegDest0);
 
 
 
-public class AndInstruction : MilocInstruction
+public partial class AndInstruction : MilocInstruction
 {
 	public AndInstruction
 	(
@@ -271,7 +271,7 @@ return string.Format("{0} r{1}, r{2}, r{3}", Name, RegSource0, RegSource1, RegDe
 
 
 
-public class OrInstruction : MilocInstruction
+public partial class OrInstruction : MilocInstruction
 {
 	public OrInstruction
 	(
@@ -309,7 +309,7 @@ return string.Format("{0} r{1}, r{2}, r{3}", Name, RegSource0, RegSource1, RegDe
 
 
 
-public class XoriInstruction : MilocInstruction
+public partial class XoriInstruction : MilocInstruction
 {
 	public XoriInstruction
 	(
@@ -347,7 +347,7 @@ return string.Format("{0} r{1}, {2}, r{3}", Name, RegSource0, Immed0, RegDest0);
 
 
 
-public class LoadiInstruction : MilocInstruction
+public partial class LoadiInstruction : MilocInstruction
 {
 	public LoadiInstruction
 	(
@@ -384,7 +384,7 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
 
 
 
-public class PrintInstruction : MilocInstruction
+public partial class PrintInstruction : MilocInstruction
 {
 	public PrintInstruction
 	(
@@ -420,7 +420,7 @@ return string.Format("{0} r{1}", Name, RegSource0);
 
 
 
-public class PrintlnInstruction : MilocInstruction
+public partial class PrintlnInstruction : MilocInstruction
 {
 	public PrintlnInstruction
 	(
@@ -456,7 +456,7 @@ return string.Format("{0} r{1}", Name, RegSource0);
 
 
 
-public class ReadInstruction : MilocInstruction
+public partial class ReadInstruction : MilocInstruction
 {
 	public ReadInstruction
 	(
@@ -492,7 +492,7 @@ return string.Format("{0} r{1}", Name, RegSource0);
 
 
 
-public class CompInstruction : MilocInstruction
+public partial class CompInstruction : MilocInstruction
 {
 	public CompInstruction
 	(
@@ -530,7 +530,7 @@ return string.Format("{0} r{1}, r{2}", Name, RegSource0, RegSource1);
 
 
 
-public class MovInstruction : MilocInstruction
+public partial class MovInstruction : MilocInstruction
 {
 	public MovInstruction
 	(
@@ -567,7 +567,7 @@ return string.Format("{0} r{1}, r{2}", Name, RegSource0, RegDest0);
 
 
 
-public class MoveqInstruction : MilocInstruction
+public partial class MoveqInstruction : MilocInstruction
 {
 	public MoveqInstruction
 	(
@@ -604,7 +604,7 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
 
 
 
-public class MovgeInstruction : MilocInstruction
+public partial class MovgeInstruction : MilocInstruction
 {
 	public MovgeInstruction
 	(
@@ -641,7 +641,7 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
 
 
 
-public class MovgtInstruction : MilocInstruction
+public partial class MovgtInstruction : MilocInstruction
 {
 	public MovgtInstruction
 	(
@@ -678,7 +678,7 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
 
 
 
-public class MovleInstruction : MilocInstruction
+public partial class MovleInstruction : MilocInstruction
 {
 	public MovleInstruction
 	(
@@ -715,7 +715,7 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
 
 
 
-public class MovltInstruction : MilocInstruction
+public partial class MovltInstruction : MilocInstruction
 {
 	public MovltInstruction
 	(
@@ -752,7 +752,7 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
 
 
 
-public class MovneInstruction : MilocInstruction
+public partial class MovneInstruction : MilocInstruction
 {
 	public MovneInstruction
 	(
@@ -789,7 +789,7 @@ return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
 
 
 
-public class JumpiInstruction : MilocInstruction
+public partial class JumpiInstruction : MilocInstruction
 {
 	public JumpiInstruction
 	(
@@ -825,7 +825,7 @@ return string.Format("{0} L{1}", Name, Label0);
 
 
 
-public class CbreqInstruction : MilocInstruction
+public partial class CbreqInstruction : MilocInstruction
 {
 	public CbreqInstruction
 	(
@@ -862,7 +862,7 @@ return string.Format("{0} L{1}, L{2}", Name, Label0, Label1);
 
 
 
-public class LoadinargumentInstruction : MilocInstruction
+public partial class LoadinargumentInstruction : MilocInstruction
 {
 	public LoadinargumentInstruction
 	(
@@ -900,7 +900,7 @@ return string.Format("{0} {1}, {2}, r{3}", Name, Str0, Immed0, RegDest0);
 
 
 
-public class CallInstruction : MilocInstruction
+public partial class CallInstruction : MilocInstruction
 {
 	public CallInstruction
 	(
@@ -936,7 +936,7 @@ return string.Format("{0} {1}", Name, Str0);
 
 
 
-public class RetInstruction : MilocInstruction
+public partial class RetInstruction : MilocInstruction
 {
 	public RetInstruction
 	(
@@ -971,7 +971,7 @@ return string.Format("{0}", Name);
 
 
 
-public class StoreretInstruction : MilocInstruction
+public partial class StoreretInstruction : MilocInstruction
 {
 	public StoreretInstruction
 	(
@@ -1007,7 +1007,7 @@ return string.Format("{0} r{1}", Name, RegSource0);
 
 
 
-public class StoreoutargumentInstruction : MilocInstruction
+public partial class StoreoutargumentInstruction : MilocInstruction
 {
 	public StoreoutargumentInstruction
 	(
@@ -1044,7 +1044,7 @@ return string.Format("{0} r{1}, {2}", Name, RegSource0, Immed0);
 
 
 
-public class LoadretInstruction : MilocInstruction
+public partial class LoadretInstruction : MilocInstruction
 {
 	public LoadretInstruction
 	(
@@ -1080,7 +1080,7 @@ return string.Format("{0} r{1}", Name, RegDest0);
 
 
 
-public class StoreaiFieldInstruction : MilocInstruction
+public partial class StoreaiFieldInstruction : MilocInstruction
 {
 	public StoreaiFieldInstruction
 	(
@@ -1118,7 +1118,7 @@ return string.Format("{0} r{1}, r{2}, {3}", Name, RegSource0, RegSource1, Str0);
 
 
 
-public class StoreaiVarInstruction : MilocInstruction
+public partial class StoreaiVarInstruction : MilocInstruction
 {
 	public StoreaiVarInstruction
 	(
@@ -1155,7 +1155,7 @@ return string.Format("{0} r{1}, rarp, {3}", Name, RegSource0, null, Str0);
 
 
 
-public class LoadaiFieldInstruction : MilocInstruction
+public partial class LoadaiFieldInstruction : MilocInstruction
 {
 	public LoadaiFieldInstruction
 	(
@@ -1193,7 +1193,7 @@ return string.Format("{0} r{1}, {2}, r{3}", Name, RegSource0, Str0, RegDest0);
 
 
 
-public class LoadaiVarInstruction : MilocInstruction
+public partial class LoadaiVarInstruction : MilocInstruction
 {
 	public LoadaiVarInstruction
 	(
@@ -1230,7 +1230,7 @@ return string.Format("{0} rarp, {2}, r{3}", Name, null, Str0, RegDest0);
 
 
 
-public class LoadglobalInstruction : MilocInstruction
+public partial class LoadglobalInstruction : MilocInstruction
 {
 	public LoadglobalInstruction
 	(
@@ -1267,7 +1267,7 @@ return string.Format("{0} {1}, r{2}", Name, Str0, RegDest0);
 
 
 
-public class StoreglobalInstruction : MilocInstruction
+public partial class StoreglobalInstruction : MilocInstruction
 {
 	public StoreglobalInstruction
 	(
@@ -1304,7 +1304,7 @@ return string.Format("{0} r{1}, {2}", Name, RegSource0, Str0);
 
 
 
-public class ComputeglobaladdressInstruction : MilocInstruction
+public partial class ComputeglobaladdressInstruction : MilocInstruction
 {
 	public ComputeglobaladdressInstruction
 	(
@@ -1341,7 +1341,7 @@ return string.Format("{0} {1}, r{2}", Name, Str0, RegDest0);
 
 
 
-public class NewInstruction : MilocInstruction
+public partial class NewInstruction : MilocInstruction
 {
 	public NewInstruction
 	(
@@ -1379,7 +1379,7 @@ return string.Format("{0} {1}, [{2}], r{3}", Name, Str0, string.Join(", ", Arr0)
 
 
 
-public class DelInstruction : MilocInstruction
+public partial class DelInstruction : MilocInstruction
 {
 	public DelInstruction
 	(
@@ -1418,87 +1418,87 @@ return string.Format("{0} r{1}", Name, RegSource0);
 public interface IMilocTranslator<T> where T : Instruction
 {
 
-	IEnumerable<T> Add(AddInstruction s);
-	IEnumerable<T> Addi(AddiInstruction s);
-	IEnumerable<T> Div(DivInstruction s);
-	IEnumerable<T> Mult(MultInstruction s);
-	IEnumerable<T> Sub(SubInstruction s);
-	IEnumerable<T> Rsubi(RsubiInstruction s);
-	IEnumerable<T> And(AndInstruction s);
-	IEnumerable<T> Or(OrInstruction s);
-	IEnumerable<T> Xori(XoriInstruction s);
-	IEnumerable<T> Loadi(LoadiInstruction s);
-	IEnumerable<T> Print(PrintInstruction s);
-	IEnumerable<T> Println(PrintlnInstruction s);
-	IEnumerable<T> Read(ReadInstruction s);
-	IEnumerable<T> Comp(CompInstruction s);
-	IEnumerable<T> Mov(MovInstruction s);
-	IEnumerable<T> Moveq(MoveqInstruction s);
-	IEnumerable<T> Movge(MovgeInstruction s);
-	IEnumerable<T> Movgt(MovgtInstruction s);
-	IEnumerable<T> Movle(MovleInstruction s);
-	IEnumerable<T> Movlt(MovltInstruction s);
-	IEnumerable<T> Movne(MovneInstruction s);
-	IEnumerable<T> Jumpi(JumpiInstruction s);
-	IEnumerable<T> Cbreq(CbreqInstruction s);
-	IEnumerable<T> Loadinargument(LoadinargumentInstruction s);
-	IEnumerable<T> Call(CallInstruction s);
-	IEnumerable<T> Ret(RetInstruction s);
-	IEnumerable<T> Storeret(StoreretInstruction s);
-	IEnumerable<T> Storeoutargument(StoreoutargumentInstruction s);
-	IEnumerable<T> Loadret(LoadretInstruction s);
-	IEnumerable<T> StoreaiField(StoreaiFieldInstruction s);
-	IEnumerable<T> StoreaiVar(StoreaiVarInstruction s);
-	IEnumerable<T> LoadaiField(LoadaiFieldInstruction s);
-	IEnumerable<T> LoadaiVar(LoadaiVarInstruction s);
-	IEnumerable<T> Loadglobal(LoadglobalInstruction s);
-	IEnumerable<T> Storeglobal(StoreglobalInstruction s);
-	IEnumerable<T> Computeglobaladdress(ComputeglobaladdressInstruction s);
-	IEnumerable<T> New(NewInstruction s);
-	IEnumerable<T> Del(DelInstruction s);
+	IEnumerable<T> Add(AddInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Addi(AddiInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Div(DivInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Mult(MultInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Sub(SubInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Rsubi(RsubiInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> And(AndInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Or(OrInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Xori(XoriInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Loadi(LoadiInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Print(PrintInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Println(PrintlnInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Read(ReadInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Comp(CompInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Mov(MovInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Moveq(MoveqInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Movge(MovgeInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Movgt(MovgtInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Movle(MovleInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Movlt(MovltInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Movne(MovneInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Jumpi(JumpiInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Cbreq(CbreqInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Loadinargument(LoadinargumentInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Call(CallInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Ret(RetInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Storeret(StoreretInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Storeoutargument(StoreoutargumentInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Loadret(LoadretInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> StoreaiField(StoreaiFieldInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> StoreaiVar(StoreaiVarInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> LoadaiField(LoadaiFieldInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> LoadaiVar(LoadaiVarInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Loadglobal(LoadglobalInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Storeglobal(StoreglobalInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Computeglobaladdress(ComputeglobaladdressInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> New(NewInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Del(DelInstruction s, InstructionStream<MilocInstruction> stream);
 }
 
 public class MilocIdentityTranslator : IMilocTranslator<MilocInstruction>
 {
 
-	public IEnumerable<MilocInstruction> Add(AddInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Addi(AddiInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Div(DivInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Mult(MultInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Sub(SubInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Rsubi(RsubiInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> And(AndInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Or(OrInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Xori(XoriInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Loadi(LoadiInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Print(PrintInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Println(PrintlnInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Read(ReadInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Comp(CompInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Mov(MovInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Moveq(MoveqInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Movge(MovgeInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Movgt(MovgtInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Movle(MovleInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Movlt(MovltInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Movne(MovneInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Jumpi(JumpiInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Cbreq(CbreqInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Loadinargument(LoadinargumentInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Call(CallInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Ret(RetInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Storeret(StoreretInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Storeoutargument(StoreoutargumentInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Loadret(LoadretInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> StoreaiField(StoreaiFieldInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> StoreaiVar(StoreaiVarInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> LoadaiField(LoadaiFieldInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> LoadaiVar(LoadaiVarInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Loadglobal(LoadglobalInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Storeglobal(StoreglobalInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Computeglobaladdress(ComputeglobaladdressInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> New(NewInstruction s) { yield return s; }
-	public IEnumerable<MilocInstruction> Del(DelInstruction s) { yield return s; }
+	public IEnumerable<MilocInstruction> Add(AddInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Addi(AddiInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Div(DivInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Mult(MultInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Sub(SubInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Rsubi(RsubiInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> And(AndInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Or(OrInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Xori(XoriInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Loadi(LoadiInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Print(PrintInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Println(PrintlnInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Read(ReadInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Comp(CompInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Mov(MovInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Moveq(MoveqInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Movge(MovgeInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Movgt(MovgtInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Movle(MovleInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Movlt(MovltInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Movne(MovneInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Jumpi(JumpiInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Cbreq(CbreqInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Loadinargument(LoadinargumentInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Call(CallInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Ret(RetInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Storeret(StoreretInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Storeoutargument(StoreoutargumentInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Loadret(LoadretInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> StoreaiField(StoreaiFieldInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> StoreaiVar(StoreaiVarInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> LoadaiField(LoadaiFieldInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> LoadaiVar(LoadaiVarInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Loadglobal(LoadglobalInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Storeglobal(StoreglobalInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Computeglobaladdress(ComputeglobaladdressInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> New(NewInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Del(DelInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
 }
 
 public class MilocConverter<T> : IInstructionConverter<MilocInstruction, T>
@@ -1510,86 +1510,279 @@ public class MilocConverter<T> : IInstructionConverter<MilocInstruction, T>
 		this.translator = translator;
 	}
 
-	public IEnumerable<T> Convert(MilocInstruction s)
+	public IEnumerable<T> Convert(InstructionStream<MilocInstruction> s)
 	{
-
-		if (s is AddInstruction)
-			return translator.Add(s as AddInstruction);
-		if (s is AddiInstruction)
-			return translator.Addi(s as AddiInstruction);
-		if (s is DivInstruction)
-			return translator.Div(s as DivInstruction);
-		if (s is MultInstruction)
-			return translator.Mult(s as MultInstruction);
-		if (s is SubInstruction)
-			return translator.Sub(s as SubInstruction);
-		if (s is RsubiInstruction)
-			return translator.Rsubi(s as RsubiInstruction);
-		if (s is AndInstruction)
-			return translator.And(s as AndInstruction);
-		if (s is OrInstruction)
-			return translator.Or(s as OrInstruction);
-		if (s is XoriInstruction)
-			return translator.Xori(s as XoriInstruction);
-		if (s is LoadiInstruction)
-			return translator.Loadi(s as LoadiInstruction);
-		if (s is PrintInstruction)
-			return translator.Print(s as PrintInstruction);
-		if (s is PrintlnInstruction)
-			return translator.Println(s as PrintlnInstruction);
-		if (s is ReadInstruction)
-			return translator.Read(s as ReadInstruction);
-		if (s is CompInstruction)
-			return translator.Comp(s as CompInstruction);
-		if (s is MovInstruction)
-			return translator.Mov(s as MovInstruction);
-		if (s is MoveqInstruction)
-			return translator.Moveq(s as MoveqInstruction);
-		if (s is MovgeInstruction)
-			return translator.Movge(s as MovgeInstruction);
-		if (s is MovgtInstruction)
-			return translator.Movgt(s as MovgtInstruction);
-		if (s is MovleInstruction)
-			return translator.Movle(s as MovleInstruction);
-		if (s is MovltInstruction)
-			return translator.Movlt(s as MovltInstruction);
-		if (s is MovneInstruction)
-			return translator.Movne(s as MovneInstruction);
-		if (s is JumpiInstruction)
-			return translator.Jumpi(s as JumpiInstruction);
-		if (s is CbreqInstruction)
-			return translator.Cbreq(s as CbreqInstruction);
-		if (s is LoadinargumentInstruction)
-			return translator.Loadinargument(s as LoadinargumentInstruction);
-		if (s is CallInstruction)
-			return translator.Call(s as CallInstruction);
-		if (s is RetInstruction)
-			return translator.Ret(s as RetInstruction);
-		if (s is StoreretInstruction)
-			return translator.Storeret(s as StoreretInstruction);
-		if (s is StoreoutargumentInstruction)
-			return translator.Storeoutargument(s as StoreoutargumentInstruction);
-		if (s is LoadretInstruction)
-			return translator.Loadret(s as LoadretInstruction);
-		if (s is StoreaiFieldInstruction)
-			return translator.StoreaiField(s as StoreaiFieldInstruction);
-		if (s is StoreaiVarInstruction)
-			return translator.StoreaiVar(s as StoreaiVarInstruction);
-		if (s is LoadaiFieldInstruction)
-			return translator.LoadaiField(s as LoadaiFieldInstruction);
-		if (s is LoadaiVarInstruction)
-			return translator.LoadaiVar(s as LoadaiVarInstruction);
-		if (s is LoadglobalInstruction)
-			return translator.Loadglobal(s as LoadglobalInstruction);
-		if (s is StoreglobalInstruction)
-			return translator.Storeglobal(s as StoreglobalInstruction);
-		if (s is ComputeglobaladdressInstruction)
-			return translator.Computeglobaladdress(s as ComputeglobaladdressInstruction);
-		if (s is NewInstruction)
-			return translator.New(s as NewInstruction);
-		if (s is DelInstruction)
-			return translator.Del(s as DelInstruction);
-		throw new NotSupportedException();
+		while (s.More)
+		{
+			var cur = s.Consume();
+			if (cur is AddInstruction)
+			{
+				var conv = cur as AddInstruction;
+				foreach (var newInstr in translator.Add(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is AddiInstruction)
+			{
+				var conv = cur as AddiInstruction;
+				foreach (var newInstr in translator.Addi(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is DivInstruction)
+			{
+				var conv = cur as DivInstruction;
+				foreach (var newInstr in translator.Div(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is MultInstruction)
+			{
+				var conv = cur as MultInstruction;
+				foreach (var newInstr in translator.Mult(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is SubInstruction)
+			{
+				var conv = cur as SubInstruction;
+				foreach (var newInstr in translator.Sub(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is RsubiInstruction)
+			{
+				var conv = cur as RsubiInstruction;
+				foreach (var newInstr in translator.Rsubi(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is AndInstruction)
+			{
+				var conv = cur as AndInstruction;
+				foreach (var newInstr in translator.And(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is OrInstruction)
+			{
+				var conv = cur as OrInstruction;
+				foreach (var newInstr in translator.Or(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is XoriInstruction)
+			{
+				var conv = cur as XoriInstruction;
+				foreach (var newInstr in translator.Xori(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is LoadiInstruction)
+			{
+				var conv = cur as LoadiInstruction;
+				foreach (var newInstr in translator.Loadi(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is PrintInstruction)
+			{
+				var conv = cur as PrintInstruction;
+				foreach (var newInstr in translator.Print(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is PrintlnInstruction)
+			{
+				var conv = cur as PrintlnInstruction;
+				foreach (var newInstr in translator.Println(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is ReadInstruction)
+			{
+				var conv = cur as ReadInstruction;
+				foreach (var newInstr in translator.Read(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is CompInstruction)
+			{
+				var conv = cur as CompInstruction;
+				foreach (var newInstr in translator.Comp(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is MovInstruction)
+			{
+				var conv = cur as MovInstruction;
+				foreach (var newInstr in translator.Mov(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is MoveqInstruction)
+			{
+				var conv = cur as MoveqInstruction;
+				foreach (var newInstr in translator.Moveq(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is MovgeInstruction)
+			{
+				var conv = cur as MovgeInstruction;
+				foreach (var newInstr in translator.Movge(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is MovgtInstruction)
+			{
+				var conv = cur as MovgtInstruction;
+				foreach (var newInstr in translator.Movgt(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is MovleInstruction)
+			{
+				var conv = cur as MovleInstruction;
+				foreach (var newInstr in translator.Movle(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is MovltInstruction)
+			{
+				var conv = cur as MovltInstruction;
+				foreach (var newInstr in translator.Movlt(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is MovneInstruction)
+			{
+				var conv = cur as MovneInstruction;
+				foreach (var newInstr in translator.Movne(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is JumpiInstruction)
+			{
+				var conv = cur as JumpiInstruction;
+				foreach (var newInstr in translator.Jumpi(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is CbreqInstruction)
+			{
+				var conv = cur as CbreqInstruction;
+				foreach (var newInstr in translator.Cbreq(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is LoadinargumentInstruction)
+			{
+				var conv = cur as LoadinargumentInstruction;
+				foreach (var newInstr in translator.Loadinargument(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is CallInstruction)
+			{
+				var conv = cur as CallInstruction;
+				foreach (var newInstr in translator.Call(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is RetInstruction)
+			{
+				var conv = cur as RetInstruction;
+				foreach (var newInstr in translator.Ret(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is StoreretInstruction)
+			{
+				var conv = cur as StoreretInstruction;
+				foreach (var newInstr in translator.Storeret(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is StoreoutargumentInstruction)
+			{
+				var conv = cur as StoreoutargumentInstruction;
+				foreach (var newInstr in translator.Storeoutargument(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is LoadretInstruction)
+			{
+				var conv = cur as LoadretInstruction;
+				foreach (var newInstr in translator.Loadret(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is StoreaiFieldInstruction)
+			{
+				var conv = cur as StoreaiFieldInstruction;
+				foreach (var newInstr in translator.StoreaiField(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is StoreaiVarInstruction)
+			{
+				var conv = cur as StoreaiVarInstruction;
+				foreach (var newInstr in translator.StoreaiVar(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is LoadaiFieldInstruction)
+			{
+				var conv = cur as LoadaiFieldInstruction;
+				foreach (var newInstr in translator.LoadaiField(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is LoadaiVarInstruction)
+			{
+				var conv = cur as LoadaiVarInstruction;
+				foreach (var newInstr in translator.LoadaiVar(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is LoadglobalInstruction)
+			{
+				var conv = cur as LoadglobalInstruction;
+				foreach (var newInstr in translator.Loadglobal(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is StoreglobalInstruction)
+			{
+				var conv = cur as StoreglobalInstruction;
+				foreach (var newInstr in translator.Storeglobal(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is ComputeglobaladdressInstruction)
+			{
+				var conv = cur as ComputeglobaladdressInstruction;
+				foreach (var newInstr in translator.Computeglobaladdress(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is NewInstruction)
+			{
+				var conv = cur as NewInstruction;
+				foreach (var newInstr in translator.New(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is DelInstruction)
+			{
+				var conv = cur as DelInstruction;
+				foreach (var newInstr in translator.Del(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			throw new NotSupportedException();
+		}
 	}
 }
 

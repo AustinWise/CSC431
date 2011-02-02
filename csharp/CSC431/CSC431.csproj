@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CFG\IInstructionConverter.cs" />
+    <Compile Include="CFG\InstructionStream.cs" />
     <Compile Include="EvilException.cs" />
     <Compile Include="CFG\BasicBlock.cs" />
     <Compile Include="CFG\FunctionBlock.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="IlSteps.cs" />
     <Compile Include="CFG\Label.cs" />
     <Compile Include="CFG\LoopBlock.cs" />
+    <Compile Include="IL\Instruction.mine.cs" />
     <Compile Include="IL\MilocInstruction.cs" />
     <Compile Include="CFG\Node.cs" />
     <Compile Include="CFG\ProgramBlock.cs" />
@@ -77,6 +79,17 @@
     <Compile Include="IL\VarGlobal.cs" />
     <Compile Include="IL\VarLocal.cs" />
     <Compile Include="IL\VarReg.cs" />
+    <Compile Include="LlvmSteps.cs" />
+    <Compile Include="LLVM\IcmpInstruction.cs" />
+    <Compile Include="LLVM\Instruction.generated.cs">
+      <DependentUpon>Instruction.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="LLVM\Instruction.mine.cs" />
+    <Compile Include="LLVM\LlvmInstruction.cs" />
+    <Compile Include="LLVM\LlvmTranslator.cs" />
+    <Compile Include="LLVM\SelectInstruction.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +100,10 @@
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
     </Content>
     <Compile Include="NDesk.Options.cs" />
+    <Content Include="LLVM\Instruction.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Instruction.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="StackSteps.cs" />

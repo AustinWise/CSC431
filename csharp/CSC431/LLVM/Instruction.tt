@@ -1,0 +1,286 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".generated.cs" #>
+<#@ Import Namespace="System.Collections.Generic" #>
+using CSC431.CFG;
+using System;
+using System.Collections.Generic;
+
+namespace CSC431.LLVM
+{
+
+<#
+foreach (var instr in InstrInfo.GetAll())
+{
+    var className = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString()) + "Instruction";
+#>
+public partial class <#=className #> : LlvmInstruction
+{
+	public <#=className #>
+	(
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (c.IsConstant)
+        return;
+    Write("{0} {1}{2}", c.Type, c.LowerPrefix, count);
+    if (!isLast)
+        Write(",");
+});
+#>
+	) : base ("<#=instr.Name #>")
+	{
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (c.IsConstant)
+        return;
+    Write("this.{0}{1} = {2}{1};", c.UpperPrefix, count, c.LowerPrefix);
+});
+if (instr.IsSetCC)
+{
+#>
+		this.CcSet = true;
+<#
+}
+#>
+	}
+
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (c.IsConstant)
+        return;
+    WriteLine("public {1} {2}{0}{{ get; private set; }}", count, c.Type, c.UpperPrefix);
+});
+#>
+
+public override int[] SourceRegs
+{
+	get
+	{
+		return new int[] {
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (!c.IsSource)
+        return;
+    Write("{1}{0}", count, c.UpperPrefix);
+    if (!isLast)
+        Write(", ");
+});
+#>
+		};
+	}
+}
+
+public override int[] DestRegs
+{
+	get
+	{
+		return new int[] {
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (!c.IsTarget)
+        return;
+    Write("{1}{0}", count, c.UpperPrefix);
+    if (!isLast)
+        Write(", ");
+});
+#>
+		};
+	}
+}
+
+<#
+    if (!instr.IsCustomToString)
+    {
+#>
+public override string ToString()
+{
+<#
+    int placeHolderCount = 1;
+    string formatStr = "";
+    instr.ForEachOperand((c, count, isLast) =>
+    {
+        if (placeHolderCount == 1)
+        {
+            if (c.IsTarget)
+                formatStr += c.MilocPrefix + "{" + placeHolderCount + "}" + c.MilocPostfix + " = {0} i32";
+            else
+                formatStr += "{0} i32";
+        }
+        else
+        {
+            if (c.IsConstant)
+                formatStr += " " + c.ConstantValue;
+            else
+                formatStr += " " + c.MilocPrefix + "{" + placeHolderCount + "}" + c.MilocPostfix;
+            if (!isLast)
+                formatStr += ",";
+        }
+        placeHolderCount++;
+    });
+    Write("return string.Format(\"{0}\", Name", formatStr);
+    instr.ForEachOperand((c, count, isLast) =>
+    {
+        string field = c.UpperPrefix + count;
+        Write(", ");
+        if (c.IsConstant)
+        {
+            Write("null");
+            return;
+        }
+        if (string.IsNullOrEmpty(c.SpecialConversion))
+            Write(field);
+        else
+            Write(c.SpecialConversion, field);
+    });
+#>
+);
+}
+<#
+    }
+    else
+    {
+#>
+	public override string ToString()
+	{
+		string ret = string.Empty;
+		ToStringCore(ref ret);
+		if (string.IsNullOrEmpty(ret))
+			throw new NotImplementedException();
+		return ret;
+	}
+
+	partial void ToStringCore(ref string ret);
+<#
+    }
+#>
+}
+
+
+
+<#
+}
+#>
+
+}
+<#+
+[Flags]
+private enum InstrFlags : int
+{
+    None = 0,
+    SetCC = 1,
+    UseCC = 2,
+    CustomToString = 4
+}
+private class OperandType
+{
+    private static Dictionary<char, OperandType> sTypes = new Dictionary<char, OperandType>();
+    static OperandType()
+    {
+        sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", MilocPrefix = "%r", Type = "int", IsSource = true });
+        sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", MilocPrefix = "%r", Type = "int", IsTarget = true });
+        sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "Label<MilocInstruction>" });
+        sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", Type = "int" });
+        sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", Type = "string" });
+        sTypes.Add('a', new OperandType() { LowerPrefix = "arr", UpperPrefix = "Arr", MilocPrefix = "[", MilocPostfix = "]", Type = "string[]", SpecialConversion = "string.Join(\", \", {0})" });
+        sTypes.Add('k', new OperandType() { ConstantValue = "rarp" });
+        sTypes.Add('c', new OperandType() { ConstantValue = "%cmp" });
+    }
+
+    public string LowerPrefix { get; private set; }
+    public string UpperPrefix { get; private set; }
+    public string MilocPrefix { get; private set; }
+    public string MilocPostfix { get; private set; }
+    public string Type { get; private set; }
+    public string SpecialConversion { get; private set; }
+    public bool IsSource { get; private set; }
+    public bool IsTarget { get; private set; }
+
+    public string ConstantValue { get; private set; }
+    public bool IsConstant
+    {
+        get
+        {
+            return ConstantValue != null;
+        }
+    }
+
+    public static OperandType Get(char letter)
+    {
+        return sTypes[letter];
+    }
+}
+private class InstrInfo
+{
+    public InstrInfo(String type, string name)
+        : this(type, name, name)
+    {
+    }
+
+    public InstrInfo(String type, string name, string className)
+    {
+        this.Type = type;
+        this.Name = name;
+        this.ClassName = className;
+    }
+
+    public InstrInfo(String type, string name, InstrFlags flags)
+        : this(type, name)
+    {
+        this.Flags = flags;
+    }
+
+    public InstrFlags Flags { get; private set; }
+    public string Type { get; private set; }
+    public string Name { get; private set; }
+    public string ClassName { get; private set; }
+
+    public bool IsSetCC
+    {
+        get
+        {
+            return ((Flags & InstrFlags.SetCC) != 0);
+        }
+    }
+
+    public bool IsCustomToString
+    {
+        get
+        {
+            return ((Flags & InstrFlags.CustomToString) != 0);
+        }
+    }
+
+    public void ForEachOperand(Action<OperandType, int, bool> f)
+    {
+        var count = new Dictionary<char, int>();
+        for (int i = 0; i < Type.Length; i++)
+        {
+            char c = Type[i];
+            if (!count.ContainsKey(c))
+                count[c] = 0;
+            f(OperandType.Get(c), count[c]++, i == Type.Length - 1);
+        }
+    }
+
+    public static InstrInfo[] GetAll()
+    {
+        return new[]
+            {
+                new InstrInfo("Rrr", "add"),
+                new InstrInfo("Rri", "add", "addi"),
+                new InstrInfo("Rrr", "sub"),
+                new InstrInfo("Rrr", "mul"),
+                new InstrInfo("Rrr", "sdiv"),
+                new InstrInfo("Rrr", "and"),
+                new InstrInfo("Rrr", "or"),
+                new InstrInfo("Ri", "loadi", InstrFlags.CustomToString),
+                new InstrInfo("r", "retvalue", InstrFlags.CustomToString),
+                new InstrInfo("", "retvoid", InstrFlags.CustomToString),
+            };
+    }
+}
+#>

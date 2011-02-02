@@ -9,6 +9,6 @@ namespace CSC431.CFG
         where Source : Instruction
         where Target : Instruction
     {
-        IEnumerable<Target> Convert(Source s);
+        IEnumerable<Target> Convert(InstructionStream<Source> s);
     }
 }
