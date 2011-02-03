@@ -100,10 +100,10 @@ function returns [FunctionBlock<MilocInstruction> f]
 		
 		SeqBlock<MilocInstruction> body = new SeqBlock<MilocInstruction>();
 		BasicBlock<MilocInstruction> argLoadBlock = new BasicBlock<MilocInstruction>();
-		body.Add(argLoadBlock);
 	}
 	: ^(FUN id=ID parameters[argLoadBlock] ^(RETTYPE retType=return_type)
 			{
+				body.Add(argLoadBlock);
 				if (!string.IsNullOrEmpty(retType))
 				{
 					functionStructMap[$id.text] = retType;
@@ -111,12 +111,10 @@ function returns [FunctionBlock<MilocInstruction> f]
 			}
 		declarations[true,localStructMap] statement_list[body])
 		{
+			BasicBlock<MilocInstruction> returnBlock = new BasicBlock<MilocInstruction>();
 			if (retType == "<void>")
-			{
-				BasicBlock<MilocInstruction> returnBlock = new BasicBlock<MilocInstruction>();
 				returnBlock.Add(new RetInstruction());
-				body.Add(returnBlock);
-			}
+			body.Add(returnBlock);
 			body.SetNext(new BasicBlock<MilocInstruction>());
 			$f = new FunctionBlock<MilocInstruction>($id.text, body);
 			foreach (var l in localMap)
