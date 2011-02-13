@@ -28,10 +28,11 @@ namespace CSC431.CFG
             throw new NotSupportedException();
         }
 
-        protected override void PrintCore(System.IO.TextWriter tw)
+        protected override void PrintCore(System.IO.TextWriter tw, Printer<T> printer)
         {
-            tw.WriteLine("{0}:", Name);
-            Body.Print(tw);
+            printer.PrintFunctionHeader(tw, this);
+            Body.Print(tw, printer);
+            printer.PrintFunctionFooter(tw, this);
         }
 
         public override Node<T> FirstNode

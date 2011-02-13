@@ -43,7 +43,7 @@ namespace CSC431
 
         public static InStep<ProgramBlock<MilocInstruction>> PrintCFG = new InStep<ProgramBlock<MilocInstruction>>(c =>
         {
-            c.Print(Console.Out);
+            c.Print(Console.Out, new MilocPrinter());
         });
 
         public static TransformStep<ProgramBlock<MilocInstruction>> ConvertIdentity = new TransformStep<ProgramBlock<MilocInstruction>>(c =>

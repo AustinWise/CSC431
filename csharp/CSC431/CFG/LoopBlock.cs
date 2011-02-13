@@ -54,13 +54,13 @@ namespace CSC431.CFG
             }
         }
 
-        protected override void PrintCore(System.IO.TextWriter tw)
+        protected override void PrintCore(System.IO.TextWriter tw, Printer<T> printer)
         {
             Condition.PrintLabel = true;
             Body.PrintLabel = true;
 
-            Condition.Print(tw);
-            Body.Print(tw);
+            Condition.Print(tw, printer);
+            Body.Print(tw, printer);
         }
 
         public override Node<T> FirstNode

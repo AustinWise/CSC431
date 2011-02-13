@@ -54,14 +54,13 @@ namespace CSC431.CFG
             }
         }
 
-        public void Print(TextWriter tw)
+        public void Print(TextWriter tw, Printer<T> printer)
         {
-            if (PrintLabel)
-                tw.WriteLine("L{0}:", Label);
-            PrintCore(tw);
+            printer.PrintNodeHeader(tw, this);
+            PrintCore(tw, printer);
         }
 
-        protected abstract void PrintCore(TextWriter tw);
+        protected abstract void PrintCore(TextWriter tw, Printer<T> printer);
 
         public Node<Target> Convert<Target>(IInstructionConverter<T, Target> conv) where Target : Instruction
         {

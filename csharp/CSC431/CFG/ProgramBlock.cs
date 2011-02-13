@@ -24,27 +24,16 @@ namespace CSC431.CFG
             throw new NotSupportedException();
         }
 
-        protected override void PrintCore(System.IO.TextWriter tw)
+        protected override void PrintCore(System.IO.TextWriter tw, Printer<T> printer)
         {
-            foreach (var f in Functions)
-            {
-                tw.WriteLine("@function {0}", f.Name);
-            }
-            foreach (var f in Functions)
-            {
-                foreach (var l in f.Locals)
-                {
-                    tw.WriteLine("@local {0}:{1}", f.Name, l);
-                }
-            }
-
-            tw.WriteLine();
+            printer.PrintFileHeader(tw, this);
 
             foreach (var f in Functions)
             {
-                f.Print(tw);
-                tw.WriteLine();
+                f.Print(tw, printer);
             }
+
+            printer.PrintFileFooter(tw, this);
         }
 
         public override Node<T> FirstNode

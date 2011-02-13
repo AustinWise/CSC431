@@ -77,7 +77,7 @@ namespace CSC431.CFG
             }
         }
 
-        protected override void PrintCore(System.IO.TextWriter tw)
+        protected override void PrintCore(System.IO.TextWriter tw, Printer<T> printer)
         {
             foreach (var l in this.code)
             {

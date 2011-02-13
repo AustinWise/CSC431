@@ -18,7 +18,7 @@ namespace CSC431
 
         public static InStep<ProgramBlock<LlvmInstruction>> PrintCFG = new InStep<ProgramBlock<LlvmInstruction>>(c =>
         {
-            c.Print(Console.Out);
+            c.Print(Console.Out, null);
         });
     }
 }

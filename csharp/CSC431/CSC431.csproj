@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="CFG\IInstructionConverter.cs" />
     <Compile Include="CFG\InstructionStream.cs" />
+    <Compile Include="CFG\Printer.cs" />
     <Compile Include="EvilException.cs" />
     <Compile Include="CFG\BasicBlock.cs" />
     <Compile Include="CFG\FunctionBlock.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="FrontEnd\EvilLexer.cs" />
     <Compile Include="FrontEnd\EvilParser.cs" />
     <Compile Include="FrontEnd\EvilParser.mine.cs" />
+    <Compile Include="IL\MilocPrinter.cs" />
     <Compile Include="IL\VarBase.cs" />
     <Compile Include="IL\VarField.cs" />
     <Compile Include="IL\VarGlobal.cs" />
