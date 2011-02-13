@@ -168,7 +168,10 @@ block returns [SeqBlock<MilocInstruction> b = new SeqBlock<MilocInstruction>()]
 statement_list[SeqBlock<MilocInstruction> b]
 	: ^(STMTS (s=statement
 		{
-			$b.Add(s);
+			if (!$b.IsReturn)
+			{
+				$b.Add(s);
+			}
 		}
 	)*)
 	;
@@ -251,6 +254,7 @@ ret returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()
 			}
 			else
 				$b.Add(new RetInstruction());
+			$b.IsReturn = true;
 		}
 	;
 

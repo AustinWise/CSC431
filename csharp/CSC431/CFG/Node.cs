@@ -21,6 +21,7 @@ namespace CSC431.CFG
 
         public abstract Node<T>[] Nexts { get; }
         public abstract Node<T> FirstNode { get; }
+        public bool IsReturn { get; set; }
 
         abstract public void SetNext(Node<T> next);
 
@@ -66,6 +67,7 @@ namespace CSC431.CFG
         {
             var copy = this.ConvertCore(conv);
             copy.Label = Label;
+            copy.IsReturn = IsReturn;
             return copy;
         }
 

@@ -50,6 +50,7 @@ namespace CSC431.CFG
         public void Add(BasicBlock<T> lines)
         {
             code.AddRange(lines.code);
+            this.IsReturn |= lines.IsReturn;
         }
 
         public override Node<T>[] Nexts

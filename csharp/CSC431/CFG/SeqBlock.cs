@@ -22,10 +22,12 @@ namespace CSC431.CFG
         {
             if (n is BasicBlock<T>)
             {
-                ((BasicBlock<T>)n).Merge();
+                var bb = n as BasicBlock<T>;
+                bb.Merge();
+                this.IsReturn |= bb.IsReturn;
                 if (last is BasicBlock<T>)
                 {
-                    (last as BasicBlock<T>).Add(n as BasicBlock<T>);
+                    (last as BasicBlock<T>).Add(bb);
                     return;
                 }
             }

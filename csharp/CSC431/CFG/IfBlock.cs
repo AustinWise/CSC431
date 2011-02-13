@@ -22,6 +22,7 @@ namespace CSC431.CFG
             this.TrueBody = trueBody;
             this.FalseBody = falseBody;
             this.NextLabel = nextLabel;
+            this.IsReturn = TrueBody.IsReturn & FalseBody.IsReturn;
         }
 
         public override Node<T>[] Nexts
