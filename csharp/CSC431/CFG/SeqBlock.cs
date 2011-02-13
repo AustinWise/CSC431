@@ -37,6 +37,18 @@ namespace CSC431.CFG
             this.last = n;
         }
 
+        public void AddAtTop(Node<T> n)
+        {
+            if (nodes.Count == 0)
+            {
+                this.Add(n);
+                return;
+            }
+
+            n.SetNext(nodes[0]);
+            this.nodes.Insert(0, n);
+        }
+
         public void Add(T n)
         {
             var b = new BasicBlock<T>();

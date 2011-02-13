@@ -64,6 +64,9 @@ namespace CSC431.CFG
         protected override Node<Target> ConvertCore<Target>(IInstructionConverter<T, Target> conv)
         {
             var copy = new FunctionBlock<Target>(Name, Body.Convert(conv) as SeqBlock<Target>);
+            var topBlock = new BasicBlock<Target>();
+            topBlock.Add(conv.FunctionStart(copy));
+            copy.Body.AddAtTop(topBlock);
             copy.Body.SetNext(new BasicBlock<Target>());
             copy.Locals = new List<string>(Locals);
             return copy;

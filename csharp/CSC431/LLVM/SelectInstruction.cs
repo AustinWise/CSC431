@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CSC431.CFG;
 
 namespace CSC431.LLVM
 {
     class SelectInstruction : LlvmInstruction
     {
-        private int rcond, rd, trueValue, falseValue;
-        public SelectInstruction(int rcond, int rd, int trueValue, int falseValue)
+        private Register rcond, rd, trueValue, falseValue;
+        public SelectInstruction(int rcond, Register rd, Register trueValue, Register falseValue)
             : base("select")
         {
             this.rcond = rcond;
@@ -17,12 +18,12 @@ namespace CSC431.LLVM
             this.falseValue = falseValue;
         }
 
-        public override int[] SourceRegs
+        public override Register[] SourceRegs
         {
             get { throw new NotImplementedException(); }
         }
 
-        public override int[] DestRegs
+        public override Register[] DestRegs
         {
             get { throw new NotImplementedException(); }
         }

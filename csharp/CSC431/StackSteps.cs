@@ -11,17 +11,20 @@ namespace CSC431
 {
     class StackSteps
     {
-        public static InStep<Tuple<CommonTokenStream, CommonTree>> MakeClrExe = new InStep<Tuple<CommonTokenStream, CommonTree>>(t =>
+        public static InStep<Tuple<CommonTokenStream, CommonTree>> MakeClrExe()
         {
-            CommonTreeNodeStream nodes = new CommonTreeNodeStream(t.Item2);
-            nodes.TokenStream = t.Item1;
-            StackGen tparser = new StackGen(nodes);
-            tparser.TraceDestination = Console.Out;
+            return new InStep<Tuple<CommonTokenStream, CommonTree>>(t =>
+            {
+                CommonTreeNodeStream nodes = new CommonTreeNodeStream(t.Item2);
+                nodes.TokenStream = t.Item1;
+                StackGen tparser = new StackGen(nodes);
+                tparser.TraceDestination = Console.Out;
 
-            tparser.Program();
+                tparser.Program();
 
-            if (tparser.NumberOfSyntaxErrors != 0)
-                throw new EvilException("make cfg syntax error");
-        });
+                if (tparser.NumberOfSyntaxErrors != 0)
+                    throw new EvilException("make cfg syntax error");
+            });
+        }
     }
 }

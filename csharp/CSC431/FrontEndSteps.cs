@@ -12,74 +12,86 @@ namespace CSC431
 {
     public static class FrontEndSteps
     {
-        public static readonly OutStep<EvilLexer> CreateLexer = new OutStep<EvilLexer>(() =>
+        public static OutStep<EvilLexer> CreateLexer()
         {
-            try
+            return new OutStep<EvilLexer>(() =>
             {
-                ANTLRInputStream input;
-                if (Options.InputFile == null)
+                try
                 {
-                    input = new ANTLRInputStream(Console.OpenStandardInput());
+                    ANTLRInputStream input;
+                    if (Options.InputFile == null)
+                    {
+                        input = new ANTLRInputStream(Console.OpenStandardInput());
+                    }
+                    else
+                    {
+                        input = new ANTLRInputStream(new FileStream(Options.InputFile, FileMode.Open));
+                    }
+                    return new EvilLexer(input);
                 }
-                else
+                catch (IOException)
                 {
-                    input = new ANTLRInputStream(new FileStream(Options.InputFile, FileMode.Open));
+                    throw new EvilException("file not found: " + (Options.InputFile ?? "<stdin>"));
                 }
-                return new EvilLexer(input);
-            }
-            catch (IOException)
-            {
-                throw new EvilException("file not found: " + (Options.InputFile ?? "<stdin>"));
-            }
-        });
+            });
+        }
 
-        public static readonly InOutStep<EvilLexer, Tuple<CommonTokenStream, CommonTree>> Parse = new InOutStep<EvilLexer, Tuple<CommonTokenStream, CommonTree>>((lexer) =>
+        public static InOutStep<EvilLexer, Tuple<CommonTokenStream, CommonTree>> Parse()
         {
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-            EvilParser parser = new EvilParser(tokens);
-            EvilParser.program_return ret = null;
-            parser.TraceDestination = Console.Out;
-
-            try
+            return new InOutStep<EvilLexer, Tuple<CommonTokenStream, CommonTree>>((lexer) =>
             {
-                ret = parser.Program();
-            }
-            catch (RecognitionException e)
+                CommonTokenStream tokens = new CommonTokenStream(lexer);
+                EvilParser parser = new EvilParser(tokens);
+                EvilParser.program_return ret = null;
+                parser.TraceDestination = Console.Out;
+
+                try
+                {
+                    ret = parser.Program();
+                }
+                catch (RecognitionException e)
+                {
+                    throw new EvilException("Error parsing.", e);
+                }
+
+                if (parser.NumberOfSyntaxErrors != 0)
+                    throw new EvilException("syntax errors");
+
+                CommonTree t = (CommonTree)ret.Tree;
+
+                return new Tuple<CommonTokenStream, CommonTree>(tokens, t);
+            });
+        }
+
+        public static TransformStep<Tuple<CommonTokenStream, CommonTree>> TypeCheck()
+        {
+            return new TransformStep<Tuple<CommonTokenStream, CommonTree>>(t =>
             {
-                throw new EvilException("Error parsing.", e);
-            }
+                CommonTreeNodeStream nodes = new CommonTreeNodeStream(t.Item2);
+                nodes.TokenStream = t.Item1;
+                TypeChecker tparser = new TypeChecker(nodes);
+                tparser.TraceDestination = Console.Out;
 
-            if (parser.NumberOfSyntaxErrors != 0)
-                throw new EvilException("syntax errors");
+                StructTypes stypes = new StructTypes();
+                SymbolTable stable = new SymbolTable();
 
-            CommonTree t = (CommonTree)ret.Tree;
+                tparser.Program(stypes, stable);
 
-            return new Tuple<CommonTokenStream, CommonTree>(tokens, t);
-        });
+                if (tparser.NumberOfSyntaxErrors != 0)
+                    throw new EvilException("type check error");
 
-        public static readonly TransformStep<Tuple<CommonTokenStream, CommonTree>> TypeCheck = new TransformStep<Tuple<CommonTokenStream, CommonTree>>(t =>
+                return t;
+            });
+        }
+
+        public static InStep<Tuple<CommonTokenStream, CommonTree>> PrintAst()
         {
-            CommonTreeNodeStream nodes = new CommonTreeNodeStream(t.Item2);
-            nodes.TokenStream = t.Item1;
-            TypeChecker tparser = new TypeChecker(nodes);
-            tparser.TraceDestination = Console.Out;
-
-            StructTypes stypes = new StructTypes();
-            SymbolTable stable = new SymbolTable();
-
-            tparser.Program(stypes, stable);
-
-            if (tparser.NumberOfSyntaxErrors != 0)
-                throw new EvilException("type check error");
-
-            return t;
-        });
-
-        public static InStep<Tuple<CommonTokenStream, CommonTree>> PrintAst = new InStep<Tuple<CommonTokenStream, CommonTree>>(t =>
-        {
-            DotTreeGenerator gen = new DotTreeGenerator();
-            var st = gen.ToDot(t.Item2);
-            Console.WriteLine(st);
-        });
+            return new InStep<Tuple<CommonTokenStream, CommonTree>>(t =>
+            {
+                DotTreeGenerator gen = new DotTreeGenerator();
+                var st = gen.ToDot(t.Item2);
+                Console.WriteLine(st);
+            });
+        }
     }
 }

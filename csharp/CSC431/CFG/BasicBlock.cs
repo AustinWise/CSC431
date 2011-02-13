@@ -47,10 +47,16 @@ namespace CSC431.CFG
         {
             code.Add(line);
         }
+
         public void Add(BasicBlock<T> lines)
         {
             code.AddRange(lines.code);
             this.IsReturn |= lines.IsReturn;
+        }
+
+        public void Add(IEnumerable<T> lines)
+        {
+            code.AddRange(lines);
         }
 
         public override Node<T>[] Nexts

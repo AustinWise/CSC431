@@ -9,35 +9,35 @@ public partial class AddInstruction : MilocInstruction
 {
 	public AddInstruction
 	(
-int regSource0,int regSource1,int regDest0	) : base ("add")
+Register regSource0,Register regSource1,Register regDest0	) : base ("add")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
 
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, r{2}, r{3}", Name, RegSource0, RegSource1, RegDest0);
+return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0);
 }
 }
 
@@ -47,35 +47,35 @@ public partial class AddiInstruction : MilocInstruction
 {
 	public AddiInstruction
 	(
-int regSource0,int immed0,int regDest0	) : base ("addi")
+Register regSource0,int immed0,Register regDest0	) : base ("addi")
 	{
 this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
-public int RegSource0{ get; private set; }
+public Register RegSource0{ get; private set; }
 public int Immed0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, {2}, r{3}", Name, RegSource0, Immed0, RegDest0);
+return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Immed0, RegDest0);
 }
 }
 
@@ -85,35 +85,35 @@ public partial class DivInstruction : MilocInstruction
 {
 	public DivInstruction
 	(
-int regSource0,int regSource1,int regDest0	) : base ("div")
+Register regSource0,Register regSource1,Register regDest0	) : base ("div")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
 
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, r{2}, r{3}", Name, RegSource0, RegSource1, RegDest0);
+return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0);
 }
 }
 
@@ -123,35 +123,35 @@ public partial class MultInstruction : MilocInstruction
 {
 	public MultInstruction
 	(
-int regSource0,int regSource1,int regDest0	) : base ("mult")
+Register regSource0,Register regSource1,Register regDest0	) : base ("mult")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
 
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, r{2}, r{3}", Name, RegSource0, RegSource1, RegDest0);
+return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0);
 }
 }
 
@@ -161,35 +161,35 @@ public partial class SubInstruction : MilocInstruction
 {
 	public SubInstruction
 	(
-int regSource0,int regSource1,int regDest0	) : base ("sub")
+Register regSource0,Register regSource1,Register regDest0	) : base ("sub")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
 
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, r{2}, r{3}", Name, RegSource0, RegSource1, RegDest0);
+return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0);
 }
 }
 
@@ -199,35 +199,35 @@ public partial class RsubiInstruction : MilocInstruction
 {
 	public RsubiInstruction
 	(
-int regSource0,int immed0,int regDest0	) : base ("rsubi")
+Register regSource0,int immed0,Register regDest0	) : base ("rsubi")
 	{
 this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
-public int RegSource0{ get; private set; }
+public Register RegSource0{ get; private set; }
 public int Immed0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, {2}, r{3}", Name, RegSource0, Immed0, RegDest0);
+return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Immed0, RegDest0);
 }
 }
 
@@ -237,35 +237,35 @@ public partial class AndInstruction : MilocInstruction
 {
 	public AndInstruction
 	(
-int regSource0,int regSource1,int regDest0	) : base ("and")
+Register regSource0,Register regSource1,Register regDest0	) : base ("and")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
 
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, r{2}, r{3}", Name, RegSource0, RegSource1, RegDest0);
+return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0);
 }
 }
 
@@ -275,35 +275,35 @@ public partial class OrInstruction : MilocInstruction
 {
 	public OrInstruction
 	(
-int regSource0,int regSource1,int regDest0	) : base ("or")
+Register regSource0,Register regSource1,Register regDest0	) : base ("or")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
 
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, r{2}, r{3}", Name, RegSource0, RegSource1, RegDest0);
+return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0);
 }
 }
 
@@ -313,35 +313,35 @@ public partial class XoriInstruction : MilocInstruction
 {
 	public XoriInstruction
 	(
-int regSource0,int immed0,int regDest0	) : base ("xori")
+Register regSource0,int immed0,Register regDest0	) : base ("xori")
 	{
 this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
-public int RegSource0{ get; private set; }
+public Register RegSource0{ get; private set; }
 public int Immed0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, {2}, r{3}", Name, RegSource0, Immed0, RegDest0);
+return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Immed0, RegDest0);
 }
 }
 
@@ -351,34 +351,34 @@ public partial class LoadiInstruction : MilocInstruction
 {
 	public LoadiInstruction
 	(
-int immed0,int regDest0	) : base ("loadi")
+int immed0,Register regDest0	) : base ("loadi")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
+return string.Format("{0} {1}, {2}", Name, Immed0, RegDest0);
 }
 }
 
@@ -388,33 +388,33 @@ public partial class PrintInstruction : MilocInstruction
 {
 	public PrintInstruction
 	(
-int regSource0	) : base ("print")
+Register regSource0	) : base ("print")
 	{
 this.RegSource0 = regSource0;	}
 
-public int RegSource0{ get; private set; }
+public Register RegSource0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}", Name, RegSource0);
+return string.Format("{0} {1}", Name, RegSource0);
 }
 }
 
@@ -424,33 +424,33 @@ public partial class PrintlnInstruction : MilocInstruction
 {
 	public PrintlnInstruction
 	(
-int regSource0	) : base ("println")
+Register regSource0	) : base ("println")
 	{
 this.RegSource0 = regSource0;	}
 
-public int RegSource0{ get; private set; }
+public Register RegSource0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}", Name, RegSource0);
+return string.Format("{0} {1}", Name, RegSource0);
 }
 }
 
@@ -460,33 +460,33 @@ public partial class ReadInstruction : MilocInstruction
 {
 	public ReadInstruction
 	(
-int regSource0	) : base ("read")
+Register regSource0	) : base ("read")
 	{
 this.RegSource0 = regSource0;	}
 
-public int RegSource0{ get; private set; }
+public Register RegSource0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}", Name, RegSource0);
+return string.Format("{0} {1}", Name, RegSource0);
 }
 }
 
@@ -496,35 +496,35 @@ public partial class CompInstruction : MilocInstruction
 {
 	public CompInstruction
 	(
-int regSource0,int regSource1	) : base ("comp")
+Register regSource0,Register regSource1	) : base ("comp")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;		this.CcSet = true;
 	}
 
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, r{2}", Name, RegSource0, RegSource1);
+return string.Format("{0} {1}, {2}", Name, RegSource0, RegSource1);
 }
 }
 
@@ -534,34 +534,34 @@ public partial class MovInstruction : MilocInstruction
 {
 	public MovInstruction
 	(
-int regSource0,int regDest0	) : base ("mov")
+Register regSource0,Register regDest0	) : base ("mov")
 	{
 this.RegSource0 = regSource0;this.RegDest0 = regDest0;	}
 
-public int RegSource0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, r{2}", Name, RegSource0, RegDest0);
+return string.Format("{0} {1}, {2}", Name, RegSource0, RegDest0);
 }
 }
 
@@ -571,34 +571,34 @@ public partial class MoveqInstruction : MilocInstruction
 {
 	public MoveqInstruction
 	(
-int immed0,int regDest0	) : base ("moveq")
+int immed0,Register regDest0	) : base ("moveq")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
+return string.Format("{0} {1}, {2}", Name, Immed0, RegDest0);
 }
 }
 
@@ -608,34 +608,34 @@ public partial class MovgeInstruction : MilocInstruction
 {
 	public MovgeInstruction
 	(
-int immed0,int regDest0	) : base ("movge")
+int immed0,Register regDest0	) : base ("movge")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
+return string.Format("{0} {1}, {2}", Name, Immed0, RegDest0);
 }
 }
 
@@ -645,34 +645,34 @@ public partial class MovgtInstruction : MilocInstruction
 {
 	public MovgtInstruction
 	(
-int immed0,int regDest0	) : base ("movgt")
+int immed0,Register regDest0	) : base ("movgt")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
+return string.Format("{0} {1}, {2}", Name, Immed0, RegDest0);
 }
 }
 
@@ -682,34 +682,34 @@ public partial class MovleInstruction : MilocInstruction
 {
 	public MovleInstruction
 	(
-int immed0,int regDest0	) : base ("movle")
+int immed0,Register regDest0	) : base ("movle")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
+return string.Format("{0} {1}, {2}", Name, Immed0, RegDest0);
 }
 }
 
@@ -719,34 +719,34 @@ public partial class MovltInstruction : MilocInstruction
 {
 	public MovltInstruction
 	(
-int immed0,int regDest0	) : base ("movlt")
+int immed0,Register regDest0	) : base ("movlt")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
+return string.Format("{0} {1}, {2}", Name, Immed0, RegDest0);
 }
 }
 
@@ -756,34 +756,34 @@ public partial class MovneInstruction : MilocInstruction
 {
 	public MovneInstruction
 	(
-int immed0,int regDest0	) : base ("movne")
+int immed0,Register regDest0	) : base ("movne")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} {1}, r{2}", Name, Immed0, RegDest0);
+return string.Format("{0} {1}, {2}", Name, Immed0, RegDest0);
 }
 }
 
@@ -799,20 +799,20 @@ this.Label0 = label0;	}
 
 public Label<MilocInstruction> Label0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
@@ -836,20 +836,20 @@ this.Label0 = label0;this.Label1 = label1;	}
 public Label<MilocInstruction> Label0{ get; private set; }
 public Label<MilocInstruction> Label1{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
@@ -866,35 +866,35 @@ public partial class LoadinargumentInstruction : MilocInstruction
 {
 	public LoadinargumentInstruction
 	(
-string str0,int immed0,int regDest0	) : base ("loadinargument")
+string str0,int immed0,Register regDest0	) : base ("loadinargument")
 	{
 this.Str0 = str0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public string Str0{ get; private set; }
 public int Immed0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} {1}, {2}, r{3}", Name, Str0, Immed0, RegDest0);
+return string.Format("{0} {1}, {2}, {3}", Name, Str0, Immed0, RegDest0);
 }
 }
 
@@ -910,20 +910,20 @@ this.Str0 = str0;	}
 
 public string Str0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
@@ -945,20 +945,20 @@ public partial class RetInstruction : MilocInstruction
 	}
 
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
@@ -975,33 +975,33 @@ public partial class StoreretInstruction : MilocInstruction
 {
 	public StoreretInstruction
 	(
-int regSource0	) : base ("storeret")
+Register regSource0	) : base ("storeret")
 	{
 this.RegSource0 = regSource0;	}
 
-public int RegSource0{ get; private set; }
+public Register RegSource0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}", Name, RegSource0);
+return string.Format("{0} {1}", Name, RegSource0);
 }
 }
 
@@ -1011,34 +1011,34 @@ public partial class StoreoutargumentInstruction : MilocInstruction
 {
 	public StoreoutargumentInstruction
 	(
-int regSource0,int immed0	) : base ("storeoutargument")
+Register regSource0,int immed0	) : base ("storeoutargument")
 	{
 this.RegSource0 = regSource0;this.Immed0 = immed0;	}
 
-public int RegSource0{ get; private set; }
+public Register RegSource0{ get; private set; }
 public int Immed0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, {2}", Name, RegSource0, Immed0);
+return string.Format("{0} {1}, {2}", Name, RegSource0, Immed0);
 }
 }
 
@@ -1048,33 +1048,33 @@ public partial class LoadretInstruction : MilocInstruction
 {
 	public LoadretInstruction
 	(
-int regDest0	) : base ("loadret")
+Register regDest0	) : base ("loadret")
 	{
 this.RegDest0 = regDest0;	}
 
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}", Name, RegDest0);
+return string.Format("{0} {1}", Name, RegDest0);
 }
 }
 
@@ -1084,35 +1084,35 @@ public partial class StoreaiFieldInstruction : MilocInstruction
 {
 	public StoreaiFieldInstruction
 	(
-int regSource0,int regSource1,string str0	) : base ("storeai")
+Register regSource0,Register regSource1,string str0	) : base ("storeai")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.Str0 = str0;	}
 
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
 public string Str0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, r{2}, {3}", Name, RegSource0, RegSource1, Str0);
+return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, Str0);
 }
 }
 
@@ -1122,34 +1122,34 @@ public partial class StoreaiVarInstruction : MilocInstruction
 {
 	public StoreaiVarInstruction
 	(
-int regSource0,string str0	) : base ("storeai")
+Register regSource0,string str0	) : base ("storeai")
 	{
 this.RegSource0 = regSource0;this.Str0 = str0;	}
 
-public int RegSource0{ get; private set; }
+public Register RegSource0{ get; private set; }
 public string Str0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, rarp, {3}", Name, RegSource0, null, Str0);
+return string.Format("{0} {1}, rarp, {3}", Name, RegSource0, null, Str0);
 }
 }
 
@@ -1159,35 +1159,35 @@ public partial class LoadaiFieldInstruction : MilocInstruction
 {
 	public LoadaiFieldInstruction
 	(
-int regSource0,string str0,int regDest0	) : base ("loadai")
+Register regSource0,string str0,Register regDest0	) : base ("loadai")
 	{
 this.RegSource0 = regSource0;this.Str0 = str0;this.RegDest0 = regDest0;	}
 
-public int RegSource0{ get; private set; }
+public Register RegSource0{ get; private set; }
 public string Str0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, {2}, r{3}", Name, RegSource0, Str0, RegDest0);
+return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Str0, RegDest0);
 }
 }
 
@@ -1197,34 +1197,34 @@ public partial class LoadaiVarInstruction : MilocInstruction
 {
 	public LoadaiVarInstruction
 	(
-string str0,int regDest0	) : base ("loadai")
+string str0,Register regDest0	) : base ("loadai")
 	{
 this.Str0 = str0;this.RegDest0 = regDest0;	}
 
 public string Str0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} rarp, {2}, r{3}", Name, null, Str0, RegDest0);
+return string.Format("{0} rarp, {2}, {3}", Name, null, Str0, RegDest0);
 }
 }
 
@@ -1234,34 +1234,34 @@ public partial class LoadglobalInstruction : MilocInstruction
 {
 	public LoadglobalInstruction
 	(
-string str0,int regDest0	) : base ("loadglobal")
+string str0,Register regDest0	) : base ("loadglobal")
 	{
 this.Str0 = str0;this.RegDest0 = regDest0;	}
 
 public string Str0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} {1}, r{2}", Name, Str0, RegDest0);
+return string.Format("{0} {1}, {2}", Name, Str0, RegDest0);
 }
 }
 
@@ -1271,34 +1271,34 @@ public partial class StoreglobalInstruction : MilocInstruction
 {
 	public StoreglobalInstruction
 	(
-int regSource0,string str0	) : base ("storeglobal")
+Register regSource0,string str0	) : base ("storeglobal")
 	{
 this.RegSource0 = regSource0;this.Str0 = str0;	}
 
-public int RegSource0{ get; private set; }
+public Register RegSource0{ get; private set; }
 public string Str0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}, {2}", Name, RegSource0, Str0);
+return string.Format("{0} {1}, {2}", Name, RegSource0, Str0);
 }
 }
 
@@ -1308,34 +1308,34 @@ public partial class ComputeglobaladdressInstruction : MilocInstruction
 {
 	public ComputeglobaladdressInstruction
 	(
-string str0,int regDest0	) : base ("computeglobaladdress")
+string str0,Register regDest0	) : base ("computeglobaladdress")
 	{
 this.Str0 = str0;this.RegDest0 = regDest0;	}
 
 public string Str0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} {1}, r{2}", Name, Str0, RegDest0);
+return string.Format("{0} {1}, {2}", Name, Str0, RegDest0);
 }
 }
 
@@ -1345,35 +1345,35 @@ public partial class NewInstruction : MilocInstruction
 {
 	public NewInstruction
 	(
-string str0,string[] arr0,int regDest0	) : base ("new")
+string str0,string[] arr0,Register regDest0	) : base ("new")
 	{
 this.Str0 = str0;this.Arr0 = arr0;this.RegDest0 = regDest0;	}
 
 public string Str0{ get; private set; }
 public string[] Arr0{ get; private set; }
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} {1}, [{2}], r{3}", Name, Str0, string.Join(", ", Arr0), RegDest0);
+return string.Format("{0} {1}, [{2}], {3}", Name, Str0, string.Join(", ", Arr0), RegDest0);
 }
 }
 
@@ -1383,33 +1383,33 @@ public partial class DelInstruction : MilocInstruction
 {
 	public DelInstruction
 	(
-int regSource0	) : base ("del")
+Register regSource0	) : base ("del")
 	{
 this.RegSource0 = regSource0;	}
 
-public int RegSource0{ get; private set; }
+public Register RegSource0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
 public override string ToString()
 {
-return string.Format("{0} r{1}", Name, RegSource0);
+return string.Format("{0} {1}", Name, RegSource0);
 }
 }
 
@@ -1417,7 +1417,7 @@ return string.Format("{0} r{1}", Name, RegSource0);
 
 public interface IMilocTranslator<T> where T : Instruction
 {
-
+	IEnumerable<T> FunctionStart(FunctionBlock<T> block);
 	IEnumerable<T> Add(AddInstruction s, InstructionStream<MilocInstruction> stream);
 	IEnumerable<T> Addi(AddiInstruction s, InstructionStream<MilocInstruction> stream);
 	IEnumerable<T> Div(DivInstruction s, InstructionStream<MilocInstruction> stream);
@@ -1460,7 +1460,10 @@ public interface IMilocTranslator<T> where T : Instruction
 
 public class MilocIdentityTranslator : IMilocTranslator<MilocInstruction>
 {
-
+	public IEnumerable<MilocInstruction> FunctionStart(FunctionBlock<MilocInstruction> block)
+	{
+		yield break;
+	}
 	public IEnumerable<MilocInstruction> Add(AddInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
 	public IEnumerable<MilocInstruction> Addi(AddiInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
 	public IEnumerable<MilocInstruction> Div(DivInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
@@ -1508,6 +1511,11 @@ public class MilocConverter<T> : IInstructionConverter<MilocInstruction, T>
 	public MilocConverter(IMilocTranslator<T> translator)
 	{
 		this.translator = translator;
+	}
+
+	public IEnumerable<T> FunctionStart(FunctionBlock<T> block)
+	{
+		return translator.FunctionStart(block);
 	}
 
 	public IEnumerable<T> Convert(InstructionStream<MilocInstruction> s)

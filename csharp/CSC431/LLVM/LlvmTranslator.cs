@@ -7,7 +7,11 @@ namespace CSC431.LLVM
 {
     class LlvmTranslator : CSC431.IL.IMilocTranslator<LlvmInstruction>
     {
-        #region IMilocTranslator<LlvmInstruction> Members
+        public IEnumerable<LlvmInstruction> FunctionStart(CFG.FunctionBlock<LlvmInstruction> block)
+        {
+            return Enumerable.Empty <LlvmInstruction>();
+        }
+
 
         public IEnumerable<LlvmInstruction> Add(IL.AddInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
@@ -221,7 +225,5 @@ namespace CSC431.LLVM
         {
             throw new NotImplementedException();
         }
-
-        #endregion
     }
 }

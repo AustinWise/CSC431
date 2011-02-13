@@ -21,7 +21,7 @@ namespace CSC431.CFG
 
         public string Name { get; private set; }
         public bool CcSet { get; protected set; }
-        public abstract int[] SourceRegs { get; }
-        public abstract int[] DestRegs { get; }
+        public abstract Register[] SourceRegs { get; }
+        public abstract Register[] DestRegs { get; }
     }
 }

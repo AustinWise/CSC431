@@ -9,28 +9,28 @@ public partial class AddInstruction : LlvmInstruction
 {
 	public AddInstruction
 	(
-int regDest0,int regSource0,int regSource1	) : base ("add")
+Register regDest0,Register regSource0,Register regSource1	) : base ("add")
 	{
 this.RegDest0 = regDest0;this.RegSource0 = regSource0;this.RegSource1 = regSource1;	}
 
-public int RegDest0{ get; private set; }
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0, 		};
 	}
 }
@@ -47,28 +47,28 @@ public partial class AddiInstruction : LlvmInstruction
 {
 	public AddiInstruction
 	(
-int regDest0,int regSource0,int immed0	) : base ("add")
+Register regDest0,Register regSource0,int immed0	) : base ("add")
 	{
 this.RegDest0 = regDest0;this.RegSource0 = regSource0;this.Immed0 = immed0;	}
 
-public int RegDest0{ get; private set; }
-public int RegSource0{ get; private set; }
+public Register RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
 public int Immed0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0, 		};
 	}
 }
@@ -85,28 +85,28 @@ public partial class SubInstruction : LlvmInstruction
 {
 	public SubInstruction
 	(
-int regDest0,int regSource0,int regSource1	) : base ("sub")
+Register regDest0,Register regSource0,Register regSource1	) : base ("sub")
 	{
 this.RegDest0 = regDest0;this.RegSource0 = regSource0;this.RegSource1 = regSource1;	}
 
-public int RegDest0{ get; private set; }
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0, 		};
 	}
 }
@@ -123,28 +123,28 @@ public partial class MulInstruction : LlvmInstruction
 {
 	public MulInstruction
 	(
-int regDest0,int regSource0,int regSource1	) : base ("mul")
+Register regDest0,Register regSource0,Register regSource1	) : base ("mul")
 	{
 this.RegDest0 = regDest0;this.RegSource0 = regSource0;this.RegSource1 = regSource1;	}
 
-public int RegDest0{ get; private set; }
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0, 		};
 	}
 }
@@ -161,28 +161,28 @@ public partial class SdivInstruction : LlvmInstruction
 {
 	public SdivInstruction
 	(
-int regDest0,int regSource0,int regSource1	) : base ("sdiv")
+Register regDest0,Register regSource0,Register regSource1	) : base ("sdiv")
 	{
 this.RegDest0 = regDest0;this.RegSource0 = regSource0;this.RegSource1 = regSource1;	}
 
-public int RegDest0{ get; private set; }
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0, 		};
 	}
 }
@@ -199,28 +199,28 @@ public partial class AndInstruction : LlvmInstruction
 {
 	public AndInstruction
 	(
-int regDest0,int regSource0,int regSource1	) : base ("and")
+Register regDest0,Register regSource0,Register regSource1	) : base ("and")
 	{
 this.RegDest0 = regDest0;this.RegSource0 = regSource0;this.RegSource1 = regSource1;	}
 
-public int RegDest0{ get; private set; }
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0, 		};
 	}
 }
@@ -237,28 +237,28 @@ public partial class OrInstruction : LlvmInstruction
 {
 	public OrInstruction
 	(
-int regDest0,int regSource0,int regSource1	) : base ("or")
+Register regDest0,Register regSource0,Register regSource1	) : base ("or")
 	{
 this.RegDest0 = regDest0;this.RegSource0 = regSource0;this.RegSource1 = regSource1;	}
 
-public int RegDest0{ get; private set; }
-public int RegSource0{ get; private set; }
-public int RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0, RegSource1		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0, 		};
 	}
 }
@@ -275,27 +275,27 @@ public partial class LoadiInstruction : LlvmInstruction
 {
 	public LoadiInstruction
 	(
-int regDest0,int immed0	) : base ("loadi")
+Register regDest0,int immed0	) : base ("loadi")
 	{
 this.RegDest0 = regDest0;this.Immed0 = immed0;	}
 
-public int RegDest0{ get; private set; }
+public Register RegDest0{ get; private set; }
 public int Immed0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegDest0, 		};
 	}
 }
@@ -318,26 +318,26 @@ public partial class RetvalueInstruction : LlvmInstruction
 {
 	public RetvalueInstruction
 	(
-int regSource0	) : base ("retvalue")
+Register regSource0	) : base ("retvalue")
 	{
 this.RegSource0 = regSource0;	}
 
-public int RegSource0{ get; private set; }
+public Register RegSource0{ get; private set; }
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 RegSource0		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
@@ -365,20 +365,20 @@ public partial class RetvoidInstruction : LlvmInstruction
 	}
 
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 		};
 	}
 }

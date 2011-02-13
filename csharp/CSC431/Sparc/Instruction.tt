@@ -5,7 +5,7 @@ using CSC431.CFG;
 using System;
 using System.Collections.Generic;
 
-namespace CSC431.LLVM
+namespace CSC431.Sparc
 {
 
 <#
@@ -13,7 +13,7 @@ foreach (var instr in InstrInfo.GetAll())
 {
     var className = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString()) + "Instruction";
 #>
-public partial class <#=className #> : LlvmInstruction
+public partial class <#=className #> : SparcInstruction
 {
 	public <#=className #>
 	(
@@ -93,56 +93,46 @@ instr.ForEachOperand((c, count, isLast) =>
 }
 
 <#
-    if (!instr.IsCustomToString)
-    {
+if (!instr.IsCustomToString)
+{
 #>
 public override string ToString()
 {
 <#
-    int placeHolderCount = 1;
-    string formatStr = "";
-    instr.ForEachOperand((c, count, isLast) =>
+int placeHolderCount = 1;
+string formatStr = "{0}";
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (c.IsConstant)
+        formatStr += " " + c.ConstantValue;
+    else
+        formatStr += " " + c.MilocPrefix + "{" + placeHolderCount + "}" + c.MilocPostfix;
+    if (!isLast)
+        formatStr += ",";
+    placeHolderCount++;
+});
+Write("return string.Format(\"{0}\", Name", formatStr);
+instr.ForEachOperand((c, count, isLast) =>
+{
+    string field = c.UpperPrefix + count;
+    Write(", ");
+    if (c.IsConstant)
     {
-        if (placeHolderCount == 1)
-        {
-            if (c.IsTarget)
-                formatStr += c.MilocPrefix + "{" + placeHolderCount + "}" + c.MilocPostfix + " = {0} i32";
-            else
-                formatStr += "{0} i32";
-        }
-        else
-        {
-            if (c.IsConstant)
-                formatStr += " " + c.ConstantValue;
-            else
-                formatStr += " " + c.MilocPrefix + "{" + placeHolderCount + "}" + c.MilocPostfix;
-            if (!isLast)
-                formatStr += ",";
-        }
-        placeHolderCount++;
-    });
-    Write("return string.Format(\"{0}\", Name", formatStr);
-    instr.ForEachOperand((c, count, isLast) =>
-    {
-        string field = c.UpperPrefix + count;
-        Write(", ");
-        if (c.IsConstant)
-        {
-            Write("null");
-            return;
-        }
-        if (string.IsNullOrEmpty(c.SpecialConversion))
-            Write(field);
-        else
-            Write(c.SpecialConversion, field);
-    });
+        Write("null");
+        return;
+    }
+    if (string.IsNullOrEmpty(c.SpecialConversion))
+        Write(field);
+    else
+        Write(c.SpecialConversion, field);
+});
 #>
 );
 }
 <#
-    }
-    else
-    {
+}
+else
+{
 #>
 	public override string ToString()
 	{
@@ -155,7 +145,7 @@ public override string ToString()
 
 	partial void ToStringCore(ref string ret);
 <#
-    }
+}
 #>
 }
 
@@ -180,8 +170,10 @@ private class OperandType
     private static Dictionary<char, OperandType> sTypes = new Dictionary<char, OperandType>();
     static OperandType()
     {
-        sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", MilocPrefix = "%r", Type = "Register", IsSource = true });
-        sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", MilocPrefix = "%r", Type = "Register", IsTarget = true });
+        sTypes.Add('h', new OperandType() { LowerPrefix = "hiBits", UpperPrefix = "HiBits", MilocPrefix = "hi(%r", MilocPostfix = ")", Type = "int" });
+        sTypes.Add('o', new OperandType() { LowerPrefix = "loBits", UpperPrefix = "LoBits", MilocPrefix = "lo(%r", MilocPostfix = ")", Type = "int" });
+        sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", MilocPrefix = "%", Type = "Register", IsSource = true });
+        sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", MilocPrefix = "%", Type = "Register", IsTarget = true });
         sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "Label<MilocInstruction>" });
         sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", Type = "int" });
         sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", Type = "string" });
@@ -270,16 +262,17 @@ private class InstrInfo
     {
         return new[]
             {
-                new InstrInfo("Rrr", "add"),
-                new InstrInfo("Rri", "add", "addi"),
-                new InstrInfo("Rrr", "sub"),
-                new InstrInfo("Rrr", "mul"),
-                new InstrInfo("Rrr", "sdiv"),
-                new InstrInfo("Rrr", "and"),
-                new InstrInfo("Rrr", "or"),
-                new InstrInfo("Ri", "loadi", InstrFlags.CustomToString),
-                new InstrInfo("r", "retvalue", InstrFlags.CustomToString),
-                new InstrInfo("", "retvoid", InstrFlags.CustomToString),
+                new InstrInfo("rrR", "add"),
+                new InstrInfo("riR", "add", "addi"),
+                new InstrInfo("rrR", "or"),
+                new InstrInfo("riR", "or", "ori"),
+                new InstrInfo("oR", "or", "orl"),
+                new InstrInfo("hR", "sethi"),
+                new InstrInfo("rR", "mova"),
+                new InstrInfo("", "ret"),
+                new InstrInfo("", "restore"),
+                new InstrInfo("", "nop"),
+                new InstrInfo("riR", "save"),
             };
     }
 }

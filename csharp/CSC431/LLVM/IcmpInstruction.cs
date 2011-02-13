@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CSC431.CFG;
 
 namespace CSC431.LLVM
 {
@@ -17,9 +18,9 @@ namespace CSC431.LLVM
     class IcmpInstruction : LlvmInstruction
     {
         private ConditionType cond;
-        private int rd, r1, r2;
+        private Register rd, r1, r2;
 
-        public IcmpInstruction(ConditionType cond, int rd, int r1, int r2)
+        public IcmpInstruction(ConditionType cond, Register rd, Register r1, Register r2)
             : base("icmp")
         {
             this.cond = cond;
@@ -28,12 +29,12 @@ namespace CSC431.LLVM
             this.rd = rd;
         }
 
-        public override int[] SourceRegs
+        public override Register[] SourceRegs
         {
             get { throw new NotImplementedException(); }
         }
 
-        public override int[] DestRegs
+        public override Register[] DestRegs
         {
             get { throw new NotImplementedException(); }
         }

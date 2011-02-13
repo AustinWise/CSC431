@@ -48,6 +48,8 @@
     <Compile Include="CFG\IInstructionConverter.cs" />
     <Compile Include="CFG\InstructionStream.cs" />
     <Compile Include="CFG\Printer.cs" />
+    <Compile Include="CFG\Register.cs" />
+    <Compile Include="CFG\VirtualRegister.cs" />
     <Compile Include="EvilException.cs" />
     <Compile Include="CFG\BasicBlock.cs" />
     <Compile Include="CFG\FunctionBlock.cs" />
@@ -96,17 +98,31 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Content Include="IL\Instruction.tt">
+    <Compile Include="IL\Instruction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
-    </Content>
+    </Compile>
     <Compile Include="NDesk.Options.cs" />
     <Content Include="LLVM\Instruction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
     </Content>
+    <Compile Include="Sparc\Instruction.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Instruction.generated.cs</LastGenOutput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SparcSteps.cs" />
+    <Compile Include="Sparc\Instruction.generated.cs">
+      <DependentUpon>Instruction.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Sparc\SparcInstruction.cs" />
+    <Compile Include="Sparc\SparcPrinter.cs" />
+    <Compile Include="Sparc\SparcRegister.cs" />
+    <Compile Include="Sparc\SparcTranslator.cs" />
     <Compile Include="StackSteps.cs" />
     <Compile Include="Stack\StackGen.cs" />
     <Compile Include="Stack\StackGen.mine.cs" />

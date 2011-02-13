@@ -13,42 +13,54 @@ namespace CSC431
     public static class IlSteps
     {
 
-        public static InOutStep<Tuple<CommonTokenStream, CommonTree>, ProgramBlock<MilocInstruction>> MakeCFG = new InOutStep<Tuple<CommonTokenStream, CommonTree>, ProgramBlock<MilocInstruction>>(t =>
+        public static InOutStep<Tuple<CommonTokenStream, CommonTree>, ProgramBlock<MilocInstruction>> MakeCFG()
         {
-            CommonTreeNodeStream nodes = new CommonTreeNodeStream(t.Item2);
-            nodes.TokenStream = t.Item1;
-            IlGenWalker tparser = new IlGenWalker(nodes);
-            tparser.TraceDestination = Console.Out;
-
-            var c = tparser.Program();
-
-            if (tparser.NumberOfSyntaxErrors != 0)
-                throw new EvilException("make cfg syntax error");
-
-            return c;
-        });
-
-        public static TransformStep<ProgramBlock<MilocInstruction>> CleanUpCfg = new TransformStep<ProgramBlock<MilocInstruction>>(c =>
-        {
-            c.Visit(n =>
+            return new InOutStep<Tuple<CommonTokenStream, CommonTree>, ProgramBlock<MilocInstruction>>(t =>
             {
-                if (!n.IsFixedUp)
-                {
-                    throw new Exception("not all nodes are fixed up.");
-                }
+                CommonTreeNodeStream nodes = new CommonTreeNodeStream(t.Item2);
+                nodes.TokenStream = t.Item1;
+                IlGenWalker tparser = new IlGenWalker(nodes);
+                tparser.TraceDestination = Console.Out;
+
+                var c = tparser.Program();
+
+                if (tparser.NumberOfSyntaxErrors != 0)
+                    throw new EvilException("make cfg syntax error");
+
+                return c;
             });
+        }
 
-            return c;
-        });
-
-        public static InStep<ProgramBlock<MilocInstruction>> PrintCFG = new InStep<ProgramBlock<MilocInstruction>>(c =>
+        public static TransformStep<ProgramBlock<MilocInstruction>> CleanUpCfg()
         {
-            c.Print(Console.Out, new MilocPrinter());
-        });
+            return new TransformStep<ProgramBlock<MilocInstruction>>(c =>
+            {
+                c.Visit(n =>
+                {
+                    if (!n.IsFixedUp)
+                    {
+                        throw new Exception("not all nodes are fixed up.");
+                    }
+                });
 
-        public static TransformStep<ProgramBlock<MilocInstruction>> ConvertIdentity = new TransformStep<ProgramBlock<MilocInstruction>>(c =>
+                return c;
+            });
+        }
+
+        public static InStep<ProgramBlock<MilocInstruction>> PrintCFG()
         {
-            return c.Convert(new MilocConverter<MilocInstruction>(new MilocIdentityTranslator())) as ProgramBlock<MilocInstruction>;
-        });
+            return new InStep<ProgramBlock<MilocInstruction>>(c =>
+            {
+                c.Print(Console.Out, new MilocPrinter());
+            });
+        }
+
+        public static TransformStep<ProgramBlock<MilocInstruction>> ConvertIdentity()
+        {
+            return new TransformStep<ProgramBlock<MilocInstruction>>(c =>
+            {
+                return c.Convert(new MilocConverter<MilocInstruction>(new MilocIdentityTranslator())) as ProgramBlock<MilocInstruction>;
+            });
+        }
     }
 }

@@ -54,11 +54,11 @@ instr.ForEachOperand((c, count, isLast) =>
 });
 #>
 
-public override int[] SourceRegs
+public override Register[] SourceRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 <#
 instr.ForEachOperand((c, count, isLast) =>
 {
@@ -73,11 +73,11 @@ instr.ForEachOperand((c, count, isLast) =>
 	}
 }
 
-public override int[] DestRegs
+public override Register[] DestRegs
 {
 	get
 	{
-		return new int[] {
+		return new Register[] {
 <#
 instr.ForEachOperand((c, count, isLast) =>
 {
@@ -134,7 +134,7 @@ instr.ForEachOperand((c, count, isLast) =>
 #>
 public interface IMilocTranslator<T> where T : Instruction
 {
-
+	IEnumerable<T> FunctionStart(FunctionBlock<T> block);
 <#
     foreach (var instr in InstrInfo.GetAll())
     {
@@ -149,7 +149,10 @@ public interface IMilocTranslator<T> where T : Instruction
 
 public class MilocIdentityTranslator : IMilocTranslator<MilocInstruction>
 {
-
+	public IEnumerable<MilocInstruction> FunctionStart(FunctionBlock<MilocInstruction> block)
+	{
+		yield break;
+	}
 <#
     foreach (var instr in InstrInfo.GetAll())
     {
@@ -169,6 +172,11 @@ public class MilocConverter<T> : IInstructionConverter<MilocInstruction, T>
 	public MilocConverter(IMilocTranslator<T> translator)
 	{
 		this.translator = translator;
+	}
+
+	public IEnumerable<T> FunctionStart(FunctionBlock<T> block)
+	{
+		return translator.FunctionStart(block);
 	}
 
 	public IEnumerable<T> Convert(InstructionStream<MilocInstruction> s)
@@ -211,8 +219,8 @@ private class OperandType
     private static Dictionary<char, OperandType> sTypes = new Dictionary<char, OperandType>();
     static OperandType()
     {
-        sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", MilocPrefix = "r", Type = "int", IsSource = true });
-        sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", MilocPrefix = "r", Type = "int", IsTarget = true });
+        sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", Type = "Register", IsSource = true });
+        sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", Type = "Register", IsTarget = true });
         sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "Label<MilocInstruction>" });
         sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", Type = "int" });
         sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", Type = "string" });
