@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-02-12 21:12:13
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-02-14 16:49:52
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -210,7 +210,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: f, t, d
+    		// elements: d, f, t
     		// token labels: 
     		// rule labels: f, retval, d, t
     		// token list labels: 
@@ -932,7 +932,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: i, t
+    		// elements: t, i
     		// token labels: i
     		// rule labels: retval, t
     		// token list labels: 
@@ -1774,7 +1774,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: r, s, d, FUN, id, p
+    		// elements: d, s, id, p, FUN, r
     		// token labels: id
     		// rule labels: retval, d, s, r, p
     		// token list labels: 
@@ -2695,7 +2695,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: e, ASSIGN, l
+    		// elements: ASSIGN, l, e
     		// token labels: 
     		// rule labels: retval, e, l
     		// token list labels: 
@@ -3145,7 +3145,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: b, e, e, WHILE
+    		// elements: e, b, e, WHILE
     		// token labels: 
     		// rule labels: retval, e, b
     		// token list labels: 
@@ -3448,7 +3448,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: id, a
+    		// elements: a, id
     		// token labels: id
     		// rule labels: retval, a
     		// token list labels: 
@@ -5272,7 +5272,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     			{
     			// AST REWRITE
-    			// elements: a, id
+    			// elements: id, a
     			// token labels: id
     			// rule labels: retval, a
     			// token list labels: 

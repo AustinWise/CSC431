@@ -7,9 +7,11 @@ namespace CSC431
 {
     public static class Program
     {
+        public static FrontEnd.StructTypes Stypes;
+        public static FrontEnd.SymbolTable Stable;
+
         public static void Main(String[] args)
         {
-            args = new[] { "test.ev" };
             try
             {
                 Options.ParseParameters(args);

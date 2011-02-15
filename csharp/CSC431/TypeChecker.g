@@ -126,6 +126,7 @@ function [StructTypes stypes,SymbolTable globalStable]
 @init {SymbolTable myStable = new SymbolTable($globalStable); List<Type> sparams = new List<Type>(); }
 	: ^(FUN id=ID p=parameters[stypes, myStable, sparams] ^(RETTYPE r=return_type[stypes]) d=declarations[stypes, myStable]
 	{
+		myStable.Name = $id.text;
 		if ($globalStable.redef($id.text))
 		{
 			error($id.line, "redef function '" + $id + "'");

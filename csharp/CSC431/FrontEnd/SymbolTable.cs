@@ -6,19 +6,55 @@ namespace CSC431.FrontEnd
 {
     public class SymbolTable
     {
+        private string name = null;
         private SymbolTable parent = null;
         private Dictionary<String, Type> declares = new Dictionary<String, Type>();
         private List<String> formals = new List<String>();
+        private List<SymbolTable> children = new List<SymbolTable>();
 
         public Type returnType = null;
 
         public SymbolTable()
         {
+            name = "~global~";
         }
 
         public SymbolTable(SymbolTable parent)
         {
             this.parent = parent;
+            this.parent.children.Add(this);
+        }
+
+        public string Name
+        {
+            get
+            {
+                if (name == null)
+                    throw new Exception("name not set");
+                return name;
+            }
+            set
+            {
+                if (name != null)
+                    throw new Exception("name set twice");
+                name = value;
+            }
+        }
+
+        public List<SymbolTable> Children
+        {
+            get
+            {
+                return this.children;
+            }
+        }
+
+        public List<string> Formals
+        {
+            get
+            {
+                return this.formals;
+            }
         }
 
         public void put(String sym, Type t)

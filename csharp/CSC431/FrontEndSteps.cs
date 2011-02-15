@@ -72,8 +72,8 @@ namespace CSC431
                 TypeChecker tparser = new TypeChecker(nodes);
                 tparser.TraceDestination = Console.Out;
 
-                StructTypes stypes = new StructTypes();
-                SymbolTable stable = new SymbolTable();
+                StructTypes stypes = Program.Stypes = new StructTypes();
+                SymbolTable stable = Program.Stable = new SymbolTable();
 
                 tparser.Program(stypes, stable);
 
