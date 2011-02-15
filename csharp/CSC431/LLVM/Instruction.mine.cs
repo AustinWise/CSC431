@@ -9,14 +9,14 @@ namespace CSC431.LLVM
     {
         partial void ToStringCore(ref string ret)
         {
-            ret = string.Format("%r{0} = add i32 {1}, 0", RegDest0, Immed0);
+            ret = string.Format("%{0} = add i32 {1}, 0", RegDest0, Immed0);
         }
     }
     public partial class RetvalueInstruction
     {
         partial void ToStringCore(ref string ret)
         {
-            ret = string.Format("ret i32 %r{0}", RegSource0);
+            ret = string.Format("ret i32 %{0}", RegSource0);
         }
     }
     public partial class RetvoidInstruction

@@ -23,7 +23,7 @@ namespace CSC431
         {
             return new InStep<ProgramBlock<LlvmInstruction>>(c =>
             {
-                c.Print(Console.Out, null);
+                c.Print(Console.Out, new LlvmPrinter());
             });
         }
     }

@@ -37,7 +37,7 @@ RegDest0, 		};
 
 public override string ToString()
 {
-return string.Format("%r{1} = {0} i32 %r{2}, %r{3}", Name, RegDest0, RegSource0, RegSource1);
+return string.Format("%{1} = {0} i32 %{2}, %{3}", Name, RegDest0, RegSource0, RegSource1);
 }
 }
 
@@ -75,7 +75,7 @@ RegDest0, 		};
 
 public override string ToString()
 {
-return string.Format("%r{1} = {0} i32 %r{2}, {3}", Name, RegDest0, RegSource0, Immed0);
+return string.Format("%{1} = {0} i32 %{2}, {3}", Name, RegDest0, RegSource0, Immed0);
 }
 }
 
@@ -113,7 +113,7 @@ RegDest0, 		};
 
 public override string ToString()
 {
-return string.Format("%r{1} = {0} i32 %r{2}, %r{3}", Name, RegDest0, RegSource0, RegSource1);
+return string.Format("%{1} = {0} i32 %{2}, %{3}", Name, RegDest0, RegSource0, RegSource1);
 }
 }
 
@@ -151,7 +151,7 @@ RegDest0, 		};
 
 public override string ToString()
 {
-return string.Format("%r{1} = {0} i32 %r{2}, %r{3}", Name, RegDest0, RegSource0, RegSource1);
+return string.Format("%{1} = {0} i32 %{2}, %{3}", Name, RegDest0, RegSource0, RegSource1);
 }
 }
 
@@ -189,7 +189,7 @@ RegDest0, 		};
 
 public override string ToString()
 {
-return string.Format("%r{1} = {0} i32 %r{2}, %r{3}", Name, RegDest0, RegSource0, RegSource1);
+return string.Format("%{1} = {0} i32 %{2}, %{3}", Name, RegDest0, RegSource0, RegSource1);
 }
 }
 
@@ -227,7 +227,7 @@ RegDest0, 		};
 
 public override string ToString()
 {
-return string.Format("%r{1} = {0} i32 %r{2}, %r{3}", Name, RegDest0, RegSource0, RegSource1);
+return string.Format("%{1} = {0} i32 %{2}, %{3}", Name, RegDest0, RegSource0, RegSource1);
 }
 }
 
@@ -265,7 +265,7 @@ RegDest0, 		};
 
 public override string ToString()
 {
-return string.Format("%r{1} = {0} i32 %r{2}, %r{3}", Name, RegDest0, RegSource0, RegSource1);
+return string.Format("%{1} = {0} i32 %{2}, %{3}", Name, RegDest0, RegSource0, RegSource1);
 }
 }
 

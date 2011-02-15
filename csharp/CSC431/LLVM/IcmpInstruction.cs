@@ -41,7 +41,7 @@ namespace CSC431.LLVM
 
         public override string ToString()
         {
-            return string.Format("%r{3} = icmp {0} i32 {1}, {2}", cond, r1, r2, rd);
+            return string.Format("%{3} = icmp {0} i32 %{1}, %{2}", cond, r1, r2, rd);
         }
     }
 }

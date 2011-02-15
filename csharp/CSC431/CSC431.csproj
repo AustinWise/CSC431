@@ -91,6 +91,7 @@
     </Compile>
     <Compile Include="LLVM\Instruction.mine.cs" />
     <Compile Include="LLVM\LlvmInstruction.cs" />
+    <Compile Include="LLVM\LlvmPrinter.cs" />
     <Compile Include="LLVM\LlvmTranslator.cs" />
     <Compile Include="LLVM\SelectInstruction.cs" />
     <Compile Include="Options.cs" />
@@ -98,19 +99,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Compile Include="IL\Instruction.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Instruction.generated.cs</LastGenOutput>
-    </Compile>
-    <Compile Include="NDesk.Options.cs" />
-    <Content Include="LLVM\Instruction.tt">
+    <Content Include="IL\Instruction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
     </Content>
-    <Compile Include="Sparc\Instruction.tt">
+    <Compile Include="NDesk.Options.cs" />
+    <Compile Include="LLVM\Instruction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
     </Compile>
+    <Content Include="Sparc\Instruction.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Instruction.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SparcSteps.cs" />

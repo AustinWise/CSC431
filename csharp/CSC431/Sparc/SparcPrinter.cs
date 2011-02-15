@@ -32,6 +32,8 @@ namespace CSC431.Sparc
 
         public override void PrintNodeHeader(System.IO.TextWriter tw, Node<SparcInstruction> f)
         {
+            if (f.PrintLabel)
+                tw.WriteLine("L{0}:", f.Label);
         }
     }
 }
