@@ -20,23 +20,26 @@ namespace CSC431
                 return;
             }
 
-            var pipe = FrontEndSteps.CreateLexer
-                .FollowWith(FrontEndSteps.Parse);
+            var pipe = FrontEndSteps.CreateLexer()
+                .FollowWith(FrontEndSteps.Parse());
 
             if (Options.DisplayAST)
-                pipe.FollowWith(FrontEndSteps.PrintAst);
+                pipe.FollowWith(FrontEndSteps.PrintAst());
 
-            var typeChecked = pipe.FollowWith(FrontEndSteps.TypeCheck);
-            var flow = typeChecked.FollowWith(IlSteps.MakeCFG).FollowWith(IlSteps.CleanUpCfg);
+            var typeChecked = pipe.FollowWith(FrontEndSteps.TypeCheck());
+            var flow = typeChecked.FollowWith(IlSteps.MakeCFG()).FollowWith(IlSteps.CleanUpCfg());
 
             if (Options.DumpIL)
-                flow.FollowWith(IlSteps.PrintCFG);
+                flow.FollowWith(IlSteps.PrintCFG());
 
             if (Options.Llvm)
-                flow.FollowWith(LlvmSteps.ConvertToLlvm).FollowWith(LlvmSteps.PrintCFG);
+                flow.FollowWith(LlvmSteps.ConvertToLlvm()).FollowWith(LlvmSteps.PrintCFG());
+
+            if (!(Options.DumpIL || Options.Llvm))
+                flow.FollowWith(SparcSteps.ConvertToLlvm()).FollowWith(SparcSteps.PrintCFG());
 
             if (!string.IsNullOrEmpty(Options.ClrExec))
-                typeChecked.FollowWith(StackSteps.MakeClrExe);
+                typeChecked.FollowWith(StackSteps.MakeClrExe());
 
             try
             {
