@@ -35,7 +35,11 @@ namespace CSC431
                 flow.FollowWith(IlSteps.PrintCFG());
 
             if (Options.Llvm)
-                flow.FollowWith(LlvmSteps.ConvertToLlvm()).FollowWith(LlvmSteps.PrintCFG());
+            {
+                var llvm = flow.FollowWith(LlvmSteps.ConvertToLlvm());
+                //llvm.FollowWith(LlvmSteps.PrintCFG());
+                llvm.FollowWith(LlvmSteps.BitcodeToSparc());
+            }
 
             if (!(Options.DumpIL || Options.Llvm))
                 flow.FollowWith(SparcSteps.ConvertToSparc()).FollowWith(SparcSteps.RegisterAllocation()).FollowWith(SparcSteps.PrintCFG());

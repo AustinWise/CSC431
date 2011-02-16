@@ -6,6 +6,7 @@ using CSC431.Steps;
 using CSC431.CFG;
 using CSC431.IL;
 using CSC431.LLVM;
+using System.Diagnostics;
 
 namespace CSC431
 {
@@ -24,6 +25,30 @@ namespace CSC431
             return new InStep<ProgramBlock<LlvmInstruction>>(c =>
             {
                 c.Print(Console.Out, new LlvmPrinter());
+            });
+        }
+
+        public static InStep<ProgramBlock<LlvmInstruction>> BitcodeToSparc()
+        {
+            return new InStep<ProgramBlock<LlvmInstruction>>(c =>
+            {
+                ProcessStartInfo si = new ProcessStartInfo("llc.exe", "-march=sparcv9");
+                si.UseShellExecute = false;
+                si.RedirectStandardInput = true;
+                si.RedirectStandardError = true;
+                si.RedirectStandardOutput = true;
+
+                Process p = Process.Start(si);
+
+                c.Print(p.StandardInput, new LlvmPrinter());
+                p.StandardInput.Flush();
+                p.StandardInput.Close();
+
+                p.WaitForExit();
+
+                var text = p.StandardOutput.ReadToEnd();
+
+                Console.WriteLine(text);
             });
         }
     }
