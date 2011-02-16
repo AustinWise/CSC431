@@ -793,11 +793,11 @@ public partial class JumpiInstruction : MilocInstruction
 {
 	public JumpiInstruction
 	(
-Label<MilocInstruction> label0	) : base ("jumpi")
+Label label0	) : base ("jumpi")
 	{
 this.Label0 = label0;	}
 
-public Label<MilocInstruction> Label0{ get; private set; }
+public Label Label0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -829,12 +829,12 @@ public partial class CbreqInstruction : MilocInstruction
 {
 	public CbreqInstruction
 	(
-Label<MilocInstruction> label0,Label<MilocInstruction> label1	) : base ("cbreq")
+Label label0,Label label1	) : base ("cbreq")
 	{
 this.Label0 = label0;this.Label1 = label1;	}
 
-public Label<MilocInstruction> Label0{ get; private set; }
-public Label<MilocInstruction> Label1{ get; private set; }
+public Label Label0{ get; private set; }
+public Label Label1{ get; private set; }
 
 public override Register[] SourceRegs
 {

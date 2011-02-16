@@ -221,7 +221,7 @@ private class OperandType
     {
         sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", Type = "Register", IsSource = true });
         sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", Type = "Register", IsTarget = true });
-        sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "Label<MilocInstruction>" });
+        sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "Label" });
         sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", Type = "int" });
         sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", Type = "string" });
         sTypes.Add('a', new OperandType() { LowerPrefix = "arr", UpperPrefix = "Arr", MilocPrefix = "[", MilocPostfix = "]", Type = "string[]", SpecialConversion = "string.Join(\", \", {0})" });

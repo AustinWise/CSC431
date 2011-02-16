@@ -170,16 +170,16 @@ private class OperandType
     private static Dictionary<char, OperandType> sTypes = new Dictionary<char, OperandType>();
     static OperandType()
     {
-        sTypes.Add('h', new OperandType() { LowerPrefix = "hiBits", UpperPrefix = "HiBits", MilocPrefix = "hi(%r", MilocPostfix = ")", Type = "int" });
-        sTypes.Add('o', new OperandType() { LowerPrefix = "loBits", UpperPrefix = "LoBits", MilocPrefix = "lo(%r", MilocPostfix = ")", Type = "int" });
+        sTypes.Add('h', new OperandType() { LowerPrefix = "hiBits", UpperPrefix = "HiBits", MilocPrefix = "hi(", MilocPostfix = ")", Type = "int" });
+        sTypes.Add('o', new OperandType() { LowerPrefix = "loBits", UpperPrefix = "LoBits", MilocPrefix = "lo(", MilocPostfix = ")", Type = "int" });
         sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", MilocPrefix = "%", Type = "Register", IsSource = true });
         sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", MilocPrefix = "%", Type = "Register", IsTarget = true });
-        sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "Label<MilocInstruction>" });
+        sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "Label" });
         sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", Type = "int" });
         sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", Type = "string" });
         sTypes.Add('a', new OperandType() { LowerPrefix = "arr", UpperPrefix = "Arr", MilocPrefix = "[", MilocPostfix = "]", Type = "string[]", SpecialConversion = "string.Join(\", \", {0})" });
         sTypes.Add('k', new OperandType() { ConstantValue = "rarp" });
-        sTypes.Add('c', new OperandType() { ConstantValue = "%cmp" });
+        sTypes.Add('c', new OperandType() { ConstantValue = "%icc" });
     }
 
     public string LowerPrefix { get; private set; }
@@ -264,11 +264,17 @@ private class InstrInfo
             {
                 new InstrInfo("rrR", "add"),
                 new InstrInfo("riR", "add", "addi"),
+                new InstrInfo("rrR", "sub"),
                 new InstrInfo("rrR", "or"),
                 new InstrInfo("riR", "or", "ori"),
-                new InstrInfo("oR", "or", "orl"),
+                new InstrInfo("roR", "or", "orl"),
+                new InstrInfo("rr", "cmp"),
+                new InstrInfo("cl", "be"),
+                new InstrInfo("cl", "ba"),
+                new InstrInfo("l", "jmp"),
                 new InstrInfo("hR", "sethi"),
                 new InstrInfo("rR", "mova"),
+                new InstrInfo("l", "call"),
                 new InstrInfo("", "ret"),
                 new InstrInfo("", "restore"),
                 new InstrInfo("", "nop"),

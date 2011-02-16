@@ -12,7 +12,6 @@ namespace CSC431.Sparc
             yield return new SaveInstruction(new SparcRegister(SparcReg.sp), -1024, new SparcRegister(SparcReg.sp));
         }
 
-
         public IEnumerable<SparcInstruction> Add(IL.AddInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
             yield return new AddInstruction(s.RegSource0, s.RegSource1, s.RegDest0);
@@ -35,7 +34,7 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Sub(IL.SubInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new SubInstruction(s.RegSource0, s.RegSource1, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Rsubi(IL.RsubiInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -61,7 +60,7 @@ namespace CSC431.Sparc
         public IEnumerable<SparcInstruction> Loadi(IL.LoadiInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
             yield return new SethiInstruction(s.Immed0, s.RegDest0);
-            yield return new OrlInstruction(s.Immed0, s.RegDest0);
+            yield return new OrlInstruction(s.RegDest0, s.Immed0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Print(IL.PrintInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -81,12 +80,12 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Comp(IL.CompInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new CmpInstruction(s.RegSource0, s.RegSource1);
         }
 
         public IEnumerable<SparcInstruction> Mov(IL.MovInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new MovaInstruction(s.RegSource0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Moveq(IL.MoveqInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -121,12 +120,14 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Jumpi(IL.JumpiInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new JmpInstruction(s.Label0);
         }
 
         public IEnumerable<SparcInstruction> Cbreq(IL.CbreqInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new BeInstruction(s.Label0);
+            yield return new NopInstruction();
+            yield return new BaInstruction(s.Label1);
         }
 
         public IEnumerable<SparcInstruction> Loadinargument(IL.LoadinargumentInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)

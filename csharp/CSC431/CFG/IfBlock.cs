@@ -11,10 +11,10 @@ namespace CSC431.CFG
         private BasicBlock<T> Condition;
         private SeqBlock<T> TrueBody;
         private SeqBlock<T> FalseBody;
-        private Label<T> NextLabel;
+        private Label NextLabel;
         private bool isFixed = false;
 
-        public IfBlock(BasicBlock<T> condition, SeqBlock<T> trueBody, SeqBlock<T> falseBody, Label<T> nextLabel)
+        public IfBlock(BasicBlock<T> condition, SeqBlock<T> trueBody, SeqBlock<T> falseBody, Label nextLabel)
         {
             this.Condition = condition;
             this.Condition.SetNext(trueBody.FirstNode);
@@ -68,7 +68,7 @@ namespace CSC431.CFG
 
         protected override Node<Target> ConvertCore<Target>(IInstructionConverter<T, Target> conv)
         {
-            return new IfBlock<Target>(Condition.Convert(conv) as BasicBlock<Target>, TrueBody.Convert(conv) as SeqBlock<Target>, FalseBody.Convert(conv) as SeqBlock<Target>, new Label<Target>());
+            return new IfBlock<Target>(Condition.Convert(conv) as BasicBlock<Target>, TrueBody.Convert(conv) as SeqBlock<Target>, FalseBody.Convert(conv) as SeqBlock<Target>, new Label());
         }
     }
 }

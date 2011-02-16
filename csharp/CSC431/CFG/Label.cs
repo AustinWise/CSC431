@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CSC431.CFG
 {
-    public class Label<T> where T : Instruction
+    public class Label
     {
         private bool _marked;
         private int _loc;
@@ -21,7 +21,7 @@ namespace CSC431.CFG
             this._marked = true;
         }
 
-        public void Mark(Node<T> loc)
+        public void Mark<T>(Node<T> loc) where T : Instruction
         {
             if (_marked)
                 throw new Exception("this label has already been marked");
@@ -44,9 +44,9 @@ namespace CSC431.CFG
             return Loc.ToString();
         }
 
-        public static implicit operator Label<T>(int loc)
+        public static implicit operator Label(int loc)
         {
-            return new Label<T>(loc);
+            return new Label(loc);
         }
 
     }

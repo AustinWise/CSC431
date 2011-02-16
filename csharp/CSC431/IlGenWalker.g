@@ -72,7 +72,9 @@ decl_list[bool isLocal, Dictionary<string, string> typeMap]
 			{
 				if (isLocal)
 				{
-					localMap.Add(id, new VarLocal(id, t));
+          //XXX: changed to VarReg for testing reg alloc, prob should change back so that IL is SSA again so that LLVM will work
+					//localMap.Add(id, new VarLocal(id, t));
+					localMap.Add(id, new VarReg(Instruction.VirtualRegister(), t));
 				}
 				else
 				{
@@ -208,7 +210,7 @@ read returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>(
 	;
 
 conditional returns [IfBlock<MilocInstruction> b]
-@init { var lab = new Label<MilocInstruction>(); }
+@init { var lab = new Label(); }
 	: ^(IF e=expression t=block (f=block)?)
 		{
 			int reg = Instruction.VirtualRegister();
@@ -226,7 +228,7 @@ conditional returns [IfBlock<MilocInstruction> b]
 	;
 
 loop returns [LoopBlock<MilocInstruction> b]
-@init { var lab = new Label<MilocInstruction>(); }
+@init { var lab = new Label(); }
 	: ^(WHILE e=expression body=block expression)
 		{
 			body.Add(new JumpiInstruction(e.Label));

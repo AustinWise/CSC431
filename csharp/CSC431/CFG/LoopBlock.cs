@@ -10,11 +10,11 @@ namespace CSC431.CFG
     {
         private BasicBlock<T> Condition;
         private SeqBlock<T> Body;
-        private Label<T> NextLabel;
+        private Label NextLabel;
         private bool isFixed = false;
         private int condReg;
 
-        public LoopBlock(BasicBlock<T> condition, SeqBlock<T> body, Label<T> nextLabel)
+        public LoopBlock(BasicBlock<T> condition, SeqBlock<T> body, Label nextLabel)
         {
             this.condReg = condition.Reg;
 
@@ -70,7 +70,7 @@ namespace CSC431.CFG
 
         protected override Node<Target> ConvertCore<Target>(IInstructionConverter<T, Target> conv)
         {
-            return new LoopBlock<Target>(Condition.Convert(conv) as BasicBlock<Target>, Body.Convert(conv) as SeqBlock<Target>, new Label<Target>());
+            return new LoopBlock<Target>(Condition.Convert(conv) as BasicBlock<Target>, Body.Convert(conv) as SeqBlock<Target>, new Label());
         }
     }
 }

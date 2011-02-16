@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections.ObjectModel;
 
 namespace CSC431.CFG
 {
@@ -31,6 +32,14 @@ namespace CSC431.CFG
             set
             {
                 this.register = value;
+            }
+        }
+
+        public ReadOnlyCollection<T> Code
+        {
+            get
+            {
+                return code.AsReadOnly();
             }
         }
 

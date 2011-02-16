@@ -6,7 +6,7 @@ using CSC431.CFG;
 
 namespace CSC431.Sparc
 {
-    public enum SparcReg
+    public enum SparcReg : int
     {
         l0,
         l1,
@@ -45,6 +45,19 @@ namespace CSC431.Sparc
     }
     public class SparcRegister : Register
     {
+        //this is so that virtual registers and sparc registers
+        //can be placed into a bit array together
+        public static int[] IntValueMap;
+        static SparcRegister()
+        {
+            var vals = Enum.GetValues(typeof(SparcReg));
+            IntValueMap = new int[vals.Length];
+            foreach (var v in vals)
+            {
+                IntValueMap[(int)v] = Instruction.VirtualRegister();
+            }
+        }
+
         private SparcReg val;
 
         public SparcRegister(SparcReg reg)
@@ -54,7 +67,7 @@ namespace CSC431.Sparc
 
         public override int IntVal
         {
-            get { return (int)val; }
+            get { return IntValueMap[(int)val]; }
         }
 
         public override string ToString()

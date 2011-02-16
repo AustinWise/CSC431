@@ -11,7 +11,7 @@ namespace CSC431
 {
     static class SparcSteps
     {
-        public static InOutStep<ProgramBlock<MilocInstruction>, ProgramBlock<SparcInstruction>> ConvertToLlvm()
+        public static InOutStep<ProgramBlock<MilocInstruction>, ProgramBlock<SparcInstruction>> ConvertToSparc()
         {
             return new InOutStep<ProgramBlock<MilocInstruction>, ProgramBlock<SparcInstruction>>(c =>
             {
@@ -25,6 +25,11 @@ namespace CSC431
             {
                 c.Print(Console.Out, new SparcPrinter());
             });
+        }
+
+        public static TransformStep<ProgramBlock<SparcInstruction>> RegisterAllocation()
+        {
+            return new TransformStep<ProgramBlock<SparcInstruction>>(new RegisterAllocation().DoAllocation);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace CSC431.CFG
 
         public override int IntVal
         {
-            get { throw new NotImplementedException(); }
+            get { return this.intVal; }
         }
 
         public override string ToString()

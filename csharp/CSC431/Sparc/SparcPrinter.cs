@@ -11,7 +11,6 @@ namespace CSC431.Sparc
         public override void PrintFileHeader(System.IO.TextWriter tw, ProgramBlock<SparcInstruction> prog)
         {
             tw.WriteLine("	.section        \".text\"");
-
         }
 
         public override void PrintFunctionHeader(System.IO.TextWriter tw, FunctionBlock<SparcInstruction> f)
