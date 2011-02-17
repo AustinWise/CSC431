@@ -47,7 +47,7 @@ namespace CSC431.Sparc
     {
         //this is so that virtual registers and sparc registers
         //can be placed into a bit array together
-        public static int[] IntValueMap;
+        public static readonly int[] IntValueMap;
         static SparcRegister()
         {
             var vals = Enum.GetValues(typeof(SparcReg));
@@ -56,6 +56,15 @@ namespace CSC431.Sparc
             {
                 IntValueMap[(int)v] = Instruction.VirtualRegister();
             }
+        }
+
+        /// <summary>
+        /// Makes sure virtual register map has been created.
+        /// </summary>
+        /// <returns></returns>
+        public static int EnsureMap()
+        {
+            return IntValueMap[0];
         }
 
         private SparcReg val;

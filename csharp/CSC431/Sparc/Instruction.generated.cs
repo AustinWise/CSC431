@@ -227,7 +227,7 @@ RegDest0		};
 
 public override string ToString()
 {
-return string.Format("{0} %{1}, lo({2}), %{3}", Name, RegSource0, LoBits0, RegDest0);
+return string.Format("{0} %{1}, %lo({2}), %{3}", Name, RegSource0, LoBits0, RegDest0);
 }
 }
 
@@ -300,7 +300,7 @@ public override Register[] DestRegs
 
 public override string ToString()
 {
-return string.Format("{0} %icc, L{2}", Name, null, Label0);
+return string.Format("{0} %icc, .L{2}", Name, null, Label0);
 }
 }
 
@@ -336,43 +336,7 @@ public override Register[] DestRegs
 
 public override string ToString()
 {
-return string.Format("{0} %icc, L{2}", Name, null, Label0);
-}
-}
-
-
-
-public partial class JmpInstruction : SparcInstruction
-{
-	public JmpInstruction
-	(
-Label label0	) : base ("jmp")
-	{
-this.Label0 = label0;	}
-
-public Label Label0{ get; private set; }
-
-public override Register[] SourceRegs
-{
-	get
-	{
-		return new Register[] {
-		};
-	}
-}
-
-public override Register[] DestRegs
-{
-	get
-	{
-		return new Register[] {
-		};
-	}
-}
-
-public override string ToString()
-{
-return string.Format("{0} L{1}", Name, Label0);
+return string.Format("{0} %icc, .L{2}", Name, null, Label0);
 }
 }
 
@@ -409,44 +373,7 @@ RegDest0		};
 
 public override string ToString()
 {
-return string.Format("{0} hi({1}), %{2}", Name, HiBits0, RegDest0);
-}
-}
-
-
-
-public partial class MovaInstruction : SparcInstruction
-{
-	public MovaInstruction
-	(
-Register regSource0,Register regDest0	) : base ("mova")
-	{
-this.RegSource0 = regSource0;this.RegDest0 = regDest0;	}
-
-public Register RegSource0{ get; private set; }
-public Register RegDest0{ get; private set; }
-
-public override Register[] SourceRegs
-{
-	get
-	{
-		return new Register[] {
-RegSource0, 		};
-	}
-}
-
-public override Register[] DestRegs
-{
-	get
-	{
-		return new Register[] {
-RegDest0		};
-	}
-}
-
-public override string ToString()
-{
-return string.Format("{0} %{1}, %{2}", Name, RegSource0, RegDest0);
+return string.Format("{0} %hi({1}), %{2}", Name, HiBits0, RegDest0);
 }
 }
 
@@ -482,7 +409,7 @@ public override Register[] DestRegs
 
 public override string ToString()
 {
-return string.Format("{0} L{1}", Name, Label0);
+return string.Format("{0} .L{1}", Name, Label0);
 }
 }
 
@@ -631,5 +558,151 @@ return string.Format("{0} %{1}, {2}, %{3}", Name, RegSource0, Immed0, RegDest0);
 
 
 
+
+public class SparcRegisterConverter : IInstructionConverter<SparcInstruction, SparcInstruction>
+{
+	private Dictionary<FunctionBlock<SparcInstruction>, SparcRegister[]> colorMapping;
+	private SparcRegister[] map;
+
+	public SparcRegisterConverter(Dictionary<FunctionBlock<SparcInstruction>, SparcRegister[]> colorMapping)
+	{
+		this.colorMapping = colorMapping;
+	}
+
+	public IEnumerable<SparcInstruction> FunctionStart(FunctionBlock<SparcInstruction> block)
+	{
+		this.map = colorMapping[block];
+		yield break;
+	}
+
+	public IEnumerable<SparcInstruction> Convert(InstructionStream<SparcInstruction> s)
+	{
+		while (s.More)
+		{
+			var cur = s.Consume();
+			if (cur is AddInstruction)
+			{
+				var conv = cur as AddInstruction;
+				var copy = new AddInstruction(
+map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is AddiInstruction)
+			{
+				var conv = cur as AddiInstruction;
+				var copy = new AddiInstruction(
+map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is SubInstruction)
+			{
+				var conv = cur as SubInstruction;
+				var copy = new SubInstruction(
+map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is OrInstruction)
+			{
+				var conv = cur as OrInstruction;
+				var copy = new OrInstruction(
+map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is OriInstruction)
+			{
+				var conv = cur as OriInstruction;
+				var copy = new OriInstruction(
+map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is OrlInstruction)
+			{
+				var conv = cur as OrlInstruction;
+				var copy = new OrlInstruction(
+map[conv.RegSource0.IntVal], conv.LoBits0, map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is CmpInstruction)
+			{
+				var conv = cur as CmpInstruction;
+				var copy = new CmpInstruction(
+map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is BeInstruction)
+			{
+				var conv = cur as BeInstruction;
+				var copy = new BeInstruction(
+conv.Label0				);
+				yield return copy;
+				continue;
+			}
+			if (cur is BaInstruction)
+			{
+				var conv = cur as BaInstruction;
+				var copy = new BaInstruction(
+conv.Label0				);
+				yield return copy;
+				continue;
+			}
+			if (cur is SethiInstruction)
+			{
+				var conv = cur as SethiInstruction;
+				var copy = new SethiInstruction(
+conv.HiBits0, map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is CallInstruction)
+			{
+				var conv = cur as CallInstruction;
+				var copy = new CallInstruction(
+conv.Label0				);
+				yield return copy;
+				continue;
+			}
+			if (cur is RetInstruction)
+			{
+				var conv = cur as RetInstruction;
+				var copy = new RetInstruction(
+				);
+				yield return copy;
+				continue;
+			}
+			if (cur is RestoreInstruction)
+			{
+				var conv = cur as RestoreInstruction;
+				var copy = new RestoreInstruction(
+				);
+				yield return copy;
+				continue;
+			}
+			if (cur is NopInstruction)
+			{
+				var conv = cur as NopInstruction;
+				var copy = new NopInstruction(
+				);
+				yield return copy;
+				continue;
+			}
+			if (cur is SaveInstruction)
+			{
+				var conv = cur as SaveInstruction;
+				var copy = new SaveInstruction(
+map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			throw new NotSupportedException();
+		}
+	}
+}
 
 }

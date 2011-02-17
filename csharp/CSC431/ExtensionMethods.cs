@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
 
 namespace CSC431
 {
@@ -12,6 +13,15 @@ namespace CSC431
             foreach (var i in list)
             {
                 act(i);
+            }
+        }
+
+        public static IEnumerable<int> TrueIndexs(this BitArray arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i])
+                    yield return i;
             }
         }
     }

@@ -7,7 +7,7 @@ namespace CSC431.LLVM
 {
     class LlvmTranslator : CSC431.IL.IMilocTranslator<LlvmInstruction>
     {
-        public IEnumerable<LlvmInstruction> FunctionStart(CFG.FunctionBlock<LlvmInstruction> block)
+        public IEnumerable<LlvmInstruction> FunctionStart(CFG.FunctionBlock<CSC431.IL.MilocInstruction> block)
         {
             return Enumerable.Empty <LlvmInstruction>();
         }

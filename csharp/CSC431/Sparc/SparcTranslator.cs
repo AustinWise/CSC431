@@ -7,7 +7,7 @@ namespace CSC431.Sparc
 {
     public class SparcTranslator : CSC431.IL.IMilocTranslator<SparcInstruction>
     {
-        public IEnumerable<SparcInstruction> FunctionStart(CFG.FunctionBlock<SparcInstruction> block)
+        public IEnumerable<SparcInstruction> FunctionStart(CFG.FunctionBlock<CSC431.IL.MilocInstruction> block)
         {
             yield return new SaveInstruction(new SparcRegister(SparcReg.sp), -1024, new SparcRegister(SparcReg.sp));
         }
@@ -85,7 +85,7 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Mov(IL.MovInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            yield return new MovaInstruction(s.RegSource0, s.RegDest0);
+            yield return new OriInstruction(s.RegSource0, 0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Moveq(IL.MoveqInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -120,7 +120,7 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Jumpi(IL.JumpiInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            yield return new JmpInstruction(s.Label0);
+            yield return new BaInstruction(s.Label0);
             yield return new NopInstruction();
         }
 
@@ -144,17 +144,15 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Ret(IL.RetInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            yield return new RestoreInstruction();
             yield return new RetInstruction();
-            yield return new NopInstruction();
+            yield return new RestoreInstruction();
         }
 
         public IEnumerable<SparcInstruction> Storeret(IL.StoreretInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            yield return new MovaInstruction(s.RegSource0, new SparcRegister(SparcReg.i0));
-            yield return new RestoreInstruction();
+            yield return new OriInstruction(s.RegSource0, 0, new SparcRegister(SparcReg.i0));
             yield return new RetInstruction();
-            yield return new NopInstruction();
+            yield return new RestoreInstruction();
         }
 
         public IEnumerable<SparcInstruction> Storeoutargument(IL.StoreoutargumentInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)

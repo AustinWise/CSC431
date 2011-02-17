@@ -9,6 +9,39 @@ namespace CSC431.Sparc
 {
     class RegisterAllocation
     {
+        private BitArray canidateColors;
+
+        public RegisterAllocation()
+        {
+            canidateColors = new BitArray(SparcRegister.IntValueMap.Max() + 1);
+
+            var canColors = new List<SparcRegister>();
+            canColors.Add(new SparcRegister(SparcReg.l0));
+            canColors.Add(new SparcRegister(SparcReg.l1));
+            canColors.Add(new SparcRegister(SparcReg.l2));
+            canColors.Add(new SparcRegister(SparcReg.l3));
+            canColors.Add(new SparcRegister(SparcReg.l4));
+            canColors.Add(new SparcRegister(SparcReg.l5));
+            canColors.Add(new SparcRegister(SparcReg.l6));
+            canColors.Add(new SparcRegister(SparcReg.l7));
+
+            foreach (var c in canColors)
+            {
+                canidateColors[c.IntVal] = true;
+            }
+        }
+
+        private void addEdge(BitArray[] dg, int x, int y)
+        {
+            dg[x][y] = true;
+            dg[y][x] = true;
+        }
+        private void removeEdge(BitArray[] dg, int x, int y)
+        {
+            dg[x][y] = false;
+            dg[y][x] = false;
+        }
+
         private int getMaxRegValue(ProgramBlock<SparcInstruction> start)
         {
             var allReg = new List<Register>();
@@ -32,10 +65,18 @@ namespace CSC431.Sparc
         Dictionary<BasicBlock<SparcInstruction>, BitArray> liveoutSets;
         int numRegs;
         Dictionary<FunctionBlock<SparcInstruction>, BitArray[]> allDepGraphs;
+        Dictionary<FunctionBlock<SparcInstruction>, SparcRegister[]> colorMapping;
+        SparcRegister[] virtToSpar;
 
         private void setupVars(ProgramBlock<SparcInstruction> start)
         {
             numRegs = getMaxRegValue(start) + 1;
+
+            virtToSpar = new SparcRegister[numRegs];
+            for (int i = 0; i < SparcRegister.IntValueMap.Length; i++)
+            {
+                virtToSpar[SparcRegister.IntValueMap[i]] = new SparcRegister((SparcReg)i);
+            }
 
             genSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
             killSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
@@ -59,6 +100,12 @@ namespace CSC431.Sparc
                     aDepGraph[i] = new BitArray(numRegs);
                 }
                 allDepGraphs[f] = aDepGraph;
+            }
+
+            colorMapping = new Dictionary<FunctionBlock<SparcInstruction>, SparcRegister[]>();
+            foreach (var f in start.Functions)
+            {
+                colorMapping[f] = new SparcRegister[numRegs];
             }
         }
 
@@ -137,10 +184,9 @@ namespace CSC431.Sparc
                         {
                             for (int i = 0; i < numRegs; i++)
                             {
-                                if (lset[i])
+                                if (lset[i] && r.IntVal != i)
                                 {
-                                    dg[i][r.IntVal] = true;
-                                    dg[r.IntVal][i] = true;
+                                    addEdge(dg, i, r.IntVal);
                                 }
                             }
                         }
@@ -161,25 +207,70 @@ namespace CSC431.Sparc
             }
         }
 
+        private class NodeAndEdges
+        {
+            public int Reg;
+            public BitArray Edges;
+        }
+
+        private void colorGraph(ProgramBlock<SparcInstruction> start)
+        {
+            foreach (var f in start.Functions)
+            {
+                var dg = allDepGraphs[f];
+                var map = colorMapping[f];
+
+                var stack = new Stack<NodeAndEdges>(numRegs);
+                //TODO: actully choose which nodes to put into the stack first based on constrainedness
+                for (int reg = 0; reg < numRegs; reg++)
+                {
+                    var bits = dg[reg];
+                    stack.Push(new NodeAndEdges() { Reg = reg, Edges = new BitArray(bits) });
+                    for (int i = 0; i < numRegs; i++)
+                    {
+                        if (bits[i])
+                            removeEdge(dg, i, reg);
+                    }
+                }
+
+                while (stack.Count != 0)
+                {
+                    var val = stack.Pop();
+                    var bits = val.Edges;
+                    SparcRegister reg = virtToSpar[val.Reg];
+                    var cans = new BitArray(canidateColors);
+
+                    if (reg == null)
+                    {
+                        bits.TrueIndexs().Map(i => cans[map[i].IntVal] = false);
+                        reg = virtToSpar[cans.TrueIndexs().First()];
+                    }
+
+                    if (reg == null)
+                        throw new EvilException("could not complete register allocation");
+
+                    map[val.Reg] = reg;
+
+                    bits.TrueIndexs().Map(i => addEdge(dg, val.Reg, i));
+                }
+            }
+        }
+
         public ProgramBlock<SparcInstruction> DoAllocation(ProgramBlock<SparcInstruction> start)
         {
-            //DEBUG CRAP
-            var virtToSpar = new Dictionary<int, SparcRegister>();
-            for (int i = 0; i < SparcRegister.IntValueMap.Length; i++)
-            {
-                virtToSpar.Add(SparcRegister.IntValueMap[i], new SparcRegister((SparcReg)i));
-            }
-            //END DEBUG CRAP
-
             setupVars(start);
             doGenAndKill(start);
             doLiveoutSets(start);
             doGraph(start);
+            colorGraph(start);
 
-            //liveout
+            //print(start);
 
+            return (ProgramBlock<SparcInstruction>)start.Convert(new SparcRegisterConverter(colorMapping));
+        }
 
-            //DEBUG
+        private void print(ProgramBlock<SparcInstruction> start)
+        {
             foreach (var k in genSets.Keys)
             {
                 Console.WriteLine("Block {0} with {1} instrs", k.Label, k.Code.Count);
@@ -219,13 +310,11 @@ namespace CSC431.Sparc
                     Console.WriteLine();
                 }
             }
-
-            return start;
         }
 
-        private Register getRegister(Dictionary<int, SparcRegister> dic, int id)
+        private Register getRegister(SparcRegister[] dic, int id)
         {
-            if (dic.ContainsKey(id))
+            if (dic[id] != null)
                 return dic[id];
             return new VirtualRegister(id);
         }

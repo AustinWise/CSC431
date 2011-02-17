@@ -155,6 +155,67 @@ else
 }
 #>
 
+public class SparcRegisterConverter : IInstructionConverter<SparcInstruction, SparcInstruction>
+{
+	private Dictionary<FunctionBlock<SparcInstruction>, SparcRegister[]> colorMapping;
+	private SparcRegister[] map;
+
+	public SparcRegisterConverter(Dictionary<FunctionBlock<SparcInstruction>, SparcRegister[]> colorMapping)
+	{
+		this.colorMapping = colorMapping;
+	}
+
+	public IEnumerable<SparcInstruction> FunctionStart(FunctionBlock<SparcInstruction> block)
+	{
+		this.map = colorMapping[block];
+		yield break;
+	}
+
+	public IEnumerable<SparcInstruction> Convert(InstructionStream<SparcInstruction> s)
+	{
+		while (s.More)
+		{
+			var cur = s.Consume();
+<#
+    foreach (var instr in InstrInfo.GetAll())
+    {
+        var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
+        var className = name + "Instruction";
+#>
+			if (cur is <#= className #>)
+			{
+				var conv = cur as <#= className #>;
+				var copy = new <#= className #>(
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (c.IsConstant)
+        return;
+    if (c.IsRegister)
+    {
+        Write("map[");
+    }
+    Write("conv.{1}{0}", count, c.UpperPrefix);
+    if (c.IsRegister)
+    {
+        Write(".IntVal]");
+    }
+    if (!isLast)
+        Write(", ");
+});
+#>
+				);
+				yield return copy;
+				continue;
+			}
+<#
+    }
+#>
+			throw new NotSupportedException();
+		}
+	}
+}
+
 }
 <#+
 [Flags]
@@ -170,11 +231,11 @@ private class OperandType
     private static Dictionary<char, OperandType> sTypes = new Dictionary<char, OperandType>();
     static OperandType()
     {
-        sTypes.Add('h', new OperandType() { LowerPrefix = "hiBits", UpperPrefix = "HiBits", MilocPrefix = "hi(", MilocPostfix = ")", Type = "int" });
-        sTypes.Add('o', new OperandType() { LowerPrefix = "loBits", UpperPrefix = "LoBits", MilocPrefix = "lo(", MilocPostfix = ")", Type = "int" });
+        sTypes.Add('h', new OperandType() { LowerPrefix = "hiBits", UpperPrefix = "HiBits", MilocPrefix = "%hi(", MilocPostfix = ")", Type = "int" });
+        sTypes.Add('o', new OperandType() { LowerPrefix = "loBits", UpperPrefix = "LoBits", MilocPrefix = "%lo(", MilocPostfix = ")", Type = "int" });
         sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", MilocPrefix = "%", Type = "Register", IsSource = true });
         sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", MilocPrefix = "%", Type = "Register", IsTarget = true });
-        sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "Label" });
+        sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = ".L", Type = "Label" });
         sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", Type = "int" });
         sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", Type = "string" });
         sTypes.Add('a', new OperandType() { LowerPrefix = "arr", UpperPrefix = "Arr", MilocPrefix = "[", MilocPostfix = "]", Type = "string[]", SpecialConversion = "string.Join(\", \", {0})" });
@@ -197,6 +258,14 @@ private class OperandType
         get
         {
             return ConstantValue != null;
+        }
+    }
+
+    public bool IsRegister
+    {
+        get
+        {
+            return IsSource || IsTarget;
         }
     }
 
@@ -271,9 +340,7 @@ private class InstrInfo
                 new InstrInfo("rr", "cmp"),
                 new InstrInfo("cl", "be"),
                 new InstrInfo("cl", "ba"),
-                new InstrInfo("l", "jmp"),
                 new InstrInfo("hR", "sethi"),
-                new InstrInfo("rR", "mova"),
                 new InstrInfo("l", "call"),
                 new InstrInfo("", "ret"),
                 new InstrInfo("", "restore"),

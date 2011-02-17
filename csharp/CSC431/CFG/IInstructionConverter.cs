@@ -9,7 +9,7 @@ namespace CSC431.CFG
         where Source : Instruction
         where Target : Instruction
     {
-        IEnumerable<Target> FunctionStart(FunctionBlock<Target> block);
+        IEnumerable<Target> FunctionStart(FunctionBlock<Source> block);
         IEnumerable<Target> Convert(InstructionStream<Source> s);
     }
 }

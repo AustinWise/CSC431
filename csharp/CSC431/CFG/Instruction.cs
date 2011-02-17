@@ -8,7 +8,7 @@ namespace CSC431.CFG
 {
     public abstract class Instruction
     {
-        private static int VirtualRegisterCounter = 1;
+        private static int VirtualRegisterCounter = 0;
         public static int VirtualRegister()
         {
             return Interlocked.Increment(ref VirtualRegisterCounter);

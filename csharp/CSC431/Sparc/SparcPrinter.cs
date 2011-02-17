@@ -18,6 +18,7 @@ namespace CSC431.Sparc
             tw.WriteLine("	.align 4");
             tw.WriteLine("	.global {0}", f.Name);
             tw.WriteLine(".type    {0}, #function", f.Name);
+            tw.WriteLine("{0}:", f.Name);
         }
 
         public override void PrintFileFooter(System.IO.TextWriter tw, ProgramBlock<SparcInstruction> prog)
@@ -32,7 +33,7 @@ namespace CSC431.Sparc
         public override void PrintNodeHeader(System.IO.TextWriter tw, Node<SparcInstruction> f)
         {
             if (f.PrintLabel)
-                tw.WriteLine("L{0}:", f.Label);
+                tw.WriteLine(".L{0}:", f.Label);
         }
     }
 }
