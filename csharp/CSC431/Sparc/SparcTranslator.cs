@@ -121,6 +121,7 @@ namespace CSC431.Sparc
         public IEnumerable<SparcInstruction> Jumpi(IL.JumpiInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
             yield return new JmpInstruction(s.Label0);
+            yield return new NopInstruction();
         }
 
         public IEnumerable<SparcInstruction> Cbreq(IL.CbreqInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -128,6 +129,7 @@ namespace CSC431.Sparc
             yield return new BeInstruction(s.Label0);
             yield return new NopInstruction();
             yield return new BaInstruction(s.Label1);
+            yield return new NopInstruction();
         }
 
         public IEnumerable<SparcInstruction> Loadinargument(IL.LoadinargumentInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
