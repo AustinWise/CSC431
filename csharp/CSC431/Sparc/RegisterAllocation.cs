@@ -31,6 +31,7 @@ namespace CSC431.Sparc
         Dictionary<BasicBlock<SparcInstruction>, BitArray> killSets;
         Dictionary<BasicBlock<SparcInstruction>, BitArray> liveoutSets;
         int numRegs;
+        Dictionary<FunctionBlock<SparcInstruction>, BitArray[]> allDepGraphs;
 
         private void setupVars(ProgramBlock<SparcInstruction> start)
         {
@@ -39,7 +40,6 @@ namespace CSC431.Sparc
             genSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
             killSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
             liveoutSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
-
             foreach (var f in start.Functions)
             {
                 f.VisitBlocks(b =>
@@ -48,6 +48,17 @@ namespace CSC431.Sparc
                     killSets[b] = new BitArray(numRegs);
                     liveoutSets[b] = new BitArray(numRegs);
                 });
+            }
+
+            allDepGraphs = new Dictionary<FunctionBlock<SparcInstruction>, BitArray[]>();
+            foreach (var f in start.Functions)
+            {
+                var aDepGraph = new BitArray[numRegs];
+                for (int i = 0; i < numRegs; i++)
+                {
+                    aDepGraph[i] = new BitArray(numRegs);
+                }
+                allDepGraphs[f] = aDepGraph;
             }
         }
 
@@ -111,6 +122,45 @@ namespace CSC431.Sparc
             while (changed);
         }
 
+        private void doGraph(ProgramBlock<SparcInstruction> start)
+        {
+            foreach (var f in start.Functions)
+            {
+                var dg = allDepGraphs[f];
+                f.VisitBlocks(b =>
+                {
+                    var lset = new BitArray(liveoutSets[b]);
+                    foreach (var instr in Enumerable.Reverse(b.Code))
+                    {
+                        //1) add an edge from t to each member of live out (in the interfence graph)
+                        foreach (var r in instr.DestRegs)
+                        {
+                            for (int i = 0; i < numRegs; i++)
+                            {
+                                if (lset[i])
+                                {
+                                    dg[i][r.IntVal] = true;
+                                    dg[r.IntVal][i] = true;
+                                }
+                            }
+                        }
+
+                        //2) remove target from LO
+                        foreach (var r in instr.DestRegs)
+                        {
+                            lset[r.IntVal] = false;
+                        }
+
+                        //3) add sources to LO
+                        foreach (var r in instr.SourceRegs)
+                        {
+                            lset[r.IntVal] = true;
+                        }
+                    }
+                });
+            }
+        }
+
         public ProgramBlock<SparcInstruction> DoAllocation(ProgramBlock<SparcInstruction> start)
         {
             //DEBUG CRAP
@@ -124,6 +174,7 @@ namespace CSC431.Sparc
             setupVars(start);
             doGenAndKill(start);
             doLiveoutSets(start);
+            doGraph(start);
 
             //liveout
 
@@ -145,6 +196,28 @@ namespace CSC431.Sparc
                         Console.WriteLine("l:{0}", getRegister(virtToSpar, i));
                 }
                 Console.WriteLine();
+            }
+
+            Console.WriteLine("derp graphs");
+            foreach (var f in start.Functions)
+            {
+                Console.WriteLine("fun {0}:", f.Name);
+                var dgraph = allDepGraphs[f];
+                Console.Write(",");
+                for (int i = 0; i < numRegs; i++)
+                {
+                    Console.Write("{0},", getRegister(virtToSpar, i));
+                }
+                Console.WriteLine();
+                for (int i = 0; i < numRegs; i++)
+                {
+                    Console.Write("{0},", getRegister(virtToSpar, i));
+                    for (int j = 0; j < numRegs; j++)
+                    {
+                        Console.Write("{0},", dgraph[i][j] ? "█" : "░");
+                    }
+                    Console.WriteLine();
+                }
             }
 
             return start;
