@@ -119,6 +119,82 @@ return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDe
 
 
 
+public partial class SdivxInstruction : SparcInstruction
+{
+	public SdivxInstruction
+	(
+Register regSource0,Register regSource1,Register regDest0	) : base ("sdivx")
+	{
+this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
+
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+RegSource0, RegSource1, 		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDest0);
+}
+}
+
+
+
+public partial class MulxInstruction : SparcInstruction
+{
+	public MulxInstruction
+	(
+Register regSource0,Register regSource1,Register regDest0	) : base ("mulx")
+	{
+this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
+
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+RegSource0, RegSource1, 		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDest0);
+}
+}
+
+
+
 public partial class OrInstruction : SparcInstruction
 {
 	public OrInstruction
@@ -342,6 +418,228 @@ return string.Format("{0} %icc, .L{2}", Name, null, Label0);
 
 
 
+public partial class MoveqInstruction : SparcInstruction
+{
+	public MoveqInstruction
+	(
+int immed0,Register regDest0	) : base ("move")
+	{
+this.Immed0 = immed0;this.RegDest0 = regDest0;	}
+
+public int Immed0{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
+}
+}
+
+
+
+public partial class MovneInstruction : SparcInstruction
+{
+	public MovneInstruction
+	(
+int immed0,Register regDest0	) : base ("movne")
+	{
+this.Immed0 = immed0;this.RegDest0 = regDest0;	}
+
+public int Immed0{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
+}
+}
+
+
+
+public partial class MovgeInstruction : SparcInstruction
+{
+	public MovgeInstruction
+	(
+int immed0,Register regDest0	) : base ("movge")
+	{
+this.Immed0 = immed0;this.RegDest0 = regDest0;	}
+
+public int Immed0{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
+}
+}
+
+
+
+public partial class MovgInstruction : SparcInstruction
+{
+	public MovgInstruction
+	(
+int immed0,Register regDest0	) : base ("movg")
+	{
+this.Immed0 = immed0;this.RegDest0 = regDest0;	}
+
+public int Immed0{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
+}
+}
+
+
+
+public partial class MovleInstruction : SparcInstruction
+{
+	public MovleInstruction
+	(
+int immed0,Register regDest0	) : base ("movle")
+	{
+this.Immed0 = immed0;this.RegDest0 = regDest0;	}
+
+public int Immed0{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
+}
+}
+
+
+
+public partial class MovlInstruction : SparcInstruction
+{
+	public MovlInstruction
+	(
+int immed0,Register regDest0	) : base ("movl")
+	{
+this.Immed0 = immed0;this.RegDest0 = regDest0;	}
+
+public int Immed0{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
+}
+}
+
+
+
 public partial class SethiInstruction : SparcInstruction
 {
 	public SethiInstruction
@@ -379,15 +677,52 @@ return string.Format("{0} %hi({1}), %{2}", Name, HiBits0, RegDest0);
 
 
 
+public partial class MovInstruction : SparcInstruction
+{
+	public MovInstruction
+	(
+Register regSource0,Register regDest0	) : base ("mov")
+	{
+this.RegSource0 = regSource0;this.RegDest0 = regDest0;	}
+
+public Register RegSource0{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+RegSource0, 		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} %{1}, %{2}", Name, RegSource0, RegDest0);
+}
+}
+
+
+
 public partial class CallInstruction : SparcInstruction
 {
 	public CallInstruction
 	(
-Label label0	) : base ("call")
+string str0	) : base ("call")
 	{
-this.Label0 = label0;	}
+this.Str0 = str0;	}
 
-public Label Label0{ get; private set; }
+public string Str0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -409,7 +744,7 @@ public override Register[] DestRegs
 
 public override string ToString()
 {
-return string.Format("{0} .L{1}", Name, Label0);
+return string.Format("{0} {1}", Name, Str0);
 }
 }
 
@@ -604,6 +939,22 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				yield return copy;
 				continue;
 			}
+			if (cur is SdivxInstruction)
+			{
+				var conv = cur as SdivxInstruction;
+				var copy = new SdivxInstruction(
+map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is MulxInstruction)
+			{
+				var conv = cur as MulxInstruction;
+				var copy = new MulxInstruction(
+map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
 			if (cur is OrInstruction)
 			{
 				var conv = cur as OrInstruction;
@@ -652,6 +1003,54 @@ conv.Label0				);
 				yield return copy;
 				continue;
 			}
+			if (cur is MoveqInstruction)
+			{
+				var conv = cur as MoveqInstruction;
+				var copy = new MoveqInstruction(
+conv.Immed0, map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is MovneInstruction)
+			{
+				var conv = cur as MovneInstruction;
+				var copy = new MovneInstruction(
+conv.Immed0, map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is MovgeInstruction)
+			{
+				var conv = cur as MovgeInstruction;
+				var copy = new MovgeInstruction(
+conv.Immed0, map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is MovgInstruction)
+			{
+				var conv = cur as MovgInstruction;
+				var copy = new MovgInstruction(
+conv.Immed0, map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is MovleInstruction)
+			{
+				var conv = cur as MovleInstruction;
+				var copy = new MovleInstruction(
+conv.Immed0, map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is MovlInstruction)
+			{
+				var conv = cur as MovlInstruction;
+				var copy = new MovlInstruction(
+conv.Immed0, map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
 			if (cur is SethiInstruction)
 			{
 				var conv = cur as SethiInstruction;
@@ -660,11 +1059,19 @@ conv.HiBits0, map[conv.RegDest0.IntVal]				);
 				yield return copy;
 				continue;
 			}
+			if (cur is MovInstruction)
+			{
+				var conv = cur as MovInstruction;
+				var copy = new MovInstruction(
+map[conv.RegSource0.IntVal], map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
 			if (cur is CallInstruction)
 			{
 				var conv = cur as CallInstruction;
 				var copy = new CallInstruction(
-conv.Label0				);
+conv.Str0				);
 				yield return copy;
 				continue;
 			}

@@ -13,4 +13,12 @@ namespace CSC431.IL
     {
         public int FieldIndex { get; set; }
     }
+    public partial class LoadaiVarInstruction
+    {
+        public int ArgIndex { get; set; }
+    }
+    public partial class StoreaiVarInstruction
+    {
+        public int ArgIndex { get; set; }
+    }
 }

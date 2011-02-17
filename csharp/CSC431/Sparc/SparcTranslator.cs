@@ -24,12 +24,12 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Div(IL.DivInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new SdivxInstruction(s.RegSource0, s.RegSource1, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Mult(IL.MultInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new MulxInstruction(s.RegSource0, s.RegSource1, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Sub(IL.SubInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -90,32 +90,32 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Moveq(IL.MoveqInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new MoveqInstruction(s.Immed0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Movge(IL.MovgeInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new MovgeInstruction(s.Immed0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Movgt(IL.MovgtInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new MovgInstruction(s.Immed0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Movle(IL.MovleInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new MovleInstruction(s.Immed0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Movlt(IL.MovltInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new MovlInstruction(s.Immed0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Movne(IL.MovneInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new MovneInstruction(s.Immed0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Jumpi(IL.JumpiInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -134,12 +134,22 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Loadinargument(IL.LoadinargumentInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            if (s.Immed0 > 5)
+                throw new NotImplementedException();
+            var store = stream.Current as CSC431.IL.StoreaiVarInstruction;
+            if (store != null && s.RegDest0 == store.RegSource0 && store.ArgIndex == s.Immed0)
+            {
+                //This is loading arg into a local at a start of a function.
+                //This is not needed as refernces to the local will be replaced with load the right i register.
+                stream.Consume();
+                yield break;
+            }
+            yield return new OriInstruction(new SparcRegister(SparcReg.i0 + s.Immed0), 0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Call(IL.CallInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new CallInstruction(s.Str0);
         }
 
         public IEnumerable<SparcInstruction> Ret(IL.RetInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -157,12 +167,14 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Storeoutargument(IL.StoreoutargumentInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            if (s.Immed0 > 5)
+                throw new NotImplementedException();
+            yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.o0 + s.Immed0));
         }
 
         public IEnumerable<SparcInstruction> Loadret(IL.LoadretInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new MovInstruction(new SparcRegister(SparcReg.o0), s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> StoreaiField(IL.StoreaiFieldInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -172,6 +184,11 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> StoreaiVar(IL.StoreaiVarInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
+            if (s.ArgIndex >= 0 && s.ArgIndex <= 5)
+            {
+                yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.i0 + s.ArgIndex));
+                yield break;
+            }
             throw new NotImplementedException();
         }
 
@@ -182,6 +199,11 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> LoadaiVar(IL.LoadaiVarInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
+            if (s.ArgIndex >= 0 && s.ArgIndex <= 5)
+            {
+                yield return new MovInstruction(new SparcRegister(SparcReg.i0 + s.ArgIndex), s.RegDest0);
+                yield break;
+            }
             throw new NotImplementedException();
         }
 

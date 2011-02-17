@@ -14,21 +14,24 @@ namespace CSC431.IL
             : base(type)
         {
             this.name = name;
+            this.ArgIndex = -1;
         }
 
         public override BasicBlock<MilocInstruction> Store(int source)
         {
             var b = new BasicBlock<MilocInstruction>();
-            b.Add(new StoreaiVarInstruction(source, name));
+            b.Add(new StoreaiVarInstruction(source, name) { ArgIndex = ArgIndex });
             return b;
         }
 
         public override BasicBlock<MilocInstruction> Load(int target)
         {
             var b = new BasicBlock<MilocInstruction>();
-            b.Add(new LoadaiVarInstruction(name, target));
+            b.Add(new LoadaiVarInstruction(name, target) { ArgIndex = ArgIndex });
             b.Reg = target;
             return b;
         }
+
+        public int ArgIndex { get; set; }
     }
 }

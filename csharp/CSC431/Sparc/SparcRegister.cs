@@ -22,16 +22,16 @@ namespace CSC431.Sparc
         i3,
         i4,
         i5,
-        i6,
-        i7,
+        fp, //i6,
+        i7, //returnAddress
         o0,
         o1,
         o2,
         o3,
         o4,
         o5,
-        o6,
-        o7,
+        sp, //o6,
+        o7, //outReturnAddress
         g0,
         g1,
         g2,
@@ -39,9 +39,7 @@ namespace CSC431.Sparc
         g4,
         g5,
         g6,
-        g7,
-
-        sp
+        g7
     }
     public class SparcRegister : Register
     {
