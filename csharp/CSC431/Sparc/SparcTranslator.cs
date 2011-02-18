@@ -246,12 +246,18 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> New(IL.NewInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new OriInstruction(new SparcRegister(SparcReg.g0), 1, new SparcRegister(SparcReg.o0));
+            yield return new OriInstruction(new SparcRegister(SparcReg.g0), s.Arr0.Length * 4, new SparcRegister(SparcReg.o1));
+            yield return new CallInstruction("calloc");
+            yield return new NopInstruction();
+            yield return new MovInstruction(new SparcRegister(SparcReg.o0), s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Del(IL.DelInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.o0));
+            yield return new CallInstruction("free");
+            yield return new NopInstruction();
         }
     }
 }
