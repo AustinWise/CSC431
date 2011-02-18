@@ -9,11 +9,12 @@ namespace CSC431.Sparc
 {
     class RegisterAllocation
     {
-        private BitArray canidateColors;
+        private BitArray candidateColors;
+        private readonly int numColors;
 
         public RegisterAllocation()
         {
-            canidateColors = new BitArray(SparcRegister.IntValueMap.Max() + 1);
+            candidateColors = new BitArray(SparcRegister.IntValueMap.Max() + 1);
 
             var canColors = new List<SparcRegister>();
             canColors.Add(new SparcRegister(SparcReg.l0));
@@ -25,9 +26,11 @@ namespace CSC431.Sparc
             canColors.Add(new SparcRegister(SparcReg.l6));
             canColors.Add(new SparcRegister(SparcReg.l7));
 
+            numColors = canColors.Count;
+
             foreach (var c in canColors)
             {
-                canidateColors[c.IntVal] = true;
+                candidateColors[c.IntVal] = true;
             }
         }
 
@@ -213,8 +216,23 @@ namespace CSC431.Sparc
             public BitArray Edges;
         }
 
+        private bool isConstrained(int reg, BitArray edges)
+        {
+            var edgeCount = edges.TrueIndexs().Count();
+
+            return edgeCount > numColors;
+        }
+
+        private int getRegisterConstrainedness(int reg, BitArray edges)
+        {
+            var edgeCount = edges.TrueIndexs().Count();
+            return edgeCount;
+        }
+
         private void colorGraph(ProgramBlock<SparcInstruction> start)
         {
+
+
             foreach (var f in start.Functions)
             {
                 var dg = allDepGraphs[f];
@@ -222,28 +240,54 @@ namespace CSC431.Sparc
 
                 var stack = new Stack<NodeAndEdges>(numRegs);
                 //TODO: actully choose which nodes to put into the stack first based on constrainedness
+                var notConstrained = Enumerable.Range(0, numRegs).Where(r => !isConstrained(r, dg[r])).ToList();
+                var constrained = Enumerable.Range(0, numRegs).Where(r => isConstrained(r, dg[r])).ToList();
+
+                //Push all unconstrained nodes first
+                foreach (var r in notConstrained)
+                {
+                    var bits = dg[r];
+
+                    stack.Push(new NodeAndEdges() { Reg = r, Edges = new BitArray(bits) });
+                    bits.TrueIndexs().Map(i => removeEdge(dg, i, r));
+                }
+
+                //While there still exists constrained registers
+                while (constrained.Count != 0)
+                {
+                    constrained.Sort((r1, r2) => getRegisterConstrainedness(r2, dg[r2]) - getRegisterConstrainedness(r1, dg[r1]));
+                    var reg = constrained[0];
+                    var bits = dg[reg];
+
+                    stack.Push(new NodeAndEdges() { Reg = reg, Edges = new BitArray(bits) });
+                    bits.TrueIndexs().Map(i => removeEdge(dg, i, reg));
+
+                    constrained.Remove(reg);
+
+                }
+
+                //Previous Code
+                /*
                 for (int reg = 0; reg < numRegs; reg++)
                 {
                     var bits = dg[reg];
+
+
                     stack.Push(new NodeAndEdges() { Reg = reg, Edges = new BitArray(bits) });
-                    for (int i = 0; i < numRegs; i++)
-                    {
-                        if (bits[i])
-                            removeEdge(dg, i, reg);
-                    }
-                }
+                    bits.TrueIndexs().Map(i => removeEdge(dg, i, reg));
+                }*/
 
                 while (stack.Count != 0)
                 {
                     var val = stack.Pop();
                     var bits = val.Edges;
                     SparcRegister reg = virtToSpar[val.Reg];
-                    var cans = new BitArray(canidateColors);
+                    var cans = new BitArray(candidateColors);
 
                     if (reg == null)
                     {
                         bits.TrueIndexs().Map(i => cans[map[i].IntVal] = false);
-                        reg = virtToSpar[cans.TrueIndexs().First()];
+                        reg = virtToSpar[cans.TrueIndexs().FirstOrDefault()];
                     }
 
                     if (reg == null)
