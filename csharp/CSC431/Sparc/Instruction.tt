@@ -92,6 +92,13 @@ instr.ForEachOperand((c, count, isLast) =>
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(<#= className #> newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as <#= className #>);
+}
+
 <#
 if (!instr.IsCustomToString)
 {
@@ -205,6 +212,7 @@ instr.ForEachOperand((c, count, isLast) =>
 });
 #>
 				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -231,8 +239,8 @@ private class OperandType
     private static Dictionary<char, OperandType> sTypes = new Dictionary<char, OperandType>();
     static OperandType()
     {
-        sTypes.Add('h', new OperandType() { LowerPrefix = "hiBits", UpperPrefix = "HiBits", MilocPrefix = "%hi(", MilocPostfix = ")", Type = "int" });
-        sTypes.Add('o', new OperandType() { LowerPrefix = "loBits", UpperPrefix = "LoBits", MilocPrefix = "%lo(", MilocPostfix = ")", Type = "int" });
+        sTypes.Add('h', new OperandType() { LowerPrefix = "hiBits", UpperPrefix = "HiBits", MilocPrefix = "%hi(", MilocPostfix = ")", Type = "int", SpecialConversion = "IsConstantData ? \".ConstantString\" + {0} : {0}.ToString()" });
+        sTypes.Add('o', new OperandType() { LowerPrefix = "loBits", UpperPrefix = "LoBits", MilocPrefix = "%lo(", MilocPostfix = ")", Type = "int", SpecialConversion = "IsConstantData ? \".ConstantString\" + {0} : {0}.ToString()" });
         sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", MilocPrefix = "%", Type = "Register", IsSource = true });
         sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", MilocPrefix = "%", Type = "Register", IsTarget = true });
         sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = ".L", Type = "Label" });

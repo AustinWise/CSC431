@@ -35,6 +35,13 @@ RegDest0		};
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(AddInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as AddInstruction);
+}
+
 public override string ToString()
 {
 return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDest0);
@@ -71,6 +78,13 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+partial void MyCopyExtraDataToNewInstance(AddiInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as AddiInstruction);
 }
 
 public override string ToString()
@@ -111,6 +125,13 @@ RegDest0		};
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(SubInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as SubInstruction);
+}
+
 public override string ToString()
 {
 return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDest0);
@@ -147,6 +168,13 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+partial void MyCopyExtraDataToNewInstance(SdivxInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as SdivxInstruction);
 }
 
 public override string ToString()
@@ -187,6 +215,13 @@ RegDest0		};
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(MulxInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as MulxInstruction);
+}
+
 public override string ToString()
 {
 return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDest0);
@@ -223,6 +258,13 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+partial void MyCopyExtraDataToNewInstance(OrInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as OrInstruction);
 }
 
 public override string ToString()
@@ -263,6 +305,13 @@ RegDest0		};
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(AndInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as AndInstruction);
+}
+
 public override string ToString()
 {
 return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDest0);
@@ -299,6 +348,13 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+partial void MyCopyExtraDataToNewInstance(XoriInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as XoriInstruction);
 }
 
 public override string ToString()
@@ -339,6 +395,13 @@ RegDest0		};
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(OriInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as OriInstruction);
+}
+
 public override string ToString()
 {
 return string.Format("{0} %{1}, {2}, %{3}", Name, RegSource0, Immed0, RegDest0);
@@ -377,9 +440,16 @@ RegDest0		};
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(OrlInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as OrlInstruction);
+}
+
 public override string ToString()
 {
-return string.Format("{0} %{1}, %lo({2}), %{3}", Name, RegSource0, LoBits0, RegDest0);
+return string.Format("{0} %{1}, %lo({2}), %{3}", Name, RegSource0, IsConstantData ? ".ConstantString" + LoBits0 : LoBits0.ToString(), RegDest0);
 }
 }
 
@@ -412,6 +482,13 @@ public override Register[] DestRegs
 		return new Register[] {
 		};
 	}
+}
+
+partial void MyCopyExtraDataToNewInstance(CmpInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as CmpInstruction);
 }
 
 public override string ToString()
@@ -450,6 +527,13 @@ public override Register[] DestRegs
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(BeInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as BeInstruction);
+}
+
 public override string ToString()
 {
 return string.Format("{0} %icc, .L{2}", Name, null, Label0);
@@ -484,6 +568,13 @@ public override Register[] DestRegs
 		return new Register[] {
 		};
 	}
+}
+
+partial void MyCopyExtraDataToNewInstance(BaInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as BaInstruction);
 }
 
 public override string ToString()
@@ -523,6 +614,13 @@ RegDest0		};
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(MoveqInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as MoveqInstruction);
+}
+
 public override string ToString()
 {
 return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
@@ -558,6 +656,13 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+partial void MyCopyExtraDataToNewInstance(MovneInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as MovneInstruction);
 }
 
 public override string ToString()
@@ -597,6 +702,13 @@ RegDest0		};
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(MovgeInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as MovgeInstruction);
+}
+
 public override string ToString()
 {
 return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
@@ -632,6 +744,13 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+partial void MyCopyExtraDataToNewInstance(MovgInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as MovgInstruction);
 }
 
 public override string ToString()
@@ -671,6 +790,13 @@ RegDest0		};
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(MovleInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as MovleInstruction);
+}
+
 public override string ToString()
 {
 return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
@@ -706,6 +832,13 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+partial void MyCopyExtraDataToNewInstance(MovlInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as MovlInstruction);
 }
 
 public override string ToString()
@@ -745,9 +878,16 @@ RegDest0		};
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(SethiInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as SethiInstruction);
+}
+
 public override string ToString()
 {
-return string.Format("{0} %hi({1}), %{2}", Name, HiBits0, RegDest0);
+return string.Format("{0} %hi({1}), %{2}", Name, IsConstantData ? ".ConstantString" + HiBits0 : HiBits0.ToString(), RegDest0);
 }
 }
 
@@ -780,6 +920,13 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+partial void MyCopyExtraDataToNewInstance(MovInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as MovInstruction);
 }
 
 public override string ToString()
@@ -818,6 +965,13 @@ public override Register[] DestRegs
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(CallInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as CallInstruction);
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}", Name, Str0);
@@ -854,6 +1008,13 @@ public override Register[] DestRegs
 		return new Register[] {
 		};
 	}
+}
+
+partial void MyCopyExtraDataToNewInstance(StwInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as StwInstruction);
 }
 
 	public override string ToString()
@@ -900,6 +1061,13 @@ RegDest0		};
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(LdswInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as LdswInstruction);
+}
+
 	public override string ToString()
 	{
 		string ret = string.Empty;
@@ -941,6 +1109,13 @@ public override Register[] DestRegs
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(RetInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as RetInstruction);
+}
+
 public override string ToString()
 {
 return string.Format("{0}", Name);
@@ -976,6 +1151,13 @@ public override Register[] DestRegs
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(RestoreInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as RestoreInstruction);
+}
+
 public override string ToString()
 {
 return string.Format("{0}", Name);
@@ -1009,6 +1191,13 @@ public override Register[] DestRegs
 		return new Register[] {
 		};
 	}
+}
+
+partial void MyCopyExtraDataToNewInstance(NopInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as NopInstruction);
 }
 
 public override string ToString()
@@ -1049,6 +1238,13 @@ RegDest0		};
 	}
 }
 
+partial void MyCopyExtraDataToNewInstance(SaveInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as SaveInstruction);
+}
+
 public override string ToString()
 {
 return string.Format("{0} %{1}, {2}, %{3}", Name, RegSource0, Immed0, RegDest0);
@@ -1084,6 +1280,7 @@ public class SparcRegisterConverter : IInstructionConverter<SparcInstruction, Sp
 				var conv = cur as AddInstruction;
 				var copy = new AddInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1092,6 +1289,7 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				var conv = cur as AddiInstruction;
 				var copy = new AddiInstruction(
 map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1100,6 +1298,7 @@ map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as SubInstruction;
 				var copy = new SubInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1108,6 +1307,7 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				var conv = cur as SdivxInstruction;
 				var copy = new SdivxInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1116,6 +1316,7 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				var conv = cur as MulxInstruction;
 				var copy = new MulxInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1124,6 +1325,7 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				var conv = cur as OrInstruction;
 				var copy = new OrInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1132,6 +1334,7 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				var conv = cur as AndInstruction;
 				var copy = new AndInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1140,6 +1343,7 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				var conv = cur as XoriInstruction;
 				var copy = new XoriInstruction(
 map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1148,6 +1352,7 @@ map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as OriInstruction;
 				var copy = new OriInstruction(
 map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1156,6 +1361,7 @@ map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as OrlInstruction;
 				var copy = new OrlInstruction(
 map[conv.RegSource0.IntVal], conv.LoBits0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1164,6 +1370,7 @@ map[conv.RegSource0.IntVal], conv.LoBits0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as CmpInstruction;
 				var copy = new CmpInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1172,6 +1379,7 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal]				);
 				var conv = cur as BeInstruction;
 				var copy = new BeInstruction(
 conv.Label0				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1180,6 +1388,7 @@ conv.Label0				);
 				var conv = cur as BaInstruction;
 				var copy = new BaInstruction(
 conv.Label0				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1188,6 +1397,7 @@ conv.Label0				);
 				var conv = cur as MoveqInstruction;
 				var copy = new MoveqInstruction(
 conv.Immed0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1196,6 +1406,7 @@ conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as MovneInstruction;
 				var copy = new MovneInstruction(
 conv.Immed0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1204,6 +1415,7 @@ conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as MovgeInstruction;
 				var copy = new MovgeInstruction(
 conv.Immed0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1212,6 +1424,7 @@ conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as MovgInstruction;
 				var copy = new MovgInstruction(
 conv.Immed0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1220,6 +1433,7 @@ conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as MovleInstruction;
 				var copy = new MovleInstruction(
 conv.Immed0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1228,6 +1442,7 @@ conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as MovlInstruction;
 				var copy = new MovlInstruction(
 conv.Immed0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1236,6 +1451,7 @@ conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as SethiInstruction;
 				var copy = new SethiInstruction(
 conv.HiBits0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1244,6 +1460,7 @@ conv.HiBits0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as MovInstruction;
 				var copy = new MovInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1252,6 +1469,7 @@ map[conv.RegSource0.IntVal], map[conv.RegDest0.IntVal]				);
 				var conv = cur as CallInstruction;
 				var copy = new CallInstruction(
 conv.Str0				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1260,6 +1478,7 @@ conv.Str0				);
 				var conv = cur as StwInstruction;
 				var copy = new StwInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], conv.Immed0				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1268,6 +1487,7 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], conv.Immed0				);
 				var conv = cur as LdswInstruction;
 				var copy = new LdswInstruction(
 map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1276,6 +1496,7 @@ map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as RetInstruction;
 				var copy = new RetInstruction(
 				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1284,6 +1505,7 @@ map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as RestoreInstruction;
 				var copy = new RestoreInstruction(
 				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1292,6 +1514,7 @@ map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as NopInstruction;
 				var copy = new NopInstruction(
 				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1300,6 +1523,7 @@ map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as SaveInstruction;
 				var copy = new SaveInstruction(
 map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}

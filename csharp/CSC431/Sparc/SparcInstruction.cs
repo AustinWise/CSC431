@@ -12,5 +12,7 @@ namespace CSC431.Sparc
             : base(name)
         {
         }
+
+        public abstract void CopyExtraDataToNewInstance(SparcInstruction newObj);
     }
 }

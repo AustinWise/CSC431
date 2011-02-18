@@ -23,6 +23,7 @@ namespace CSC431.Sparc
 
         public override void PrintFileFooter(System.IO.TextWriter tw, ProgramBlock<SparcInstruction> prog)
         {
+            tw.WriteLine(Properties.Resources.SparcDataSection);
         }
 
         public override void PrintFunctionFooter(System.IO.TextWriter tw, FunctionBlock<SparcInstruction> f)

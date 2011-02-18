@@ -79,7 +79,11 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Println(IL.PrintlnInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new SethiInstruction(1, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
+            yield return new OrlInstruction(new SparcRegister(SparcReg.o0), 1, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
+            yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.o1));
+            yield return new CallInstruction("printf");
+            yield return new NopInstruction();
         }
 
         public IEnumerable<SparcInstruction> Read(IL.ReadInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
