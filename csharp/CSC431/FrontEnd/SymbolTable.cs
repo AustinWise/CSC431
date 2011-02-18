@@ -57,6 +57,14 @@ namespace CSC431.FrontEnd
             }
         }
 
+        public IEnumerable<KeyValuePair<string, Type>> Declares
+        {
+            get
+            {
+                return this.declares;
+            }
+        }
+
         public void put(String sym, Type t)
         {
             this.declares.Add(sym, t);

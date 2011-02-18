@@ -1082,6 +1082,107 @@ public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
 
 
 
+public partial class OrlstrInstruction : SparcInstruction
+{
+	public OrlstrInstruction
+	(
+Register regSource0,string str0,Register regDest0	) : base ("or")
+	{
+this.RegSource0 = regSource0;this.Str0 = str0;this.RegDest0 = regDest0;	}
+
+public Register RegSource0{ get; private set; }
+public string Str0{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+RegSource0, 		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+partial void MyCopyExtraDataToNewInstance(OrlstrInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as OrlstrInstruction);
+}
+
+	public override string ToString()
+	{
+		string ret = string.Empty;
+		ToStringCore(ref ret);
+		if (string.IsNullOrEmpty(ret))
+			throw new NotImplementedException();
+		return ret;
+	}
+
+	partial void ToStringCore(ref string ret);
+}
+
+
+
+public partial class SethistrInstruction : SparcInstruction
+{
+	public SethistrInstruction
+	(
+string str0,Register regDest0	) : base ("sethi")
+	{
+this.Str0 = str0;this.RegDest0 = regDest0;	}
+
+public string Str0{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+partial void MyCopyExtraDataToNewInstance(SethistrInstruction newObj);
+
+public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
+{
+	MyCopyExtraDataToNewInstance(newObj as SethistrInstruction);
+}
+
+	public override string ToString()
+	{
+		string ret = string.Empty;
+		ToStringCore(ref ret);
+		if (string.IsNullOrEmpty(ret))
+			throw new NotImplementedException();
+		return ret;
+	}
+
+	partial void ToStringCore(ref string ret);
+}
+
+
+
 public partial class RetInstruction : SparcInstruction
 {
 	public RetInstruction
@@ -1259,7 +1360,7 @@ public class SparcRegisterConverter : IInstructionConverter<SparcInstruction, Sp
 	private Dictionary<string, SparcRegister[]> colorMapping;
 	private SparcRegister[] map;
 
-    public SparcRegisterConverter(Dictionary<string, SparcRegister[]> colorMapping)
+	public SparcRegisterConverter(Dictionary<string, SparcRegister[]> colorMapping)
 	{
 		this.colorMapping = colorMapping;
 	}
@@ -1487,6 +1588,24 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], conv.Immed0				);
 				var conv = cur as LdswInstruction;
 				var copy = new LdswInstruction(
 map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
+				yield return copy;
+				continue;
+			}
+			if (cur is OrlstrInstruction)
+			{
+				var conv = cur as OrlstrInstruction;
+				var copy = new OrlstrInstruction(
+map[conv.RegSource0.IntVal], conv.Str0, map[conv.RegDest0.IntVal]				);
+				conv.CopyExtraDataToNewInstance(copy);
+				yield return copy;
+				continue;
+			}
+			if (cur is SethistrInstruction)
+			{
+				var conv = cur as SethistrInstruction;
+				var copy = new SethistrInstruction(
+conv.Str0, map[conv.RegDest0.IntVal]				);
 				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;

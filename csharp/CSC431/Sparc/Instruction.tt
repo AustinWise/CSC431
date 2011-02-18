@@ -92,11 +92,11 @@ instr.ForEachOperand((c, count, isLast) =>
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(<#= className #> newObj);
+partial void MyCopyExtraDataToNewInstance(<#=className #> newObj);
 
 public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
 {
-	MyCopyExtraDataToNewInstance(newObj as <#= className #>);
+	MyCopyExtraDataToNewInstance(newObj as <#=className #>);
 }
 
 <#
@@ -164,17 +164,17 @@ else
 
 public class SparcRegisterConverter : IInstructionConverter<SparcInstruction, SparcInstruction>
 {
-	private Dictionary<FunctionBlock<SparcInstruction>, SparcRegister[]> colorMapping;
+	private Dictionary<string, SparcRegister[]> colorMapping;
 	private SparcRegister[] map;
 
-	public SparcRegisterConverter(Dictionary<FunctionBlock<SparcInstruction>, SparcRegister[]> colorMapping)
+	public SparcRegisterConverter(Dictionary<string, SparcRegister[]> colorMapping)
 	{
 		this.colorMapping = colorMapping;
 	}
 
-	public IEnumerable<SparcInstruction> FunctionStart(FunctionBlock<SparcInstruction> old, FunctionBlock<SparcInstruction> copy)
+	public IEnumerable<SparcInstruction> FunctionStart(FunctionBlock<SparcInstruction> copy)
 	{
-		this.map = colorMapping[old];
+		this.map = colorMapping[copy.Name];
 		yield break;
 	}
 
@@ -184,15 +184,15 @@ public class SparcRegisterConverter : IInstructionConverter<SparcInstruction, Sp
 		{
 			var cur = s.Consume();
 <#
-    foreach (var instr in InstrInfo.GetAll())
-    {
-        var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
-        var className = name + "Instruction";
+foreach (var instr in InstrInfo.GetAll())
+{
+    var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
+    var className = name + "Instruction";
 #>
-			if (cur is <#= className #>)
+			if (cur is <#=className #>)
 			{
-				var conv = cur as <#= className #>;
-				var copy = new <#= className #>(
+				var conv = cur as <#=className #>;
+				var copy = new <#=className #>(
 <#
 instr.ForEachOperand((c, count, isLast) =>
 {
@@ -217,7 +217,7 @@ instr.ForEachOperand((c, count, isLast) =>
 				continue;
 			}
 <#
-    }
+}
 #>
 			throw new NotSupportedException();
 		}
@@ -285,20 +285,25 @@ private class OperandType
 private class InstrInfo
 {
     public InstrInfo(String type, string name)
-        : this(type, name, name)
+        : this(type, name, name, InstrFlags.None)
     {
     }
 
     public InstrInfo(String type, string name, string className)
+        : this(type, name, className, InstrFlags.None)
+    {
+    }
+
+    public InstrInfo(String type, string name, InstrFlags flags)
+        : this(type, name, name, flags)
+    {
+    }
+
+    public InstrInfo(String type, string name, string className, InstrFlags flags)
     {
         this.Type = type;
         this.Name = name;
         this.ClassName = className;
-    }
-
-    public InstrInfo(String type, string name, InstrFlags flags)
-        : this(type, name)
-    {
         this.Flags = flags;
     }
 
@@ -363,6 +368,8 @@ private class InstrInfo
                 new InstrInfo("s", "call"),
                 new InstrInfo("rri", "stw", InstrFlags.CustomToString),
                 new InstrInfo("riR", "ldsw", InstrFlags.CustomToString),
+                new InstrInfo("rsR", "or", "orlstr", InstrFlags.CustomToString),
+                new InstrInfo("sR", "sethi", "sethistr", InstrFlags.CustomToString),
                 new InstrInfo("", "ret"),
                 new InstrInfo("", "restore"),
                 new InstrInfo("", "nop"),

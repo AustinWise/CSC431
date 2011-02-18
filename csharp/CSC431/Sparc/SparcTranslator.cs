@@ -243,12 +243,18 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Loadglobal(IL.LoadglobalInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            var addrReg = new CSC431.CFG.VirtualRegister(CFG.Instruction.VirtualRegister());
+            yield return new SethistrInstruction(s.Str0, addrReg);
+            yield return new OrlstrInstruction(addrReg, s.Str0, addrReg);
+            yield return new LdswInstruction(addrReg, 0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Storeglobal(IL.StoreglobalInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            var addrReg = new CSC431.CFG.VirtualRegister(CFG.Instruction.VirtualRegister());
+            yield return new SethistrInstruction(s.Str0, addrReg);
+            yield return new OrlstrInstruction(addrReg, s.Str0, addrReg);
+            yield return new StwInstruction(s.RegSource0, addrReg, 0);
         }
 
         public IEnumerable<SparcInstruction> Computeglobaladdress(IL.ComputeglobaladdressInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)

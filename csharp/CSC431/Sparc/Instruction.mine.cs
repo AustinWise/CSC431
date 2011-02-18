@@ -40,4 +40,20 @@ namespace CSC431.Sparc
             newObj.IsConstantData = IsConstantData;
         }
     }
+
+    public partial class SethistrInstruction
+    {
+        partial void ToStringCore(ref string ret)
+        {
+            ret = string.Format("{0} %hi({1}), %{2}", Name, Str0, RegDest0);
+        }
+    }
+
+    public partial class OrlstrInstruction
+    {
+        partial void ToStringCore(ref string ret)
+        {
+            ret = string.Format("{0} %{1}, %lo({2}), %{3}", Name, RegSource0, Str0, RegDest0);
+        }
+    }
 }

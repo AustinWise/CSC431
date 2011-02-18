@@ -23,6 +23,12 @@ namespace CSC431.Sparc
 
         public override void PrintFileFooter(System.IO.TextWriter tw, ProgramBlock<SparcInstruction> prog)
         {
+            foreach (var g in Program.Stable.Declares)
+            {
+                if (g.Value.isFun())
+                    continue;
+                tw.WriteLine("	.common {0},4,4", g.Key);
+            }
             tw.WriteLine(Properties.Resources.SparcDataSection);
         }
 
