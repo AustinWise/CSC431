@@ -18,20 +18,12 @@ namespace CSC431
             {
                 try
                 {
-                    ANTLRInputStream input;
-                    if (Options.InputFile == null)
-                    {
-                        input = new ANTLRInputStream(Console.OpenStandardInput());
-                    }
-                    else
-                    {
-                        input = new ANTLRInputStream(new FileStream(Options.InputFile, FileMode.Open));
-                    }
+                    ANTLRInputStream input = new ANTLRInputStream(Options.InputSource.Value);
                     return new EvilLexer(input);
                 }
                 catch (IOException)
                 {
-                    throw new EvilException("file not found: " + (Options.InputFile ?? "<stdin>"));
+                    throw new EvilException("file not found");
                 }
             });
         }
@@ -72,8 +64,11 @@ namespace CSC431
                 TypeChecker tparser = new TypeChecker(nodes);
                 tparser.TraceDestination = Console.Out;
 
-                StructTypes stypes = Program.Stypes = new StructTypes();
-                SymbolTable stable = Program.Stable = new SymbolTable();
+                StructTypes stypes = new StructTypes();
+                SymbolTable stable = new SymbolTable();
+
+                Program.Stypes.Value = stypes;
+                Program.Stable.Value = stable;
 
                 tparser.Program(stypes, stable);
 

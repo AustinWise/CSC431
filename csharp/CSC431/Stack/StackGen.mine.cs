@@ -29,7 +29,7 @@ namespace CSC431.Stack
 
         public void Program()
         {
-            AssemblyName aName = new AssemblyName(Options.ClrExec);
+            AssemblyName aName = new AssemblyName(Options.ClrExec.Value);
             AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(aName, AssemblyBuilderAccess.RunAndSave);
             programModule = ab.DefineDynamicModule(aName.Name, aName.Name + ".exe", true);
             programType = programModule.DefineType("Program", TypeAttributes.Public);

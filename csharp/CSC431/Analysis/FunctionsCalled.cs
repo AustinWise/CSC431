@@ -31,7 +31,9 @@ namespace CSC431.Analysis
                 });
                 f.FunctionsCalled = calleds;
 
-                var argCounts = calleds.Select(funName => Program.Stable.Children.Where(n => n.Name == funName).First().Formals.Count);
+                var stable = Program.Stable.Value;
+
+                var argCounts = calleds.Select(funName => stable.Children.Where(n => n.Name == funName).First().Formals.Count);
                 if (argCounts.Any())
                     f.MaxOutArgs = argCounts.Max();
             }

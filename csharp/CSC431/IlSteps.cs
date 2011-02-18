@@ -7,6 +7,7 @@ using Antlr.Runtime;
 using Antlr.Runtime.Tree;
 using CSC431.CFG;
 using CSC431.IL;
+using System.IO;
 
 namespace CSC431
 {
@@ -51,7 +52,9 @@ namespace CSC431
         {
             return new InStep<ProgramBlock<MilocInstruction>>(c =>
             {
-                c.Print(Console.Out, new MilocPrinter());
+                var f = new StreamWriter("dump.il");
+                c.Print(f, new MilocPrinter());
+                f.Close();
             });
         }
 

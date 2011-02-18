@@ -2,64 +2,33 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using CSC431.Steps;
+using System.Threading.Tasks;
 
 namespace CSC431
 {
     public static class Program
     {
-        public static FrontEnd.StructTypes Stypes;
-        public static FrontEnd.SymbolTable Stable;
+        public static TaskLocal<FrontEnd.StructTypes> Stypes = new TaskLocal<FrontEnd.StructTypes>();
+        public static TaskLocal<FrontEnd.SymbolTable> Stable = new TaskLocal<FrontEnd.SymbolTable>();
 
-        public static void Main(String[] args)
+        public static int Main(String[] args)
         {
-            try
+            args = new[] { "test.ev" };
+            var t = new Task(() =>
             {
                 Options.ParseParameters(args);
-            }
-            catch (EvilException ex)
+                Step.DoAll(Options.CreatePipe(SparcSteps.PrintCFG));
+            });
+            t.RunSynchronously();
+
+            if (t.IsFaulted)
             {
-                Console.WriteLine(ex.Message);
-                return;
+                var ex = t.Exception as AggregateException;
+                Console.WriteLine(ex.InnerExceptions[0].Message);
+                return 1;
             }
 
-            var pipe = FrontEndSteps.CreateLexer()
-                .FollowWith(FrontEndSteps.Parse());
-
-            if (Options.DisplayAST)
-                pipe.FollowWith(FrontEndSteps.PrintAst());
-
-            var typeChecked = pipe.FollowWith(FrontEndSteps.TypeCheck());
-            var flow = typeChecked.FollowWith(IlSteps.MakeCFG()).FollowWith(IlSteps.CleanUpCfg());
-
-            if (Options.DumpIL)
-                flow.FollowWith(IlSteps.PrintCFG());
-
-            if (Options.Llvm)
-            {
-                var llvm = flow.FollowWith(LlvmSteps.ConvertToLlvm());
-                //llvm.FollowWith(LlvmSteps.PrintCFG());
-                llvm.FollowWith(LlvmSteps.BitcodeToSparc());
-            }
-
-            if (!(Options.DumpIL || Options.Llvm))
-            {
-                flow.FollowWith(Analysis.FunctionsCalled.Step())
-                    .FollowWith(SparcSteps.ConvertToSparc())
-                    .FollowWith(SparcSteps.RegisterAllocation())
-                    .FollowWith(SparcSteps.PrintCFG());
-            }
-
-            if (!string.IsNullOrEmpty(Options.ClrExec))
-                typeChecked.FollowWith(StackSteps.MakeClrExe());
-
-            try
-            {
-                Step.DoAll(pipe);
-            }
-            catch (EvilException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            return 0;
         }
     }
 }

@@ -7,6 +7,7 @@ using CSC431.CFG;
 using CSC431.IL;
 using CSC431.LLVM;
 using System.Diagnostics;
+using System.IO;
 
 namespace CSC431
 {
@@ -24,7 +25,9 @@ namespace CSC431
         {
             return new InStep<ProgramBlock<LlvmInstruction>>(c =>
             {
-                c.Print(Console.Out, new LlvmPrinter());
+                StreamWriter f = new StreamWriter("llvm.ll");
+                c.Print(f, new LlvmPrinter());
+                f.Close();
             });
         }
 
@@ -48,7 +51,9 @@ namespace CSC431
 
                 var text = p.StandardOutput.ReadToEnd();
 
-                Console.WriteLine(text);
+                StreamWriter f = new StreamWriter("llvm.s");
+                f.Write(text);
+                f.Close();
             });
         }
     }

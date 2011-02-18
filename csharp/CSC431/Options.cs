@@ -5,31 +5,27 @@ using System.Text;
 using System.IO;
 using Antlr.Runtime;
 using NDesk.Options;
+using CSC431.Steps;
 
 namespace CSC431
 {
     public static class Options
     {
-        static Options()
-        {
-            InputFile = null;
-            DisplayAST = false;
-        }
-
-        public static String InputFile { get; set; }
-        public static bool DisplayAST { get; set; }
-        public static bool DumpIL { get; set; }
-        public static string ClrExec { get; set; }
-        public static bool Llvm { get; set; }
+        public static TaskLocal<Stream> InputSource = new TaskLocal<Stream>();
+        private static TaskLocal<String> InputFile = new TaskLocal<string>();
+        public static TaskLocal<bool> DisplayAST = new TaskLocal<bool>();
+        public static TaskLocal<bool> DumpIL = new TaskLocal<bool>();
+        public static TaskLocal<string> ClrExec = new TaskLocal<string>();
+        public static TaskLocal<bool> Llvm = new TaskLocal<bool>();
 
         public static void ParseParameters(String[] args)
         {
             var os = new OptionSet()
             {
-                {"displayAST", v=> DisplayAST = v != null},
-                {"dumpIL", v=> DumpIL = v != null},
-                {"clrExe=", v=> ClrExec = v},
-                {"llvm", v=> Llvm = v != null},
+                {"displayAST", v=> DisplayAST.Value = v != null},
+                {"dumpIL", v=> DumpIL.Value = v != null},
+                {"clrExe=", v=> ClrExec.Value = v},
+                {"llvm", v=> Llvm.Value = v != null},
             };
 
             var extras = os.Parse(args);
@@ -37,15 +33,59 @@ namespace CSC431
             {
                 if (e.StartsWith("-"))
                     throw new EvilException("unexpected option: " + e);
-                else if (InputFile != null)
+                else if (InputFile.Value != null)
                 {
                     throw new EvilException("too many files specified");
                 }
                 else
                 {
-                    InputFile = e;
+                    InputFile.Value = e;
                 }
             }
+
+            if (InputFile.Value == null)
+            {
+                InputSource.Value = Console.OpenStandardInput();
+            }
+            else
+            {
+                InputSource.Value = new FileStream(Options.InputFile.Value, FileMode.Open);
+            }
+        }
+
+        public static Step CreatePipe(Func<InStep<CSC431.CFG.ProgramBlock<Sparc.SparcInstruction>>> outputer)
+        {
+            var pipe = FrontEndSteps.CreateLexer()
+                .FollowWith(FrontEndSteps.Parse());
+
+            if (Options.DisplayAST.Value)
+                pipe.FollowWith(FrontEndSteps.PrintAst());
+
+            var typeChecked = pipe.FollowWith(FrontEndSteps.TypeCheck());
+            var flow = typeChecked.FollowWith(IlSteps.MakeCFG()).FollowWith(IlSteps.CleanUpCfg());
+
+            if (Options.DumpIL.Value)
+                flow.FollowWith(IlSteps.PrintCFG());
+
+            if (Options.Llvm.Value)
+            {
+                var llvm = flow.FollowWith(LlvmSteps.ConvertToLlvm());
+                //llvm.FollowWith(LlvmSteps.PrintCFG());
+                llvm.FollowWith(LlvmSteps.BitcodeToSparc());
+            }
+
+            if (!(Options.DumpIL.Value || Options.Llvm.Value))
+            {
+                flow.FollowWith(Analysis.FunctionsCalled.Step())
+                    .FollowWith(SparcSteps.ConvertToSparc())
+                    .FollowWith(SparcSteps.RegisterAllocation())
+                    .FollowWith(outputer());
+            }
+
+            if (!string.IsNullOrEmpty(Options.ClrExec.Value))
+                typeChecked.FollowWith(StackSteps.MakeClrExe());
+
+            return pipe;
         }
     }
 }

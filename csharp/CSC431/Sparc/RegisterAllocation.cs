@@ -30,6 +30,8 @@ namespace CSC431.Sparc
 
             foreach (var c in canColors)
             {
+                if (c.IntVal == 0)
+                    throw new Exception("no register should have an intval of 0, the register allocator depends on this");
                 candidateColors[c.IntVal] = true;
             }
         }

@@ -14,8 +14,10 @@ namespace CSC431.LLVM
 
         public override void PrintFunctionHeader(System.IO.TextWriter tw, FunctionBlock<LlvmInstruction> f)
         {
-            var funType = Program.Stable.getType(f.Name);
-            var funTable = Program.Stable.Children.Where(t => t.Name == f.Name).First();
+            var stable = Program.Stable.Value;
+
+            var funType = stable.getType(f.Name);
+            var funTable = stable.Children.Where(t => t.Name == f.Name).First();
             tw.Write("define ");
             tw.Write(funType.getReturnType().isVoid() ? "void" : "i32");
             tw.Write(" @{0}(", f.Name);
