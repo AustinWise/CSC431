@@ -8,14 +8,23 @@ namespace CSC431.Sparc
     public class SparcTranslator : CSC431.IL.IMilocTranslator<SparcInstruction>
     {
         int spOffset;
+        CFG.FunctionBlock<SparcInstruction> curFunc;
+
+        private int getLocalOffset(string name)
+        {
+            return spOffset + curFunc.GetLocalIndex(name) * 4;
+        }
 
         public IEnumerable<SparcInstruction> FunctionStart(CFG.FunctionBlock<SparcInstruction> copy)
         {
+            this.curFunc = copy;
+
             spOffset = 92;
             if (copy.MaxOutArgs > 6)
             {
                 spOffset += (copy.MaxOutArgs - 6) * 4;
             }
+
             //TODO: actully calculate frame size
             yield return new SaveInstruction(new SparcRegister(SparcReg.sp), -1024, new SparcRegister(SparcReg.sp));
         }
@@ -27,7 +36,7 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Addi(IL.AddiInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new AddiInstruction(s.RegSource0, s.Immed0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Div(IL.DivInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -73,7 +82,11 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Print(IL.PrintInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new SethiInstruction(0, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
+            yield return new OrlInstruction(new SparcRegister(SparcReg.o0), 0, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
+            yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.o1));
+            yield return new CallInstruction("printf");
+            yield return new NopInstruction();
         }
 
         public IEnumerable<SparcInstruction> Println(IL.PrintlnInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -87,7 +100,7 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Read(IL.ReadInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException("read");
         }
 
         public IEnumerable<SparcInstruction> Comp(IL.CompInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -240,7 +253,24 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Computeglobaladdress(IL.ComputeglobaladdressInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            var read = stream.Current as IL.ReadInstruction;
+            var ld = stream.LA(1) as IL.LoadglobalInstruction;
+
+            if (read == null || ld == null || s.RegDest0 != read.RegSource0 || s.Str0 != ld.Str0)
+            {
+                throw new NotSupportedException("Computeglobaladdress");
+            }
+
+            stream.Consume();
+            stream.Consume();
+
+            yield return new SethiInstruction(2, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
+            yield return new OrlInstruction(new SparcRegister(SparcReg.o0), 2, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
+            yield return new AddiInstruction(new SparcRegister(SparcReg.sp), getLocalOffset("~~~scanf~~~"), new SparcRegister(SparcReg.o1));
+            yield return new CallInstruction("scanf");
+            yield return new NopInstruction();
+            yield return new LdswInstruction(new SparcRegister(SparcReg.sp), getLocalOffset("~~~scanf~~~"), ld.RegDest0);
+
         }
 
         public IEnumerable<SparcInstruction> New(IL.NewInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
