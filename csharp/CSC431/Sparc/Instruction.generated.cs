@@ -233,6 +233,82 @@ return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDe
 
 
 
+public partial class AndInstruction : SparcInstruction
+{
+	public AndInstruction
+	(
+Register regSource0,Register regSource1,Register regDest0	) : base ("and")
+	{
+this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
+
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+RegSource0, RegSource1, 		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDest0);
+}
+}
+
+
+
+public partial class XoriInstruction : SparcInstruction
+{
+	public XoriInstruction
+	(
+Register regSource0,int immed0,Register regDest0	) : base ("xori")
+	{
+this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
+
+public Register RegSource0{ get; private set; }
+public int Immed0{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+RegSource0, 		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} %{1}, {2}, %{3}", Name, RegSource0, Immed0, RegDest0);
+}
+}
+
+
+
 public partial class OriInstruction : SparcInstruction
 {
 	public OriInstruction
@@ -750,6 +826,94 @@ return string.Format("{0} {1}", Name, Str0);
 
 
 
+public partial class StwInstruction : SparcInstruction
+{
+	public StwInstruction
+	(
+Register regSource0,Register regSource1,int immed0	) : base ("stw")
+	{
+this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.Immed0 = immed0;	}
+
+public Register RegSource0{ get; private set; }
+public Register RegSource1{ get; private set; }
+public int Immed0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+RegSource0, RegSource1, 		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+		};
+	}
+}
+
+	public override string ToString()
+	{
+		string ret = string.Empty;
+		ToStringCore(ref ret);
+		if (string.IsNullOrEmpty(ret))
+			throw new NotImplementedException();
+		return ret;
+	}
+
+	partial void ToStringCore(ref string ret);
+}
+
+
+
+public partial class LdwInstruction : SparcInstruction
+{
+	public LdwInstruction
+	(
+Register regSource0,int immed0,Register regDest0	) : base ("ldw")
+	{
+this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
+
+public Register RegSource0{ get; private set; }
+public int Immed0{ get; private set; }
+public Register RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+RegSource0, 		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+	public override string ToString()
+	{
+		string ret = string.Empty;
+		ToStringCore(ref ret);
+		if (string.IsNullOrEmpty(ret))
+			throw new NotImplementedException();
+		return ret;
+	}
+
+	partial void ToStringCore(ref string ret);
+}
+
+
+
 public partial class RetInstruction : SparcInstruction
 {
 	public RetInstruction
@@ -963,6 +1127,22 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				yield return copy;
 				continue;
 			}
+			if (cur is AndInstruction)
+			{
+				var conv = cur as AndInstruction;
+				var copy = new AndInstruction(
+map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
+			if (cur is XoriInstruction)
+			{
+				var conv = cur as XoriInstruction;
+				var copy = new XoriInstruction(
+map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
+				yield return copy;
+				continue;
+			}
 			if (cur is OriInstruction)
 			{
 				var conv = cur as OriInstruction;
@@ -1072,6 +1252,22 @@ map[conv.RegSource0.IntVal], map[conv.RegDest0.IntVal]				);
 				var conv = cur as CallInstruction;
 				var copy = new CallInstruction(
 conv.Str0				);
+				yield return copy;
+				continue;
+			}
+			if (cur is StwInstruction)
+			{
+				var conv = cur as StwInstruction;
+				var copy = new StwInstruction(
+map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], conv.Immed0				);
+				yield return copy;
+				continue;
+			}
+			if (cur is LdwInstruction)
+			{
+				var conv = cur as LdwInstruction;
+				var copy = new LdwInstruction(
+map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				yield return copy;
 				continue;
 			}

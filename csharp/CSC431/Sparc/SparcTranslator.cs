@@ -44,17 +44,17 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> And(IL.AndInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new AndInstruction(s.RegSource0, s.RegSource1, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Or(IL.OrInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new OrInstruction(s.RegSource0, s.RegSource1, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Xori(IL.XoriInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new XoriInstruction(s.RegSource0, s.Immed0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Loadi(IL.LoadiInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -179,7 +179,7 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> StoreaiField(IL.StoreaiFieldInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new StwInstruction(s.RegSource0, s.RegSource1, s.FieldIndex * 4);
         }
 
         public IEnumerable<SparcInstruction> StoreaiVar(IL.StoreaiVarInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -194,7 +194,7 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> LoadaiField(IL.LoadaiFieldInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new LdwInstruction(s.RegSource0, s.FieldIndex * 4, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> LoadaiVar(IL.LoadaiVarInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
