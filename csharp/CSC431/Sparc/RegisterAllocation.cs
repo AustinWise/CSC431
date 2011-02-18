@@ -222,7 +222,7 @@ namespace CSC431.Sparc
         {
             var edgeCount = edges.TrueIndexs().Count();
 
-            return edgeCount > numColors;
+            return edgeCount >= numColors;
         }
 
         private int compareConstrainedness(BitArray[] dg, int r1, int r2)
