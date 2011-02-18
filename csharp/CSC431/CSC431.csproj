@@ -45,11 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analysis\FunctionsCalled.cs" />
     <Compile Include="CFG\IInstructionConverter.cs" />
     <Compile Include="CFG\InstructionStream.cs" />
     <Compile Include="CFG\Printer.cs" />
     <Compile Include="CFG\Register.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Sparc\RegisterAllocation.cs" />
     <Compile Include="CFG\VirtualRegister.cs" />
     <Compile Include="EvilException.cs" />
@@ -113,6 +119,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\SparcDataSection.txt" />
     <Content Include="Sparc\Instruction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
@@ -150,7 +157,12 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

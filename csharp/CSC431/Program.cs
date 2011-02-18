@@ -43,7 +43,12 @@ namespace CSC431
             }
 
             if (!(Options.DumpIL || Options.Llvm))
-                flow.FollowWith(SparcSteps.ConvertToSparc()).FollowWith(SparcSteps.RegisterAllocation()).FollowWith(SparcSteps.PrintCFG());
+            {
+                flow.FollowWith(Analysis.FunctionsCalled.Step())
+                    .FollowWith(SparcSteps.ConvertToSparc())
+                    .FollowWith(SparcSteps.RegisterAllocation())
+                    .FollowWith(SparcSteps.PrintCFG());
+            }
 
             if (!string.IsNullOrEmpty(Options.ClrExec))
                 typeChecked.FollowWith(StackSteps.MakeClrExe());

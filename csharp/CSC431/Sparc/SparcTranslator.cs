@@ -7,8 +7,16 @@ namespace CSC431.Sparc
 {
     public class SparcTranslator : CSC431.IL.IMilocTranslator<SparcInstruction>
     {
+        int spOffset;
+
         public IEnumerable<SparcInstruction> FunctionStart(CFG.FunctionBlock<CSC431.IL.MilocInstruction> block)
         {
+            spOffset = 92;
+            var maxArgCount = block.FunctionsCalled.Select(funName => Program.Stable.Children.Where(n => n.Name == funName).First().Formals.Count).Max();
+            if (maxArgCount > 6)
+            {
+                spOffset += (maxArgCount - 6) * 4;
+            }
             yield return new SaveInstruction(new SparcRegister(SparcReg.sp), -1024, new SparcRegister(SparcReg.sp));
         }
 
@@ -169,7 +177,8 @@ namespace CSC431.Sparc
         {
             if (s.Immed0 > 5)
                 throw new NotImplementedException();
-            yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.o0 + s.Immed0));
+            else
+                yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.o0 + s.Immed0));
         }
 
         public IEnumerable<SparcInstruction> Loadret(IL.LoadretInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)

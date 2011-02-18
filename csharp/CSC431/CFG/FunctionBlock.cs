@@ -72,5 +72,10 @@ namespace CSC431.CFG
             copy.Locals = new List<string>(Locals);
             return copy;
         }
+
+
+
+        //~~BONUS INFO~~ (not here by default, need to use an analysis step to populate)
+        public List<string> FunctionsCalled { get; set; }
     }
 }

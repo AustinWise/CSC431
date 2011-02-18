@@ -1,0 +1,10 @@
+	.section        ".rodata"
+	.align 8
+.PrintFormat:
+	.asciz  "%d "
+	.align 8
+.PrintLineFormat:
+	.asciz  "%d\n"
+	.align 8
+.ReadForma:t
+	.asciz  "%d"
