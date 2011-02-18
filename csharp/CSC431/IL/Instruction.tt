@@ -134,7 +134,7 @@ instr.ForEachOperand((c, count, isLast) =>
 #>
 public interface IMilocTranslator<T> where T : Instruction
 {
-	IEnumerable<T> FunctionStart(FunctionBlock<MilocInstruction> block);
+	IEnumerable<T> FunctionStart(FunctionBlock<T> copy);
 <#
     foreach (var instr in InstrInfo.GetAll())
     {
@@ -149,7 +149,7 @@ public interface IMilocTranslator<T> where T : Instruction
 
 public class MilocIdentityTranslator : IMilocTranslator<MilocInstruction>
 {
-	public IEnumerable<MilocInstruction> FunctionStart(FunctionBlock<MilocInstruction> block)
+	public IEnumerable<MilocInstruction> FunctionStart(FunctionBlock<MilocInstruction> copy)
 	{
 		yield break;
 	}
@@ -174,9 +174,9 @@ public class MilocConverter<T> : IInstructionConverter<MilocInstruction, T>
 		this.translator = translator;
 	}
 
-	public IEnumerable<T> FunctionStart(FunctionBlock<MilocInstruction> block)
+	public IEnumerable<T> FunctionStart(FunctionBlock<T> copy)
 	{
-		return translator.FunctionStart(block);
+		return translator.FunctionStart(copy);
 	}
 
 	public IEnumerable<T> Convert(InstructionStream<MilocInstruction> s)

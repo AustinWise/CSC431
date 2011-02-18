@@ -1417,7 +1417,7 @@ return string.Format("{0} {1}", Name, RegSource0);
 
 public interface IMilocTranslator<T> where T : Instruction
 {
-	IEnumerable<T> FunctionStart(FunctionBlock<MilocInstruction> block);
+	IEnumerable<T> FunctionStart(FunctionBlock<T> copy);
 	IEnumerable<T> Add(AddInstruction s, InstructionStream<MilocInstruction> stream);
 	IEnumerable<T> Addi(AddiInstruction s, InstructionStream<MilocInstruction> stream);
 	IEnumerable<T> Div(DivInstruction s, InstructionStream<MilocInstruction> stream);
@@ -1460,7 +1460,7 @@ public interface IMilocTranslator<T> where T : Instruction
 
 public class MilocIdentityTranslator : IMilocTranslator<MilocInstruction>
 {
-	public IEnumerable<MilocInstruction> FunctionStart(FunctionBlock<MilocInstruction> block)
+	public IEnumerable<MilocInstruction> FunctionStart(FunctionBlock<MilocInstruction> copy)
 	{
 		yield break;
 	}
@@ -1513,9 +1513,9 @@ public class MilocConverter<T> : IInstructionConverter<MilocInstruction, T>
 		this.translator = translator;
 	}
 
-	public IEnumerable<T> FunctionStart(FunctionBlock<MilocInstruction> block)
+	public IEnumerable<T> FunctionStart(FunctionBlock<T> copy)
 	{
-		return translator.FunctionStart(block);
+		return translator.FunctionStart(copy);
 	}
 
 	public IEnumerable<T> Convert(InstructionStream<MilocInstruction> s)

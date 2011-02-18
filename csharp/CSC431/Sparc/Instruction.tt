@@ -172,9 +172,9 @@ public class SparcRegisterConverter : IInstructionConverter<SparcInstruction, Sp
 		this.colorMapping = colorMapping;
 	}
 
-	public IEnumerable<SparcInstruction> FunctionStart(FunctionBlock<SparcInstruction> block)
+	public IEnumerable<SparcInstruction> FunctionStart(FunctionBlock<SparcInstruction> old, FunctionBlock<SparcInstruction> copy)
 	{
-		this.map = colorMapping[block];
+		this.map = colorMapping[old];
 		yield break;
 	}
 

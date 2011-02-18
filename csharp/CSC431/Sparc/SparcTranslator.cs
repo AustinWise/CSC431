@@ -9,13 +9,12 @@ namespace CSC431.Sparc
     {
         int spOffset;
 
-        public IEnumerable<SparcInstruction> FunctionStart(CFG.FunctionBlock<CSC431.IL.MilocInstruction> block)
+        public IEnumerable<SparcInstruction> FunctionStart(CFG.FunctionBlock<SparcInstruction> copy)
         {
             spOffset = 92;
-            var argCounts = block.FunctionsCalled.Select(funName => Program.Stable.Children.Where(n => n.Name == funName).First().Formals.Count).ToList();
-            if (argCounts.Count != 0 && argCounts.Max() > 6)
+            if (copy.MaxOutArgs > 6)
             {
-                spOffset += (argCounts.Max() - 6) * 4;
+                spOffset += (copy.MaxOutArgs - 6) * 4;
             }
             //TODO: actully calculate frame size
             yield return new SaveInstruction(new SparcRegister(SparcReg.sp), -1024, new SparcRegister(SparcReg.sp));
@@ -226,7 +225,7 @@ namespace CSC431.Sparc
                     yield return new LdswInstruction(new SparcRegister(SparcReg.fp), 92 + (s.ArgIndex - 6) * 4, s.RegDest0);
                 yield break;
             }
-            throw new NotImplementedException();
+            throw new NotSupportedException("LoadaiVar");
         }
 
         public IEnumerable<SparcInstruction> Loadglobal(IL.LoadglobalInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)

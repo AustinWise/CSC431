@@ -1256,17 +1256,17 @@ return string.Format("{0} %{1}, {2}, %{3}", Name, RegSource0, Immed0, RegDest0);
 
 public class SparcRegisterConverter : IInstructionConverter<SparcInstruction, SparcInstruction>
 {
-	private Dictionary<FunctionBlock<SparcInstruction>, SparcRegister[]> colorMapping;
+	private Dictionary<string, SparcRegister[]> colorMapping;
 	private SparcRegister[] map;
 
-	public SparcRegisterConverter(Dictionary<FunctionBlock<SparcInstruction>, SparcRegister[]> colorMapping)
+    public SparcRegisterConverter(Dictionary<string, SparcRegister[]> colorMapping)
 	{
 		this.colorMapping = colorMapping;
 	}
 
-	public IEnumerable<SparcInstruction> FunctionStart(FunctionBlock<SparcInstruction> block)
+	public IEnumerable<SparcInstruction> FunctionStart(FunctionBlock<SparcInstruction> copy)
 	{
-		this.map = colorMapping[block];
+		this.map = colorMapping[copy.Name];
 		yield break;
 	}
 

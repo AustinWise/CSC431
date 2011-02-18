@@ -64,18 +64,45 @@ namespace CSC431.CFG
 
         protected override Node<Target> ConvertCore<Target>(IInstructionConverter<T, Target> conv)
         {
+            var copy = new FunctionBlock<Target>(Name, null);
+
+            //copy data
+            copy.Locals = new List<string>(Locals);
+
+            //bonus propegation
+            copy.FunctionsCalled = this.FunctionsCalled;
+            copy.MaxOutArgs = this.MaxOutArgs;
+
             var topBlock = new BasicBlock<Target>();
-            topBlock.Add(conv.FunctionStart(this));
-            var copy = new FunctionBlock<Target>(Name, Body.Convert(conv) as SeqBlock<Target>);
+            topBlock.Add(conv.FunctionStart(copy));
+            copy.Body = Body.Convert(conv) as SeqBlock<Target>;
             copy.Body.AddAtTop(topBlock);
             copy.Body.SetNext(new BasicBlock<Target>());
-            copy.Locals = new List<string>(Locals);
+
             return copy;
         }
 
+        public int GetLocalIndex(string name)
+        {
+            int ndx = Locals.IndexOf(name);
+            if (ndx == -1)
+            {
+                Locals.Add(name);
+                ndx = Locals.Count - 1;
+            }
+            return ndx;
+        }
 
+        public int AllocateLocal()
+        {
+            string name = "<Spill>" + Guid.NewGuid();
+            Locals.Add(name);
+            return Locals.Count - 1;
+        }
 
-        //~~BONUS INFO~~ (not here by default, need to use an analysis step to populate)
+        //~~BONUS INFO~~ (not here by default, need to use an analysis step to populate, not copied)
+        //Should be fine to propegate through converts.
         public List<string> FunctionsCalled { get; set; }
+        public int MaxOutArgs { get; set; }
     }
 }

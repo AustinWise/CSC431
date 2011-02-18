@@ -9,7 +9,12 @@ namespace CSC431.CFG
         where Source : Instruction
         where Target : Instruction
     {
-        IEnumerable<Target> FunctionStart(FunctionBlock<Source> block);
+        /// <summary>
+        /// Returns instructions that should be inserted at the top of new function.
+        /// </summary>
+        /// <param name="copy">A copy of the old block with all the old data copied, except for Body.</param>
+        /// <returns></returns>
+        IEnumerable<Target> FunctionStart(FunctionBlock<Target> copy);
         IEnumerable<Target> Convert(InstructionStream<Source> s);
     }
 }

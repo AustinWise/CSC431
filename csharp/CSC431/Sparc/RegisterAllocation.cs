@@ -68,7 +68,7 @@ namespace CSC431.Sparc
         Dictionary<BasicBlock<SparcInstruction>, BitArray> liveoutSets;
         int numRegs;
         Dictionary<FunctionBlock<SparcInstruction>, BitArray[]> allDepGraphs;
-        Dictionary<FunctionBlock<SparcInstruction>, SparcRegister[]> colorMapping;
+        Dictionary<string, SparcRegister[]> colorMapping;
         SparcRegister[] virtToSpar;
 
         private void setupVars(ProgramBlock<SparcInstruction> start)
@@ -105,10 +105,10 @@ namespace CSC431.Sparc
                 allDepGraphs[f] = aDepGraph;
             }
 
-            colorMapping = new Dictionary<FunctionBlock<SparcInstruction>, SparcRegister[]>();
+            colorMapping = new Dictionary<string, SparcRegister[]>();
             foreach (var f in start.Functions)
             {
-                colorMapping[f] = new SparcRegister[numRegs];
+                colorMapping[f.Name] = new SparcRegister[numRegs];
             }
         }
 
@@ -223,10 +223,9 @@ namespace CSC431.Sparc
             return edgeCount > numColors;
         }
 
-        private int getRegisterConstrainedness(int reg, BitArray edges)
+        private int compareConstrainedness(BitArray[] dg, int r1, int r2)
         {
-            var edgeCount = edges.TrueIndexs().Count();
-            return edgeCount;
+            return dg[r2].TrueIndexs().Count() - dg[r1].TrueIndexs().Count();
         }
 
         private void colorGraph(ProgramBlock<SparcInstruction> start)
@@ -236,7 +235,7 @@ namespace CSC431.Sparc
             foreach (var f in start.Functions)
             {
                 var dg = allDepGraphs[f];
-                var map = colorMapping[f];
+                var map = colorMapping[f.Name];
 
                 var stack = new Stack<NodeAndEdges>(numRegs);
 
@@ -255,7 +254,7 @@ namespace CSC431.Sparc
                 //While there still exists constrained registers
                 while (constrained.Count != 0)
                 {
-                    constrained.Sort((r1, r2) => getRegisterConstrainedness(r2, dg[r2]) - getRegisterConstrainedness(r1, dg[r1]));
+                    constrained.Sort((r1, r2) => compareConstrainedness(dg, r1, r2));
                     var reg = constrained[0];
                     var bits = dg[reg];
 
