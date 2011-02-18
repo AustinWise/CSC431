@@ -354,7 +354,7 @@ private class InstrInfo
                 new InstrInfo("rR", "mov"),
                 new InstrInfo("s", "call"),
                 new InstrInfo("rri", "stw", InstrFlags.CustomToString),
-                new InstrInfo("riR", "ldw", InstrFlags.CustomToString),
+                new InstrInfo("riR", "ldsw", InstrFlags.CustomToString),
                 new InstrInfo("", "ret"),
                 new InstrInfo("", "restore"),
                 new InstrInfo("", "nop"),

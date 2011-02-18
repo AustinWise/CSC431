@@ -9,13 +9,13 @@ public partial class AddInstruction : MilocInstruction
 {
 	public AddInstruction
 	(
-Register regSource0,Register regSource1,Register regDest0	) : base ("add")
+VirtualRegister regSource0,VirtualRegister regSource1,VirtualRegister regDest0	) : base ("add")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
 
-public Register RegSource0{ get; private set; }
-public Register RegSource1{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
+public VirtualRegister RegSource1{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -47,13 +47,13 @@ public partial class AddiInstruction : MilocInstruction
 {
 	public AddiInstruction
 	(
-Register regSource0,int immed0,Register regDest0	) : base ("addi")
+VirtualRegister regSource0,int immed0,VirtualRegister regDest0	) : base ("addi")
 	{
 this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
-public Register RegSource0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
 public int Immed0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -85,13 +85,13 @@ public partial class DivInstruction : MilocInstruction
 {
 	public DivInstruction
 	(
-Register regSource0,Register regSource1,Register regDest0	) : base ("div")
+VirtualRegister regSource0,VirtualRegister regSource1,VirtualRegister regDest0	) : base ("div")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
 
-public Register RegSource0{ get; private set; }
-public Register RegSource1{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
+public VirtualRegister RegSource1{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -123,13 +123,13 @@ public partial class MultInstruction : MilocInstruction
 {
 	public MultInstruction
 	(
-Register regSource0,Register regSource1,Register regDest0	) : base ("mult")
+VirtualRegister regSource0,VirtualRegister regSource1,VirtualRegister regDest0	) : base ("mult")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
 
-public Register RegSource0{ get; private set; }
-public Register RegSource1{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
+public VirtualRegister RegSource1{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -161,13 +161,13 @@ public partial class SubInstruction : MilocInstruction
 {
 	public SubInstruction
 	(
-Register regSource0,Register regSource1,Register regDest0	) : base ("sub")
+VirtualRegister regSource0,VirtualRegister regSource1,VirtualRegister regDest0	) : base ("sub")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
 
-public Register RegSource0{ get; private set; }
-public Register RegSource1{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
+public VirtualRegister RegSource1{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -199,13 +199,13 @@ public partial class RsubiInstruction : MilocInstruction
 {
 	public RsubiInstruction
 	(
-Register regSource0,int immed0,Register regDest0	) : base ("rsubi")
+VirtualRegister regSource0,int immed0,VirtualRegister regDest0	) : base ("rsubi")
 	{
 this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
-public Register RegSource0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
 public int Immed0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -237,13 +237,13 @@ public partial class AndInstruction : MilocInstruction
 {
 	public AndInstruction
 	(
-Register regSource0,Register regSource1,Register regDest0	) : base ("and")
+VirtualRegister regSource0,VirtualRegister regSource1,VirtualRegister regDest0	) : base ("and")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
 
-public Register RegSource0{ get; private set; }
-public Register RegSource1{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
+public VirtualRegister RegSource1{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -275,13 +275,13 @@ public partial class OrInstruction : MilocInstruction
 {
 	public OrInstruction
 	(
-Register regSource0,Register regSource1,Register regDest0	) : base ("or")
+VirtualRegister regSource0,VirtualRegister regSource1,VirtualRegister regDest0	) : base ("or")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDest0;	}
 
-public Register RegSource0{ get; private set; }
-public Register RegSource1{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
+public VirtualRegister RegSource1{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -313,13 +313,13 @@ public partial class XoriInstruction : MilocInstruction
 {
 	public XoriInstruction
 	(
-Register regSource0,int immed0,Register regDest0	) : base ("xori")
+VirtualRegister regSource0,int immed0,VirtualRegister regDest0	) : base ("xori")
 	{
 this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
-public Register RegSource0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
 public int Immed0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -351,12 +351,12 @@ public partial class LoadiInstruction : MilocInstruction
 {
 	public LoadiInstruction
 	(
-int immed0,Register regDest0	) : base ("loadi")
+int immed0,VirtualRegister regDest0	) : base ("loadi")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -388,11 +388,11 @@ public partial class PrintInstruction : MilocInstruction
 {
 	public PrintInstruction
 	(
-Register regSource0	) : base ("print")
+VirtualRegister regSource0	) : base ("print")
 	{
 this.RegSource0 = regSource0;	}
 
-public Register RegSource0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -424,11 +424,11 @@ public partial class PrintlnInstruction : MilocInstruction
 {
 	public PrintlnInstruction
 	(
-Register regSource0	) : base ("println")
+VirtualRegister regSource0	) : base ("println")
 	{
 this.RegSource0 = regSource0;	}
 
-public Register RegSource0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -460,11 +460,11 @@ public partial class ReadInstruction : MilocInstruction
 {
 	public ReadInstruction
 	(
-Register regSource0	) : base ("read")
+VirtualRegister regSource0	) : base ("read")
 	{
 this.RegSource0 = regSource0;	}
 
-public Register RegSource0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -496,13 +496,13 @@ public partial class CompInstruction : MilocInstruction
 {
 	public CompInstruction
 	(
-Register regSource0,Register regSource1	) : base ("comp")
+VirtualRegister regSource0,VirtualRegister regSource1	) : base ("comp")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;		this.CcSet = true;
 	}
 
-public Register RegSource0{ get; private set; }
-public Register RegSource1{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
+public VirtualRegister RegSource1{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -534,12 +534,12 @@ public partial class MovInstruction : MilocInstruction
 {
 	public MovInstruction
 	(
-Register regSource0,Register regDest0	) : base ("mov")
+VirtualRegister regSource0,VirtualRegister regDest0	) : base ("mov")
 	{
 this.RegSource0 = regSource0;this.RegDest0 = regDest0;	}
 
-public Register RegSource0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -571,12 +571,12 @@ public partial class MoveqInstruction : MilocInstruction
 {
 	public MoveqInstruction
 	(
-int immed0,Register regDest0	) : base ("moveq")
+int immed0,VirtualRegister regDest0	) : base ("moveq")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -608,12 +608,12 @@ public partial class MovgeInstruction : MilocInstruction
 {
 	public MovgeInstruction
 	(
-int immed0,Register regDest0	) : base ("movge")
+int immed0,VirtualRegister regDest0	) : base ("movge")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -645,12 +645,12 @@ public partial class MovgtInstruction : MilocInstruction
 {
 	public MovgtInstruction
 	(
-int immed0,Register regDest0	) : base ("movgt")
+int immed0,VirtualRegister regDest0	) : base ("movgt")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -682,12 +682,12 @@ public partial class MovleInstruction : MilocInstruction
 {
 	public MovleInstruction
 	(
-int immed0,Register regDest0	) : base ("movle")
+int immed0,VirtualRegister regDest0	) : base ("movle")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -719,12 +719,12 @@ public partial class MovltInstruction : MilocInstruction
 {
 	public MovltInstruction
 	(
-int immed0,Register regDest0	) : base ("movlt")
+int immed0,VirtualRegister regDest0	) : base ("movlt")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -756,12 +756,12 @@ public partial class MovneInstruction : MilocInstruction
 {
 	public MovneInstruction
 	(
-int immed0,Register regDest0	) : base ("movne")
+int immed0,VirtualRegister regDest0	) : base ("movne")
 	{
 this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -866,13 +866,13 @@ public partial class LoadinargumentInstruction : MilocInstruction
 {
 	public LoadinargumentInstruction
 	(
-string str0,int immed0,Register regDest0	) : base ("loadinargument")
+string str0,int immed0,VirtualRegister regDest0	) : base ("loadinargument")
 	{
 this.Str0 = str0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public string Str0{ get; private set; }
 public int Immed0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -975,11 +975,11 @@ public partial class StoreretInstruction : MilocInstruction
 {
 	public StoreretInstruction
 	(
-Register regSource0	) : base ("storeret")
+VirtualRegister regSource0	) : base ("storeret")
 	{
 this.RegSource0 = regSource0;	}
 
-public Register RegSource0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -1011,11 +1011,11 @@ public partial class StoreoutargumentInstruction : MilocInstruction
 {
 	public StoreoutargumentInstruction
 	(
-Register regSource0,int immed0	) : base ("storeoutargument")
+VirtualRegister regSource0,int immed0	) : base ("storeoutargument")
 	{
 this.RegSource0 = regSource0;this.Immed0 = immed0;	}
 
-public Register RegSource0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
 public int Immed0{ get; private set; }
 
 public override Register[] SourceRegs
@@ -1048,11 +1048,11 @@ public partial class LoadretInstruction : MilocInstruction
 {
 	public LoadretInstruction
 	(
-Register regDest0	) : base ("loadret")
+VirtualRegister regDest0	) : base ("loadret")
 	{
 this.RegDest0 = regDest0;	}
 
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -1084,12 +1084,12 @@ public partial class StoreaiFieldInstruction : MilocInstruction
 {
 	public StoreaiFieldInstruction
 	(
-Register regSource0,Register regSource1,string str0	) : base ("storeai")
+VirtualRegister regSource0,VirtualRegister regSource1,string str0	) : base ("storeai")
 	{
 this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.Str0 = str0;	}
 
-public Register RegSource0{ get; private set; }
-public Register RegSource1{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
+public VirtualRegister RegSource1{ get; private set; }
 public string Str0{ get; private set; }
 
 public override Register[] SourceRegs
@@ -1122,11 +1122,11 @@ public partial class StoreaiVarInstruction : MilocInstruction
 {
 	public StoreaiVarInstruction
 	(
-Register regSource0,string str0	) : base ("storeai")
+VirtualRegister regSource0,string str0	) : base ("storeai")
 	{
 this.RegSource0 = regSource0;this.Str0 = str0;	}
 
-public Register RegSource0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
 public string Str0{ get; private set; }
 
 public override Register[] SourceRegs
@@ -1159,13 +1159,13 @@ public partial class LoadaiFieldInstruction : MilocInstruction
 {
 	public LoadaiFieldInstruction
 	(
-Register regSource0,string str0,Register regDest0	) : base ("loadai")
+VirtualRegister regSource0,string str0,VirtualRegister regDest0	) : base ("loadai")
 	{
 this.RegSource0 = regSource0;this.Str0 = str0;this.RegDest0 = regDest0;	}
 
-public Register RegSource0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
 public string Str0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -1197,12 +1197,12 @@ public partial class LoadaiVarInstruction : MilocInstruction
 {
 	public LoadaiVarInstruction
 	(
-string str0,Register regDest0	) : base ("loadai")
+string str0,VirtualRegister regDest0	) : base ("loadai")
 	{
 this.Str0 = str0;this.RegDest0 = regDest0;	}
 
 public string Str0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -1234,12 +1234,12 @@ public partial class LoadglobalInstruction : MilocInstruction
 {
 	public LoadglobalInstruction
 	(
-string str0,Register regDest0	) : base ("loadglobal")
+string str0,VirtualRegister regDest0	) : base ("loadglobal")
 	{
 this.Str0 = str0;this.RegDest0 = regDest0;	}
 
 public string Str0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -1271,11 +1271,11 @@ public partial class StoreglobalInstruction : MilocInstruction
 {
 	public StoreglobalInstruction
 	(
-Register regSource0,string str0	) : base ("storeglobal")
+VirtualRegister regSource0,string str0	) : base ("storeglobal")
 	{
 this.RegSource0 = regSource0;this.Str0 = str0;	}
 
-public Register RegSource0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
 public string Str0{ get; private set; }
 
 public override Register[] SourceRegs
@@ -1308,12 +1308,12 @@ public partial class ComputeglobaladdressInstruction : MilocInstruction
 {
 	public ComputeglobaladdressInstruction
 	(
-string str0,Register regDest0	) : base ("computeglobaladdress")
+string str0,VirtualRegister regDest0	) : base ("computeglobaladdress")
 	{
 this.Str0 = str0;this.RegDest0 = regDest0;	}
 
 public string Str0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -1345,13 +1345,13 @@ public partial class NewInstruction : MilocInstruction
 {
 	public NewInstruction
 	(
-string str0,string[] arr0,Register regDest0	) : base ("new")
+string str0,string[] arr0,VirtualRegister regDest0	) : base ("new")
 	{
 this.Str0 = str0;this.Arr0 = arr0;this.RegDest0 = regDest0;	}
 
 public string Str0{ get; private set; }
 public string[] Arr0{ get; private set; }
-public Register RegDest0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
 
 public override Register[] SourceRegs
 {
@@ -1383,11 +1383,11 @@ public partial class DelInstruction : MilocInstruction
 {
 	public DelInstruction
 	(
-Register regSource0	) : base ("del")
+VirtualRegister regSource0	) : base ("del")
 	{
 this.RegSource0 = regSource0;	}
 
-public Register RegSource0{ get; private set; }
+public VirtualRegister RegSource0{ get; private set; }
 
 public override Register[] SourceRegs
 {

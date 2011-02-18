@@ -180,8 +180,8 @@ private class OperandType
     private static Dictionary<char, OperandType> sTypes = new Dictionary<char, OperandType>();
     static OperandType()
     {
-        sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", MilocPrefix = "%", Type = "Register", IsSource = true });
-        sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", MilocPrefix = "%", Type = "Register", IsTarget = true });
+        sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", MilocPrefix = "%", Type = "VirtualRegister", IsSource = true });
+        sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", MilocPrefix = "%", Type = "VirtualRegister", IsTarget = true });
         sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "Label<MilocInstruction>" });
         sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", Type = "int" });
         sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", Type = "string" });

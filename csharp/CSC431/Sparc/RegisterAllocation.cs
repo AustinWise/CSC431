@@ -239,7 +239,7 @@ namespace CSC431.Sparc
                 var map = colorMapping[f];
 
                 var stack = new Stack<NodeAndEdges>(numRegs);
-                //TODO: actully choose which nodes to put into the stack first based on constrainedness
+
                 var notConstrained = Enumerable.Range(0, numRegs).Where(r => !isConstrained(r, dg[r])).ToList();
                 var constrained = Enumerable.Range(0, numRegs).Where(r => isConstrained(r, dg[r])).ToList();
 
@@ -263,19 +263,7 @@ namespace CSC431.Sparc
                     bits.TrueIndexs().Map(i => removeEdge(dg, i, reg));
 
                     constrained.Remove(reg);
-
                 }
-
-                //Previous Code
-                /*
-                for (int reg = 0; reg < numRegs; reg++)
-                {
-                    var bits = dg[reg];
-
-
-                    stack.Push(new NodeAndEdges() { Reg = reg, Edges = new BitArray(bits) });
-                    bits.TrueIndexs().Map(i => removeEdge(dg, i, reg));
-                }*/
 
                 while (stack.Count != 0)
                 {

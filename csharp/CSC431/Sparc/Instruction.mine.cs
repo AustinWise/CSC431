@@ -9,15 +9,15 @@ namespace CSC431.Sparc
     {
         partial void ToStringCore(ref string ret)
         {
-            ret = string.Format("{3} {0}, [{1} + {2}]", RegSource0, RegSource1, Immed0, Name);
+            ret = string.Format("{3} %{0}, [%{1} + {2}]", RegSource0, RegSource1, Immed0, Name);
         }
     }
 
-    public partial class LdwInstruction
+    public partial class LdswInstruction
     {
         partial void ToStringCore(ref string ret)
         {
-            ret = string.Format("{3} [{0} + {1}], {2}", RegSource0, Immed0, RegDest0, Name);
+            ret = string.Format("{3} [%{0} + {1}], %{2}", RegSource0, Immed0, RegDest0, Name);
         }
     }
 }

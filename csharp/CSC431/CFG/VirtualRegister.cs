@@ -23,5 +23,33 @@ namespace CSC431.CFG
         {
             return string.Format("r{0}", intVal);
         }
+
+        public static implicit operator VirtualRegister(int reg)
+        {
+            return new VirtualRegister(reg);
+        }
+
+        public static bool operator ==(VirtualRegister a, VirtualRegister b)
+        {
+            return a.intVal == b.intVal;
+        }
+
+        public static bool operator !=(VirtualRegister a, VirtualRegister b)
+        {
+            return a.intVal != b.intVal;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as VirtualRegister;
+            if (other == null)
+                return false;
+            return this.intVal == other.intVal;
+        }
+
+        public override int GetHashCode()
+        {
+            return intVal;
+        }
     }
 }

@@ -870,11 +870,11 @@ public override Register[] DestRegs
 
 
 
-public partial class LdwInstruction : SparcInstruction
+public partial class LdswInstruction : SparcInstruction
 {
-	public LdwInstruction
+	public LdswInstruction
 	(
-Register regSource0,int immed0,Register regDest0	) : base ("ldw")
+Register regSource0,int immed0,Register regDest0	) : base ("ldsw")
 	{
 this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
@@ -1263,10 +1263,10 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], conv.Immed0				);
 				yield return copy;
 				continue;
 			}
-			if (cur is LdwInstruction)
+			if (cur is LdswInstruction)
 			{
-				var conv = cur as LdwInstruction;
-				var copy = new LdwInstruction(
+				var conv = cur as LdswInstruction;
+				var copy = new LdswInstruction(
 map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				yield return copy;
 				continue;

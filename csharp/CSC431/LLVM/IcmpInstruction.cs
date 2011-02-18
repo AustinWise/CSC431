@@ -18,9 +18,9 @@ namespace CSC431.LLVM
     class IcmpInstruction : LlvmInstruction
     {
         private ConditionType cond;
-        private Register rd, r1, r2;
+        private VirtualRegister rd, r1, r2;
 
-        public IcmpInstruction(ConditionType cond, Register rd, Register r1, Register r2)
+        public IcmpInstruction(ConditionType cond, VirtualRegister rd, VirtualRegister r1, VirtualRegister r2)
             : base("icmp")
         {
             this.cond = cond;

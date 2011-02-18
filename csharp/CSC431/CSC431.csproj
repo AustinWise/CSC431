@@ -108,10 +108,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Content Include="IL\Instruction.tt">
+    <Compile Include="IL\Instruction.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Instruction.generated.cs</LastGenOutput>
-    </Content>
+    </Compile>
     <Compile Include="NDesk.Options.cs" />
     <Content Include="llc.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

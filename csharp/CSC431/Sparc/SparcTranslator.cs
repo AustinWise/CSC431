@@ -12,11 +12,12 @@ namespace CSC431.Sparc
         public IEnumerable<SparcInstruction> FunctionStart(CFG.FunctionBlock<CSC431.IL.MilocInstruction> block)
         {
             spOffset = 92;
-            var maxArgCount = block.FunctionsCalled.Select(funName => Program.Stable.Children.Where(n => n.Name == funName).First().Formals.Count).Max();
-            if (maxArgCount > 6)
+            var argCounts = block.FunctionsCalled.Select(funName => Program.Stable.Children.Where(n => n.Name == funName).First().Formals.Count).ToList();
+            if (argCounts.Count != 0 && argCounts.Max() > 6)
             {
-                spOffset += (maxArgCount - 6) * 4;
+                spOffset += (argCounts.Max() - 6) * 4;
             }
+            //TODO: actully calculate frame size
             yield return new SaveInstruction(new SparcRegister(SparcReg.sp), -1024, new SparcRegister(SparcReg.sp));
         }
 
@@ -142,8 +143,6 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Loadinargument(IL.LoadinargumentInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            if (s.Immed0 > 5)
-                throw new NotImplementedException();
             var store = stream.Current as CSC431.IL.StoreaiVarInstruction;
             if (store != null && s.RegDest0 == store.RegSource0 && store.ArgIndex == s.Immed0)
             {
@@ -152,12 +151,16 @@ namespace CSC431.Sparc
                 stream.Consume();
                 yield break;
             }
-            yield return new OriInstruction(new SparcRegister(SparcReg.i0 + s.Immed0), 0, s.RegDest0);
+            else
+            {
+                throw new NotSupportedException("Loadinarguement is not actully used for that in IL.");
+            }
         }
 
         public IEnumerable<SparcInstruction> Call(IL.CallInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
             yield return new CallInstruction(s.Str0);
+            yield return new NopInstruction();
         }
 
         public IEnumerable<SparcInstruction> Ret(IL.RetInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -176,7 +179,7 @@ namespace CSC431.Sparc
         public IEnumerable<SparcInstruction> Storeoutargument(IL.StoreoutargumentInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
             if (s.Immed0 > 5)
-                throw new NotImplementedException();
+                yield return new StwInstruction(s.RegSource0, new SparcRegister(SparcReg.sp), 92 + (s.Immed0 - 6) * 4);
             else
                 yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.o0 + s.Immed0));
         }
@@ -193,9 +196,12 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> StoreaiVar(IL.StoreaiVarInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            if (s.ArgIndex >= 0 && s.ArgIndex <= 5)
+            if (s.ArgIndex >= 0)
             {
-                yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.i0 + s.ArgIndex));
+                if (s.ArgIndex <= 5)
+                    yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.i0 + s.ArgIndex));
+                else
+                    yield return new StwInstruction(s.RegSource0, new SparcRegister(SparcReg.fp), 92 + (s.ArgIndex - 6) * 4);
                 yield break;
             }
             throw new NotImplementedException();
@@ -203,14 +209,17 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> LoadaiField(IL.LoadaiFieldInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            yield return new LdwInstruction(s.RegSource0, s.FieldIndex * 4, s.RegDest0);
+            yield return new LdswInstruction(s.RegSource0, s.FieldIndex * 4, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> LoadaiVar(IL.LoadaiVarInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            if (s.ArgIndex >= 0 && s.ArgIndex <= 5)
+            if (s.ArgIndex >= 0)
             {
-                yield return new MovInstruction(new SparcRegister(SparcReg.i0 + s.ArgIndex), s.RegDest0);
+                if (s.ArgIndex <= 5)
+                    yield return new MovInstruction(new SparcRegister(SparcReg.i0 + s.ArgIndex), s.RegDest0);
+                else
+                    yield return new LdswInstruction(new SparcRegister(SparcReg.fp), 92 + (s.ArgIndex - 6) * 4, s.RegDest0);
                 yield break;
             }
             throw new NotImplementedException();

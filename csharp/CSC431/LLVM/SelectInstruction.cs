@@ -8,8 +8,8 @@ namespace CSC431.LLVM
 {
     class SelectInstruction : LlvmInstruction
     {
-        private Register rcond, rd, trueValue, falseValue;
-        public SelectInstruction(int rcond, Register rd, Register trueValue, Register falseValue)
+        private VirtualRegister rcond, rd, trueValue, falseValue;
+        public SelectInstruction(int rcond, VirtualRegister rd, VirtualRegister trueValue, VirtualRegister falseValue)
             : base("select")
         {
             this.rcond = rcond;
