@@ -50,6 +50,7 @@
     <Compile Include="CFG\Printer.cs" />
     <Compile Include="CFG\Register.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Sparc\Instruction.mine.cs" />
     <Compile Include="Sparc\RegisterAllocation.cs" />
     <Compile Include="CFG\VirtualRegister.cs" />
     <Compile Include="EvilException.cs" />
