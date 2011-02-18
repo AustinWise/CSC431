@@ -49,7 +49,7 @@ namespace CSC431
             }
             else
             {
-                InputSource.Value = new FileStream(Options.InputFile.Value, FileMode.Open);
+                InputSource.Value = new FileStream(Options.InputFile.Value, FileMode.Open, FileAccess.Read);
             }
         }
 

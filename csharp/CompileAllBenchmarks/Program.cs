@@ -43,7 +43,7 @@ namespace CompileAllBenchmarks
                 {
                     var evFile = Directory.GetFiles(myDir, "*.ev").First();
 
-                    CSC431.Options.InputSource.Value = new FileStream(evFile, FileMode.Open);
+                    CSC431.Options.InputSource.Value = new FileStream(evFile, FileMode.Open, FileAccess.Read);
 
                     var output = new StringWriter();
 
