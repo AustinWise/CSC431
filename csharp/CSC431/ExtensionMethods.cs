@@ -34,14 +34,19 @@ namespace CSC431
             return loc;
         }
 
-        public static IEnumerable<int> TrueIndexs(this BitArray arr)
+        /// <summary>
+        /// THIS RETURNS 0 IF THERE ARE NO TRUE INDEXES, BE SURE YOU WANT THAT.
+        /// </summary>
+        /// <param name="ar"></param>
+        /// <returns></returns>
+        public static int FirstTrueIndex(this BitArray ar)
         {
-
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < ar.Length; i++)
             {
-                if (arr[i])
-                    yield return i;
+                if (ar[i])
+                    return i;
             }
+            return 0;
         }
 
         public static int IntArraySize(this BitArray ar)

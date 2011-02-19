@@ -65,6 +65,28 @@ namespace CSC431.Sparc
             dg[x][y] = false;
             dg[y][x] = false;
         }
+        private void removeEdges(BitArray[] dg, int x, BitArray edges)
+        {
+            for (int y = 0; y < dg.Length; y++)
+            {
+                if (edges[y])
+                {
+                    dg[x][y] = false;
+                    dg[y][x] = false;
+                }
+            }
+        }
+        private void addEdges(BitArray[] dg, int x, BitArray edges)
+        {
+            for (int y = 0; y < dg.Length; y++)
+            {
+                if (edges[y])
+                {
+                    dg[x][y] = true;
+                    dg[y][x] = true;
+                }
+            }
+        }
 
         private int getMaxRegValue(ProgramBlock<SparcInstruction> start)
         {
@@ -286,7 +308,7 @@ namespace CSC431.Sparc
                 var bits = dg[r];
 
                 stack.Push(new NodeAndEdges() { Reg = r, Edges = new BitArray(bits) });
-                bits.TrueIndexs().Map(i => removeEdge(dg, i, r));
+                removeEdges(dg, r, bits);
             }
 
             //Console.WriteLine("\t{0}:{1} reg constr", f.Name, constrained.Count);
@@ -299,7 +321,7 @@ namespace CSC431.Sparc
                 var bits = dg[reg];
 
                 stack.Push(new NodeAndEdges() { Reg = reg, Edges = new BitArray(bits) });
-                bits.TrueIndexs().Map(i => removeEdge(dg, i, reg));
+                removeEdges(dg, reg, bits);
 
                 constrained.Remove(reg);
             }
@@ -313,8 +335,12 @@ namespace CSC431.Sparc
                 if (reg == null)
                 {
                     var cans = new BitArray(candidateColors);
-                    bits.TrueIndexs().Map(i => cans[map[i].IntVal] = false);
-                    reg = virtToSparc[cans.TrueIndexs().FirstOrDefault()];
+                    for (int i = 0; i < bits.Length; i++)
+                    {
+                        if (bits[i])
+                            cans[map[i].IntVal] = false;
+                    }
+                    reg = virtToSparc[cans.FirstTrueIndex()];
                 }
 
                 if (reg == null)
@@ -325,7 +351,7 @@ namespace CSC431.Sparc
                 constrainedAndUncolorable.Remove(val.Reg);
 
                 map[val.Reg] = reg;
-                bits.TrueIndexs().Map(i => addEdge(dg, val.Reg, i));
+                addEdges(dg, val.Reg, bits);
             }
 
             constrainedAndUncolorable.Sort((r1, r2) => compareConstrainedness(dg, r1, r2));
