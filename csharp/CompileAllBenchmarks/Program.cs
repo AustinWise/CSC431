@@ -5,6 +5,10 @@ using System.Text;
 using System.IO;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using CSC431.Steps;
+using CSC431.CFG;
+using CSC431.Sparc;
+using CSC431;
 
 namespace CompileAllBenchmarks
 {
@@ -43,7 +47,7 @@ namespace CompileAllBenchmarks
                 {
                     var evFile = Directory.GetFiles(myDir, "*.ev").First();
 
-                    CSC431.Options.InputSource.Value = new FileStream(evFile, FileMode.Open, FileAccess.Read);
+                    Options.InputSource.Value = new FileStream(evFile, FileMode.Open, FileAccess.Read);
 
                     var output = new StringWriter();
 
@@ -73,9 +77,9 @@ namespace CompileAllBenchmarks
             }
         }
 
-        private static CSC431.Steps.InStep<CSC431.CFG.ProgramBlock<CSC431.Sparc.SparcInstruction>> CreateWriter(StringWriter wr)
+        private static InStep<ProgramBlock<SparcInstruction>> CreateWriter(StringWriter wr)
         {
-            return new CSC431.Steps.InStep<CSC431.CFG.ProgramBlock<CSC431.Sparc.SparcInstruction>>(prog =>
+            return new InStep<ProgramBlock<SparcInstruction>>(prog =>
             {
                 prog.Print(wr, new CSC431.Sparc.SparcPrinter());
             });

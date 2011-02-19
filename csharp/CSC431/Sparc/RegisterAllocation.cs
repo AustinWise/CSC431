@@ -9,12 +9,14 @@ namespace CSC431.Sparc
 {
     class RegisterAllocation
     {
+        private SparcRegister[] sparcRegisterCache;
         private BitArray candidateColors;
         private readonly int numColors;
 
         public RegisterAllocation()
         {
             candidateColors = new BitArray(SparcRegister.IntValueMap.Max() + 1);
+            sparcRegisterCache = new SparcRegister[candidateColors.Length];
 
             var canColors = new List<SparcRegister>();
             canColors.Add(new SparcRegister(SparcReg.l0));
@@ -33,6 +35,7 @@ namespace CSC431.Sparc
                 if (c.IntVal == 0)
                     throw new Exception("no register should have an intval of 0, the register allocator depends on this");
                 candidateColors[c.IntVal] = true;
+                sparcRegisterCache[c.IntVal] = c;
             }
         }
 
@@ -71,17 +74,10 @@ namespace CSC431.Sparc
         int numRegs;
         Dictionary<FunctionBlock<SparcInstruction>, BitArray[]> allDepGraphs;
         Dictionary<string, SparcRegister[]> colorMapping;
-        SparcRegister[] virtToSpar;
 
         private void setupVars(ProgramBlock<SparcInstruction> start)
         {
             numRegs = getMaxRegValue(start) + 1;
-
-            virtToSpar = new SparcRegister[numRegs];
-            for (int i = 0; i < SparcRegister.IntValueMap.Length; i++)
-            {
-                virtToSpar[SparcRegister.IntValueMap[i]] = new SparcRegister((SparcReg)i);
-            }
 
             genSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
             killSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
@@ -270,13 +266,13 @@ namespace CSC431.Sparc
                 {
                     var val = stack.Pop();
                     var bits = val.Edges;
-                    SparcRegister reg = virtToSpar[val.Reg];
-                    var cans = new BitArray(candidateColors);
+                    SparcRegister reg = getSparcRegister(val.Reg);
 
                     if (reg == null)
                     {
+                        var cans = new BitArray(candidateColors);
                         bits.TrueIndexs().Map(i => cans[map[i].IntVal] = false);
-                        reg = virtToSpar[cans.TrueIndexs().FirstOrDefault()];
+                        reg = sparcRegisterCache[cans.TrueIndexs().FirstOrDefault()];
                     }
 
                     if (reg == null)
@@ -313,11 +309,11 @@ namespace CSC431.Sparc
                 for (int i = 0; i < numRegs; i++)
                 {
                     if (gset[i])
-                        Console.WriteLine("g:{0}", getRegister(virtToSpar, i));
+                        Console.WriteLine("g:{0}", getRegister(i));
                     if (kset[i])
-                        Console.WriteLine("k:{0}", getRegister(virtToSpar, i));
+                        Console.WriteLine("k:{0}", getRegister(i));
                     if (lset[i])
-                        Console.WriteLine("l:{0}", getRegister(virtToSpar, i));
+                        Console.WriteLine("l:{0}", getRegister(i));
                 }
                 Console.WriteLine();
             }
@@ -330,12 +326,12 @@ namespace CSC431.Sparc
                 Console.Write(",");
                 for (int i = 0; i < numRegs; i++)
                 {
-                    Console.Write("{0},", getRegister(virtToSpar, i));
+                    Console.Write("{0},", getRegister(i));
                 }
                 Console.WriteLine();
                 for (int i = 0; i < numRegs; i++)
                 {
-                    Console.Write("{0},", getRegister(virtToSpar, i));
+                    Console.Write("{0},", getRegister(i));
                     for (int j = 0; j < numRegs; j++)
                     {
                         Console.Write("{0},", dgraph[i][j] ? "█" : "░");
@@ -345,11 +341,18 @@ namespace CSC431.Sparc
             }
         }
 
-        private Register getRegister(SparcRegister[] dic, int id)
+        private Register getRegister(int id)
         {
-            if (dic[id] != null)
-                return dic[id];
-            return new VirtualRegister(id);
+            if (id >= sparcRegisterCache.Length || sparcRegisterCache[id] == null)
+                return new VirtualRegister(id);
+            return sparcRegisterCache[id];
+        }
+
+        private SparcRegister getSparcRegister(int id)
+        {
+            if (id >= sparcRegisterCache.Length || sparcRegisterCache[id] == null)
+                return null;
+            return sparcRegisterCache[id];
         }
     }
 }

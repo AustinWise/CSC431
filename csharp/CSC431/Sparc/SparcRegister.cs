@@ -43,6 +43,10 @@ namespace CSC431.Sparc
     }
     public class SparcRegister : Register
     {
+        //Const versions of the registers to cut down on object creation
+        public static readonly SparcRegister SP = new SparcRegister(SparcReg.sp);
+        public static readonly SparcRegister FP = new SparcRegister(SparcReg.fp);
+
         //this is so that virtual registers and sparc registers
         //can be placed into a bit array together
         public static readonly int[] IntValueMap;

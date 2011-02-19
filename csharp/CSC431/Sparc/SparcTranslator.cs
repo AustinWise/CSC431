@@ -26,7 +26,7 @@ namespace CSC431.Sparc
             }
 
             //TODO: actully calculate frame size
-            yield return new SaveInstruction(new SparcRegister(SparcReg.sp), -1024, new SparcRegister(SparcReg.sp));
+            yield return new SaveInstruction(SparcRegister.SP, -1024, SparcRegister.SP);
         }
 
         public IEnumerable<SparcInstruction> Add(IL.AddInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -195,7 +195,7 @@ namespace CSC431.Sparc
         public IEnumerable<SparcInstruction> Storeoutargument(IL.StoreoutargumentInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
             if (s.Immed0 > 5)
-                yield return new StwInstruction(s.RegSource0, new SparcRegister(SparcReg.sp), 92 + (s.Immed0 - 6) * 4);
+                yield return new StwInstruction(s.RegSource0, SparcRegister.SP, 92 + (s.Immed0 - 6) * 4);
             else
                 yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.o0 + s.Immed0));
         }
@@ -217,7 +217,7 @@ namespace CSC431.Sparc
                 if (s.ArgIndex <= 5)
                     yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.i0 + s.ArgIndex));
                 else
-                    yield return new StwInstruction(s.RegSource0, new SparcRegister(SparcReg.fp), 92 + (s.ArgIndex - 6) * 4);
+                    yield return new StwInstruction(s.RegSource0, SparcRegister.FP, 92 + (s.ArgIndex - 6) * 4);
                 yield break;
             }
             throw new NotImplementedException();
@@ -235,7 +235,7 @@ namespace CSC431.Sparc
                 if (s.ArgIndex <= 5)
                     yield return new MovInstruction(new SparcRegister(SparcReg.i0 + s.ArgIndex), s.RegDest0);
                 else
-                    yield return new LdswInstruction(new SparcRegister(SparcReg.fp), 92 + (s.ArgIndex - 6) * 4, s.RegDest0);
+                    yield return new LdswInstruction(SparcRegister.FP, 92 + (s.ArgIndex - 6) * 4, s.RegDest0);
                 yield break;
             }
             throw new NotSupportedException("LoadaiVar");
@@ -272,10 +272,10 @@ namespace CSC431.Sparc
 
             yield return new SethiInstruction(2, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
             yield return new OrlInstruction(new SparcRegister(SparcReg.o0), 2, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
-            yield return new AddiInstruction(new SparcRegister(SparcReg.sp), getLocalOffset("~~~scanf~~~"), new SparcRegister(SparcReg.o1));
+            yield return new AddiInstruction(SparcRegister.SP, getLocalOffset("~~~scanf~~~"), new SparcRegister(SparcReg.o1));
             yield return new CallInstruction("scanf");
             yield return new NopInstruction();
-            yield return new LdswInstruction(new SparcRegister(SparcReg.sp), getLocalOffset("~~~scanf~~~"), ld.RegDest0);
+            yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("~~~scanf~~~"), ld.RegDest0);
 
         }
 
