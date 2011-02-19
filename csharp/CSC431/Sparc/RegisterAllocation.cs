@@ -13,6 +13,7 @@ namespace CSC431.Sparc
         private BitArray candidateColors;
         private readonly int numColors;
         private readonly List<int> emptyList = new List<int>();
+        private List<string> coloringDone = new List<string>();
 
         public RegisterAllocation()
         {
@@ -43,6 +44,15 @@ namespace CSC431.Sparc
                     throw new Exception("no register should have an intval of 0, the register allocator depends on this");
                 candidateColors[c.IntVal] = true;
             }
+
+
+
+            //data the may be inject in setupVars()
+            genSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
+            killSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
+            liveoutSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
+            allDepGraphs = new Dictionary<FunctionBlock<SparcInstruction>, BitArray[]>();
+            colorMapping = new Dictionary<string, SparcRegister[]>();
         }
 
         private void addEdge(BitArray[] dg, int x, int y)
@@ -84,14 +94,11 @@ namespace CSC431.Sparc
 
         private void setupVars(ProgramBlock<SparcInstruction> start)
         {
-            numRegs = getMaxRegValue(start) + 1;
-            spilleds = new BitArray(numRegs);
-
-            genSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
-            killSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
-            liveoutSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
             foreach (var f in start.Functions)
             {
+                if (coloringDone.Contains(f.Name))
+                    continue;
+
                 f.VisitBlocks(b =>
                 {
                     genSets[b] = new BitArray(numRegs);
@@ -100,9 +107,11 @@ namespace CSC431.Sparc
                 });
             }
 
-            allDepGraphs = new Dictionary<FunctionBlock<SparcInstruction>, BitArray[]>();
             foreach (var f in start.Functions)
             {
+                if (coloringDone.Contains(f.Name))
+                    continue;
+
                 var aDepGraph = new BitArray[numRegs];
                 for (int i = 0; i < numRegs; i++)
                 {
@@ -111,9 +120,11 @@ namespace CSC431.Sparc
                 allDepGraphs[f] = aDepGraph;
             }
 
-            colorMapping = new Dictionary<string, SparcRegister[]>();
             foreach (var f in start.Functions)
             {
+                if (coloringDone.Contains(f.Name))
+                    continue;
+
                 colorMapping[f.Name] = new SparcRegister[numRegs];
             }
         }
@@ -122,6 +133,9 @@ namespace CSC431.Sparc
         {
             foreach (var f in start.Functions)
             {
+                if (coloringDone.Contains(f.Name))
+                    continue;
+
                 f.VisitBlocks(b =>
                 {
                     var gset = genSets[b];
@@ -144,6 +158,9 @@ namespace CSC431.Sparc
 
                 foreach (var f in start.Functions)
                 {
+                    if (coloringDone.Contains(f.Name))
+                        continue;
+
                     f.VisitBlocks(b =>
                     {
                         var gset = genSets[b];
@@ -194,6 +211,9 @@ namespace CSC431.Sparc
         {
             foreach (var f in start.Functions)
             {
+                if (coloringDone.Contains(f.Name))
+                    continue;
+
                 var dg = allDepGraphs[f];
                 f.VisitBlocks(b =>
                 {
@@ -322,7 +342,13 @@ namespace CSC431.Sparc
 
             foreach (var f in start.Functions)
             {
+                if (coloringDone.Contains(f.Name))
+                    continue;
+                
                 functionsToUncoloredRegisters[f.Name] = colorFunction(f);
+
+                if (functionsToUncoloredRegisters[f.Name].Count == 0)
+                    coloringDone.Add(f.Name);
             }
 
             return functionsToUncoloredRegisters;
@@ -330,6 +356,9 @@ namespace CSC431.Sparc
 
         public ProgramBlock<SparcInstruction> DoAllocation(ProgramBlock<SparcInstruction> start)
         {
+            numRegs = getMaxRegValue(start) + 1;
+            spilleds = new BitArray(numRegs);
+
             while (true)
             {
                 setupVars(start);
