@@ -31,5 +31,28 @@ namespace CSC431
         {
             return new TransformStep<ProgramBlock<SparcInstruction>>(new RegisterAllocation().DoAllocation);
         }
+
+        public static TransformStep<ProgramBlock<SparcInstruction>> SetStacks()
+        {
+            return new TransformStep<ProgramBlock<SparcInstruction>>(prog =>
+            {
+                foreach (var f in prog.Functions)
+                {
+                    var thisF = f;
+                    thisF.VisitBlocks(b =>
+                    {
+                        foreach (var i in b.Code)
+                        {
+                            var save = i as SaveInstruction;
+                            if (save != null)
+                            {
+                                save.SetStackSizes(thisF);
+                            }
+                        }
+                    });
+                }
+                return prog;
+            });
+        }
     }
 }

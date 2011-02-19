@@ -16,6 +16,24 @@ namespace CSC431
             }
         }
 
+        public static int MaxIndex<T>(this List<T> list, Func<T, int> maxFunction)
+        {
+            int loc = -1;
+            int maxValue = int.MinValue;
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                int newMaxVal = maxFunction(list[i]);
+                if (newMaxVal > maxValue)
+                {
+                    loc = i;
+                    maxValue = newMaxVal;
+                }
+            }
+
+            return loc;
+        }
+
         public static IEnumerable<int> TrueIndexs(this BitArray arr)
         {
             for (int i = 0; i < arr.Length; i++)

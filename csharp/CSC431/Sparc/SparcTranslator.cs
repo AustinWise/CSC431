@@ -25,8 +25,7 @@ namespace CSC431.Sparc
                 spOffset += (copy.MaxOutArgs - 6) * 4;
             }
 
-            //TODO: actully calculate frame size
-            yield return new SaveInstruction(SparcRegister.SP, -1024, SparcRegister.SP);
+            yield return new SaveInstruction();
         }
 
         public IEnumerable<SparcInstruction> Add(IL.AddInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)

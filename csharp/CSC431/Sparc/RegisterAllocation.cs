@@ -9,14 +9,21 @@ namespace CSC431.Sparc
 {
     class RegisterAllocation
     {
-        private SparcRegister[] sparcRegisterCache;
+        private SparcRegister[] virtToSparc;
         private BitArray candidateColors;
         private readonly int numColors;
+        private readonly List<int> emptyList = new List<int>();
 
         public RegisterAllocation()
         {
             candidateColors = new BitArray(SparcRegister.IntValueMap.Max() + 1);
-            sparcRegisterCache = new SparcRegister[candidateColors.Length];
+            virtToSparc = new SparcRegister[candidateColors.Length];
+
+            foreach (SparcReg r in Enum.GetValues(typeof(SparcReg)))
+            {
+                var s = new SparcRegister(r);
+                virtToSparc[s.IntVal] = s;
+            }
 
             var canColors = new List<SparcRegister>();
             canColors.Add(new SparcRegister(SparcReg.l0));
@@ -35,7 +42,6 @@ namespace CSC431.Sparc
                 if (c.IntVal == 0)
                     throw new Exception("no register should have an intval of 0, the register allocator depends on this");
                 candidateColors[c.IntVal] = true;
-                sparcRegisterCache[c.IntVal] = c;
             }
         }
 
@@ -74,10 +80,12 @@ namespace CSC431.Sparc
         int numRegs;
         Dictionary<FunctionBlock<SparcInstruction>, BitArray[]> allDepGraphs;
         Dictionary<string, SparcRegister[]> colorMapping;
+        BitArray spilleds;
 
         private void setupVars(ProgramBlock<SparcInstruction> start)
         {
             numRegs = getMaxRegValue(start) + 1;
+            spilleds = new BitArray(numRegs);
 
             genSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
             killSets = new Dictionary<BasicBlock<SparcInstruction>, BitArray>();
@@ -146,7 +154,7 @@ namespace CSC431.Sparc
                         {
                             var sucKset = killSets[suc as BasicBlock<SparcInstruction>];
                             var sucGset = genSets[suc as BasicBlock<SparcInstruction>];
-                            var sucLset = liveoutSets[suc as BasicBlock<SparcInstruction>];
+                            var sucLset = liveoutSets[suc as BasicBlock<SparcInstruction>]; //TODO: don't use if this block is a return block
                             var sucSet = new BitArray(numRegs);
 
                             //do lset - kset
@@ -226,72 +234,118 @@ namespace CSC431.Sparc
             return dg[r2].TrueIndexs().Count() - dg[r1].TrueIndexs().Count();
         }
 
-        private void colorGraph(ProgramBlock<SparcInstruction> start)
+        private List<int> colorFunction(FunctionBlock<SparcInstruction> f)
         {
+            var uncolorableRegs = new List<int>();
 
+            var dg = allDepGraphs[f];
+            var map = colorMapping[f.Name];
+
+            var stack = new Stack<NodeAndEdges>(numRegs);
+
+            var notConstrained = Enumerable.Range(0, numRegs).Where(r => !isConstrained(r, dg[r])).ToList();
+            var constrained = Enumerable.Range(0, numRegs).Where(r => isConstrained(r, dg[r])).ToList();
+            var constrainedAndUncolorable = new List<int>(constrained);
+
+            //Push all unconstrained nodes first
+            foreach (var r in notConstrained)
+            {
+                var bits = dg[r];
+
+                stack.Push(new NodeAndEdges() { Reg = r, Edges = new BitArray(bits) });
+                bits.TrueIndexs().Map(i => removeEdge(dg, i, r));
+            }
+
+            //Console.WriteLine("\t{0}:{1} reg constr", f.Name, constrained.Count);
+
+            //While there still exists constrained registers
+            while (constrained.Count != 0)
+            {
+                var constrainedNdx = constrained.MaxIndex(r => dg[r].TrueIndexs().Count());
+                var reg = constrained[constrainedNdx];
+                var bits = dg[reg];
+
+                stack.Push(new NodeAndEdges() { Reg = reg, Edges = new BitArray(bits) });
+                bits.TrueIndexs().Map(i => removeEdge(dg, i, reg));
+
+                constrained.Remove(reg);
+            }
+
+            while (stack.Count != 0)
+            {
+                var val = stack.Pop();
+                var bits = val.Edges;
+                SparcRegister reg = getSparcRegister(val.Reg);
+
+                if (reg == null)
+                {
+                    var cans = new BitArray(candidateColors);
+                    bits.TrueIndexs().Map(i => cans[map[i].IntVal] = false);
+                    reg = virtToSparc[cans.TrueIndexs().FirstOrDefault()];
+                }
+
+                if (reg == null)
+                {
+                    break;
+                }
+
+                constrainedAndUncolorable.Remove(val.Reg);
+
+                map[val.Reg] = reg;
+                bits.TrueIndexs().Map(i => addEdge(dg, val.Reg, i));
+            }
+
+            constrainedAndUncolorable.Sort((r1, r2) => compareConstrainedness(dg, r1, r2));
+            return constrainedAndUncolorable;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="start"></param>
+        /// <returns>-1 if all nodes were colorable, otherwise the id of the virtual register that coud not be colored.</returns>
+        private Dictionary<string, List<int>> colorGraph(ProgramBlock<SparcInstruction> start)
+        {
+            var functionsToUncoloredRegisters = new Dictionary<string, List<int>>();
 
             foreach (var f in start.Functions)
             {
-                var dg = allDepGraphs[f];
-                var map = colorMapping[f.Name];
-
-                var stack = new Stack<NodeAndEdges>(numRegs);
-
-                var notConstrained = Enumerable.Range(0, numRegs).Where(r => !isConstrained(r, dg[r])).ToList();
-                var constrained = Enumerable.Range(0, numRegs).Where(r => isConstrained(r, dg[r])).ToList();
-
-                //Push all unconstrained nodes first
-                foreach (var r in notConstrained)
-                {
-                    var bits = dg[r];
-
-                    stack.Push(new NodeAndEdges() { Reg = r, Edges = new BitArray(bits) });
-                    bits.TrueIndexs().Map(i => removeEdge(dg, i, r));
-                }
-
-                //While there still exists constrained registers
-                while (constrained.Count != 0)
-                {
-                    constrained.Sort((r1, r2) => compareConstrainedness(dg, r1, r2));
-                    var reg = constrained[0];
-                    var bits = dg[reg];
-
-                    stack.Push(new NodeAndEdges() { Reg = reg, Edges = new BitArray(bits) });
-                    bits.TrueIndexs().Map(i => removeEdge(dg, i, reg));
-
-                    constrained.Remove(reg);
-                }
-
-                while (stack.Count != 0)
-                {
-                    var val = stack.Pop();
-                    var bits = val.Edges;
-                    SparcRegister reg = getSparcRegister(val.Reg);
-
-                    if (reg == null)
-                    {
-                        var cans = new BitArray(candidateColors);
-                        bits.TrueIndexs().Map(i => cans[map[i].IntVal] = false);
-                        reg = sparcRegisterCache[cans.TrueIndexs().FirstOrDefault()];
-                    }
-
-                    if (reg == null)
-                        throw new EvilException("could not complete register allocation");
-
-                    map[val.Reg] = reg;
-
-                    bits.TrueIndexs().Map(i => addEdge(dg, val.Reg, i));
-                }
+                functionsToUncoloredRegisters[f.Name] = colorFunction(f);
             }
+
+            return functionsToUncoloredRegisters;
         }
 
         public ProgramBlock<SparcInstruction> DoAllocation(ProgramBlock<SparcInstruction> start)
         {
-            setupVars(start);
-            doGenAndKill(start);
-            doLiveoutSets(start);
-            doGraph(start);
-            colorGraph(start);
+            while (true)
+            {
+                setupVars(start);
+                doGenAndKill(start);
+                doLiveoutSets(start);
+                doGraph(start);
+                var uncoloredRegs = colorGraph(start);
+
+                if (uncoloredRegs.Select(r => r.Value.Count).Sum() == 0)
+                    break;
+
+                var regsToSpill = new BitArray(numRegs);
+
+                foreach (var kvp in uncoloredRegs)
+                {
+                    if (kvp.Value.Count != 0)
+                    {
+                        var rToSpill = kvp.Value.Where(r => !spilleds[r]).Where(r => getSparcRegister(r) == null).First();
+                        regsToSpill.Set(rToSpill, true);
+                    }
+                }
+
+                spilleds.Or(regsToSpill);
+
+                start = (ProgramBlock<SparcInstruction>)start.Convert(new SpillConverter(regsToSpill));
+
+                //Console.WriteLine("spilled {0} regs, trying again", regsToSpill.TrueIndexs().Count());
+            }
 
             //print(start);
 
@@ -343,16 +397,16 @@ namespace CSC431.Sparc
 
         private Register getRegister(int id)
         {
-            if (id >= sparcRegisterCache.Length || sparcRegisterCache[id] == null)
+            if (id >= virtToSparc.Length || virtToSparc[id] == null)
                 return new VirtualRegister(id);
-            return sparcRegisterCache[id];
+            return virtToSparc[id];
         }
 
         private SparcRegister getSparcRegister(int id)
         {
-            if (id >= sparcRegisterCache.Length || sparcRegisterCache[id] == null)
+            if (id >= virtToSparc.Length || virtToSparc[id] == null)
                 return null;
-            return sparcRegisterCache[id];
+            return virtToSparc[id];
         }
     }
 }

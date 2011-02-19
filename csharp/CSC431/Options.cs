@@ -74,11 +74,12 @@ namespace CSC431
                 llvm.FollowWith(LlvmSteps.BitcodeToSparc());
             }
 
-            if (!(Options.DumpIL.Value || Options.Llvm.Value))
+            if (!Options.Llvm.Value)
             {
                 flow.FollowWith(Analysis.FunctionsCalled.Step())
                     .FollowWith(SparcSteps.ConvertToSparc())
                     .FollowWith(SparcSteps.RegisterAllocation())
+                    .FollowWith(SparcSteps.SetStacks())
                     .FollowWith(outputer());
             }
 

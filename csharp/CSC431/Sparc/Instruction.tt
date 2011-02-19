@@ -3,7 +3,9 @@
 <#@ Import Namespace="System.Collections.Generic" #>
 using CSC431.CFG;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CSC431.Sparc
 {
@@ -224,6 +226,92 @@ instr.ForEachOperand((c, count, isLast) =>
 	}
 }
 
+public class SpillConverter : IInstructionConverter<SparcInstruction, SparcInstruction>
+{
+	private BitArray regToSpill;
+	private int spOffset;
+    CFG.FunctionBlock<SparcInstruction> curFunc;
+
+	public SpillConverter(BitArray regToSpill)
+	{
+		this.regToSpill = regToSpill;
+	}
+
+    private int getLocalOffset(string name)
+    {
+        return spOffset + curFunc.GetLocalIndex(name) * 4;
+    }
+
+	public IEnumerable<SparcInstruction> FunctionStart(FunctionBlock<SparcInstruction> copy)
+	{
+		curFunc = copy;
+
+        spOffset = 92;
+        if (copy.MaxOutArgs > 6)
+        {
+            spOffset += (copy.MaxOutArgs - 6) * 4;
+        }
+
+		return Enumerable.Empty<SparcInstruction>();
+	}
+
+	public IEnumerable<SparcInstruction> Convert(InstructionStream<SparcInstruction> s)
+	{
+		while (s.More)
+		{
+			var cur = s.Consume();
+<#
+foreach (var instr in InstrInfo.GetAll())
+{
+    var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
+    var className = name + "Instruction";
+#>
+			if (cur is <#=className #>)
+			{
+				var conv = cur as <#=className #>;
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (c.IsConstant)
+        return;
+    if (c.IsSource)
+        WriteLine("\t\t\t\tif (regToSpill[conv.{0}.IntVal]){{ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset(\"reg_\" + conv.{0}.IntVal), conv.{0}); }}", c.UpperPrefix + count);
+});
+#>
+
+				var copy = new <#=className #>(
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (c.IsConstant)
+        return;
+    Write("conv.{1}{0}", count, c.UpperPrefix);
+    if (!isLast)
+        Write(", ");
+});
+#>
+				);
+				conv.CopyExtraDataToNewInstance(copy);
+				yield return copy;
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (c.IsConstant)
+        return;
+    if (c.IsTarget)
+        WriteLine("\t\t\t\tif (regToSpill[conv.{0}.IntVal]){{ yield return new StwInstruction(conv.{0}, SparcRegister.SP, getLocalOffset(\"reg_\" + conv.{0}.IntVal)); }}", c.UpperPrefix + count);
+});
+#>
+				continue;
+			}
+<#
+}
+#>
+			throw new NotSupportedException();
+		}
+	}
+}
+
 }
 <#+
 [Flags]
@@ -246,8 +334,6 @@ private class OperandType
         sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = ".L", Type = "Label" });
         sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", Type = "int" });
         sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", Type = "string" });
-        sTypes.Add('a', new OperandType() { LowerPrefix = "arr", UpperPrefix = "Arr", MilocPrefix = "[", MilocPostfix = "]", Type = "string[]", SpecialConversion = "string.Join(\", \", {0})" });
-        sTypes.Add('k', new OperandType() { ConstantValue = "rarp" });
         sTypes.Add('c', new OperandType() { ConstantValue = "%icc" });
     }
 
@@ -259,6 +345,7 @@ private class OperandType
     public string SpecialConversion { get; private set; }
     public bool IsSource { get; private set; }
     public bool IsTarget { get; private set; }
+    public bool IsFunction { get; private set; }
 
     public string ConstantValue { get; private set; }
     public bool IsConstant
@@ -373,7 +460,7 @@ private class InstrInfo
                 new InstrInfo("", "ret"),
                 new InstrInfo("", "restore"),
                 new InstrInfo("", "nop"),
-                new InstrInfo("riR", "save"),
+                new InstrInfo("", "save", InstrFlags.CustomToString),
             };
     }
 }

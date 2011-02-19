@@ -56,4 +56,36 @@ namespace CSC431.Sparc
             ret = string.Format("{0} %{1}, %lo({2}), %{3}", Name, RegSource0, Str0, RegDest0);
         }
     }
+
+    public partial class SaveInstruction
+    {
+        private int spSize = 0;
+
+        public void SetStackSizes(CSC431.CFG.FunctionBlock<SparcInstruction> f)
+        {
+            spSize = 92;
+
+            if (f.MaxOutArgs > 6)
+            {
+                spSize += (f.MaxOutArgs - 6) * 4;
+            }
+
+            spSize += f.Locals.Count * 4;
+
+            //doubleword align
+            if (0 != (spSize & 0x7))
+            {
+                spSize >>= 3;
+                spSize++;
+                spSize <<= 3;
+            }
+        }
+
+        partial void ToStringCore(ref string ret)
+        {
+            if (spSize == 0)
+                throw new Exception("stack size not set");
+            ret = string.Format("save %sp, -{0}, %sp", spSize);
+        }
+    }
 }
