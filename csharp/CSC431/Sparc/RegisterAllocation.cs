@@ -257,14 +257,14 @@ namespace CSC431.Sparc
 
         private bool isConstrained(int reg, BitArray edges)
         {
-            var edgeCount = edges.TrueIndexs().Count();
+            var edgeCount = edges.NumberOfBitsSet();
 
             return edgeCount >= numColors;
         }
 
         private int compareConstrainedness(BitArray[] dg, int r1, int r2)
         {
-            return dg[r2].TrueIndexs().Count() - dg[r1].TrueIndexs().Count();
+            return dg[r2].NumberOfBitsSet() - dg[r1].NumberOfBitsSet();
         }
 
         private List<int> colorFunction(FunctionBlock<SparcInstruction> f)
@@ -294,7 +294,7 @@ namespace CSC431.Sparc
             //While there still exists constrained registers
             while (constrained.Count != 0)
             {
-                var constrainedNdx = constrained.MaxIndex(r => dg[r].TrueIndexs().Count());
+                var constrainedNdx = constrained.MaxIndex(r => dg[r].NumberOfBitsSet());
                 var reg = constrained[constrainedNdx];
                 var bits = dg[reg];
 
