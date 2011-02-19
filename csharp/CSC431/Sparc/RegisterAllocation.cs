@@ -191,6 +191,7 @@ namespace CSC431.Sparc
                         var countingSet = new BitArray(lset);
                         countingSet.Xor(newLset);
                         var countArr = new int[countingSet.IntArraySize()];
+                        countingSet.CopyTo(countArr, 0);
 
                         for (int i = 0; i < countArr.Length; i++)
                         {
