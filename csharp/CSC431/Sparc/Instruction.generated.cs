@@ -322,11 +322,11 @@ return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDe
 
 
 
-public partial class XoriInstruction : SparcInstruction
+public partial class XorInstruction : SparcInstruction
 {
-	public XoriInstruction
+	public XorInstruction
 	(
-Register regSource0,int immed0,Register regDest0	) : base ("xori")
+Register regSource0,int immed0,Register regDest0	) : base ("xor")
 	{
 this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
@@ -352,11 +352,11 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(XoriInstruction newObj);
+partial void MyCopyExtraDataToNewInstance(XorInstruction newObj);
 
 public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
 {
-	MyCopyExtraDataToNewInstance(newObj as XoriInstruction);
+	MyCopyExtraDataToNewInstance(newObj as XorInstruction);
 }
 
 public override string ToString()
@@ -1444,10 +1444,10 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				yield return copy;
 				continue;
 			}
-			if (cur is XoriInstruction)
+			if (cur is XorInstruction)
 			{
-				var conv = cur as XoriInstruction;
-				var copy = new XoriInstruction(
+				var conv = cur as XorInstruction;
+				var copy = new XorInstruction(
 map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
@@ -1780,12 +1780,12 @@ conv.RegSource0, conv.RegSource1, conv.RegDest0				);
 				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
 				continue;
 			}
-			if (cur is XoriInstruction)
+			if (cur is XorInstruction)
 			{
-				var conv = cur as XoriInstruction;
+				var conv = cur as XorInstruction;
 				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
 
-				var copy = new XoriInstruction(
+				var copy = new XorInstruction(
 conv.RegSource0, conv.Immed0, conv.RegDest0				);
 				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;

@@ -70,7 +70,7 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Xori(IL.XoriInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            yield return new XoriInstruction(s.RegSource0, s.Immed0, s.RegDest0);
+            yield return new XorInstruction(s.RegSource0, s.Immed0, s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Loadi(IL.LoadiInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
