@@ -171,9 +171,17 @@ namespace CSC431.Sparc
                             }
                         }
 
-                        if (newLset.Cast<bool>().Zip(lset.Cast<bool>(), (o1, o2) => o1 == o2).Where(v => !v).Any())
+                        var countingSet = new BitArray(lset);
+                        countingSet.Xor(newLset);
+                        var countArr = new int[countingSet.IntArraySize()];
+
+                        for (int i = 0; i < countArr.Length; i++)
                         {
-                            changed = true;
+                            changed |= countArr[i] != 0;
+                        }
+
+                        if (changed)
+                        {
                             liveoutSets[b] = newLset;
                         }
                     });

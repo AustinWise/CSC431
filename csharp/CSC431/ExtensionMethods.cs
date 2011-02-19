@@ -42,5 +42,15 @@ namespace CSC431
                     yield return i;
             }
         }
+
+        public static int IntArraySize(this BitArray ar)
+        {
+            int n = ar.Length;
+            if (n <= 0)
+            {
+                return 0;
+            }
+            return (((n - 1) / 0x20) + 1);
+        }
     }
 }
