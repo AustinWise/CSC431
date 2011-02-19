@@ -150,21 +150,25 @@ namespace CSC431.Sparc
                         var kset = killSets[b];
                         var lset = liveoutSets[b];
                         var newLset = new BitArray(numRegs);
-                        foreach (var suc in b.Nexts)
+
+                        if (!b.IsReturn)
                         {
-                            var sucKset = killSets[suc as BasicBlock<SparcInstruction>];
-                            var sucGset = genSets[suc as BasicBlock<SparcInstruction>];
-                            var sucLset = liveoutSets[suc as BasicBlock<SparcInstruction>]; //TODO: don't use if this block is a return block
-                            var sucSet = new BitArray(numRegs);
+                            foreach (var suc in b.Nexts)
+                            {
+                                var sucKset = killSets[suc as BasicBlock<SparcInstruction>];
+                                var sucGset = genSets[suc as BasicBlock<SparcInstruction>];
+                                var sucLset = liveoutSets[suc as BasicBlock<SparcInstruction>];
+                                var sucSet = new BitArray(numRegs);
 
-                            //do lset - kset
-                            sucSet.Or(sucLset).Xor(sucKset).And(sucLset);
+                                //do lset - kset
+                                sucSet.Or(sucLset).Xor(sucKset).And(sucLset);
 
-                            //do gen union with the above
-                            sucSet.Or(sucGset);
+                                //do gen union with the above
+                                sucSet.Or(sucGset);
 
-                            //union with new lset
-                            newLset.Or(sucSet);
+                                //union with new lset
+                                newLset.Or(sucSet);
+                            }
                         }
 
                         if (newLset.Cast<bool>().Zip(lset.Cast<bool>(), (o1, o2) => o1 == o2).Where(v => !v).Any())

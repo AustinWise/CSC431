@@ -291,7 +291,7 @@ expression returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruc
 	| ^(TIMES e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new MultInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(DIVIDE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new DivInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(NOT e=expression) { $b.Add(e); $b.Add(new XoriInstruction(e.Reg, 1, reg)); }
-	| ^(NEG e=expression)
+	| ^(NEG e=expression) { $b.Add(e); int negZeroReg = Instruction.VirtualRegister(); $b.Add(new LoadiInstruction(0, negZeroReg)); $b.Add(new SubInstruction(negZeroReg, e.Reg, reg)); }
 	| s=selector { $b = s; }
 	;
 

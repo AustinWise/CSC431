@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-02-17 00:08:10
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-02-18 21:43:33
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -3019,6 +3019,8 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 
 
     			Match(input, TokenTypes.Up, null); 
+    			DebugLocation(294, 24);
+    			 b.Add(e); int negZeroReg = Instruction.VirtualRegister(); b.Add(new LoadiInstruction(0, negZeroReg)); b.Add(new SubInstruction(negZeroReg, e.Reg, reg)); 
 
     			}
     			break;
@@ -3027,7 +3029,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			// IlGenWalker.g:295:4: s= selector
     			{
     			DebugLocation(295, 5);
-    			PushFollow(Follow._selector_in_expression1195);
+    			PushFollow(Follow._selector_in_expression1197);
     			s=selector();
     			PopFollow();
 
@@ -3103,16 +3105,16 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			{
     			DebugLocation(299, 4);
     			DebugLocation(299, 6);
-    			Match(input,DOT,Follow._DOT_in_selector1213); 
+    			Match(input,DOT,Follow._DOT_in_selector1215); 
 
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(299, 11);
-    			PushFollow(Follow._selector_in_selector1217);
+    			PushFollow(Follow._selector_in_selector1219);
     			s=selector();
     			PopFollow();
 
     			DebugLocation(299, 23);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_selector1221); 
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_selector1223); 
 
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(300, 3);
@@ -3132,7 +3134,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			// IlGenWalker.g:308:4: f= factor
     			{
     			DebugLocation(308, 5);
-    			PushFollow(Follow._factor_in_selector1233);
+    			PushFollow(Follow._factor_in_selector1235);
     			f=factor();
     			PopFollow();
 
@@ -3238,13 +3240,13 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			{
     			DebugLocation(313, 4);
     			DebugLocation(313, 6);
-    			Match(input,INVOKE,Follow._INVOKE_in_factor1256); 
+    			Match(input,INVOKE,Follow._INVOKE_in_factor1258); 
 
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(313, 15);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1260); 
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1262); 
     			DebugLocation(313, 26);
-    			PushFollow(Follow._arguments_in_factor1264);
+    			PushFollow(Follow._arguments_in_factor1266);
     			regLocs=arguments(b);
     			PopFollow();
 
@@ -3267,7 +3269,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			// IlGenWalker.g:322:4: id= ID
     			{
     			DebugLocation(322, 6);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1277); 
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1279); 
     			DebugLocation(323, 3);
 
     						b = getVarReg((id!=null?id.Text:null)).Load(reg);
@@ -3281,7 +3283,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			// IlGenWalker.g:327:4: i= INTEGER
     			{
     			DebugLocation(327, 5);
-    			i=(CommonTree)Match(input,INTEGER,Follow._INTEGER_in_factor1288); 
+    			i=(CommonTree)Match(input,INTEGER,Follow._INTEGER_in_factor1290); 
     			DebugLocation(327, 14);
     			b.Add(new LoadiInstruction(int.Parse((i!=null?i.Text:null)), reg)); 
 
@@ -3292,7 +3294,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			// IlGenWalker.g:328:4: TRUE
     			{
     			DebugLocation(328, 4);
-    			Match(input,TRUE,Follow._TRUE_in_factor1295); 
+    			Match(input,TRUE,Follow._TRUE_in_factor1297); 
     			DebugLocation(328, 9);
     			b.Add(new LoadiInstruction(1, reg)); 
 
@@ -3303,7 +3305,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			// IlGenWalker.g:329:4: FALSE
     			{
     			DebugLocation(329, 4);
-    			Match(input,FALSE,Follow._FALSE_in_factor1302); 
+    			Match(input,FALSE,Follow._FALSE_in_factor1304); 
     			DebugLocation(329, 10);
     			b.Add(new LoadiInstruction(0, reg)); 
 
@@ -3315,11 +3317,11 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			{
     			DebugLocation(330, 4);
     			DebugLocation(330, 6);
-    			Match(input,NEW,Follow._NEW_in_factor1310); 
+    			Match(input,NEW,Follow._NEW_in_factor1312); 
 
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(330, 12);
-    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1314); 
+    			id=(CommonTree)Match(input,ID,Follow._ID_in_factor1316); 
 
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(330, 17);
@@ -3332,7 +3334,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			// IlGenWalker.g:331:4: NULL
     			{
     			DebugLocation(331, 4);
-    			Match(input,NULL,Follow._NULL_in_factor1322); 
+    			Match(input,NULL,Follow._NULL_in_factor1324); 
     			DebugLocation(331, 9);
     			b.Add(new LoadiInstruction(0, reg)); 
 
@@ -3377,7 +3379,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     		// IlGenWalker.g:335:4: arg_list[$b, $regLocs]
     		{
     		DebugLocation(335, 4);
-    		PushFollow(Follow._arg_list_in_arguments1340);
+    		PushFollow(Follow._arg_list_in_arguments1342);
     		arg_list(b, regLocs);
     		PopFollow();
 
@@ -3457,7 +3459,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			{
     			DebugLocation(339, 4);
     			DebugLocation(339, 6);
-    			Match(input,ARGS,Follow._ARGS_in_arg_list1355); 
+    			Match(input,ARGS,Follow._ARGS_in_arg_list1357); 
 
     			Match(input, TokenTypes.Down, null); 
     			DebugLocation(339, 11);
@@ -3484,7 +3486,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     					// IlGenWalker.g:339:12: e= expression
     					{
     					DebugLocation(339, 13);
-    					PushFollow(Follow._expression_in_arg_list1360);
+    					PushFollow(Follow._expression_in_arg_list1362);
     					e=expression();
     					PopFollow();
 
@@ -3519,7 +3521,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			// IlGenWalker.g:340:4: ARGS
     			{
     			DebugLocation(340, 4);
-    			Match(input,ARGS,Follow._ARGS_in_arg_list1372); 
+    			Match(input,ARGS,Follow._ARGS_in_arg_list1374); 
 
     			}
     			break;
@@ -3670,25 +3672,25 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 		public static readonly BitSet _expression_in_expression1174 = new BitSet(new ulong[]{0x0000000000000008UL});
 		public static readonly BitSet _NEG_in_expression1183 = new BitSet(new ulong[]{0x0000000000000004UL});
 		public static readonly BitSet _expression_in_expression1187 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _selector_in_expression1195 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _DOT_in_selector1213 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _selector_in_selector1217 = new BitSet(new ulong[]{0x0100000000000000UL});
-		public static readonly BitSet _ID_in_selector1221 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _factor_in_selector1233 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _INVOKE_in_factor1256 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _ID_in_factor1260 = new BitSet(new ulong[]{0x0000000200000000UL});
-		public static readonly BitSet _arguments_in_factor1264 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _ID_in_factor1277 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _INTEGER_in_factor1288 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _TRUE_in_factor1295 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _FALSE_in_factor1302 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _NEW_in_factor1310 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _ID_in_factor1314 = new BitSet(new ulong[]{0x0000000000000008UL});
-		public static readonly BitSet _NULL_in_factor1322 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _arg_list_in_arguments1340 = new BitSet(new ulong[]{0x0000000000000002UL});
-		public static readonly BitSet _ARGS_in_arg_list1355 = new BitSet(new ulong[]{0x0000000000000004UL});
-		public static readonly BitSet _expression_in_arg_list1360 = new BitSet(new ulong[]{0x03FFFC05001E0008UL});
-		public static readonly BitSet _ARGS_in_arg_list1372 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _selector_in_expression1197 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _DOT_in_selector1215 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _selector_in_selector1219 = new BitSet(new ulong[]{0x0100000000000000UL});
+		public static readonly BitSet _ID_in_selector1223 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _factor_in_selector1235 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _INVOKE_in_factor1258 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _ID_in_factor1262 = new BitSet(new ulong[]{0x0000000200000000UL});
+		public static readonly BitSet _arguments_in_factor1266 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _ID_in_factor1279 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _INTEGER_in_factor1290 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _TRUE_in_factor1297 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _FALSE_in_factor1304 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _NEW_in_factor1312 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _ID_in_factor1316 = new BitSet(new ulong[]{0x0000000000000008UL});
+		public static readonly BitSet _NULL_in_factor1324 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _arg_list_in_arguments1342 = new BitSet(new ulong[]{0x0000000000000002UL});
+		public static readonly BitSet _ARGS_in_arg_list1357 = new BitSet(new ulong[]{0x0000000000000004UL});
+		public static readonly BitSet _expression_in_arg_list1362 = new BitSet(new ulong[]{0x03FFFC05001E0008UL});
+		public static readonly BitSet _ARGS_in_arg_list1374 = new BitSet(new ulong[]{0x0000000000000002UL});
 
 	}
 	#endregion Follow sets

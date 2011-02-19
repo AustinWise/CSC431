@@ -13,7 +13,6 @@ namespace CSC431
 
         public static int Main(String[] args)
         {
-            args = new[] { "test.ev" };
             var t = new Task(() =>
             {
                 Options.ParseParameters(args);
