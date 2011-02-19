@@ -7,7 +7,7 @@ foreach dir (*)
 #   gcc *.c
 #   a.out < input >&! output.c
    gcc -mcpu=v9 *.s
-   a.out < input >&! output.ev
+   ./a.out < input >&! output.ev
    diff -wb output.ev output >&! /dev/null
 #   diff -wb output.ev output.c >&! /dev/null
    echo ${status}

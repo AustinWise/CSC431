@@ -1,4 +1,3 @@
-output
 *.suo
 *proj.user
 bin
@@ -7,3 +6,6 @@ bin/*
 obj/*
 *.cache
 *.tokens
+output.ev
+a.out
+
