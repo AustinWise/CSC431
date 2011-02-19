@@ -36,7 +36,8 @@ namespace CompileAllBenchmarks
             //return;
 
 
-            const string benchDir = @"C:\Users\AustinWise\Downloads\benchmarks\";
+            string benchDir = @"..\..\..\..\benchmarks\";
+            
 
             List<Task<string>> tasks = new List<Task<string>>();
 
