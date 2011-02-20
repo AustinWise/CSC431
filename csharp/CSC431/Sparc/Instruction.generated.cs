@@ -37,18 +37,23 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(AddInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as AddInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+				if (regToSpill[this.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource1.IntVal), this.RegSource1); }
+
+				var copy = new AddInstruction(
+this.RegSource0, this.RegSource1, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END AddInstruction
 
 
 
@@ -82,18 +87,22 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(AddiInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as AddiInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %{1}, {2}, %{3}", Name, RegSource0, Immed0, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+
+				var copy = new AddiInstruction(
+this.RegSource0, this.Immed0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END AddiInstruction
 
 
 
@@ -127,18 +136,23 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(SubInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as SubInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+				if (regToSpill[this.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource1.IntVal), this.RegSource1); }
+
+				var copy = new SubInstruction(
+this.RegSource0, this.RegSource1, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END SubInstruction
 
 
 
@@ -172,18 +186,23 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(SdivxInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as SdivxInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+				if (regToSpill[this.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource1.IntVal), this.RegSource1); }
+
+				var copy = new SdivxInstruction(
+this.RegSource0, this.RegSource1, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END SdivxInstruction
 
 
 
@@ -217,18 +236,23 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(MulxInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as MulxInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+				if (regToSpill[this.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource1.IntVal), this.RegSource1); }
+
+				var copy = new MulxInstruction(
+this.RegSource0, this.RegSource1, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END MulxInstruction
 
 
 
@@ -262,18 +286,23 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(OrInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as OrInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+				if (regToSpill[this.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource1.IntVal), this.RegSource1); }
+
+				var copy = new OrInstruction(
+this.RegSource0, this.RegSource1, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END OrInstruction
 
 
 
@@ -307,18 +336,23 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(AndInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as AndInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %{1}, %{2}, %{3}", Name, RegSource0, RegSource1, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+				if (regToSpill[this.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource1.IntVal), this.RegSource1); }
+
+				var copy = new AndInstruction(
+this.RegSource0, this.RegSource1, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END AndInstruction
 
 
 
@@ -352,18 +386,22 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(XorInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as XorInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %{1}, {2}, %{3}", Name, RegSource0, Immed0, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+
+				var copy = new XorInstruction(
+this.RegSource0, this.Immed0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END XorInstruction
 
 
 
@@ -397,18 +435,22 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(OriInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as OriInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %{1}, {2}, %{3}", Name, RegSource0, Immed0, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+
+				var copy = new OriInstruction(
+this.RegSource0, this.Immed0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END OriInstruction
 
 
 
@@ -442,18 +484,22 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(OrlInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as OrlInstruction);
-}
-
 public override string ToString()
 {
-return string.Format("{0} %{1}, %lo({2}), %{3}", Name, RegSource0, IsConstantData ? ".ConstantString" + LoBits0 : LoBits0.ToString(), RegDest0);
+return string.Format("{0} %{1}, %lo({2}), %{3}", Name, RegSource0, LoBits0, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+
+				var copy = new OrlInstruction(
+this.RegSource0, this.LoBits0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END OrlInstruction
 
 
 
@@ -486,18 +532,22 @@ public override Register[] DestRegs
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(CmpInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as CmpInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %{1}, %{2}", Name, RegSource0, RegSource1);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+				if (regToSpill[this.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource1.IntVal), this.RegSource1); }
+
+				var copy = new CmpInstruction(
+this.RegSource0, this.RegSource1				);
+				yield return copy;
+	}
+
+} //END CmpInstruction
 
 
 
@@ -529,18 +579,20 @@ public override Register[] DestRegs
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(BeInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as BeInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %icc, .L{2}", Name, null, Label0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new BeInstruction(
+this.Label0				);
+				yield return copy;
+	}
+
+} //END BeInstruction
 
 
 
@@ -572,18 +624,20 @@ public override Register[] DestRegs
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(BaInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as BaInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %icc, .L{2}", Name, null, Label0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new BaInstruction(
+this.Label0				);
+				yield return copy;
+	}
+
+} //END BaInstruction
 
 
 
@@ -616,18 +670,21 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(MoveqInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as MoveqInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new MoveqInstruction(
+this.Immed0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END MoveqInstruction
 
 
 
@@ -660,18 +717,21 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(MovneInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as MovneInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new MovneInstruction(
+this.Immed0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END MovneInstruction
 
 
 
@@ -704,18 +764,21 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(MovgeInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as MovgeInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new MovgeInstruction(
+this.Immed0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END MovgeInstruction
 
 
 
@@ -748,18 +811,21 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(MovgInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as MovgInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new MovgInstruction(
+this.Immed0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END MovgInstruction
 
 
 
@@ -792,18 +858,21 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(MovleInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as MovleInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new MovleInstruction(
+this.Immed0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END MovleInstruction
 
 
 
@@ -836,18 +905,21 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(MovlInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as MovlInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %icc, {2}, %{3}", Name, null, Immed0, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new MovlInstruction(
+this.Immed0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END MovlInstruction
 
 
 
@@ -880,18 +952,21 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(SethiInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as SethiInstruction);
-}
-
 public override string ToString()
 {
-return string.Format("{0} %hi({1}), %{2}", Name, IsConstantData ? ".ConstantString" + HiBits0 : HiBits0.ToString(), RegDest0);
+return string.Format("{0} %hi({1}), %{2}", Name, HiBits0, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new SethiInstruction(
+this.HiBits0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END SethiInstruction
 
 
 
@@ -924,18 +999,22 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(MovInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as MovInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} %{1}, %{2}", Name, RegSource0, RegDest0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+
+				var copy = new MovInstruction(
+this.RegSource0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END MovInstruction
 
 
 
@@ -967,18 +1046,20 @@ public override Register[] DestRegs
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(CallInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as CallInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0} {1}", Name, Str0);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new CallInstruction(
+this.Str0				);
+				yield return copy;
+	}
+
+} //END CallInstruction
 
 
 
@@ -1012,13 +1093,6 @@ public override Register[] DestRegs
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(StwInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as StwInstruction);
-}
-
 	public override string ToString()
 	{
 		string ret = string.Empty;
@@ -1029,7 +1103,18 @@ public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
 	}
 
 	partial void ToStringCore(ref string ret);
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+				if (regToSpill[this.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource1.IntVal), this.RegSource1); }
+
+				var copy = new StwInstruction(
+this.RegSource0, this.RegSource1, this.Immed0				);
+				yield return copy;
+	}
+
+} //END StwInstruction
 
 
 
@@ -1063,13 +1148,6 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(LdswInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as LdswInstruction);
-}
-
 	public override string ToString()
 	{
 		string ret = string.Empty;
@@ -1080,7 +1158,18 @@ public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
 	}
 
 	partial void ToStringCore(ref string ret);
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+
+				var copy = new LdswInstruction(
+this.RegSource0, this.Immed0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END LdswInstruction
 
 
 
@@ -1114,13 +1203,6 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(OrlstrInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as OrlstrInstruction);
-}
-
 	public override string ToString()
 	{
 		string ret = string.Empty;
@@ -1131,7 +1213,18 @@ public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
 	}
 
 	partial void ToStringCore(ref string ret);
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+
+				var copy = new OrlstrInstruction(
+this.RegSource0, this.Str0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END OrlstrInstruction
 
 
 
@@ -1164,13 +1257,6 @@ RegDest0		};
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(SethistrInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as SethistrInstruction);
-}
-
 	public override string ToString()
 	{
 		string ret = string.Empty;
@@ -1181,7 +1267,17 @@ public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
 	}
 
 	partial void ToStringCore(ref string ret);
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new SethistrInstruction(
+this.Str0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+} //END SethistrInstruction
 
 
 
@@ -1212,18 +1308,20 @@ public override Register[] DestRegs
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(RetInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as RetInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0}", Name);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new RetInstruction(
+				);
+				yield return copy;
+	}
+
+} //END RetInstruction
 
 
 
@@ -1254,18 +1352,20 @@ public override Register[] DestRegs
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(RestoreInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as RestoreInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0}", Name);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new RestoreInstruction(
+				);
+				yield return copy;
+	}
+
+} //END RestoreInstruction
 
 
 
@@ -1296,18 +1396,20 @@ public override Register[] DestRegs
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(NopInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as NopInstruction);
-}
-
 public override string ToString()
 {
 return string.Format("{0}", Name);
 }
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new NopInstruction(
+				);
+				yield return copy;
+	}
+
+} //END NopInstruction
 
 
 
@@ -1338,13 +1440,6 @@ public override Register[] DestRegs
 	}
 }
 
-partial void MyCopyExtraDataToNewInstance(SaveInstruction newObj);
-
-public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
-{
-	MyCopyExtraDataToNewInstance(newObj as SaveInstruction);
-}
-
 	public override string ToString()
 	{
 		string ret = string.Empty;
@@ -1355,7 +1450,16 @@ public override void CopyExtraDataToNewInstance(SparcInstruction newObj)
 	}
 
 	partial void ToStringCore(ref string ret);
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+
+				var copy = new SaveInstruction(
+				);
+				yield return copy;
+	}
+
+} //END SaveInstruction
 
 
 
@@ -1386,7 +1490,6 @@ public class SparcRegisterConverter : IInstructionConverter<SparcInstruction, Sp
 				var conv = cur as AddInstruction;
 				var copy = new AddInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1395,7 +1498,6 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				var conv = cur as AddiInstruction;
 				var copy = new AddiInstruction(
 map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1404,7 +1506,6 @@ map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as SubInstruction;
 				var copy = new SubInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1413,7 +1514,6 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				var conv = cur as SdivxInstruction;
 				var copy = new SdivxInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1422,7 +1522,6 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				var conv = cur as MulxInstruction;
 				var copy = new MulxInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1431,7 +1530,6 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				var conv = cur as OrInstruction;
 				var copy = new OrInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1440,7 +1538,6 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				var conv = cur as AndInstruction;
 				var copy = new AndInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1449,7 +1546,6 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntV
 				var conv = cur as XorInstruction;
 				var copy = new XorInstruction(
 map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1458,7 +1554,6 @@ map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as OriInstruction;
 				var copy = new OriInstruction(
 map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1467,7 +1562,6 @@ map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as OrlInstruction;
 				var copy = new OrlInstruction(
 map[conv.RegSource0.IntVal], conv.LoBits0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1476,7 +1570,6 @@ map[conv.RegSource0.IntVal], conv.LoBits0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as CmpInstruction;
 				var copy = new CmpInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1485,7 +1578,6 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal]				);
 				var conv = cur as BeInstruction;
 				var copy = new BeInstruction(
 conv.Label0				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1494,7 +1586,6 @@ conv.Label0				);
 				var conv = cur as BaInstruction;
 				var copy = new BaInstruction(
 conv.Label0				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1503,7 +1594,6 @@ conv.Label0				);
 				var conv = cur as MoveqInstruction;
 				var copy = new MoveqInstruction(
 conv.Immed0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1512,7 +1602,6 @@ conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as MovneInstruction;
 				var copy = new MovneInstruction(
 conv.Immed0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1521,7 +1610,6 @@ conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as MovgeInstruction;
 				var copy = new MovgeInstruction(
 conv.Immed0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1530,7 +1618,6 @@ conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as MovgInstruction;
 				var copy = new MovgInstruction(
 conv.Immed0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1539,7 +1626,6 @@ conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as MovleInstruction;
 				var copy = new MovleInstruction(
 conv.Immed0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1548,7 +1634,6 @@ conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as MovlInstruction;
 				var copy = new MovlInstruction(
 conv.Immed0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1557,7 +1642,6 @@ conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as SethiInstruction;
 				var copy = new SethiInstruction(
 conv.HiBits0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1566,7 +1650,6 @@ conv.HiBits0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as MovInstruction;
 				var copy = new MovInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1575,7 +1658,6 @@ map[conv.RegSource0.IntVal], map[conv.RegDest0.IntVal]				);
 				var conv = cur as CallInstruction;
 				var copy = new CallInstruction(
 conv.Str0				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1584,7 +1666,6 @@ conv.Str0				);
 				var conv = cur as StwInstruction;
 				var copy = new StwInstruction(
 map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], conv.Immed0				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1593,7 +1674,6 @@ map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], conv.Immed0				);
 				var conv = cur as LdswInstruction;
 				var copy = new LdswInstruction(
 map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1602,7 +1682,6 @@ map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as OrlstrInstruction;
 				var copy = new OrlstrInstruction(
 map[conv.RegSource0.IntVal], conv.Str0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1611,7 +1690,6 @@ map[conv.RegSource0.IntVal], conv.Str0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as SethistrInstruction;
 				var copy = new SethistrInstruction(
 conv.Str0, map[conv.RegDest0.IntVal]				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1620,7 +1698,6 @@ conv.Str0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as RetInstruction;
 				var copy = new RetInstruction(
 				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1629,7 +1706,6 @@ conv.Str0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as RestoreInstruction;
 				var copy = new RestoreInstruction(
 				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1638,7 +1714,6 @@ conv.Str0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as NopInstruction;
 				var copy = new NopInstruction(
 				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1647,7 +1722,6 @@ conv.Str0, map[conv.RegDest0.IntVal]				);
 				var conv = cur as SaveInstruction;
 				var copy = new SaveInstruction(
 				);
-				conv.CopyExtraDataToNewInstance(copy);
 				yield return copy;
 				continue;
 			}
@@ -1690,351 +1764,10 @@ public class SpillConverter : IInstructionConverter<SparcInstruction, SparcInstr
 		while (s.More)
 		{
 			var cur = s.Consume();
-			if (cur is AddInstruction)
+			foreach (var newInstr in cur.Spill(regToSpill, getLocalOffset))
 			{
-				var conv = cur as AddInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-				if (regToSpill[conv.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource1.IntVal), conv.RegSource1); }
-
-				var copy = new AddInstruction(
-conv.RegSource0, conv.RegSource1, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
+				yield return newInstr;
 			}
-			if (cur is AddiInstruction)
-			{
-				var conv = cur as AddiInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-
-				var copy = new AddiInstruction(
-conv.RegSource0, conv.Immed0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is SubInstruction)
-			{
-				var conv = cur as SubInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-				if (regToSpill[conv.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource1.IntVal), conv.RegSource1); }
-
-				var copy = new SubInstruction(
-conv.RegSource0, conv.RegSource1, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is SdivxInstruction)
-			{
-				var conv = cur as SdivxInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-				if (regToSpill[conv.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource1.IntVal), conv.RegSource1); }
-
-				var copy = new SdivxInstruction(
-conv.RegSource0, conv.RegSource1, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is MulxInstruction)
-			{
-				var conv = cur as MulxInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-				if (regToSpill[conv.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource1.IntVal), conv.RegSource1); }
-
-				var copy = new MulxInstruction(
-conv.RegSource0, conv.RegSource1, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is OrInstruction)
-			{
-				var conv = cur as OrInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-				if (regToSpill[conv.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource1.IntVal), conv.RegSource1); }
-
-				var copy = new OrInstruction(
-conv.RegSource0, conv.RegSource1, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is AndInstruction)
-			{
-				var conv = cur as AndInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-				if (regToSpill[conv.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource1.IntVal), conv.RegSource1); }
-
-				var copy = new AndInstruction(
-conv.RegSource0, conv.RegSource1, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is XorInstruction)
-			{
-				var conv = cur as XorInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-
-				var copy = new XorInstruction(
-conv.RegSource0, conv.Immed0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is OriInstruction)
-			{
-				var conv = cur as OriInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-
-				var copy = new OriInstruction(
-conv.RegSource0, conv.Immed0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is OrlInstruction)
-			{
-				var conv = cur as OrlInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-
-				var copy = new OrlInstruction(
-conv.RegSource0, conv.LoBits0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is CmpInstruction)
-			{
-				var conv = cur as CmpInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-				if (regToSpill[conv.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource1.IntVal), conv.RegSource1); }
-
-				var copy = new CmpInstruction(
-conv.RegSource0, conv.RegSource1				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				continue;
-			}
-			if (cur is BeInstruction)
-			{
-				var conv = cur as BeInstruction;
-
-				var copy = new BeInstruction(
-conv.Label0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				continue;
-			}
-			if (cur is BaInstruction)
-			{
-				var conv = cur as BaInstruction;
-
-				var copy = new BaInstruction(
-conv.Label0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				continue;
-			}
-			if (cur is MoveqInstruction)
-			{
-				var conv = cur as MoveqInstruction;
-
-				var copy = new MoveqInstruction(
-conv.Immed0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is MovneInstruction)
-			{
-				var conv = cur as MovneInstruction;
-
-				var copy = new MovneInstruction(
-conv.Immed0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is MovgeInstruction)
-			{
-				var conv = cur as MovgeInstruction;
-
-				var copy = new MovgeInstruction(
-conv.Immed0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is MovgInstruction)
-			{
-				var conv = cur as MovgInstruction;
-
-				var copy = new MovgInstruction(
-conv.Immed0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is MovleInstruction)
-			{
-				var conv = cur as MovleInstruction;
-
-				var copy = new MovleInstruction(
-conv.Immed0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is MovlInstruction)
-			{
-				var conv = cur as MovlInstruction;
-
-				var copy = new MovlInstruction(
-conv.Immed0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is SethiInstruction)
-			{
-				var conv = cur as SethiInstruction;
-
-				var copy = new SethiInstruction(
-conv.HiBits0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is MovInstruction)
-			{
-				var conv = cur as MovInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-
-				var copy = new MovInstruction(
-conv.RegSource0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is CallInstruction)
-			{
-				var conv = cur as CallInstruction;
-
-				var copy = new CallInstruction(
-conv.Str0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				continue;
-			}
-			if (cur is StwInstruction)
-			{
-				var conv = cur as StwInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-				if (regToSpill[conv.RegSource1.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource1.IntVal), conv.RegSource1); }
-
-				var copy = new StwInstruction(
-conv.RegSource0, conv.RegSource1, conv.Immed0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				continue;
-			}
-			if (cur is LdswInstruction)
-			{
-				var conv = cur as LdswInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-
-				var copy = new LdswInstruction(
-conv.RegSource0, conv.Immed0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is OrlstrInstruction)
-			{
-				var conv = cur as OrlstrInstruction;
-				if (regToSpill[conv.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + conv.RegSource0.IntVal), conv.RegSource0); }
-
-				var copy = new OrlstrInstruction(
-conv.RegSource0, conv.Str0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is SethistrInstruction)
-			{
-				var conv = cur as SethistrInstruction;
-
-				var copy = new SethistrInstruction(
-conv.Str0, conv.RegDest0				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				if (regToSpill[conv.RegDest0.IntVal]){ yield return new StwInstruction(conv.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + conv.RegDest0.IntVal)); }
-				continue;
-			}
-			if (cur is RetInstruction)
-			{
-				var conv = cur as RetInstruction;
-
-				var copy = new RetInstruction(
-				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				continue;
-			}
-			if (cur is RestoreInstruction)
-			{
-				var conv = cur as RestoreInstruction;
-
-				var copy = new RestoreInstruction(
-				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				continue;
-			}
-			if (cur is NopInstruction)
-			{
-				var conv = cur as NopInstruction;
-
-				var copy = new NopInstruction(
-				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				continue;
-			}
-			if (cur is SaveInstruction)
-			{
-				var conv = cur as SaveInstruction;
-
-				var copy = new SaveInstruction(
-				);
-				conv.CopyExtraDataToNewInstance(copy);
-				yield return copy;
-				continue;
-			}
-			throw new NotSupportedException();
 		}
 	}
 }

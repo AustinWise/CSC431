@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CSC431.CFG;
+using System.Collections;
 
 namespace CSC431.Sparc
 {
@@ -13,5 +14,6 @@ namespace CSC431.Sparc
         {
         }
 
+        public abstract IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset);
     }
 }

@@ -149,7 +149,44 @@ else
 <#
 }
 #>
-}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (c.IsConstant)
+        return;
+    if (c.IsSource)
+        WriteLine("\t\t\t\tif (regToSpill[this.{0}.IntVal]){{ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset(\"reg_\" + this.{0}.IntVal), this.{0}); }}", c.UpperPrefix + count);
+});
+#>
+
+				var copy = new <#=className #>(
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (c.IsConstant)
+        return;
+    Write("this.{1}{0}", count, c.UpperPrefix);
+    if (!isLast)
+        Write(", ");
+});
+#>
+				);
+				yield return copy;
+<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (c.IsConstant)
+        return;
+    if (c.IsTarget)
+        WriteLine("\t\t\t\tif (regToSpill[this.{0}.IntVal]){{ yield return new StwInstruction(this.{0}, SparcRegister.SP, getLocalOffset(\"reg_\" + this.{0}.IntVal)); }}", c.UpperPrefix + count);
+});
+#>
+	}
+
+} //END <#= className #>
 
 
 
@@ -252,53 +289,10 @@ public class SpillConverter : IInstructionConverter<SparcInstruction, SparcInstr
 		while (s.More)
 		{
 			var cur = s.Consume();
-<#
-foreach (var instr in InstrInfo.GetAll())
-{
-    var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
-    var className = name + "Instruction";
-#>
-			if (cur is <#=className #>)
+			foreach (var newInstr in cur.Spill(regToSpill, getLocalOffset))
 			{
-				var conv = cur as <#=className #>;
-<#
-instr.ForEachOperand((c, count, isLast) =>
-{
-    if (c.IsConstant)
-        return;
-    if (c.IsSource)
-        WriteLine("\t\t\t\tif (regToSpill[conv.{0}.IntVal]){{ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset(\"reg_\" + conv.{0}.IntVal), conv.{0}); }}", c.UpperPrefix + count);
-});
-#>
-
-				var copy = new <#=className #>(
-<#
-instr.ForEachOperand((c, count, isLast) =>
-{
-    if (c.IsConstant)
-        return;
-    Write("conv.{1}{0}", count, c.UpperPrefix);
-    if (!isLast)
-        Write(", ");
-});
-#>
-				);
-				yield return copy;
-<#
-instr.ForEachOperand((c, count, isLast) =>
-{
-    if (c.IsConstant)
-        return;
-    if (c.IsTarget)
-        WriteLine("\t\t\t\tif (regToSpill[conv.{0}.IntVal]){{ yield return new StwInstruction(conv.{0}, SparcRegister.SP, getLocalOffset(\"reg_\" + conv.{0}.IntVal)); }}", c.UpperPrefix + count);
-});
-#>
-				continue;
+				yield return newInstr;
 			}
-<#
-}
-#>
-			throw new NotSupportedException();
 		}
 	}
 }
