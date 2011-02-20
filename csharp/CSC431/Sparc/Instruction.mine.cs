@@ -21,26 +21,6 @@ namespace CSC431.Sparc
         }
     }
 
-    public partial class SethiInstruction
-    {
-        public bool IsConstantData { get; set; }
-
-        partial void MyCopyExtraDataToNewInstance(SethiInstruction newObj)
-        {
-            newObj.IsConstantData = IsConstantData;
-        }
-    }
-
-    public partial class OrlInstruction
-    {
-        public bool IsConstantData { get; set; }
-
-        partial void MyCopyExtraDataToNewInstance(OrlInstruction newObj)
-        {
-            newObj.IsConstantData = IsConstantData;
-        }
-    }
-
     public partial class SethistrInstruction
     {
         partial void ToStringCore(ref string ret)

@@ -81,8 +81,8 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Print(IL.PrintInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            yield return new SethiInstruction(0, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
-            yield return new OrlInstruction(new SparcRegister(SparcReg.o0), 0, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
+            yield return new SethistrInstruction(".ConstantString0", new SparcRegister(SparcReg.o0));
+            yield return new OrlstrInstruction(new SparcRegister(SparcReg.o0), ".ConstantString0", new SparcRegister(SparcReg.o0));
             yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.o1));
             yield return new CallInstruction("printf");
             yield return new NopInstruction();
@@ -90,8 +90,8 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Println(IL.PrintlnInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            yield return new SethiInstruction(1, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
-            yield return new OrlInstruction(new SparcRegister(SparcReg.o0), 1, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
+            yield return new SethistrInstruction(".ConstantString1", new SparcRegister(SparcReg.o0));
+            yield return new OrlstrInstruction(new SparcRegister(SparcReg.o0), ".ConstantString1", new SparcRegister(SparcReg.o0));
             yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.o1));
             yield return new CallInstruction("printf");
             yield return new NopInstruction();
@@ -269,8 +269,8 @@ namespace CSC431.Sparc
             stream.Consume();
             stream.Consume();
 
-            yield return new SethiInstruction(2, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
-            yield return new OrlInstruction(new SparcRegister(SparcReg.o0), 2, new SparcRegister(SparcReg.o0)) { IsConstantData = true };
+            yield return new SethistrInstruction(".ConstantString2", new SparcRegister(SparcReg.o0));
+            yield return new OrlstrInstruction(new SparcRegister(SparcReg.o0), ".ConstantString2", new SparcRegister(SparcReg.o0));
             yield return new AddiInstruction(SparcRegister.SP, getLocalOffset("~~~scanf~~~"), new SparcRegister(SparcReg.o1));
             yield return new CallInstruction("scanf");
             yield return new NopInstruction();
