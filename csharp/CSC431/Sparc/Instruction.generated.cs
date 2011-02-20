@@ -53,6 +53,12 @@ this.RegSource0, this.RegSource1, this.RegDest0				);
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new AddInstruction(map[this.RegSource0.IntVal], map[this.RegSource1.IntVal], map[this.RegDest0.IntVal]);
+	}
+
+
 } //END AddInstruction
 
 
@@ -101,6 +107,12 @@ this.RegSource0, this.Immed0, this.RegDest0				);
 				yield return copy;
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new AddiInstruction(map[this.RegSource0.IntVal], this.Immed0, map[this.RegDest0.IntVal]);
+	}
+
 
 } //END AddiInstruction
 
@@ -152,6 +164,12 @@ this.RegSource0, this.RegSource1, this.RegDest0				);
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new SubInstruction(map[this.RegSource0.IntVal], map[this.RegSource1.IntVal], map[this.RegDest0.IntVal]);
+	}
+
+
 } //END SubInstruction
 
 
@@ -201,6 +219,12 @@ this.RegSource0, this.RegSource1, this.RegDest0				);
 				yield return copy;
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new SdivxInstruction(map[this.RegSource0.IntVal], map[this.RegSource1.IntVal], map[this.RegDest0.IntVal]);
+	}
+
 
 } //END SdivxInstruction
 
@@ -252,6 +276,12 @@ this.RegSource0, this.RegSource1, this.RegDest0				);
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new MulxInstruction(map[this.RegSource0.IntVal], map[this.RegSource1.IntVal], map[this.RegDest0.IntVal]);
+	}
+
+
 } //END MulxInstruction
 
 
@@ -301,6 +331,12 @@ this.RegSource0, this.RegSource1, this.RegDest0				);
 				yield return copy;
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new OrInstruction(map[this.RegSource0.IntVal], map[this.RegSource1.IntVal], map[this.RegDest0.IntVal]);
+	}
+
 
 } //END OrInstruction
 
@@ -352,6 +388,12 @@ this.RegSource0, this.RegSource1, this.RegDest0				);
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new AndInstruction(map[this.RegSource0.IntVal], map[this.RegSource1.IntVal], map[this.RegDest0.IntVal]);
+	}
+
+
 } //END AndInstruction
 
 
@@ -400,6 +442,12 @@ this.RegSource0, this.Immed0, this.RegDest0				);
 				yield return copy;
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new XorInstruction(map[this.RegSource0.IntVal], this.Immed0, map[this.RegDest0.IntVal]);
+	}
+
 
 } //END XorInstruction
 
@@ -450,6 +498,12 @@ this.RegSource0, this.Immed0, this.RegDest0				);
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new OriInstruction(map[this.RegSource0.IntVal], this.Immed0, map[this.RegDest0.IntVal]);
+	}
+
+
 } //END OriInstruction
 
 
@@ -499,6 +553,12 @@ this.RegSource0, this.LoBits0, this.RegDest0				);
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new OrlInstruction(map[this.RegSource0.IntVal], this.LoBits0, map[this.RegDest0.IntVal]);
+	}
+
+
 } //END OrlInstruction
 
 
@@ -547,6 +607,12 @@ this.RegSource0, this.RegSource1				);
 				yield return copy;
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new CmpInstruction(map[this.RegSource0.IntVal], map[this.RegSource1.IntVal]);
+	}
+
+
 } //END CmpInstruction
 
 
@@ -592,6 +658,12 @@ this.Label0				);
 				yield return copy;
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new BeInstruction(this.Label0);
+	}
+
+
 } //END BeInstruction
 
 
@@ -636,6 +708,12 @@ return string.Format("{0} %icc, .L{2}", Name, null, Label0);
 this.Label0				);
 				yield return copy;
 	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new BaInstruction(this.Label0);
+	}
+
 
 } //END BaInstruction
 
@@ -684,6 +762,12 @@ this.Immed0, this.RegDest0				);
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new MoveqInstruction(this.Immed0, map[this.RegDest0.IntVal]);
+	}
+
+
 } //END MoveqInstruction
 
 
@@ -730,6 +814,12 @@ this.Immed0, this.RegDest0				);
 				yield return copy;
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new MovneInstruction(this.Immed0, map[this.RegDest0.IntVal]);
+	}
+
 
 } //END MovneInstruction
 
@@ -778,6 +868,12 @@ this.Immed0, this.RegDest0				);
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new MovgeInstruction(this.Immed0, map[this.RegDest0.IntVal]);
+	}
+
+
 } //END MovgeInstruction
 
 
@@ -824,6 +920,12 @@ this.Immed0, this.RegDest0				);
 				yield return copy;
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new MovgInstruction(this.Immed0, map[this.RegDest0.IntVal]);
+	}
+
 
 } //END MovgInstruction
 
@@ -872,6 +974,12 @@ this.Immed0, this.RegDest0				);
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new MovleInstruction(this.Immed0, map[this.RegDest0.IntVal]);
+	}
+
+
 } //END MovleInstruction
 
 
@@ -919,6 +1027,12 @@ this.Immed0, this.RegDest0				);
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new MovlInstruction(this.Immed0, map[this.RegDest0.IntVal]);
+	}
+
+
 } //END MovlInstruction
 
 
@@ -965,6 +1079,12 @@ this.HiBits0, this.RegDest0				);
 				yield return copy;
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new SethiInstruction(this.HiBits0, map[this.RegDest0.IntVal]);
+	}
+
 
 } //END SethiInstruction
 
@@ -1014,6 +1134,12 @@ this.RegSource0, this.RegDest0				);
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new MovInstruction(map[this.RegSource0.IntVal], map[this.RegDest0.IntVal]);
+	}
+
+
 } //END MovInstruction
 
 
@@ -1058,6 +1184,12 @@ return string.Format("{0} {1}", Name, Str0);
 this.Str0				);
 				yield return copy;
 	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new CallInstruction(this.Str0);
+	}
+
 
 } //END CallInstruction
 
@@ -1114,6 +1246,12 @@ this.RegSource0, this.RegSource1, this.Immed0				);
 				yield return copy;
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new StwInstruction(map[this.RegSource0.IntVal], map[this.RegSource1.IntVal], this.Immed0);
+	}
+
+
 } //END StwInstruction
 
 
@@ -1168,6 +1306,12 @@ this.RegSource0, this.Immed0, this.RegDest0				);
 				yield return copy;
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new LdswInstruction(map[this.RegSource0.IntVal], this.Immed0, map[this.RegDest0.IntVal]);
+	}
+
 
 } //END LdswInstruction
 
@@ -1224,6 +1368,12 @@ this.RegSource0, this.Str0, this.RegDest0				);
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new OrlstrInstruction(map[this.RegSource0.IntVal], this.Str0, map[this.RegDest0.IntVal]);
+	}
+
+
 } //END OrlstrInstruction
 
 
@@ -1277,6 +1427,12 @@ this.Str0, this.RegDest0				);
 				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new SethistrInstruction(this.Str0, map[this.RegDest0.IntVal]);
+	}
+
+
 } //END SethistrInstruction
 
 
@@ -1320,6 +1476,12 @@ return string.Format("{0}", Name);
 				);
 				yield return copy;
 	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new RetInstruction();
+	}
+
 
 } //END RetInstruction
 
@@ -1365,6 +1527,12 @@ return string.Format("{0}", Name);
 				yield return copy;
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new RestoreInstruction();
+	}
+
+
 } //END RestoreInstruction
 
 
@@ -1408,6 +1576,12 @@ return string.Format("{0}", Name);
 				);
 				yield return copy;
 	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new NopInstruction();
+	}
+
 
 } //END NopInstruction
 
@@ -1459,6 +1633,12 @@ public override Register[] DestRegs
 				yield return copy;
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new SaveInstruction();
+	}
+
+
 } //END SaveInstruction
 
 
@@ -1483,250 +1663,7 @@ public class SparcRegisterConverter : IInstructionConverter<SparcInstruction, Sp
 	public IEnumerable<SparcInstruction> Convert(InstructionStream<SparcInstruction> s)
 	{
 		while (s.More)
-		{
-			var cur = s.Consume();
-			if (cur is AddInstruction)
-			{
-				var conv = cur as AddInstruction;
-				var copy = new AddInstruction(
-map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is AddiInstruction)
-			{
-				var conv = cur as AddiInstruction;
-				var copy = new AddiInstruction(
-map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is SubInstruction)
-			{
-				var conv = cur as SubInstruction;
-				var copy = new SubInstruction(
-map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is SdivxInstruction)
-			{
-				var conv = cur as SdivxInstruction;
-				var copy = new SdivxInstruction(
-map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is MulxInstruction)
-			{
-				var conv = cur as MulxInstruction;
-				var copy = new MulxInstruction(
-map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is OrInstruction)
-			{
-				var conv = cur as OrInstruction;
-				var copy = new OrInstruction(
-map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is AndInstruction)
-			{
-				var conv = cur as AndInstruction;
-				var copy = new AndInstruction(
-map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is XorInstruction)
-			{
-				var conv = cur as XorInstruction;
-				var copy = new XorInstruction(
-map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is OriInstruction)
-			{
-				var conv = cur as OriInstruction;
-				var copy = new OriInstruction(
-map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is OrlInstruction)
-			{
-				var conv = cur as OrlInstruction;
-				var copy = new OrlInstruction(
-map[conv.RegSource0.IntVal], conv.LoBits0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is CmpInstruction)
-			{
-				var conv = cur as CmpInstruction;
-				var copy = new CmpInstruction(
-map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is BeInstruction)
-			{
-				var conv = cur as BeInstruction;
-				var copy = new BeInstruction(
-conv.Label0				);
-				yield return copy;
-				continue;
-			}
-			if (cur is BaInstruction)
-			{
-				var conv = cur as BaInstruction;
-				var copy = new BaInstruction(
-conv.Label0				);
-				yield return copy;
-				continue;
-			}
-			if (cur is MoveqInstruction)
-			{
-				var conv = cur as MoveqInstruction;
-				var copy = new MoveqInstruction(
-conv.Immed0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is MovneInstruction)
-			{
-				var conv = cur as MovneInstruction;
-				var copy = new MovneInstruction(
-conv.Immed0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is MovgeInstruction)
-			{
-				var conv = cur as MovgeInstruction;
-				var copy = new MovgeInstruction(
-conv.Immed0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is MovgInstruction)
-			{
-				var conv = cur as MovgInstruction;
-				var copy = new MovgInstruction(
-conv.Immed0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is MovleInstruction)
-			{
-				var conv = cur as MovleInstruction;
-				var copy = new MovleInstruction(
-conv.Immed0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is MovlInstruction)
-			{
-				var conv = cur as MovlInstruction;
-				var copy = new MovlInstruction(
-conv.Immed0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is SethiInstruction)
-			{
-				var conv = cur as SethiInstruction;
-				var copy = new SethiInstruction(
-conv.HiBits0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is MovInstruction)
-			{
-				var conv = cur as MovInstruction;
-				var copy = new MovInstruction(
-map[conv.RegSource0.IntVal], map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is CallInstruction)
-			{
-				var conv = cur as CallInstruction;
-				var copy = new CallInstruction(
-conv.Str0				);
-				yield return copy;
-				continue;
-			}
-			if (cur is StwInstruction)
-			{
-				var conv = cur as StwInstruction;
-				var copy = new StwInstruction(
-map[conv.RegSource0.IntVal], map[conv.RegSource1.IntVal], conv.Immed0				);
-				yield return copy;
-				continue;
-			}
-			if (cur is LdswInstruction)
-			{
-				var conv = cur as LdswInstruction;
-				var copy = new LdswInstruction(
-map[conv.RegSource0.IntVal], conv.Immed0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is OrlstrInstruction)
-			{
-				var conv = cur as OrlstrInstruction;
-				var copy = new OrlstrInstruction(
-map[conv.RegSource0.IntVal], conv.Str0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is SethistrInstruction)
-			{
-				var conv = cur as SethistrInstruction;
-				var copy = new SethistrInstruction(
-conv.Str0, map[conv.RegDest0.IntVal]				);
-				yield return copy;
-				continue;
-			}
-			if (cur is RetInstruction)
-			{
-				var conv = cur as RetInstruction;
-				var copy = new RetInstruction(
-				);
-				yield return copy;
-				continue;
-			}
-			if (cur is RestoreInstruction)
-			{
-				var conv = cur as RestoreInstruction;
-				var copy = new RestoreInstruction(
-				);
-				yield return copy;
-				continue;
-			}
-			if (cur is NopInstruction)
-			{
-				var conv = cur as NopInstruction;
-				var copy = new NopInstruction(
-				);
-				yield return copy;
-				continue;
-			}
-			if (cur is SaveInstruction)
-			{
-				var conv = cur as SaveInstruction;
-				var copy = new SaveInstruction(
-				);
-				yield return copy;
-				continue;
-			}
-			throw new NotSupportedException();
-		}
+			yield return s.Consume().ConvertRegister(map);
 	}
 }
 

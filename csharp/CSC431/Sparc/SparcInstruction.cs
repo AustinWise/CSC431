@@ -15,5 +15,6 @@ namespace CSC431.Sparc
         }
 
         public abstract IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset);
+        public abstract SparcInstruction ConvertRegister(SparcRegister[] map);
     }
 }

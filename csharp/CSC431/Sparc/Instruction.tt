@@ -186,6 +186,29 @@ instr.ForEachOperand((c, count, isLast) =>
 #>
 	}
 
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new <#=className #>(<#
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (c.IsConstant)
+        return;
+    if (c.IsRegister)
+    {
+        Write("map[");
+    }
+    Write("this.{1}{0}", count, c.UpperPrefix);
+    if (c.IsRegister)
+    {
+        Write(".IntVal]");
+    }
+    if (!isLast)
+        Write(", ");
+});
+#>);
+	}
+
+
 } //END <#= className #>
 
 
@@ -213,45 +236,7 @@ public class SparcRegisterConverter : IInstructionConverter<SparcInstruction, Sp
 	public IEnumerable<SparcInstruction> Convert(InstructionStream<SparcInstruction> s)
 	{
 		while (s.More)
-		{
-			var cur = s.Consume();
-<#
-foreach (var instr in InstrInfo.GetAll())
-{
-    var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
-    var className = name + "Instruction";
-#>
-			if (cur is <#=className #>)
-			{
-				var conv = cur as <#=className #>;
-				var copy = new <#=className #>(
-<#
-instr.ForEachOperand((c, count, isLast) =>
-{
-    if (c.IsConstant)
-        return;
-    if (c.IsRegister)
-    {
-        Write("map[");
-    }
-    Write("conv.{1}{0}", count, c.UpperPrefix);
-    if (c.IsRegister)
-    {
-        Write(".IntVal]");
-    }
-    if (!isLast)
-        Write(", ");
-});
-#>
-				);
-				yield return copy;
-				continue;
-			}
-<#
-}
-#>
-			throw new NotSupportedException();
-		}
+			yield return s.Consume().ConvertRegister(map);
 	}
 }
 
