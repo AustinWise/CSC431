@@ -105,6 +105,7 @@
     <Compile Include="LLVM\SelectInstruction.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Steps\IStep.cs" />
     <Compile Include="TaskLocal.cs" />
   </ItemGroup>
   <ItemGroup>

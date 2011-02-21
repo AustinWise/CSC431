@@ -5,8 +5,8 @@ using System.Text;
 
 namespace CSC431.Steps
 {
-    public interface IInStep<T> : IStep
+    public interface IStep
     {
-        T Input { get; set; }
+        Step AsStep();
     }
 }

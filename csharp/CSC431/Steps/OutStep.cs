@@ -21,7 +21,12 @@ namespace CSC431.Steps
             this.Output = fun();
         }
 
-        public F FollowWith<F>(F next) where F : Step, IInStep<T>
+        public void FollowWith(InStep<T> next)
+        {
+            AddNext(next);
+        }
+
+        public IOutStep<Out> FollowWith<Out>(InOutStep<T, Out> next)
         {
             AddNext(next);
             return next;

@@ -17,6 +17,7 @@ namespace CSC431
         public static TaskLocal<bool> DumpIL = new TaskLocal<bool>();
         public static TaskLocal<string> ClrExec = new TaskLocal<string>();
         public static TaskLocal<bool> Llvm = new TaskLocal<bool>();
+        public static TaskLocal<bool> DisableRegAlloc = new TaskLocal<bool>();
 
         public static void ParseParameters(String[] args)
         {
@@ -76,17 +77,20 @@ namespace CSC431
 
             if (!Options.Llvm.Value)
             {
-                flow.FollowWith(Analysis.FunctionsCalled.Step())
-                    .FollowWith(SparcSteps.ConvertToSparc())
-                    .FollowWith(SparcSteps.RegisterAllocation())
-                    .FollowWith(SparcSteps.SetStacks())
-                    .FollowWith(outputer());
+                var sparc = flow.FollowWith(Analysis.FunctionsCalled.Step())
+                    .FollowWith(SparcSteps.ConvertToSparc());
+
+                if (!Options.DisableRegAlloc.Value)
+                    sparc = sparc.FollowWith(SparcSteps.RegisterAllocation());
+
+                sparc.FollowWith(SparcSteps.SetStacks())
+                     .FollowWith(outputer());
             }
 
             if (!string.IsNullOrEmpty(Options.ClrExec.Value))
                 typeChecked.FollowWith(StackSteps.MakeClrExe());
 
-            return pipe;
+            return pipe.AsStep();
         }
     }
 }

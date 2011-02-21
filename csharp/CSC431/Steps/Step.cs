@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSC431.Steps
 {
-    public abstract class Step
+    public abstract class Step : IStep
     {
         protected abstract void Process();
 
@@ -19,6 +19,11 @@ namespace CSC431.Steps
                 throw new ArgumentNullException();
             next.parent = this;
             nexts.Add(next);
+        }
+
+        public Step AsStep()
+        {
+            return this;
         }
 
         private static bool isOut(System.Type t)

@@ -5,9 +5,10 @@ using System.Text;
 
 namespace CSC431.Steps
 {
-    public interface IOutStep<T>
+    public interface IOutStep<T> : IStep
     {
         T Output { get; set; }
-        F FollowWith<F>(F next) where F : Step, IInStep<T>;
+        void FollowWith(InStep<T> next);
+        IOutStep<Out> FollowWith<Out>(InOutStep<T, Out> next);
     }
 }
