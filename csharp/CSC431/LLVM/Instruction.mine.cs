@@ -19,11 +19,64 @@ namespace CSC431.LLVM
             ret = string.Format("ret i32 %{0}", RegSource0);
         }
     }
+    public partial class BrcondInstruction
+    {
+        partial void ToStringCore(ref string ret)
+        {
+            ret = string.Format("br i1 %{0}, label %L{1}, label %L{2}", this.RegSource0, this.Label0, this.Label1);
+        }
+    }
+    public partial class BrInstruction
+    {
+        partial void ToStringCore(ref string ret)
+        {
+            ret = string.Format("br label %L{0}", this.Label0);
+        }
+    }
     public partial class RetvoidInstruction
     {
         partial void ToStringCore(ref string ret)
         {
             ret = "ret void";
+        }
+    }
+    public partial class LoadInstruction
+    {
+        partial void ToStringCore(ref string ret)
+        {
+            ret = string.Format("%{0} = load i32* %{1}", RegDest0, RegSource0);
+        }
+    }
+    public partial class StoreInstruction
+    {
+        partial void ToStringCore(ref string ret)
+        {
+            ret = string.Format("store i32 %{0}, i32* %{1}", RegSource0, RegSource1);
+        }
+    }
+    public class StringInstruction : LlvmInstruction
+    {
+        private string val;
+
+        public StringInstruction(string val)
+            : base("string instr")
+        {
+            this.val = val;
+        }
+
+        public override CFG.Register[] SourceRegs
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override CFG.Register[] DestRegs
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override string ToString()
+        {
+            return val;
         }
     }
 }

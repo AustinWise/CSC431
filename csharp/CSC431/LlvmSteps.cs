@@ -29,11 +29,11 @@ namespace CSC431
             });
         }
 
-        public static InStep<ProgramBlock<LlvmInstruction>> BitcodeToSparc()
+        public static InStep<ProgramBlock<LlvmInstruction>> BitcodeToSparc(TextWriter outfile)
         {
             return new InStep<ProgramBlock<LlvmInstruction>>(c =>
             {
-                ProcessStartInfo si = new ProcessStartInfo("llc.exe", "-march=sparcv9");
+                ProcessStartInfo si = new ProcessStartInfo("llc.exe", "-march=sparc -mcpu=v9");
                 si.UseShellExecute = false;
                 si.RedirectStandardInput = true;
                 si.RedirectStandardError = true;
@@ -48,10 +48,12 @@ namespace CSC431
                 p.WaitForExit();
 
                 var text = p.StandardOutput.ReadToEnd();
+                var err = p.StandardError.ReadToEnd();
 
-                StreamWriter f = new StreamWriter("llvm.s");
-                f.Write(text);
-                f.Close();
+                if (p.ExitCode != 0)
+                    throw new EvilException(err);
+
+                outfile.Write(text);
             });
         }
     }

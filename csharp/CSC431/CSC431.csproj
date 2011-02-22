@@ -51,6 +51,7 @@
     <Compile Include="CFG\Printer.cs" />
     <Compile Include="CFG\Register.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="LLVM\LlvmRegister.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

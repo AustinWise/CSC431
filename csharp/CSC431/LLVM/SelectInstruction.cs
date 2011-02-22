@@ -8,8 +8,9 @@ namespace CSC431.LLVM
 {
     class SelectInstruction : LlvmInstruction
     {
-        private VirtualRegister rcond, rd, trueValue, falseValue;
-        public SelectInstruction(int rcond, VirtualRegister rd, VirtualRegister trueValue, VirtualRegister falseValue)
+        private VirtualRegister rcond, rd;
+        private int trueValue, falseValue;
+        public SelectInstruction(int rcond, VirtualRegister rd, int trueValue, int falseValue)
             : base("select")
         {
             this.rcond = rcond;
@@ -30,7 +31,7 @@ namespace CSC431.LLVM
 
         public override string ToString()
         {
-            return string.Format("%r{0} = select i1 {3}, i32 {1}, i32 {2}", rd, trueValue, falseValue, rcond);
+            return string.Format("%{0} = select i1 %{3}, i32 {1}, i32 {2}", rd, trueValue, falseValue, rcond);
         }
     }
 }

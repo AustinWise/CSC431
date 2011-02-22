@@ -72,9 +72,10 @@ decl_list[bool isLocal, Dictionary<string, string> typeMap]
 			{
 				if (isLocal)
 				{
-          //XXX: changed to VarReg for testing reg alloc, prob should change back so that IL is SSA again so that LLVM will work
-					//localMap.Add(id, new VarLocal(id, t));
-					localMap.Add(id, new VarReg(Instruction.VirtualRegister(), t));
+          				if (Options.Llvm.Value)
+						localMap.Add(id, new VarLocal(id, t));
+					else
+						localMap.Add(id, new VarReg(Instruction.VirtualRegister(), t));
 				}
 				else
 				{
@@ -116,6 +117,12 @@ function returns [FunctionBlock<MilocInstruction> f]
 			BasicBlock<MilocInstruction> returnBlock = new BasicBlock<MilocInstruction>();
 			if (retType == "<void>")
 				returnBlock.Add(new RetInstruction());
+			else if (Options.Llvm.Value)
+			{
+				int llvmDummyReturnReg = Instruction.VirtualRegister();
+				returnBlock.Add(new LoadiInstruction(0, llvmDummyReturnReg));
+				returnBlock.Add(new StoreretInstruction(llvmDummyReturnReg));
+			}
 			body.Add(returnBlock);
 			body.SetNext(new BasicBlock<MilocInstruction>());
 			$f = new FunctionBlock<MilocInstruction>($id.text, body);

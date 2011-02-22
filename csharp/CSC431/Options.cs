@@ -72,7 +72,7 @@ namespace CSC431
             {
                 var llvm = flow.FollowWith(LlvmSteps.ConvertToLlvm());
                 llvm.FollowWith(LlvmSteps.PrintCFG(outfile));
-                llvm.FollowWith(LlvmSteps.BitcodeToSparc());
+                llvm.FollowWith(LlvmSteps.BitcodeToSparc(outfile));
             }
 
             if (!Options.Llvm.Value)

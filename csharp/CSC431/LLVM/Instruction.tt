@@ -180,12 +180,12 @@ private class OperandType
     private static Dictionary<char, OperandType> sTypes = new Dictionary<char, OperandType>();
     static OperandType()
     {
-        sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", MilocPrefix = "%", Type = "VirtualRegister", IsSource = true });
-        sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", MilocPrefix = "%", Type = "VirtualRegister", IsTarget = true });
-        sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "L", Type = "Label<MilocInstruction>" });
+        sTypes.Add('r', new OperandType() { LowerPrefix = "regSource", UpperPrefix = "RegSource", MilocPrefix = "%", Type = "Register", IsSource = true });
+        sTypes.Add('R', new OperandType() { LowerPrefix = "regDest", UpperPrefix = "RegDest", MilocPrefix = "%", Type = "Register", IsTarget = true });
+        sTypes.Add('l', new OperandType() { LowerPrefix = "label", UpperPrefix = "Label", MilocPrefix = "label L", Type = "Label" });
         sTypes.Add('i', new OperandType() { LowerPrefix = "immed", UpperPrefix = "Immed", Type = "int" });
         sTypes.Add('s', new OperandType() { LowerPrefix = "str", UpperPrefix = "Str", Type = "string" });
-        sTypes.Add('a', new OperandType() { LowerPrefix = "arr", UpperPrefix = "Arr", MilocPrefix = "[", MilocPostfix = "]", Type = "string[]", SpecialConversion = "string.Join(\", \", {0})" });
+        sTypes.Add('a', new OperandType() { LowerPrefix = "arr", UpperPrefix = "Arr", MilocPrefix = "(", MilocPostfix = ")", Type = "string[]", SpecialConversion = "string.Join(\", \", {0})" });
         sTypes.Add('k', new OperandType() { ConstantValue = "rarp" });
         sTypes.Add('c', new OperandType() { ConstantValue = "%cmp" });
     }
@@ -216,20 +216,25 @@ private class OperandType
 private class InstrInfo
 {
     public InstrInfo(String type, string name)
-        : this(type, name, name)
+        : this(type, name, name, InstrFlags.None)
     {
     }
 
     public InstrInfo(String type, string name, string className)
+        : this(type, name, className, InstrFlags.None)
+    {
+    }
+
+    public InstrInfo(String type, string name, InstrFlags flags)
+        : this(type, name, name, flags)
+    {
+    }
+
+    public InstrInfo(String type, string name, string className, InstrFlags flags)
     {
         this.Type = type;
         this.Name = name;
         this.ClassName = className;
-    }
-
-    public InstrInfo(String type, string name, InstrFlags flags)
-        : this(type, name)
-    {
         this.Flags = flags;
     }
 
@@ -277,9 +282,16 @@ private class InstrInfo
                 new InstrInfo("Rrr", "sdiv"),
                 new InstrInfo("Rrr", "and"),
                 new InstrInfo("Rrr", "or"),
+                new InstrInfo("Rri", "xor", "xori"),
                 new InstrInfo("Ri", "loadi", InstrFlags.CustomToString),
+                new InstrInfo("rll", "br", "brcond", InstrFlags.CustomToString),
+                new InstrInfo("l", "br", InstrFlags.CustomToString),
                 new InstrInfo("r", "retvalue", InstrFlags.CustomToString),
                 new InstrInfo("", "retvoid", InstrFlags.CustomToString),
+                new InstrInfo("", "call"),
+                new InstrInfo("R", "alloca"),
+                new InstrInfo("Rr", "load", InstrFlags.CustomToString),
+                new InstrInfo("rr", "store", InstrFlags.CustomToString),
             };
     }
 }

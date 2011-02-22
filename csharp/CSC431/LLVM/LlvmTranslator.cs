@@ -7,9 +7,25 @@ namespace CSC431.LLVM
 {
     class LlvmTranslator : CSC431.IL.IMilocTranslator<LlvmInstruction>
     {
+        private static Dictionary<Type, ConditionType> condMap;
+        static LlvmTranslator()
+        {
+            condMap = new Dictionary<Type, ConditionType>();
+            condMap.Add(typeof(IL.MoveqInstruction), ConditionType.eq);
+            condMap.Add(typeof(IL.MovgeInstruction), ConditionType.sge);
+            condMap.Add(typeof(IL.MovgtInstruction), ConditionType.sgt);
+            condMap.Add(typeof(IL.MovleInstruction), ConditionType.sle);
+            condMap.Add(typeof(IL.MovltInstruction), ConditionType.slt);
+            condMap.Add(typeof(IL.MovneInstruction), ConditionType.ne);
+        }
+
+
         public IEnumerable<LlvmInstruction> FunctionStart(CFG.FunctionBlock<LlvmInstruction> copy)
         {
-            return Enumerable.Empty<LlvmInstruction>();
+            foreach (var l in copy.Locals)
+            {
+                yield return new AllocaInstruction(new LlvmRegister("stack_" + l));
+            }
         }
 
 
@@ -55,7 +71,7 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> Xori(IL.XoriInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new XoriInstruction(s.RegDest0, s.RegSource0, s.Immed0);
         }
 
         public IEnumerable<LlvmInstruction> Loadi(IL.LoadiInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -66,23 +82,57 @@ namespace CSC431.LLVM
                 yield break;
             }
 
+            //expression in while/if
+            if (stream.LA(1) is IL.CbreqInstruction)
+            {
+                var theCmp = stream.Consume() as IL.CompInstruction;
+                var theCbeq = stream.Consume() as IL.CbreqInstruction;
+                var theCmpReg = new CFG.VirtualRegister(CSC431.CFG.Instruction.VirtualRegister());
+                if (theCmp.RegSource1 != s.RegDest0)
+                    throw new Exception("cmp using unexpected reg in branch");
+                yield return new IcmpConstInstruction(ConditionType.eq, theCmpReg, theCmp.RegSource0, s.Immed0);
+                yield return new BrcondInstruction(theCmpReg, theCbeq.Label0, theCbeq.Label1);
+                yield break;
+            }
+
+            //remaining is conditional loads in expression for comparisions
+
             int falseValue = s.Immed0;
+            var condMovs = new List<LlvmInstruction>();
 
             int cmpreg = CSC431.CFG.Instruction.VirtualRegister();
             var cmp = stream.Consume() as IL.CompInstruction;
             var next = stream.Consume();
-            if (next is IL.MoveqInstruction)
+
+
+            doCondMov<IL.MoveqInstruction>(s, falseValue, condMovs, cmpreg, cmp, next);
+            doCondMov<IL.MovgeInstruction>(s, falseValue, condMovs, cmpreg, cmp, next);
+            doCondMov<IL.MovgtInstruction>(s, falseValue, condMovs, cmpreg, cmp, next);
+            doCondMov<IL.MovleInstruction>(s, falseValue, condMovs, cmpreg, cmp, next);
+            doCondMov<IL.MovltInstruction>(s, falseValue, condMovs, cmpreg, cmp, next);
+            doCondMov<IL.MovneInstruction>(s, falseValue, condMovs, cmpreg, cmp, next);
+
+            if (condMovs.Count != 2)
             {
-                var conv = next as IL.MoveqInstruction;
+                throw new NotSupportedException("unknown instuction '" + next.Name + "' following 'comp'");
+            }
+
+            yield return condMovs[0];
+            yield return condMovs[1];
+        }
+
+        private static void doCondMov<T>(IL.LoadiInstruction s, int falseValue, List<LlvmInstruction> condMovs, int cmpreg, IL.CompInstruction cmp, IL.MilocInstruction next)
+        {
+            if (next is T)
+            {
+                condMovs.Add(new IcmpInstruction(condMap[typeof(T)], cmpreg, cmp.RegSource0, cmp.RegSource1));
+
+                var conv = next as dynamic;
                 if (conv.RegDest0 != s.RegDest0)
                     throw new Exception("Invalid instruction stream.");
                 int trueValue = conv.Immed0;
-                yield return new IcmpInstruction(ConditionType.eq, cmpreg, cmp.RegSource0, cmp.RegSource1);
-                yield return new SelectInstruction(cmpreg, s.RegDest0, trueValue, falseValue);
-            }
-            else
-            {
-                throw new NotSupportedException("unknown instuction '" + next.Name + "' following 'comp'");
+                var ret = new SelectInstruction(cmpreg, s.RegDest0, trueValue, falseValue);
+                condMovs.Add(ret);
             }
         }
 
@@ -143,7 +193,7 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> Jumpi(IL.JumpiInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new BrInstruction(s.Label0);
         }
 
         public IEnumerable<LlvmInstruction> Cbreq(IL.CbreqInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -153,27 +203,71 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> Loadinargument(IL.LoadinargumentInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            var store = stream.Consume() as IL.StoreaiVarInstruction;
+            if (store.Str0 != s.Str0)
+                throw new Exception("werid storaivar following loadinarg");
+
+            yield return new StoreInstruction(new LlvmRegister(s.Str0), new LlvmRegister("stack_" + s.Str0));
         }
 
         public IEnumerable<LlvmInstruction> Call(IL.CallInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            bool isVoid = Program.Stable.Value.getType(s.Str0).getReturnType().isVoid();
+
+            string callString = string.Format("call {0} @{1}()", isVoid ? "void" : "i32", s.Str0);
+
+            if (stream.Current is IL.LoadretInstruction)
+            {
+                var loadret = stream.Consume() as IL.LoadretInstruction;
+                yield return new StringInstruction(string.Format("%{0} = {1}", loadret.RegDest0, callString));
+            }
+            else
+            {
+                yield return new StringInstruction(callString);
+            }
         }
 
         public IEnumerable<LlvmInstruction> Ret(IL.RetInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new RetvoidInstruction();
+            while (stream.More)
+                stream.Consume();
         }
 
         public IEnumerable<LlvmInstruction> Storeret(IL.StoreretInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
             yield return new RetvalueInstruction(s.RegSource0);
+            while (stream.More)
+                stream.Consume();
         }
 
         public IEnumerable<LlvmInstruction> Storeoutargument(IL.StoreoutargumentInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            var argList = new List<IL.StoreoutargumentInstruction>();
+            argList.Add(s);
+
+            while ((s = stream.Current as IL.StoreoutargumentInstruction) != null)
+            {
+                argList.Add(s);
+                stream.Consume();
+            }
+
+            var call = stream.Consume() as IL.CallInstruction;
+
+            var arg = string.Join(", ", argList.Select(r => "i32 %" + r.RegSource0.ToString()).ToArray());
+            bool isVoid = Program.Stable.Value.getType(call.Str0).getReturnType().isVoid();
+
+            string callString = string.Format("call {0} @{1}({2})", isVoid ? "void" : "i32", call.Str0, arg);
+
+            if (stream.Current is IL.LoadretInstruction)
+            {
+                var loadret = stream.Consume() as IL.LoadretInstruction;
+                yield return new StringInstruction(string.Format("%{0} = {1}", loadret.RegDest0, callString));
+            }
+            else
+            {
+                yield return new StringInstruction(callString);
+            }
         }
 
         public IEnumerable<LlvmInstruction> Loadret(IL.LoadretInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -188,7 +282,7 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> StoreaiVar(IL.StoreaiVarInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new StoreInstruction(s.RegSource0, new LlvmRegister("stack_" + s.Str0));
         }
 
         public IEnumerable<LlvmInstruction> LoadaiField(IL.LoadaiFieldInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -198,7 +292,7 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> LoadaiVar(IL.LoadaiVarInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new LoadInstruction(s.RegDest0, new LlvmRegister("stack_" + s.Str0));
         }
 
         public IEnumerable<LlvmInstruction> Loadglobal(IL.LoadglobalInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
