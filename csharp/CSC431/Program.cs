@@ -16,7 +16,7 @@ namespace CSC431
             var t = new Task(() =>
             {
                 Options.ParseParameters(args);
-                Step.DoAll(Options.CreatePipe(SparcSteps.PrintCFG));
+                Step.DoAll(Options.CreatePipe(Console.Out));
             });
             t.RunSynchronously();
 

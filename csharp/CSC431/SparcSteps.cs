@@ -19,11 +19,11 @@ namespace CSC431
             });
         }
 
-        public static InStep<ProgramBlock<SparcInstruction>> PrintCFG()
+        public static InStep<ProgramBlock<SparcInstruction>> PrintCFG(System.IO.TextWriter outfile)
         {
             return new InStep<ProgramBlock<SparcInstruction>>(c =>
             {
-                c.Print(Console.Out, new SparcPrinter());
+                c.Print(outfile, new SparcPrinter());
             });
         }
 

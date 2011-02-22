@@ -54,7 +54,7 @@ namespace CSC431
             }
         }
 
-        public static Step CreatePipe(Func<InStep<CSC431.CFG.ProgramBlock<Sparc.SparcInstruction>>> outputer)
+        public static Step CreatePipe(TextWriter outfile)
         {
             var pipe = FrontEndSteps.CreateLexer()
                 .FollowWith(FrontEndSteps.Parse());
@@ -71,7 +71,7 @@ namespace CSC431
             if (Options.Llvm.Value)
             {
                 var llvm = flow.FollowWith(LlvmSteps.ConvertToLlvm());
-                //llvm.FollowWith(LlvmSteps.PrintCFG());
+                llvm.FollowWith(LlvmSteps.PrintCFG(outfile));
                 llvm.FollowWith(LlvmSteps.BitcodeToSparc());
             }
 
@@ -84,7 +84,7 @@ namespace CSC431
                     sparc = sparc.FollowWith(SparcSteps.RegisterAllocation());
 
                 sparc.FollowWith(SparcSteps.SetStacks())
-                     .FollowWith(outputer());
+                     .FollowWith(SparcSteps.PrintCFG(outfile));
             }
 
             if (!string.IsNullOrEmpty(Options.ClrExec.Value))

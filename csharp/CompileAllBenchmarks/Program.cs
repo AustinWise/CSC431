@@ -37,7 +37,7 @@ namespace CompileAllBenchmarks
 
 
             string benchDir = @"..\..\..\..\benchmarks\";
-            
+
 
             List<Task<string>> tasks = new List<Task<string>>();
 
@@ -50,9 +50,9 @@ namespace CompileAllBenchmarks
 
                     Options.InputSource.Value = new FileStream(evFile, FileMode.Open, FileAccess.Read);
 
-                    var output = new StringWriter();
+                    var output = new StreamWriter(Path.Combine(myDir, "code.s"), false, Encoding.ASCII);
 
-                    var pipe = CSC431.Options.CreatePipe(() => CreateWriter(output));
+                    var pipe = CSC431.Options.CreatePipe(output);
                     try
                     {
                         CSC431.Steps.Step.DoAll(pipe);
@@ -61,8 +61,10 @@ namespace CompileAllBenchmarks
                     {
                         return string.Format("{0}\n\t{1}\n", evFile.Substring(evFile.LastIndexOf('\\') + 1), ex.Message);
                     }
-
-                    File.WriteAllText(Path.Combine(myDir, "code.s"), output.ToString());
+                    finally
+                    {
+                        output.Close();
+                    }
 
                     return "";
                 });
@@ -76,14 +78,6 @@ namespace CompileAllBenchmarks
             {
                 Console.Write(t.Result);
             }
-        }
-
-        private static InStep<ProgramBlock<SparcInstruction>> CreateWriter(StringWriter wr)
-        {
-            return new InStep<ProgramBlock<SparcInstruction>>(prog =>
-            {
-                prog.Print(wr, new CSC431.Sparc.SparcPrinter());
-            });
         }
     }
 }
