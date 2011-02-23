@@ -18,7 +18,6 @@ this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDes
 public Register RegSource0{ get; private set; }
 public Register RegSource1{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -74,7 +73,6 @@ this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 public Register RegSource0{ get; private set; }
 public int Immed0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -129,7 +127,6 @@ this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDes
 public Register RegSource0{ get; private set; }
 public Register RegSource1{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -185,7 +182,6 @@ this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDes
 public Register RegSource0{ get; private set; }
 public Register RegSource1{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -241,7 +237,6 @@ this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDes
 public Register RegSource0{ get; private set; }
 public Register RegSource1{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -297,7 +292,6 @@ this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDes
 public Register RegSource0{ get; private set; }
 public Register RegSource1{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -353,7 +347,6 @@ this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.RegDest0 = regDes
 public Register RegSource0{ get; private set; }
 public Register RegSource1{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -409,7 +402,6 @@ this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 public Register RegSource0{ get; private set; }
 public int Immed0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -464,7 +456,6 @@ this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 public Register RegSource0{ get; private set; }
 public int Immed0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -519,7 +510,6 @@ this.RegSource0 = regSource0;this.LoBits0 = loBits0;this.RegDest0 = regDest0;	}
 public Register RegSource0{ get; private set; }
 public int LoBits0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -573,7 +563,6 @@ this.RegSource0 = regSource0;this.RegSource1 = regSource1;	}
 
 public Register RegSource0{ get; private set; }
 public Register RegSource1{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -626,7 +615,6 @@ Label label0	) : base ("be")
 this.Label0 = label0;	}
 
 public Label Label0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -677,7 +665,6 @@ Label label0	) : base ("ba")
 this.Label0 = label0;	}
 
 public Label Label0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -729,7 +716,6 @@ this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -782,7 +768,6 @@ this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -835,7 +820,6 @@ this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -888,7 +872,6 @@ this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -941,7 +924,6 @@ this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -994,7 +976,6 @@ this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 
 public int Immed0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -1047,7 +1028,6 @@ this.HiBits0 = hiBits0;this.RegDest0 = regDest0;	}
 
 public int HiBits0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -1100,7 +1080,6 @@ this.RegSource0 = regSource0;this.RegDest0 = regDest0;	}
 
 public Register RegSource0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -1154,24 +1133,6 @@ this.Str0 = str0;	}
 
 public string Str0{ get; private set; }
 
-public override Register[] SourceRegs
-{
-	get
-	{
-		return new Register[] {
-		};
-	}
-}
-
-public override Register[] DestRegs
-{
-	get
-	{
-		return new Register[] {
-		};
-	}
-}
-
 public override string ToString()
 {
 return string.Format("{0} {1}", Name, Str0);
@@ -1206,7 +1167,6 @@ this.RegSource0 = regSource0;this.RegSource1 = regSource1;this.Immed0 = immed0;	
 public Register RegSource0{ get; private set; }
 public Register RegSource1{ get; private set; }
 public int Immed0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -1267,7 +1227,6 @@ this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
 public Register RegSource0{ get; private set; }
 public int Immed0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -1328,7 +1287,6 @@ this.RegSource0 = regSource0;this.Str0 = str0;this.RegDest0 = regDest0;	}
 public Register RegSource0{ get; private set; }
 public string Str0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -1388,7 +1346,6 @@ this.Str0 = str0;this.RegDest0 = regDest0;	}
 
 public string Str0{ get; private set; }
 public Register RegDest0{ get; private set; }
-
 public override Register[] SourceRegs
 {
 	get
@@ -1445,7 +1402,6 @@ public partial class RetInstruction : SparcInstruction
 	{
 	}
 
-
 public override Register[] SourceRegs
 {
 	get
@@ -1494,7 +1450,6 @@ public partial class RestoreInstruction : SparcInstruction
 	) : base ("restore")
 	{
 	}
-
 
 public override Register[] SourceRegs
 {
@@ -1545,7 +1500,6 @@ public partial class NopInstruction : SparcInstruction
 	{
 	}
 
-
 public override Register[] SourceRegs
 {
 	get
@@ -1594,7 +1548,6 @@ public partial class SaveInstruction : SparcInstruction
 	) : base ("save")
 	{
 	}
-
 
 public override Register[] SourceRegs
 {

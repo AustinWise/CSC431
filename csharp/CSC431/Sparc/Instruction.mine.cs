@@ -5,6 +5,41 @@ using System.Text;
 
 namespace CSC431.Sparc
 {
+    public partial class CallInstruction
+    {
+        static CallInstruction()
+        {
+            callDestRegs = new[]
+            {
+                new SparcRegister(SparcReg.g1),
+                new SparcRegister(SparcReg.g2),
+                new SparcRegister(SparcReg.g3),
+                new SparcRegister(SparcReg.g4),
+                new SparcRegister(SparcReg.g5),
+                new SparcRegister(SparcReg.g6),
+                new SparcRegister(SparcReg.g7),
+                new SparcRegister(SparcReg.o0),
+                new SparcRegister(SparcReg.o1),
+                new SparcRegister(SparcReg.o2),
+                new SparcRegister(SparcReg.o3),
+                new SparcRegister(SparcReg.o4),
+                new SparcRegister(SparcReg.o5),
+                new SparcRegister(SparcReg.sp),
+                new SparcRegister(SparcReg.o7),
+            };
+        }
+
+        private static readonly CFG.Register[] callDestRegs;
+
+        public override CFG.Register[] SourceRegs
+        {
+            get { return new CFG.Register[0]; }
+        }
+        public override CFG.Register[] DestRegs
+        {
+            get { return callDestRegs; }
+        }
+    }
     public partial class StwInstruction
     {
         partial void ToStringCore(ref string ret)

@@ -1,7 +1,7 @@
 #!/bin/tcsh
 # note: I have ecc aliased to gcc -mcpu=v9
 unlimit
-foreach dir (*)
+foreach dir (`find -mindepth 1 -type d`)
    echo "**** ${dir} ****"
    cd ${dir}
 #   gcc *.c

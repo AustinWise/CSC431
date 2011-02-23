@@ -35,6 +35,14 @@ namespace CSC431.Sparc
             canColors.Add(new SparcRegister(SparcReg.l5));
             canColors.Add(new SparcRegister(SparcReg.l6));
             canColors.Add(new SparcRegister(SparcReg.l7));
+            canColors.Add(new SparcRegister(SparcReg.o1));
+            canColors.Add(new SparcRegister(SparcReg.o2));
+            canColors.Add(new SparcRegister(SparcReg.o3));
+            canColors.Add(new SparcRegister(SparcReg.o4));
+            canColors.Add(new SparcRegister(SparcReg.o5));
+            canColors.Add(new SparcRegister(SparcReg.g1));
+            canColors.Add(new SparcRegister(SparcReg.g4));
+            canColors.Add(new SparcRegister(SparcReg.g5));
 
             numColors = canColors.Count;
 

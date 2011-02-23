@@ -55,21 +55,24 @@ instr.ForEachOperand((c, count, isLast) =>
     WriteLine("public {1} {2}{0}{{ get; private set; }}", count, c.Type, c.UpperPrefix);
 });
 #>
-
+<#
+    if (!instr.IsCustomSrcDest)
+    {
+#>
 public override Register[] SourceRegs
 {
 	get
 	{
 		return new Register[] {
 <#
-instr.ForEachOperand((c, count, isLast) =>
-{
-    if (!c.IsSource)
-        return;
-    Write("{1}{0}", count, c.UpperPrefix);
-    if (!isLast)
-        Write(", ");
-});
+    instr.ForEachOperand((c, count, isLast) =>
+    {
+        if (!c.IsSource)
+            return;
+        Write("{1}{0}", count, c.UpperPrefix);
+        if (!isLast)
+            Write(", ");
+    });
 #>
 		};
 	}
@@ -81,18 +84,21 @@ public override Register[] DestRegs
 	{
 		return new Register[] {
 <#
-instr.ForEachOperand((c, count, isLast) =>
-{
-    if (!c.IsTarget)
-        return;
-    Write("{1}{0}", count, c.UpperPrefix);
-    if (!isLast)
-        Write(", ");
-});
+    instr.ForEachOperand((c, count, isLast) =>
+    {
+        if (!c.IsTarget)
+            return;
+        Write("{1}{0}", count, c.UpperPrefix);
+        if (!isLast)
+            Write(", ");
+    });
 #>
 		};
 	}
 }
+<#
+    }
+#>
 
 <#
 if (!instr.IsCustomToString)
@@ -290,7 +296,8 @@ private enum InstrFlags : int
     None = 0,
     SetCC = 1,
     UseCC = 2,
-    CustomToString = 4
+    CustomToString = 4,
+    CustomSourceAndTarget = 8,
 }
 private class OperandType
 {
@@ -385,6 +392,14 @@ private class InstrInfo
         }
     }
 
+    public bool IsCustomSrcDest
+    {
+        get
+        {
+            return ((Flags & InstrFlags.CustomSourceAndTarget) != 0);
+        }
+    }
+
     public void ForEachOperand(Action<OperandType, int, bool> f)
     {
         var count = new Dictionary<char, int>();
@@ -422,7 +437,7 @@ private class InstrInfo
                 new InstrInfo("ciR", "movl"),
                 new InstrInfo("hR", "sethi"),
                 new InstrInfo("rR", "mov"),
-                new InstrInfo("s", "call"),
+                new InstrInfo("s", "call", InstrFlags.CustomSourceAndTarget),
                 new InstrInfo("rri", "stw", InstrFlags.CustomToString),
                 new InstrInfo("riR", "ldsw", InstrFlags.CustomToString),
                 new InstrInfo("rsR", "or", "orlstr", InstrFlags.CustomToString),
