@@ -6,36 +6,36 @@ calcPower:
 save %sp, -104, %sp
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-or %l0, 0, %l0
+or %l0, 0, %l3
 .L3695:
-mov %i1, %l2
-sethi %hi(0), %l1
-or %l1, %lo(0), %l1
-sethi %hi(0), %l3
-or %l3, %lo(0), %l3
-cmp %l2, %l1
-movg %icc, 1, %l3
-sethi %hi(1), %l1
-or %l1, %lo(1), %l1
-cmp %l3, %l1
+mov %i1, %l1
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+movg %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
 be %icc, .L3701
 nop
 ba %icc, .L3728
 nop
 .L3701:
-or %l0, 0, %l1
+or %l3, 0, %l1
 mov %i0, %l0
 mulx %l1, %l0, %l0
-or %l0, 0, %l0
-mov %i1, %l2
-sethi %hi(1), %l1
-or %l1, %lo(1), %l1
-sub %l2, %l1, %l1
-mov %l1, %i1
+or %l0, 0, %l3
+mov %i1, %l1
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+sub %l1, %l0, %l0
+mov %l0, %i1
 ba %icc, .L3695
 nop
 .L3728:
-or %l0, 0, %l0
+or %l3, 0, %l0
 or %l0, 0, %i0
 ret
 restore
@@ -57,9 +57,9 @@ add %sp, 92, %o1
 call scanf
 nop
 ldsw [%sp + 92], %l0
-or %l0, 0, %l0
+or %l0, 0, %l5
 or %l2, 0, %l3
-or %l0, 0, %l0
+or %l5, 0, %l0
 stw %l0, [%l3 + 0]
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
@@ -67,17 +67,17 @@ add %sp, 92, %o1
 call scanf
 nop
 ldsw [%sp + 92], %l0
-or %l0, 0, %l0
-or %l0, 0, %l4
-sethi %hi(0), %l3
-or %l3, %lo(0), %l3
-sethi %hi(0), %l5
-or %l5, %lo(0), %l5
-cmp %l4, %l3
-movl %icc, 1, %l5
-sethi %hi(1), %l3
-or %l3, %lo(1), %l3
-cmp %l5, %l3
+or %l0, 0, %l5
+or %l5, 0, %l3
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+sethi %hi(0), %l4
+or %l4, %lo(0), %l4
+cmp %l3, %l0
+movl %icc, 1, %l4
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l4, %l0
 be %icc, .L3758
 nop
 ba %icc, .L3764
@@ -98,7 +98,7 @@ ba %icc, .L3769
 nop
 .L3769:
 or %l2, 0, %l3
-or %l0, 0, %l0
+or %l5, 0, %l0
 stw %l0, [%l3 + 4]
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0

@@ -16,47 +16,47 @@ add %sp, 92, %o1
 call scanf
 nop
 ldsw [%sp + 92], %l0
-or %l0, 0, %l0
 or %l0, 0, %l4
-sethi %hi(1), %l3
-or %l3, %lo(1), %l3
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-sub %l2, %l3, %l2
-sethi %hi(0), %l3
-or %l3, %lo(0), %l3
-cmp %l4, %l2
-move %icc, 1, %l3
+or %l4, 0, %l3
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
-cmp %l3, %l2
-be %icc, .L1553
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+sub %l0, %l2, %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l3, %l0
+move %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
+be %icc, .L80
 nop
-ba %icc, .L1559
+ba %icc, .L86
 nop
-.L1553:
+.L80:
 or %l1, 0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L1579
+ba %icc, .L291
 nop
-.L1559:
+.L86:
 or %l1, 0, %l2
-or %l0, 0, %l0
+or %l4, 0, %l0
 stw %l0, [%l2 + 0]
-or %l1, 0, %l2
+or %l1, 0, %l0
 call getIntList
 nop
-mov %o0, %l0
-stw %l0, [%l2 + 4]
+mov %o0, %l2
+stw %l2, [%l0 + 4]
 or %l1, 0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L1579
+ba %icc, .L291
 nop
-.L1579:
+.L291:
 	.size    getIntList, .-getIntList
 	.align 4
 	.global biggest
@@ -72,25 +72,25 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L1592
+be %icc, .L304
 nop
-ba %icc, .L1598
+ba %icc, .L310
 nop
-.L1592:
+.L304:
 mov %i0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L1607
+ba %icc, .L319
 nop
-.L1598:
+.L310:
 mov %i1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L1607
+ba %icc, .L319
 nop
-.L1607:
+.L319:
 	.size    biggest, .-biggest
 	.align 4
 	.global biggestInList
@@ -99,25 +99,25 @@ biggestInList:
 save %sp, -96, %sp
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
-or %l0, 0, %l0
-.L1619:
-mov %i0, %l1
-ldsw [%l1 + 4], %l2
-sethi %hi(0), %l1
-or %l1, %lo(0), %l1
-sethi %hi(0), %l3
-or %l3, %lo(0), %l3
-cmp %l2, %l1
-movne %icc, 1, %l3
-sethi %hi(1), %l1
-or %l1, %lo(1), %l1
-cmp %l3, %l1
-be %icc, .L1626
+or %l0, 0, %l3
+.L331:
+mov %i0, %l0
+ldsw [%l0 + 4], %l1
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+movne %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
+be %icc, .L338
 nop
-ba %icc, .L1654
+ba %icc, .L366
 nop
-.L1626:
-or %l0, 0, %l1
+.L338:
+or %l3, 0, %l1
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
 mov %l1, %o0
@@ -125,14 +125,14 @@ mov %l0, %o1
 call biggest
 nop
 mov %o0, %l0
-or %l0, 0, %l0
-mov %i0, %l1
-ldsw [%l1 + 4], %l1
-mov %l1, %i0
-ba %icc, .L1619
+or %l0, 0, %l3
+mov %i0, %l0
+ldsw [%l0 + 4], %l0
+mov %l0, %i0
+ba %icc, .L331
 nop
-.L1654:
-or %l0, 0, %l0
+.L366:
+or %l3, 0, %l0
 or %l0, 0, %i0
 ret
 restore

@@ -91,12 +91,12 @@ or %g0, 4, %o1
 call calloc
 nop
 mov %o0, %l0
-or %l0, 0, %l5
-sethi %hi(1000000), %l1
-or %l1, %lo(1000000), %l1
+or %l0, 0, %l1
+sethi %hi(1000000), %l4
+or %l4, %lo(1000000), %l4
 sethi %hi(end), %l0
 or %l0, %lo(end), %l0
-stw %l1, [%l0 + 0]
+stw %l4, [%l0 + 0]
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
 add %sp, 92, %o1
@@ -109,10 +109,10 @@ or %o0, %lo(.ConstantString2), %o0
 add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 92], %l2
-sethi %hi(interval), %l1
-or %l1, %lo(interval), %l1
-stw %l2, [%l1 + 0]
+ldsw [%sp + 92], %l5
+sethi %hi(interval), %l4
+or %l4, %lo(interval), %l4
+stw %l5, [%l4 + 0]
 or %l0, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
@@ -129,159 +129,159 @@ call printf
 nop
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l2
+or %l0, 0, %l0
 .L2668:
-or %l2, 0, %l1
-sethi %hi(50), %l0
-or %l0, %lo(50), %l0
+or %l0, 0, %l5
+sethi %hi(50), %l4
+or %l4, %lo(50), %l4
 sethi %hi(0), %l6
 or %l6, %lo(0), %l6
-cmp %l1, %l0
+cmp %l5, %l4
 movl %icc, 1, %l6
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l6, %l0
+sethi %hi(1), %l4
+or %l4, %lo(1), %l4
+cmp %l6, %l4
 be %icc, .L2674
 nop
 ba %icc, .L2820
 nop
 .L2674:
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-or %l0, 0, %l4
+sethi %hi(0), %l3
+or %l3, %lo(0), %l3
+or %l3, 0, %l3
 .L2680:
-or %l4, 0, %l1
-sethi %hi(end), %l0
-or %l0, %lo(end), %l0
-ldsw [%l0 + 0], %l0
+or %l3, 0, %l5
+sethi %hi(end), %l4
+or %l4, %lo(end), %l4
+ldsw [%l4 + 0], %l4
 sethi %hi(0), %l6
 or %l6, %lo(0), %l6
-cmp %l1, %l0
+cmp %l5, %l4
 movle %icc, 1, %l6
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l6, %l0
+sethi %hi(1), %l4
+or %l4, %lo(1), %l4
+cmp %l6, %l4
 be %icc, .L2687
 nop
 ba %icc, .L2804
 nop
 .L2687:
-sethi %hi(1), %l1
-or %l1, %lo(1), %l1
-sethi %hi(2), %l0
-or %l0, %lo(2), %l0
-mulx %l1, %l0, %l1
-sethi %hi(3), %l0
-or %l0, %lo(3), %l0
-mulx %l1, %l0, %l1
-sethi %hi(4), %l0
-or %l0, %lo(4), %l0
-mulx %l1, %l0, %l1
-sethi %hi(5), %l0
-or %l0, %lo(5), %l0
-mulx %l1, %l0, %l1
-sethi %hi(6), %l0
-or %l0, %lo(6), %l0
-mulx %l1, %l0, %l1
-sethi %hi(7), %l0
-or %l0, %lo(7), %l0
-mulx %l1, %l0, %l1
-sethi %hi(8), %l0
-or %l0, %lo(8), %l0
-mulx %l1, %l0, %l1
-sethi %hi(9), %l0
-or %l0, %lo(9), %l0
-mulx %l1, %l0, %l1
-sethi %hi(10), %l0
-or %l0, %lo(10), %l0
-mulx %l1, %l0, %l1
-sethi %hi(11), %l0
-or %l0, %lo(11), %l0
-mulx %l1, %l0, %l0
-or %l0, 0, %l3
-or %l4, 0, %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-add %l1, %l0, %l0
-or %l0, 0, %l4
-or %l5, 0, %l1
-or %l4, 0, %l0
-stw %l0, [%l1 + 0]
-or %l5, 0, %l0
-ldsw [%l0 + 0], %l0
-or %l0, 0, %l0
-or %l5, 0, %l1
-sethi %hi(2), %l0
-or %l0, %lo(2), %l0
-mov %l1, %o0
-mov %l0, %o1
+sethi %hi(1), %l4
+or %l4, %lo(1), %l4
+sethi %hi(2), %l2
+or %l2, %lo(2), %l2
+mulx %l4, %l2, %l4
+sethi %hi(3), %l2
+or %l2, %lo(3), %l2
+mulx %l4, %l2, %l4
+sethi %hi(4), %l2
+or %l2, %lo(4), %l2
+mulx %l4, %l2, %l4
+sethi %hi(5), %l2
+or %l2, %lo(5), %l2
+mulx %l4, %l2, %l4
+sethi %hi(6), %l2
+or %l2, %lo(6), %l2
+mulx %l4, %l2, %l4
+sethi %hi(7), %l2
+or %l2, %lo(7), %l2
+mulx %l4, %l2, %l4
+sethi %hi(8), %l2
+or %l2, %lo(8), %l2
+mulx %l4, %l2, %l4
+sethi %hi(9), %l2
+or %l2, %lo(9), %l2
+mulx %l4, %l2, %l4
+sethi %hi(10), %l2
+or %l2, %lo(10), %l2
+mulx %l4, %l2, %l4
+sethi %hi(11), %l2
+or %l2, %lo(11), %l2
+mulx %l4, %l2, %l2
+or %l2, 0, %l2
+or %l3, 0, %l4
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+add %l4, %l3, %l3
+or %l3, 0, %l3
+or %l1, 0, %l5
+or %l3, 0, %l4
+stw %l4, [%l5 + 0]
+or %l1, 0, %l4
+ldsw [%l4 + 0], %l4
+or %l4, 0, %l4
+or %l1, 0, %l5
+sethi %hi(2), %l4
+or %l4, %lo(2), %l4
+mov %l5, %o0
+mov %l4, %o1
 call multBy4xTimes
 nop
-or %l5, 0, %l0
-mov %l0, %o0
+or %l1, 0, %l4
+mov %l4, %o0
 call divideBy8
 nop
-sethi %hi(interval), %l0
-or %l0, %lo(interval), %l0
-ldsw [%l0 + 0], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-sub %l1, %l0, %l0
-or %l0, 0, %l1
-or %l1, 0, %l6
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-sethi %hi(0), %l7
-or %l7, %lo(0), %l7
-cmp %l6, %l0
-movle %icc, 1, %l7
-or %l7, 0, %l0
-or %l1, 0, %l7
+sethi %hi(interval), %l4
+or %l4, %lo(interval), %l4
+ldsw [%l4 + 0], %l5
+sethi %hi(1), %l4
+or %l4, %lo(1), %l4
+sub %l5, %l4, %l4
+or %l4, 0, %l7
+or %l7, 0, %l5
+sethi %hi(0), %l4
+or %l4, %lo(0), %l4
 sethi %hi(0), %l6
 or %l6, %lo(0), %l6
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-cmp %l7, %l6
-movle %icc, 1, %l0
-sethi %hi(1), %l6
-or %l6, %lo(1), %l6
-cmp %l0, %l6
+cmp %l5, %l4
+movle %icc, 1, %l6
+or %l6, 0, %l4
+or %l7, 0, %l5
+sethi %hi(0), %l4
+or %l4, %lo(0), %l4
+sethi %hi(0), %l6
+or %l6, %lo(0), %l6
+cmp %l5, %l4
+movle %icc, 1, %l6
+sethi %hi(1), %l4
+or %l4, %lo(1), %l4
+cmp %l6, %l4
 be %icc, .L2775
 nop
 ba %icc, .L2781
 nop
 .L2775:
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-or %l0, 0, %l1
+sethi %hi(1), %l4
+or %l4, %lo(1), %l4
+or %l4, 0, %l7
 ba %icc, .L2786
 nop
 .L2781:
 ba %icc, .L2786
 nop
 .L2786:
-or %l4, 0, %l4
-or %l1, 0, %l0
-add %l4, %l0, %l0
-or %l0, 0, %l4
+or %l3, 0, %l4
+or %l7, 0, %l3
+add %l4, %l3, %l3
+or %l3, 0, %l3
 ba %icc, .L2680
 nop
 .L2804:
-or %l2, 0, %l1
+or %l0, 0, %l4
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-add %l1, %l0, %l0
-or %l0, 0, %l2
+add %l4, %l0, %l0
+or %l0, 0, %l0
 ba %icc, .L2668
 nop
 .L2820:
-or %l4, 0, %l0
+or %l3, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l3, 0, %l0
+or %l2, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1

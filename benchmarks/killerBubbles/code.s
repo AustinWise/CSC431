@@ -20,9 +20,9 @@ deathSort:
 save %sp, -96, %sp
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-or %l0, 0, %l0
-.L3381:
 or %l0, 0, %l1
+.L3381:
+or %l1, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sethi %hi(0), %l2
@@ -39,11 +39,11 @@ nop
 .L3387:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
+or %l0, 0, %l1
+mov %i0, %l0
 or %l0, 0, %l0
-mov %i0, %l1
-or %l1, 0, %l1
 .L3398:
-or %l1, 0, %l2
+or %l0, 0, %l2
 ldsw [%l2 + 8], %l3
 mov %i0, %l2
 sethi %hi(0), %l4
@@ -58,8 +58,8 @@ nop
 ba %icc, .L3474
 nop
 .L3406:
-or %l1, 0, %l3
-or %l1, 0, %l2
+or %l0, 0, %l3
+or %l0, 0, %l2
 ldsw [%l2 + 8], %l2
 mov %l3, %o0
 mov %l2, %o1
@@ -80,30 +80,30 @@ nop
 ba %icc, .L3447
 nop
 .L3420:
-or %l1, 0, %l0
-ldsw [%l0 + 0], %l0
-or %l0, 0, %l0
+or %l0, 0, %l1
+ldsw [%l1 + 0], %l1
 or %l1, 0, %l3
-or %l1, 0, %l2
-ldsw [%l2 + 8], %l2
-ldsw [%l2 + 0], %l2
-stw %l2, [%l3 + 0]
-or %l1, 0, %l2
-ldsw [%l2 + 8], %l2
-or %l0, 0, %l0
-stw %l0, [%l2 + 0]
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-or %l0, 0, %l0
+or %l0, 0, %l2
+or %l0, 0, %l1
+ldsw [%l1 + 8], %l1
+ldsw [%l1 + 0], %l1
+stw %l1, [%l2 + 0]
+or %l0, 0, %l1
+ldsw [%l1 + 8], %l2
+or %l3, 0, %l1
+stw %l1, [%l2 + 0]
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
+or %l1, 0, %l1
 ba %icc, .L3452
 nop
 .L3447:
 ba %icc, .L3452
 nop
 .L3452:
-or %l1, 0, %l1
-ldsw [%l1 + 8], %l1
-or %l1, 0, %l1
+or %l0, 0, %l0
+ldsw [%l0 + 8], %l0
+or %l0, 0, %l0
 ba %icc, .L3398
 nop
 .L3474:
@@ -231,40 +231,40 @@ or %l0, %lo(1000), %l0
 mulx %l1, %l0, %l0
 or %l0, 0, %l3
 or %l3, 0, %l0
-or %l0, 0, %l3
+or %l0, 0, %l2
 or %g0, 1, %o0
 or %g0, 12, %o1
 call calloc
 nop
 mov %o0, %l0
 or %l0, 0, %l1
-or %l1, 0, %l2
-or %l3, 0, %l0
-stw %l0, [%l2 + 0]
-or %l1, 0, %l2
+or %l1, 0, %l3
+or %l2, 0, %l0
+stw %l0, [%l3 + 0]
+or %l1, 0, %l3
 or %l1, 0, %l0
-stw %l0, [%l2 + 4]
-or %l1, 0, %l2
+stw %l0, [%l3 + 4]
+or %l1, 0, %l3
 or %l1, 0, %l0
-stw %l0, [%l2 + 8]
-or %l3, 0, %l2
+stw %l0, [%l3 + 8]
+or %l2, 0, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sub %l2, %l0, %l0
-or %l0, 0, %l3
+or %l0, 0, %l2
 or %l1, 0, %l0
 or %l0, 0, %l0
 .L3616:
-or %l3, 0, %l4
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
+or %l2, 0, %l4
+sethi %hi(0), %l3
+or %l3, %lo(0), %l3
 sethi %hi(0), %l5
 or %l5, %lo(0), %l5
-cmp %l4, %l2
+cmp %l4, %l3
 movg %icc, 1, %l5
-sethi %hi(1), %l2
-or %l2, %lo(1), %l2
-cmp %l5, %l2
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+cmp %l5, %l3
 be %icc, .L3622
 nop
 ba %icc, .L3673
@@ -274,27 +274,27 @@ or %g0, 1, %o0
 or %g0, 12, %o1
 call calloc
 nop
-mov %o0, %l2
-or %l2, 0, %l2
-or %l2, 0, %l5
-or %l3, 0, %l4
-stw %l4, [%l5 + 0]
-or %l2, 0, %l5
-or %l0, 0, %l4
-stw %l4, [%l5 + 4]
-or %l2, 0, %l5
-or %l1, 0, %l4
-stw %l4, [%l5 + 8]
-or %l0, 0, %l4
-or %l2, 0, %l0
-stw %l0, [%l4 + 8]
-or %l2, 0, %l0
+mov %o0, %l3
+or %l3, 0, %l5
+or %l5, 0, %l4
+or %l2, 0, %l3
+stw %l3, [%l4 + 0]
+or %l5, 0, %l4
+or %l0, 0, %l3
+stw %l3, [%l4 + 4]
+or %l5, 0, %l4
+or %l1, 0, %l3
+stw %l3, [%l4 + 8]
+or %l0, 0, %l3
+or %l5, 0, %l0
+stw %l0, [%l3 + 8]
+or %l5, 0, %l0
 or %l0, 0, %l0
-or %l3, 0, %l3
+or %l2, 0, %l3
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 sub %l3, %l2, %l2
-or %l2, 0, %l3
+or %l2, 0, %l2
 ba %icc, .L3616
 nop
 .L3673:

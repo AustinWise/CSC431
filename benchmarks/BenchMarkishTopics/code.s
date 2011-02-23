@@ -14,31 +14,31 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L26
+be %icc, .L40
 nop
-ba %icc, .L37
+ba %icc, .L68
 nop
-.L26:
+.L40:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L45
+ba %icc, .L101
 nop
-.L37:
-ba %icc, .L45
+.L68:
+ba %icc, .L101
 nop
-.L45:
-sethi %hi(1), %l1
-or %l1, %lo(1), %l1
-mov %i0, %l0
-ldsw [%l0 + 4], %l0
-mov %l0, %o0
+.L101:
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+mov %i0, %l1
+ldsw [%l1 + 4], %l1
+mov %l1, %o0
 call length
 nop
-mov %o0, %l0
-add %l1, %l0, %l0
+mov %o0, %l1
+add %l0, %l1, %l0
 or %l0, 0, %i0
 ret
 restore
@@ -58,11 +58,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L97
+be %icc, .L464
 nop
-ba %icc, .L126
+ba %icc, .L489
 nop
-.L97:
+.L464:
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
@@ -76,12 +76,12 @@ mov %i0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L131
+ba %icc, .L496
 nop
-.L126:
-ba %icc, .L131
+.L489:
+ba %icc, .L496
 nop
-.L131:
+.L496:
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
@@ -114,22 +114,22 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L163
+be %icc, .L564
 nop
-ba %icc, .L168
+ba %icc, .L574
 nop
-.L163:
+.L564:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L173
+ba %icc, .L583
 nop
-.L168:
-ba %icc, .L173
+.L574:
+ba %icc, .L583
 nop
-.L173:
+.L583:
 mov %i0, %l0
 or %l0, 0, %l1
 mov %i0, %l0
@@ -164,7 +164,7 @@ or %l0, 0, %l0
 sethi %hi(0), %l1
 or %l1, %lo(0), %l1
 or %l1, 0, %l1
-.L414:
+.L821:
 sethi %hi(intList), %l2
 or %l2, %lo(intList), %l2
 ldsw [%l2 + 0], %l3
@@ -177,11 +177,11 @@ movg %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L537
+be %icc, .L886
 nop
-ba %icc, .L585
+ba %icc, .L990
 nop
-.L537:
+.L886:
 or %l1, 0, %l2
 sethi %hi(intList), %l1
 or %l1, %lo(intList), %l1
@@ -208,9 +208,9 @@ sub %l3, %l2, %l3
 sethi %hi(intList), %l2
 or %l2, %lo(intList), %l2
 stw %l3, [%l2 + 0]
-ba %icc, .L414
+ba %icc, .L821
 nop
-.L585:
+.L990:
 or %l1, 0, %l2
 mov %l2, %o0
 call length
@@ -221,7 +221,7 @@ or %o0, %lo(.ConstantString0), %o0
 mov %l2, %o1
 call printf
 nop
-.L595:
+.L996:
 or %l1, 0, %l2
 mov %l2, %o0
 call length
@@ -236,11 +236,11 @@ movg %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L610
+be %icc, .L1004
 nop
-ba %icc, .L673
+ba %icc, .L1039
 nop
-.L610:
+.L1004:
 or %l0, 0, %l2
 or %l1, 0, %l0
 ldsw [%l0 + 0], %l0
@@ -262,9 +262,9 @@ call deleteFirst
 nop
 mov %o0, %l1
 or %l1, 0, %l1
-ba %icc, .L595
+ba %icc, .L996
 nop
-.L673:
+.L1039:
 or %l0, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0

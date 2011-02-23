@@ -1240,138 +1240,138 @@ main:
 save %sp, -96, %sp
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l6
+or %l0, 0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l7
+or %l0, 0, %l3
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l0
+or %l0, 0, %l2
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l0
-sethi %hi(1), %l1
-or %l1, %lo(1), %l1
+or %l0, 0, %l2
+sethi %hi(1), %l2
+or %l2, %lo(1), %l2
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l1, %l0
-or %l0, 0, %l4
+sub %l0, %l2, %l0
+or %l0, 0, %l2
 or %g0, 1, %o0
 or %g0, 36, %o1
 call calloc
 nop
 mov %o0, %l0
-or %l0, 0, %l5
-or %l5, 0, %l0
-mov %l0, %o0
+or %l0, 0, %l0
+or %l0, 0, %l4
+mov %l4, %o0
 call cleanBoard
 nop
 .L8055:
-or %l4, 0, %l1
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-sethi %hi(0), %l3
-or %l3, %lo(0), %l3
-cmp %l1, %l0
-movl %icc, 1, %l3
-or %l6, 0, %l1
-sethi %hi(8), %l0
-or %l0, %lo(8), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-movne %icc, 1, %l2
-and %l3, %l2, %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l1, %l0
+or %l2, 0, %l5
+sethi %hi(0), %l4
+or %l4, %lo(0), %l4
+sethi %hi(0), %l7
+or %l7, %lo(0), %l7
+cmp %l5, %l4
+movl %icc, 1, %l7
+or %l1, 0, %l5
+sethi %hi(8), %l4
+or %l4, %lo(8), %l4
+sethi %hi(0), %l6
+or %l6, %lo(0), %l6
+cmp %l5, %l4
+movne %icc, 1, %l6
+and %l7, %l6, %l5
+sethi %hi(1), %l4
+or %l4, %lo(1), %l4
+cmp %l5, %l4
 be %icc, .L8068
 nop
 ba %icc, .L8155
 nop
 .L8068:
-or %l5, 0, %l0
-mov %l0, %o0
+or %l0, 0, %l2
+mov %l2, %o0
 call printBoard
 nop
-or %l7, 0, %l1
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
+or %l3, 0, %l4
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
-cmp %l1, %l0
-move %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
+sethi %hi(0), %l5
+or %l5, %lo(0), %l5
+cmp %l4, %l2
+move %icc, 1, %l5
+sethi %hi(1), %l2
+or %l2, %lo(1), %l2
+cmp %l5, %l2
 be %icc, .L8080
 nop
 ba %icc, .L8101
 nop
 .L8080:
-or %l7, 0, %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-add %l1, %l0, %l0
-or %l0, 0, %l7
+or %l3, 0, %l3
+sethi %hi(1), %l2
+or %l2, %lo(1), %l2
+add %l3, %l2, %l2
+or %l2, 0, %l3
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
 add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 92], %l0
-or %l0, 0, %l0
-or %l5, 0, %l2
-sethi %hi(1), %l1
-or %l1, %lo(1), %l1
-or %l0, 0, %l0
-mov %l2, %o0
-mov %l1, %o1
-mov %l0, %o2
+ldsw [%sp + 92], %l2
+or %l2, 0, %l2
+or %l0, 0, %l5
+sethi %hi(1), %l4
+or %l4, %lo(1), %l4
+or %l2, 0, %l2
+mov %l5, %o0
+mov %l4, %o1
+mov %l2, %o2
 call placePiece
 nop
 ba %icc, .L8125
 nop
 .L8101:
-or %l7, 0, %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-sub %l1, %l0, %l0
-or %l0, 0, %l7
+or %l3, 0, %l3
+sethi %hi(1), %l2
+or %l2, %lo(1), %l2
+sub %l3, %l2, %l2
+or %l2, 0, %l3
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
 add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 92], %l0
-or %l0, 0, %l0
-or %l5, 0, %l2
-sethi %hi(2), %l1
-or %l1, %lo(2), %l1
-or %l0, 0, %l0
-mov %l2, %o0
-mov %l1, %o1
-mov %l0, %o2
+ldsw [%sp + 92], %l2
+or %l2, 0, %l2
+or %l0, 0, %l5
+sethi %hi(2), %l4
+or %l4, %lo(2), %l4
+or %l2, 0, %l2
+mov %l5, %o0
+mov %l4, %o1
+mov %l2, %o2
 call placePiece
 nop
 ba %icc, .L8125
 nop
 .L8125:
-or %l5, 0, %l0
-mov %l0, %o0
+or %l0, 0, %l2
+mov %l2, %o0
 call checkWinner
 nop
-mov %o0, %l0
-or %l0, 0, %l4
-or %l6, 0, %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-add %l1, %l0, %l0
-or %l0, 0, %l6
+mov %o0, %l2
+or %l2, 0, %l2
+or %l1, 0, %l4
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
+add %l4, %l1, %l1
+or %l1, 0, %l1
 ba %icc, .L8055
 nop
 .L8155:
-or %l4, 0, %l1
+or %l2, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0

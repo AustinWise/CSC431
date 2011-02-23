@@ -65,22 +65,22 @@ sdivx %l1, %l0, %l0
 add %l2, %l0, %l1
 mov %i2, %l0
 add %l1, %l0, %l0
-or %l0, 0, %l0
-or %l0, 0, %l2
-mov %i1, %l1
-sethi %hi(0), %l3
-or %l3, %lo(0), %l3
-cmp %l2, %l1
-movg %icc, 1, %l3
-sethi %hi(1), %l1
-or %l1, %lo(1), %l1
-cmp %l3, %l1
+or %l0, 0, %l4
+or %l4, 0, %l1
+mov %i1, %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+movg %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
 be %icc, .L6616
 nop
 ba %icc, .L6627
 nop
 .L6616:
-or %l0, 0, %l1
+or %l4, 0, %l1
 mov %i0, %l0
 mov %l1, %o0
 mov %l0, %o1
@@ -93,30 +93,30 @@ restore
 ba %icc, .L6661
 nop
 .L6627:
-sethi %hi(5), %l2
-or %l2, %lo(5), %l2
-sethi %hi(6), %l1
-or %l1, %lo(6), %l1
-sethi %hi(0), %l4
-or %l4, %lo(0), %l4
-cmp %l2, %l1
-movl %icc, 1, %l4
-or %l0, 0, %l2
-mov %i1, %l1
+sethi %hi(5), %l1
+or %l1, %lo(5), %l1
+sethi %hi(6), %l0
+or %l0, %lo(6), %l0
 sethi %hi(0), %l3
 or %l3, %lo(0), %l3
-cmp %l2, %l1
-movle %icc, 1, %l3
-and %l4, %l3, %l2
-sethi %hi(1), %l1
-or %l1, %lo(1), %l1
-cmp %l2, %l1
+cmp %l1, %l0
+movl %icc, 1, %l3
+or %l4, 0, %l1
+mov %i1, %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+movle %icc, 1, %l2
+and %l3, %l2, %l1
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l1, %l0
 be %icc, .L6642
 nop
 ba %icc, .L6653
 nop
 .L6642:
-or %l0, 0, %l1
+or %l4, 0, %l1
 mov %i1, %l0
 mov %l1, %o0
 mov %l0, %o1
@@ -135,7 +135,7 @@ nop
 ba %icc, .L6661
 nop
 .L6661:
-or %l0, 0, %l0
+or %l4, 0, %l0
 or %l0, 0, %i0
 ret
 restore

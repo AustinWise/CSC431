@@ -57,16 +57,16 @@ sub %l1, %l0, %l0
 mov %l0, %o0
 call computeFib
 nop
-mov %o0, %l2
-mov %i0, %l1
-sethi %hi(2), %l0
-or %l0, %lo(2), %l0
-sub %l1, %l0, %l0
-mov %l0, %o0
+mov %o0, %l0
+mov %i0, %l2
+sethi %hi(2), %l1
+or %l1, %lo(2), %l1
+sub %l2, %l1, %l1
+mov %l1, %o0
 call computeFib
 nop
-mov %o0, %l0
-add %l2, %l0, %l0
+mov %o0, %l1
+add %l0, %l1, %l0
 or %l0, 0, %i0
 ret
 restore

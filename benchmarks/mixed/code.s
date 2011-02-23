@@ -65,105 +65,105 @@ or %g0, 12, %o1
 call calloc
 nop
 mov %o0, %l0
-or %l0, 0, %l1
-or %l1, 0, %l2
+or %l0, 0, %l2
+or %l2, 0, %l0
 or %g0, 1, %o0
 or %g0, 4, %o1
 call calloc
 nop
-mov %o0, %l0
-stw %l0, [%l2 + 8]
+mov %o0, %l1
+stw %l1, [%l0 + 8]
 or %g0, 1, %o0
 or %g0, 12, %o1
 call calloc
 nop
 mov %o0, %l0
-or %l0, 0, %l0
-or %l0, 0, %l3
+or %l0, 0, %l1
+or %l1, 0, %l0
 or %g0, 1, %o0
 or %g0, 4, %o1
 call calloc
 nop
-mov %o0, %l2
-stw %l2, [%l3 + 8]
+mov %o0, %l3
+stw %l3, [%l0 + 8]
+or %l2, 0, %l3
+mov %i0, %l0
+stw %l0, [%l3 + 0]
 or %l1, 0, %l3
-mov %i0, %l2
-stw %l2, [%l3 + 0]
-or %l0, 0, %l3
-sethi %hi(3), %l2
-or %l2, %lo(3), %l2
-stw %l2, [%l3 + 0]
-or %l1, 0, %l2
-ldsw [%l2 + 8], %l3
-or %l1, 0, %l2
-ldsw [%l2 + 0], %l2
-stw %l2, [%l3 + 0]
-or %l0, 0, %l2
-ldsw [%l2 + 8], %l3
-or %l0, 0, %l2
-ldsw [%l2 + 0], %l2
-stw %l2, [%l3 + 0]
+sethi %hi(3), %l0
+or %l0, %lo(3), %l0
+stw %l0, [%l3 + 0]
+or %l2, 0, %l0
+ldsw [%l0 + 8], %l3
+or %l2, 0, %l0
+ldsw [%l0 + 0], %l0
+stw %l0, [%l3 + 0]
+or %l1, 0, %l0
+ldsw [%l0 + 8], %l3
+or %l1, 0, %l0
+ldsw [%l0 + 0], %l0
+stw %l0, [%l3 + 0]
 .L3919:
 mov %i0, %l3
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
 sethi %hi(0), %l4
 or %l4, %lo(0), %l4
-cmp %l3, %l2
+cmp %l3, %l0
 movg %icc, 1, %l4
-sethi %hi(1), %l2
-or %l2, %lo(1), %l2
-cmp %l4, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l4, %l0
 be %icc, .L3925
 nop
 ba %icc, .L3994
 nop
 .L3925:
-or %l1, 0, %l2
-ldsw [%l2 + 0], %l3
-or %l0, 0, %l2
-ldsw [%l2 + 0], %l2
-mulx %l3, %l2, %l2
-or %l2, 0, %l2
-or %l2, 0, %l3
-or %l1, 0, %l2
-ldsw [%l2 + 8], %l2
-ldsw [%l2 + 0], %l2
-mulx %l3, %l2, %l3
-or %l0, 0, %l2
-ldsw [%l2 + 0], %l2
-sdivx %l3, %l2, %l2
-or %l2, 0, %l2
-or %l0, 0, %l2
-ldsw [%l2 + 8], %l2
-ldsw [%l2 + 0], %l3
-or %l1, 0, %l2
-ldsw [%l2 + 0], %l2
+or %l2, 0, %l0
+ldsw [%l0 + 0], %l3
+or %l1, 0, %l0
+ldsw [%l0 + 0], %l0
+mulx %l3, %l0, %l0
+or %l0, 0, %l0
+or %l0, 0, %l3
+or %l2, 0, %l0
+ldsw [%l0 + 8], %l0
+ldsw [%l0 + 0], %l0
+mulx %l3, %l0, %l3
+or %l1, 0, %l0
+ldsw [%l0 + 0], %l0
+sdivx %l3, %l0, %l0
+or %l0, 0, %l0
+or %l1, 0, %l0
+ldsw [%l0 + 8], %l0
+ldsw [%l0 + 0], %l3
+or %l2, 0, %l0
+ldsw [%l0 + 0], %l0
 mov %l3, %o0
-mov %l2, %o1
+mov %l0, %o1
 call add
 nop
-mov %o0, %l2
-or %l2, 0, %l2
-or %l0, 0, %l2
-ldsw [%l2 + 0], %l3
-or %l1, 0, %l2
-ldsw [%l2 + 0], %l2
-sub %l3, %l2, %l2
-or %l2, 0, %l2
+mov %o0, %l0
+or %l0, 0, %l0
+or %l1, 0, %l0
+ldsw [%l0 + 0], %l3
+or %l2, 0, %l0
+ldsw [%l0 + 0], %l0
+sub %l3, %l0, %l0
+or %l0, 0, %l0
 mov %i0, %l3
-sethi %hi(1), %l2
-or %l2, %lo(1), %l2
-sub %l3, %l2, %l2
-mov %l2, %i0
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+sub %l3, %l0, %l0
+mov %l0, %i0
 ba %icc, .L3919
 nop
 .L3994:
-or %l1, 0, %l1
-mov %l1, %o0
+or %l2, 0, %l0
+mov %l0, %o0
 call free
 nop
-or %l0, 0, %l0
+or %l1, 0, %l0
 mov %l0, %o0
 call free
 nop

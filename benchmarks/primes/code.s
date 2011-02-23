@@ -6,38 +6,38 @@ isqrt:
 save %sp, -96, %sp
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-or %l0, 0, %l1
+or %l0, 0, %l4
 sethi %hi(3), %l0
 or %l0, %lo(3), %l0
-or %l0, 0, %l0
+or %l0, 0, %l3
 .L6345:
-or %l1, 0, %l3
-mov %i0, %l2
-sethi %hi(0), %l4
-or %l4, %lo(0), %l4
-cmp %l3, %l2
-movle %icc, 1, %l4
-sethi %hi(1), %l2
-or %l2, %lo(1), %l2
-cmp %l4, %l2
+or %l4, 0, %l1
+mov %i0, %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+movle %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
 be %icc, .L6352
 nop
 ba %icc, .L6380
 nop
 .L6352:
-or %l1, 0, %l2
-or %l0, 0, %l1
-add %l2, %l1, %l1
-or %l1, 0, %l1
-or %l0, 0, %l2
+or %l4, 0, %l1
+or %l3, 0, %l0
+add %l1, %l0, %l0
+or %l0, 0, %l4
+or %l3, 0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
-add %l2, %l0, %l0
-or %l0, 0, %l0
+add %l1, %l0, %l0
+or %l0, 0, %l3
 ba %icc, .L6345
 nop
 .L6380:
-or %l0, 0, %l1
+or %l3, 0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 sdivx %l1, %l0, %l1
@@ -81,43 +81,43 @@ mov %l0, %o0
 call isqrt
 nop
 mov %o0, %l0
-or %l0, 0, %l2
+or %l0, 0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
-or %l0, 0, %l1
+or %l0, 0, %l0
 .L6420:
-or %l1, 0, %l3
-or %l2, 0, %l0
+or %l0, 0, %l3
+or %l1, 0, %l2
 sethi %hi(0), %l4
 or %l4, %lo(0), %l4
-cmp %l3, %l0
+cmp %l3, %l2
 movle %icc, 1, %l4
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l4, %l0
+sethi %hi(1), %l2
+or %l2, %lo(1), %l2
+cmp %l4, %l2
 be %icc, .L6427
 nop
 ba %icc, .L6479
 nop
 .L6427:
-mov %i0, %l0
 mov %i0, %l4
-or %l1, 0, %l3
-sdivx %l4, %l3, %l4
-or %l1, 0, %l3
-mulx %l4, %l3, %l3
-sub %l0, %l3, %l0
-or %l0, 0, %l0
-or %l0, 0, %l3
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
+mov %i0, %l3
+or %l0, 0, %l2
+sdivx %l3, %l2, %l3
+or %l0, 0, %l2
+mulx %l3, %l2, %l2
+sub %l4, %l2, %l2
+or %l2, 0, %l2
+or %l2, 0, %l3
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
 sethi %hi(0), %l4
 or %l4, %lo(0), %l4
-cmp %l3, %l0
+cmp %l3, %l2
 move %icc, 1, %l4
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l4, %l0
+sethi %hi(1), %l2
+or %l2, %lo(1), %l2
+cmp %l4, %l2
 be %icc, .L6452
 nop
 ba %icc, .L6457
@@ -134,11 +134,11 @@ nop
 ba %icc, .L6462
 nop
 .L6462:
-or %l1, 0, %l1
+or %l0, 0, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-add %l1, %l0, %l0
-or %l0, 0, %l1
+add %l2, %l0, %l0
+or %l0, 0, %l0
 ba %icc, .L6420
 nop
 .L6479:
