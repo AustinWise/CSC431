@@ -117,15 +117,15 @@ restore
 	.global main
 .type    main, #function
 main:
-save %sp, -96, %sp
+save %sp, -104, %sp
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 92, %o1
+add %sp, 96, %o1
 call scanf
 nop
+ldsw [%sp + 96], %l0
+stw %l0, [%sp + 92]
 ldsw [%sp + 92], %l0
-or %l0, 0, %l0
-or %l0, 0, %l0
 mov %l0, %o0
 call hailstone
 nop

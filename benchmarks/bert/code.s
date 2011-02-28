@@ -5,7 +5,7 @@
 concatLists:
 save %sp, -104, %sp
 mov %i0, %l0
-or %l0, 0, %l3
+stw %l0, [%sp + 100]
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -16,22 +16,22 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L42
+be %icc, .L51
 nop
-ba %icc, .L70
+ba %icc, .L84
 nop
-.L42:
+.L51:
 mov %i1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L107
+ba %icc, .L106
 nop
-.L70:
-ba %icc, .L107
+.L84:
+ba %icc, .L106
 nop
-.L107:
-or %l3, 0, %l0
+.L106:
+ldsw [%sp + 100], %l0
 ldsw [%l0 + 4], %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -42,18 +42,18 @@ movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L122
+be %icc, .L118
 nop
-ba %icc, .L142
+ba %icc, .L289
 nop
-.L122:
-or %l3, 0, %l0
+.L118:
+ldsw [%sp + 100], %l0
 ldsw [%l0 + 4], %l0
-or %l0, 0, %l3
-ba %icc, .L107
+stw %l0, [%sp + 100]
+ba %icc, .L106
 nop
-.L142:
-or %l3, 0, %l1
+.L289:
+ldsw [%sp + 100], %l1
 mov %i1, %l0
 stw %l0, [%l1 + 4]
 mov %i0, %l0
@@ -71,14 +71,14 @@ or %g0, 8, %o1
 call calloc
 nop
 mov %o0, %l0
-or %l0, 0, %l2
-or %l2, 0, %l1
+stw %l0, [%sp + 100]
+ldsw [%sp + 100], %l1
 mov %i1, %l0
 stw %l0, [%l1 + 0]
-or %l2, 0, %l1
+ldsw [%sp + 100], %l1
 mov %i0, %l0
 stw %l0, [%l1 + 4]
-or %l2, 0, %l0
+ldsw [%sp + 100], %l0
 or %l0, 0, %i0
 ret
 restore
@@ -98,22 +98,22 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L217
+be %icc, .L400
 nop
-ba %icc, .L222
+ba %icc, .L405
 nop
-.L217:
+.L400:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L227
+ba %icc, .L410
 nop
-.L222:
-ba %icc, .L227
+.L405:
+ba %icc, .L410
 nop
-.L227:
+.L410:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 mov %i0, %l1
@@ -142,22 +142,22 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L664
+be %icc, .L432
 nop
-ba %icc, .L672
+ba %icc, .L439
 nop
-.L664:
+.L432:
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L677
+ba %icc, .L444
 nop
-.L672:
-ba %icc, .L677
+.L439:
+ba %icc, .L444
 nop
-.L677:
+.L444:
 mov %i0, %l0
 ldsw [%l0 + 4], %l2
 mov %i1, %l1
@@ -201,11 +201,11 @@ movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L718
+be %icc, .L489
 nop
-ba %icc, .L730
+ba %icc, .L762
 nop
-.L718:
+.L489:
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
 sethi %hi(.ConstantString1), %o0
@@ -218,12 +218,12 @@ ldsw [%l0 + 4], %l0
 mov %l0, %o0
 call printList
 nop
-ba %icc, .L735
+ba %icc, .L767
 nop
-.L730:
-ba %icc, .L735
+.L762:
+ba %icc, .L767
 nop
-.L735:
+.L767:
 ret
 restore
 	.size    printList, .-printList
@@ -242,11 +242,11 @@ movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L747
+be %icc, .L842
 nop
-ba %icc, .L764
+ba %icc, .L871
 nop
-.L747:
+.L842:
 mov %i0, %l0
 ldsw [%l0 + 4], %l0
 mov %l0, %o0
@@ -264,12 +264,12 @@ ldsw [%l0 + 8], %l0
 mov %l0, %o0
 call treeprint
 nop
-ba %icc, .L769
+ba %icc, .L876
 nop
-.L764:
-ba %icc, .L769
+.L871:
+ba %icc, .L876
 nop
-.L769:
+.L876:
 ret
 restore
 	.size    treeprint, .-treeprint
@@ -288,11 +288,11 @@ movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L781
+be %icc, .L888
 nop
-ba %icc, .L793
+ba %icc, .L899
 nop
-.L781:
+.L888:
 mov %i0, %l0
 ldsw [%l0 + 4], %l0
 mov %l0, %o0
@@ -302,12 +302,12 @@ mov %i0, %l0
 mov %l0, %o0
 call free
 nop
-ba %icc, .L798
+ba %icc, .L904
 nop
-.L793:
-ba %icc, .L798
+.L899:
+ba %icc, .L904
 nop
-.L798:
+.L904:
 ret
 restore
 	.size    freeList, .-freeList
@@ -327,11 +327,11 @@ xor %l2, 1, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L824
+be %icc, .L920
 nop
-ba %icc, .L840
+ba %icc, .L936
 nop
-.L824:
+.L920:
 mov %i0, %l0
 ldsw [%l0 + 4], %l0
 mov %l0, %o0
@@ -346,12 +346,12 @@ mov %i0, %l0
 mov %l0, %o0
 call free
 nop
-ba %icc, .L845
+ba %icc, .L941
 nop
-.L840:
-ba %icc, .L845
+.L936:
+ba %icc, .L941
 nop
-.L845:
+.L941:
 ret
 restore
 	.size    freeTree, .-freeTree
@@ -359,7 +359,7 @@ restore
 	.global postOrder
 .type    postOrder, #function
 postOrder:
-save %sp, -96, %sp
+save %sp, -104, %sp
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -370,44 +370,44 @@ movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L857
+be %icc, .L953
 nop
-ba %icc, .L915
+ba %icc, .L991
 nop
-.L857:
+.L953:
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
 nop
 mov %o0, %l0
-or %l0, 0, %l1
-or %l1, 0, %l2
+stw %l0, [%sp + 96]
+ldsw [%sp + 96], %l1
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
-stw %l0, [%l2 + 0]
-or %l1, 0, %l2
+stw %l0, [%l1 + 0]
+ldsw [%sp + 96], %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-stw %l0, [%l2 + 4]
+stw %l0, [%l1 + 4]
 mov %i0, %l0
 ldsw [%l0 + 4], %l0
 mov %l0, %o0
 call postOrder
 nop
 mov %o0, %l0
-mov %i0, %l2
-ldsw [%l2 + 8], %l2
-mov %l2, %o0
+mov %i0, %l1
+ldsw [%l1 + 8], %l1
+mov %l1, %o0
 call postOrder
 nop
-mov %o0, %l2
+mov %o0, %l1
 mov %l0, %o0
-mov %l2, %o1
+mov %l1, %o1
 call concatLists
 nop
-mov %o0, %l2
-or %l1, 0, %l0
-mov %l2, %o0
+mov %o0, %l1
+ldsw [%sp + 96], %l0
+mov %l1, %o0
 mov %l0, %o1
 call concatLists
 nop
@@ -415,12 +415,12 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L920
+ba %icc, .L996
 nop
-.L915:
-ba %icc, .L920
+.L991:
+ba %icc, .L996
 nop
-.L920:
+.L996:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
@@ -442,38 +442,38 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L935
+be %icc, .L1011
 nop
-ba %icc, .L961
+ba %icc, .L1037
 nop
-.L935:
+.L1011:
 or %g0, 1, %o0
 or %g0, 12, %o1
 call calloc
 nop
 mov %o0, %l0
-or %l0, 0, %l2
-or %l2, 0, %l1
+stw %l0, [%sp + 100]
+ldsw [%sp + 100], %l1
 mov %i1, %l0
 stw %l0, [%l1 + 0]
-or %l2, 0, %l1
+ldsw [%sp + 100], %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 stw %l0, [%l1 + 4]
-or %l2, 0, %l1
+ldsw [%sp + 100], %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 stw %l0, [%l1 + 8]
-or %l2, 0, %l0
+ldsw [%sp + 100], %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L966
+ba %icc, .L1042
 nop
-.L961:
-ba %icc, .L966
+.L1037:
+ba %icc, .L1042
 nop
-.L966:
+.L1042:
 mov %i1, %l1
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
@@ -524,13 +524,13 @@ restore
 	.global quickSort
 .type    quickSort, #function
 quickSort:
-save %sp, -96, %sp
+save %sp, -120, %sp
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l4
+stw %l0, [%sp + 104]
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l5
+stw %l0, [%sp + 108]
 mov %i0, %l0
 mov %l0, %o0
 call size
@@ -586,90 +586,90 @@ add %l1, %l0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 sdivx %l1, %l0, %l0
-or %l0, 0, %l3
+stw %l0, [%sp + 96]
 mov %i0, %l0
-or %l0, 0, %l1
+stw %l0, [%sp + 112]
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l2
+stw %l0, [%sp + 100]
 .L1153:
-or %l1, 0, %l6
+ldsw [%sp + 112], %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sethi %hi(0), %l7
-or %l7, %lo(0), %l7
-cmp %l6, %l0
-movne %icc, 1, %l7
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-cmp %l7, %l0
+cmp %l2, %l0
 be %icc, .L1159
 nop
 ba %icc, .L1232
 nop
 .L1159:
-mov %i0, %l6
-or %l2, 0, %l0
-mov %l6, %o0
+mov %i0, %l1
+ldsw [%sp + 100], %l0
+mov %l1, %o0
 mov %l0, %o1
 call get
 nop
-mov %o0, %l6
-or %l3, 0, %l0
-sethi %hi(0), %l7
-or %l7, %lo(0), %l7
-cmp %l6, %l0
-movg %icc, 1, %l7
+mov %o0, %l1
+ldsw [%sp + 96], %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-cmp %l7, %l0
+cmp %l2, %l0
 be %icc, .L1173
 nop
 ba %icc, .L1190
 nop
 .L1173:
-or %l5, 0, %l0
-mov %i0, %l6
-or %l2, 0, %l5
-mov %l6, %o0
-mov %l5, %o1
+ldsw [%sp + 108], %l0
+mov %i0, %l2
+ldsw [%sp + 100], %l1
+mov %l2, %o0
+mov %l1, %o1
 call get
 nop
-mov %o0, %l5
+mov %o0, %l1
 mov %l0, %o0
-mov %l5, %o1
+mov %l1, %o1
 call add
 nop
 mov %o0, %l0
-or %l0, 0, %l5
+stw %l0, [%sp + 108]
 ba %icc, .L1210
 nop
 .L1190:
-or %l4, 0, %l0
-mov %i0, %l6
-or %l2, 0, %l4
-mov %l6, %o0
-mov %l4, %o1
+ldsw [%sp + 104], %l0
+mov %i0, %l2
+ldsw [%sp + 100], %l1
+mov %l2, %o0
+mov %l1, %o1
 call get
 nop
-mov %o0, %l4
+mov %o0, %l1
 mov %l0, %o0
-mov %l4, %o1
+mov %l1, %o1
 call add
 nop
 mov %o0, %l0
-or %l0, 0, %l4
+stw %l0, [%sp + 104]
 ba %icc, .L1210
 nop
 .L1210:
-or %l1, 0, %l0
+ldsw [%sp + 112], %l0
 ldsw [%l0 + 4], %l0
-or %l0, 0, %l1
-or %l2, 0, %l2
+stw %l0, [%sp + 112]
+ldsw [%sp + 100], %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-add %l2, %l0, %l0
-or %l0, 0, %l2
+add %l1, %l0, %l0
+stw %l0, [%sp + 100]
 ba %icc, .L1153
 nop
 .L1232:
@@ -677,12 +677,12 @@ mov %i0, %l0
 mov %l0, %o0
 call freeList
 nop
-or %l4, 0, %l0
+ldsw [%sp + 104], %l0
 mov %l0, %o0
 call quickSort
 nop
 mov %o0, %l0
-or %l5, 0, %l1
+ldsw [%sp + 108], %l1
 mov %l1, %o0
 call quickSort
 nop
@@ -891,7 +891,7 @@ restore
 	.global inOrder
 .type    inOrder, #function
 inOrder:
-save %sp, -96, %sp
+save %sp, -104, %sp
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -912,22 +912,22 @@ or %g0, 8, %o1
 call calloc
 nop
 mov %o0, %l0
-or %l0, 0, %l0
-or %l0, 0, %l2
-mov %i0, %l1
-ldsw [%l1 + 0], %l1
-stw %l1, [%l2 + 0]
-or %l0, 0, %l2
-sethi %hi(0), %l1
-or %l1, %lo(0), %l1
-stw %l1, [%l2 + 4]
-mov %i0, %l1
-ldsw [%l1 + 4], %l1
-mov %l1, %o0
+stw %l0, [%sp + 96]
+ldsw [%sp + 96], %l1
+mov %i0, %l0
+ldsw [%l0 + 0], %l0
+stw %l0, [%l1 + 0]
+ldsw [%sp + 96], %l1
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+stw %l0, [%l1 + 4]
+mov %i0, %l0
+ldsw [%l0 + 4], %l0
+mov %l0, %o0
 call inOrder
 nop
 mov %o0, %l1
-or %l0, 0, %l0
+ldsw [%sp + 96], %l0
 mov %i0, %l2
 ldsw [%l2 + 8], %l2
 mov %l2, %o0
@@ -1074,36 +1074,36 @@ restore
 	.global buildTree
 .type    buildTree, #function
 buildTree:
-save %sp, -96, %sp
+save %sp, -104, %sp
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l1
+stw %l0, [%sp + 100]
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l2
+stw %l0, [%sp + 96]
 .L1525:
-or %l2, 0, %l0
-mov %i0, %l3
-mov %l3, %o0
+ldsw [%sp + 96], %l0
+mov %i0, %l1
+mov %l1, %o0
 call size
 nop
-mov %o0, %l3
-sethi %hi(0), %l4
-or %l4, %lo(0), %l4
-cmp %l0, %l3
-movl %icc, 1, %l4
+mov %o0, %l1
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l0, %l1
+movl %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-cmp %l4, %l0
+cmp %l2, %l0
 be %icc, .L1534
 nop
 ba %icc, .L1570
 nop
 .L1534:
-or %l1, 0, %l0
-mov %i0, %l3
-or %l2, 0, %l1
-mov %l3, %o0
+ldsw [%sp + 100], %l0
+mov %i0, %l2
+ldsw [%sp + 96], %l1
+mov %l2, %o0
 mov %l1, %o1
 call get
 nop
@@ -1113,16 +1113,16 @@ mov %l1, %o1
 call treeadd
 nop
 mov %o0, %l0
-or %l0, 0, %l1
-or %l2, 0, %l2
+stw %l0, [%sp + 100]
+ldsw [%sp + 96], %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-add %l2, %l0, %l0
-or %l0, 0, %l2
+add %l1, %l0, %l0
+stw %l0, [%sp + 96]
 ba %icc, .L1525
 nop
 .L1570:
-or %l1, 0, %l0
+ldsw [%sp + 100], %l0
 or %l0, 0, %i0
 ret
 restore
@@ -1131,79 +1131,79 @@ restore
 	.global treeMain
 .type    treeMain, #function
 treeMain:
-save %sp, -96, %sp
+save %sp, -112, %sp
 mov %i0, %l0
 mov %l0, %o0
 call buildTree
 nop
 mov %o0, %l0
-or %l0, 0, %l1
-or %l1, 0, %l0
+stw %l0, [%sp + 96]
+ldsw [%sp + 96], %l0
 mov %l0, %o0
 call treeprint
 nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l0
+ldsw [%sp + 96], %l0
 mov %l0, %o0
 call inOrder
 nop
 mov %o0, %l0
-or %l0, 0, %l0
-or %l0, 0, %l2
-mov %l2, %o0
+stw %l0, [%sp + 100]
+ldsw [%sp + 100], %l0
+mov %l0, %o0
 call printList
 nop
-sethi %hi(999), %l3
-or %l3, %lo(999), %l3
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-sub %l2, %l3, %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l2, %o1
+mov %l0, %o1
 call printf
 nop
-or %l0, 0, %l0
+ldsw [%sp + 100], %l0
 mov %l0, %o0
 call freeList
 nop
-or %l1, 0, %l0
+ldsw [%sp + 96], %l0
 mov %l0, %o0
 call postOrder
 nop
 mov %o0, %l0
-or %l0, 0, %l0
-or %l0, 0, %l2
-mov %l2, %o0
+stw %l0, [%sp + 104]
+ldsw [%sp + 104], %l0
+mov %l0, %o0
 call printList
 nop
-sethi %hi(999), %l3
-or %l3, %lo(999), %l3
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-sub %l2, %l3, %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l2, %o1
+mov %l0, %o1
 call printf
 nop
-or %l0, 0, %l0
+ldsw [%sp + 104], %l0
 mov %l0, %o0
 call freeList
 nop
-or %l1, 0, %l2
+ldsw [%sp + 96], %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-mov %l2, %o0
+mov %l1, %o0
 mov %l0, %o1
 call treesearch
 nop
@@ -1213,19 +1213,45 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l2
+ldsw [%sp + 96], %l1
 sethi %hi(10), %l0
 or %l0, %lo(10), %l0
+mov %l1, %o0
+mov %l0, %o1
+call treesearch
+nop
+mov %o0, %l0
+sethi %hi(.ConstantString1), %o0
+or %o0, %lo(.ConstantString1), %o0
+mov %l0, %o1
+call printf
+nop
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+sub %l0, %l1, %l0
+sethi %hi(.ConstantString1), %o0
+or %o0, %lo(.ConstantString1), %o0
+mov %l0, %o1
+call printf
+nop
+ldsw [%sp + 96], %l2
+sethi %hi(2), %l1
+or %l1, %lo(2), %l1
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+sub %l0, %l1, %l0
 mov %l2, %o0
 mov %l0, %o1
 call treesearch
@@ -1236,46 +1262,20 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l3
-sethi %hi(2), %l2
-or %l2, %lo(2), %l2
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
-mov %l3, %o0
-mov %l0, %o1
-call treesearch
-nop
-mov %o0, %l0
-sethi %hi(.ConstantString1), %o0
-or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
-call printf
-nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
-sethi %hi(.ConstantString1), %o0
-or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
-call printf
-nop
-or %l1, 0, %l2
+ldsw [%sp + 96], %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
-mov %l2, %o0
+mov %l1, %o0
 mov %l0, %o1
 call treesearch
 nop
@@ -1285,20 +1285,20 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l2
+ldsw [%sp + 96], %l1
 sethi %hi(3), %l0
 or %l0, %lo(3), %l0
-mov %l2, %o0
+mov %l1, %o0
 mov %l0, %o1
 call treesearch
 nop
@@ -1308,20 +1308,20 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l2
+ldsw [%sp + 96], %l1
 sethi %hi(9), %l0
 or %l0, %lo(9), %l0
-mov %l2, %o0
+mov %l1, %o0
 mov %l0, %o1
 call treesearch
 nop
@@ -1331,20 +1331,20 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l2
+ldsw [%sp + 96], %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-mov %l2, %o0
+mov %l1, %o0
 mov %l0, %o1
 call treesearch
 nop
@@ -1354,20 +1354,20 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l2
+ldsw [%sp + 96], %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-mov %l2, %o0
+mov %l1, %o0
 mov %l0, %o1
 call bintreesearch
 nop
@@ -1377,19 +1377,45 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l2
+ldsw [%sp + 96], %l1
 sethi %hi(10), %l0
 or %l0, %lo(10), %l0
+mov %l1, %o0
+mov %l0, %o1
+call bintreesearch
+nop
+mov %o0, %l0
+sethi %hi(.ConstantString1), %o0
+or %o0, %lo(.ConstantString1), %o0
+mov %l0, %o1
+call printf
+nop
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+sub %l0, %l1, %l0
+sethi %hi(.ConstantString1), %o0
+or %o0, %lo(.ConstantString1), %o0
+mov %l0, %o1
+call printf
+nop
+ldsw [%sp + 96], %l2
+sethi %hi(2), %l1
+or %l1, %lo(2), %l1
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+sub %l0, %l1, %l0
 mov %l2, %o0
 mov %l0, %o1
 call bintreesearch
@@ -1400,46 +1426,20 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l3
-sethi %hi(2), %l2
-or %l2, %lo(2), %l2
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
-mov %l3, %o0
-mov %l0, %o1
-call bintreesearch
-nop
-mov %o0, %l0
-sethi %hi(.ConstantString1), %o0
-or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
-call printf
-nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
-sethi %hi(.ConstantString1), %o0
-or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
-call printf
-nop
-or %l1, 0, %l2
+ldsw [%sp + 96], %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
-mov %l2, %o0
+mov %l1, %o0
 mov %l0, %o1
 call bintreesearch
 nop
@@ -1449,20 +1449,20 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l2
+ldsw [%sp + 96], %l1
 sethi %hi(3), %l0
 or %l0, %lo(3), %l0
-mov %l2, %o0
+mov %l1, %o0
 mov %l0, %o1
 call bintreesearch
 nop
@@ -1472,20 +1472,20 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l2
+ldsw [%sp + 96], %l1
 sethi %hi(9), %l0
 or %l0, %lo(9), %l0
-mov %l2, %o0
+mov %l1, %o0
 mov %l0, %o1
 call bintreesearch
 nop
@@ -1495,20 +1495,20 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l2
+ldsw [%sp + 96], %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-mov %l2, %o0
+mov %l1, %o0
 mov %l0, %o1
 call bintreesearch
 nop
@@ -1518,17 +1518,17 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-sethi %hi(999), %l2
-or %l2, %lo(999), %l2
+sethi %hi(999), %l1
+or %l1, %lo(999), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
+sub %l0, %l1, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l0
+ldsw [%sp + 96], %l0
 mov %l0, %o0
 call freeTree
 nop
@@ -1594,24 +1594,24 @@ restore
 	.global main
 .type    main, #function
 main:
-save %sp, -96, %sp
+save %sp, -120, %sp
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+stw %l0, [%sp + 100]
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+stw %l0, [%sp + 92]
+.L1860:
+ldsw [%sp + 92], %l1
+sethi %hi(10), %l0
+or %l0, %lo(10), %l0
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
-or %l2, 0, %l2
-sethi %hi(0), %l3
-or %l3, %lo(0), %l3
-or %l3, 0, %l3
-.L1860:
-or %l3, 0, %l5
-sethi %hi(10), %l4
-or %l4, %lo(10), %l4
-sethi %hi(0), %l6
-or %l6, %lo(0), %l6
-cmp %l5, %l4
-movl %icc, 1, %l6
-sethi %hi(1), %l4
-or %l4, %lo(1), %l4
-cmp %l6, %l4
+cmp %l1, %l0
+movl %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
 be %icc, .L1866
 nop
 ba %icc, .L1925
@@ -1619,62 +1619,62 @@ nop
 .L1866:
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 92, %o1
+add %sp, 116, %o1
 call scanf
 nop
-ldsw [%sp + 92], %l0
-or %l0, 0, %l0
-or %l2, 0, %l1
-or %l0, 0, %l0
+ldsw [%sp + 116], %l0
+stw %l0, [%sp + 96]
+ldsw [%sp + 100], %l1
+ldsw [%sp + 96], %l0
 mov %l1, %o0
 mov %l0, %o1
 call add
 nop
 mov %o0, %l0
-or %l0, 0, %l2
-or %l2, 0, %l0
+stw %l0, [%sp + 100]
+ldsw [%sp + 100], %l0
 mov %l0, %o0
 call myCopy
 nop
 mov %o0, %l0
-or %l0, 0, %l1
-or %l2, 0, %l0
+stw %l0, [%sp + 104]
+ldsw [%sp + 100], %l0
 mov %l0, %o0
 call myCopy
 nop
 mov %o0, %l0
-or %l0, 0, %l0
-or %l1, 0, %l4
-mov %l4, %o0
+stw %l0, [%sp + 108]
+ldsw [%sp + 104], %l0
+mov %l0, %o0
 call quickSortMain
 nop
-mov %o0, %l4
-or %l4, 0, %l4
-or %l4, 0, %l4
-mov %l4, %o0
+mov %o0, %l0
+stw %l0, [%sp + 112]
+ldsw [%sp + 112], %l0
+mov %l0, %o0
 call freeList
 nop
-or %l0, 0, %l4
-mov %l4, %o0
+ldsw [%sp + 108], %l0
+mov %l0, %o0
 call treeMain
 nop
-or %l3, 0, %l4
-sethi %hi(1), %l3
-or %l3, %lo(1), %l3
-add %l4, %l3, %l3
-or %l3, 0, %l3
+ldsw [%sp + 92], %l1
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+add %l1, %l0, %l0
+stw %l0, [%sp + 92]
 ba %icc, .L1860
 nop
 .L1925:
-or %l2, 0, %l2
-mov %l2, %o0
+ldsw [%sp + 100], %l0
+mov %l0, %o0
 call freeList
 nop
-or %l1, 0, %l1
-mov %l1, %o0
+ldsw [%sp + 104], %l0
+mov %l0, %o0
 call freeList
 nop
-or %l0, 0, %l0
+ldsw [%sp + 108], %l0
 mov %l0, %o0
 call freeList
 nop

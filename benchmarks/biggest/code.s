@@ -3,60 +3,60 @@
 	.global getIntList
 .type    getIntList, #function
 getIntList:
-save %sp, -96, %sp
+save %sp, -104, %sp
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
 nop
 mov %o0, %l0
-or %l0, 0, %l1
+stw %l0, [%sp + 92]
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 92, %o1
+add %sp, 100, %o1
 call scanf
 nop
-ldsw [%sp + 92], %l0
-or %l0, 0, %l4
-or %l4, 0, %l3
-sethi %hi(1), %l2
-or %l2, %lo(1), %l2
+ldsw [%sp + 100], %l0
+stw %l0, [%sp + 96]
+ldsw [%sp + 96], %l2
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sub %l0, %l2, %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l3, %l0
-move %icc, 1, %l2
+sub %l0, %l1, %l0
+sethi %hi(0), %l1
+or %l1, %lo(0), %l1
+cmp %l2, %l0
+move %icc, 1, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L80
+cmp %l1, %l0
+be %icc, .L76
 nop
 ba %icc, .L86
 nop
-.L80:
-or %l1, 0, %l0
+.L76:
+ldsw [%sp + 92], %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L291
+ba %icc, .L146
 nop
 .L86:
-or %l1, 0, %l2
-or %l4, 0, %l0
-stw %l0, [%l2 + 0]
-or %l1, 0, %l0
+ldsw [%sp + 92], %l1
+ldsw [%sp + 96], %l0
+stw %l0, [%l1 + 0]
+ldsw [%sp + 92], %l0
 call getIntList
 nop
-mov %o0, %l2
-stw %l2, [%l0 + 4]
-or %l1, 0, %l0
+mov %o0, %l1
+stw %l1, [%l0 + 4]
+ldsw [%sp + 92], %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L291
+ba %icc, .L146
 nop
-.L291:
+.L146:
 	.size    getIntList, .-getIntList
 	.align 4
 	.global biggest
@@ -72,35 +72,35 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L304
+be %icc, .L163
 nop
-ba %icc, .L310
+ba %icc, .L169
 nop
-.L304:
+.L163:
 mov %i0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L319
+ba %icc, .L181
 nop
-.L310:
+.L169:
 mov %i1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L319
+ba %icc, .L181
 nop
-.L319:
+.L181:
 	.size    biggest, .-biggest
 	.align 4
 	.global biggestInList
 .type    biggestInList, #function
 biggestInList:
-save %sp, -96, %sp
+save %sp, -104, %sp
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
-or %l0, 0, %l3
-.L331:
+stw %l0, [%sp + 96]
+.L199:
 mov %i0, %l0
 ldsw [%l0 + 4], %l1
 sethi %hi(0), %l0
@@ -112,12 +112,12 @@ movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L338
+be %icc, .L210
 nop
-ba %icc, .L366
+ba %icc, .L262
 nop
-.L338:
-or %l3, 0, %l1
+.L210:
+ldsw [%sp + 96], %l1
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
 mov %l1, %o0
@@ -125,14 +125,14 @@ mov %l0, %o1
 call biggest
 nop
 mov %o0, %l0
-or %l0, 0, %l3
+stw %l0, [%sp + 96]
 mov %i0, %l0
 ldsw [%l0 + 4], %l0
 mov %l0, %i0
-ba %icc, .L331
+ba %icc, .L199
 nop
-.L366:
-or %l3, 0, %l0
+.L262:
+ldsw [%sp + 96], %l0
 or %l0, 0, %i0
 ret
 restore
@@ -145,8 +145,8 @@ save %sp, -96, %sp
 call getIntList
 nop
 mov %o0, %l0
-or %l0, 0, %l0
-or %l0, 0, %l0
+stw %l0, [%sp + 92]
+ldsw [%sp + 92], %l0
 mov %l0, %o0
 call biggestInList
 nop

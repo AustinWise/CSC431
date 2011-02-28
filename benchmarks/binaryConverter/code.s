@@ -15,11 +15,11 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L44
+be %icc, .L40
 nop
-ba %icc, .L112
+ba %icc, .L232
 nop
-.L44:
+.L40:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -27,7 +27,7 @@ sub %l1, %l0, %l0
 mov %l0, %i0
 ba %icc, .L15
 nop
-.L112:
+.L232:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
@@ -41,8 +41,8 @@ power:
 save %sp, -104, %sp
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-or %l0, 0, %l3
-.L169:
+stw %l0, [%sp + 100]
+.L352:
 mov %i1, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -53,24 +53,24 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L175
+be %icc, .L361
 nop
-ba %icc, .L254
+ba %icc, .L508
 nop
-.L175:
-or %l3, 0, %l1
+.L361:
+ldsw [%sp + 100], %l1
 mov %i0, %l0
 mulx %l1, %l0, %l0
-or %l0, 0, %l3
+stw %l0, [%sp + 100]
 mov %i1, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sub %l1, %l0, %l0
 mov %l0, %i1
-ba %icc, .L169
+ba %icc, .L352
 nop
-.L254:
-or %l3, 0, %l0
+.L508:
+ldsw [%sp + 100], %l0
 or %l0, 0, %i0
 ret
 restore
@@ -79,7 +79,7 @@ restore
 	.global recursiveDecimalSum
 .type    recursiveDecimalSum, #function
 recursiveDecimalSum:
-save %sp, -104, %sp
+save %sp, -120, %sp
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -90,45 +90,45 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L270
+be %icc, .L524
 nop
-ba %icc, .L451
+ba %icc, .L612
 nop
-.L270:
+.L524:
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
-or %l0, 0, %l1
-mov %i0, %l2
+stw %l0, [%sp + 108]
+mov %i0, %l1
 sethi %hi(10), %l0
 or %l0, %lo(10), %l0
-sdivx %l2, %l0, %l0
-or %l0, 0, %l0
-or %l0, 0, %l2
+sdivx %l1, %l0, %l0
+stw %l0, [%sp + 104]
+ldsw [%sp + 104], %l1
 sethi %hi(10), %l0
 or %l0, %lo(10), %l0
-mulx %l2, %l0, %l0
-or %l0, 0, %l0
-mov %i0, %l2
-or %l0, 0, %l0
-sub %l2, %l0, %l0
-or %l0, 0, %l0
-or %l0, 0, %l2
+mulx %l1, %l0, %l0
+stw %l0, [%sp + 104]
+mov %i0, %l1
+ldsw [%sp + 104], %l0
+sub %l1, %l0, %l0
+stw %l0, [%sp + 104]
+ldsw [%sp + 104], %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-sethi %hi(0), %l3
-or %l3, %lo(0), %l3
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+move %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
 cmp %l2, %l0
-move %icc, 1, %l3
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l3, %l0
-be %icc, .L404
+be %icc, .L573
 nop
-ba %icc, .L421
+ba %icc, .L589
 nop
-.L404:
+.L573:
 mov %i1, %l0
-or %l1, 0, %l2
+ldsw [%sp + 108], %l2
 mov %i2, %l1
 mov %l2, %o0
 mov %l1, %o1
@@ -137,12 +137,12 @@ nop
 mov %o0, %l1
 add %l0, %l1, %l0
 mov %l0, %i1
-ba %icc, .L428
+ba %icc, .L594
 nop
-.L421:
-ba %icc, .L428
+.L589:
+ba %icc, .L594
 nop
-.L428:
+.L594:
 mov %i0, %l1
 sethi %hi(10), %l0
 or %l0, %lo(10), %l0
@@ -161,12 +161,12 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L460
+ba %icc, .L617
 nop
-.L451:
-ba %icc, .L460
+.L612:
+ba %icc, .L617
 nop
-.L460:
+.L617:
 mov %i1, %l0
 or %l0, 0, %i0
 ret
@@ -176,16 +176,16 @@ restore
 	.global convertToDecimal
 .type    convertToDecimal, #function
 convertToDecimal:
-save %sp, -96, %sp
+save %sp, -104, %sp
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l3
+stw %l0, [%sp + 96]
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l0
+stw %l0, [%sp + 100]
 mov %i0, %l2
-or %l0, 0, %l1
-or %l3, 0, %l0
+ldsw [%sp + 100], %l1
+ldsw [%sp + 96], %l0
 mov %l2, %o0
 mov %l1, %o1
 mov %l0, %o2
@@ -200,53 +200,53 @@ restore
 	.global main
 .type    main, #function
 main:
-save %sp, -96, %sp
+save %sp, -104, %sp
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 92, %o1
+add %sp, 100, %o1
 call scanf
 nop
+ldsw [%sp + 100], %l0
+stw %l0, [%sp + 92]
 ldsw [%sp + 92], %l0
-or %l0, 0, %l1
-or %l1, 0, %l0
 mov %l0, %o0
 call convertToDecimal
 nop
 mov %o0, %l0
-or %l0, 0, %l1
-or %l1, 0, %l2
-or %l1, 0, %l0
-mulx %l2, %l0, %l0
-or %l0, 0, %l0
-.L572:
-or %l0, 0, %l3
+stw %l0, [%sp + 92]
+ldsw [%sp + 92], %l1
+ldsw [%sp + 92], %l0
+mulx %l1, %l0, %l0
+stw %l0, [%sp + 96]
+.L682:
+ldsw [%sp + 96], %l1
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
-sethi %hi(0), %l4
-or %l4, %lo(0), %l4
-cmp %l3, %l2
-movg %icc, 1, %l4
-sethi %hi(1), %l2
-or %l2, %lo(1), %l2
-cmp %l4, %l2
-be %icc, .L585
-nop
-ba %icc, .L621
-nop
-.L585:
-or %l0, 0, %l2
-mov %l2, %o0
-call wait
-nop
-or %l0, 0, %l2
+cmp %l1, %l0
+movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-sub %l2, %l0, %l0
-or %l0, 0, %l0
-ba %icc, .L572
+cmp %l2, %l0
+be %icc, .L688
 nop
-.L621:
-or %l1, 0, %l0
+ba %icc, .L732
+nop
+.L688:
+ldsw [%sp + 96], %l0
+mov %l0, %o0
+call wait
+nop
+ldsw [%sp + 96], %l1
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+sub %l1, %l0, %l0
+stw %l0, [%sp + 96]
+ba %icc, .L682
+nop
+.L732:
+ldsw [%sp + 92], %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1

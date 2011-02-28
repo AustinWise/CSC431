@@ -3,7 +3,7 @@
 	.global tailrecursive
 .type    tailrecursive, #function
 tailrecursive:
-save %sp, -96, %sp
+save %sp, -104, %sp
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -32,7 +32,7 @@ or %g0, 12, %o1
 call calloc
 nop
 mov %o0, %l0
-or %l0, 0, %l0
+stw %l0, [%sp + 96]
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -59,14 +59,14 @@ restore
 	.global domath
 .type    domath, #function
 domath:
-save %sp, -96, %sp
+save %sp, -112, %sp
 or %g0, 1, %o0
 or %g0, 12, %o1
 call calloc
 nop
 mov %o0, %l0
-or %l0, 0, %l2
-or %l2, 0, %l0
+stw %l0, [%sp + 96]
+ldsw [%sp + 96], %l0
 or %g0, 1, %o0
 or %g0, 4, %o1
 call calloc
@@ -78,92 +78,92 @@ or %g0, 12, %o1
 call calloc
 nop
 mov %o0, %l0
-or %l0, 0, %l1
-or %l1, 0, %l0
+stw %l0, [%sp + 100]
+ldsw [%sp + 100], %l0
 or %g0, 1, %o0
 or %g0, 4, %o1
 call calloc
 nop
-mov %o0, %l3
-stw %l3, [%l0 + 8]
-or %l2, 0, %l3
+mov %o0, %l1
+stw %l1, [%l0 + 8]
+ldsw [%sp + 96], %l1
 mov %i0, %l0
-stw %l0, [%l3 + 0]
-or %l1, 0, %l3
+stw %l0, [%l1 + 0]
+ldsw [%sp + 100], %l1
 sethi %hi(3), %l0
 or %l0, %lo(3), %l0
-stw %l0, [%l3 + 0]
-or %l2, 0, %l0
-ldsw [%l0 + 8], %l3
-or %l2, 0, %l0
+stw %l0, [%l1 + 0]
+ldsw [%sp + 96], %l0
+ldsw [%l0 + 8], %l1
+ldsw [%sp + 96], %l0
 ldsw [%l0 + 0], %l0
-stw %l0, [%l3 + 0]
-or %l1, 0, %l0
-ldsw [%l0 + 8], %l3
-or %l1, 0, %l0
+stw %l0, [%l1 + 0]
+ldsw [%sp + 100], %l0
+ldsw [%l0 + 8], %l1
+ldsw [%sp + 100], %l0
 ldsw [%l0 + 0], %l0
-stw %l0, [%l3 + 0]
+stw %l0, [%l1 + 0]
 .L3919:
-mov %i0, %l3
+mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sethi %hi(0), %l4
-or %l4, %lo(0), %l4
-cmp %l3, %l0
-movg %icc, 1, %l4
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-cmp %l4, %l0
+cmp %l2, %l0
 be %icc, .L3925
 nop
 ba %icc, .L3994
 nop
 .L3925:
-or %l2, 0, %l0
-ldsw [%l0 + 0], %l3
-or %l1, 0, %l0
+ldsw [%sp + 96], %l0
+ldsw [%l0 + 0], %l1
+ldsw [%sp + 100], %l0
 ldsw [%l0 + 0], %l0
-mulx %l3, %l0, %l0
-or %l0, 0, %l0
-or %l0, 0, %l3
-or %l2, 0, %l0
+mulx %l1, %l0, %l0
+stw %l0, [%sp + 104]
+ldsw [%sp + 104], %l1
+ldsw [%sp + 96], %l0
 ldsw [%l0 + 8], %l0
 ldsw [%l0 + 0], %l0
-mulx %l3, %l0, %l3
-or %l1, 0, %l0
+mulx %l1, %l0, %l1
+ldsw [%sp + 100], %l0
 ldsw [%l0 + 0], %l0
-sdivx %l3, %l0, %l0
-or %l0, 0, %l0
-or %l1, 0, %l0
+sdivx %l1, %l0, %l0
+stw %l0, [%sp + 104]
+ldsw [%sp + 100], %l0
 ldsw [%l0 + 8], %l0
-ldsw [%l0 + 0], %l3
-or %l2, 0, %l0
+ldsw [%l0 + 0], %l1
+ldsw [%sp + 96], %l0
 ldsw [%l0 + 0], %l0
-mov %l3, %o0
+mov %l1, %o0
 mov %l0, %o1
 call add
 nop
 mov %o0, %l0
-or %l0, 0, %l0
-or %l1, 0, %l0
-ldsw [%l0 + 0], %l3
-or %l2, 0, %l0
+stw %l0, [%sp + 104]
+ldsw [%sp + 100], %l0
+ldsw [%l0 + 0], %l1
+ldsw [%sp + 96], %l0
 ldsw [%l0 + 0], %l0
-sub %l3, %l0, %l0
-or %l0, 0, %l0
-mov %i0, %l3
+sub %l1, %l0, %l0
+stw %l0, [%sp + 104]
+mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-sub %l3, %l0, %l0
+sub %l1, %l0, %l0
 mov %l0, %i0
 ba %icc, .L3919
 nop
 .L3994:
-or %l2, 0, %l0
+ldsw [%sp + 96], %l0
 mov %l0, %o0
 call free
 nop
-or %l1, 0, %l0
+ldsw [%sp + 100], %l0
 mov %l0, %o0
 call free
 nop
@@ -174,7 +174,7 @@ restore
 	.global objinstantiation
 .type    objinstantiation, #function
 objinstantiation:
-save %sp, -96, %sp
+save %sp, -104, %sp
 .L4008:
 mov %i0, %l1
 sethi %hi(0), %l0
@@ -196,8 +196,8 @@ or %g0, 12, %o1
 call calloc
 nop
 mov %o0, %l0
-or %l0, 0, %l0
-or %l0, 0, %l0
+stw %l0, [%sp + 96]
+ldsw [%sp + 96], %l0
 mov %l0, %o0
 call free
 nop
@@ -307,74 +307,74 @@ nop
 	.global main
 .type    main, #function
 main:
-save %sp, -96, %sp
+save %sp, -120, %sp
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 92, %o1
+add %sp, 112, %o1
 call scanf
 nop
-ldsw [%sp + 92], %l0
-or %l0, 0, %l4
+ldsw [%sp + 112], %l0
+stw %l0, [%sp + 92]
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 92, %o1
+add %sp, 112, %o1
 call scanf
 nop
-ldsw [%sp + 92], %l0
-or %l0, 0, %l3
+ldsw [%sp + 112], %l0
+stw %l0, [%sp + 96]
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 92, %o1
+add %sp, 112, %o1
 call scanf
 nop
-ldsw [%sp + 92], %l0
-or %l0, 0, %l2
+ldsw [%sp + 112], %l0
+stw %l0, [%sp + 100]
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 92, %o1
+add %sp, 112, %o1
 call scanf
 nop
-ldsw [%sp + 92], %l0
-or %l0, 0, %l1
+ldsw [%sp + 112], %l0
+stw %l0, [%sp + 104]
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 92, %o1
+add %sp, 112, %o1
 call scanf
 nop
+ldsw [%sp + 112], %l0
+stw %l0, [%sp + 108]
 ldsw [%sp + 92], %l0
-or %l0, 0, %l0
-or %l4, 0, %l5
-mov %l5, %o0
+mov %l0, %o0
 call tailrecursive
 nop
-or %l4, 0, %l4
+ldsw [%sp + 92], %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l4, %o1
+mov %l0, %o1
 call printf
 nop
-or %l3, 0, %l4
-mov %l4, %o0
+ldsw [%sp + 96], %l0
+mov %l0, %o0
 call domath
 nop
-or %l3, 0, %l3
+ldsw [%sp + 96], %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l3, %o1
+mov %l0, %o1
 call printf
 nop
-or %l2, 0, %l3
-mov %l3, %o0
+ldsw [%sp + 100], %l0
+mov %l0, %o0
 call objinstantiation
 nop
-or %l2, 0, %l2
+ldsw [%sp + 100], %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l2, %o1
+mov %l0, %o1
 call printf
 nop
-or %l1, 0, %l1
-or %l0, 0, %l0
+ldsw [%sp + 104], %l1
+ldsw [%sp + 108], %l0
 mov %l1, %o0
 mov %l0, %o1
 call ackermann

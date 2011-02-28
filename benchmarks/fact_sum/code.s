@@ -15,7 +15,7 @@ restore
 	.global fact
 .type    fact, #function
 fact:
-save %sp, -96, %sp
+save %sp, -104, %sp
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -95,8 +95,8 @@ call fact
 nop
 mov %o0, %l1
 mulx %l0, %l1, %l0
-or %l0, 0, %l0
-or %l0, 0, %l0
+stw %l0, [%sp + 96]
+ldsw [%sp + 96], %l0
 or %l0, 0, %i0
 ret
 restore
@@ -105,12 +105,12 @@ restore
 	.global main
 .type    main, #function
 main:
-save %sp, -96, %sp
+save %sp, -112, %sp
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l0
+stw %l0, [%sp + 100]
 .L2035:
-or %l0, 0, %l2
+ldsw [%sp + 100], %l2
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 sethi %hi(0), %l0
@@ -130,32 +130,32 @@ nop
 .L2042:
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 92, %o1
+add %sp, 104, %o1
 call scanf
 nop
-ldsw [%sp + 92], %l0
-or %l0, 0, %l1
+ldsw [%sp + 104], %l0
+stw %l0, [%sp + 92]
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 92, %o1
+add %sp, 104, %o1
 call scanf
 nop
+ldsw [%sp + 104], %l0
+stw %l0, [%sp + 96]
 ldsw [%sp + 92], %l0
-or %l0, 0, %l0
-or %l1, 0, %l1
-mov %l1, %o0
-call fact
-nop
-mov %o0, %l1
-or %l1, 0, %l1
-or %l0, 0, %l0
 mov %l0, %o0
 call fact
 nop
 mov %o0, %l0
-or %l0, 0, %l0
-or %l1, 0, %l1
-or %l0, 0, %l0
+stw %l0, [%sp + 92]
+ldsw [%sp + 96], %l0
+mov %l0, %o0
+call fact
+nop
+mov %o0, %l0
+stw %l0, [%sp + 96]
+ldsw [%sp + 92], %l1
+ldsw [%sp + 96], %l0
 mov %l1, %o0
 mov %l0, %o1
 call sum
@@ -168,11 +168,11 @@ call printf
 nop
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 92, %o1
+add %sp, 104, %o1
 call scanf
 nop
-ldsw [%sp + 92], %l0
-or %l0, 0, %l0
+ldsw [%sp + 104], %l0
+stw %l0, [%sp + 100]
 ba %icc, .L2035
 nop
 .L2082:

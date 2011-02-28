@@ -3,7 +3,7 @@
 	.global function
 .type    function, #function
 function:
-save %sp, -96, %sp
+save %sp, -104, %sp
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -32,39 +32,39 @@ nop
 .L8809:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-or %l0, 0, %l0
+stw %l0, [%sp + 96]
 .L8813:
-or %l0, 0, %l3
-mov %i0, %l2
+ldsw [%sp + 96], %l2
 mov %i0, %l1
-mulx %l2, %l1, %l1
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l3, %l1
-movl %icc, 1, %l2
-sethi %hi(1), %l1
-or %l1, %lo(1), %l1
-cmp %l2, %l1
+mov %i0, %l0
+mulx %l1, %l0, %l0
+sethi %hi(0), %l1
+or %l1, %lo(0), %l1
+cmp %l2, %l0
+movl %icc, 1, %l1
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l1, %l0
 be %icc, .L8824
 nop
 ba %icc, .L8860
 nop
 .L8824:
-or %l0, 0, %l2
-mov %i0, %l1
-add %l2, %l1, %l1
-or %l1, 0, %l1
-or %l1, 0, %l1
+ldsw [%sp + 96], %l1
+mov %i0, %l0
+add %l1, %l0, %l0
+stw %l0, [%sp + 100]
+ldsw [%sp + 100], %l0
 sethi %hi(.ConstantString0), %o0
 or %o0, %lo(.ConstantString0), %o0
-mov %l1, %o1
+mov %l0, %o1
 call printf
 nop
-or %l0, 0, %l1
+ldsw [%sp + 96], %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
-or %l0, 0, %l0
+stw %l0, [%sp + 96]
 ba %icc, .L8813
 nop
 .L8860:
@@ -84,15 +84,15 @@ restore
 	.global main
 .type    main, #function
 main:
-save %sp, -96, %sp
+save %sp, -104, %sp
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 92, %o1
+add %sp, 96, %o1
 call scanf
 nop
+ldsw [%sp + 96], %l0
+stw %l0, [%sp + 92]
 ldsw [%sp + 92], %l0
-or %l0, 0, %l0
-or %l0, 0, %l0
 mov %l0, %o0
 call function
 nop
