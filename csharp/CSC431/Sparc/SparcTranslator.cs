@@ -219,7 +219,7 @@ namespace CSC431.Sparc
                     yield return new StwInstruction(s.RegSource0, SparcRegister.FP, 92 + (s.ArgIndex - 6) * 4);
                 yield break;
             }
-            throw new NotImplementedException();
+            yield return new StwInstruction(s.RegSource0, SparcRegister.SP, getLocalOffset(s.Str0));
         }
 
         public IEnumerable<SparcInstruction> LoadaiField(IL.LoadaiFieldInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -237,7 +237,7 @@ namespace CSC431.Sparc
                     yield return new LdswInstruction(SparcRegister.FP, 92 + (s.ArgIndex - 6) * 4, s.RegDest0);
                 yield break;
             }
-            throw new NotSupportedException("LoadaiVar");
+            yield return new LdswInstruction(SparcRegister.SP, getLocalOffset(s.Str0), s.RegDest0);
         }
 
         public IEnumerable<SparcInstruction> Loadglobal(IL.LoadglobalInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)

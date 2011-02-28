@@ -7,12 +7,12 @@
       <Value>VisualStudio</Value>
     </TransformationPropertyValue>
     <TransformationPropertyValue>
-      <FileName>Sparc\Instruction.tt</FileName>
+      <FileName>LLVM\Instruction.tt</FileName>
       <PropertyName>Host</PropertyName>
       <Value>VisualStudio</Value>
     </TransformationPropertyValue>
     <TransformationPropertyValue>
-      <FileName>LLVM\Instruction.tt</FileName>
+      <FileName>Sparc\Instruction.tt</FileName>
       <PropertyName>Host</PropertyName>
       <Value>VisualStudio</Value>
     </TransformationPropertyValue>

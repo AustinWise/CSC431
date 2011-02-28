@@ -72,10 +72,7 @@ decl_list[bool isLocal, Dictionary<string, string> typeMap]
 			{
 				if (isLocal)
 				{
-          				if (Options.Llvm.Value)
-						localMap.Add(id, new VarLocal(id, t));
-					else
-						localMap.Add(id, new VarReg(Instruction.VirtualRegister(), t));
+					localMap.Add(id, new VarLocal(id, t));
 				}
 				else
 				{
