@@ -18,6 +18,7 @@ namespace CSC431
         public static TaskLocal<string> ClrExec = new TaskLocal<string>();
         public static TaskLocal<bool> Llvm = new TaskLocal<bool>();
         public static TaskLocal<bool> DisableRegAlloc = new TaskLocal<bool>();
+        public static TaskLocal<bool> DisableOpt = new TaskLocal<bool>();
 
         public static void ParseParameters(String[] args)
         {
@@ -64,6 +65,9 @@ namespace CSC431
 
             var typeChecked = pipe.FollowWith(FrontEndSteps.TypeCheck());
             var flow = typeChecked.FollowWith(IlSteps.MakeCFG()).FollowWith(IlSteps.CleanUpCfg());
+
+            if (!Options.DisableOpt.Value)
+                flow = flow.FollowWith(OptSteps.CommonSubExprElim());
 
             if (Options.DumpIL.Value)
                 flow.FollowWith(IlSteps.PrintCFG());

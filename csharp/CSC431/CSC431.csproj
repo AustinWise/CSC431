@@ -45,13 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analysis\CommonSubExprElim.cs" />
     <Compile Include="Analysis\FunctionsCalled.cs" />
     <Compile Include="CFG\IInstructionConverter.cs" />
     <Compile Include="CFG\InstructionStream.cs" />
     <Compile Include="CFG\Printer.cs" />
     <Compile Include="CFG\Register.cs" />
+    <Compile Include="Ensure.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="LLVM\LlvmRegister.cs" />
+    <Compile Include="Multimap.cs" />
+    <Compile Include="OptSteps.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

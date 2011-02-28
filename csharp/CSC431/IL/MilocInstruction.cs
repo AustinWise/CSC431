@@ -14,5 +14,9 @@ namespace CSC431.IL
             : base(name)
         {
         }
+
+        internal virtual void CopyExtraData(MilocInstruction newInstr)
+        {
+        }
     }
 }
