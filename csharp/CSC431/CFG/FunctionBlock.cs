@@ -40,7 +40,13 @@ namespace CSC431.CFG
             get { return Body.FirstNode; }
         }
 
+
         public void VisitBlocks(Action<BasicBlock<T>> fun)
+        {
+            VisitBlocks(fun, true);
+        }
+
+        public void VisitBlocks(Action<BasicBlock<T>> fun, bool topToBottom)
         {
             var seen = new List<Node<T>>();
             var q = new Queue<Node<T>>();
@@ -49,7 +55,7 @@ namespace CSC431.CFG
             while (q.Count != 0)
             {
                 var node = q.Dequeue();
-                if (node is BasicBlock<T>)
+                if (topToBottom)
                     fun(node as BasicBlock<T>);
                 foreach (var next in node.Nexts)
                 {
@@ -58,6 +64,14 @@ namespace CSC431.CFG
                         seen.Add(next);
                         q.Enqueue(next);
                     }
+                }
+            }
+
+            if (!topToBottom)
+            {
+                for (int i = seen.Count - 1; i >= 0; i--)
+                {
+                    fun((BasicBlock<T>)seen[i]);
                 }
             }
         }

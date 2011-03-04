@@ -68,7 +68,10 @@ namespace CSC431
             var flow = typeChecked.FollowWith(IlSteps.MakeCFG()).FollowWith(IlSteps.CleanUpCfg());
 
             if (!Options.DisableOpt.Value)
-                flow = flow.FollowWith(OptSteps.CommonSubExprElim());
+            {
+                flow = flow.FollowWith(OptSteps.UselessCodeRemoval());
+                //flow = flow.FollowWith(OptSteps.CommonSubExprElim());
+            }
 
             if (Options.DumpIL.Value)
                 flow.FollowWith(IlSteps.PrintCFG());

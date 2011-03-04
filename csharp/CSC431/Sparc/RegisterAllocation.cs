@@ -232,7 +232,7 @@ namespace CSC431.Sparc
                         {
                             liveoutSets[b] = newLset;
                         }
-                    });
+                    }, false);
                 }
             }
             while (changed);
@@ -379,7 +379,7 @@ namespace CSC431.Sparc
             {
                 if (coloringDone.Contains(f.Name))
                     continue;
-                
+
                 functionsToUncoloredRegisters[f.Name] = colorFunction(f);
 
                 if (functionsToUncoloredRegisters[f.Name].Count == 0)

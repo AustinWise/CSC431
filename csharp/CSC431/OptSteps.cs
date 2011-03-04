@@ -13,5 +13,14 @@ namespace CSC431
         {
             return new TransformStep<ProgramBlock<IL.MilocInstruction>>(Analysis.CommonSubExprElim.DoOpt);
         }
+
+        public static TransformStep<ProgramBlock<IL.MilocInstruction>> UselessCodeRemoval()
+        {
+            return new TransformStep<ProgramBlock<IL.MilocInstruction>>(prog =>
+            {
+                var rd = new Analysis.ReachingDef<IL.MilocInstruction>(prog);
+                return prog;
+            });
+        }
     }
 }
