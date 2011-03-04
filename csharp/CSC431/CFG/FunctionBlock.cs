@@ -114,8 +114,8 @@ namespace CSC431.CFG
             return Locals.Count - 1;
         }
 
-        //~~BONUS INFO~~ (not here by default, need to use an analysis step to populate, not copied)
-        //Should be fine to propegate through converts.
+        //~~BONUS INFO~~ (not here by default, need to use an analysis step to populate)
+        //Will be propegated through converts.
         public List<string> FunctionsCalled { get; set; }
         public int MaxOutArgs { get; set; }
     }
