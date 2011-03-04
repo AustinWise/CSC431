@@ -16,25 +16,7 @@ namespace CompileAllBenchmarks
     {
         static void Main(string[] args)
         {
-            //var ass = typeof(CSC431.Steps.Step).Assembly;
-
-            //foreach (var t in ass.GetTypes())
-            //{
-            //    if (t.IsEnum)
-            //        continue;
-            //    foreach (var f in t.GetFields())
-            //    {
-            //        if (f.IsStatic && !f.IsInitOnly && !f.IsLiteral && f.FieldType.Name != "TaskLocal`1")
-            //            Console.WriteLine(t.Name + "." + f.Name);
-            //    }
-            //    foreach (var f in t.GetProperties())
-            //    {
-            //        if (f.GetGetMethod().IsStatic && f.PropertyType.Name != "TaskLocal`1")
-            //            Console.WriteLine(t.Name + "." + f.Name);
-            //    }
-            //}
-            //return;
-
+            //FindGlobalVariables();
 
             string benchDir = @"..\..\..\..\benchmarks\";
 
@@ -78,6 +60,32 @@ namespace CompileAllBenchmarks
             {
                 Console.Write(t.Result);
             }
+        }
+
+        private static void FindGlobalVariables()
+        {
+            var ass = typeof(CSC431.Steps.Step).Assembly;
+
+            foreach (var t in ass.GetTypes())
+            {
+                if (t.IsEnum)
+                    continue;
+                if (t.GetCustomAttributes(typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute), false).Length != 0)
+                    continue;
+                foreach (var f in t.GetFields())
+                {
+                    if (f.IsStatic && !f.IsInitOnly && !f.IsLiteral)
+                    {
+                        Console.WriteLine(t.Name + "." + f.Name);
+                    }
+                }
+                foreach (var f in t.GetProperties())
+                {
+                    if (f.GetGetMethod().IsStatic)
+                        Console.WriteLine(t.Name + "." + f.Name);
+                }
+            }
+            Environment.Exit(0);
         }
     }
 }

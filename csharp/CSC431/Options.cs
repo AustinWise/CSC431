@@ -11,14 +11,14 @@ namespace CSC431
 {
     public static class Options
     {
-        public static TaskLocal<Stream> InputSource = new TaskLocal<Stream>();
-        private static TaskLocal<String> InputFile = new TaskLocal<string>();
-        public static TaskLocal<bool> DisplayAST = new TaskLocal<bool>();
-        public static TaskLocal<bool> DumpIL = new TaskLocal<bool>();
-        public static TaskLocal<string> ClrExec = new TaskLocal<string>();
-        public static TaskLocal<bool> Llvm = new TaskLocal<bool>();
-        public static TaskLocal<bool> DisableRegAlloc = new TaskLocal<bool>();
-        public static TaskLocal<bool> DisableOpt = new TaskLocal<bool>();
+        public static readonly TaskLocal<Stream> InputSource = new TaskLocal<Stream>();
+        private static readonly TaskLocal<String> InputFile = new TaskLocal<string>();
+        public static readonly TaskLocal<bool> DisplayAST = new TaskLocal<bool>();
+        public static readonly TaskLocal<bool> DumpIL = new TaskLocal<bool>();
+        public static readonly TaskLocal<string> ClrExec = new TaskLocal<string>();
+        public static readonly TaskLocal<bool> Llvm = new TaskLocal<bool>();
+        public static readonly TaskLocal<bool> DisableRegAlloc = new TaskLocal<bool>();
+        public static readonly TaskLocal<bool> DisableOpt = new TaskLocal<bool>();
 
         public static void ParseParameters(String[] args)
         {

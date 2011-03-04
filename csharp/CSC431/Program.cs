@@ -8,8 +8,8 @@ namespace CSC431
 {
     public static class Program
     {
-        public static TaskLocal<FrontEnd.StructTypes> Stypes = new TaskLocal<FrontEnd.StructTypes>();
-        public static TaskLocal<FrontEnd.SymbolTable> Stable = new TaskLocal<FrontEnd.SymbolTable>();
+        public static readonly TaskLocal<FrontEnd.StructTypes> Stypes = new TaskLocal<FrontEnd.StructTypes>();
+        public static readonly TaskLocal<FrontEnd.SymbolTable> Stable = new TaskLocal<FrontEnd.SymbolTable>();
 
         public static int Main(String[] args)
         {
