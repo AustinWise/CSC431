@@ -67,14 +67,8 @@ namespace CSC431
             var typeChecked = pipe.FollowWith(FrontEndSteps.TypeCheck());
             var flow = typeChecked.FollowWith(IlSteps.MakeCFG()).FollowWith(IlSteps.CleanUpCfg());
 
-            if (!Options.DisableOpt.Value)
-            {
-                flow = flow.FollowWith(OptSteps.UselessCodeRemoval());
-                //flow = flow.FollowWith(OptSteps.CommonSubExprElim());
-            }
-
             if (Options.DumpIL.Value)
-                flow.FollowWith(IlSteps.PrintCFG());
+                flow.FollowWith(IlSteps.PrintCFG("dump.il"));
 
             if (Options.Llvm.Value)
             {
@@ -82,6 +76,16 @@ namespace CSC431
                 llvm.FollowWith(LlvmSteps.PrintCFG(outfile));
                 llvm.FollowWith(LlvmSteps.BitcodeToSparc(outfile));
             }
+
+            if (!Options.DisableOpt.Value)
+            {
+                flow = flow.FollowWith(OptSteps.UselessCodeRemoval());
+                //flow = flow.FollowWith(OptSteps.CommonSubExprElim());
+
+                if (Options.DumpIL.Value)
+                    flow.FollowWith(IlSteps.PrintCFG("afterOpt.il"));
+            }
+
 
             if (!Options.Llvm.Value)
             {

@@ -10,6 +10,9 @@ namespace CSC431.LLVM
     {
         public override void PrintFileHeader(System.IO.TextWriter tw, ProgramBlock<LlvmInstruction> prog)
         {
+            tw.WriteLine("@.LC0 = internal constant [4 x i8] c\"%d \\00\"");
+            tw.WriteLine("@.LC1 = internal constant [4 x i8] c\"%d\\0A\\00\"");
+            tw.WriteLine("@.LC2 = internal constant [3 x i8] c\"%d\\00\"");
         }
 
         public override void PrintFunctionHeader(System.IO.TextWriter tw, FunctionBlock<LlvmInstruction> f)

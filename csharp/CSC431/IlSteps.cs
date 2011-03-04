@@ -48,11 +48,12 @@ namespace CSC431
             });
         }
 
-        public static InStep<ProgramBlock<MilocInstruction>> PrintCFG()
+        public static InStep<ProgramBlock<MilocInstruction>> PrintCFG(string fileName)
         {
             return new InStep<ProgramBlock<MilocInstruction>>(c =>
             {
-                var f = new StreamWriter("dump.il");
+                TextWriter f = new StreamWriter(fileName);
+                f.WriteLine("# {0}", fileName);
                 c.Print(f, new MilocPrinter());
                 f.Close();
             });

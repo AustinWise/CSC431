@@ -19,6 +19,8 @@ namespace CSC431.LLVM
             condMap.Add(typeof(IL.MovneInstruction), ConditionType.ne);
         }
 
+        private int castNum = 0;
+
 
         public IEnumerable<LlvmInstruction> FunctionStart(CFG.FunctionBlock<LlvmInstruction> copy)
         {
@@ -88,7 +90,7 @@ namespace CSC431.LLVM
                 var theCmp = stream.Consume() as IL.CompInstruction;
                 var theCbeq = stream.Consume() as IL.CbreqInstruction;
                 var theCmpReg = new CFG.VirtualRegister(CSC431.CFG.Instruction.VirtualRegister());
-                if (theCmp.RegSource1 != s.RegDest0)
+                if (theCmp.RegSource1 != s.RegDest0 || s.Immed0 != 1)
                     throw new Exception("cmp using unexpected reg in branch");
                 yield return new IcmpConstInstruction(ConditionType.eq, theCmpReg, theCmp.RegSource0, s.Immed0);
                 yield return new BrcondInstruction(theCmpReg, theCbeq.Label0, theCbeq.Label1);
@@ -143,7 +145,9 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> Println(IL.PrintlnInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            castNum++;
+            yield return new StringInstruction("%cast" + castNum + " = getelementptr [13 x i8]* @.LC1, i64 0, i64 0");
+            yield return new StringInstruction("call i32 @printf(i8* %cast" + castNum +", i32 %" + s.RegSource0 +")");
         }
 
         public IEnumerable<LlvmInstruction> Read(IL.ReadInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
