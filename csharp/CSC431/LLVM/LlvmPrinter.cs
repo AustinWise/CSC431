@@ -13,6 +13,7 @@ namespace CSC431.LLVM
             tw.WriteLine("@.LC0 = internal constant [4 x i8] c\"%d \\00\"");
             tw.WriteLine("@.LC1 = internal constant [4 x i8] c\"%d\\0A\\00\"");
             tw.WriteLine("@.LC2 = internal constant [3 x i8] c\"%d\\00\"");
+            tw.WriteLine("declare i32 @printf(i8*, ...)");
         }
 
         public override void PrintFunctionHeader(System.IO.TextWriter tw, FunctionBlock<LlvmInstruction> f)

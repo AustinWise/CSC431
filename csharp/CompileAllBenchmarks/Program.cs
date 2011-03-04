@@ -14,15 +14,27 @@ namespace CompileAllBenchmarks
 {
     class Program
     {
+        const string benchDir = @"..\..\..\..\benchmarks\";
+
         static void Main(string[] args)
         {
             //FindGlobalVariables();
 
-            string benchDir = @"..\..\..\..\benchmarks\";
-
-
             List<Task<string>> tasks = new List<Task<string>>();
+            tasks.AddRange(compileBenchmarks("code.s", () => { }));
+            //tasks.AddRange(compileBenchmarks("llvm.s", () => { Options.Llvm.Value = true; Options.DisableOpt.Value = true; }));
 
+            Task.WaitAll(tasks.ToArray());
+
+            foreach (var t in tasks)
+            {
+                Console.Write(t.Result);
+            }
+        }
+
+        private static List<Task<string>> compileBenchmarks(string outputFileName, Action setOptions)
+        {
+            List<Task<string>> tasks = new List<Task<string>>();
             foreach (var dontUseDir in Directory.GetDirectories(benchDir))
             {
                 var myDir = dontUseDir;
@@ -31,8 +43,9 @@ namespace CompileAllBenchmarks
                     var evFile = Directory.GetFiles(myDir, "*.ev").First();
 
                     Options.InputSource.Value = new FileStream(evFile, FileMode.Open, FileAccess.Read);
+                    setOptions();
 
-                    var output = new StreamWriter(Path.Combine(myDir, "code.s"), false, Encoding.ASCII);
+                    var output = new StreamWriter(Path.Combine(myDir, outputFileName), false, Encoding.ASCII);
 
                     var pipe = CSC431.Options.CreatePipe(output);
                     try
@@ -53,13 +66,7 @@ namespace CompileAllBenchmarks
                 t.Start();
                 tasks.Add(t);
             }
-
-            Task.WaitAll(tasks.ToArray());
-
-            foreach (var t in tasks)
-            {
-                Console.Write(t.Result);
-            }
+            return tasks;
         }
 
         private static void FindGlobalVariables()

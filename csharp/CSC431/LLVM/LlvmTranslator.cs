@@ -146,8 +146,8 @@ namespace CSC431.LLVM
         public IEnumerable<LlvmInstruction> Println(IL.PrintlnInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
             castNum++;
-            yield return new StringInstruction("%cast" + castNum + " = getelementptr [13 x i8]* @.LC1, i64 0, i64 0");
-            yield return new StringInstruction("call i32 @printf(i8* %cast" + castNum +", i32 %" + s.RegSource0 +")");
+            yield return new StringInstruction("%cast" + castNum + " = getelementptr [4 x i8]* @.LC1, i64 0, i64 0");
+            yield return new StringInstruction("call i32 (i8*, ...)* @printf(i8* %cast" + castNum + ", i32 %" + s.RegSource0 + ")");
         }
 
         public IEnumerable<LlvmInstruction> Read(IL.ReadInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)

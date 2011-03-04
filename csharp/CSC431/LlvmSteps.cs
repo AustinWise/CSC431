@@ -33,28 +33,72 @@ namespace CSC431
         {
             return new InStep<ProgramBlock<LlvmInstruction>>(c =>
             {
-                ProcessStartInfo si = new ProcessStartInfo("llc.exe", "-march=sparc -mcpu=v9");
-                si.UseShellExecute = false;
-                si.RedirectStandardInput = true;
-                si.RedirectStandardError = true;
-                si.RedirectStandardOutput = true;
+                var tmp = Path.GetTempFileName();
+                string sparc;
 
-                Process p = Process.Start(si);
+                try
+                {
+                    optimizeBitcode(c, tmp);
+                    sparc = compileBitcode(tmp);
+                }
+                finally
+                {
+                    File.Delete(tmp);
+                }
 
-                c.Print(p.StandardInput, new LlvmPrinter());
-                p.StandardInput.Flush();
-                p.StandardInput.Close();
-
-                p.WaitForExit();
-
-                var text = p.StandardOutput.ReadToEnd();
-                var err = p.StandardError.ReadToEnd();
-
-                if (p.ExitCode != 0)
-                    throw new EvilException(err);
-
-                outfile.Write(text);
+                outfile.Write(sparc);
             });
+        }
+
+        private static void optimizeBitcode(ProgramBlock<LlvmInstruction> c, string tmp)
+        {
+            ProcessStartInfo si = new ProcessStartInfo("opt.exe", "-std-compile-opts -o \"" + tmp + "\"");
+            si.UseShellExecute = false;
+            si.RedirectStandardInput = true;
+            si.RedirectStandardError = true;
+            si.RedirectStandardOutput = true;
+
+            Process p = Process.Start(si);
+
+            c.Print(p.StandardInput, new LlvmPrinter());
+            p.StandardInput.Flush();
+            p.StandardInput.Close();
+
+            var text = p.StandardOutput.ReadToEnd();
+            var err = p.StandardError.ReadToEnd();
+
+            p.WaitForExit();
+
+            text += p.StandardOutput.ReadToEnd();
+            err += p.StandardError.ReadToEnd();
+
+            if (p.ExitCode != 0)
+                throw new EvilException(err);
+        }
+
+        private static string compileBitcode(string tmp)
+        {
+            ProcessStartInfo si = new ProcessStartInfo("llc.exe", "\"" + tmp + "\" -march=sparc -mcpu=v9 -o -");
+            si.UseShellExecute = false;
+            si.RedirectStandardInput = true;
+            si.RedirectStandardError = true;
+            si.RedirectStandardOutput = true;
+
+            Process p = Process.Start(si);
+            p.StandardInput.Close();
+
+            var text = p.StandardOutput.ReadToEnd();
+            var err = p.StandardError.ReadToEnd();
+
+            p.WaitForExit();
+
+            text += p.StandardOutput.ReadToEnd();
+            err += p.StandardError.ReadToEnd();
+
+            if (p.ExitCode != 0)
+                throw new EvilException(err);
+
+            return text;
         }
     }
 }
