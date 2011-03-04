@@ -28,6 +28,7 @@ namespace CSC431
                 {"dumpIL", v=> DumpIL.Value = v != null},
                 {"clrExe=", v=> ClrExec.Value = v},
                 {"llvm", v=> Llvm.Value = v != null},
+                {"noOpt", v=> DisableOpt.Value = v != null},
             };
 
             var extras = os.Parse(args);
