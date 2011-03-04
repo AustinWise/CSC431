@@ -212,7 +212,10 @@ private enum InstrFlags : int
 {
     None = 0,
     SetCC = 1,
-    UseCC = 2
+    UseCC = 2,
+    ExprElimGen,
+    ExprElimCustom,
+    ExprElimRemove,
 }
 private class OperandType
 {
