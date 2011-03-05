@@ -22,6 +22,7 @@ namespace CompileAllBenchmarks
 
             List<Task<string>> tasks = new List<Task<string>>();
             tasks.AddRange(compileBenchmarks("code.s", () => { }));
+            tasks.AddRange(compileBenchmarks("noopt.s", () => { Options.DisableOpt.Value = true; }));
             //tasks.AddRange(compileBenchmarks("llvm.s", () => { Options.Llvm.Value = true; Options.DisableOpt.Value = true; }));
 
             Task.WaitAll(tasks.ToArray());
@@ -42,7 +43,8 @@ namespace CompileAllBenchmarks
                 {
                     var evFile = Directory.GetFiles(myDir, "*.ev").First();
 
-                    Options.InputSource.Value = new FileStream(evFile, FileMode.Open, FileAccess.Read);
+                    var input = new FileStream(evFile, FileMode.Open, FileAccess.Read);
+                    Options.InputSource.Value = input;
                     setOptions();
 
                     var outpath = Path.Combine(myDir, outputFileName);
@@ -67,6 +69,12 @@ namespace CompileAllBenchmarks
                     if (!string.IsNullOrEmpty(ret))
                         File.Delete(outpath);
 
+                    //clean up stuff
+                    input.Close();
+                    Options.InputSource.Value = null;
+                    CSC431.Program.Stable.Value = null;
+                    CSC431.Program.Stypes.Value = null;
+
                     return ret;
                 });
                 t.Start();
@@ -87,6 +95,8 @@ namespace CompileAllBenchmarks
                     continue;
                 foreach (var f in t.GetFields())
                 {
+                    //if (f.FieldType.Name == "TaskLocal`1")
+                    //    Console.WriteLine("TL " + f);
                     if (f.IsStatic && !f.IsInitOnly && !f.IsLiteral)
                     {
                         Console.WriteLine(t.Name + "." + f.Name);

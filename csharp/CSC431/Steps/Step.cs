@@ -65,6 +65,9 @@ namespace CSC431.Steps
                         dn.Input = res;
                         toDos.Enqueue(n);
                     }
+
+                    //allow the output to be garbage collected
+                    ds.Output = null;
                 }
                 else
                 {
