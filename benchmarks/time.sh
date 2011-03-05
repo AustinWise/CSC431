@@ -7,9 +7,7 @@ foreach dir (`find -mindepth 1 -type d`)
    foreach asmfile (*.s)
      echo "  ** ${asmfile} **"
      gcc -mcpu=v9 ${asmfile}
-     ./a.out < input >&! ${asmfile}.output.ev
-     diff -wb ${asmfile}.output.ev output >&! /dev/null
-     echo "    ${status}"
+     /usr/bin/time -p a.out < input |& grep real | awk '{ print $2 }'
    end
    
    cd ..
