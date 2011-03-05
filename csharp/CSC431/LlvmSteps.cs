@@ -21,11 +21,13 @@ namespace CSC431
             });
         }
 
-        public static InStep<ProgramBlock<LlvmInstruction>> PrintCFG(TextWriter outfile)
+        public static InStep<ProgramBlock<LlvmInstruction>> PrintCFG()
         {
             return new InStep<ProgramBlock<LlvmInstruction>>(c =>
             {
-                c.Print(outfile, new LlvmPrinter());
+                var sw = new StreamWriter("dump.ll");
+                c.Print(sw, new LlvmPrinter());
+                sw.Close();
             });
         }
 

@@ -1,67 +1,4 @@
-@.LC0 = internal constant [4 x i8] c"%d \00"
-@.LC1 = internal constant [4 x i8] c"%d\0A\00"
-@.LC2 = internal constant [3 x i8] c"%d\00"
-declare i32 @printf(i8*, ...)
-declare i32 @scanf(i8*, ...)
-define i32 @computeFib(i32 %input) {
-%stack_input = alloca i32
-%evil_scanf = alloca i32
-store i32 %input, i32* %stack_input
-%r1487 = load i32* %stack_input
-%r1489 = add i32 0, 0
-%r1526 = icmp eq i32 %r1487, %r1489
-%r1485 = select i1 %r1526, i32 1, i32 0
-%r1527 = icmp eq i32 %r1485, 1
-br i1 %r1527, label %L2491, label %L2496
-L2491:
-%r1491 = add i32 0, 0
-ret i32 %r1491
-br label %L2535
-L2496:
-%r1494 = load i32* %stack_input
-%r1496 = add i32 2, 0
-%r1528 = icmp sle i32 %r1494, %r1496
-%r1492 = select i1 %r1528, i32 1, i32 0
-%r1529 = icmp eq i32 %r1492, 1
-br i1 %r1529, label %L2504, label %L2509
-L2504:
-%r1498 = add i32 1, 0
-ret i32 %r1498
-br label %L2533
-L2509:
-%r1504 = load i32* %stack_input
-%r1506 = add i32 1, 0
-%r1502 = sub i32 %r1504, %r1506
-%r1501 = call i32 @computeFib(i32 %r1502)
-%r1511 = load i32* %stack_input
-%r1513 = add i32 2, 0
-%r1509 = sub i32 %r1511, %r1513
-%r1508 = call i32 @computeFib(i32 %r1509)
-%r1499 = add i32 %r1501, %r1508
-ret i32 %r1499
-br label %L2533
-L2533:
-br label %L2535
-br label %L2535
-L2535:
-%r1516 = add i32 0, 0
-ret i32 %r1516
-}
-define i32 @main() {
-%stack_input = alloca i32
-%evil_scanf = alloca i32
-%cast1 = getelementptr [3 x i8]* @.LC2, i64 0, i64 0
-call i32 (i8*, ...)* @scanf(i8* %cast1, i32* %evil_scanf)
-%r1518 = load i32* %evil_scanf
-store i32 %r1518, i32* %stack_input
-%r1522 = load i32* %stack_input
-%r1520 = call i32 @computeFib(i32 %r1522)
-%cast2 = getelementptr [4 x i8]* @.LC1, i64 0, i64 0
-call i32 (i8*, ...)* @printf(i8* %cast2, i32 %r1520)
-%r1524 = add i32 0, 0
-ret i32 %r1524
-}
-	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmpF95.tmp"
+	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmpE4DE.tmp"
 	.text
 	.globl	computeFib
 	.align	4
@@ -86,7 +23,7 @@ computeFib:                             ! @computeFib
 	restore %g0, %g0, %g0
 	retl
 	nop
-.LBB0_4:                                ! %L2509
+.LBB0_4:                                ! %L2597
 	add %i0, -1, %o0
 	call computeFib
 	nop
