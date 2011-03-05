@@ -14,25 +14,25 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L2954
+be %icc, .L5263
 nop
-ba %icc, .L2967
+ba %icc, .L5276
 nop
-.L2954:
+.L5263:
 sethi %hi(peg1), %l0
 or %l0, %lo(peg1), %l0
 ldsw [%l0 + 0], %l0
-stw %l0, [%sp + 100]
-sethi %hi(peg1), %l0
-or %l0, %lo(peg1), %l0
-ldsw [%l0 + 0], %l0
-ldsw [%l0 + 4], %l1
-sethi %hi(peg1), %l0
-or %l0, %lo(peg1), %l0
-stw %l1, [%l0 + 0]
-ba %icc, .L3007
+or %l0, 0, %l0
+sethi %hi(peg1), %l1
+or %l1, %lo(peg1), %l1
+ldsw [%l1 + 0], %l1
+ldsw [%l1 + 4], %l2
+sethi %hi(peg1), %l1
+or %l1, %lo(peg1), %l1
+stw %l2, [%l1 + 0]
+ba %icc, .L5316
 nop
-.L2967:
+.L5276:
 mov %i0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
@@ -43,111 +43,111 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L2975
+be %icc, .L5284
 nop
-ba %icc, .L2988
+ba %icc, .L5297
 nop
-.L2975:
+.L5284:
 sethi %hi(peg2), %l0
 or %l0, %lo(peg2), %l0
 ldsw [%l0 + 0], %l0
-stw %l0, [%sp + 100]
-sethi %hi(peg2), %l0
-or %l0, %lo(peg2), %l0
-ldsw [%l0 + 0], %l0
-ldsw [%l0 + 4], %l1
-sethi %hi(peg2), %l0
-or %l0, %lo(peg2), %l0
-stw %l1, [%l0 + 0]
-ba %icc, .L3005
+or %l0, 0, %l0
+sethi %hi(peg2), %l1
+or %l1, %lo(peg2), %l1
+ldsw [%l1 + 0], %l1
+ldsw [%l1 + 4], %l2
+sethi %hi(peg2), %l1
+or %l1, %lo(peg2), %l1
+stw %l2, [%l1 + 0]
+ba %icc, .L5314
 nop
-.L2988:
+.L5297:
 sethi %hi(peg3), %l0
 or %l0, %lo(peg3), %l0
 ldsw [%l0 + 0], %l0
-stw %l0, [%sp + 100]
-sethi %hi(peg3), %l0
-or %l0, %lo(peg3), %l0
-ldsw [%l0 + 0], %l0
-ldsw [%l0 + 4], %l1
-sethi %hi(peg3), %l0
-or %l0, %lo(peg3), %l0
-stw %l1, [%l0 + 0]
-ba %icc, .L3005
+or %l0, 0, %l0
+sethi %hi(peg3), %l1
+or %l1, %lo(peg3), %l1
+ldsw [%l1 + 0], %l1
+ldsw [%l1 + 4], %l2
+sethi %hi(peg3), %l1
+or %l1, %lo(peg3), %l1
+stw %l2, [%l1 + 0]
+ba %icc, .L5314
 nop
-.L3005:
-ba %icc, .L3007
+.L5314:
+ba %icc, .L5316
 nop
-.L3007:
-mov %i1, %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-move %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L3013
+.L5316:
+mov %i1, %l2
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
+sethi %hi(0), %l3
+or %l3, %lo(0), %l3
+cmp %l2, %l1
+move %icc, 1, %l3
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
+cmp %l3, %l1
+be %icc, .L5322
 nop
-ba %icc, .L3026
+ba %icc, .L5335
 nop
-.L3013:
-ldsw [%sp + 100], %l1
+.L5322:
+or %l0, 0, %l2
+sethi %hi(peg1), %l1
+or %l1, %lo(peg1), %l1
+ldsw [%l1 + 0], %l1
+stw %l1, [%l2 + 4]
+or %l0, 0, %l1
 sethi %hi(peg1), %l0
 or %l0, %lo(peg1), %l0
-ldsw [%l0 + 0], %l0
-stw %l0, [%l1 + 4]
-ldsw [%sp + 100], %l1
-sethi %hi(peg1), %l0
-or %l0, %lo(peg1), %l0
 stw %l1, [%l0 + 0]
-ba %icc, .L3066
+ba %icc, .L5375
 nop
-.L3026:
-mov %i1, %l1
-sethi %hi(2), %l0
-or %l0, %lo(2), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-move %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L3034
+.L5335:
+mov %i1, %l2
+sethi %hi(2), %l1
+or %l1, %lo(2), %l1
+sethi %hi(0), %l3
+or %l3, %lo(0), %l3
+cmp %l2, %l1
+move %icc, 1, %l3
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
+cmp %l3, %l1
+be %icc, .L5343
 nop
-ba %icc, .L3047
+ba %icc, .L5356
 nop
-.L3034:
-ldsw [%sp + 100], %l1
-sethi %hi(peg2), %l0
-or %l0, %lo(peg2), %l0
-ldsw [%l0 + 0], %l0
-stw %l0, [%l1 + 4]
-ldsw [%sp + 100], %l1
+.L5343:
+or %l0, 0, %l2
+sethi %hi(peg2), %l1
+or %l1, %lo(peg2), %l1
+ldsw [%l1 + 0], %l1
+stw %l1, [%l2 + 4]
+or %l0, 0, %l1
 sethi %hi(peg2), %l0
 or %l0, %lo(peg2), %l0
 stw %l1, [%l0 + 0]
-ba %icc, .L3064
+ba %icc, .L5373
 nop
-.L3047:
-ldsw [%sp + 100], %l1
-sethi %hi(peg3), %l0
-or %l0, %lo(peg3), %l0
-ldsw [%l0 + 0], %l0
-stw %l0, [%l1 + 4]
-ldsw [%sp + 100], %l1
+.L5356:
+or %l0, 0, %l2
+sethi %hi(peg3), %l1
+or %l1, %lo(peg3), %l1
+ldsw [%l1 + 0], %l1
+stw %l1, [%l2 + 4]
+or %l0, 0, %l1
 sethi %hi(peg3), %l0
 or %l0, %lo(peg3), %l0
 stw %l1, [%l0 + 0]
-ba %icc, .L3064
+ba %icc, .L5373
 nop
-.L3064:
-ba %icc, .L3066
+.L5373:
+ba %icc, .L5375
 nop
-.L3066:
+.L5375:
 sethi %hi(numMoves), %l0
 or %l0, %lo(numMoves), %l0
 ldsw [%l0 + 0], %l1
@@ -175,20 +175,20 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L3086
+be %icc, .L5395
 nop
-ba %icc, .L3095
+ba %icc, .L5404
 nop
-.L3086:
+.L5395:
 mov %i1, %l1
 mov %i2, %l0
 mov %l1, %o0
 mov %l0, %o1
 call move
 nop
-ba %icc, .L3139
+ba %icc, .L5448
 nop
-.L3095:
+.L5404:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -221,9 +221,9 @@ mov %l1, %o2
 mov %l0, %o3
 call hanoi
 nop
-ba %icc, .L3139
+ba %icc, .L5448
 nop
-.L3139:
+.L5448:
 ret
 restore
 	.size    hanoi, .-hanoi
@@ -231,38 +231,38 @@ restore
 	.global printPeg
 .type    printPeg, #function
 printPeg:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i0, %l0
-stw %l0, [%sp + 96]
-.L3150:
-ldsw [%sp + 96], %l1
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-movne %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L3156
+or %l0, 0, %l0
+.L5459:
+or %l0, 0, %l2
+sethi %hi(0), %l1
+or %l1, %lo(0), %l1
+sethi %hi(0), %l3
+or %l3, %lo(0), %l3
+cmp %l2, %l1
+movne %icc, 1, %l3
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
+cmp %l3, %l1
+be %icc, .L5465
 nop
-ba %icc, .L3177
+ba %icc, .L5486
 nop
-.L3156:
-ldsw [%sp + 96], %l0
-ldsw [%l0 + 0], %l0
+.L5465:
+or %l0, 0, %l1
+ldsw [%l1 + 0], %l1
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
+mov %l1, %o1
 call printf
 nop
-ldsw [%sp + 96], %l0
+or %l0, 0, %l0
 ldsw [%l0 + 4], %l0
-stw %l0, [%sp + 96]
-ba %icc, .L3150
+or %l0, 0, %l0
+ba %icc, .L5459
 nop
-.L3177:
+.L5486:
 ret
 restore
 	.size    printPeg, .-printPeg
@@ -270,7 +270,7 @@ restore
 	.global main
 .type    main, #function
 main:
-save %sp, -112, %sp
+save %sp, -96, %sp
 sethi %hi(0), %l1
 or %l1, %lo(0), %l1
 sethi %hi(peg1), %l0
@@ -293,110 +293,110 @@ or %l0, %lo(numMoves), %l0
 stw %l1, [%l0 + 0]
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 104, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 104], %l0
-stw %l0, [%sp + 96]
-ldsw [%sp + 96], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
+ldsw [%sp + 92], %l0
+or %l0, 0, %l0
+or %l0, 0, %l2
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
+sethi %hi(0), %l3
+or %l3, %lo(0), %l3
+cmp %l2, %l1
+movge %icc, 1, %l3
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
+cmp %l3, %l1
+be %icc, .L5516
+nop
+ba %icc, .L5655
+nop
+.L5516:
+or %l0, 0, %l1
+or %l1, 0, %l1
+.L5523:
+or %l1, 0, %l3
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
-cmp %l1, %l0
-movge %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L3207
+sethi %hi(0), %l4
+or %l4, %lo(0), %l4
+cmp %l3, %l2
+movne %icc, 1, %l4
+sethi %hi(1), %l2
+or %l2, %lo(1), %l2
+cmp %l4, %l2
+be %icc, .L5529
 nop
-ba %icc, .L3346
+ba %icc, .L5568
 nop
-.L3207:
-ldsw [%sp + 96], %l0
-stw %l0, [%sp + 92]
-.L3214:
-ldsw [%sp + 92], %l1
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-movne %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L3220
-nop
-ba %icc, .L3259
-nop
-.L3220:
+.L5529:
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
 nop
-mov %o0, %l0
-stw %l0, [%sp + 100]
-ldsw [%sp + 100], %l1
-ldsw [%sp + 92], %l0
-stw %l0, [%l1 + 0]
-ldsw [%sp + 100], %l1
-sethi %hi(peg1), %l0
-or %l0, %lo(peg1), %l0
-ldsw [%l0 + 0], %l0
-stw %l0, [%l1 + 4]
-ldsw [%sp + 100], %l1
-sethi %hi(peg1), %l0
-or %l0, %lo(peg1), %l0
-stw %l1, [%l0 + 0]
-ldsw [%sp + 92], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-sub %l1, %l0, %l0
-stw %l0, [%sp + 92]
-ba %icc, .L3214
+mov %o0, %l2
+or %l2, 0, %l4
+or %l4, 0, %l3
+or %l1, 0, %l2
+stw %l2, [%l3 + 0]
+or %l4, 0, %l3
+sethi %hi(peg1), %l2
+or %l2, %lo(peg1), %l2
+ldsw [%l2 + 0], %l2
+stw %l2, [%l3 + 4]
+or %l4, 0, %l3
+sethi %hi(peg1), %l2
+or %l2, %lo(peg1), %l2
+stw %l3, [%l2 + 0]
+or %l1, 0, %l2
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
+sub %l2, %l1, %l1
+or %l1, 0, %l1
+ba %icc, .L5523
 nop
-.L3259:
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
+.L5568:
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
+mov %l1, %o1
 call printf
 nop
-sethi %hi(peg1), %l0
-or %l0, %lo(peg1), %l0
-ldsw [%l0 + 0], %l0
-mov %l0, %o0
+sethi %hi(peg1), %l1
+or %l1, %lo(peg1), %l1
+ldsw [%l1 + 0], %l1
+mov %l1, %o0
 call printPeg
 nop
-sethi %hi(2), %l0
-or %l0, %lo(2), %l0
+sethi %hi(2), %l1
+or %l1, %lo(2), %l1
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
+mov %l1, %o1
 call printf
 nop
-sethi %hi(peg2), %l0
-or %l0, %lo(peg2), %l0
-ldsw [%l0 + 0], %l0
-mov %l0, %o0
+sethi %hi(peg2), %l1
+or %l1, %lo(peg2), %l1
+ldsw [%l1 + 0], %l1
+mov %l1, %o0
 call printPeg
 nop
-sethi %hi(3), %l0
-or %l0, %lo(3), %l0
+sethi %hi(3), %l1
+or %l1, %lo(3), %l1
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
+mov %l1, %o1
 call printf
 nop
-sethi %hi(peg3), %l0
-or %l0, %lo(peg3), %l0
-ldsw [%l0 + 0], %l0
-mov %l0, %o0
+sethi %hi(peg3), %l1
+or %l1, %lo(peg3), %l1
+ldsw [%l1 + 0], %l1
+mov %l1, %o0
 call printPeg
 nop
-ldsw [%sp + 96], %l3
+or %l0, 0, %l3
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 sethi %hi(3), %l1
@@ -456,7 +456,7 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-.L3315:
+.L5624:
 sethi %hi(peg3), %l0
 or %l0, %lo(peg3), %l0
 ldsw [%l0 + 0], %l1
@@ -469,15 +469,15 @@ movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L3321
+be %icc, .L5630
 nop
-ba %icc, .L3348
+ba %icc, .L5657
 nop
-.L3321:
+.L5630:
 sethi %hi(peg3), %l0
 or %l0, %lo(peg3), %l0
 ldsw [%l0 + 0], %l0
-stw %l0, [%sp + 100]
+or %l0, 0, %l4
 sethi %hi(peg3), %l0
 or %l0, %lo(peg3), %l0
 ldsw [%l0 + 0], %l0
@@ -485,19 +485,19 @@ ldsw [%l0 + 4], %l1
 sethi %hi(peg3), %l0
 or %l0, %lo(peg3), %l0
 stw %l1, [%l0 + 0]
-ldsw [%sp + 100], %l0
+or %l4, 0, %l0
 mov %l0, %o0
 call free
 nop
-ba %icc, .L3315
+ba %icc, .L5624
 nop
-.L3348:
-ba %icc, .L3351
+.L5657:
+ba %icc, .L5660
 nop
-.L3346:
-ba %icc, .L3351
+.L5655:
+ba %icc, .L5660
 nop
-.L3351:
+.L5660:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0

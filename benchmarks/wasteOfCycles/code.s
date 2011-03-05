@@ -3,7 +3,7 @@
 	.global function
 .type    function, #function
 function:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -14,60 +14,59 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L8799
+be %icc, .L15255
 nop
-ba %icc, .L8804
+ba %icc, .L15260
 nop
-.L8799:
+.L15255:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L8809
+ba %icc, .L15265
 nop
-.L8804:
-ba %icc, .L8809
+.L15260:
+ba %icc, .L15265
 nop
-.L8809:
+.L15265:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-stw %l0, [%sp + 96]
-.L8813:
-ldsw [%sp + 96], %l2
+.L15269:
+or %l0, 0, %l3
+mov %i0, %l2
 mov %i0, %l1
-mov %i0, %l0
-mulx %l1, %l0, %l0
-sethi %hi(0), %l1
-or %l1, %lo(0), %l1
-cmp %l2, %l0
-movl %icc, 1, %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l1, %l0
-be %icc, .L8824
+mulx %l2, %l1, %l1
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l3, %l1
+movl %icc, 1, %l2
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
+cmp %l2, %l1
+be %icc, .L15280
 nop
-ba %icc, .L8860
+ba %icc, .L15316
 nop
-.L8824:
-ldsw [%sp + 96], %l1
-mov %i0, %l0
-add %l1, %l0, %l0
-stw %l0, [%sp + 100]
-ldsw [%sp + 100], %l0
+.L15280:
+or %l0, 0, %l2
+mov %i0, %l1
+add %l2, %l1, %l1
+or %l1, 0, %l1
+or %l1, 0, %l1
 sethi %hi(.ConstantString0), %o0
 or %o0, %lo(.ConstantString0), %o0
-mov %l0, %o1
+mov %l1, %o1
 call printf
 nop
-ldsw [%sp + 96], %l1
+or %l0, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
-stw %l0, [%sp + 96]
-ba %icc, .L8813
+or %l0, 0, %l0
+ba %icc, .L15269
 nop
-.L8860:
+.L15316:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -84,15 +83,15 @@ restore
 	.global main
 .type    main, #function
 main:
-save %sp, -104, %sp
+save %sp, -96, %sp
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 96, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 96], %l0
-stw %l0, [%sp + 92]
 ldsw [%sp + 92], %l0
+or %l0, 0, %l0
+or %l0, 0, %l0
 mov %l0, %o0
 call function
 nop

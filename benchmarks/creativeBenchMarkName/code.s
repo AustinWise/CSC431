@@ -3,111 +3,111 @@
 	.global buildList
 .type    buildList, #function
 buildList:
-save %sp, -128, %sp
+save %sp, -96, %sp
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
 nop
 mov %o0, %l0
-stw %l0, [%sp + 100]
+or %l0, 0, %l6
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
 nop
 mov %o0, %l0
-stw %l0, [%sp + 104]
+or %l0, 0, %l5
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
 nop
 mov %o0, %l0
-stw %l0, [%sp + 108]
+or %l0, 0, %l4
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
 nop
 mov %o0, %l0
-stw %l0, [%sp + 112]
+or %l0, 0, %l3
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
 nop
 mov %o0, %l0
-stw %l0, [%sp + 116]
+or %l0, 0, %l2
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
 nop
 mov %o0, %l0
-stw %l0, [%sp + 120]
-ldsw [%sp + 100], %l0
+or %l0, 0, %l1
+or %l6, 0, %l0
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 124, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 124], %l1
-stw %l1, [%l0 + 0]
-ldsw [%sp + 104], %l0
+ldsw [%sp + 92], %l7
+stw %l7, [%l0 + 0]
+or %l5, 0, %l0
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 124, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 124], %l1
-stw %l1, [%l0 + 0]
-ldsw [%sp + 108], %l0
+ldsw [%sp + 92], %l7
+stw %l7, [%l0 + 0]
+or %l4, 0, %l0
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 124, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 124], %l1
-stw %l1, [%l0 + 0]
-ldsw [%sp + 112], %l0
+ldsw [%sp + 92], %l7
+stw %l7, [%l0 + 0]
+or %l3, 0, %l0
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 124, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 124], %l1
-stw %l1, [%l0 + 0]
-ldsw [%sp + 116], %l0
+ldsw [%sp + 92], %l7
+stw %l7, [%l0 + 0]
+or %l2, 0, %l0
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 124, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 124], %l1
-stw %l1, [%l0 + 0]
-ldsw [%sp + 120], %l0
+ldsw [%sp + 92], %l7
+stw %l7, [%l0 + 0]
+or %l1, 0, %l0
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 124, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 124], %l1
-stw %l1, [%l0 + 0]
-ldsw [%sp + 100], %l1
-ldsw [%sp + 104], %l0
-stw %l0, [%l1 + 4]
-ldsw [%sp + 104], %l1
-ldsw [%sp + 108], %l0
-stw %l0, [%l1 + 4]
-ldsw [%sp + 108], %l1
-ldsw [%sp + 112], %l0
-stw %l0, [%l1 + 4]
-ldsw [%sp + 112], %l1
-ldsw [%sp + 116], %l0
-stw %l0, [%l1 + 4]
-ldsw [%sp + 116], %l1
-ldsw [%sp + 120], %l0
-stw %l0, [%l1 + 4]
-ldsw [%sp + 120], %l1
+ldsw [%sp + 92], %l7
+stw %l7, [%l0 + 0]
+or %l6, 0, %l7
+or %l5, 0, %l0
+stw %l0, [%l7 + 4]
+or %l5, 0, %l5
+or %l4, 0, %l0
+stw %l0, [%l5 + 4]
+or %l4, 0, %l4
+or %l3, 0, %l0
+stw %l0, [%l4 + 4]
+or %l3, 0, %l3
+or %l2, 0, %l0
+stw %l0, [%l3 + 4]
+or %l2, 0, %l2
+or %l1, 0, %l0
+stw %l0, [%l2 + 4]
+or %l1, 0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 stw %l0, [%l1 + 4]
-ldsw [%sp + 100], %l0
+or %l6, 0, %l0
 or %l0, 0, %i0
 ret
 restore
@@ -116,57 +116,56 @@ restore
 	.global multiple
 .type    multiple, #function
 multiple:
-save %sp, -112, %sp
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-stw %l0, [%sp + 96]
-mov %i0, %l0
-stw %l0, [%sp + 104]
-ldsw [%sp + 104], %l0
-ldsw [%l0 + 0], %l0
-stw %l0, [%sp + 100]
-ldsw [%sp + 104], %l0
-ldsw [%l0 + 4], %l0
-stw %l0, [%sp + 104]
-.L2200:
-ldsw [%sp + 96], %l1
-sethi %hi(5), %l0
-or %l0, %lo(5), %l0
+save %sp, -96, %sp
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
-cmp %l1, %l0
-movl %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L2206
-nop
-ba %icc, .L2244
-nop
-.L2206:
-ldsw [%sp + 100], %l1
-ldsw [%sp + 104], %l0
-ldsw [%l0 + 0], %l0
-mulx %l1, %l0, %l0
-stw %l0, [%sp + 100]
-ldsw [%sp + 104], %l0
+mov %i0, %l0
+or %l0, 0, %l0
+or %l0, 0, %l1
+ldsw [%l1 + 0], %l1
+or %l1, 0, %l1
+or %l0, 0, %l0
 ldsw [%l0 + 4], %l0
-stw %l0, [%sp + 104]
-ldsw [%sp + 100], %l0
+or %l0, 0, %l0
+.L3648:
+or %l2, 0, %l4
+sethi %hi(5), %l3
+or %l3, %lo(5), %l3
+sethi %hi(0), %l5
+or %l5, %lo(0), %l5
+cmp %l4, %l3
+movl %icc, 1, %l5
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+cmp %l5, %l3
+be %icc, .L3654
+nop
+ba %icc, .L3692
+nop
+.L3654:
+or %l1, 0, %l3
+or %l0, 0, %l1
+ldsw [%l1 + 0], %l1
+mulx %l3, %l1, %l1
+or %l1, 0, %l1
+or %l0, 0, %l0
+ldsw [%l0 + 4], %l0
+or %l0, 0, %l0
+or %l1, 0, %l3
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
+mov %l3, %o1
 call printf
 nop
-ldsw [%sp + 96], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-add %l1, %l0, %l0
-stw %l0, [%sp + 96]
-ba %icc, .L2200
+or %l2, 0, %l3
+sethi %hi(1), %l2
+or %l2, %lo(1), %l2
+add %l3, %l2, %l2
+or %l2, 0, %l2
+ba %icc, .L3648
 nop
-.L2244:
-ldsw [%sp + 100], %l0
+.L3692:
+or %l1, 0, %l0
 or %l0, 0, %i0
 ret
 restore
@@ -175,57 +174,56 @@ restore
 	.global add
 .type    add, #function
 add:
-save %sp, -112, %sp
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-stw %l0, [%sp + 96]
-mov %i0, %l0
-stw %l0, [%sp + 104]
-ldsw [%sp + 104], %l0
-ldsw [%l0 + 0], %l0
-stw %l0, [%sp + 100]
-ldsw [%sp + 104], %l0
-ldsw [%l0 + 4], %l0
-stw %l0, [%sp + 104]
-.L2275:
-ldsw [%sp + 96], %l1
-sethi %hi(5), %l0
-or %l0, %lo(5), %l0
+save %sp, -96, %sp
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
-cmp %l1, %l0
-movl %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L2281
-nop
-ba %icc, .L2319
-nop
-.L2281:
-ldsw [%sp + 100], %l1
-ldsw [%sp + 104], %l0
-ldsw [%l0 + 0], %l0
-add %l1, %l0, %l0
-stw %l0, [%sp + 100]
-ldsw [%sp + 104], %l0
+mov %i0, %l0
+or %l0, 0, %l0
+or %l0, 0, %l1
+ldsw [%l1 + 0], %l1
+or %l1, 0, %l1
+or %l0, 0, %l0
 ldsw [%l0 + 4], %l0
-stw %l0, [%sp + 104]
-ldsw [%sp + 100], %l0
+or %l0, 0, %l0
+.L3723:
+or %l2, 0, %l4
+sethi %hi(5), %l3
+or %l3, %lo(5), %l3
+sethi %hi(0), %l5
+or %l5, %lo(0), %l5
+cmp %l4, %l3
+movl %icc, 1, %l5
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+cmp %l5, %l3
+be %icc, .L3729
+nop
+ba %icc, .L3767
+nop
+.L3729:
+or %l1, 0, %l3
+or %l0, 0, %l1
+ldsw [%l1 + 0], %l1
+add %l3, %l1, %l1
+or %l1, 0, %l1
+or %l0, 0, %l0
+ldsw [%l0 + 4], %l0
+or %l0, 0, %l0
+or %l1, 0, %l3
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
+mov %l3, %o1
 call printf
 nop
-ldsw [%sp + 96], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-add %l1, %l0, %l0
-stw %l0, [%sp + 96]
-ba %icc, .L2275
+or %l2, 0, %l3
+sethi %hi(1), %l2
+or %l2, %lo(1), %l2
+add %l3, %l2, %l2
+or %l2, 0, %l2
+ba %icc, .L3723
 nop
-.L2319:
-ldsw [%sp + 100], %l0
+.L3767:
+or %l1, 0, %l0
 or %l0, 0, %i0
 ret
 restore
@@ -246,19 +244,19 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L2336
+be %icc, .L3784
 nop
-ba %icc, .L2343
+ba %icc, .L3791
 nop
-.L2336:
+.L3784:
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L2360
+ba %icc, .L3808
 nop
-.L2343:
+.L3791:
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
 mov %i0, %l1
@@ -271,113 +269,109 @@ mulx %l0, %l1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L2360
+ba %icc, .L3808
 nop
-.L2360:
+.L3808:
 	.size    recurseList, .-recurseList
 	.align 4
 	.global main
 .type    main, #function
 main:
-save %sp, -120, %sp
+save %sp, -96, %sp
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-stw %l0, [%sp + 112]
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-stw %l0, [%sp + 108]
 call buildList
 nop
-mov %o0, %l0
-stw %l0, [%sp + 92]
-ldsw [%sp + 92], %l0
-mov %l0, %o0
+mov %o0, %l1
+or %l1, 0, %l3
+or %l3, 0, %l1
+mov %l1, %o0
 call multiple
 nop
-mov %o0, %l0
-stw %l0, [%sp + 96]
-ldsw [%sp + 92], %l0
-mov %l0, %o0
+mov %o0, %l1
+or %l1, 0, %l1
+or %l3, 0, %l4
+mov %l4, %o0
 call add
 nop
-mov %o0, %l0
-stw %l0, [%sp + 100]
-ldsw [%sp + 96], %l2
-ldsw [%sp + 100], %l1
-sethi %hi(2), %l0
-or %l0, %lo(2), %l0
-sdivx %l1, %l0, %l0
-sub %l2, %l0, %l0
-stw %l0, [%sp + 104]
-.L2404:
-ldsw [%sp + 112], %l1
-sethi %hi(10000), %l0
-or %l0, %lo(10000), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-movl %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L2410
+mov %o0, %l4
+or %l4, 0, %l5
+or %l1, 0, %l4
+or %l5, 0, %l1
+sra %l1, 1, %l1
+sub %l4, %l1, %l1
+or %l1, 0, %l1
+.L3852:
+or %l2, 0, %l5
+sethi %hi(10000), %l4
+or %l4, %lo(10000), %l4
+sethi %hi(0), %l6
+or %l6, %lo(0), %l6
+cmp %l5, %l4
+movl %icc, 1, %l6
+sethi %hi(1), %l4
+or %l4, %lo(1), %l4
+cmp %l6, %l4
+be %icc, .L3858
 nop
-ba %icc, .L2439
+ba %icc, .L3887
 nop
-.L2410:
-ldsw [%sp + 108], %l0
-ldsw [%sp + 92], %l1
-mov %l1, %o0
+.L3858:
+or %l0, 0, %l0
+or %l3, 0, %l4
+mov %l4, %o0
 call recurseList
 nop
-mov %o0, %l1
-add %l0, %l1, %l0
-stw %l0, [%sp + 108]
-ldsw [%sp + 112], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-add %l1, %l0, %l0
-stw %l0, [%sp + 112]
-ba %icc, .L2404
+mov %o0, %l4
+add %l0, %l4, %l0
+or %l0, 0, %l0
+or %l2, 0, %l4
+sethi %hi(1), %l2
+or %l2, %lo(1), %l2
+add %l4, %l2, %l2
+or %l2, 0, %l2
+ba %icc, .L3852
 nop
-.L2439:
-ldsw [%sp + 108], %l0
+.L3887:
+or %l0, 0, %l2
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
+mov %l2, %o1
 call printf
 nop
-.L2443:
-ldsw [%sp + 108], %l1
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
+.L3891:
+or %l0, 0, %l3
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
-cmp %l1, %l0
-movne %icc, 1, %l2
+sethi %hi(0), %l4
+or %l4, %lo(0), %l4
+cmp %l3, %l2
+movne %icc, 1, %l4
+sethi %hi(1), %l2
+or %l2, %lo(1), %l2
+cmp %l4, %l2
+be %icc, .L3897
+nop
+ba %icc, .L3915
+nop
+.L3897:
+or %l0, 0, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L2449
+sub %l2, %l0, %l0
+or %l0, 0, %l0
+ba %icc, .L3891
 nop
-ba %icc, .L2467
-nop
-.L2449:
-ldsw [%sp + 108], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-sub %l1, %l0, %l0
-stw %l0, [%sp + 108]
-ba %icc, .L2443
-nop
-.L2467:
-ldsw [%sp + 104], %l0
+.L3915:
+or %l1, 0, %l1
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
+mov %l1, %o1
 call printf
 nop
-ldsw [%sp + 108], %l0
+or %l0, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1

@@ -20,17 +20,17 @@ restore
 .type    hailstone, #function
 hailstone:
 save %sp, -96, %sp
-.L2861:
+.L5038:
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L2862
+be %icc, .L5039
 nop
-ba %icc, .L2926
+ba %icc, .L5103
 nop
-.L2862:
+.L5039:
 mov %i0, %l0
 sethi %hi(.ConstantString0), %o0
 or %o0, %lo(.ConstantString0), %o0
@@ -54,11 +54,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L2878
+be %icc, .L5055
 nop
-ba %icc, .L2891
+ba %icc, .L5068
 nop
-.L2878:
+.L5055:
 sethi %hi(3), %l1
 or %l1, %lo(3), %l1
 mov %i0, %l0
@@ -67,17 +67,17 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
 mov %l0, %i0
-ba %icc, .L2904
+ba %icc, .L5081
 nop
-.L2891:
+.L5068:
 mov %i0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 sdivx %l1, %l0, %l0
 mov %l0, %i0
-ba %icc, .L2904
+ba %icc, .L5081
 nop
-.L2904:
+.L5081:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -88,11 +88,11 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L2910
+be %icc, .L5087
 nop
-ba %icc, .L2917
+ba %icc, .L5094
 nop
-.L2910:
+.L5087:
 mov %i0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
@@ -101,15 +101,15 @@ call printf
 nop
 ret
 restore
-ba %icc, .L2924
+ba %icc, .L5101
 nop
-.L2917:
-ba %icc, .L2924
+.L5094:
+ba %icc, .L5101
 nop
-.L2924:
-ba %icc, .L2861
+.L5101:
+ba %icc, .L5038
 nop
-.L2926:
+.L5103:
 ret
 restore
 	.size    hailstone, .-hailstone
@@ -117,15 +117,15 @@ restore
 	.global main
 .type    main, #function
 main:
-save %sp, -104, %sp
+save %sp, -96, %sp
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 96, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 96], %l0
-stw %l0, [%sp + 92]
 ldsw [%sp + 92], %l0
+or %l0, 0, %l0
+or %l0, 0, %l0
 mov %l0, %o0
 call hailstone
 nop

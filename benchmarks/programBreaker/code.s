@@ -14,18 +14,18 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L6555
+be %icc, .L10594
 nop
-ba %icc, .L6561
+ba %icc, .L10600
 nop
-.L6555:
+.L10594:
 mov %i1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L6578
+ba %icc, .L10617
 nop
-.L6561:
+.L10600:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -39,25 +39,20 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L6578
+ba %icc, .L10617
 nop
-.L6578:
+.L10617:
 	.size    fun2, .-fun2
 	.align 4
 	.global fun1
 .type    fun1, #function
 fun1:
-save %sp, -112, %sp
-sethi %hi(5), %l1
-or %l1, %lo(5), %l1
-sethi %hi(6), %l0
-or %l0, %lo(6), %l0
-add %l1, %l0, %l2
-mov %i0, %l1
-sethi %hi(2), %l0
-or %l0, %lo(2), %l0
-mulx %l1, %l0, %l0
-sub %l2, %l0, %l2
+save %sp, -104, %sp
+sethi %hi(11), %l1
+or %l1, %lo(11), %l1
+mov %i0, %l0
+sll %l0, 1, %l0
+sub %l1, %l0, %l2
 sethi %hi(4), %l1
 or %l1, %lo(4), %l1
 mov %i1, %l0
@@ -65,8 +60,8 @@ sdivx %l1, %l0, %l0
 add %l2, %l0, %l1
 mov %i2, %l0
 add %l1, %l0, %l0
-stw %l0, [%sp + 104]
-ldsw [%sp + 104], %l1
+or %l0, 0, %l4
+or %l4, 0, %l1
 mov %i1, %l0
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
@@ -75,12 +70,12 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L6616
+be %icc, .L10655
 nop
-ba %icc, .L6627
+ba %icc, .L10666
 nop
-.L6616:
-ldsw [%sp + 104], %l1
+.L10655:
+or %l4, 0, %l1
 mov %i0, %l0
 mov %l1, %o0
 mov %l0, %o1
@@ -90,9 +85,9 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L6661
+ba %icc, .L10700
 nop
-.L6627:
+.L10666:
 sethi %hi(5), %l1
 or %l1, %lo(5), %l1
 sethi %hi(6), %l0
@@ -101,7 +96,7 @@ sethi %hi(0), %l3
 or %l3, %lo(0), %l3
 cmp %l1, %l0
 movl %icc, 1, %l3
-ldsw [%sp + 104], %l1
+or %l4, 0, %l1
 mov %i1, %l0
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
@@ -111,12 +106,12 @@ and %l3, %l2, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L6642
+be %icc, .L10681
 nop
-ba %icc, .L6653
+ba %icc, .L10692
 nop
-.L6642:
-ldsw [%sp + 104], %l1
+.L10681:
+or %l4, 0, %l1
 mov %i1, %l0
 mov %l1, %o0
 mov %l0, %o1
@@ -126,16 +121,16 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L6659
+ba %icc, .L10698
 nop
-.L6653:
-ba %icc, .L6659
+.L10692:
+ba %icc, .L10698
 nop
-.L6659:
-ba %icc, .L6661
+.L10698:
+ba %icc, .L10700
 nop
-.L6661:
-ldsw [%sp + 104], %l0
+.L10700:
+or %l4, 0, %l0
 or %l0, 0, %i0
 ret
 restore
@@ -144,57 +139,54 @@ restore
 	.global main
 .type    main, #function
 main:
-save %sp, -104, %sp
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-stw %l0, [%sp + 92]
+save %sp, -96, %sp
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 96, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 96], %l0
-stw %l0, [%sp + 92]
-.L6677:
-ldsw [%sp + 92], %l1
-sethi %hi(10000), %l0
-or %l0, %lo(10000), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-movl %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L6683
+ldsw [%sp + 92], %l0
+or %l0, 0, %l0
+.L10716:
+or %l0, 0, %l2
+sethi %hi(10000), %l1
+or %l1, %lo(10000), %l1
+sethi %hi(0), %l3
+or %l3, %lo(0), %l3
+cmp %l2, %l1
+movl %icc, 1, %l3
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
+cmp %l3, %l1
+be %icc, .L10722
 nop
-ba %icc, .L6711
+ba %icc, .L10750
 nop
-.L6683:
-sethi %hi(3), %l2
-or %l2, %lo(3), %l2
-ldsw [%sp + 92], %l1
-sethi %hi(5), %l0
-or %l0, %lo(5), %l0
-mov %l2, %o0
-mov %l1, %o1
-mov %l0, %o2
+.L10722:
+sethi %hi(3), %l3
+or %l3, %lo(3), %l3
+or %l0, 0, %l2
+sethi %hi(5), %l1
+or %l1, %lo(5), %l1
+mov %l3, %o0
+mov %l2, %o1
+mov %l1, %o2
 call fun1
 nop
-mov %o0, %l0
+mov %o0, %l1
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
+mov %l1, %o1
 call printf
 nop
-ldsw [%sp + 92], %l1
+or %l0, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
-stw %l0, [%sp + 92]
-ba %icc, .L6677
+or %l0, 0, %l0
+ba %icc, .L10716
 nop
-.L6711:
+.L10750:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0

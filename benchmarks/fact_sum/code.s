@@ -15,7 +15,7 @@ restore
 	.global fact
 .type    fact, #function
 fact:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -34,22 +34,22 @@ or %l3, %l2, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L1974
+be %icc, .L4162
 nop
-ba %icc, .L1979
+ba %icc, .L4167
 nop
-.L1974:
+.L4162:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L1984
+ba %icc, .L4172
 nop
-.L1979:
-ba %icc, .L1984
+.L4167:
+ba %icc, .L4172
 nop
-.L1984:
+.L4172:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -60,16 +60,13 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L1990
+be %icc, .L4178
 nop
-ba %icc, .L2002
+ba %icc, .L4190
 nop
-.L1990:
-sethi %hi(1), %l1
-or %l1, %lo(1), %l1
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-sub %l0, %l1, %l1
+.L4178:
+sethi %hi(-1), %l1
+or %l1, %lo(-1), %l1
 mov %i0, %l0
 mulx %l1, %l0, %l0
 mov %l0, %o0
@@ -79,12 +76,12 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L2007
+ba %icc, .L4195
 nop
-.L2002:
-ba %icc, .L2007
+.L4190:
+ba %icc, .L4195
 nop
-.L2007:
+.L4195:
 mov %i0, %l0
 mov %i0, %l2
 sethi %hi(1), %l1
@@ -95,8 +92,8 @@ call fact
 nop
 mov %o0, %l1
 mulx %l0, %l1, %l0
-stw %l0, [%sp + 96]
-ldsw [%sp + 96], %l0
+or %l0, 0, %l0
+or %l0, 0, %l0
 or %l0, 0, %i0
 ret
 restore
@@ -105,57 +102,53 @@ restore
 	.global main
 .type    main, #function
 main:
-save %sp, -112, %sp
+save %sp, -96, %sp
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-stw %l0, [%sp + 100]
-.L2035:
-ldsw [%sp + 100], %l2
-sethi %hi(1), %l1
-or %l1, %lo(1), %l1
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-sub %l0, %l1, %l0
-sethi %hi(0), %l1
-or %l1, %lo(0), %l1
-cmp %l2, %l0
-movne %icc, 1, %l1
+.L4223:
+or %l0, 0, %l1
+sethi %hi(-1), %l0
+or %l0, %lo(-1), %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-cmp %l1, %l0
-be %icc, .L2042
+cmp %l2, %l0
+be %icc, .L4230
 nop
-ba %icc, .L2082
+ba %icc, .L4270
 nop
-.L2042:
+.L4230:
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 104, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 104], %l0
-stw %l0, [%sp + 92]
-sethi %hi(.ConstantString2), %o0
-or %o0, %lo(.ConstantString2), %o0
-add %sp, 104, %o1
-call scanf
-nop
-ldsw [%sp + 104], %l0
-stw %l0, [%sp + 96]
 ldsw [%sp + 92], %l0
+or %l0, 0, %l1
+sethi %hi(.ConstantString2), %o0
+or %o0, %lo(.ConstantString2), %o0
+add %sp, 92, %o1
+call scanf
+nop
+ldsw [%sp + 92], %l0
+or %l0, 0, %l0
+or %l1, 0, %l1
+mov %l1, %o0
+call fact
+nop
+mov %o0, %l1
+or %l1, 0, %l1
+or %l0, 0, %l0
 mov %l0, %o0
 call fact
 nop
 mov %o0, %l0
-stw %l0, [%sp + 92]
-ldsw [%sp + 96], %l0
-mov %l0, %o0
-call fact
-nop
-mov %o0, %l0
-stw %l0, [%sp + 96]
-ldsw [%sp + 92], %l1
-ldsw [%sp + 96], %l0
+or %l0, 0, %l0
+or %l1, 0, %l1
+or %l0, 0, %l0
 mov %l1, %o0
 mov %l0, %o1
 call sum
@@ -168,14 +161,14 @@ call printf
 nop
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 104, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 104], %l0
-stw %l0, [%sp + 100]
-ba %icc, .L2035
+ldsw [%sp + 92], %l0
+or %l0, 0, %l0
+ba %icc, .L4223
 nop
-.L2082:
+.L4270:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0

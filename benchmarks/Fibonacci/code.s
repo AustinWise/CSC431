@@ -14,19 +14,19 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L2491
+be %icc, .L4418
 nop
-ba %icc, .L2496
+ba %icc, .L4423
 nop
-.L2491:
+.L4418:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L2535
+ba %icc, .L4462
 nop
-.L2496:
+.L4423:
 mov %i0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
@@ -37,19 +37,19 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L2504
+be %icc, .L4431
 nop
-ba %icc, .L2509
+ba %icc, .L4436
 nop
-.L2504:
+.L4431:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L2533
+ba %icc, .L4460
 nop
-.L2509:
+.L4436:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -70,26 +70,26 @@ add %l0, %l1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L2533
+ba %icc, .L4460
 nop
-.L2533:
-ba %icc, .L2535
+.L4460:
+ba %icc, .L4462
 nop
-.L2535:
+.L4462:
 	.size    computeFib, .-computeFib
 	.align 4
 	.global main
 .type    main, #function
 main:
-save %sp, -104, %sp
+save %sp, -96, %sp
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 96, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 96], %l0
-stw %l0, [%sp + 92]
 ldsw [%sp + 92], %l0
+or %l0, 0, %l0
+or %l0, 0, %l0
 mov %l0, %o0
 call computeFib
 nop

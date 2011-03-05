@@ -3,86 +3,86 @@
 	.global getRands
 .type    getRands, #function
 getRands:
-save %sp, -120, %sp
-mov %i0, %l1
+save %sp, -104, %sp
+mov %i0, %l2
 mov %i0, %l0
-mulx %l1, %l0, %l0
-stw %l0, [%sp + 100]
+mulx %l2, %l0, %l0
+or %l0, 0, %l2
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
 nop
 mov %o0, %l0
-stw %l0, [%sp + 112]
-ldsw [%sp + 112], %l1
-ldsw [%sp + 100], %l0
-stw %l0, [%l1 + 0]
-ldsw [%sp + 112], %l1
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-stw %l0, [%l1 + 4]
-mov %i1, %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-sub %l1, %l0, %l0
-mov %l0, %i1
-ldsw [%sp + 100], %l0
-stw %l0, [%sp + 104]
-.L6758:
-mov %i1, %l1
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
+or %l0, 0, %l0
+or %l0, 0, %l4
+or %l2, 0, %l3
+stw %l3, [%l4 + 0]
+or %l0, 0, %l4
+sethi %hi(0), %l3
+or %l3, %lo(0), %l3
+stw %l3, [%l4 + 4]
+mov %i1, %l4
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+sub %l4, %l3, %l3
+mov %l3, %i1
+or %l2, 0, %l2
+or %l2, 0, %l5
+.L10959:
+mov %i1, %l3
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
-cmp %l1, %l0
-movg %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L6764
+sethi %hi(0), %l4
+or %l4, %lo(0), %l4
+cmp %l3, %l2
+movg %icc, 1, %l4
+sethi %hi(1), %l2
+or %l2, %lo(1), %l2
+cmp %l4, %l2
+be %icc, .L10965
 nop
-ba %icc, .L6831
+ba %icc, .L11032
 nop
-.L6764:
-ldsw [%sp + 104], %l1
-ldsw [%sp + 104], %l0
-mulx %l1, %l0, %l1
-mov %i0, %l0
-sdivx %l1, %l0, %l2
+.L10965:
+or %l5, 0, %l2
+or %l5, 0, %l1
+mulx %l2, %l1, %l2
 mov %i0, %l1
-sethi %hi(2), %l0
-or %l0, %lo(2), %l0
-sdivx %l1, %l0, %l0
-mulx %l2, %l0, %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-add %l1, %l0, %l0
-stw %l0, [%sp + 100]
+sdivx %l2, %l1, %l3
+mov %i0, %l2
+sethi %hi(2), %l1
+or %l1, %lo(2), %l1
+sdivx %l2, %l1, %l1
+mulx %l3, %l1, %l2
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
+add %l2, %l1, %l1
+or %l1, 0, %l2
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
 nop
-mov %o0, %l0
-stw %l0, [%sp + 108]
-ldsw [%sp + 108], %l1
-ldsw [%sp + 100], %l0
-stw %l0, [%l1 + 0]
-ldsw [%sp + 108], %l1
-ldsw [%sp + 112], %l0
-stw %l0, [%l1 + 4]
-ldsw [%sp + 108], %l0
-stw %l0, [%sp + 112]
-mov %i1, %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-sub %l1, %l0, %l0
-mov %l0, %i1
-ldsw [%sp + 100], %l0
-stw %l0, [%sp + 104]
-ba %icc, .L6758
+mov %o0, %l1
+or %l1, 0, %l1
+or %l1, 0, %l4
+or %l2, 0, %l3
+stw %l3, [%l4 + 0]
+or %l1, 0, %l3
+or %l0, 0, %l0
+stw %l0, [%l3 + 4]
+or %l1, 0, %l0
+or %l0, 0, %l0
+mov %i1, %l4
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+sub %l4, %l3, %l3
+mov %l3, %i1
+or %l2, 0, %l2
+or %l2, 0, %l5
+ba %icc, .L10959
 nop
-.L6831:
-ldsw [%sp + 108], %l0
+.L11032:
+or %l1, 0, %l0
 or %l0, 0, %i0
 ret
 restore
@@ -91,74 +91,71 @@ restore
 	.global calcMean
 .type    calcMean, #function
 calcMean:
-save %sp, -112, %sp
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-stw %l0, [%sp + 96]
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-stw %l0, [%sp + 100]
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-stw %l0, [%sp + 104]
-.L6853:
-mov %i0, %l1
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
+save %sp, -96, %sp
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
-cmp %l1, %l0
-movne %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L6859
-nop
-ba %icc, .L6893
-nop
-.L6859:
-ldsw [%sp + 100], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-add %l1, %l0, %l0
-stw %l0, [%sp + 100]
-ldsw [%sp + 96], %l1
-mov %i0, %l0
-ldsw [%l0 + 0], %l0
-add %l1, %l0, %l0
-stw %l0, [%sp + 96]
-mov %i0, %l0
-ldsw [%l0 + 4], %l0
-mov %l0, %i0
-ba %icc, .L6853
-nop
-.L6893:
-ldsw [%sp + 100], %l1
+sethi %hi(0), %l1
+or %l1, %lo(0), %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-movne %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L6899
+.L11054:
+mov %i0, %l4
+sethi %hi(0), %l3
+or %l3, %lo(0), %l3
+sethi %hi(0), %l5
+or %l5, %lo(0), %l5
+cmp %l4, %l3
+movne %icc, 1, %l5
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+cmp %l5, %l3
+be %icc, .L11060
 nop
-ba %icc, .L6910
+ba %icc, .L11094
 nop
-.L6899:
-ldsw [%sp + 96], %l1
-ldsw [%sp + 100], %l0
-sdivx %l1, %l0, %l0
-stw %l0, [%sp + 104]
-ba %icc, .L6915
+.L11060:
+or %l1, 0, %l3
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
+add %l3, %l1, %l1
+or %l1, 0, %l1
+or %l2, 0, %l3
+mov %i0, %l2
+ldsw [%l2 + 0], %l2
+add %l3, %l2, %l2
+or %l2, 0, %l2
+mov %i0, %l3
+ldsw [%l3 + 4], %l3
+mov %l3, %i0
+ba %icc, .L11054
 nop
-.L6910:
-ba %icc, .L6915
+.L11094:
+or %l1, 0, %l4
+sethi %hi(0), %l3
+or %l3, %lo(0), %l3
+sethi %hi(0), %l5
+or %l5, %lo(0), %l5
+cmp %l4, %l3
+movne %icc, 1, %l5
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+cmp %l5, %l3
+be %icc, .L11100
 nop
-.L6915:
-ldsw [%sp + 104], %l0
+ba %icc, .L11111
+nop
+.L11100:
+or %l2, 0, %l2
+or %l1, 0, %l0
+sdivx %l2, %l0, %l0
+or %l0, 0, %l0
+ba %icc, .L11116
+nop
+.L11111:
+ba %icc, .L11116
+nop
+.L11116:
+or %l0, 0, %l0
 or %l0, 0, %i0
 ret
 restore
@@ -167,17 +164,15 @@ restore
 	.global approxSqrt
 .type    approxSqrt, #function
 approxSqrt:
-save %sp, -112, %sp
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-stw %l0, [%sp + 96]
-ldsw [%sp + 96], %l0
-stw %l0, [%sp + 104]
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-stw %l0, [%sp + 100]
-.L6938:
-ldsw [%sp + 100], %l1
+save %sp, -96, %sp
+sethi %hi(1), %l4
+or %l4, %lo(1), %l4
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+.L11139:
+or %l2, 0, %l1
 mov %i0, %l0
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
@@ -186,26 +181,26 @@ movl %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L6945
+be %icc, .L11146
 nop
-ba %icc, .L6978
+ba %icc, .L11179
 nop
-.L6945:
-ldsw [%sp + 96], %l1
-ldsw [%sp + 96], %l0
+.L11146:
+or %l4, 0, %l1
+or %l4, 0, %l0
 mulx %l1, %l0, %l0
-stw %l0, [%sp + 100]
-ldsw [%sp + 96], %l0
-stw %l0, [%sp + 104]
-ldsw [%sp + 96], %l1
+or %l0, 0, %l2
+or %l4, 0, %l0
+or %l0, 0, %l3
+or %l4, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
-stw %l0, [%sp + 96]
-ba %icc, .L6938
+or %l0, 0, %l4
+ba %icc, .L11139
 nop
-.L6978:
-ldsw [%sp + 104], %l0
+.L11179:
+or %l3, 0, %l0
 or %l0, 0, %i0
 ret
 restore
@@ -215,7 +210,7 @@ restore
 .type    approxSqrtAll, #function
 approxSqrtAll:
 save %sp, -96, %sp
-.L6988:
+.L11189:
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -226,11 +221,11 @@ movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L6994
+be %icc, .L11195
 nop
-ba %icc, .L7017
+ba %icc, .L11218
 nop
-.L6994:
+.L11195:
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
 mov %l0, %o0
@@ -245,9 +240,9 @@ nop
 mov %i0, %l0
 ldsw [%l0 + 4], %l0
 mov %l0, %i0
-ba %icc, .L6988
+ba %icc, .L11189
 nop
-.L7017:
+.L11218:
 ret
 restore
 	.size    approxSqrtAll, .-approxSqrtAll
@@ -255,117 +250,113 @@ restore
 	.global range
 .type    range, #function
 range:
-save %sp, -112, %sp
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-stw %l0, [%sp + 96]
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-stw %l0, [%sp + 100]
+save %sp, -96, %sp
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+sethi %hi(0), %l1
+or %l1, %lo(0), %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-stw %l0, [%sp + 104]
-.L7035:
+.L11236:
+mov %i0, %l4
+sethi %hi(0), %l3
+or %l3, %lo(0), %l3
+sethi %hi(0), %l5
+or %l5, %lo(0), %l5
+cmp %l4, %l3
+movne %icc, 1, %l5
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+cmp %l5, %l3
+be %icc, .L11242
+nop
+ba %icc, .L11326
+nop
+.L11242:
+or %l0, 0, %l4
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+cmp %l4, %l3
+be %icc, .L11247
+nop
+ba %icc, .L11265
+nop
+.L11247:
+mov %i0, %l0
+ldsw [%l0 + 0], %l0
+or %l0, 0, %l2
+mov %i0, %l0
+ldsw [%l0 + 0], %l0
+or %l0, 0, %l1
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+ba %icc, .L11312
+nop
+.L11265:
+mov %i0, %l3
+ldsw [%l3 + 0], %l4
+or %l2, 0, %l3
+sethi %hi(0), %l5
+or %l5, %lo(0), %l5
+cmp %l4, %l3
+movl %icc, 1, %l5
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+cmp %l5, %l3
+be %icc, .L11275
+nop
+ba %icc, .L11283
+nop
+.L11275:
+mov %i0, %l2
+ldsw [%l2 + 0], %l2
+or %l2, 0, %l2
+ba %icc, .L11310
+nop
+.L11283:
+mov %i0, %l3
+ldsw [%l3 + 0], %l4
+or %l1, 0, %l3
+sethi %hi(0), %l5
+or %l5, %lo(0), %l5
+cmp %l4, %l3
+movg %icc, 1, %l5
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+cmp %l5, %l3
+be %icc, .L11293
+nop
+ba %icc, .L11301
+nop
+.L11293:
 mov %i0, %l1
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-movne %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L7041
+ldsw [%l1 + 0], %l1
+or %l1, 0, %l1
+ba %icc, .L11307
 nop
-ba %icc, .L7125
+.L11301:
+ba %icc, .L11307
 nop
-.L7041:
-ldsw [%sp + 104], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l1, %l0
-be %icc, .L7046
+.L11307:
+ba %icc, .L11310
 nop
-ba %icc, .L7064
+.L11310:
+ba %icc, .L11312
 nop
-.L7046:
-mov %i0, %l0
-ldsw [%l0 + 0], %l0
-stw %l0, [%sp + 96]
-mov %i0, %l0
-ldsw [%l0 + 0], %l0
-stw %l0, [%sp + 100]
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-stw %l0, [%sp + 104]
-ba %icc, .L7111
+.L11312:
+mov %i0, %l3
+ldsw [%l3 + 4], %l3
+mov %l3, %i0
+ba %icc, .L11236
 nop
-.L7064:
-mov %i0, %l0
-ldsw [%l0 + 0], %l1
-ldsw [%sp + 96], %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-movl %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L7074
-nop
-ba %icc, .L7082
-nop
-.L7074:
-mov %i0, %l0
-ldsw [%l0 + 0], %l0
-stw %l0, [%sp + 96]
-ba %icc, .L7109
-nop
-.L7082:
-mov %i0, %l0
-ldsw [%l0 + 0], %l1
-ldsw [%sp + 100], %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-movg %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L7092
-nop
-ba %icc, .L7100
-nop
-.L7092:
-mov %i0, %l0
-ldsw [%l0 + 0], %l0
-stw %l0, [%sp + 100]
-ba %icc, .L7106
-nop
-.L7100:
-ba %icc, .L7106
-nop
-.L7106:
-ba %icc, .L7109
-nop
-.L7109:
-ba %icc, .L7111
-nop
-.L7111:
-mov %i0, %l0
-ldsw [%l0 + 4], %l0
-mov %l0, %i0
-ba %icc, .L7035
-nop
-.L7125:
-ldsw [%sp + 96], %l0
+.L11326:
+or %l2, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-ldsw [%sp + 100], %l0
+or %l1, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
@@ -378,46 +369,46 @@ restore
 	.global main
 .type    main, #function
 main:
-save %sp, -112, %sp
+save %sp, -96, %sp
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 108, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 108], %l0
-stw %l0, [%sp + 92]
+ldsw [%sp + 92], %l0
+or %l0, 0, %l0
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 108, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 108], %l0
-stw %l0, [%sp + 96]
 ldsw [%sp + 92], %l1
-ldsw [%sp + 96], %l0
+or %l1, 0, %l2
+or %l0, 0, %l1
+or %l2, 0, %l0
 mov %l1, %o0
 mov %l0, %o1
 call getRands
 nop
 mov %o0, %l0
-stw %l0, [%sp + 104]
-ldsw [%sp + 104], %l0
-mov %l0, %o0
+or %l0, 0, %l0
+or %l0, 0, %l1
+mov %l1, %o0
 call calcMean
 nop
-mov %o0, %l0
-stw %l0, [%sp + 100]
-ldsw [%sp + 100], %l0
+mov %o0, %l1
+or %l1, 0, %l1
+or %l1, 0, %l1
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
-mov %l0, %o1
+mov %l1, %o1
 call printf
 nop
-ldsw [%sp + 104], %l0
-mov %l0, %o0
+or %l0, 0, %l1
+mov %l1, %o0
 call range
 nop
-ldsw [%sp + 104], %l0
+or %l0, 0, %l0
 mov %l0, %o0
 call approxSqrtAll
 nop

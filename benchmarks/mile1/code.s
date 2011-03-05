@@ -4,10 +4,9 @@
 .type    calcPower, #function
 calcPower:
 save %sp, -104, %sp
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-stw %l0, [%sp + 100]
-.L3695:
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+.L6509:
 mov %i1, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -18,24 +17,24 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L3701
+be %icc, .L6515
 nop
-ba %icc, .L3728
+ba %icc, .L6542
 nop
-.L3701:
-ldsw [%sp + 100], %l1
+.L6515:
+or %l3, 0, %l1
 mov %i0, %l0
 mulx %l1, %l0, %l0
-stw %l0, [%sp + 100]
+or %l0, 0, %l3
 mov %i1, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sub %l1, %l0, %l0
 mov %l0, %i1
-ba %icc, .L3695
+ba %icc, .L6509
 nop
-.L3728:
-ldsw [%sp + 100], %l0
+.L6542:
+or %l3, 0, %l0
 or %l0, 0, %i0
 ret
 restore
@@ -44,100 +43,96 @@ restore
 	.global main
 .type    main, #function
 main:
-save %sp, -120, %sp
+save %sp, -96, %sp
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
 nop
 mov %o0, %l0
-stw %l0, [%sp + 92]
+or %l0, 0, %l2
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 112, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 112], %l0
-stw %l0, [%sp + 96]
-ldsw [%sp + 92], %l1
-ldsw [%sp + 96], %l0
-stw %l0, [%l1 + 0]
+ldsw [%sp + 92], %l0
+or %l0, 0, %l5
+or %l2, 0, %l3
+or %l5, 0, %l0
+stw %l0, [%l3 + 0]
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
-add %sp, 112, %o1
+add %sp, 92, %o1
 call scanf
 nop
-ldsw [%sp + 112], %l0
-stw %l0, [%sp + 96]
-ldsw [%sp + 96], %l1
+ldsw [%sp + 92], %l0
+or %l0, 0, %l5
+or %l5, 0, %l3
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-movl %icc, 1, %l2
+sethi %hi(0), %l4
+or %l4, %lo(0), %l4
+cmp %l3, %l0
+movl %icc, 1, %l4
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L3758
+cmp %l4, %l0
+be %icc, .L6572
 nop
-ba %icc, .L3764
+ba %icc, .L6578
 nop
-.L3758:
-sethi %hi(1), %l1
-or %l1, %lo(1), %l1
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-sub %l0, %l1, %l0
+.L6572:
+sethi %hi(-1), %l0
+or %l0, %lo(-1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L3769
+ba %icc, .L6583
 nop
-.L3764:
-ba %icc, .L3769
+.L6578:
+ba %icc, .L6583
 nop
-.L3769:
-ldsw [%sp + 92], %l1
-ldsw [%sp + 96], %l0
-stw %l0, [%l1 + 4]
+.L6583:
+or %l2, 0, %l3
+or %l5, 0, %l0
+stw %l0, [%l3 + 4]
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-stw %l0, [%sp + 108]
-.L3779:
-ldsw [%sp + 108], %l1
-sethi %hi(1000000), %l0
-or %l0, %lo(1000000), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-movl %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L3785
+.L6593:
+or %l0, 0, %l4
+sethi %hi(1000000), %l3
+or %l3, %lo(1000000), %l3
+sethi %hi(0), %l5
+or %l5, %lo(0), %l5
+cmp %l4, %l3
+movl %icc, 1, %l5
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+cmp %l5, %l3
+be %icc, .L6599
 nop
-ba %icc, .L3815
+ba %icc, .L6629
 nop
-.L3785:
-ldsw [%sp + 108], %l1
+.L6599:
+or %l0, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
-stw %l0, [%sp + 108]
-ldsw [%sp + 92], %l0
-ldsw [%l0 + 0], %l1
-ldsw [%sp + 92], %l0
-ldsw [%l0 + 4], %l0
-mov %l1, %o0
-mov %l0, %o1
+or %l0, 0, %l0
+or %l2, 0, %l1
+ldsw [%l1 + 0], %l3
+or %l2, 0, %l1
+ldsw [%l1 + 4], %l1
+mov %l3, %o0
+mov %l1, %o1
 call calcPower
 nop
-mov %o0, %l0
-stw %l0, [%sp + 100]
-ba %icc, .L3779
+mov %o0, %l1
+or %l1, 0, %l1
+ba %icc, .L6593
 nop
-.L3815:
-ldsw [%sp + 100], %l0
+.L6629:
+or %l1, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
