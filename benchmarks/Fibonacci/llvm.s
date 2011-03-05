@@ -1,6 +1,5 @@
-	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmpE4DE.tmp"
+	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmpFF05.tmp"
 	.text
-	.globl	computeFib
 	.align	4
 	.type	computeFib,@function
 computeFib:                             ! @computeFib
@@ -23,7 +22,7 @@ computeFib:                             ! @computeFib
 	restore %g0, %g0, %g0
 	retl
 	nop
-.LBB0_4:                                ! %L2597
+.LBB0_4:                                ! %L2509
 	add %i0, -1, %o0
 	call computeFib
 	nop

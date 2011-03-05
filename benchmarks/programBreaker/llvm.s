@@ -1,36 +1,5 @@
-	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmpE50F.tmp"
+	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmpFF35.tmp"
 	.text
-	.globl	fun2
-	.align	4
-	.type	fun2,@function
-fun2:                                   ! @fun2
-! BB#0:
-	save %sp, -96, %sp
-	or %g0, %i1, %i0
-	restore %g0, %g0, %g0
-	retl
-	nop
-.Ltmp0:
-	.size	fun2, .Ltmp0-fun2
-
-	.globl	fun1
-	.align	4
-	.type	fun1,@function
-fun1:                                   ! @fun1
-! BB#0:                                 ! %L6616
-	save %sp, -96, %sp
-	or %g0, 4, %l0
-	sra %l0, 31, %l1
-	wr %l1, %g0, %y
-	sdiv %l0, %i1, %l0
-	movg %icc, %i0, %i1
-	or %g0, %i1, %i0
-	restore %g0, %g0, %g0
-	retl
-	nop
-.Ltmp1:
-	.size	fun1, .Ltmp1-fun1
-
 	.globl	main
 	.align	4
 	.type	main,@function
@@ -46,9 +15,9 @@ main:                                   ! @main
 	sethi 9, %l0
 	or %l0, 783, %l1
 	subcc %o1, %l1, %l1
-	bg .LBB2_2
+	bg .LBB0_2
 	nop
-.LBB2_1:                                ! %L6683
+.LBB0_1:                                ! %L6683
                                         ! =>This Inner Loop Header: Depth=1
 	or %g0, 4, %l1
 	sra %l1, 31, %l2
@@ -63,15 +32,15 @@ main:                                   ! @main
 	or %l0, 784, %l1
 	subcc %l2, %l1, %l1
 	or %g0, %l2, %o1
-	bne .LBB2_1
+	bne .LBB0_1
 	nop
-.LBB2_2:                                ! %L6711
+.LBB0_2:                                ! %L6711
 	sethi 0, %i0
 	restore %g0, %g0, %g0
 	retl
 	nop
-.Ltmp2:
-	.size	main, .Ltmp2-main
+.Ltmp0:
+	.size	main, .Ltmp0-main
 
 	.type	.LC1,@object            ! @.LC1
 	.section	.rodata.str1.1,"aMS",@progbits,1
