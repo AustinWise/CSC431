@@ -49,6 +49,7 @@
     <Compile Include="Analysis\FunctionsCalled.cs" />
     <Compile Include="Analysis\IterativeDataflow.cs" />
     <Compile Include="Analysis\ReachingDef.cs" />
+    <Compile Include="Analysis\UselessCodeRemoval.cs" />
     <Compile Include="CFG\IInstructionConverter.cs" />
     <Compile Include="CFG\InstructionStream.cs" />
     <Compile Include="CFG\Printer.cs" />

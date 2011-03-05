@@ -120,7 +120,25 @@ namespace CSC431.Analysis
         /// <returns></returns>
         public List<T> GetDef(BasicBlock<T> block, T instr, int reg)
         {
-            throw new NotImplementedException();
+            var defs = new Dictionary<int, List<T>>();
+            foreach (var kvp in reachingDefs[block])
+            {
+                defs.Add(kvp.Key, new List<T>(kvp.Value));
+            }
+
+            foreach (var i in block.Code)
+            {
+                if (i == instr)
+                    return defs[reg];
+
+                foreach (var t in i.DestRegs)
+                {
+                    defs[t.IntVal].Add(i);
+                }
+
+            }
+
+            throw new Exception("instr not found in block");
         }
     }
 }
