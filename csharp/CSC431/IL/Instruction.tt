@@ -65,9 +65,11 @@ instr.ForEachOperand((c, count, isLast) =>
     if (!c.IsSource)
         return;
     Write("{1}{0}", count, c.UpperPrefix);
-    if (!isLast)
+    if (!isLast || instr.IsUseCC)
         Write(", ");
 });
+if (instr.IsUseCC)
+    Write("MilocInstruction.IccReg");
 #>
 		};
 	}
@@ -84,12 +86,19 @@ instr.ForEachOperand((c, count, isLast) =>
     if (!c.IsTarget)
         return;
     Write("{1}{0}", count, c.UpperPrefix);
-    if (!isLast)
+    if (!isLast || instr.IsSetCC)
         Write(", ");
 });
+if (instr.IsSetCC)
+    Write("MilocInstruction.IccReg");
 #>
 		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return <#= instr.IsCritical.ToString().ToLower() #>; }
 }
 
 public override string ToString()
@@ -136,32 +145,59 @@ public interface IMilocTranslator<T> where T : Instruction
 {
 	IEnumerable<T> FunctionStart(FunctionBlock<T> copy);
 <#
-    foreach (var instr in InstrInfo.GetAll())
-    {
-        var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
-        var className = name + "Instruction";
+foreach (var instr in InstrInfo.GetAll())
+{
+    var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
+    var className = name + "Instruction";
 #>
-	IEnumerable<T> <#= name #>(<#= className #> s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> <#=name #>(<#=className #> s, InstructionStream<MilocInstruction> stream);
 <#
-    }
+}
 #>
 }
 
 public class MilocIdentityTranslator : IMilocTranslator<MilocInstruction>
 {
+	private bool copyOnlyMarked = false;
+
+	public MilocIdentityTranslator(bool copyOnlyMarked)
+	{
+		this.copyOnlyMarked = copyOnlyMarked;
+	}
+
 	public IEnumerable<MilocInstruction> FunctionStart(FunctionBlock<MilocInstruction> copy)
 	{
 		yield break;
 	}
 <#
-    foreach (var instr in InstrInfo.GetAll())
-    {
-        var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
-        var className = name + "Instruction";
+foreach (var instr in InstrInfo.GetAll())
+{
+    var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
+    var className = name + "Instruction";
 #>
-	public IEnumerable<MilocInstruction> <#= name #>(<#= className #> s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> <#=name #>(<#=className #> s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new <#=className #>(
 <#
-    }
+instr.ForEachOperand((c, count, isLast) =>
+{
+    if (c.IsConstant)
+        return;
+    Write("s.{1}{0}", count, c.UpperPrefix);
+    if (!isLast)
+        Write(", ");
+});
+#>
+			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+<#
+}
 #>
 }
 
@@ -185,20 +221,20 @@ public class MilocConverter<T> : IInstructionConverter<MilocInstruction, T>
 		{
 			var cur = s.Consume();
 <#
-    foreach (var instr in InstrInfo.GetAll())
-    {
-        var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
-        var className = name + "Instruction";
+foreach (var instr in InstrInfo.GetAll())
+{
+    var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
+    var className = name + "Instruction";
 #>
-			if (cur is <#= className #>)
+			if (cur is <#=className #>)
 			{
-				var conv = cur as <#= className #>;
-				foreach (var newInstr in translator.<#= name #>(conv, s))
+				var conv = cur as <#=className #>;
+				foreach (var newInstr in translator.<#=name #>(conv, s))
 					yield return newInstr;
 				continue;
 			}
 <#
-    }
+}
 #>
 			throw new NotSupportedException();
 		}
@@ -213,9 +249,7 @@ private enum InstrFlags : int
     None = 0,
     SetCC = 1,
     UseCC = 2,
-    ExprElimGen,
-    ExprElimCustom,
-    ExprElimRemove,
+    IsCritical = 4,
 }
 private class OperandType
 {
@@ -257,20 +291,25 @@ private class OperandType
 private class InstrInfo
 {
     public InstrInfo(String type, string name)
-        : this(type, name, name)
+        : this(type, name, name, InstrFlags.None)
     {
     }
 
     public InstrInfo(String type, string name, string className)
+        : this(type, name, className, InstrFlags.None)
+    {
+    }
+
+    public InstrInfo(String type, string name, InstrFlags flags)
+        : this(type, name, name, flags)
+    {
+    }
+
+    public InstrInfo(String type, string name, string className, InstrFlags flags)
     {
         this.Type = type;
         this.Name = name;
         this.ClassName = className;
-    }
-
-    public InstrInfo(String type, string name, InstrFlags flags)
-        : this(type, name)
-    {
         this.Flags = flags;
     }
 
@@ -284,6 +323,22 @@ private class InstrInfo
         get
         {
             return ((Flags & InstrFlags.SetCC) != 0);
+        }
+    }
+
+    public bool IsUseCC
+    {
+        get
+        {
+            return ((Flags & InstrFlags.UseCC) != 0);
+        }
+    }
+
+    public bool IsCritical
+    {
+        get
+        {
+            return ((Flags & InstrFlags.IsCritical) != 0);
         }
     }
 
@@ -313,9 +368,9 @@ private class InstrInfo
                 new InstrInfo("rrR", "or"),
                 new InstrInfo("riR", "xori"),
                 new InstrInfo("iR", "loadi"),
-                new InstrInfo("r", "print"),
-                new InstrInfo("r", "println"),
-                new InstrInfo("r", "read"),
+                new InstrInfo("r", "print", InstrFlags.IsCritical),
+                new InstrInfo("r", "println", InstrFlags.IsCritical),
+                new InstrInfo("r", "read", InstrFlags.IsCritical),
                 new InstrInfo("rr", "comp", InstrFlags.SetCC),
                 new InstrInfo("rR", "mov"),
                 new InstrInfo("iR", "moveq", InstrFlags.UseCC),
@@ -324,23 +379,23 @@ private class InstrInfo
                 new InstrInfo("iR", "movle", InstrFlags.UseCC),
                 new InstrInfo("iR", "movlt", InstrFlags.UseCC),
                 new InstrInfo("iR", "movne", InstrFlags.UseCC),
-                new InstrInfo("l", "jumpi"),
-                new InstrInfo("ll", "cbreq"),
+                new InstrInfo("l", "jumpi", InstrFlags.IsCritical),
+                new InstrInfo("ll", "cbreq", InstrFlags.UseCC | InstrFlags.IsCritical),
                 new InstrInfo("siR", "loadinargument"),
-                new InstrInfo("s", "call"),
-                new InstrInfo("", "ret"),
-                new InstrInfo("r", "storeret"),
-                new InstrInfo("ri", "storeoutargument"),
+                new InstrInfo("s", "call", InstrFlags.IsCritical),
+                new InstrInfo("", "ret", InstrFlags.IsCritical),
+                new InstrInfo("r", "storeret", InstrFlags.IsCritical),
+                new InstrInfo("ri", "storeoutargument", InstrFlags.IsCritical),
                 new InstrInfo("R", "loadret"),
-                new InstrInfo("rrs", "storeai", "storeaiField"),
-                new InstrInfo("rks", "storeai", "storeaiVar"),
+                new InstrInfo("rrs", "storeai", "storeaiField", InstrFlags.IsCritical),
+                new InstrInfo("rks", "storeai", "storeaiVar", InstrFlags.IsCritical),
                 new InstrInfo("rsR", "loadai", "loadaiField"),
                 new InstrInfo("ksR", "loadai", "loadaiVar"),
                 new InstrInfo("sR", "loadglobal"),
-                new InstrInfo("rs", "storeglobal"),
-                new InstrInfo("sR", "computeglobaladdress"),
+                new InstrInfo("rs", "storeglobal", InstrFlags.IsCritical),
+                new InstrInfo("sR", "computeglobaladdress", InstrFlags.IsCritical), //probably not strictly critical, but always and only paired with read so it needs to stay
                 new InstrInfo("saR", "new"),
-                new InstrInfo("r", "del"),
+                new InstrInfo("r", "del", InstrFlags.IsCritical),
             };
     }
 }

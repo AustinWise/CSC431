@@ -35,6 +35,11 @@ RegDest0		};
 	}
 }
 
+public override bool IsCritical
+{
+    get { return false; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0);
@@ -71,6 +76,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -111,6 +121,11 @@ RegDest0		};
 	}
 }
 
+public override bool IsCritical
+{
+    get { return false; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0);
@@ -147,6 +162,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -187,6 +207,11 @@ RegDest0		};
 	}
 }
 
+public override bool IsCritical
+{
+    get { return false; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0);
@@ -223,6 +248,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -263,6 +293,11 @@ RegDest0		};
 	}
 }
 
+public override bool IsCritical
+{
+    get { return false; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0);
@@ -299,6 +334,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -339,6 +379,11 @@ RegDest0		};
 	}
 }
 
+public override bool IsCritical
+{
+    get { return false; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Immed0, RegDest0);
@@ -374,6 +419,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -412,6 +462,11 @@ public override Register[] DestRegs
 	}
 }
 
+public override bool IsCritical
+{
+    get { return true; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}", Name, RegSource0);
@@ -446,6 +501,11 @@ public override Register[] DestRegs
 		return new Register[] {
 		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return true; }
 }
 
 public override string ToString()
@@ -484,6 +544,11 @@ public override Register[] DestRegs
 	}
 }
 
+public override bool IsCritical
+{
+    get { return true; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}", Name, RegSource0);
@@ -518,8 +583,13 @@ public override Register[] DestRegs
 	get
 	{
 		return new Register[] {
-		};
+MilocInstruction.IccReg		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -559,6 +629,11 @@ RegDest0		};
 	}
 }
 
+public override bool IsCritical
+{
+    get { return false; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}", Name, RegSource0, RegDest0);
@@ -583,7 +658,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-		};
+MilocInstruction.IccReg		};
 	}
 }
 
@@ -594,6 +669,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -620,7 +700,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-		};
+MilocInstruction.IccReg		};
 	}
 }
 
@@ -631,6 +711,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -657,7 +742,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-		};
+MilocInstruction.IccReg		};
 	}
 }
 
@@ -668,6 +753,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -694,7 +784,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-		};
+MilocInstruction.IccReg		};
 	}
 }
 
@@ -705,6 +795,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -731,7 +826,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-		};
+MilocInstruction.IccReg		};
 	}
 }
 
@@ -742,6 +837,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -768,7 +868,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-		};
+MilocInstruction.IccReg		};
 	}
 }
 
@@ -779,6 +879,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -817,6 +922,11 @@ public override Register[] DestRegs
 	}
 }
 
+public override bool IsCritical
+{
+    get { return true; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} L{1}", Name, Label0);
@@ -841,7 +951,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-		};
+MilocInstruction.IccReg		};
 	}
 }
 
@@ -852,6 +962,11 @@ public override Register[] DestRegs
 		return new Register[] {
 		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return true; }
 }
 
 public override string ToString()
@@ -892,6 +1007,11 @@ RegDest0		};
 	}
 }
 
+public override bool IsCritical
+{
+    get { return false; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, Str0, Immed0, RegDest0);
@@ -926,6 +1046,11 @@ public override Register[] DestRegs
 		return new Register[] {
 		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return true; }
 }
 
 public override string ToString()
@@ -963,6 +1088,11 @@ public override Register[] DestRegs
 	}
 }
 
+public override bool IsCritical
+{
+    get { return true; }
+}
+
 public override string ToString()
 {
 return string.Format("{0}", Name);
@@ -997,6 +1127,11 @@ public override Register[] DestRegs
 		return new Register[] {
 		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return true; }
 }
 
 public override string ToString()
@@ -1036,6 +1171,11 @@ public override Register[] DestRegs
 	}
 }
 
+public override bool IsCritical
+{
+    get { return true; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}", Name, RegSource0, Immed0);
@@ -1070,6 +1210,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -1110,6 +1255,11 @@ public override Register[] DestRegs
 	}
 }
 
+public override bool IsCritical
+{
+    get { return true; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, Str0);
@@ -1145,6 +1295,11 @@ public override Register[] DestRegs
 		return new Register[] {
 		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return true; }
 }
 
 public override string ToString()
@@ -1185,6 +1340,11 @@ RegDest0		};
 	}
 }
 
+public override bool IsCritical
+{
+    get { return false; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Str0, RegDest0);
@@ -1220,6 +1380,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
 }
 
 public override string ToString()
@@ -1259,6 +1424,11 @@ RegDest0		};
 	}
 }
 
+public override bool IsCritical
+{
+    get { return false; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}", Name, Str0, RegDest0);
@@ -1296,6 +1466,11 @@ public override Register[] DestRegs
 	}
 }
 
+public override bool IsCritical
+{
+    get { return true; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}", Name, RegSource0, Str0);
@@ -1331,6 +1506,11 @@ public override Register[] DestRegs
 		return new Register[] {
 RegDest0		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return true; }
 }
 
 public override string ToString()
@@ -1371,6 +1551,11 @@ RegDest0		};
 	}
 }
 
+public override bool IsCritical
+{
+    get { return false; }
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, [{2}], {3}", Name, Str0, string.Join(", ", Arr0), RegDest0);
@@ -1405,6 +1590,11 @@ public override Register[] DestRegs
 		return new Register[] {
 		};
 	}
+}
+
+public override bool IsCritical
+{
+    get { return true; }
 }
 
 public override string ToString()
@@ -1460,48 +1650,435 @@ public interface IMilocTranslator<T> where T : Instruction
 
 public class MilocIdentityTranslator : IMilocTranslator<MilocInstruction>
 {
+	private bool copyOnlyMarked = false;
+
+	public MilocIdentityTranslator(bool copyOnlyMarked)
+	{
+		this.copyOnlyMarked = copyOnlyMarked;
+	}
+
 	public IEnumerable<MilocInstruction> FunctionStart(FunctionBlock<MilocInstruction> copy)
 	{
 		yield break;
 	}
-	public IEnumerable<MilocInstruction> Add(AddInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Addi(AddiInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Div(DivInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Mult(MultInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Sub(SubInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Rsubi(RsubiInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> And(AndInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Or(OrInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Xori(XoriInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Loadi(LoadiInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Print(PrintInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Println(PrintlnInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Read(ReadInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Comp(CompInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Mov(MovInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Moveq(MoveqInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Movge(MovgeInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Movgt(MovgtInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Movle(MovleInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Movlt(MovltInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Movne(MovneInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Jumpi(JumpiInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Cbreq(CbreqInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Loadinargument(LoadinargumentInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Call(CallInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Ret(RetInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Storeret(StoreretInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Storeoutargument(StoreoutargumentInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Loadret(LoadretInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> StoreaiField(StoreaiFieldInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> StoreaiVar(StoreaiVarInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> LoadaiField(LoadaiFieldInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> LoadaiVar(LoadaiVarInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Loadglobal(LoadglobalInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Storeglobal(StoreglobalInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Computeglobaladdress(ComputeglobaladdressInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> New(NewInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
-	public IEnumerable<MilocInstruction> Del(DelInstruction s, InstructionStream<MilocInstruction> stream) { yield return s; }
+	public IEnumerable<MilocInstruction> Add(AddInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new AddInstruction(
+s.RegSource0, s.RegSource1, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Addi(AddiInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new AddiInstruction(
+s.RegSource0, s.Immed0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Div(DivInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new DivInstruction(
+s.RegSource0, s.RegSource1, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Mult(MultInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new MultInstruction(
+s.RegSource0, s.RegSource1, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Sub(SubInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new SubInstruction(
+s.RegSource0, s.RegSource1, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Rsubi(RsubiInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new RsubiInstruction(
+s.RegSource0, s.Immed0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> And(AndInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new AndInstruction(
+s.RegSource0, s.RegSource1, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Or(OrInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new OrInstruction(
+s.RegSource0, s.RegSource1, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Xori(XoriInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new XoriInstruction(
+s.RegSource0, s.Immed0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Loadi(LoadiInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new LoadiInstruction(
+s.Immed0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Print(PrintInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new PrintInstruction(
+s.RegSource0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Println(PrintlnInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new PrintlnInstruction(
+s.RegSource0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Read(ReadInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new ReadInstruction(
+s.RegSource0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Comp(CompInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new CompInstruction(
+s.RegSource0, s.RegSource1			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Mov(MovInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new MovInstruction(
+s.RegSource0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Moveq(MoveqInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new MoveqInstruction(
+s.Immed0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Movge(MovgeInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new MovgeInstruction(
+s.Immed0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Movgt(MovgtInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new MovgtInstruction(
+s.Immed0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Movle(MovleInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new MovleInstruction(
+s.Immed0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Movlt(MovltInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new MovltInstruction(
+s.Immed0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Movne(MovneInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new MovneInstruction(
+s.Immed0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Jumpi(JumpiInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new JumpiInstruction(
+s.Label0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Cbreq(CbreqInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new CbreqInstruction(
+s.Label0, s.Label1			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Loadinargument(LoadinargumentInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new LoadinargumentInstruction(
+s.Str0, s.Immed0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Call(CallInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new CallInstruction(
+s.Str0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Ret(RetInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new RetInstruction(
+			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Storeret(StoreretInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new StoreretInstruction(
+s.RegSource0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Storeoutargument(StoreoutargumentInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new StoreoutargumentInstruction(
+s.RegSource0, s.Immed0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Loadret(LoadretInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new LoadretInstruction(
+s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> StoreaiField(StoreaiFieldInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new StoreaiFieldInstruction(
+s.RegSource0, s.RegSource1, s.Str0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> StoreaiVar(StoreaiVarInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new StoreaiVarInstruction(
+s.RegSource0, s.Str0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> LoadaiField(LoadaiFieldInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new LoadaiFieldInstruction(
+s.RegSource0, s.Str0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> LoadaiVar(LoadaiVarInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new LoadaiVarInstruction(
+s.Str0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Loadglobal(LoadglobalInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new LoadglobalInstruction(
+s.Str0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Storeglobal(StoreglobalInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new StoreglobalInstruction(
+s.RegSource0, s.Str0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Computeglobaladdress(ComputeglobaladdressInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new ComputeglobaladdressInstruction(
+s.Str0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> New(NewInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new NewInstruction(
+s.Str0, s.Arr0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public IEnumerable<MilocInstruction> Del(DelInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new DelInstruction(
+s.RegSource0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
 }
 
 public class MilocConverter<T> : IInstructionConverter<MilocInstruction, T>

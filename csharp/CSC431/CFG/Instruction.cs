@@ -23,5 +23,11 @@ namespace CSC431.CFG
         public bool CcSet { get; protected set; }
         public abstract Register[] SourceRegs { get; }
         public abstract Register[] DestRegs { get; }
+        public abstract bool IsCritical { get; }
+
+        /// <summary>
+        /// Not propagated between clones.
+        /// </summary>
+        public bool Mark { get; set; }
     }
 }

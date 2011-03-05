@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CSC431.Steps;
 using CSC431.CFG;
+using CSC431.Analysis;
 
 namespace CSC431
 {
@@ -16,11 +17,7 @@ namespace CSC431
 
         public static TransformStep<ProgramBlock<IL.MilocInstruction>> UselessCodeRemoval()
         {
-            return new TransformStep<ProgramBlock<IL.MilocInstruction>>(prog =>
-            {
-                var rd = new Analysis.ReachingDef<IL.MilocInstruction>(prog);
-                return prog;
-            });
+            return new TransformStep<ProgramBlock<IL.MilocInstruction>>(new UselessCodeRemoval().DoOpt);
         }
     }
 }

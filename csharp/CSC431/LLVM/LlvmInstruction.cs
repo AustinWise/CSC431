@@ -12,5 +12,10 @@ namespace CSC431.LLVM
             : base(name)
         {
         }
+
+        public override bool IsCritical
+        {
+            get { return true; }
+        }
     }
 }

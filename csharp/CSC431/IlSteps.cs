@@ -58,13 +58,5 @@ namespace CSC431
                 f.Close();
             });
         }
-
-        public static TransformStep<ProgramBlock<MilocInstruction>> ConvertIdentity()
-        {
-            return new TransformStep<ProgramBlock<MilocInstruction>>(c =>
-            {
-                return c.Convert(new MilocConverter<MilocInstruction>(new MilocIdentityTranslator())) as ProgramBlock<MilocInstruction>;
-            });
-        }
     }
 }

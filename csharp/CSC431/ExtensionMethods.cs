@@ -16,6 +16,13 @@ namespace CSC431
             }
         }
 
+        public static void AddEnsuringList<K, V>(this Dictionary<K, List<V>> dic, K key, V value)
+        {
+            if (!dic.ContainsKey(key))
+                dic.Add(key, new List<V>());
+            dic[key].Add(value);
+        }
+
         public static int MaxIndex<T>(this List<T> list, Func<T, int> maxFunction)
         {
             int loc = -1;

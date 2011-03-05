@@ -14,6 +14,11 @@ namespace CSC431.Sparc
         {
         }
 
+        public override bool IsCritical
+        {
+            get { return true; }
+        }
+
         public abstract IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset);
         public abstract SparcInstruction ConvertRegister(SparcRegister[] map);
     }
