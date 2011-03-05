@@ -19,5 +19,10 @@ namespace CSC431.IL
         internal virtual void CopyExtraData(MilocInstruction newInstr)
         {
         }
+
+        public virtual int? ConstantValue(int? x, int? y)
+        {
+            return null;
+        }
     }
 }

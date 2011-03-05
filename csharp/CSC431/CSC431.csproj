@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analysis\CommonSubExprElim.cs" />
+    <Compile Include="Analysis\ConstantFoldingConverter.cs" />
     <Compile Include="Analysis\FunctionsCalled.cs" />
     <Compile Include="Analysis\IterativeDataflow.cs" />
     <Compile Include="Analysis\PowerReduction.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="CFG\Register.cs" />
     <Compile Include="Ensure.cs" />
     <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="IL\IArithmeticInstruction.cs" />
     <Compile Include="LLVM\LlvmRegister.cs" />
     <Compile Include="Multimap.cs" />
     <Compile Include="OptSteps.cs" />

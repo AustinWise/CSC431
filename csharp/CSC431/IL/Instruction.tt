@@ -13,7 +13,7 @@ foreach (var instr in InstrInfo.GetAll())
 {
     var className = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString()) + "Instruction";
 #>
-public partial class <#=className #> : MilocInstruction
+public partial class <#=className #> : MilocInstruction<#=instr.IsArithmetic ? ", IArithmeticInstruction" : "" #>
 {
 	public <#=className #>
 	(
@@ -100,6 +100,20 @@ public override bool IsCritical
 {
     get { return <#=instr.IsCritical.ToString().ToLower() #>; }
 }
+
+<#
+if (instr.ConstantExpression != null)
+{
+#>
+public override int? ConstantValue(int? x, int? y)
+{
+	if (!(x.HasValue && y.HasValue))
+		return null;
+	return x <#= instr.ConstantExpression #> y;
+}
+<#
+}
+#>
 
 public override string ToString()
 {
@@ -250,7 +264,8 @@ private enum InstrFlags : int
     SetCC = 1,
     UseCC = 2,
     IsCritical = 4,
-    NotSupportedInMochi = 8
+    NotSupportedInMochi = 8,
+    Arithmetic = 16,
 }
 private class OperandType
 {
@@ -312,12 +327,15 @@ private class InstrInfo
         this.Name = name;
         this.ClassName = className;
         this.Flags = flags;
+        if (type == "rrR")
+            Flags |= InstrFlags.Arithmetic;
     }
 
     public InstrFlags Flags { get; private set; }
     public string Type { get; private set; }
     public string Name { get; private set; }
     public string ClassName { get; private set; }
+    public string ConstantExpression { get; set; }
 
     public bool IsSetCC
     {
@@ -343,6 +361,14 @@ private class InstrInfo
         }
     }
 
+    public bool IsArithmetic
+    {
+        get
+        {
+            return ((Flags & InstrFlags.Arithmetic) != 0);
+        }
+    }
+
     public void ForEachOperand(Action<OperandType, int, bool> f)
     {
         var count = new Dictionary<char, int>();
@@ -359,11 +385,11 @@ private class InstrInfo
     {
         return new[]
             {
-                new InstrInfo("rrR", "add"),
+                new InstrInfo("rrR", "add") { ConstantExpression = "+" },
                 new InstrInfo("riR", "addi"),
-                new InstrInfo("rrR", "div"),
-                new InstrInfo("rrR", "mult"),
-                new InstrInfo("rrR", "sub"),
+                new InstrInfo("rrR", "div") { ConstantExpression = "/" },
+                new InstrInfo("rrR", "mult") { ConstantExpression = "*" },
+                new InstrInfo("rrR", "sub") { ConstantExpression = "-" },
                 new InstrInfo("riR", "rsubi"),
                 new InstrInfo("rrR", "and"),
                 new InstrInfo("rrR", "or"),

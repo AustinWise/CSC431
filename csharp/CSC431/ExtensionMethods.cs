@@ -23,6 +23,13 @@ namespace CSC431
             dic[key].Add(value);
         }
 
+        public static V? GetMaybeNull<K, V>(this Dictionary<K, V> dic, K key) where V : struct
+        {
+            if (dic.ContainsKey(key))
+                return dic[key];
+            return null;
+        }
+
         public static int MaxIndex<T>(this List<T> list, Func<T, int> maxFunction)
         {
             int loc = -1;

@@ -19,5 +19,18 @@ namespace CSC431
         {
             return new TransformStep<ProgramBlock<IL.MilocInstruction>>(new UselessCodeRemoval().DoOpt);
         }
+
+        public static TransformStep<ProgramBlock<IL.MilocInstruction>> PowerReduction()
+        {
+            return new TransformStep<ProgramBlock<IL.MilocInstruction>>(new PowerReduction().DoOpt);
+        }
+
+        public static TransformStep<ProgramBlock<IL.MilocInstruction>> ConstantFolding()
+        {
+            return new TransformStep<ProgramBlock<IL.MilocInstruction>>(prog =>
+            {
+                return (ProgramBlock<IL.MilocInstruction>)prog.Convert(new ConstantFoldingConverter());
+            });
+        }
     }
 }

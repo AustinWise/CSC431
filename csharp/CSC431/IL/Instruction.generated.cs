@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace CSC431.IL
 {
 
-public partial class AddInstruction : MilocInstruction
+public partial class AddInstruction : MilocInstruction, IArithmeticInstruction
 {
 	public AddInstruction
 	(
@@ -38,6 +38,13 @@ RegDest0		};
 public override bool IsCritical
 {
     get { return false; }
+}
+
+public override int? ConstantValue(int? x, int? y)
+{
+	if (!(x.HasValue && y.HasValue))
+		return null;
+	return x + y;
 }
 
 public override string ToString()
@@ -83,6 +90,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Immed0, RegDest0);
@@ -91,7 +99,7 @@ return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Immed0, RegDest0);
 
 
 
-public partial class DivInstruction : MilocInstruction
+public partial class DivInstruction : MilocInstruction, IArithmeticInstruction
 {
 	public DivInstruction
 	(
@@ -126,6 +134,13 @@ public override bool IsCritical
     get { return false; }
 }
 
+public override int? ConstantValue(int? x, int? y)
+{
+	if (!(x.HasValue && y.HasValue))
+		return null;
+	return x / y;
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0);
@@ -134,7 +149,7 @@ return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0
 
 
 
-public partial class MultInstruction : MilocInstruction
+public partial class MultInstruction : MilocInstruction, IArithmeticInstruction
 {
 	public MultInstruction
 	(
@@ -169,6 +184,13 @@ public override bool IsCritical
     get { return false; }
 }
 
+public override int? ConstantValue(int? x, int? y)
+{
+	if (!(x.HasValue && y.HasValue))
+		return null;
+	return x * y;
+}
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0);
@@ -177,7 +199,7 @@ return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0
 
 
 
-public partial class SubInstruction : MilocInstruction
+public partial class SubInstruction : MilocInstruction, IArithmeticInstruction
 {
 	public SubInstruction
 	(
@@ -210,6 +232,13 @@ RegDest0		};
 public override bool IsCritical
 {
     get { return false; }
+}
+
+public override int? ConstantValue(int? x, int? y)
+{
+	if (!(x.HasValue && y.HasValue))
+		return null;
+	return x - y;
 }
 
 public override string ToString()
@@ -255,6 +284,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Immed0, RegDest0);
@@ -263,7 +293,7 @@ return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Immed0, RegDest0);
 
 
 
-public partial class AndInstruction : MilocInstruction
+public partial class AndInstruction : MilocInstruction, IArithmeticInstruction
 {
 	public AndInstruction
 	(
@@ -298,6 +328,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0);
@@ -306,7 +337,7 @@ return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, RegDest0
 
 
 
-public partial class OrInstruction : MilocInstruction
+public partial class OrInstruction : MilocInstruction, IArithmeticInstruction
 {
 	public OrInstruction
 	(
@@ -340,6 +371,7 @@ public override bool IsCritical
 {
     get { return false; }
 }
+
 
 public override string ToString()
 {
@@ -384,6 +416,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Immed0, RegDest0);
@@ -426,6 +459,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}", Name, Immed0, RegDest0);
@@ -466,6 +500,7 @@ public override bool IsCritical
 {
     get { return true; }
 }
+
 
 public override string ToString()
 {
@@ -508,6 +543,7 @@ public override bool IsCritical
     get { return true; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}", Name, RegSource0);
@@ -548,6 +584,7 @@ public override bool IsCritical
 {
     get { return true; }
 }
+
 
 public override string ToString()
 {
@@ -592,6 +629,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}", Name, RegSource0, RegSource1);
@@ -633,6 +671,7 @@ public override bool IsCritical
 {
     get { return false; }
 }
+
 
 public override string ToString()
 {
@@ -676,6 +715,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}", Name, Immed0, RegDest0);
@@ -717,6 +757,7 @@ public override bool IsCritical
 {
     get { return false; }
 }
+
 
 public override string ToString()
 {
@@ -760,6 +801,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}", Name, Immed0, RegDest0);
@@ -801,6 +843,7 @@ public override bool IsCritical
 {
     get { return false; }
 }
+
 
 public override string ToString()
 {
@@ -844,6 +887,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}", Name, Immed0, RegDest0);
@@ -886,6 +930,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}", Name, Immed0, RegDest0);
@@ -926,6 +971,7 @@ public override bool IsCritical
 {
     get { return true; }
 }
+
 
 public override string ToString()
 {
@@ -968,6 +1014,7 @@ public override bool IsCritical
 {
     get { return true; }
 }
+
 
 public override string ToString()
 {
@@ -1012,6 +1059,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, Str0, Immed0, RegDest0);
@@ -1053,6 +1101,7 @@ public override bool IsCritical
     get { return true; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}", Name, Str0);
@@ -1092,6 +1141,7 @@ public override bool IsCritical
 {
     get { return true; }
 }
+
 
 public override string ToString()
 {
@@ -1133,6 +1183,7 @@ public override bool IsCritical
 {
     get { return true; }
 }
+
 
 public override string ToString()
 {
@@ -1176,6 +1227,7 @@ public override bool IsCritical
     get { return true; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}", Name, RegSource0, Immed0);
@@ -1216,6 +1268,7 @@ public override bool IsCritical
 {
     get { return false; }
 }
+
 
 public override string ToString()
 {
@@ -1260,6 +1313,7 @@ public override bool IsCritical
     get { return true; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, RegSource1, Str0);
@@ -1301,6 +1355,7 @@ public override bool IsCritical
 {
     get { return true; }
 }
+
 
 public override string ToString()
 {
@@ -1345,6 +1400,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Str0, RegDest0);
@@ -1386,6 +1442,7 @@ public override bool IsCritical
 {
     get { return false; }
 }
+
 
 public override string ToString()
 {
@@ -1429,6 +1486,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}", Name, Str0, RegDest0);
@@ -1471,6 +1529,7 @@ public override bool IsCritical
     get { return true; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}", Name, RegSource0, Str0);
@@ -1512,6 +1571,7 @@ public override bool IsCritical
 {
     get { return true; }
 }
+
 
 public override string ToString()
 {
@@ -1556,6 +1616,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, [{2}], {3}", Name, Str0, string.Join(", ", Arr0), RegDest0);
@@ -1596,6 +1657,7 @@ public override bool IsCritical
 {
     get { return true; }
 }
+
 
 public override string ToString()
 {
@@ -1640,6 +1702,7 @@ public override bool IsCritical
     get { return false; }
 }
 
+
 public override string ToString()
 {
 return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Immed0, RegDest0);
@@ -1682,6 +1745,7 @@ public override bool IsCritical
 {
     get { return false; }
 }
+
 
 public override string ToString()
 {
