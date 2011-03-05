@@ -445,6 +445,114 @@ this.RegSource0, this.Immed0, this.RegDest0				);
 
 
 
+public partial class SllInstruction : SparcInstruction
+{
+	public SllInstruction
+	(
+Register regSource0,int immed0,Register regDest0	) : base ("sll")
+	{
+this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
+
+public Register RegSource0{ get; private set; }
+public int Immed0{ get; private set; }
+public Register RegDest0{ get; private set; }
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+RegSource0, 		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} %{1}, {2}, %{3}", Name, RegSource0, Immed0, RegDest0);
+}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+
+				var copy = new SllInstruction(
+this.RegSource0, this.Immed0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new SllInstruction(map[this.RegSource0.IntVal], this.Immed0, map[this.RegDest0.IntVal]);
+	}
+
+
+} //END SllInstruction
+
+
+
+public partial class SraInstruction : SparcInstruction
+{
+	public SraInstruction
+	(
+Register regSource0,int immed0,Register regDest0	) : base ("sra")
+	{
+this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
+
+public Register RegSource0{ get; private set; }
+public int Immed0{ get; private set; }
+public Register RegDest0{ get; private set; }
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+RegSource0, 		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override string ToString()
+{
+return string.Format("{0} %{1}, {2}, %{3}", Name, RegSource0, Immed0, RegDest0);
+}
+
+	public override IEnumerable<SparcInstruction> Spill(BitArray regToSpill, Func<string, int> getLocalOffset)
+	{
+				if (regToSpill[this.RegSource0.IntVal]){ yield return new LdswInstruction(SparcRegister.SP, getLocalOffset("reg_" + this.RegSource0.IntVal), this.RegSource0); }
+
+				var copy = new SraInstruction(
+this.RegSource0, this.Immed0, this.RegDest0				);
+				yield return copy;
+				if (regToSpill[this.RegDest0.IntVal]){ yield return new StwInstruction(this.RegDest0, SparcRegister.SP, getLocalOffset("reg_" + this.RegDest0.IntVal)); }
+	}
+
+	public override SparcInstruction ConvertRegister(SparcRegister[] map)
+	{
+		return new SraInstruction(map[this.RegSource0.IntVal], this.Immed0, map[this.RegDest0.IntVal]);
+	}
+
+
+} //END SraInstruction
+
+
+
 public partial class OriInstruction : SparcInstruction
 {
 	public OriInstruction

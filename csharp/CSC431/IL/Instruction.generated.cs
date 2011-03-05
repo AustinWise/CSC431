@@ -1605,6 +1605,92 @@ return string.Format("{0} {1}", Name, RegSource0);
 
 
 
+public partial class SllInstruction : MilocInstruction
+{
+	public SllInstruction
+	(
+VirtualRegister regSource0,int immed0,VirtualRegister regDest0	) : base ("sll")
+	{
+this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
+
+public VirtualRegister RegSource0{ get; private set; }
+public int Immed0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+RegSource0, 		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
+}
+
+public override string ToString()
+{
+return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Immed0, RegDest0);
+}
+}
+
+
+
+public partial class SraInstruction : MilocInstruction
+{
+	public SraInstruction
+	(
+VirtualRegister regSource0,int immed0,VirtualRegister regDest0	) : base ("sra")
+	{
+this.RegSource0 = regSource0;this.Immed0 = immed0;this.RegDest0 = regDest0;	}
+
+public VirtualRegister RegSource0{ get; private set; }
+public int Immed0{ get; private set; }
+public VirtualRegister RegDest0{ get; private set; }
+
+public override Register[] SourceRegs
+{
+	get
+	{
+		return new Register[] {
+RegSource0, 		};
+	}
+}
+
+public override Register[] DestRegs
+{
+	get
+	{
+		return new Register[] {
+RegDest0		};
+	}
+}
+
+public override bool IsCritical
+{
+    get { return false; }
+}
+
+public override string ToString()
+{
+return string.Format("{0} {1}, {2}, {3}", Name, RegSource0, Immed0, RegDest0);
+}
+}
+
+
+
 public interface IMilocTranslator<T> where T : Instruction
 {
 	IEnumerable<T> FunctionStart(FunctionBlock<T> copy);
@@ -1646,6 +1732,8 @@ public interface IMilocTranslator<T> where T : Instruction
 	IEnumerable<T> Computeglobaladdress(ComputeglobaladdressInstruction s, InstructionStream<MilocInstruction> stream);
 	IEnumerable<T> New(NewInstruction s, InstructionStream<MilocInstruction> stream);
 	IEnumerable<T> Del(DelInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Sll(SllInstruction s, InstructionStream<MilocInstruction> stream);
+	IEnumerable<T> Sra(SraInstruction s, InstructionStream<MilocInstruction> stream);
 }
 
 public class MilocIdentityTranslator : IMilocTranslator<MilocInstruction>
@@ -1661,7 +1749,7 @@ public class MilocIdentityTranslator : IMilocTranslator<MilocInstruction>
 	{
 		yield break;
 	}
-	public IEnumerable<MilocInstruction> Add(AddInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Add(AddInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1672,7 +1760,7 @@ s.RegSource0, s.RegSource1, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Addi(AddiInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Addi(AddiInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1683,7 +1771,7 @@ s.RegSource0, s.Immed0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Div(DivInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Div(DivInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1694,7 +1782,7 @@ s.RegSource0, s.RegSource1, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Mult(MultInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Mult(MultInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1705,7 +1793,7 @@ s.RegSource0, s.RegSource1, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Sub(SubInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Sub(SubInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1716,7 +1804,7 @@ s.RegSource0, s.RegSource1, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Rsubi(RsubiInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Rsubi(RsubiInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1727,7 +1815,7 @@ s.RegSource0, s.Immed0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> And(AndInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> And(AndInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1738,7 +1826,7 @@ s.RegSource0, s.RegSource1, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Or(OrInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Or(OrInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1749,7 +1837,7 @@ s.RegSource0, s.RegSource1, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Xori(XoriInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Xori(XoriInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1760,7 +1848,7 @@ s.RegSource0, s.Immed0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Loadi(LoadiInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Loadi(LoadiInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1771,7 +1859,7 @@ s.Immed0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Print(PrintInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Print(PrintInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1782,7 +1870,7 @@ s.RegSource0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Println(PrintlnInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Println(PrintlnInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1793,7 +1881,7 @@ s.RegSource0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Read(ReadInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Read(ReadInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1804,7 +1892,7 @@ s.RegSource0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Comp(CompInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Comp(CompInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1815,7 +1903,7 @@ s.RegSource0, s.RegSource1			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Mov(MovInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Mov(MovInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1826,7 +1914,7 @@ s.RegSource0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Moveq(MoveqInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Moveq(MoveqInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1837,7 +1925,7 @@ s.Immed0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Movge(MovgeInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Movge(MovgeInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1848,7 +1936,7 @@ s.Immed0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Movgt(MovgtInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Movgt(MovgtInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1859,7 +1947,7 @@ s.Immed0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Movle(MovleInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Movle(MovleInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1870,7 +1958,7 @@ s.Immed0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Movlt(MovltInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Movlt(MovltInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1881,7 +1969,7 @@ s.Immed0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Movne(MovneInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Movne(MovneInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1892,7 +1980,7 @@ s.Immed0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Jumpi(JumpiInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Jumpi(JumpiInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1903,7 +1991,7 @@ s.Label0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Cbreq(CbreqInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Cbreq(CbreqInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1914,7 +2002,7 @@ s.Label0, s.Label1			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Loadinargument(LoadinargumentInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Loadinargument(LoadinargumentInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1925,7 +2013,7 @@ s.Str0, s.Immed0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Call(CallInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Call(CallInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1936,7 +2024,7 @@ s.Str0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Ret(RetInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Ret(RetInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1947,7 +2035,7 @@ s.Str0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Storeret(StoreretInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Storeret(StoreretInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1958,7 +2046,7 @@ s.RegSource0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Storeoutargument(StoreoutargumentInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Storeoutargument(StoreoutargumentInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1969,7 +2057,7 @@ s.RegSource0, s.Immed0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Loadret(LoadretInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Loadret(LoadretInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1980,7 +2068,7 @@ s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> StoreaiField(StoreaiFieldInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> StoreaiField(StoreaiFieldInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -1991,7 +2079,7 @@ s.RegSource0, s.RegSource1, s.Str0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> StoreaiVar(StoreaiVarInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> StoreaiVar(StoreaiVarInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -2002,7 +2090,7 @@ s.RegSource0, s.Str0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> LoadaiField(LoadaiFieldInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> LoadaiField(LoadaiFieldInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -2013,7 +2101,7 @@ s.RegSource0, s.Str0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> LoadaiVar(LoadaiVarInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> LoadaiVar(LoadaiVarInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -2024,7 +2112,7 @@ s.Str0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Loadglobal(LoadglobalInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Loadglobal(LoadglobalInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -2035,7 +2123,7 @@ s.Str0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Storeglobal(StoreglobalInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Storeglobal(StoreglobalInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -2046,7 +2134,7 @@ s.RegSource0, s.Str0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Computeglobaladdress(ComputeglobaladdressInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Computeglobaladdress(ComputeglobaladdressInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -2057,7 +2145,7 @@ s.Str0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> New(NewInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> New(NewInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -2068,13 +2156,35 @@ s.Str0, s.Arr0, s.RegDest0			);
 			yield return copy;
 		}
 	}
-	public IEnumerable<MilocInstruction> Del(DelInstruction s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> Del(DelInstruction s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
 
 			var copy = new DelInstruction(
 s.RegSource0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public virtual IEnumerable<MilocInstruction> Sll(SllInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new SllInstruction(
+s.RegSource0, s.Immed0, s.RegDest0			);
+			s.CopyExtraData(copy);
+			yield return copy;
+		}
+	}
+	public virtual IEnumerable<MilocInstruction> Sra(SraInstruction s, InstructionStream<MilocInstruction> stream)
+	{
+		if (!copyOnlyMarked || s.Mark)
+		{
+
+			var copy = new SraInstruction(
+s.RegSource0, s.Immed0, s.RegDest0			);
 			s.CopyExtraData(copy);
 			yield return copy;
 		}
@@ -2363,6 +2473,20 @@ public class MilocConverter<T> : IInstructionConverter<MilocInstruction, T>
 			{
 				var conv = cur as DelInstruction;
 				foreach (var newInstr in translator.Del(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is SllInstruction)
+			{
+				var conv = cur as SllInstruction;
+				foreach (var newInstr in translator.Sll(conv, s))
+					yield return newInstr;
+				continue;
+			}
+			if (cur is SraInstruction)
+			{
+				var conv = cur as SraInstruction;
+				foreach (var newInstr in translator.Sra(conv, s))
 					yield return newInstr;
 				continue;
 			}

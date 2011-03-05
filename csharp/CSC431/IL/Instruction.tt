@@ -98,7 +98,7 @@ if (instr.IsSetCC)
 
 public override bool IsCritical
 {
-    get { return <#= instr.IsCritical.ToString().ToLower() #>; }
+    get { return <#=instr.IsCritical.ToString().ToLower() #>; }
 }
 
 public override string ToString()
@@ -175,7 +175,7 @@ foreach (var instr in InstrInfo.GetAll())
     var name = instr.ClassName.Substring(1).Insert(0, char.ToUpper(instr.ClassName[0]).ToString());
     var className = name + "Instruction";
 #>
-	public IEnumerable<MilocInstruction> <#=name #>(<#=className #> s, InstructionStream<MilocInstruction> stream)
+	public virtual IEnumerable<MilocInstruction> <#=name #>(<#=className #> s, InstructionStream<MilocInstruction> stream)
 	{
 		if (!copyOnlyMarked || s.Mark)
 		{
@@ -250,6 +250,7 @@ private enum InstrFlags : int
     SetCC = 1,
     UseCC = 2,
     IsCritical = 4,
+    NotSupportedInMochi = 8
 }
 private class OperandType
 {
@@ -396,6 +397,9 @@ private class InstrInfo
                 new InstrInfo("sR", "computeglobaladdress", InstrFlags.IsCritical), //probably not strictly critical, but always and only paired with read so it needs to stay
                 new InstrInfo("saR", "new"),
                 new InstrInfo("r", "del", InstrFlags.IsCritical),
+                
+                new InstrInfo("riR" ,"sll", InstrFlags.NotSupportedInMochi),
+                new InstrInfo("riR" ,"sra", InstrFlags.NotSupportedInMochi),
             };
     }
 }

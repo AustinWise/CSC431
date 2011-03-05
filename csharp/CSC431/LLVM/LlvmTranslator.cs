@@ -323,5 +323,15 @@ namespace CSC431.LLVM
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<LlvmInstruction> Sll(IL.SllInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<LlvmInstruction> Sra(IL.SraInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

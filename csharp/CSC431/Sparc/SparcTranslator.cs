@@ -293,5 +293,15 @@ namespace CSC431.Sparc
             yield return new CallInstruction("free");
             yield return new NopInstruction();
         }
+
+        public IEnumerable<SparcInstruction> Sll(IL.SllInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
+        {
+            yield return new SllInstruction(s.RegSource0, s.Immed0, s.RegDest0);
+        }
+
+        public IEnumerable<SparcInstruction> Sra(IL.SraInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
+        {
+            yield return new SraInstruction(s.RegSource0, s.Immed0, s.RegDest0);
+        }
     }
 }

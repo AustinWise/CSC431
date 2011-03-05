@@ -7,12 +7,13 @@ using CSC431.CFG;
 
 namespace CSC431.Analysis
 {
-    public class ReachingDef<T> : IterativeDataflow<T> where T:Instruction
+    public class ReachingDef<T> : IterativeDataflow<T> where T : Instruction
     {
         private Dictionary<BasicBlock<T>, Dictionary<int, T>> genSets;
         private Dictionary<BasicBlock<T>, List<int>> killSets;
         private Dictionary<BasicBlock<T>, List<BasicBlock<T>>> preds;
         private Dictionary<BasicBlock<T>, Dictionary<int, List<T>>> reachingDefs;
+        private Dictionary<T, BasicBlock<T>> instrToBlockMap;
 
         public ReachingDef(ProgramBlock<T> prog)
         {
@@ -20,6 +21,7 @@ namespace CSC431.Analysis
             killSets = new Dictionary<BasicBlock<T>, List<int>>();
             preds = new Dictionary<BasicBlock<T>, List<BasicBlock<T>>>();
             reachingDefs = new Dictionary<BasicBlock<T>, Dictionary<int, List<T>>>();
+            instrToBlockMap = new Dictionary<T, BasicBlock<T>>();
 
             DoDataflow(prog);
         }
@@ -51,6 +53,7 @@ namespace CSC431.Analysis
                         gen.Add(t.IntVal, i);
                     kill.Add(t.IntVal);
                 }
+                instrToBlockMap[i] = block;
             }
             genSets[block] = gen;
             killSets[block] = kill;
@@ -118,8 +121,9 @@ namespace CSC431.Analysis
         /// <param name="instr"></param>
         /// <param name="reg"></param>
         /// <returns></returns>
-        public List<T> GetDef(BasicBlock<T> block, T instr, int reg)
+        public List<T> GetDef(T instr, int reg)
         {
+            BasicBlock<T> block = instrToBlockMap[instr];
             var defs = new Dictionary<int, List<T>>();
             foreach (var kvp in reachingDefs[block])
             {
@@ -133,7 +137,7 @@ namespace CSC431.Analysis
 
                 foreach (var t in i.DestRegs)
                 {
-                    defs[t.IntVal].Add(i);
+                    defs.AddEnsuringList(t.IntVal, i);
                 }
 
             }

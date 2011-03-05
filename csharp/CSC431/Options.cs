@@ -79,6 +79,7 @@ namespace CSC431
 
             if (!Options.DisableOpt.Value)
             {
+                flow = flow.FollowWith(OptSteps.PowerReduction());
                 flow = flow.FollowWith(OptSteps.UselessCodeRemoval());
                 //flow = flow.FollowWith(OptSteps.CommonSubExprElim());
 

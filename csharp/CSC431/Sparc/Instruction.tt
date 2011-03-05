@@ -424,6 +424,8 @@ private class InstrInfo
                 new InstrInfo("rrR", "or"),
                 new InstrInfo("rrR", "and"),
                 new InstrInfo("riR", "xor"),
+                new InstrInfo("riR", "sll"),
+                new InstrInfo("riR", "sra"),
                 new InstrInfo("riR", "or", "ori"),
                 new InstrInfo("roR", "or", "orl"),
                 new InstrInfo("rr", "cmp"),

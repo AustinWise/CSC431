@@ -48,6 +48,7 @@
     <Compile Include="Analysis\CommonSubExprElim.cs" />
     <Compile Include="Analysis\FunctionsCalled.cs" />
     <Compile Include="Analysis\IterativeDataflow.cs" />
+    <Compile Include="Analysis\PowerReduction.cs" />
     <Compile Include="Analysis\ReachingDef.cs" />
     <Compile Include="Analysis\UselessCodeRemoval.cs" />
     <Compile Include="CFG\IInstructionConverter.cs" />
