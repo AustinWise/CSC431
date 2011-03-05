@@ -99,7 +99,7 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Read(IL.ReadInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotSupportedException("read");
+            throw new NotSupportedException("read starts with a computeglobaladdress");
         }
 
         public IEnumerable<SparcInstruction> Comp(IL.CompInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -263,7 +263,7 @@ namespace CSC431.Sparc
 
             if (read == null || ld == null || s.RegDest0 != read.RegSource0 || s.Str0 != ld.Str0)
             {
-                throw new NotSupportedException("Computeglobaladdress");
+                throw new NotSupportedException("Computeglobaladdress should be followed by a read.");
             }
 
             stream.Consume();

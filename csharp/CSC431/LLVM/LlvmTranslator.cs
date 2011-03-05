@@ -28,6 +28,7 @@ namespace CSC431.LLVM
             {
                 yield return new AllocaInstruction(new LlvmRegister("stack_" + l));
             }
+            yield return new AllocaInstruction(new LlvmRegister("evil_scanf"));
         }
 
 
@@ -152,7 +153,7 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> Read(IL.ReadInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException("read starts with a compute global address");
         }
 
         public IEnumerable<LlvmInstruction> Comp(IL.CompInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -311,7 +312,22 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> Computeglobaladdress(IL.ComputeglobaladdressInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            var read = stream.Current as IL.ReadInstruction;
+            var ld = stream.LA(1) as IL.LoadglobalInstruction;
+
+            if (read == null || ld == null || s.RegDest0 != read.RegSource0 || s.Str0 != ld.Str0)
+            {
+                throw new NotSupportedException("Computeglobaladdress should be followed by a read.");
+            }
+
+            stream.Consume();
+            stream.Consume();
+
+            castNum++;
+
+            yield return new StringInstruction("%cast" + castNum + " = getelementptr [3 x i8]* @.LC2, i64 0, i64 0");
+            yield return new StringInstruction("call i32 (i8*, ...)* @scanf(i8* %cast" + castNum + ", i32* %evil_scanf)");
+            yield return new LoadInstruction(ld.RegDest0, new LlvmRegister("evil_scanf"));
         }
 
         public IEnumerable<LlvmInstruction> New(IL.NewInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)

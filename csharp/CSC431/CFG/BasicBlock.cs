@@ -109,6 +109,17 @@ namespace CSC431.CFG
         {
             var copy = new BasicBlock<Target>();
             copy.code.AddRange(conv.Convert(new InstructionStream<T>(code)));
+
+            //Total hack job.  LLVM does not like extra labels hanging around.
+            if (this.nexts.Count == 1 && nexts[0].PrintLabel && typeof(T) == typeof(IL.MilocInstruction) && typeof(Target) == typeof(LLVM.LlvmInstruction))
+            {
+                var bb = nexts[0] as BasicBlock<IL.MilocInstruction>;
+                if (bb.code.Count != 0)
+                {
+                    copy.code.AddRange(conv.Convert(new InstructionStream<T>(new List<T>(new T[] { (T)(object)new IL.JumpiInstruction(nexts[0].Label) }))));
+                }
+            }
+
             copy.Reg = this.register;
             copy.StructType = StructType;
             return copy;
