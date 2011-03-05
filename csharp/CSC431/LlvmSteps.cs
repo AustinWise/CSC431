@@ -25,7 +25,7 @@ namespace CSC431
         {
             return new InStep<ProgramBlock<LlvmInstruction>>(c =>
             {
-                var sw = new StreamWriter("dump.ll");
+                TextWriter sw = new StreamWriter("dump.ll");
                 c.Print(sw, new LlvmPrinter());
                 sw.Close();
             });

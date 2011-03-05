@@ -15,6 +15,7 @@ namespace CSC431
         private static readonly TaskLocal<String> InputFile = new TaskLocal<string>();
         public static readonly TaskLocal<bool> DisplayAST = new TaskLocal<bool>();
         public static readonly TaskLocal<bool> DumpIL = new TaskLocal<bool>();
+        public static readonly TaskLocal<bool> DumpLL = new TaskLocal<bool>();
         public static readonly TaskLocal<string> ClrExec = new TaskLocal<string>();
         public static readonly TaskLocal<bool> Llvm = new TaskLocal<bool>();
         public static readonly TaskLocal<bool> DisableRegAlloc = new TaskLocal<bool>();
@@ -26,6 +27,7 @@ namespace CSC431
             {
                 {"displayAST", v=> DisplayAST.Value = v != null},
                 {"dumpIL", v=> DumpIL.Value = v != null},
+                {"dumpLL", v=> DumpLL.Value = v != null},
                 {"clrExe=", v=> ClrExec.Value = v},
                 {"llvm", v=> Llvm.Value = v != null},
                 {"noOpt", v=> DisableOpt.Value = v != null},
@@ -73,7 +75,7 @@ namespace CSC431
             if (Options.Llvm.Value)
             {
                 var llvm = flow.FollowWith(LlvmSteps.ConvertToLlvm());
-                if (Options.DumpIL.Value)
+                if (Options.DumpLL.Value)
                     llvm.FollowWith(LlvmSteps.PrintCFG());
                 llvm.FollowWith(LlvmSteps.BitcodeToSparc(outfile));
             }

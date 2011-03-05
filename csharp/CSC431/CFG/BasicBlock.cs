@@ -114,7 +114,7 @@ namespace CSC431.CFG
             if (this.nexts.Count == 1 && nexts[0].PrintLabel && typeof(T) == typeof(IL.MilocInstruction) && typeof(Target) == typeof(LLVM.LlvmInstruction))
             {
                 var bb = nexts[0] as BasicBlock<IL.MilocInstruction>;
-                if (bb.code.Count != 0)
+                if (bb.code.Count != 0 && !(this.code[code.Count-1] is IL.JumpiInstruction))
                 {
                     copy.code.AddRange(conv.Convert(new InstructionStream<T>(new List<T>(new T[] { (T)(object)new IL.JumpiInstruction(nexts[0].Label) }))));
                 }

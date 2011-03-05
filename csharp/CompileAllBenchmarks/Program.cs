@@ -45,23 +45,29 @@ namespace CompileAllBenchmarks
                     Options.InputSource.Value = new FileStream(evFile, FileMode.Open, FileAccess.Read);
                     setOptions();
 
-                    var output = new StreamWriter(Path.Combine(myDir, outputFileName), false, Encoding.ASCII);
+                    var outpath = Path.Combine(myDir, outputFileName);
+                    var output = new StreamWriter(outpath, false, Encoding.ASCII);
 
+                    string ret;
                     var pipe = CSC431.Options.CreatePipe(output);
                     try
                     {
                         CSC431.Steps.Step.DoAll(pipe);
+                        ret = "";
                     }
                     catch (Exception ex)
                     {
-                        return string.Format("{0}\n\t{1}\n", evFile.Substring(evFile.LastIndexOf('\\') + 1), ex.Message);
+                        ret = string.Format("{0}\n\t{1}\n", evFile.Substring(evFile.LastIndexOf('\\') + 1), ex.Message);
                     }
                     finally
                     {
                         output.Close();
                     }
 
-                    return "";
+                    if (!string.IsNullOrEmpty(ret))
+                        File.Delete(outpath);
+
+                    return ret;
                 });
                 t.Start();
                 tasks.Add(t);
