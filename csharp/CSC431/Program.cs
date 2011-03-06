@@ -16,14 +16,33 @@ namespace CSC431
             var t = new Task(() =>
             {
                 Options.ParseParameters(args);
-                Step.DoAll(Options.CreatePipe(Console.Out));
+                if (Options.DisplayHelp.Value)
+                    Options.WriteOptionDescriptions(Console.Out);
+                else
+                    Step.DoAll(Options.CreatePipe(Console.Out));
             });
             t.RunSynchronously();
 
             if (t.IsFaulted)
             {
-                var ex = t.Exception as AggregateException;
-                Console.WriteLine(ex.InnerExceptions[0].Message);
+                var ex = (t.Exception as AggregateException).InnerExceptions[0];
+
+                string str;
+                if (ex is EvilException)
+                {
+                    str = "Error: " + (ex as EvilException).System.ToString() + ": ";
+                }
+                else
+                {
+                    str = "INTERNAL ERROR, you broke the compiler: ";
+                }
+                str += ex.Message;
+                if (ex.InnerException != null)
+                    str += "\n\t" + ex.InnerException.Message;
+
+                Console.WriteLine(str);
+                Console.WriteLine("Run with -help for information about command line switches.");
+
                 return 1;
             }
 

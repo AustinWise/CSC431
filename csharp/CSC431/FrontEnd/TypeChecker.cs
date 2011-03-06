@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 TypeChecker.g 2011-02-28 11:52:30
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 TypeChecker.g 2011-03-06 06:25:16
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -1002,7 +1002,7 @@ public partial class TypeChecker : Antlr.Runtime.Tree.TreeParser
 
     							if ((id!=null?id.Text:null) == CSC431.IL.MilocInstruction.ReadGlobalName)
     							{
-    								throw new EvilException("invalid variable name");
+    								error((id!=null?id.Line:0), "invalid variable name, '" + (id!=null?id.Text:null) + "' is reserved'");
     							}
     							
     							if (stable.redef((id!=null?id.Text:null)))

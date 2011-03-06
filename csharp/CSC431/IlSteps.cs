@@ -26,7 +26,7 @@ namespace CSC431
                 var c = tparser.Program();
 
                 if (tparser.NumberOfSyntaxErrors != 0)
-                    throw new EvilException("make cfg syntax error");
+                    throw new EvilException(EvilSystem.Il, "IL generation tree walking error.");
 
                 return c;
             });

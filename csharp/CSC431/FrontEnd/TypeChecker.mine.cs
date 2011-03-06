@@ -15,7 +15,7 @@ namespace CSC431.FrontEnd
 
         private static void error(int lineNum, String errorMsg)
         {
-            throw new EvilException(lineNum + ": " + errorMsg);
+            throw new EvilException(EvilSystem.Typecheck, lineNum + ": " + errorMsg);
         }
 
         private static Type getVar(SymbolTable stable, CommonTree sym)

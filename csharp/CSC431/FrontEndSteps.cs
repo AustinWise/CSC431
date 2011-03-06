@@ -16,15 +16,7 @@ namespace CSC431
         {
             return new OutStep<EvilLexer>(() =>
             {
-                try
-                {
-                    ANTLRInputStream input = new ANTLRInputStream(Options.InputSource.Value);
-                    return new EvilLexer(input);
-                }
-                catch (IOException)
-                {
-                    throw new EvilException("file not found");
-                }
+                return new EvilLexer(new ANTLRInputStream(Options.InputSource.Value));
             });
         }
 
@@ -43,11 +35,11 @@ namespace CSC431
                 }
                 catch (RecognitionException e)
                 {
-                    throw new EvilException("Error parsing.", e);
+                    throw new EvilException(EvilSystem.Parsing, "Error parsing.", e);
                 }
 
                 if (parser.NumberOfSyntaxErrors != 0)
-                    throw new EvilException("syntax errors");
+                    throw new EvilException(EvilSystem.Parsing,  "Syntax errors.");
 
                 CommonTree t = (CommonTree)ret.Tree;
 
@@ -73,7 +65,7 @@ namespace CSC431
                 tparser.Program(stypes, stable);
 
                 if (tparser.NumberOfSyntaxErrors != 0)
-                    throw new EvilException("type check error");
+                    throw new EvilException(EvilSystem.Typecheck, "Type check tree walking errors.");
 
                 return t;
             });

@@ -20,27 +20,34 @@ namespace CSC431
         public static readonly TaskLocal<bool> Llvm = new TaskLocal<bool>();
         public static readonly TaskLocal<bool> DisableRegAlloc = new TaskLocal<bool>();
         public static readonly TaskLocal<bool> DisableOpt = new TaskLocal<bool>();
+        public static readonly TaskLocal<bool> DisplayHelp = new TaskLocal<bool>();
+
+        private static readonly OptionSet optionSet;
+
+        static Options()
+        {
+            optionSet = new OptionSet()
+            {
+                {"displayAST", "Displays the AST.", v=> DisplayAST.Value = v != null},
+                {"dumpIL", "Dumps the generated miloc.  The unoptimized dump should be compatible with Mochi.", v=> DumpIL.Value = v != null},
+                {"noOpt", "Disables optimizations.", v=> DisableOpt.Value = v != null},
+                {"clrExe=", "Creates a .NET EXE with the given name.", v=> ClrExec.Value = v},
+                {"llvm", "Uses LLVM for optimization and code generation. Incomplete.", v=> Llvm.Value = v != null},
+                {"dumpLL", "Dumps the generated LLVM code.", v=> DumpLL.Value = v != null},
+                {"help|h|?", "Displays this help message.", v=> DisplayHelp.Value = v != null},
+            };
+        }
 
         public static void ParseParameters(String[] args)
         {
-            var os = new OptionSet()
-            {
-                {"displayAST", v=> DisplayAST.Value = v != null},
-                {"dumpIL", v=> DumpIL.Value = v != null},
-                {"dumpLL", v=> DumpLL.Value = v != null},
-                {"clrExe=", v=> ClrExec.Value = v},
-                {"llvm", v=> Llvm.Value = v != null},
-                {"noOpt", v=> DisableOpt.Value = v != null},
-            };
-
-            var extras = os.Parse(args);
+            var extras = optionSet.Parse(args);
             foreach (var e in extras)
             {
                 if (e.StartsWith("-"))
-                    throw new EvilException("unexpected option: " + e);
+                    throw new EvilException(EvilSystem.Options, "Unexpected option: " + e);
                 else if (InputFile.Value != null)
                 {
-                    throw new EvilException("too many files specified");
+                    throw new EvilException(EvilSystem.Options, "Too many files specified.");
                 }
                 else
                 {
@@ -48,13 +55,23 @@ namespace CSC431
                 }
             }
 
+            if (Options.Llvm.Value)
+                Options.DisableOpt.Value = true;
+
             if (InputFile.Value == null)
             {
                 InputSource.Value = Console.OpenStandardInput();
             }
             else
             {
-                InputSource.Value = new FileStream(Options.InputFile.Value, FileMode.Open, FileAccess.Read);
+                try
+                {
+                    InputSource.Value = new FileStream(Options.InputFile.Value, FileMode.Open, FileAccess.Read);
+                }
+                catch (IOException ex)
+                {
+                    throw new EvilException(EvilSystem.Options, "Failed to open file.", ex);
+                }
             }
         }
 
@@ -64,7 +81,10 @@ namespace CSC431
                 .FollowWith(FrontEndSteps.Parse());
 
             if (Options.DisplayAST.Value)
+            {
                 pipe.FollowWith(FrontEndSteps.PrintAst());
+                return pipe.AsStep();
+            }
 
             var typeChecked = pipe.FollowWith(FrontEndSteps.TypeCheck());
             var flow = typeChecked.FollowWith(IlSteps.MakeCFG()).FollowWith(IlSteps.CleanUpCfg());
@@ -108,6 +128,11 @@ namespace CSC431
                 typeChecked.FollowWith(StackSteps.MakeClrExe());
 
             return pipe.AsStep();
+        }
+
+        public static void WriteOptionDescriptions(TextWriter o)
+        {
+            optionSet.WriteOptionDescriptions(o);
         }
     }
 }

@@ -75,7 +75,7 @@ namespace CSC431
             err += p.StandardError.ReadToEnd();
 
             if (p.ExitCode != 0)
-                throw new EvilException(err);
+                throw new EvilException(EvilSystem.Llvm, err);
         }
 
         private static string compileBitcode(string tmp)
@@ -98,7 +98,7 @@ namespace CSC431
             err += p.StandardError.ReadToEnd();
 
             if (p.ExitCode != 0)
-                throw new EvilException(err);
+                throw new EvilException(EvilSystem.Llvm, err);
 
             return text;
         }

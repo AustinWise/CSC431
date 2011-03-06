@@ -102,7 +102,7 @@ id_list [Type t, SymbolTable stable]
 		{
 			if ($id.text == CSC431.IL.MilocInstruction.ReadGlobalName)
 			{
-				throw new EvilException("invalid variable name");
+				error($id.line, "invalid variable name, '" + $id.text + "' is reserved'");
 			}
 			
 			if ($stable.redef($id.text))

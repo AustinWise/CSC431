@@ -23,7 +23,7 @@ namespace CSC431
                 tparser.Program();
 
                 if (tparser.NumberOfSyntaxErrors != 0)
-                    throw new EvilException("make cfg syntax error");
+                    throw new EvilException(EvilSystem.Clr, "CLR EXE tree walking errors.");
             });
         }
     }
