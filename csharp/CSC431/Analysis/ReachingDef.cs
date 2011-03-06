@@ -14,6 +14,7 @@ namespace CSC431.Analysis
         private Dictionary<BasicBlock<T>, List<BasicBlock<T>>> preds;
         private Dictionary<BasicBlock<T>, Dictionary<int, List<T>>> reachingDefs;
         private Dictionary<T, BasicBlock<T>> instrToBlockMap;
+        private Dictionary<Tuple<T, int>, List<T>> reachingDefCache;
 
         public ReachingDef(ProgramBlock<T> prog)
         {
@@ -22,6 +23,7 @@ namespace CSC431.Analysis
             preds = new Dictionary<BasicBlock<T>, List<BasicBlock<T>>>();
             reachingDefs = new Dictionary<BasicBlock<T>, Dictionary<int, List<T>>>();
             instrToBlockMap = new Dictionary<T, BasicBlock<T>>();
+            reachingDefCache = new Dictionary<Tuple<T, int>, List<T>>();
 
             DoDataflow(prog);
         }
@@ -123,26 +125,31 @@ namespace CSC431.Analysis
         /// <returns></returns>
         public List<T> GetDef(T instr, int reg)
         {
-            BasicBlock<T> block = instrToBlockMap[instr];
-            var defs = new Dictionary<int, List<T>>();
-            foreach (var kvp in reachingDefs[block])
-            {
-                defs.Add(kvp.Key, new List<T>(kvp.Value));
-            }
+            var cacheKey = new Tuple<T, int>(instr, reg);
 
-            foreach (var i in block.Code)
+            if (!reachingDefCache.ContainsKey(cacheKey))
             {
-                if (i == instr)
-                    return defs[reg];
-
-                foreach (var t in i.DestRegs)
+                BasicBlock<T> block = instrToBlockMap[instr];
+                var defs = new Dictionary<int, List<T>>();
+                foreach (var kvp in reachingDefs[block])
                 {
-                    defs.AddEnsuringList(t.IntVal, i);
+                    defs.Add(kvp.Key, new List<T>(kvp.Value));
                 }
 
+                foreach (var i in block.Code)
+                {
+                    if (i == instr)
+                        reachingDefCache[cacheKey] = defs[reg];
+
+                    foreach (var t in i.DestRegs)
+                    {
+                        defs.AddEnsuringList(t.IntVal, i);
+                    }
+
+                }
             }
 
-            throw new Exception("instr not found in block");
+            return reachingDefCache[cacheKey];
         }
     }
 }
