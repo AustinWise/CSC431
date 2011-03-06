@@ -9,6 +9,14 @@ namespace CSC431.FrontEnd
     {
         private Dictionary<String, StructDef> definedTypes = new Dictionary<String, StructDef>();
 
+        public Dictionary<String, StructDef> DefinedTypes
+        {
+            get
+            {
+                return definedTypes;
+            }
+        }
+
         public class StructDef
         {
             private String name;
@@ -37,6 +45,14 @@ namespace CSC431.FrontEnd
             public Type getFieldType(String f)
             {
                 return this.types[f];
+            }
+
+            public ICollection<string> Fields
+            {
+                get
+                {
+                    return types.Keys;
+                }
             }
         }
 

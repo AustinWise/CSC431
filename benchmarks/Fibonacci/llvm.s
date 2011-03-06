@@ -1,4 +1,4 @@
-	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmp9663.tmp"
+	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmp6E19.tmp"
 	.text
 	.align	4
 	.type	computeFib,@function
@@ -8,21 +8,21 @@ computeFib:                             ! @computeFib
 	subcc %i0, 0, %l0
 	bne .LBB0_2
 	nop
-! BB#1:                                 ! %L2491
+! BB#1:                                 ! %L3152
 	sethi 0, %i0
 	restore %g0, %g0, %g0
 	retl
 	nop
-.LBB0_2:                                ! %L2496
+.LBB0_2:                                ! %L3157
 	subcc %i0, 2, %l0
 	bg .LBB0_4
 	nop
-! BB#3:                                 ! %L2504
+! BB#3:                                 ! %L3165
 	or %g0, 1, %i0
 	restore %g0, %g0, %g0
 	retl
 	nop
-.LBB0_4:                                ! %L2509
+.LBB0_4:                                ! %L3170
 	add %i0, -1, %o0
 	call computeFib
 	nop

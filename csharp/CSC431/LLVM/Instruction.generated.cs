@@ -521,41 +521,6 @@ public override Register[] DestRegs
 
 
 
-public partial class CallInstruction : LlvmInstruction
-{
-	public CallInstruction
-	(
-	) : base ("call")
-	{
-	}
-
-
-public override Register[] SourceRegs
-{
-	get
-	{
-		return new Register[] {
-		};
-	}
-}
-
-public override Register[] DestRegs
-{
-	get
-	{
-		return new Register[] {
-		};
-	}
-}
-
-public override string ToString()
-{
-return string.Format("", Name);
-}
-}
-
-
-
 public partial class AllocaInstruction : LlvmInstruction
 {
 	public AllocaInstruction

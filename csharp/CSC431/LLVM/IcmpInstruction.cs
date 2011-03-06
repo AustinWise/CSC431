@@ -19,14 +19,16 @@ namespace CSC431.LLVM
     {
         private ConditionType cond;
         private VirtualRegister rd, r1, r2;
+        private string type;
 
-        public IcmpInstruction(ConditionType cond, VirtualRegister rd, VirtualRegister r1, VirtualRegister r2)
+        public IcmpInstruction(ConditionType cond, VirtualRegister rd, VirtualRegister r1, VirtualRegister r2, string type)
             : base("icmp")
         {
             this.cond = cond;
             this.r1 = r1;
             this.r2 = r2;
             this.rd = rd;
+            this.type = type;
         }
 
         public override Register[] SourceRegs
@@ -41,7 +43,7 @@ namespace CSC431.LLVM
 
         public override string ToString()
         {
-            return string.Format("%{3} = icmp {0} i32 %{1}, %{2}", cond, r1, r2, rd);
+            return string.Format("%{3} = icmp {0} {4} %{1}, %{2}", cond, r1, r2, rd, type != null ? "%" + type + "*" : "i32");
         }
     }
     class IcmpConstInstruction : LlvmInstruction

@@ -60,7 +60,9 @@
     <Compile Include="Ensure.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="IL\IArithmeticInstruction.cs" />
+    <Compile Include="IL\ITyped.cs" />
     <Compile Include="LLVM\LlvmRegister.cs" />
+    <Compile Include="Analysis\NullPointerConverter.cs" />
     <Compile Include="Multimap.cs" />
     <Compile Include="OptSteps.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

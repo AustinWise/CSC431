@@ -32,7 +32,10 @@ namespace CSC431
                 string str;
                 if (ex is EvilException)
                 {
-                    str = "Error: " + (ex as EvilException).System.ToString() + ": ";
+                    var evEx = ex as EvilException;
+                    str = "Error: " + evEx.System.ToString() + ": ";
+                    if (evEx.System == EvilSystem.Llvm)
+                        str += "\n";
                 }
                 else
                 {

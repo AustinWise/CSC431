@@ -42,26 +42,33 @@ namespace CSC431.LLVM
     }
     public partial class LoadInstruction
     {
+        public bool IsGlobal { get; set; }
+        public FrontEnd.Type Type;
+
         partial void ToStringCore(ref string ret)
         {
-            ret = string.Format("%{0} = load i32* %{1}", RegDest0, RegSource0);
+            ret = string.Format("%{0} = load {3}* {2}{1}", RegDest0, RegSource0, IsGlobal ? "@" : "%", Type.isStruct() ? "%" + Type.getStructType() + "*" : "i32");
         }
     }
     public partial class StoreInstruction
     {
+        public bool IsGlobal { get; set; }
+        public bool IsNull { get; set; }
+        public FrontEnd.Type Type;
+
         partial void ToStringCore(ref string ret)
         {
-            ret = string.Format("store i32 %{0}, i32* %{1}", RegSource0, RegSource1);
+            ret = string.Format("store {3} {0}, {3}* {2}{1}", IsNull ? "null" : "%" + RegSource0.ToString(), RegSource1, IsGlobal ? "@" : "%", Type.isStruct() ? "%" + Type.getStructType() + "*" : "i32");
         }
     }
     public class StringInstruction : LlvmInstruction
     {
         private string val;
 
-        public StringInstruction(string val)
+        public StringInstruction(string val, params object[] args)
             : base("string instr")
         {
-            this.val = val;
+            this.val = string.Format(val, args);
         }
 
         public override CFG.Register[] SourceRegs

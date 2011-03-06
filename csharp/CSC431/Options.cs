@@ -96,7 +96,8 @@ namespace CSC431
 
             if (Options.Llvm.Value)
             {
-                var llvm = flow.FollowWith(LlvmSteps.ConvertToLlvm());
+                var llvm = flow.FollowWith(LlvmSteps.PropegateNullPointers())
+                    .FollowWith(LlvmSteps.ConvertToLlvm());
                 if (Options.DumpLL.Value)
                     llvm.FollowWith(LlvmSteps.PrintCFG());
                 llvm.FollowWith(LlvmSteps.BitcodeToSparc(outfile));

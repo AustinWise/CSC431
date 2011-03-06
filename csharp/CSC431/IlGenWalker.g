@@ -256,7 +256,7 @@ loop returns [LoopBlock<MilocInstruction> b]
 	;
 
 delete returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()]
-	: ^(DELETE e=expression) {$b.Add(e); $b.Add(new DelInstruction(e.Reg));}
+	: ^(DELETE e=expression) {$b.Add(e); $b.Add(new DelInstruction(e.Reg) { StructType = e.StructType });}
 	;
 
 ret returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()]
@@ -277,13 +277,12 @@ invocation returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruc
 	: ^(INVOKE id=ID regLocs=arguments[$b]) {doInvoke($id.text, $b, regLocs); }
 	;
 
-//TODO: make lvalue also support structs
 lvalue[BasicBlock<MilocInstruction> b] returns [VarBase dest]
 	: ^(DOT lv=lvalue[b] id=ID)
 		{
 			var reg = Instruction.VirtualRegister();
 			b.Add(lv.Load(reg));
-			$dest = new VarField($id.text, reg, getMemberType(lv.Type, $id.text), getFieldIndex(lv.Type, $id.text));
+			$dest = new VarField($id.text, reg, lv.Type, getMemberType(lv.Type, $id.text), getFieldIndex(lv.Type, $id.text));
 			
 		}
 	| id=ID {$dest = getVarReg($id.text); }
@@ -293,12 +292,12 @@ expression returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruc
 @init { int reg = Instruction.VirtualRegister(); $b.Reg = reg; }
 	: ^(AND e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new AndInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(OR e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new OrInstruction(e1.Reg, e2.Reg, reg)); }
-	| ^(EQ e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MoveqInstruction(1, reg)); }
-	| ^(LT e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovltInstruction(1, reg)); }
-	| ^(GT e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovgtInstruction(1, reg)); }
-	| ^(NE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovneInstruction(1, reg)); }
-	| ^(LE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovleInstruction(1, reg)); }
-	| ^(GE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg)); $b.Add(new MovgeInstruction(1, reg)); }
+	| ^(EQ e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg) { StructType1 = e1.StructType, StructType2 = e2.StructType}); $b.Add(new MoveqInstruction(1, reg)); }
+	| ^(LT e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg) { StructType1 = e1.StructType, StructType2 = e2.StructType}); $b.Add(new MovltInstruction(1, reg)); }
+	| ^(GT e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg) { StructType1 = e1.StructType, StructType2 = e2.StructType}); $b.Add(new MovgtInstruction(1, reg)); }
+	| ^(NE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg) { StructType1 = e1.StructType, StructType2 = e2.StructType}); $b.Add(new MovneInstruction(1, reg)); }
+	| ^(LE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg) { StructType1 = e1.StructType, StructType2 = e2.StructType}); $b.Add(new MovleInstruction(1, reg)); }
+	| ^(GE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg) { StructType1 = e1.StructType, StructType2 = e2.StructType}); $b.Add(new MovgeInstruction(1, reg)); }
 	| ^(PLUS e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new AddInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(MINUS e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new SubInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(TIMES e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new MultInstruction(e1.Reg, e2.Reg, reg)); }
@@ -315,7 +314,7 @@ selector returns [BasicBlock<MilocInstruction> b]
 			int reg = Instruction.VirtualRegister();
 			$b.Reg = reg;
 			$b.Add(s);
-			$b.Add(new LoadaiFieldInstruction(s.Reg, $id.text, reg) { FieldIndex = getFieldIndex(s.StructType, $id.text) });
+			$b.Add(new LoadaiFieldInstruction(s.Reg, $id.text, reg) { ContainingType = s.StructType, FieldIndex = getFieldIndex(s.StructType, $id.text) });
 			$b.StructType = getMemberType(s.StructType, $id.text);
 		}
 	| f=factor {$b = f;}
@@ -341,7 +340,7 @@ factor returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction
 	| TRUE {$b.Add(new LoadiInstruction(1, reg)); }
 	| FALSE {$b.Add(new LoadiInstruction(0, reg)); }
 	| ^(NEW id=ID) {$b.Add(new NewInstruction($id.text, getFields($id.text), reg)); $b.StructType = $id.text; }
-	| NULL {$b.Add(new LoadiInstruction(0, reg)); }
+	| NULL {$b.Add(new LoadiInstruction(0, reg) {IsNull = true}); }
 	;
 
 arguments[BasicBlock<MilocInstruction> b] returns [List<int> regLocs = new List<int>()]

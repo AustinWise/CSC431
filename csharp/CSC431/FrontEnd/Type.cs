@@ -42,6 +42,22 @@ namespace CSC431.FrontEnd
                 throw new Exception("lolololol, gtb to ML for closures");
         }
 
+        public string GetLlvmType()
+        {
+            switch (typeCode)
+            {
+                case TYPE_BOOL:
+                case TYPE_INT:
+                    return "i32";
+                case TYPE_STRUCT:
+                    return "%" + mStructType + "*";
+                case TYPE_VOID:
+                    return "void";
+                default:
+                    throw new NotSupportedException();
+            }
+        }
+
         public Type getReturnType()
         {
             return this.retType;

@@ -13,6 +13,14 @@ namespace CSC431
 {
     static class LlvmSteps
     {
+        public static TransformStep<ProgramBlock<MilocInstruction>> PropegateNullPointers()
+        {
+            return new TransformStep<ProgramBlock<MilocInstruction>>(prog =>
+            {
+                return (ProgramBlock<MilocInstruction>)prog.Convert(new Analysis.NullPointerConverter(prog));
+            });
+        }
+
         public static InOutStep<ProgramBlock<MilocInstruction>, ProgramBlock<LlvmInstruction>> ConvertToLlvm()
         {
             return new InOutStep<ProgramBlock<MilocInstruction>, ProgramBlock<LlvmInstruction>>(c =>

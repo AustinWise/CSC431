@@ -11,26 +11,28 @@ namespace CSC431.IL
         private string name;
         private int addressReg;
         private int fieldIndex;
+        private string containingType;
 
-        public VarField(string name, int addressReg, string type, int fieldIndex)
+        public VarField(string name, int addressReg, string containingType, string type, int fieldIndex)
             : base(type)
         {
             this.name = name;
             this.addressReg = addressReg;
             this.fieldIndex = fieldIndex;
+            this.containingType = containingType;
         }
 
         public override BasicBlock<MilocInstruction> Store(int source)
         {
             var b = new BasicBlock<MilocInstruction>();
-            b.Add(new StoreaiFieldInstruction(source, addressReg, name) { FieldIndex = fieldIndex });
+            b.Add(new StoreaiFieldInstruction(source, addressReg, name) { ContainingType = containingType, FieldIndex = fieldIndex, FieldType = this.Type });
             return b;
         }
 
         public override BasicBlock<MilocInstruction> Load(int target)
         {
             var b = new BasicBlock<MilocInstruction>();
-            b.Add(new LoadaiFieldInstruction(addressReg, name, target) { FieldIndex = fieldIndex });
+            b.Add(new LoadaiFieldInstruction(addressReg, name, target) { ContainingType = containingType, FieldIndex = fieldIndex, FieldType = this.Type });
             b.Reg = target;
             return b;
         }

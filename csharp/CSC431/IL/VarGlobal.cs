@@ -19,14 +19,14 @@ namespace CSC431.IL
         public override BasicBlock<MilocInstruction> Store(int source)
         {
             var b = new BasicBlock<MilocInstruction>();
-            b.Add(new StoreglobalInstruction(source, name));
+            b.Add(new StoreglobalInstruction(source, name) { Type = this.Type });
             return b;
         }
 
         public override BasicBlock<MilocInstruction> Load(int target)
         {
             var b = new BasicBlock<MilocInstruction>();
-            b.Add(new LoadglobalInstruction(name, target));
+            b.Add(new LoadglobalInstruction(name, target) { Type = this.Type });
             b.Reg = target;
             return b;
         }

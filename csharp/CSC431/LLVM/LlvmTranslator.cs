@@ -20,13 +20,23 @@ namespace CSC431.LLVM
         }
 
         private int castNum = 0;
+        private FrontEnd.SymbolTable stable;
 
 
         public IEnumerable<LlvmInstruction> FunctionStart(CFG.FunctionBlock<LlvmInstruction> copy)
         {
+            stable = Program.Stable.Value.Children.Where(c => c.Name == copy.Name).First();
             foreach (var l in copy.Locals)
             {
-                yield return new AllocaInstruction(new LlvmRegister("stack_" + l));
+                var t = stable.getType(l);
+                if (t.isStruct())
+                {
+                    yield return new StringInstruction("%stack_{0} = alloca %{1}*", l, t.getStructType());
+                }
+                else
+                {
+                    yield return new AllocaInstruction(new LlvmRegister("stack_" + l));
+                }
             }
             yield return new AllocaInstruction(new LlvmRegister("evil_scanf"));
         }
@@ -81,7 +91,10 @@ namespace CSC431.LLVM
         {
             if (!(stream.Current is IL.CompInstruction))
             {
-                yield return new LoadiInstruction(s.RegDest0, s.Immed0);
+                if (s.IsNull)
+                    yield return new StringInstruction("%{0} = inttoptr i32 0 to {1}*", s.RegDest0, s.Type != null ? "%" + s.Type : "i8");
+                else
+                    yield return new LoadiInstruction(s.RegDest0, s.Immed0);
                 yield break;
             }
 
@@ -128,7 +141,9 @@ namespace CSC431.LLVM
         {
             if (next is T)
             {
-                condMovs.Add(new IcmpInstruction(condMap[typeof(T)], cmpreg, cmp.RegSource0, cmp.RegSource1));
+                var type = cmp.StructType1 ?? cmp.StructType2;
+
+                condMovs.Add(new IcmpInstruction(condMap[typeof(T)], cmpreg, cmp.RegSource0, cmp.RegSource1, type));
 
                 var conv = next as dynamic;
                 if (conv.RegDest0 != s.RegDest0)
@@ -141,7 +156,9 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> Print(IL.PrintInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            castNum++;
+            yield return new StringInstruction("%cast" + castNum + " = getelementptr [4 x i8]* @.LC0, i64 0, i64 0");
+            yield return new StringInstruction("call i32 (i8*, ...)* @printf(i8* %cast" + castNum + ", i32 %" + s.RegSource0 + ")");
         }
 
         public IEnumerable<LlvmInstruction> Println(IL.PrintlnInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -212,7 +229,7 @@ namespace CSC431.LLVM
             if (store.Str0 != s.Str0)
                 throw new Exception("werid storaivar following loadinarg");
 
-            yield return new StoreInstruction(new LlvmRegister(s.Str0), new LlvmRegister("stack_" + s.Str0));
+            yield return new StoreInstruction(new LlvmRegister(s.Str0), new LlvmRegister("stack_" + s.Str0)) { Type = stable.getType(s.Str0) };
         }
 
         public IEnumerable<LlvmInstruction> Call(IL.CallInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -259,10 +276,11 @@ namespace CSC431.LLVM
 
             var call = stream.Consume() as IL.CallInstruction;
 
-            var arg = string.Join(", ", argList.Select(r => "i32 %" + r.RegSource0.ToString()).ToArray());
-            bool isVoid = Program.Stable.Value.getType(call.Str0).getReturnType().isVoid();
+            var funDef = Program.Stable.Value.getType(call.Str0);
 
-            string callString = string.Format("call {0} @{1}({2})", isVoid ? "void" : "i32", call.Str0, arg);
+            var arg = string.Join(", ", argList.Select(r => funDef.getArgs()[argList.IndexOf(r)].GetLlvmType() + " %" + r.RegSource0.ToString()).ToArray());
+
+            string callString = string.Format("call {0} @{1}({2})", funDef.getReturnType().GetLlvmType(), call.Str0, arg);
 
             if (stream.Current is IL.LoadretInstruction)
             {
@@ -282,32 +300,38 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> StoreaiField(IL.StoreaiFieldInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            var addrReg = new CFG.VirtualRegister(CFG.Instruction.VirtualRegister());
+            yield return new StringInstruction("%{0} = getelementptr %{1}* %{2}, i32 0, i32 {3}", addrReg, s.ContainingType, s.RegSource1, s.FieldIndex);
+            yield return new StoreInstruction(s.RegSource0, addrReg) { IsNull = s.IsNull, Type = s.FieldType == null ? FrontEnd.Type.intType() : FrontEnd.Type.structType(s.FieldType) };
         }
 
         public IEnumerable<LlvmInstruction> StoreaiVar(IL.StoreaiVarInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            yield return new StoreInstruction(s.RegSource0, new LlvmRegister("stack_" + s.Str0));
+            var t = stable.getType(s.Str0);
+            yield return new StoreInstruction(s.RegSource0, new LlvmRegister("stack_" + s.Str0)) { IsNull = s.IsNull, Type = t };
         }
 
         public IEnumerable<LlvmInstruction> LoadaiField(IL.LoadaiFieldInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            var addrReg = new CFG.VirtualRegister(CFG.Instruction.VirtualRegister());
+            yield return new StringInstruction("%{0} = getelementptr %{1}* %{2}, i32 0, i32 {3}", addrReg, s.ContainingType, s.RegSource0, s.FieldIndex);
+            yield return new LoadInstruction(s.RegDest0, addrReg) { Type = Program.Stypes.Value.get(s.ContainingType).getFieldType(s.Str0) };
         }
 
         public IEnumerable<LlvmInstruction> LoadaiVar(IL.LoadaiVarInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            yield return new LoadInstruction(s.RegDest0, new LlvmRegister("stack_" + s.Str0));
+            var t = stable.getType(s.Str0);
+            yield return new LoadInstruction(s.RegDest0, new LlvmRegister("stack_" + s.Str0)) { Type = t };
         }
 
         public IEnumerable<LlvmInstruction> Loadglobal(IL.LoadglobalInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new LoadInstruction(s.RegDest0, new LlvmRegister(s.Str0)) { Type = Program.Stable.Value.getType(s.Str0), IsGlobal = true };
         }
 
         public IEnumerable<LlvmInstruction> Storeglobal(IL.StoreglobalInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            yield return new StoreInstruction(s.RegSource0, new LlvmRegister(s.Str0)) { IsNull = s.IsNull, Type = Program.Stable.Value.getType(s.Str0), IsGlobal = true };
         }
 
         public IEnumerable<LlvmInstruction> Computeglobaladdress(IL.ComputeglobaladdressInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -327,17 +351,21 @@ namespace CSC431.LLVM
 
             yield return new StringInstruction("%cast" + castNum + " = getelementptr [3 x i8]* @.LC2, i64 0, i64 0");
             yield return new StringInstruction("call i32 (i8*, ...)* @scanf(i8* %cast" + castNum + ", i32* %evil_scanf)");
-            yield return new LoadInstruction(ld.RegDest0, new LlvmRegister("evil_scanf"));
+            yield return new LoadInstruction(ld.RegDest0, new LlvmRegister("evil_scanf")) { Type = FrontEnd.Type.intType() };
         }
 
         public IEnumerable<LlvmInstruction> New(IL.NewInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            var addrReg = new CFG.VirtualRegister(CFG.Instruction.VirtualRegister());
+            yield return new StringInstruction("%{0} = call i8* @calloc(i32 {1}, i32 4)", addrReg, s.Arr0.Length);
+            yield return new StringInstruction("%{0} = bitcast i8* %{2} to %{1}*", s.RegDest0, s.Str0, addrReg);
         }
 
         public IEnumerable<LlvmInstruction> Del(IL.DelInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            throw new NotImplementedException();
+            var addrReg = new CFG.VirtualRegister(CFG.Instruction.VirtualRegister());
+            yield return new StringInstruction("%{0} = bitcast %{1}* %{2} to i8*", addrReg, s.StructType, s.RegSource0);
+            yield return new StringInstruction("call void @free(i8* %{0})", addrReg);
         }
 
         public IEnumerable<LlvmInstruction> Sll(IL.SllInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)

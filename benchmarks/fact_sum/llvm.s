@@ -1,4 +1,4 @@
-	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmp95D4.tmp"
+	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmp6E18.tmp"
 	.text
 	.globl	main
 	.align	4
@@ -6,7 +6,7 @@
 main:                                   ! @main
 ! BB#0:
 	save %sp, -104, %sp
-.LBB0_1:                                ! %L2435
+.LBB0_1:                                ! %L3053
                                         ! =>This Loop Header: Depth=1
                                         !     Child Loop BB0_7 Depth 2
                                         !     Child Loop BB0_2 Depth 2
@@ -35,18 +35,18 @@ main:                                   ! @main
 	or %g0, 1, %l2
 	ba .LBB0_7
 	nop
-.LBB0_4:                                ! %L2377.i
+.LBB0_4:                                ! %L2995.i
                                         !   in Loop: Header=BB0_2 Depth=2
 	subcc %l2, 1, %l4
 	bg .LBB0_6
 	nop
-! BB#5:                                 ! %L2383.i
+! BB#5:                                 ! %L3001.i
                                         !   in Loop: Header=BB0_2 Depth=2
 	sethi 0, %l4
 	sub %l4, %l2, %l2
 	ba .LBB0_2
 	nop
-.LBB0_6:                                ! %L2400.i
+.LBB0_6:                                ! %L3018.i
                                         !   in Loop: Header=BB0_2 Depth=2
 	add %l2, -1, %l4
 	smul %l2, %l3, %l3
@@ -59,18 +59,18 @@ main:                                   ! @main
 	subcc %l1, 2, %l4
 	bcs .LBB0_11
 	nop
-! BB#8:                                 ! %L2377.i7
+! BB#8:                                 ! %L2995.i7
                                         !   in Loop: Header=BB0_7 Depth=2
 	subcc %l1, 1, %l4
 	bg .LBB0_10
 	nop
-! BB#9:                                 ! %L2383.i9
+! BB#9:                                 ! %L3001.i9
                                         !   in Loop: Header=BB0_7 Depth=2
 	sethi 0, %l4
 	sub %l4, %l1, %l1
 	ba .LBB0_7
 	nop
-.LBB0_10:                               ! %L2400.i12
+.LBB0_10:                               ! %L3018.i12
                                         !   in Loop: Header=BB0_7 Depth=2
 	add %l1, -1, %l4
 	smul %l1, %l2, %l2
@@ -92,7 +92,7 @@ main:                                   ! @main
 	subcc %l0, -1, %l0
 	bne .LBB0_1
 	nop
-! BB#12:                                ! %L2475
+! BB#12:                                ! %L3093
 	sethi 0, %i0
 	restore %g0, %g0, %g0
 	retl
