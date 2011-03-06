@@ -10,6 +10,7 @@ namespace CSC431.Steps
         public InStep(Action<T> fun)
         {
             this.fun = fun;
+            SetName(fun.Method);
         }
 
         private Action<T> fun;

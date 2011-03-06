@@ -10,6 +10,7 @@ namespace CSC431.Steps
         public OutStep(Func<T> fun)
         {
             this.fun = fun;
+            SetName(fun.Method);
         }
 
         private Func<T> fun;

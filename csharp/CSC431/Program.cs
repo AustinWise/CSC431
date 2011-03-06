@@ -18,6 +18,8 @@ namespace CSC431
                 Options.ParseParameters(args);
                 if (Options.DisplayHelp.Value)
                     Options.WriteOptionDescriptions(Console.Out);
+                else if (Options.DisplayStepGraph.Value)
+                    Console.WriteLine(Step.MakeGraph(Options.CreatePipe(null)));
                 else
                     Step.DoAll(Options.CreatePipe(Console.Out));
             });

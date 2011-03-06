@@ -21,6 +21,7 @@ namespace CSC431
         public static readonly TaskLocal<bool> DisableRegAlloc = new TaskLocal<bool>();
         public static readonly TaskLocal<bool> DisableOpt = new TaskLocal<bool>();
         public static readonly TaskLocal<bool> DisplayHelp = new TaskLocal<bool>();
+        public static readonly TaskLocal<bool> DisplayStepGraph = new TaskLocal<bool>();
 
         private static readonly OptionSet optionSet;
 
@@ -34,6 +35,7 @@ namespace CSC431
                 {"clrExe=", "Creates a .NET EXE with the given name.", v=> ClrExec.Value = v},
                 {"llvm", "Uses LLVM for optimization and code generation. Incomplete.", v=> Llvm.Value = v != null},
                 {"dumpLL", "Dumps the generated LLVM code.", v=> DumpLL.Value = v != null},
+                {"displayGraph", "Displays the compiler's dataflow graph for the given arguments.", v=> DisplayStepGraph.Value = v != null},
                 {"help|h|?", "Displays this help message.", v=> DisplayHelp.Value = v != null},
             };
         }

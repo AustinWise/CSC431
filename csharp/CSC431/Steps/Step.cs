@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace CSC431.Steps
 {
@@ -12,6 +13,32 @@ namespace CSC431.Steps
 
         private Step parent;
         private List<Step> nexts = new List<Step>();
+        public string Name { get; private set; }
+
+        protected void SetName(MethodInfo meth)
+        {
+            string methName = meth.Name;
+
+            bool genedMeth = meth.GetCustomAttributes(typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute), false).Length != 0;
+            bool genedClass = meth.DeclaringType.GetCustomAttributes(typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute), false).Length != 0;
+
+            if (genedMeth || genedClass)
+            {
+                methName = methName.Substring(methName.IndexOf('<') + 1);
+                methName = methName.Substring(0, methName.IndexOf('>'));
+            }
+
+            string className = meth.DeclaringType.Name;
+            if (genedClass)
+            {
+                className = meth.DeclaringType.DeclaringType.Name;
+            }
+
+            if (className.EndsWith("Steps"))
+                className = className.Substring(0, className.IndexOf("Steps"));
+
+            Name = className + "." + methName;
+        }
 
         protected void AddNext(Step next)
         {
@@ -77,6 +104,10 @@ namespace CSC431.Steps
             }
         }
 
+        /// <summary>
+        /// Executes steps concurrently.  Not compatable with code that uses TaskLocal (the compiler use TaskLocal).
+        /// </summary>
+        /// <param name="aStep"></param>
         public static void DoAllThreaded(Step aStep)
         {
             while (aStep.parent != null)
@@ -133,6 +164,59 @@ namespace CSC431.Steps
 
             top.Start();
             Task.WaitAll(leafTasks.ToArray());
+        }
+
+        public static string MakeGraph(Step s)
+        {
+            while (s.parent != null)
+            {
+                s = s.parent;
+            }
+
+            Queue<Step> toDos = new Queue<Step>();
+            toDos.Enqueue(s);
+
+            var allSteps = new List<Step>();
+
+            while (toDos.Count != 0)
+            {
+                s = toDos.Dequeue();
+                allSteps.Add(s);
+
+                if (isOut(s.GetType()))
+                {
+                    foreach (var n in s.nexts)
+                    {
+                        toDos.Enqueue(n);
+                    }
+                }
+                else
+                {
+                    if (s.nexts.Count != 0)
+                        throw new NotSupportedException("non-output steps should not be followed");
+                }
+            }
+
+            var sb = new StringBuilder();
+
+            sb.AppendLine("digraph {");
+            for (int i = 0; i < allSteps.Count; i++)
+            {
+                sb.AppendFormat("\tn{0} [label=\"{1}\"];", i, allSteps[i].Name);
+                sb.AppendLine();
+            }
+            sb.AppendLine();
+            for (int i = 0; i < allSteps.Count; i++)
+            {
+                foreach (var next in allSteps[i].nexts)
+                {
+                    sb.AppendFormat("\tn{0} -> n{1}", i, allSteps.IndexOf(next));
+                    sb.AppendLine();
+                }
+            }
+            sb.AppendLine("}");
+
+            return sb.ToString();
         }
     }
 }
