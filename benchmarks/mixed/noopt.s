@@ -14,19 +14,19 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L19269
+be %icc, .L19438
 nop
-ba %icc, .L19272
+ba %icc, .L19441
 nop
-.L19269:
+.L19438:
 ret
 restore
-ba %icc, .L19277
+ba %icc, .L19446
 nop
-.L19272:
-ba %icc, .L19277
+.L19441:
+ba %icc, .L19446
 nop
-.L19277:
+.L19446:
 or %g0, 1, %o0
 or %g0, 12, %o1
 call calloc
@@ -47,7 +47,7 @@ restore
 	.global add
 .type    add, #function
 add:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i0, %l1
 mov %i1, %l0
 add %l1, %l0, %l0
@@ -103,7 +103,7 @@ ldsw [%l0 + 8], %l3
 or %l1, 0, %l0
 ldsw [%l0 + 0], %l0
 stw %l0, [%l3 + 0]
-.L19353:
+.L19525:
 mov %i0, %l3
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -114,11 +114,11 @@ movg %icc, 1, %l4
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l4, %l0
-be %icc, .L19359
+be %icc, .L19531
 nop
-ba %icc, .L19428
+ba %icc, .L19600
 nop
-.L19359:
+.L19531:
 or %l2, 0, %l0
 ldsw [%l0 + 0], %l3
 or %l1, 0, %l0
@@ -156,9 +156,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sub %l3, %l0, %l0
 mov %l0, %i0
-ba %icc, .L19353
+ba %icc, .L19525
 nop
-.L19428:
+.L19600:
 or %l2, 0, %l0
 mov %l0, %o0
 call free
@@ -175,7 +175,7 @@ restore
 .type    objinstantiation, #function
 objinstantiation:
 save %sp, -96, %sp
-.L19442:
+.L19615:
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -186,11 +186,11 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L19448
+be %icc, .L19621
 nop
-ba %icc, .L19474
+ba %icc, .L19647
 nop
-.L19448:
+.L19621:
 or %g0, 1, %o0
 or %g0, 12, %o1
 call calloc
@@ -206,9 +206,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sub %l1, %l0, %l0
 mov %l0, %i0
-ba %icc, .L19442
+ba %icc, .L19615
 nop
-.L19474:
+.L19647:
 ret
 restore
 	.size    objinstantiation, .-objinstantiation
@@ -216,7 +216,7 @@ restore
 	.global ackermann
 .type    ackermann, #function
 ackermann:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -227,11 +227,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L19486
+be %icc, .L19661
 nop
-ba %icc, .L19495
+ba %icc, .L19670
 nop
-.L19486:
+.L19661:
 mov %i1, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -239,12 +239,12 @@ add %l1, %l0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L19500
+ba %icc, .L19675
 nop
-.L19495:
-ba %icc, .L19500
+.L19670:
+ba %icc, .L19675
 nop
-.L19500:
+.L19675:
 mov %i1, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -255,11 +255,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L19506
+be %icc, .L19681
 nop
-ba %icc, .L19519
+ba %icc, .L19694
 nop
-.L19506:
+.L19681:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -274,9 +274,9 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L19544
+ba %icc, .L19719
 nop
-.L19519:
+.L19694:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -299,9 +299,9 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L19544
+ba %icc, .L19719
 nop
-.L19544:
+.L19719:
 	.size    ackermann, .-ackermann
 	.align 4
 	.global main

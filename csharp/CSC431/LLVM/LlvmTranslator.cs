@@ -234,9 +234,9 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> Call(IL.CallInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            bool isVoid = Program.Stable.Value.getType(s.Str0).getReturnType().isVoid();
+            var funDef = stable.getType(s.Str0);
 
-            string callString = string.Format("call {0} @{1}()", isVoid ? "void" : "i32", s.Str0);
+            string callString = string.Format("call {0} @{1}()", funDef.getReturnType().GetLlvmType(), s.Str0);
 
             if (stream.Current is IL.LoadretInstruction)
             {
@@ -258,7 +258,7 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> Storeret(IL.StoreretInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            yield return new RetvalueInstruction(s.RegSource0);
+            yield return new StringInstruction("ret {1} %{0}", s.RegSource0, stable.returnType.GetLlvmType());
             while (stream.More)
                 stream.Consume();
         }
@@ -282,7 +282,7 @@ namespace CSC431.LLVM
 
             string callString = string.Format("call {0} @{1}({2})", funDef.getReturnType().GetLlvmType(), call.Str0, arg);
 
-            if (stream.Current is IL.LoadretInstruction)
+            if (stream.More && stream.Current is IL.LoadretInstruction)
             {
                 var loadret = stream.Consume() as IL.LoadretInstruction;
                 yield return new StringInstruction(string.Format("%{0} = {1}", loadret.RegDest0, callString));

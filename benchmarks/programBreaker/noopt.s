@@ -3,7 +3,7 @@
 	.global fun2
 .type    fun2, #function
 fun2:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -14,18 +14,18 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L21989
+be %icc, .L22175
 nop
-ba %icc, .L21995
+ba %icc, .L22181
 nop
-.L21989:
+.L22175:
 mov %i1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L22012
+ba %icc, .L22198
 nop
-.L21995:
+.L22181:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -39,15 +39,15 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L22012
+ba %icc, .L22198
 nop
-.L22012:
+.L22198:
 	.size    fun2, .-fun2
 	.align 4
 	.global fun1
 .type    fun1, #function
 fun1:
-save %sp, -104, %sp
+save %sp, -96, %sp
 sethi %hi(5), %l1
 or %l1, %lo(5), %l1
 sethi %hi(6), %l0
@@ -75,11 +75,11 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L22050
+be %icc, .L22239
 nop
-ba %icc, .L22061
+ba %icc, .L22250
 nop
-.L22050:
+.L22239:
 or %l4, 0, %l1
 mov %i0, %l0
 mov %l1, %o0
@@ -90,9 +90,9 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L22095
+ba %icc, .L22284
 nop
-.L22061:
+.L22250:
 sethi %hi(5), %l1
 or %l1, %lo(5), %l1
 sethi %hi(6), %l0
@@ -111,11 +111,11 @@ and %l3, %l2, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L22076
+be %icc, .L22265
 nop
-ba %icc, .L22087
+ba %icc, .L22276
 nop
-.L22076:
+.L22265:
 or %l4, 0, %l1
 mov %i1, %l0
 mov %l1, %o0
@@ -126,15 +126,15 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L22093
+ba %icc, .L22282
 nop
-.L22087:
-ba %icc, .L22093
+.L22276:
+ba %icc, .L22282
 nop
-.L22093:
-ba %icc, .L22095
+.L22282:
+ba %icc, .L22284
 nop
-.L22095:
+.L22284:
 or %l4, 0, %l0
 or %l0, 0, %i0
 ret
@@ -155,7 +155,7 @@ call scanf
 nop
 ldsw [%sp + 92], %l0
 or %l0, 0, %l0
-.L22111:
+.L22300:
 or %l0, 0, %l2
 sethi %hi(10000), %l1
 or %l1, %lo(10000), %l1
@@ -166,11 +166,11 @@ movl %icc, 1, %l3
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 cmp %l3, %l1
-be %icc, .L22117
+be %icc, .L22306
 nop
-ba %icc, .L22145
+ba %icc, .L22334
 nop
-.L22117:
+.L22306:
 sethi %hi(3), %l3
 or %l3, %lo(3), %l3
 or %l0, 0, %l2
@@ -192,9 +192,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
 or %l0, 0, %l0
-ba %icc, .L22111
+ba %icc, .L22300
 nop
-.L22145:
+.L22334:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0

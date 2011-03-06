@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-02-28 11:52:29
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 Evil.g 2011-03-06 12:34:50
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -210,7 +210,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: f, d, t
+    		// elements: f, t, d
     		// token labels: 
     		// rule labels: f, retval, d, t
     		// token list labels: 
@@ -932,7 +932,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: t, i
+    		// elements: i, t
     		// token labels: i
     		// rule labels: retval, t
     		// token list labels: 
@@ -1349,7 +1349,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: ilist, t
+    		// elements: t, ilist
     		// token labels: 
     		// rule labels: retval, t, ilist
     		// token list labels: 
@@ -1774,7 +1774,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: id, s, d, p, r, FUN
+    		// elements: r, s, d, FUN, id, p
     		// token labels: id
     		// rule labels: retval, d, s, r, p
     		// token list labels: 
@@ -2695,7 +2695,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: ASSIGN, e, l
+    		// elements: e, ASSIGN, l
     		// token labels: 
     		// rule labels: retval, e, l
     		// token list labels: 
@@ -3145,7 +3145,7 @@ public partial class EvilParser : Antlr.Runtime.Parser
 
     		{
     		// AST REWRITE
-    		// elements: WHILE, b, e, e
+    		// elements: b, e, e, WHILE
     		// token labels: 
     		// rule labels: retval, e, b
     		// token list labels: 

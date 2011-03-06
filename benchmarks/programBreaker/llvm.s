@@ -1,4 +1,4 @@
-	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmp6F1A.tmp"
+	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmpB1B7.tmp"
 	.text
 	.globl	main
 	.align	4
@@ -17,7 +17,7 @@ main:                                   ! @main
 	subcc %o1, %l1, %l1
 	bg .LBB0_2
 	nop
-.LBB0_1:                                ! %L7842
+.LBB0_1:                                ! %L7778
                                         ! =>This Inner Loop Header: Depth=1
 	or %g0, 4, %l1
 	sra %l1, 31, %l2
@@ -34,7 +34,7 @@ main:                                   ! @main
 	or %g0, %l2, %o1
 	bne .LBB0_1
 	nop
-.LBB0_2:                                ! %L7870
+.LBB0_2:                                ! %L7806
 	sethi 0, %i0
 	restore %g0, %g0, %g0
 	retl

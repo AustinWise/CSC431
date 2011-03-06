@@ -65,6 +65,18 @@ namespace CSC431.Steps
             return false;
         }
 
+        private static bool isIn(System.Type t)
+        {
+            foreach (var i in t.GetInterfaces())
+            {
+                if (!i.IsGenericType)
+                    continue;
+                if (typeof(IInStep<>).IsAssignableFrom(i.GetGenericTypeDefinition()))
+                    return true;
+            }
+            return false;
+        }
+
         public static void DoAll(Step s)
         {
             while (s.parent != null)
@@ -100,6 +112,12 @@ namespace CSC431.Steps
                 {
                     if (s.nexts.Count != 0)
                         throw new NotSupportedException("non-output steps should not be followed");
+                }
+
+                if (isIn(s.GetType()))
+                {
+                    dynamic ds = s;
+                    ds.Input = null;
                 }
             }
         }

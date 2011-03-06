@@ -1,4 +1,4 @@
-	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmp6E39.tmp"
+	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmpB0C7.tmp"
 	.text
 	.globl	main
 	.align	4
@@ -12,7 +12,7 @@ main:                                   ! @main
 	call scanf
 	nop
 	ld [%fp+-4], %l0
-.LBB0_1:                                ! %L3278.i
+.LBB0_1:                                ! %L3609.i
                                         ! =>This Inner Loop Header: Depth=1
 	srl %l0, 31, %l1
 	sethi %hi(.LC0), %l2
@@ -26,16 +26,16 @@ main:                                   ! @main
 	subcc %l2, 1, %l2
 	bne .LBB0_3
 	nop
-! BB#2:                                 ! %L3294.i
+! BB#2:                                 ! %L3625.i
                                         !   in Loop: Header=BB0_1 Depth=1
 	smul %l0, 3, %l0
 	add %l0, 1, %l0
 	ba .LBB0_4
 	nop
-.LBB0_3:                                ! %L3307.i
+.LBB0_3:                                ! %L3638.i
                                         !   in Loop: Header=BB0_1 Depth=1
 	sra %l1, 1, %l0
-.LBB0_4:                                ! %L3320.i
+.LBB0_4:                                ! %L3651.i
                                         !   in Loop: Header=BB0_1 Depth=1
 	subcc %l0, 1, %l1
 	bg .LBB0_1

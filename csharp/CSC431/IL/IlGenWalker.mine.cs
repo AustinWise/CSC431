@@ -17,6 +17,8 @@ namespace CSC431.IL
         private Dictionary<string, VarBase> localMap = new Dictionary<string, VarBase>();
         private Dictionary<string, List<StructMember>> structMap = new Dictionary<string, List<StructMember>>();
 
+        private string currentFunction;
+
         public ProgramBlock<MilocInstruction> Program()
         {
             return this.program();
@@ -31,9 +33,11 @@ namespace CSC431.IL
 
         private void doInvoke(string id, BasicBlock<MilocInstruction> b, List<int> regLocs)
         {
+            var fun = CSC431.Program.Stable.Value.getType(id);
             for (int i = 0; i < regLocs.Count; i++)
             {
-                b.Add(new StoreoutargumentInstruction(regLocs[i], i));
+                var t = fun.getArgs()[i];
+                b.Add(new StoreoutargumentInstruction(regLocs[i], i) { Type = t });
             }
             b.Add(new CallInstruction(id));
         }
@@ -56,10 +60,16 @@ namespace CSC431.IL
 
         private string getVarType(string id)
         {
-            if (localStructMap.ContainsKey(id))
-                return localStructMap[id];
-            if (globalStructMap.ContainsKey(id))
-                return globalStructMap[id];
+            if (localMap.ContainsKey(id))
+            {
+                if (localStructMap.ContainsKey(id))
+                    return localStructMap[id];
+                else
+                    return null;
+            }
+            if (globalMap.ContainsKey(id))
+                if (globalStructMap.ContainsKey(id))
+                    return globalStructMap[id];
             return null;
         }
 

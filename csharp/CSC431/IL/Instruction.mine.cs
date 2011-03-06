@@ -137,4 +137,34 @@ namespace CSC431.IL
         public FrontEnd.Type Source0Type { get { return StructType1 == null ? null : FrontEnd.Type.structType(StructType1); } }
         public FrontEnd.Type Source1Type { get { return StructType2 == null ? null : FrontEnd.Type.structType(StructType2); } }
     }
+
+    public partial class StoreretInstruction : ITyped
+    {
+        public string CurrentFunction { get; set; }
+
+        internal override void CopyExtraData(MilocInstruction newInstr)
+        {
+            var other = newInstr as StoreretInstruction;
+            other.CurrentFunction = CurrentFunction;
+        }
+
+        public FrontEnd.Type TargetType { get { return null; } }
+        public FrontEnd.Type Source0Type { get { return Program.Stable.Value.getType(CurrentFunction).getReturnType(); } }
+        public FrontEnd.Type Source1Type { get { return null; } }
+    }
+
+    public partial class StoreoutargumentInstruction : ITyped
+    {
+        public FrontEnd.Type Type { get; set; }
+
+        internal override void CopyExtraData(MilocInstruction newInstr)
+        {
+            var other = newInstr as StoreoutargumentInstruction;
+            other.Type = Type;
+        }
+
+        public FrontEnd.Type TargetType { get { return null; } }
+        public FrontEnd.Type Source0Type { get { return Type; } }
+        public FrontEnd.Type Source1Type { get { return null; } }
+    }
 }

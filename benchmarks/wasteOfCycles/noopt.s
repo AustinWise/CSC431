@@ -14,26 +14,26 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L24233
+be %icc, .L24439
 nop
-ba %icc, .L24238
+ba %icc, .L24444
 nop
-.L24233:
+.L24439:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L24243
+ba %icc, .L24449
 nop
-.L24238:
-ba %icc, .L24243
+.L24444:
+ba %icc, .L24449
 nop
-.L24243:
+.L24449:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %l0
-.L24247:
+.L24453:
 or %l0, 0, %l3
 mov %i0, %l2
 mov %i0, %l1
@@ -45,11 +45,11 @@ movl %icc, 1, %l2
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 cmp %l2, %l1
-be %icc, .L24258
+be %icc, .L24464
 nop
-ba %icc, .L24294
+ba %icc, .L24500
 nop
-.L24258:
+.L24464:
 or %l0, 0, %l2
 mov %i0, %l1
 add %l2, %l1, %l1
@@ -65,9 +65,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
 or %l0, 0, %l0
-ba %icc, .L24247
+ba %icc, .L24453
 nop
-.L24294:
+.L24500:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0

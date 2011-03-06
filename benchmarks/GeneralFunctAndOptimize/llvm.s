@@ -1,4 +1,4 @@
-	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmp6E49.tmp"
+	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmpB0A7.tmp"
 	.text
 	.align	4
 	.type	multBy4xTimes,@function
@@ -8,11 +8,11 @@ multBy4xTimes:                          ! @multBy4xTimes
 	subcc %i1, 0, %l0
 	bg .LBB0_2
 	nop
-! BB#1:                                 ! %L3372
+! BB#1:                                 ! %L3259
 	restore %g0, %g0, %g0
 	retl
 	nop
-.LBB0_2:                                ! %L3384
+.LBB0_2:                                ! %L3271
 	ld [%i0], %l0
 	sll %l0, 2, %l0
 	st %l0, [%i0]
@@ -69,7 +69,7 @@ main:                                   ! @main
                                         ! =>This Loop Header: Depth=1
                                         !     Child Loop BB1_2 Depth 2
 	sethi 0, %l2
-.LBB1_2:                                ! %L3495
+.LBB1_2:                                ! %L3382
                                         !   Parent Loop BB1_1 Depth=1
                                         ! =>  This Inner Loop Header: Depth=2
 	add %l2, 1, %l5
@@ -90,13 +90,13 @@ main:                                   ! @main
 	subcc %l2, %l5, %l5
 	bl .LBB1_2
 	nop
-! BB#3:                                 ! %L3612
+! BB#3:                                 ! %L3499
                                         !   in Loop: Header=BB1_1 Depth=1
 	add %l4, -1, %l4
 	subcc %l4, 0, %l5
 	bne .LBB1_1
 	nop
-! BB#4:                                 ! %L3628
+! BB#4:                                 ! %L3515
 	or %g0, %l3, %o0
 	or %g0, %l2, %o1
 	call printf

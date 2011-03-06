@@ -106,6 +106,7 @@ function returns [FunctionBlock<MilocInstruction> f]
 	}
 	: ^(FUN id=ID parameters[argLoadBlock] ^(RETTYPE retType=return_type)
 			{
+				currentFunction = $id.text;
 				body.Add(argLoadBlock);
 				if (!string.IsNullOrEmpty(retType))
 				{
@@ -120,8 +121,8 @@ function returns [FunctionBlock<MilocInstruction> f]
 			else if (Options.Llvm.Value)
 			{
 				int llvmDummyReturnReg = Instruction.VirtualRegister();
-				returnBlock.Add(new LoadiInstruction(0, llvmDummyReturnReg));
-				returnBlock.Add(new StoreretInstruction(llvmDummyReturnReg));
+				returnBlock.Add(new LoadiInstruction(0, llvmDummyReturnReg) { IsNull = retType != null});
+				returnBlock.Add(new StoreretInstruction(llvmDummyReturnReg) { CurrentFunction = currentFunction });
 			}
 			body.Add(returnBlock);
 			body.SetNext(new BasicBlock<MilocInstruction>());
@@ -265,7 +266,7 @@ ret returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()
 			if (e != null)
 			{
 				$b.Add(e);
-				$b.Add(new StoreretInstruction(e.Reg));
+				$b.Add(new StoreretInstruction(e.Reg) { CurrentFunction = currentFunction });
 			}
 			else
 				$b.Add(new RetInstruction());

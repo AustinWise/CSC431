@@ -3,7 +3,7 @@
 	.global multBy4xTimes
 .type    multBy4xTimes, #function
 multBy4xTimes:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i1, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -14,22 +14,22 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L17999
+be %icc, .L18150
 nop
-ba %icc, .L18006
+ba %icc, .L18157
 nop
-.L17999:
+.L18150:
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L18011
+ba %icc, .L18162
 nop
-.L18006:
-ba %icc, .L18011
+.L18157:
+ba %icc, .L18162
 nop
-.L18011:
+.L18162:
 mov %i0, %l2
 sethi %hi(4), %l1
 or %l1, %lo(4), %l1
@@ -130,7 +130,7 @@ nop
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %l0
-.L18102:
+.L18254:
 or %l0, 0, %l5
 sethi %hi(50), %l4
 or %l4, %lo(50), %l4
@@ -141,15 +141,15 @@ movl %icc, 1, %l6
 sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 cmp %l6, %l4
-be %icc, .L18108
+be %icc, .L18260
 nop
-ba %icc, .L18254
+ba %icc, .L18406
 nop
-.L18108:
+.L18260:
 sethi %hi(0), %l3
 or %l3, %lo(0), %l3
 or %l3, 0, %l3
-.L18114:
+.L18266:
 or %l3, 0, %l5
 sethi %hi(end), %l4
 or %l4, %lo(end), %l4
@@ -161,11 +161,11 @@ movle %icc, 1, %l6
 sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 cmp %l6, %l4
-be %icc, .L18121
+be %icc, .L18273
 nop
-ba %icc, .L18238
+ba %icc, .L18390
 nop
-.L18121:
+.L18273:
 sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 sethi %hi(2), %l2
@@ -246,35 +246,35 @@ movle %icc, 1, %l6
 sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 cmp %l6, %l4
-be %icc, .L18209
+be %icc, .L18361
 nop
-ba %icc, .L18215
+ba %icc, .L18367
 nop
-.L18209:
+.L18361:
 sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 or %l4, 0, %l7
-ba %icc, .L18220
+ba %icc, .L18372
 nop
-.L18215:
-ba %icc, .L18220
+.L18367:
+ba %icc, .L18372
 nop
-.L18220:
+.L18372:
 or %l3, 0, %l4
 or %l7, 0, %l3
 add %l4, %l3, %l3
 or %l3, 0, %l3
-ba %icc, .L18114
+ba %icc, .L18266
 nop
-.L18238:
+.L18390:
 or %l0, 0, %l4
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l4, %l0, %l0
 or %l0, 0, %l0
-ba %icc, .L18102
+ba %icc, .L18254
 nop
-.L18254:
+.L18406:
 or %l3, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0

@@ -3,7 +3,7 @@
 	.global sum
 .type    sum, #function
 sum:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i0, %l1
 mov %i1, %l0
 add %l1, %l0, %l0
@@ -34,22 +34,22 @@ or %l3, %l2, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L17801
+be %icc, .L17949
 nop
-ba %icc, .L17806
+ba %icc, .L17954
 nop
-.L17801:
+.L17949:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L17811
+ba %icc, .L17959
 nop
-.L17806:
-ba %icc, .L17811
+.L17954:
+ba %icc, .L17959
 nop
-.L17811:
+.L17959:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -60,11 +60,11 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L17817
+be %icc, .L17965
 nop
-ba %icc, .L17829
+ba %icc, .L17977
 nop
-.L17817:
+.L17965:
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 sethi %hi(0), %l0
@@ -79,12 +79,12 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L17834
+ba %icc, .L17982
 nop
-.L17829:
-ba %icc, .L17834
+.L17977:
+ba %icc, .L17982
 nop
-.L17834:
+.L17982:
 mov %i0, %l0
 mov %i0, %l2
 sethi %hi(1), %l1
@@ -109,7 +109,7 @@ save %sp, -96, %sp
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %l0
-.L17862:
+.L18010:
 or %l0, 0, %l2
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
@@ -123,11 +123,11 @@ movne %icc, 1, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L17869
+be %icc, .L18017
 nop
-ba %icc, .L17909
+ba %icc, .L18057
 nop
-.L17869:
+.L18017:
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
 add %sp, 92, %o1
@@ -173,9 +173,9 @@ call scanf
 nop
 ldsw [%sp + 92], %l0
 or %l0, 0, %l0
-ba %icc, .L17862
+ba %icc, .L18010
 nop
-.L17909:
+.L18057:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0

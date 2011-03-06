@@ -14,19 +14,19 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L17925
+be %icc, .L18074
 nop
-ba %icc, .L17930
+ba %icc, .L18079
 nop
-.L17925:
+.L18074:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L17969
+ba %icc, .L18118
 nop
-.L17930:
+.L18079:
 mov %i0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
@@ -37,19 +37,19 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L17938
+be %icc, .L18087
 nop
-ba %icc, .L17943
+ba %icc, .L18092
 nop
-.L17938:
+.L18087:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L17967
+ba %icc, .L18116
 nop
-.L17943:
+.L18092:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -70,12 +70,12 @@ add %l0, %l1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L17967
+ba %icc, .L18116
 nop
-.L17967:
-ba %icc, .L17969
+.L18116:
+ba %icc, .L18118
 nop
-.L17969:
+.L18118:
 	.size    computeFib, .-computeFib
 	.align 4
 	.global main

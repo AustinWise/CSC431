@@ -14,22 +14,22 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L15444
+be %icc, .L15548
 nop
-ba %icc, .L15449
+ba %icc, .L15553
 nop
-.L15444:
+.L15548:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L15454
+ba %icc, .L15558
 nop
-.L15449:
-ba %icc, .L15454
+.L15553:
+ba %icc, .L15558
 nop
-.L15454:
+.L15558:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 mov %i0, %l1
@@ -47,7 +47,7 @@ restore
 	.global addToFront
 .type    addToFront, #function
 addToFront:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -58,11 +58,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L15476
+be %icc, .L15582
 nop
-ba %icc, .L15492
+ba %icc, .L15598
 nop
-.L15476:
+.L15582:
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
@@ -76,12 +76,12 @@ mov %i0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L15497
+ba %icc, .L15603
 nop
-.L15492:
-ba %icc, .L15497
+.L15598:
+ba %icc, .L15603
 nop
-.L15497:
+.L15603:
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
@@ -114,22 +114,22 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L15529
+be %icc, .L15636
 nop
-ba %icc, .L15534
+ba %icc, .L15641
 nop
-.L15529:
+.L15636:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L15539
+ba %icc, .L15646
 nop
-.L15534:
-ba %icc, .L15539
+.L15641:
+ba %icc, .L15646
 nop
-.L15539:
+.L15646:
 mov %i0, %l0
 or %l0, 0, %l1
 mov %i0, %l0
@@ -164,7 +164,7 @@ or %l0, 0, %l0
 sethi %hi(0), %l1
 or %l1, %lo(0), %l1
 or %l1, 0, %l1
-.L15574:
+.L15681:
 sethi %hi(intList), %l2
 or %l2, %lo(intList), %l2
 ldsw [%l2 + 0], %l3
@@ -177,11 +177,11 @@ movg %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L15580
+be %icc, .L15687
 nop
-ba %icc, .L15613
+ba %icc, .L15720
 nop
-.L15580:
+.L15687:
 or %l1, 0, %l2
 sethi %hi(intList), %l1
 or %l1, %lo(intList), %l1
@@ -208,9 +208,9 @@ sub %l3, %l2, %l3
 sethi %hi(intList), %l2
 or %l2, %lo(intList), %l2
 stw %l3, [%l2 + 0]
-ba %icc, .L15574
+ba %icc, .L15681
 nop
-.L15613:
+.L15720:
 or %l1, 0, %l2
 mov %l2, %o0
 call length
@@ -221,7 +221,7 @@ or %o0, %lo(.ConstantString0), %o0
 mov %l2, %o1
 call printf
 nop
-.L15619:
+.L15726:
 or %l1, 0, %l2
 mov %l2, %o0
 call length
@@ -236,11 +236,11 @@ movg %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L15627
+be %icc, .L15734
 nop
-ba %icc, .L15662
+ba %icc, .L15769
 nop
-.L15627:
+.L15734:
 or %l0, 0, %l2
 or %l1, 0, %l0
 ldsw [%l0 + 0], %l0
@@ -262,9 +262,9 @@ call deleteFirst
 nop
 mov %o0, %l1
 or %l1, 0, %l1
-ba %icc, .L15619
+ba %icc, .L15726
 nop
-.L15662:
+.L15769:
 or %l0, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0

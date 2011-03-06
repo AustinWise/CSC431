@@ -53,7 +53,7 @@ namespace CSC431.LLVM
             var funTable = stable.Children.Where(t => t.Name == f.Name).First();
             tw.WriteLine();
             tw.Write("define ");
-            tw.Write(funType.getReturnType().isVoid() ? "void" : "i32");
+            tw.Write(funType.getReturnType().GetLlvmType());
             tw.Write(" @{0}(", f.Name);
 
             var args = funTable.Formals;
