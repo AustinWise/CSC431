@@ -27,10 +27,7 @@ namespace CSC431
 
         public static TransformStep<ProgramBlock<IL.MilocInstruction>> ConstantFolding()
         {
-            return new TransformStep<ProgramBlock<IL.MilocInstruction>>(prog =>
-            {
-                return (ProgramBlock<IL.MilocInstruction>)prog.Convert(new ConstantFoldingConverter());
-            });
+            return new TransformStep<ProgramBlock<IL.MilocInstruction>>(ConstantFoldingConverter.DoOpt);
         }
     }
 }

@@ -1,4 +1,4 @@
-	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmpFF25.tmp"
+	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmp9693.tmp"
 	.text
 	.globl	main
 	.align	4
@@ -15,20 +15,20 @@ main:                                   ! @main
 	subcc %l0, 0, %l1
 	bl .LBB0_11
 	nop
-! BB#1:                                 ! %.L4336_crit_edge
+! BB#1:                                 ! %.L6504_crit_edge
 	sethi 0, %l1
-.LBB0_2:                                ! %L4336
+.LBB0_2:                                ! %L6504
                                         ! =>This Loop Header: Depth=1
                                         !     Child Loop BB0_6 Depth 2
                                         !     Child Loop BB0_4 Depth 2
 	subcc %l1, 2, %l2
 	bl .LBB0_10
 	nop
-! BB#3:                                 ! %L4336.L4184.i.i_crit_edge
+! BB#3:                                 ! %L6504.L6352.i.i_crit_edge
                                         !   in Loop: Header=BB0_2 Depth=1
 	or %g0, 3, %l2
 	or %g0, 1, %l3
-.LBB0_4:                                ! %L4184.i.i
+.LBB0_4:                                ! %L6352.i.i
                                         !   Parent Loop BB0_2 Depth=1
                                         ! =>  This Inner Loop Header: Depth=2
 	add %l2, 2, %l4
@@ -44,13 +44,13 @@ main:                                   ! @main
 	sra %l2, 1, %l2
 	add %l2, -1, %l2
 	or %g0, 2, %l3
-.LBB0_6:                                ! %L4252.i
+.LBB0_6:                                ! %L6420.i
                                         !   Parent Loop BB0_2 Depth=1
                                         ! =>  This Inner Loop Header: Depth=2
 	subcc %l3, %l2, %l4
 	bg .LBB0_9
 	nop
-! BB#7:                                 ! %L4259.i
+! BB#7:                                 ! %L6427.i
                                         !   in Loop: Header=BB0_6 Depth=2
 	sra %l1, 31, %l4
 	wr %l4, %g0, %y
@@ -60,25 +60,25 @@ main:                                   ! @main
 	subcc %l4, 0, %l4
 	be .LBB0_10
 	nop
-! BB#8:                                 ! %L4294.i
+! BB#8:                                 ! %L6462.i
                                         !   in Loop: Header=BB0_6 Depth=2
 	add %l3, 1, %l3
 	ba .LBB0_6
 	nop
-.LBB0_9:                                ! %L4343
+.LBB0_9:                                ! %L6511
                                         !   in Loop: Header=BB0_2 Depth=1
 	sethi %hi(.LC1), %l2
 	add %l2, %lo(.LC1), %o0
 	or %g0, %l1, %o1
 	call printf
 	nop
-.LBB0_10:                               ! %L4354
+.LBB0_10:                               ! %L6522
                                         !   in Loop: Header=BB0_2 Depth=1
 	add %l1, 1, %l1
 	subcc %l1, %l0, %l2
 	ble .LBB0_2
 	nop
-.LBB0_11:                               ! %L4371
+.LBB0_11:                               ! %L6539
 	sethi 0, %i0
 	restore %g0, %g0, %g0
 	retl

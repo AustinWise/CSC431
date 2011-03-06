@@ -9,6 +9,13 @@ namespace CSC431.Analysis
 {
     public class ConstantFoldingConverter : IInstructionConverter<MilocInstruction, MilocInstruction>
     {
+        private ConstantFinder finder;
+
+        public ConstantFoldingConverter(ProgramBlock<MilocInstruction> prog)
+        {
+            finder = new ConstantFinder(prog);
+        }
+
         public IEnumerable<MilocInstruction> FunctionStart(FunctionBlock<MilocInstruction> copy)
         {
             return Enumerable.Empty<MilocInstruction>();
@@ -20,52 +27,17 @@ namespace CSC431.Analysis
             while (s.More)
             {
                 var cur = s.Consume();
-                if (cur is LoadiInstruction)
-                {
-                    var load = cur as LoadiInstruction;
-                    values[load.RegDest0.IntVal] = load.Immed0;
-                    yield return load;
-                }
-                else if (cur is MovInstruction)
-                {
-                    var mov = cur as MovInstruction;
-                    var val = values.GetMaybeNull(mov.RegSource0.IntVal);
-                    if (val.HasValue)
-                    {
-                        values[mov.RegDest0.IntVal] = val.Value;
-                        yield return new LoadiInstruction(val.Value, mov.RegDest0);
-                    }
-                    else
-                    {
-                        values.Remove(mov.RegDest0.IntVal);
-                        yield return cur;
-                    }
-                }
-                else if (cur is IArithmeticInstruction)
-                {
-                    var art = cur as IArithmeticInstruction;
-                    var val = art.ConstantValue(values.GetMaybeNull(art.RegSource0.IntVal), values.GetMaybeNull(art.RegSource1.IntVal));
-                    if (val.HasValue)
-                    {
-                        yield return new LoadiInstruction(val.Value, art.RegDest0);
-                        values[art.RegDest0.IntVal] = val.Value;
-                    }
-                    else
-                    {
-                        values.Remove(art.RegDest0.IntVal);
-                        yield return cur;
-                    }
-                }
+                var val = finder.GetValue(cur);
+                if (val == null)
+                    yield return cur;
                 else
-                {
-                    var instr = cur;
-                    foreach (var t in instr.DestRegs)
-                    {
-                        values.Remove(t.IntVal);
-                    }
-                    yield return instr;
-                }
+                    yield return new LoadiInstruction(val.Item2, val.Item1);
             }
+        }
+
+        public static ProgramBlock<MilocInstruction> DoOpt(ProgramBlock<MilocInstruction> prog)
+        {
+            return (ProgramBlock<MilocInstruction>)prog.Convert(new ConstantFoldingConverter(prog));
         }
     }
 }

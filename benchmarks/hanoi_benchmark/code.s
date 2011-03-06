@@ -14,11 +14,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L5263
+be %icc, .L5731
 nop
-ba %icc, .L5276
+ba %icc, .L5744
 nop
-.L5263:
+.L5731:
 sethi %hi(peg1), %l0
 or %l0, %lo(peg1), %l0
 ldsw [%l0 + 0], %l0
@@ -30,9 +30,9 @@ ldsw [%l1 + 4], %l2
 sethi %hi(peg1), %l1
 or %l1, %lo(peg1), %l1
 stw %l2, [%l1 + 0]
-ba %icc, .L5316
+ba %icc, .L5784
 nop
-.L5276:
+.L5744:
 mov %i0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
@@ -43,11 +43,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L5284
+be %icc, .L5752
 nop
-ba %icc, .L5297
+ba %icc, .L5765
 nop
-.L5284:
+.L5752:
 sethi %hi(peg2), %l0
 or %l0, %lo(peg2), %l0
 ldsw [%l0 + 0], %l0
@@ -59,9 +59,9 @@ ldsw [%l1 + 4], %l2
 sethi %hi(peg2), %l1
 or %l1, %lo(peg2), %l1
 stw %l2, [%l1 + 0]
-ba %icc, .L5314
+ba %icc, .L5782
 nop
-.L5297:
+.L5765:
 sethi %hi(peg3), %l0
 or %l0, %lo(peg3), %l0
 ldsw [%l0 + 0], %l0
@@ -73,12 +73,12 @@ ldsw [%l1 + 4], %l2
 sethi %hi(peg3), %l1
 or %l1, %lo(peg3), %l1
 stw %l2, [%l1 + 0]
-ba %icc, .L5314
+ba %icc, .L5782
 nop
-.L5314:
-ba %icc, .L5316
+.L5782:
+ba %icc, .L5784
 nop
-.L5316:
+.L5784:
 mov %i1, %l2
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
@@ -89,11 +89,11 @@ move %icc, 1, %l3
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 cmp %l3, %l1
-be %icc, .L5322
+be %icc, .L5790
 nop
-ba %icc, .L5335
+ba %icc, .L5803
 nop
-.L5322:
+.L5790:
 or %l0, 0, %l2
 sethi %hi(peg1), %l1
 or %l1, %lo(peg1), %l1
@@ -103,9 +103,9 @@ or %l0, 0, %l1
 sethi %hi(peg1), %l0
 or %l0, %lo(peg1), %l0
 stw %l1, [%l0 + 0]
-ba %icc, .L5375
+ba %icc, .L5843
 nop
-.L5335:
+.L5803:
 mov %i1, %l2
 sethi %hi(2), %l1
 or %l1, %lo(2), %l1
@@ -116,11 +116,11 @@ move %icc, 1, %l3
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 cmp %l3, %l1
-be %icc, .L5343
+be %icc, .L5811
 nop
-ba %icc, .L5356
+ba %icc, .L5824
 nop
-.L5343:
+.L5811:
 or %l0, 0, %l2
 sethi %hi(peg2), %l1
 or %l1, %lo(peg2), %l1
@@ -130,9 +130,9 @@ or %l0, 0, %l1
 sethi %hi(peg2), %l0
 or %l0, %lo(peg2), %l0
 stw %l1, [%l0 + 0]
-ba %icc, .L5373
+ba %icc, .L5841
 nop
-.L5356:
+.L5824:
 or %l0, 0, %l2
 sethi %hi(peg3), %l1
 or %l1, %lo(peg3), %l1
@@ -142,12 +142,12 @@ or %l0, 0, %l1
 sethi %hi(peg3), %l0
 or %l0, %lo(peg3), %l0
 stw %l1, [%l0 + 0]
-ba %icc, .L5373
+ba %icc, .L5841
 nop
-.L5373:
-ba %icc, .L5375
+.L5841:
+ba %icc, .L5843
 nop
-.L5375:
+.L5843:
 sethi %hi(numMoves), %l0
 or %l0, %lo(numMoves), %l0
 ldsw [%l0 + 0], %l1
@@ -175,20 +175,20 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L5395
+be %icc, .L5863
 nop
-ba %icc, .L5404
+ba %icc, .L5872
 nop
-.L5395:
+.L5863:
 mov %i1, %l1
 mov %i2, %l0
 mov %l1, %o0
 mov %l0, %o1
 call move
 nop
-ba %icc, .L5448
+ba %icc, .L5916
 nop
-.L5404:
+.L5872:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -221,9 +221,9 @@ mov %l1, %o2
 mov %l0, %o3
 call hanoi
 nop
-ba %icc, .L5448
+ba %icc, .L5916
 nop
-.L5448:
+.L5916:
 ret
 restore
 	.size    hanoi, .-hanoi
@@ -234,7 +234,7 @@ printPeg:
 save %sp, -96, %sp
 mov %i0, %l0
 or %l0, 0, %l0
-.L5459:
+.L5927:
 or %l0, 0, %l2
 sethi %hi(0), %l1
 or %l1, %lo(0), %l1
@@ -245,11 +245,11 @@ movne %icc, 1, %l3
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 cmp %l3, %l1
-be %icc, .L5465
+be %icc, .L5933
 nop
-ba %icc, .L5486
+ba %icc, .L5954
 nop
-.L5465:
+.L5933:
 or %l0, 0, %l1
 ldsw [%l1 + 0], %l1
 sethi %hi(.ConstantString1), %o0
@@ -260,9 +260,9 @@ nop
 or %l0, 0, %l0
 ldsw [%l0 + 4], %l0
 or %l0, 0, %l0
-ba %icc, .L5459
+ba %icc, .L5927
 nop
-.L5486:
+.L5954:
 ret
 restore
 	.size    printPeg, .-printPeg
@@ -308,14 +308,14 @@ movge %icc, 1, %l3
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 cmp %l3, %l1
-be %icc, .L5516
+be %icc, .L5984
 nop
-ba %icc, .L5655
+ba %icc, .L6123
 nop
-.L5516:
+.L5984:
 or %l0, 0, %l1
 or %l1, 0, %l1
-.L5523:
+.L5991:
 or %l1, 0, %l3
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
@@ -326,11 +326,11 @@ movne %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L5529
+be %icc, .L5997
 nop
-ba %icc, .L5568
+ba %icc, .L6036
 nop
-.L5529:
+.L5997:
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
@@ -354,9 +354,9 @@ sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 sub %l2, %l1, %l1
 or %l1, 0, %l1
-ba %icc, .L5523
+ba %icc, .L5991
 nop
-.L5568:
+.L6036:
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 sethi %hi(.ConstantString1), %o0
@@ -456,7 +456,7 @@ or %o0, %lo(.ConstantString1), %o0
 mov %l0, %o1
 call printf
 nop
-.L5624:
+.L6092:
 sethi %hi(peg3), %l0
 or %l0, %lo(peg3), %l0
 ldsw [%l0 + 0], %l1
@@ -469,11 +469,11 @@ movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L5630
+be %icc, .L6098
 nop
-ba %icc, .L5657
+ba %icc, .L6125
 nop
-.L5630:
+.L6098:
 sethi %hi(peg3), %l0
 or %l0, %lo(peg3), %l0
 ldsw [%l0 + 0], %l0
@@ -489,15 +489,15 @@ or %l4, 0, %l0
 mov %l0, %o0
 call free
 nop
-ba %icc, .L5624
+ba %icc, .L6092
 nop
-.L5657:
-ba %icc, .L5660
+.L6125:
+ba %icc, .L6128
 nop
-.L5655:
-ba %icc, .L5660
+.L6123:
+ba %icc, .L6128
 nop
-.L5660:
+.L6128:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0

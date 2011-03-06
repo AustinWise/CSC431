@@ -54,7 +54,7 @@ namespace CSC431
 
         private static void optimizeBitcode(ProgramBlock<LlvmInstruction> c, string tmp)
         {
-            ProcessStartInfo si = new ProcessStartInfo("opt.exe", "-std-compile-opts -o \"" + tmp + "\"");
+            ProcessStartInfo si = new ProcessStartInfo("opt.exe", "-std-compile-opts -std-link-opts -o \"" + tmp + "\"");
             si.UseShellExecute = false;
             si.RedirectStandardInput = true;
             si.RedirectStandardError = true;

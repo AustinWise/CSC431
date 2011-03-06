@@ -8,7 +8,7 @@ sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 sethi %hi(3), %l3
 or %l3, %lo(3), %l3
-.L10186:
+.L9952:
 or %l4, 0, %l1
 mov %i0, %l0
 sethi %hi(0), %l2
@@ -18,11 +18,11 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L10193
+be %icc, .L9959
 nop
-ba %icc, .L10221
+ba %icc, .L9987
 nop
-.L10193:
+.L9959:
 or %l4, 0, %l1
 or %l3, 0, %l0
 add %l1, %l0, %l0
@@ -32,9 +32,9 @@ sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 add %l1, %l0, %l0
 or %l0, 0, %l3
-ba %icc, .L10186
+ba %icc, .L9952
 nop
-.L10221:
+.L9987:
 or %l3, 0, %l0
 sra %l0, 1, %l1
 sethi %hi(1), %l0
@@ -59,19 +59,19 @@ movl %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L10243
+be %icc, .L10009
 nop
-ba %icc, .L10248
+ba %icc, .L10014
 nop
-.L10243:
+.L10009:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L10326
+ba %icc, .L10092
 nop
-.L10248:
+.L10014:
 mov %i0, %l0
 mov %l0, %o0
 call isqrt
@@ -80,7 +80,7 @@ mov %o0, %l0
 or %l0, 0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
-.L10261:
+.L10027:
 or %l0, 0, %l3
 or %l1, 0, %l2
 sethi %hi(0), %l4
@@ -90,11 +90,11 @@ movle %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L10268
+be %icc, .L10034
 nop
-ba %icc, .L10320
+ba %icc, .L10086
 nop
-.L10268:
+.L10034:
 mov %i0, %l4
 mov %i0, %l3
 or %l0, 0, %l2
@@ -113,38 +113,38 @@ move %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L10293
+be %icc, .L10059
 nop
-ba %icc, .L10298
+ba %icc, .L10064
 nop
-.L10293:
+.L10059:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L10303
+ba %icc, .L10069
 nop
-.L10298:
-ba %icc, .L10303
+.L10064:
+ba %icc, .L10069
 nop
-.L10303:
+.L10069:
 or %l0, 0, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l2, %l0, %l0
 or %l0, 0, %l0
-ba %icc, .L10261
+ba %icc, .L10027
 nop
-.L10320:
+.L10086:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L10326
+ba %icc, .L10092
 nop
-.L10326:
+.L10092:
 	.size    prime, .-prime
 	.align 4
 	.global main
@@ -160,7 +160,7 @@ ldsw [%sp + 92], %l0
 or %l0, 0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-.L10338:
+.L10104:
 or %l0, 0, %l3
 or %l1, 0, %l2
 sethi %hi(0), %l4
@@ -170,11 +170,11 @@ movle %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L10345
+be %icc, .L10111
 nop
-ba %icc, .L10380
+ba %icc, .L10146
 nop
-.L10345:
+.L10111:
 or %l0, 0, %l2
 mov %l2, %o0
 call prime
@@ -183,31 +183,31 @@ mov %o0, %l3
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l3, %l2
-be %icc, .L10352
+be %icc, .L10118
 nop
-ba %icc, .L10358
+ba %icc, .L10124
 nop
-.L10352:
+.L10118:
 or %l0, 0, %l2
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
 mov %l2, %o1
 call printf
 nop
-ba %icc, .L10363
+ba %icc, .L10129
 nop
-.L10358:
-ba %icc, .L10363
+.L10124:
+ba %icc, .L10129
 nop
-.L10363:
+.L10129:
 or %l0, 0, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l2, %l0, %l0
 or %l0, 0, %l0
-ba %icc, .L10338
+ba %icc, .L10104
 nop
-.L10380:
+.L10146:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0

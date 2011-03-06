@@ -1,4 +1,4 @@
-	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmpFEC4.tmp"
+	.file	"C:\\Users\\AustinWise\\AppData\\Local\\Temp\\tmp95D5.tmp"
 	.text
 	.globl	main
 	.align	4
@@ -19,10 +19,10 @@ main:                                   ! @main
 	sethi 0, %o1
 	ba .LBB0_11
 	nop
-.LBB0_2:                                ! %.L1626.i.i_crit_edge
+.LBB0_2:                                ! %.L1770.i.i_crit_edge
 	sethi 0, %l1
 	or %g0, %l1, %o1
-.LBB0_3:                                ! %L1626.i.i
+.LBB0_3:                                ! %L1770.i.i
                                         ! =>This Loop Header: Depth=1
                                         !     Child Loop BB0_8 Depth 2
 	rd %y, %l2
@@ -34,25 +34,25 @@ main:                                   ! @main
 	subcc %l2, 1, %l2
 	be .LBB0_5
 	nop
-! BB#4:                                 ! %L1626.i.i.L1684.i.i_crit_edge
+! BB#4:                                 ! %L1770.i.i.L1828.i.i_crit_edge
                                         !   in Loop: Header=BB0_3 Depth=1
 	ba .LBB0_10
 	nop
-.LBB0_5:                                ! %L1663.i.i
+.LBB0_5:                                ! %L1807.i.i
                                         !   in Loop: Header=BB0_3 Depth=1
 	subcc %l1, 0, %l2
 	bg .LBB0_7
 	nop
-! BB#6:                                 ! %L1663.i.i.power.exit.i.i_crit_edge
+! BB#6:                                 ! %L1807.i.i.power.exit.i.i_crit_edge
                                         !   in Loop: Header=BB0_3 Depth=1
 	or %g0, 1, %l2
 	ba .LBB0_9
 	nop
-.LBB0_7:                                ! %L1663.i.i.L1583.i.i.i_crit_edge
+.LBB0_7:                                ! %L1807.i.i.L1727.i.i.i_crit_edge
                                         !   in Loop: Header=BB0_3 Depth=1
 	or %g0, 1, %l2
 	or %g0, %l1, %l3
-.LBB0_8:                                ! %L1583.i.i.i
+.LBB0_8:                                ! %L1727.i.i.i
                                         !   Parent Loop BB0_3 Depth=1
                                         ! =>  This Inner Loop Header: Depth=2
 	sll %l2, 1, %l2
@@ -63,7 +63,7 @@ main:                                   ! @main
 .LBB0_9:                                ! %power.exit.i.i
                                         !   in Loop: Header=BB0_3 Depth=1
 	add %l2, %o1, %o1
-.LBB0_10:                               ! %L1684.i.i
+.LBB0_10:                               ! %L1828.i.i
                                         !   in Loop: Header=BB0_3 Depth=1
 	rd %y, %l2
 	sra %l2, 2, %l3
