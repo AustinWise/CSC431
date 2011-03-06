@@ -25,12 +25,28 @@ namespace CompileAllBenchmarks
             tasks.AddRange(compileBenchmarks("noopt.s", () => { Options.DisableOpt.Value = true; }));
             //tasks.AddRange(compileBenchmarks("llvm.s", () => { Options.Llvm.Value = true; Options.DisableOpt.Value = true; }));
 
-            Task.WaitAll(tasks.ToArray());
+            var taskArr = tasks.ToArray();
+            while (!Task.WaitAll(taskArr, 100))
+            {
+                Console.Clear();
+                for (int i = 0; i < taskArr.Length; i++)
+                {
+                    var t = taskArr[i];
+                    if (t.Status == TaskStatus.RanToCompletion)
+                        Console.Write('█');
+                    else
+                        Console.Write('░');
+                }
+                Console.WriteLine();
+            }
+            Console.Clear();
 
             foreach (var t in tasks)
             {
                 Console.Write(t.Result);
             }
+
+            Console.WriteLine("Done compiling.");
         }
 
         private static List<Task<string>> compileBenchmarks(string outputFileName, Action setOptions)
