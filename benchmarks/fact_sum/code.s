@@ -3,7 +3,7 @@
 	.global sum
 .type    sum, #function
 sum:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i0, %l1
 mov %i1, %l0
 add %l1, %l0, %l0
@@ -34,22 +34,22 @@ or %l3, %l2, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L4024
+be %icc, .L4207
 nop
-ba %icc, .L4029
+ba %icc, .L4212
 nop
-.L4024:
+.L4207:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L4034
+ba %icc, .L4217
 nop
-.L4029:
-ba %icc, .L4034
+.L4212:
+ba %icc, .L4217
 nop
-.L4034:
+.L4217:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -60,11 +60,11 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L4040
+be %icc, .L4223
 nop
-ba %icc, .L4052
+ba %icc, .L4235
 nop
-.L4040:
+.L4223:
 sethi %hi(-1), %l1
 or %l1, %lo(-1), %l1
 mov %i0, %l0
@@ -76,12 +76,12 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L4057
+ba %icc, .L4240
 nop
-.L4052:
-ba %icc, .L4057
+.L4235:
+ba %icc, .L4240
 nop
-.L4057:
+.L4240:
 mov %i0, %l0
 mov %i0, %l2
 sethi %hi(1), %l1
@@ -105,7 +105,7 @@ main:
 save %sp, -96, %sp
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-.L4085:
+.L4268:
 or %l0, 0, %l1
 sethi %hi(-1), %l0
 or %l0, %lo(-1), %l0
@@ -116,11 +116,11 @@ movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L4092
+be %icc, .L4275
 nop
-ba %icc, .L4132
+ba %icc, .L4315
 nop
-.L4092:
+.L4275:
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
 add %sp, 92, %o1
@@ -166,9 +166,9 @@ call scanf
 nop
 ldsw [%sp + 92], %l0
 or %l0, 0, %l0
-ba %icc, .L4085
+ba %icc, .L4268
 nop
-.L4132:
+.L4315:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0

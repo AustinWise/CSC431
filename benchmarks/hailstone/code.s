@@ -3,7 +3,7 @@
 	.global mod
 .type    mod, #function
 mod:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i0, %l2
 mov %i0, %l1
 mov %i1, %l0
@@ -20,17 +20,17 @@ restore
 .type    hailstone, #function
 hailstone:
 save %sp, -96, %sp
-.L4934:
+.L5090:
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L4935
+be %icc, .L5091
 nop
-ba %icc, .L4999
+ba %icc, .L5155
 nop
-.L4935:
+.L5091:
 mov %i0, %l0
 sethi %hi(.ConstantString0), %o0
 or %o0, %lo(.ConstantString0), %o0
@@ -54,11 +54,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L4951
+be %icc, .L5107
 nop
-ba %icc, .L4964
+ba %icc, .L5120
 nop
-.L4951:
+.L5107:
 sethi %hi(3), %l1
 or %l1, %lo(3), %l1
 mov %i0, %l0
@@ -67,17 +67,17 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
 mov %l0, %i0
-ba %icc, .L4977
+ba %icc, .L5133
 nop
-.L4964:
+.L5120:
 mov %i0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 sdivx %l1, %l0, %l0
 mov %l0, %i0
-ba %icc, .L4977
+ba %icc, .L5133
 nop
-.L4977:
+.L5133:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -88,11 +88,11 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L4983
+be %icc, .L5139
 nop
-ba %icc, .L4990
+ba %icc, .L5146
 nop
-.L4983:
+.L5139:
 mov %i0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0
@@ -101,15 +101,15 @@ call printf
 nop
 ret
 restore
-ba %icc, .L4997
+ba %icc, .L5153
 nop
-.L4990:
-ba %icc, .L4997
+.L5146:
+ba %icc, .L5153
 nop
-.L4997:
-ba %icc, .L4934
+.L5153:
+ba %icc, .L5090
 nop
-.L4999:
+.L5155:
 ret
 restore
 	.size    hailstone, .-hailstone

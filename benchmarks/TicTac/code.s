@@ -147,7 +147,7 @@ restore
 	.global placePiece
 .type    placePiece, #function
 placePiece:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i2, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -158,17 +158,17 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L11824
+be %icc, .L11921
 nop
-ba %icc, .L11832
+ba %icc, .L11929
 nop
-.L11824:
+.L11921:
 mov %i0, %l1
 mov %i1, %l0
 stw %l0, [%l1 + 0]
-ba %icc, .L11989
+ba %icc, .L12086
 nop
-.L11832:
+.L11929:
 mov %i2, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
@@ -179,17 +179,17 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L11840
+be %icc, .L11937
 nop
-ba %icc, .L11848
+ba %icc, .L11945
 nop
-.L11840:
+.L11937:
 mov %i0, %l1
 mov %i1, %l0
 stw %l0, [%l1 + 4]
-ba %icc, .L11987
+ba %icc, .L12084
 nop
-.L11848:
+.L11945:
 mov %i2, %l1
 sethi %hi(3), %l0
 or %l0, %lo(3), %l0
@@ -200,17 +200,17 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L11856
+be %icc, .L11953
 nop
-ba %icc, .L11864
+ba %icc, .L11961
 nop
-.L11856:
+.L11953:
 mov %i0, %l1
 mov %i1, %l0
 stw %l0, [%l1 + 8]
-ba %icc, .L11984
+ba %icc, .L12081
 nop
-.L11864:
+.L11961:
 mov %i2, %l1
 sethi %hi(4), %l0
 or %l0, %lo(4), %l0
@@ -221,17 +221,17 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L11872
+be %icc, .L11969
 nop
-ba %icc, .L11880
+ba %icc, .L11977
 nop
-.L11872:
+.L11969:
 mov %i0, %l1
 mov %i1, %l0
 stw %l0, [%l1 + 12]
-ba %icc, .L11981
+ba %icc, .L12078
 nop
-.L11880:
+.L11977:
 mov %i2, %l1
 sethi %hi(5), %l0
 or %l0, %lo(5), %l0
@@ -242,17 +242,17 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L11888
+be %icc, .L11985
 nop
-ba %icc, .L11896
+ba %icc, .L11993
 nop
-.L11888:
+.L11985:
 mov %i0, %l1
 mov %i1, %l0
 stw %l0, [%l1 + 16]
-ba %icc, .L11978
+ba %icc, .L12075
 nop
-.L11896:
+.L11993:
 mov %i2, %l1
 sethi %hi(6), %l0
 or %l0, %lo(6), %l0
@@ -263,17 +263,17 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L11904
+be %icc, .L12001
 nop
-ba %icc, .L11912
+ba %icc, .L12009
 nop
-.L11904:
+.L12001:
 mov %i0, %l1
 mov %i1, %l0
 stw %l0, [%l1 + 20]
-ba %icc, .L11975
+ba %icc, .L12072
 nop
-.L11912:
+.L12009:
 mov %i2, %l1
 sethi %hi(7), %l0
 or %l0, %lo(7), %l0
@@ -284,17 +284,17 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L11920
+be %icc, .L12017
 nop
-ba %icc, .L11928
+ba %icc, .L12025
 nop
-.L11920:
+.L12017:
 mov %i0, %l1
 mov %i1, %l0
 stw %l0, [%l1 + 24]
-ba %icc, .L11972
+ba %icc, .L12069
 nop
-.L11928:
+.L12025:
 mov %i2, %l1
 sethi %hi(8), %l0
 or %l0, %lo(8), %l0
@@ -305,17 +305,17 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L11936
+be %icc, .L12033
 nop
-ba %icc, .L11944
+ba %icc, .L12041
 nop
-.L11936:
+.L12033:
 mov %i0, %l1
 mov %i1, %l0
 stw %l0, [%l1 + 28]
-ba %icc, .L11969
+ba %icc, .L12066
 nop
-.L11944:
+.L12041:
 mov %i2, %l1
 sethi %hi(9), %l0
 or %l0, %lo(9), %l0
@@ -326,44 +326,44 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L11952
+be %icc, .L12049
 nop
-ba %icc, .L11960
+ba %icc, .L12057
 nop
-.L11952:
+.L12049:
 mov %i0, %l1
 mov %i1, %l0
 stw %l0, [%l1 + 32]
-ba %icc, .L11966
+ba %icc, .L12063
 nop
-.L11960:
-ba %icc, .L11966
+.L12057:
+ba %icc, .L12063
 nop
-.L11966:
-ba %icc, .L11969
+.L12063:
+ba %icc, .L12066
 nop
-.L11969:
-ba %icc, .L11972
+.L12066:
+ba %icc, .L12069
 nop
-.L11972:
-ba %icc, .L11975
+.L12069:
+ba %icc, .L12072
 nop
-.L11975:
-ba %icc, .L11978
+.L12072:
+ba %icc, .L12075
 nop
-.L11978:
-ba %icc, .L11981
+.L12075:
+ba %icc, .L12078
 nop
-.L11981:
-ba %icc, .L11984
+.L12078:
+ba %icc, .L12081
 nop
-.L11984:
-ba %icc, .L11987
+.L12081:
+ba %icc, .L12084
 nop
-.L11987:
-ba %icc, .L11989
+.L12084:
+ba %icc, .L12086
 nop
-.L11989:
+.L12086:
 ret
 restore
 	.size    placePiece, .-placePiece
@@ -383,11 +383,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12002
+be %icc, .L12100
 nop
-ba %icc, .L12035
+ba %icc, .L12133
 nop
-.L12002:
+.L12100:
 mov %i0, %l0
 ldsw [%l0 + 4], %l1
 sethi %hi(1), %l0
@@ -399,11 +399,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12011
+be %icc, .L12109
 nop
-ba %icc, .L12030
+ba %icc, .L12128
 nop
-.L12011:
+.L12109:
 mov %i0, %l0
 ldsw [%l0 + 8], %l1
 sethi %hi(1), %l0
@@ -415,178 +415,36 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12020
+be %icc, .L12118
 nop
-ba %icc, .L12025
+ba %icc, .L12123
 nop
-.L12020:
+.L12118:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L12032
-nop
-.L12025:
-ba %icc, .L12032
-nop
-.L12032:
-ba %icc, .L12037
-nop
-.L12030:
-ba %icc, .L12037
-nop
-.L12037:
-ba %icc, .L12040
-nop
-.L12035:
-ba %icc, .L12040
-nop
-.L12040:
-mov %i0, %l0
-ldsw [%l0 + 0], %l1
-sethi %hi(2), %l0
-or %l0, %lo(2), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-move %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L12047
-nop
-ba %icc, .L12080
-nop
-.L12047:
-mov %i0, %l0
-ldsw [%l0 + 4], %l1
-sethi %hi(2), %l0
-or %l0, %lo(2), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-move %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L12056
-nop
-ba %icc, .L12075
-nop
-.L12056:
-mov %i0, %l0
-ldsw [%l0 + 8], %l1
-sethi %hi(2), %l0
-or %l0, %lo(2), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-move %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L12065
-nop
-ba %icc, .L12070
-nop
-.L12065:
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-or %l0, 0, %i0
-ret
-restore
-ba %icc, .L12077
-nop
-.L12070:
-ba %icc, .L12077
-nop
-.L12077:
-ba %icc, .L12082
-nop
-.L12075:
-ba %icc, .L12082
-nop
-.L12082:
-ba %icc, .L12085
-nop
-.L12080:
-ba %icc, .L12085
-nop
-.L12085:
-mov %i0, %l0
-ldsw [%l0 + 12], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-move %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L12092
-nop
-ba %icc, .L12125
-nop
-.L12092:
-mov %i0, %l0
-ldsw [%l0 + 16], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-move %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L12101
-nop
-ba %icc, .L12120
-nop
-.L12101:
-mov %i0, %l0
-ldsw [%l0 + 20], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-move %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L12110
-nop
-ba %icc, .L12115
-nop
-.L12110:
-sethi %hi(0), %l0
-or %l0, %lo(0), %l0
-or %l0, 0, %i0
-ret
-restore
-ba %icc, .L12122
-nop
-.L12115:
-ba %icc, .L12122
-nop
-.L12122:
-ba %icc, .L12127
-nop
-.L12120:
-ba %icc, .L12127
-nop
-.L12127:
 ba %icc, .L12130
 nop
-.L12125:
+.L12123:
 ba %icc, .L12130
 nop
 .L12130:
+ba %icc, .L12135
+nop
+.L12128:
+ba %icc, .L12135
+nop
+.L12135:
+ba %icc, .L12138
+nop
+.L12133:
+ba %icc, .L12138
+nop
+.L12138:
 mov %i0, %l0
-ldsw [%l0 + 12], %l1
+ldsw [%l0 + 0], %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 sethi %hi(0), %l2
@@ -596,13 +454,13 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12137
+be %icc, .L12145
 nop
-ba %icc, .L12170
+ba %icc, .L12178
 nop
-.L12137:
+.L12145:
 mov %i0, %l0
-ldsw [%l0 + 16], %l1
+ldsw [%l0 + 4], %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 sethi %hi(0), %l2
@@ -612,13 +470,13 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12146
+be %icc, .L12154
 nop
-ba %icc, .L12165
+ba %icc, .L12173
 nop
-.L12146:
+.L12154:
 mov %i0, %l0
-ldsw [%l0 + 20], %l1
+ldsw [%l0 + 8], %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 sethi %hi(0), %l2
@@ -628,36 +486,36 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12155
+be %icc, .L12163
 nop
-ba %icc, .L12160
+ba %icc, .L12168
 nop
-.L12155:
+.L12163:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L12167
-nop
-.L12160:
-ba %icc, .L12167
-nop
-.L12167:
-ba %icc, .L12172
-nop
-.L12165:
-ba %icc, .L12172
-nop
-.L12172:
 ba %icc, .L12175
 nop
-.L12170:
+.L12168:
 ba %icc, .L12175
 nop
 .L12175:
+ba %icc, .L12180
+nop
+.L12173:
+ba %icc, .L12180
+nop
+.L12180:
+ba %icc, .L12183
+nop
+.L12178:
+ba %icc, .L12183
+nop
+.L12183:
 mov %i0, %l0
-ldsw [%l0 + 24], %l1
+ldsw [%l0 + 12], %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sethi %hi(0), %l2
@@ -667,13 +525,13 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12182
+be %icc, .L12190
 nop
-ba %icc, .L12215
+ba %icc, .L12223
 nop
-.L12182:
+.L12190:
 mov %i0, %l0
-ldsw [%l0 + 28], %l1
+ldsw [%l0 + 16], %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sethi %hi(0), %l2
@@ -683,13 +541,13 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12191
+be %icc, .L12199
 nop
-ba %icc, .L12210
+ba %icc, .L12218
 nop
-.L12191:
+.L12199:
 mov %i0, %l0
-ldsw [%l0 + 32], %l1
+ldsw [%l0 + 20], %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sethi %hi(0), %l2
@@ -699,36 +557,36 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12200
+be %icc, .L12208
 nop
-ba %icc, .L12205
+ba %icc, .L12213
 nop
-.L12200:
+.L12208:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L12212
-nop
-.L12205:
-ba %icc, .L12212
-nop
-.L12212:
-ba %icc, .L12217
-nop
-.L12210:
-ba %icc, .L12217
-nop
-.L12217:
 ba %icc, .L12220
 nop
-.L12215:
+.L12213:
 ba %icc, .L12220
 nop
 .L12220:
+ba %icc, .L12225
+nop
+.L12218:
+ba %icc, .L12225
+nop
+.L12225:
+ba %icc, .L12228
+nop
+.L12223:
+ba %icc, .L12228
+nop
+.L12228:
 mov %i0, %l0
-ldsw [%l0 + 24], %l1
+ldsw [%l0 + 12], %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 sethi %hi(0), %l2
@@ -738,13 +596,13 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12227
+be %icc, .L12235
 nop
-ba %icc, .L12260
+ba %icc, .L12268
 nop
-.L12227:
+.L12235:
 mov %i0, %l0
-ldsw [%l0 + 28], %l1
+ldsw [%l0 + 16], %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 sethi %hi(0), %l2
@@ -754,13 +612,13 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12236
+be %icc, .L12244
 nop
-ba %icc, .L12255
+ba %icc, .L12263
 nop
-.L12236:
+.L12244:
 mov %i0, %l0
-ldsw [%l0 + 32], %l1
+ldsw [%l0 + 20], %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 sethi %hi(0), %l2
@@ -770,66 +628,34 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12245
+be %icc, .L12253
 nop
-ba %icc, .L12250
+ba %icc, .L12258
 nop
-.L12245:
+.L12253:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L12257
-nop
-.L12250:
-ba %icc, .L12257
-nop
-.L12257:
-ba %icc, .L12262
-nop
-.L12255:
-ba %icc, .L12262
-nop
-.L12262:
 ba %icc, .L12265
 nop
-.L12260:
+.L12258:
 ba %icc, .L12265
 nop
 .L12265:
-mov %i0, %l0
-ldsw [%l0 + 0], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-move %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L12272
+ba %icc, .L12270
 nop
-ba %icc, .L12305
+.L12263:
+ba %icc, .L12270
 nop
-.L12272:
-mov %i0, %l0
-ldsw [%l0 + 12], %l1
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-move %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L12281
+.L12270:
+ba %icc, .L12273
 nop
-ba %icc, .L12300
+.L12268:
+ba %icc, .L12273
 nop
-.L12281:
+.L12273:
 mov %i0, %l0
 ldsw [%l0 + 24], %l1
 sethi %hi(1), %l0
@@ -841,66 +667,66 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12290
+be %icc, .L12280
 nop
-ba %icc, .L12295
+ba %icc, .L12313
 nop
-.L12290:
+.L12280:
+mov %i0, %l0
+ldsw [%l0 + 28], %l1
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+move %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
+be %icc, .L12289
+nop
+ba %icc, .L12308
+nop
+.L12289:
+mov %i0, %l0
+ldsw [%l0 + 32], %l1
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+move %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
+be %icc, .L12298
+nop
+ba %icc, .L12303
+nop
+.L12298:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L12302
-nop
-.L12295:
-ba %icc, .L12302
-nop
-.L12302:
-ba %icc, .L12307
-nop
-.L12300:
-ba %icc, .L12307
-nop
-.L12307:
 ba %icc, .L12310
 nop
-.L12305:
+.L12303:
 ba %icc, .L12310
 nop
 .L12310:
-mov %i0, %l0
-ldsw [%l0 + 0], %l1
-sethi %hi(2), %l0
-or %l0, %lo(2), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-move %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L12317
+ba %icc, .L12315
 nop
-ba %icc, .L12350
+.L12308:
+ba %icc, .L12315
 nop
-.L12317:
-mov %i0, %l0
-ldsw [%l0 + 12], %l1
-sethi %hi(2), %l0
-or %l0, %lo(2), %l0
-sethi %hi(0), %l2
-or %l2, %lo(0), %l2
-cmp %l1, %l0
-move %icc, 1, %l2
-sethi %hi(1), %l0
-or %l0, %lo(1), %l0
-cmp %l2, %l0
-be %icc, .L12326
+.L12315:
+ba %icc, .L12318
 nop
-ba %icc, .L12345
+.L12313:
+ba %icc, .L12318
 nop
-.L12326:
+.L12318:
 mov %i0, %l0
 ldsw [%l0 + 24], %l1
 sethi %hi(2), %l0
@@ -912,36 +738,68 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12335
+be %icc, .L12325
 nop
-ba %icc, .L12340
+ba %icc, .L12358
 nop
-.L12335:
+.L12325:
+mov %i0, %l0
+ldsw [%l0 + 28], %l1
+sethi %hi(2), %l0
+or %l0, %lo(2), %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+move %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
+be %icc, .L12334
+nop
+ba %icc, .L12353
+nop
+.L12334:
+mov %i0, %l0
+ldsw [%l0 + 32], %l1
+sethi %hi(2), %l0
+or %l0, %lo(2), %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+move %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
+be %icc, .L12343
+nop
+ba %icc, .L12348
+nop
+.L12343:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L12347
-nop
-.L12340:
-ba %icc, .L12347
-nop
-.L12347:
-ba %icc, .L12352
-nop
-.L12345:
-ba %icc, .L12352
-nop
-.L12352:
 ba %icc, .L12355
 nop
-.L12350:
+.L12348:
 ba %icc, .L12355
 nop
 .L12355:
+ba %icc, .L12360
+nop
+.L12353:
+ba %icc, .L12360
+nop
+.L12360:
+ba %icc, .L12363
+nop
+.L12358:
+ba %icc, .L12363
+nop
+.L12363:
 mov %i0, %l0
-ldsw [%l0 + 4], %l1
+ldsw [%l0 + 0], %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sethi %hi(0), %l2
@@ -951,13 +809,13 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12362
+be %icc, .L12370
 nop
-ba %icc, .L12395
+ba %icc, .L12403
 nop
-.L12362:
+.L12370:
 mov %i0, %l0
-ldsw [%l0 + 16], %l1
+ldsw [%l0 + 12], %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sethi %hi(0), %l2
@@ -967,13 +825,13 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12371
+be %icc, .L12379
 nop
-ba %icc, .L12390
+ba %icc, .L12398
 nop
-.L12371:
+.L12379:
 mov %i0, %l0
-ldsw [%l0 + 28], %l1
+ldsw [%l0 + 24], %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sethi %hi(0), %l2
@@ -983,34 +841,176 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12380
+be %icc, .L12388
 nop
-ba %icc, .L12385
+ba %icc, .L12393
 nop
-.L12380:
+.L12388:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L12392
-nop
-.L12385:
-ba %icc, .L12392
-nop
-.L12392:
-ba %icc, .L12397
-nop
-.L12390:
-ba %icc, .L12397
-nop
-.L12397:
 ba %icc, .L12400
 nop
-.L12395:
+.L12393:
 ba %icc, .L12400
 nop
 .L12400:
+ba %icc, .L12405
+nop
+.L12398:
+ba %icc, .L12405
+nop
+.L12405:
+ba %icc, .L12408
+nop
+.L12403:
+ba %icc, .L12408
+nop
+.L12408:
+mov %i0, %l0
+ldsw [%l0 + 0], %l1
+sethi %hi(2), %l0
+or %l0, %lo(2), %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+move %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
+be %icc, .L12415
+nop
+ba %icc, .L12448
+nop
+.L12415:
+mov %i0, %l0
+ldsw [%l0 + 12], %l1
+sethi %hi(2), %l0
+or %l0, %lo(2), %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+move %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
+be %icc, .L12424
+nop
+ba %icc, .L12443
+nop
+.L12424:
+mov %i0, %l0
+ldsw [%l0 + 24], %l1
+sethi %hi(2), %l0
+or %l0, %lo(2), %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+move %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
+be %icc, .L12433
+nop
+ba %icc, .L12438
+nop
+.L12433:
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+or %l0, 0, %i0
+ret
+restore
+ba %icc, .L12445
+nop
+.L12438:
+ba %icc, .L12445
+nop
+.L12445:
+ba %icc, .L12450
+nop
+.L12443:
+ba %icc, .L12450
+nop
+.L12450:
+ba %icc, .L12453
+nop
+.L12448:
+ba %icc, .L12453
+nop
+.L12453:
+mov %i0, %l0
+ldsw [%l0 + 4], %l1
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+move %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
+be %icc, .L12460
+nop
+ba %icc, .L12493
+nop
+.L12460:
+mov %i0, %l0
+ldsw [%l0 + 16], %l1
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+move %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
+be %icc, .L12469
+nop
+ba %icc, .L12488
+nop
+.L12469:
+mov %i0, %l0
+ldsw [%l0 + 28], %l1
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+sethi %hi(0), %l2
+or %l2, %lo(0), %l2
+cmp %l1, %l0
+move %icc, 1, %l2
+sethi %hi(1), %l0
+or %l0, %lo(1), %l0
+cmp %l2, %l0
+be %icc, .L12478
+nop
+ba %icc, .L12483
+nop
+.L12478:
+sethi %hi(0), %l0
+or %l0, %lo(0), %l0
+or %l0, 0, %i0
+ret
+restore
+ba %icc, .L12490
+nop
+.L12483:
+ba %icc, .L12490
+nop
+.L12490:
+ba %icc, .L12495
+nop
+.L12488:
+ba %icc, .L12495
+nop
+.L12495:
+ba %icc, .L12498
+nop
+.L12493:
+ba %icc, .L12498
+nop
+.L12498:
 mov %i0, %l0
 ldsw [%l0 + 4], %l1
 sethi %hi(2), %l0
@@ -1022,11 +1022,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12407
+be %icc, .L12505
 nop
-ba %icc, .L12440
+ba %icc, .L12538
 nop
-.L12407:
+.L12505:
 mov %i0, %l0
 ldsw [%l0 + 16], %l1
 sethi %hi(2), %l0
@@ -1038,11 +1038,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12416
+be %icc, .L12514
 nop
-ba %icc, .L12435
+ba %icc, .L12533
 nop
-.L12416:
+.L12514:
 mov %i0, %l0
 ldsw [%l0 + 28], %l1
 sethi %hi(2), %l0
@@ -1054,34 +1054,34 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12425
+be %icc, .L12523
 nop
-ba %icc, .L12430
+ba %icc, .L12528
 nop
-.L12425:
+.L12523:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L12437
+ba %icc, .L12535
 nop
-.L12430:
-ba %icc, .L12437
+.L12528:
+ba %icc, .L12535
 nop
-.L12437:
-ba %icc, .L12442
+.L12535:
+ba %icc, .L12540
 nop
-.L12435:
-ba %icc, .L12442
+.L12533:
+ba %icc, .L12540
 nop
-.L12442:
-ba %icc, .L12445
+.L12540:
+ba %icc, .L12543
 nop
-.L12440:
-ba %icc, .L12445
+.L12538:
+ba %icc, .L12543
 nop
-.L12445:
+.L12543:
 mov %i0, %l0
 ldsw [%l0 + 8], %l1
 sethi %hi(1), %l0
@@ -1093,11 +1093,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12452
+be %icc, .L12550
 nop
-ba %icc, .L12485
+ba %icc, .L12583
 nop
-.L12452:
+.L12550:
 mov %i0, %l0
 ldsw [%l0 + 20], %l1
 sethi %hi(1), %l0
@@ -1109,11 +1109,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12461
+be %icc, .L12559
 nop
-ba %icc, .L12480
+ba %icc, .L12578
 nop
-.L12461:
+.L12559:
 mov %i0, %l0
 ldsw [%l0 + 32], %l1
 sethi %hi(1), %l0
@@ -1125,34 +1125,34 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12470
+be %icc, .L12568
 nop
-ba %icc, .L12475
+ba %icc, .L12573
 nop
-.L12470:
+.L12568:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L12482
+ba %icc, .L12580
 nop
-.L12475:
-ba %icc, .L12482
+.L12573:
+ba %icc, .L12580
 nop
-.L12482:
-ba %icc, .L12487
+.L12580:
+ba %icc, .L12585
 nop
-.L12480:
-ba %icc, .L12487
+.L12578:
+ba %icc, .L12585
 nop
-.L12487:
-ba %icc, .L12490
+.L12585:
+ba %icc, .L12588
 nop
-.L12485:
-ba %icc, .L12490
+.L12583:
+ba %icc, .L12588
 nop
-.L12490:
+.L12588:
 mov %i0, %l0
 ldsw [%l0 + 8], %l1
 sethi %hi(2), %l0
@@ -1164,11 +1164,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12497
+be %icc, .L12595
 nop
-ba %icc, .L12530
+ba %icc, .L12628
 nop
-.L12497:
+.L12595:
 mov %i0, %l0
 ldsw [%l0 + 20], %l1
 sethi %hi(2), %l0
@@ -1180,11 +1180,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12506
+be %icc, .L12604
 nop
-ba %icc, .L12525
+ba %icc, .L12623
 nop
-.L12506:
+.L12604:
 mov %i0, %l0
 ldsw [%l0 + 32], %l1
 sethi %hi(2), %l0
@@ -1196,34 +1196,34 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L12515
+be %icc, .L12613
 nop
-ba %icc, .L12520
+ba %icc, .L12618
 nop
-.L12515:
+.L12613:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L12527
+ba %icc, .L12625
 nop
-.L12520:
-ba %icc, .L12527
+.L12618:
+ba %icc, .L12625
 nop
-.L12527:
-ba %icc, .L12532
+.L12625:
+ba %icc, .L12630
 nop
-.L12525:
-ba %icc, .L12532
+.L12623:
+ba %icc, .L12630
 nop
-.L12532:
-ba %icc, .L12535
+.L12630:
+ba %icc, .L12633
 nop
-.L12530:
-ba %icc, .L12535
+.L12628:
+ba %icc, .L12633
 nop
-.L12535:
+.L12633:
 sethi %hi(-1), %l0
 or %l0, %lo(-1), %l0
 or %l0, 0, %i0
@@ -1255,7 +1255,7 @@ or %l0, 0, %l4
 mov %l4, %o0
 call cleanBoard
 nop
-.L12574:
+.L12672:
 or %l2, 0, %l5
 sethi %hi(0), %l4
 or %l4, %lo(0), %l4
@@ -1274,11 +1274,11 @@ and %l7, %l6, %l5
 sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 cmp %l5, %l4
-be %icc, .L12587
+be %icc, .L12685
 nop
-ba %icc, .L12674
+ba %icc, .L12772
 nop
-.L12587:
+.L12685:
 or %l0, 0, %l2
 mov %l2, %o0
 call printBoard
@@ -1293,11 +1293,11 @@ move %icc, 1, %l5
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l5, %l2
-be %icc, .L12599
+be %icc, .L12697
 nop
-ba %icc, .L12620
+ba %icc, .L12718
 nop
-.L12599:
+.L12697:
 or %l3, 0, %l3
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
@@ -1319,9 +1319,9 @@ mov %l4, %o1
 mov %l2, %o2
 call placePiece
 nop
-ba %icc, .L12644
+ba %icc, .L12742
 nop
-.L12620:
+.L12718:
 or %l3, 0, %l3
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
@@ -1343,9 +1343,9 @@ mov %l4, %o1
 mov %l2, %o2
 call placePiece
 nop
-ba %icc, .L12644
+ba %icc, .L12742
 nop
-.L12644:
+.L12742:
 or %l0, 0, %l2
 mov %l2, %o0
 call checkWinner
@@ -1357,9 +1357,9 @@ sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 add %l4, %l1, %l1
 or %l1, 0, %l1
-ba %icc, .L12574
+ba %icc, .L12672
 nop
-.L12674:
+.L12772:
 or %l2, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0

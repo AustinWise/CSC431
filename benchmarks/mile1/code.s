@@ -3,10 +3,10 @@
 	.global calcPower
 .type    calcPower, #function
 calcPower:
-save %sp, -104, %sp
+save %sp, -96, %sp
 sethi %hi(1), %l3
 or %l3, %lo(1), %l3
-.L6509:
+.L6332:
 mov %i1, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -17,11 +17,11 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L6515
+be %icc, .L6338
 nop
-ba %icc, .L6542
+ba %icc, .L6365
 nop
-.L6515:
+.L6338:
 or %l3, 0, %l1
 mov %i0, %l0
 mulx %l1, %l0, %l0
@@ -31,9 +31,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sub %l1, %l0, %l0
 mov %l0, %i1
-ba %icc, .L6509
+ba %icc, .L6332
 nop
-.L6542:
+.L6365:
 or %l3, 0, %l0
 or %l0, 0, %i0
 ret
@@ -77,28 +77,28 @@ movl %icc, 1, %l4
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l4, %l0
-be %icc, .L6572
+be %icc, .L6395
 nop
-ba %icc, .L6578
+ba %icc, .L6401
 nop
-.L6572:
+.L6395:
 sethi %hi(-1), %l0
 or %l0, %lo(-1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L6583
+ba %icc, .L6406
 nop
-.L6578:
-ba %icc, .L6583
+.L6401:
+ba %icc, .L6406
 nop
-.L6583:
+.L6406:
 or %l2, 0, %l3
 or %l5, 0, %l0
 stw %l0, [%l3 + 4]
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-.L6593:
+.L6416:
 or %l0, 0, %l4
 sethi %hi(1000000), %l3
 or %l3, %lo(1000000), %l3
@@ -109,11 +109,11 @@ movl %icc, 1, %l5
 sethi %hi(1), %l3
 or %l3, %lo(1), %l3
 cmp %l5, %l3
-be %icc, .L6599
+be %icc, .L6422
 nop
-ba %icc, .L6629
+ba %icc, .L6452
 nop
-.L6599:
+.L6422:
 or %l0, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -129,9 +129,9 @@ call calcPower
 nop
 mov %o0, %l1
 or %l1, 0, %l1
-ba %icc, .L6593
+ba %icc, .L6416
 nop
-.L6629:
+.L6452:
 or %l1, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0

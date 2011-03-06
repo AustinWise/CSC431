@@ -3,7 +3,7 @@
 	.global fun2
 .type    fun2, #function
 fun2:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -14,18 +14,18 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L10594
+be %icc, .L10677
 nop
-ba %icc, .L10600
+ba %icc, .L10683
 nop
-.L10594:
+.L10677:
 mov %i1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L10617
+ba %icc, .L10700
 nop
-.L10600:
+.L10683:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -39,15 +39,15 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L10617
+ba %icc, .L10700
 nop
-.L10617:
+.L10700:
 	.size    fun2, .-fun2
 	.align 4
 	.global fun1
 .type    fun1, #function
 fun1:
-save %sp, -104, %sp
+save %sp, -96, %sp
 sethi %hi(11), %l1
 or %l1, %lo(11), %l1
 mov %i0, %l0
@@ -70,11 +70,11 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L10655
+be %icc, .L10741
 nop
-ba %icc, .L10666
+ba %icc, .L10752
 nop
-.L10655:
+.L10741:
 or %l4, 0, %l1
 mov %i0, %l0
 mov %l1, %o0
@@ -85,9 +85,9 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L10700
+ba %icc, .L10786
 nop
-.L10666:
+.L10752:
 sethi %hi(5), %l1
 or %l1, %lo(5), %l1
 sethi %hi(6), %l0
@@ -106,11 +106,11 @@ and %l3, %l2, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L10681
+be %icc, .L10767
 nop
-ba %icc, .L10692
+ba %icc, .L10778
 nop
-.L10681:
+.L10767:
 or %l4, 0, %l1
 mov %i1, %l0
 mov %l1, %o0
@@ -121,15 +121,15 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L10698
+ba %icc, .L10784
 nop
-.L10692:
-ba %icc, .L10698
+.L10778:
+ba %icc, .L10784
 nop
-.L10698:
-ba %icc, .L10700
+.L10784:
+ba %icc, .L10786
 nop
-.L10700:
+.L10786:
 or %l4, 0, %l0
 or %l0, 0, %i0
 ret
@@ -147,7 +147,7 @@ call scanf
 nop
 ldsw [%sp + 92], %l0
 or %l0, 0, %l0
-.L10716:
+.L10802:
 or %l0, 0, %l2
 sethi %hi(10000), %l1
 or %l1, %lo(10000), %l1
@@ -158,11 +158,11 @@ movl %icc, 1, %l3
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 cmp %l3, %l1
-be %icc, .L10722
+be %icc, .L10808
 nop
-ba %icc, .L10750
+ba %icc, .L10836
 nop
-.L10722:
+.L10808:
 sethi %hi(3), %l3
 or %l3, %lo(3), %l3
 or %l0, 0, %l2
@@ -184,9 +184,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
 or %l0, 0, %l0
-ba %icc, .L10716
+ba %icc, .L10802
 nop
-.L10750:
+.L10836:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0

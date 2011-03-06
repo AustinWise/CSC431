@@ -109,7 +109,33 @@ namespace CSC431.Sparc
 
         public IEnumerable<SparcInstruction> Mov(IL.MovInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            yield return new OriInstruction(s.RegSource0, 0, s.RegDest0);
+            if (s.ArgIndex != -1)
+            {
+                if (s.ArgReg == s.RegDest0.IntVal)
+                {
+                    if (s.ArgIndex <= 5)
+                        yield return new MovInstruction(s.RegSource0, new SparcRegister(SparcReg.i0 + s.ArgIndex));
+                    else
+                        yield return new StwInstruction(s.RegSource0, SparcRegister.FP, 92 + (s.ArgIndex - 6) * 4);
+                    yield break;
+                }
+                else if (s.ArgReg == s.RegSource0.IntVal)
+                {
+                    if (s.ArgIndex <= 5)
+                        yield return new MovInstruction(new SparcRegister(SparcReg.i0 + s.ArgIndex), s.RegDest0);
+                    else
+                        yield return new LdswInstruction(SparcRegister.FP, 92 + (s.ArgIndex - 6) * 4, s.RegDest0);
+                    yield break;
+                }
+                else
+                {
+                    throw new Exception("ArgReg should really be either the source or the dest.");
+                }
+            }
+            else
+            {
+                yield return new OriInstruction(s.RegSource0, 0, s.RegDest0);
+            }
         }
 
         public IEnumerable<SparcInstruction> Moveq(IL.MoveqInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
@@ -159,10 +185,16 @@ namespace CSC431.Sparc
         public IEnumerable<SparcInstruction> Loadinargument(IL.LoadinargumentInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
             var store = stream.Current as CSC431.IL.StoreaiVarInstruction;
+            var mov = stream.Current as CSC431.IL.MovInstruction;
             if (store != null && s.RegDest0 == store.RegSource0 && store.ArgIndex == s.Immed0)
             {
                 //This is loading arg into a local at a start of a function.
                 //This is not needed as refernces to the local will be replaced with load the right i register.
+                stream.Consume();
+                yield break;
+            }
+            else if (mov != null && s.RegDest0 == mov.RegSource0 && mov.ArgIndex == s.Immed0)
+            {
                 stream.Consume();
                 yield break;
             }

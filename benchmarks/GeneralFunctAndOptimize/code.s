@@ -3,7 +3,7 @@
 	.global multBy4xTimes
 .type    multBy4xTimes, #function
 multBy4xTimes:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i1, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -14,22 +14,22 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L4589
+be %icc, .L4637
 nop
-ba %icc, .L4596
+ba %icc, .L4644
 nop
-.L4589:
+.L4637:
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L4601
+ba %icc, .L4649
 nop
-.L4596:
-ba %icc, .L4601
+.L4644:
+ba %icc, .L4649
 nop
-.L4601:
+.L4649:
 mov %i0, %l1
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
@@ -121,7 +121,7 @@ call printf
 nop
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-.L4692:
+.L4741:
 or %l0, 0, %l5
 sethi %hi(50), %l4
 or %l4, %lo(50), %l4
@@ -132,14 +132,14 @@ movl %icc, 1, %l6
 sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 cmp %l6, %l4
-be %icc, .L4698
+be %icc, .L4747
 nop
-ba %icc, .L4844
+ba %icc, .L4893
 nop
-.L4698:
+.L4747:
 sethi %hi(0), %l3
 or %l3, %lo(0), %l3
-.L4704:
+.L4753:
 or %l3, 0, %l5
 sethi %hi(end), %l4
 or %l4, %lo(end), %l4
@@ -151,11 +151,11 @@ movle %icc, 1, %l6
 sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 cmp %l6, %l4
-be %icc, .L4711
+be %icc, .L4760
 nop
-ba %icc, .L4828
+ba %icc, .L4877
 nop
-.L4711:
+.L4760:
 sethi %hi(39916800), %l2
 or %l2, %lo(39916800), %l2
 or %l3, 0, %l4
@@ -198,34 +198,34 @@ movle %icc, 1, %l6
 sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 cmp %l6, %l4
-be %icc, .L4799
+be %icc, .L4848
 nop
-ba %icc, .L4805
+ba %icc, .L4854
 nop
-.L4799:
+.L4848:
 sethi %hi(1), %l7
 or %l7, %lo(1), %l7
-ba %icc, .L4810
+ba %icc, .L4859
 nop
-.L4805:
-ba %icc, .L4810
+.L4854:
+ba %icc, .L4859
 nop
-.L4810:
+.L4859:
 or %l3, 0, %l4
 or %l7, 0, %l3
 add %l4, %l3, %l3
 or %l3, 0, %l3
-ba %icc, .L4704
+ba %icc, .L4753
 nop
-.L4828:
+.L4877:
 or %l0, 0, %l4
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l4, %l0, %l0
 or %l0, 0, %l0
-ba %icc, .L4692
+ba %icc, .L4741
 nop
-.L4844:
+.L4893:
 or %l3, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0

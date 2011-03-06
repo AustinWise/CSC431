@@ -41,4 +41,16 @@ namespace CSC431.IL
             (newInstr as StoreaiVarInstruction).ArgIndex = ArgIndex;
         }
     }
+    public partial class MovInstruction
+    {
+        public int ArgIndex { get; set; }
+        public int ArgReg { get; set; }
+
+        internal override void CopyExtraData(MilocInstruction newInstr)
+        {
+            var other = newInstr as MovInstruction;
+            other.ArgIndex = ArgIndex;
+            other.ArgReg = ArgReg;
+        }
+    }
 }

@@ -3,7 +3,7 @@
 	.global compare
 .type    compare, #function
 compare:
-save %sp, -104, %sp
+save %sp, -96, %sp
 mov %i0, %l0
 ldsw [%l0 + 0], %l1
 mov %i1, %l0
@@ -20,7 +20,7 @@ deathSort:
 save %sp, -96, %sp
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
-.L5277:
+.L5948:
 or %l1, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -31,16 +31,16 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L5283
+be %icc, .L5954
 nop
-ba %icc, .L5372
+ba %icc, .L6043
 nop
-.L5283:
+.L5954:
 sethi %hi(0), %l1
 or %l1, %lo(0), %l1
 mov %i0, %l0
 or %l0, 0, %l0
-.L5294:
+.L5965:
 or %l0, 0, %l2
 ldsw [%l2 + 8], %l3
 mov %i0, %l2
@@ -51,11 +51,11 @@ movne %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L5302
+be %icc, .L5973
 nop
-ba %icc, .L5370
+ba %icc, .L6041
 nop
-.L5302:
+.L5973:
 or %l0, 0, %l3
 or %l0, 0, %l2
 ldsw [%l2 + 8], %l2
@@ -73,11 +73,11 @@ movg %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L5316
+be %icc, .L5987
 nop
-ba %icc, .L5343
+ba %icc, .L6014
 nop
-.L5316:
+.L5987:
 or %l0, 0, %l1
 ldsw [%l1 + 0], %l1
 or %l1, 0, %l3
@@ -92,21 +92,21 @@ or %l3, 0, %l1
 stw %l1, [%l2 + 0]
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
-ba %icc, .L5348
+ba %icc, .L6019
 nop
-.L5343:
-ba %icc, .L5348
+.L6014:
+ba %icc, .L6019
 nop
-.L5348:
+.L6019:
 or %l0, 0, %l0
 ldsw [%l0 + 8], %l0
 or %l0, 0, %l0
-ba %icc, .L5294
+ba %icc, .L5965
 nop
-.L5370:
-ba %icc, .L5277
+.L6041:
+ba %icc, .L5948
 nop
-.L5372:
+.L6043:
 ret
 restore
 	.size    deathSort, .-deathSort
@@ -129,7 +129,7 @@ mov %i0, %l0
 mov %l0, %o0
 call free
 nop
-.L5393:
+.L6065:
 or %l1, 0, %l2
 mov %i0, %l0
 sethi %hi(0), %l3
@@ -139,11 +139,11 @@ movne %icc, 1, %l3
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l3, %l0
-be %icc, .L5400
+be %icc, .L6072
 nop
-ba %icc, .L5431
+ba %icc, .L6103
 nop
-.L5400:
+.L6072:
 or %l1, 0, %l0
 or %l0, 0, %l0
 or %l1, 0, %l2
@@ -160,9 +160,9 @@ or %l0, 0, %l0
 mov %l0, %o0
 call free
 nop
-ba %icc, .L5393
+ba %icc, .L6065
 nop
-.L5431:
+.L6103:
 ret
 restore
 	.size    printEVILList, .-printEVILList
@@ -193,11 +193,11 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L5449
+be %icc, .L6121
 nop
-ba %icc, .L5459
+ba %icc, .L6131
 nop
-.L5449:
+.L6121:
 sethi %hi(-1), %l0
 or %l0, %lo(-1), %l0
 sethi %hi(.ConstantString1), %o0
@@ -210,12 +210,12 @@ or %l0, %lo(-1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L5464
+ba %icc, .L6136
 nop
-.L5459:
-ba %icc, .L5464
+.L6131:
+ba %icc, .L6136
 nop
-.L5464:
+.L6136:
 or %l3, 0, %l1
 sethi %hi(1000), %l0
 or %l0, %lo(1000), %l0
@@ -245,7 +245,7 @@ sub %l2, %l0, %l0
 or %l0, 0, %l2
 or %l1, 0, %l0
 or %l0, 0, %l0
-.L5512:
+.L6184:
 or %l2, 0, %l4
 sethi %hi(0), %l3
 or %l3, %lo(0), %l3
@@ -256,11 +256,11 @@ movg %icc, 1, %l5
 sethi %hi(1), %l3
 or %l3, %lo(1), %l3
 cmp %l5, %l3
-be %icc, .L5518
+be %icc, .L6190
 nop
-ba %icc, .L5569
+ba %icc, .L6241
 nop
-.L5518:
+.L6190:
 or %g0, 1, %o0
 or %g0, 12, %o1
 call calloc
@@ -286,9 +286,9 @@ sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 sub %l3, %l2, %l2
 or %l2, 0, %l2
-ba %icc, .L5512
+ba %icc, .L6184
 nop
-.L5569:
+.L6241:
 or %l1, 0, %l0
 mov %l0, %o0
 call deathSort
