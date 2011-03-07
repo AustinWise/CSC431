@@ -11,6 +11,13 @@ using System.IO;
 
 namespace CSC431
 {
+    public enum LlvmArch
+    {
+        x86,
+        x64,
+        SparcV9,
+    }
+
     static class LlvmSteps
     {
         public static TransformStep<ProgramBlock<MilocInstruction>> PropegateNullPointers()
@@ -88,7 +95,23 @@ namespace CSC431
 
         private static string compileBitcode(string tmp)
         {
-            ProcessStartInfo si = new ProcessStartInfo("llc.exe", "\"" + tmp + "\" -march=sparc -mcpu=v9 -o -");
+            string archString;
+            switch (Options.LlvmArch.Value)
+            {
+                case LlvmArch.x86:
+                    archString = "-march=x86";
+                    break;
+                case LlvmArch.x64:
+                    archString = "-march=x86-64";
+                    break;
+                case LlvmArch.SparcV9:
+                    archString = "-march=sparc -mcpu=v9";
+                    break;
+                default:
+                    throw new NotSupportedException("Unsupported LlvmArch");
+            }
+
+            ProcessStartInfo si = new ProcessStartInfo("llc.exe", "\"" + tmp + "\" " + archString + " -o -");
             si.UseShellExecute = false;
             si.RedirectStandardInput = true;
             si.RedirectStandardError = true;
