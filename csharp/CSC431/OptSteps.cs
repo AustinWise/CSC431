@@ -17,12 +17,12 @@ namespace CSC431
 
         public static TransformStep<ProgramBlock<IL.MilocInstruction>> UselessCodeRemoval()
         {
-            return new TransformStep<ProgramBlock<IL.MilocInstruction>>(new UselessCodeRemoval().DoOpt);
+            return new TransformStep<ProgramBlock<IL.MilocInstruction>>(Analysis.UselessCodeRemoval.DoOpt);
         }
 
         public static TransformStep<ProgramBlock<IL.MilocInstruction>> PowerReduction()
         {
-            return new TransformStep<ProgramBlock<IL.MilocInstruction>>(new PowerReduction().DoOpt);
+            return new TransformStep<ProgramBlock<IL.MilocInstruction>>(Analysis.PowerReduction.DoOpt);
         }
 
         public static TransformStep<ProgramBlock<IL.MilocInstruction>> ConstantFolding()

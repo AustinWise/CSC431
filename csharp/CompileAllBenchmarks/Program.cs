@@ -23,7 +23,7 @@ namespace CompileAllBenchmarks
             List<Task<string>> tasks = new List<Task<string>>();
             tasks.AddRange(compileBenchmarks("code.s", () => { }));
             tasks.AddRange(compileBenchmarks("noopt.s", () => { Options.DisableOpt.Value = true; }));
-            //tasks.AddRange(compileBenchmarks("llvm.s", () => { Options.Llvm.Value = true; Options.DisableOpt.Value = true; }));
+            //tasks.AddRange(compileBenchmarks("llvm.s", () => { Options.Llvm.Value = true; }));
 
             var taskArr = tasks.ToArray();
             while (!Task.WaitAll(taskArr, 100))

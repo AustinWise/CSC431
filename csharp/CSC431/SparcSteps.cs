@@ -29,7 +29,7 @@ namespace CSC431
 
         public static TransformStep<ProgramBlock<SparcInstruction>> RegisterAllocation()
         {
-            return new TransformStep<ProgramBlock<SparcInstruction>>(new RegisterAllocation().DoAllocation);
+            return new TransformStep<ProgramBlock<SparcInstruction>>(prog => new RegisterAllocation().DoAllocation(prog));
         }
 
         public static TransformStep<ProgramBlock<SparcInstruction>> SetStacks()

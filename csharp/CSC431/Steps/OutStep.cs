@@ -32,5 +32,12 @@ namespace CSC431.Steps
             AddNext(next);
             return next;
         }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            this.Output = default(T);
+            this.fun = null;
+        }
     }
 }

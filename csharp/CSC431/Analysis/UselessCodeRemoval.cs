@@ -12,13 +12,14 @@ namespace CSC431.Analysis
         ReachingDef<MilocInstruction> defs;
         ProgramBlock<MilocInstruction> prog;
 
-        public ProgramBlock<MilocInstruction> DoOpt(ProgramBlock<MilocInstruction> prog)
+        public static ProgramBlock<MilocInstruction> DoOpt(ProgramBlock<MilocInstruction> prog)
         {
-            this.prog = prog;
-            defs = new ReachingDef<MilocInstruction>(prog);
+            var self = new UselessCodeRemoval();
+            self.prog = prog;
+            self.defs = new ReachingDef<MilocInstruction>(prog);
 
-            Mark();
-            return Sweep();
+            self.Mark();
+            return self.Sweep();
         }
 
         private void Mark()

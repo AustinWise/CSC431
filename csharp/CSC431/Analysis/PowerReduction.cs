@@ -20,7 +20,7 @@ namespace CSC431.Analysis
         }
 
 
-        public ProgramBlock<MilocInstruction> DoOpt(ProgramBlock<MilocInstruction> prog)
+        public static ProgramBlock<MilocInstruction> DoOpt(ProgramBlock<MilocInstruction> prog)
         {
             var defs = new ReachingDef<MilocInstruction>(prog);
             var conv = prog.Convert(new MilocConverter<MilocInstruction>(new PowerReductionTranslator(defs)));

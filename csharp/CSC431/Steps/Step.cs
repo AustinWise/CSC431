@@ -7,9 +7,15 @@ using System.Reflection;
 
 namespace CSC431.Steps
 {
-    public abstract class Step : IStep
+    public abstract class Step : IStep, IDisposable
     {
         protected abstract void Process();
+
+        public virtual void Dispose()
+        {
+            this.nexts = null;
+            this.parent = null;
+        }
 
         private Step parent;
         private List<Step> nexts = new List<Step>();
@@ -104,9 +110,6 @@ namespace CSC431.Steps
                         dn.Input = res;
                         toDos.Enqueue(n);
                     }
-
-                    //allow the output to be garbage collected
-                    ds.Output = null;
                 }
                 else
                 {
@@ -114,11 +117,7 @@ namespace CSC431.Steps
                         throw new NotSupportedException("non-output steps should not be followed");
                 }
 
-                if (isIn(s.GetType()))
-                {
-                    dynamic ds = s;
-                    ds.Input = null;
-                }
+                s.Dispose();
             }
         }
 

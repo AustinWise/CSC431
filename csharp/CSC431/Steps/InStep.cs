@@ -21,5 +21,12 @@ namespace CSC431.Steps
         {
             fun(Input);
         }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            this.Input = default(T);
+            this.fun = null;
+        }
     }
 }
