@@ -11,7 +11,6 @@ namespace CSC431.Analysis
     {
         private Dictionary<BasicBlock<T>, Dictionary<int, T>> genSets;
         private Dictionary<BasicBlock<T>, List<int>> killSets;
-        private Dictionary<BasicBlock<T>, List<BasicBlock<T>>> preds;
         private Dictionary<BasicBlock<T>, Dictionary<int, List<T>>> reachingDefs;
         private Dictionary<T, BasicBlock<T>> instrToBlockMap;
         private Dictionary<Tuple<T, int>, List<T>> reachingDefCache;
@@ -20,7 +19,6 @@ namespace CSC431.Analysis
         {
             genSets = new Dictionary<BasicBlock<T>, Dictionary<int, T>>();
             killSets = new Dictionary<BasicBlock<T>, List<int>>();
-            preds = new Dictionary<BasicBlock<T>, List<BasicBlock<T>>>();
             reachingDefs = new Dictionary<BasicBlock<T>, Dictionary<int, List<T>>>();
             instrToBlockMap = new Dictionary<T, BasicBlock<T>>();
             reachingDefCache = new Dictionary<Tuple<T, int>, List<T>>();
@@ -28,23 +26,8 @@ namespace CSC431.Analysis
             DoDataflow(prog);
         }
 
-        private void addPred(BasicBlock<T> cur, BasicBlock<T> next)
-        {
-            if (!preds.ContainsKey(next))
-                preds.Add(next, new List<BasicBlock<T>>());
-            var list = preds[next];
-            list.Add(cur);
-        }
-
         protected override void CalculateLocal(FunctionBlock<T> fun, BasicBlock<T> block)
         {
-            foreach (var n in block.Nexts)
-            {
-                addPred(block, (BasicBlock<T>)n);
-            }
-            if (!preds.ContainsKey(block))
-                preds.Add(block, new List<BasicBlock<T>>());
-
             var gen = new Dictionary<int, T>();
             var kill = new List<int>();
             foreach (var i in block.Code.Reverse())
@@ -66,7 +49,7 @@ namespace CSC431.Analysis
         {
             var newdefs = new Dictionary<int, List<T>>();
 
-            foreach (var p in preds[block])
+            foreach (var p in GetPredecessors(block))
             {
                 var gen = genSets[p];
                 var kill = killSets[p];
