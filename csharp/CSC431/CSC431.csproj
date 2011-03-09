@@ -57,6 +57,7 @@
     <Compile Include="CFG\InstructionStream.cs" />
     <Compile Include="CFG\Printer.cs" />
     <Compile Include="CFG\Register.cs" />
+    <Compile Include="CFG\VirtRegAlloc.cs" />
     <Compile Include="Ensure.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="IL\IArithmeticInstruction.cs" />

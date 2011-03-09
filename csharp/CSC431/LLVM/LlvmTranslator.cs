@@ -103,7 +103,7 @@ namespace CSC431.LLVM
             {
                 var theCmp = stream.Consume() as IL.CompInstruction;
                 var theCbeq = stream.Consume() as IL.CbreqInstruction;
-                var theCmpReg = new CFG.VirtualRegister(CSC431.CFG.Instruction.VirtualRegister());
+                var theCmpReg = new CFG.VirtualRegister(CSC431.CFG.VirtRegAlloc.AllocSlow());
                 if (theCmp.RegSource1 != s.RegDest0 || s.Immed0 != 1)
                     throw new Exception("cmp using unexpected reg in branch");
                 yield return new IcmpConstInstruction(ConditionType.eq, theCmpReg, theCmp.RegSource0, s.Immed0);
@@ -116,7 +116,7 @@ namespace CSC431.LLVM
             int falseValue = s.Immed0;
             var condMovs = new List<LlvmInstruction>();
 
-            int cmpreg = CSC431.CFG.Instruction.VirtualRegister();
+            int cmpreg = CSC431.CFG.VirtRegAlloc.AllocSlow();
             var cmp = stream.Consume() as IL.CompInstruction;
             var next = stream.Consume();
 
@@ -300,7 +300,7 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> StoreaiField(IL.StoreaiFieldInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            var addrReg = new CFG.VirtualRegister(CFG.Instruction.VirtualRegister());
+            var addrReg = new CFG.VirtualRegister(CFG.VirtRegAlloc.AllocSlow());
             yield return new StringInstruction("%{0} = getelementptr %{1}* %{2}, i32 0, i32 {3}", addrReg, s.ContainingType, s.RegSource1, s.FieldIndex);
             yield return new StoreInstruction(s.RegSource0, addrReg) { IsNull = s.IsNull, Type = s.FieldType == null ? FrontEnd.Type.intType() : FrontEnd.Type.structType(s.FieldType) };
         }
@@ -313,7 +313,7 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> LoadaiField(IL.LoadaiFieldInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            var addrReg = new CFG.VirtualRegister(CFG.Instruction.VirtualRegister());
+            var addrReg = new CFG.VirtualRegister(CFG.VirtRegAlloc.AllocSlow());
             yield return new StringInstruction("%{0} = getelementptr %{1}* %{2}, i32 0, i32 {3}", addrReg, s.ContainingType, s.RegSource0, s.FieldIndex);
             yield return new LoadInstruction(s.RegDest0, addrReg) { Type = Program.Stypes.Value.get(s.ContainingType).getFieldType(s.Str0) };
         }
@@ -356,14 +356,14 @@ namespace CSC431.LLVM
 
         public IEnumerable<LlvmInstruction> New(IL.NewInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            var addrReg = new CFG.VirtualRegister(CFG.Instruction.VirtualRegister());
+            var addrReg = new CFG.VirtualRegister(CFG.VirtRegAlloc.AllocSlow());
             yield return new StringInstruction("%{0} = call i8* @calloc(i32 {1}, i32 4)", addrReg, s.Arr0.Length);
             yield return new StringInstruction("%{0} = bitcast i8* %{2} to %{1}*", s.RegDest0, s.Str0, addrReg);
         }
 
         public IEnumerable<LlvmInstruction> Del(IL.DelInstruction s, CFG.InstructionStream<IL.MilocInstruction> stream)
         {
-            var addrReg = new CFG.VirtualRegister(CFG.Instruction.VirtualRegister());
+            var addrReg = new CFG.VirtualRegister(CFG.VirtRegAlloc.AllocSlow());
             yield return new StringInstruction("%{0} = bitcast %{1}* %{2} to i8*", addrReg, s.StructType, s.RegSource0);
             yield return new StringInstruction("call void @free(i8* %{0})", addrReg);
         }

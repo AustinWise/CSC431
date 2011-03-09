@@ -17,6 +17,8 @@ namespace CSC431.IL
         private Dictionary<string, VarBase> localMap = new Dictionary<string, VarBase>();
         private Dictionary<string, List<StructMember>> structMap = new Dictionary<string, List<StructMember>>();
 
+        private VirtRegAlloc regAlloc = VirtRegAlloc.Instance;
+
         private string currentFunction;
 
         public ProgramBlock<MilocInstruction> Program()

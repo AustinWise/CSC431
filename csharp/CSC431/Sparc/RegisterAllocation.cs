@@ -17,7 +17,7 @@ namespace CSC431.Sparc
 
         public RegisterAllocation()
         {
-            candidateColors = new BitArray(SparcRegister.IntValueMap.Max() + 1);
+            candidateColors = new BitArray(SparcRegister.IntValueMap.Value.Max() + 1);
             virtToSparc = new SparcRegister[candidateColors.Length];
 
             foreach (SparcReg r in Enum.GetValues(typeof(SparcReg)))
