@@ -36,9 +36,9 @@ namespace CompileAllBenchmarks
                 {
                     var t = taskArr[i];
                     if (t.Status == TaskStatus.RanToCompletion)
-                        Console.Write('█');
+                        Console.Write('#');
                     else
-                        Console.Write('░');
+                        Console.Write('.');
                 }
                 Console.WriteLine();
             }
