@@ -29,9 +29,11 @@ namespace CSC431.Stack
 
         public void Program()
         {
-            AssemblyName aName = new AssemblyName("EvilProg-" + Guid.NewGuid().ToString());
+            var tempName = "EvilProg-" + Guid.NewGuid().ToString();
+
+            AssemblyName aName = new AssemblyName(tempName);
             AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(aName, AssemblyBuilderAccess.Save);
-            programModule = ab.DefineDynamicModule(aName.Name, "EvilProg-" + Guid.NewGuid().ToString() + ".exe", true);
+            programModule = ab.DefineDynamicModule(aName.Name, tempName + ".exe", true);
             programType = programModule.DefineType("Program", TypeAttributes.Public);
 
             createReadInInt();
@@ -45,7 +47,7 @@ namespace CSC431.Stack
 
             programType.CreateType();
 
-            string tempPath = "EvilProg-" + Guid.NewGuid().ToString() + ".exe";
+            string tempPath = tempName + ".exe";
             ab.Save(tempPath);
 
             if (File.Exists(Options.ClrExec.Value))
