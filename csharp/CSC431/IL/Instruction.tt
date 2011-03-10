@@ -69,7 +69,7 @@ instr.ForEachOperand((c, count, isLast) =>
         Write(", ");
 });
 if (instr.IsUseCC)
-    Write("MilocInstruction.IccReg");
+    Write("MilocInstruction.IccReg.Value");
 #>
 		};
 	}
@@ -90,7 +90,7 @@ instr.ForEachOperand((c, count, isLast) =>
         Write(", ");
 });
 if (instr.IsSetCC)
-    Write("MilocInstruction.IccReg");
+    Write("MilocInstruction.IccReg.Value");
 #>
 		};
 	}

@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-03-06 13:03:35
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 IlGenWalker.g 2011-03-09 03:28:22
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 168, 219
@@ -913,7 +913,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     							if (Options.Llvm.Value)
     								localMap.Add(id, new VarLocal(id, t));
     							else
-    								localMap.Add(id, new VarReg(Instruction.VirtualRegister(), t));
+    								localMap.Add(id, new VarReg(regAlloc.Alloc(), t));
     						}
     						else
     						{
@@ -1203,7 +1203,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     						returnBlock.Add(new RetInstruction());
     					else if (Options.Llvm.Value)
     					{
-    						int llvmDummyReturnReg = Instruction.VirtualRegister();
+    						int llvmDummyReturnReg = regAlloc.Alloc();
     						returnBlock.Add(new LoadiInstruction(0, llvmDummyReturnReg) { IsNull = retType != null});
     						returnBlock.Add(new StoreretInstruction(llvmDummyReturnReg) { CurrentFunction = currentFunction });
     					}
@@ -1371,12 +1371,12 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     		Match(input, TokenTypes.Up, null); 
     		DebugLocation(146, 5);
 
-    		   		int regDest = Instruction.VirtualRegister();
+    		   		int regDest = regAlloc.Alloc();
     		   		VarBase localContainer;
     		   		if (Options.Llvm.Value)
     		   			localContainer = new VarLocal((id!=null?id.Text:null), t) { ArgIndex = ndx };
     		   		else
-    		   			localContainer = new VarReg(Instruction.VirtualRegister(), t) { ArgIndex = ndx };
+    		   			localContainer = new VarReg(regAlloc.Alloc(), t) { ArgIndex = ndx };
     		   		localMap[(id!=null?id.Text:null)] = localContainer;
     		   		
     		   		b.Add(new LoadinargumentInstruction((id!=null?id.Text:null), ndx, regDest));
@@ -2052,8 +2052,8 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     		Match(input, TokenTypes.Up, null); 
     		DebugLocation(216, 3);
 
-    					int addressReg = Instruction.VirtualRegister();
-    					int valueReg = Instruction.VirtualRegister();
+    					int addressReg = regAlloc.Alloc();
+    					int valueReg = regAlloc.Alloc();
     					b.Add(new ComputeglobaladdressInstruction(MilocInstruction.ReadGlobalName, addressReg));
     					b.Add(new ReadInstruction(addressReg));
     					b.Add(new LoadglobalInstruction(MilocInstruction.ReadGlobalName, valueReg));
@@ -2152,7 +2152,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     		Match(input, TokenTypes.Up, null); 
     		DebugLocation(229, 3);
 
-    					int reg = Instruction.VirtualRegister();
+    					int reg = regAlloc.Alloc();
     					f = f ?? new SeqBlock<MilocInstruction>();
     					
     					e.Add(new LoadiInstruction(1, reg));
@@ -2233,7 +2233,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 
     					body.Add(new JumpiInstruction(e.Label));
     					
-    					int reg = Instruction.VirtualRegister();
+    					int reg = regAlloc.Alloc();
     					e.Add(new LoadiInstruction(1, reg));
     					e.Add(new CompInstruction(e.Reg, reg));
     					e.Add(new CbreqInstruction(body.Label, lab));			
@@ -2526,7 +2526,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(283, 3);
 
-    						var reg = Instruction.VirtualRegister();
+    						var reg = regAlloc.Alloc();
     						b.Add(lv.Load(reg));
     						dest = new VarField((id!=null?id.Text:null), reg, lv.Type, getMemberType(lv.Type, (id!=null?id.Text:null)), getFieldIndex(lv.Type, (id!=null?id.Text:null)));
     						
@@ -2580,7 +2580,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
         BasicBlock<MilocInstruction> e = default(BasicBlock<MilocInstruction>);
         BasicBlock<MilocInstruction> s = default(BasicBlock<MilocInstruction>);
 
-         int reg = Instruction.VirtualRegister(); b.Reg = reg; 
+         int reg = regAlloc.Alloc(); b.Reg = reg; 
     	try { DebugEnterRule(GrammarFileName, "expression");
     	DebugLocation(292, 1);
     	try
@@ -3034,7 +3034,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
 
     			Match(input, TokenTypes.Up, null); 
     			DebugLocation(307, 24);
-    			 b.Add(e); int negZeroReg = Instruction.VirtualRegister(); b.Add(new LoadiInstruction(0, negZeroReg)); b.Add(new SubInstruction(negZeroReg, e.Reg, reg)); 
+    			 b.Add(e); int negZeroReg = regAlloc.Alloc(); b.Add(new LoadiInstruction(0, negZeroReg)); b.Add(new SubInstruction(negZeroReg, e.Reg, reg)); 
 
     			}
     			break;
@@ -3134,7 +3134,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			DebugLocation(313, 3);
 
     						b = new BasicBlock<MilocInstruction>();
-    						int reg = Instruction.VirtualRegister();
+    						int reg = regAlloc.Alloc();
     						b.Reg = reg;
     						b.Add(s);
     						b.Add(new LoadaiFieldInstruction(s.Reg, (id!=null?id.Text:null), reg) { ContainingType = s.StructType, FieldIndex = getFieldIndex(s.StructType, (id!=null?id.Text:null)) });
@@ -3191,7 +3191,7 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
         CommonTree i=null;
         List<int> regLocs = default(List<int>);
 
-         int reg = Instruction.VirtualRegister(); b.Reg = reg; 
+         int reg = regAlloc.Alloc(); b.Reg = reg; 
     	try { DebugEnterRule(GrammarFileName, "factor");
     	DebugLocation(324, 1);
     	try
@@ -3287,7 +3287,6 @@ public partial class IlGenWalker : Antlr.Runtime.Tree.TreeParser
     			DebugLocation(336, 3);
 
     						b = getVarReg((id!=null?id.Text:null)).Load(reg);
-                    
     						b.StructType = getVarType((id!=null?id.Text:null));
     					
 

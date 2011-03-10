@@ -9,7 +9,7 @@ namespace CSC431
     public sealed class TaskLocal<T>
     {
         private Dictionary<int, T> data = new Dictionary<int, T>();
-        private T defaultValue;
+        private Func<T> defaultValue;
 
         public TaskLocal()
             : this(default(T))
@@ -17,6 +17,11 @@ namespace CSC431
         }
 
         public TaskLocal(T defaultValue)
+        {
+            this.defaultValue = () => defaultValue;
+        }
+
+        public TaskLocal(Func<T> defaultValue)
         {
             this.defaultValue = defaultValue;
         }
@@ -37,7 +42,16 @@ namespace CSC431
                 lock (this)
                 {
                     if (!data.ContainsKey(curId))
-                        data[curId] = defaultValue;
+                    {
+                        //avoid calling this while holding a lock to allow for task local
+                        //initalizers to call other task locals
+                        var newVal = defaultValue();
+                        lock (data)
+                        {
+                            if (!data.ContainsKey(curId))
+                                data[curId] = newVal;
+                        }
+                    }
                     return data[curId];
                 }
             }

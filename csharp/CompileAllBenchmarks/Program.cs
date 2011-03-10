@@ -14,11 +14,14 @@ namespace CompileAllBenchmarks
 {
     class Program
     {
-        const string benchDir = @"..\..\..\..\benchmarks\";
+        static string benchDir;
 
         static void Main(string[] args)
         {
             //FindGlobalVariables();
+
+            benchDir = @"..{0}..{0}..{0}..{0}benchmarks{0}";
+            benchDir = string.Format(benchDir, Path.DirectorySeparatorChar);
 
             List<Task<string>> tasks = new List<Task<string>>();
             tasks.AddRange(compileBenchmarks("code.s", () => { }));
@@ -33,9 +36,9 @@ namespace CompileAllBenchmarks
                 {
                     var t = taskArr[i];
                     if (t.Status == TaskStatus.RanToCompletion)
-                        Console.Write('█');
+                        Console.Write('#');
                     else
-                        Console.Write('░');
+                        Console.Write('.');
                 }
                 Console.WriteLine();
             }

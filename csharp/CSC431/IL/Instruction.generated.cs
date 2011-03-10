@@ -620,7 +620,7 @@ public override Register[] DestRegs
 	get
 	{
 		return new Register[] {
-MilocInstruction.IccReg		};
+MilocInstruction.IccReg.Value		};
 	}
 }
 
@@ -697,7 +697,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-MilocInstruction.IccReg		};
+MilocInstruction.IccReg.Value		};
 	}
 }
 
@@ -740,7 +740,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-MilocInstruction.IccReg		};
+MilocInstruction.IccReg.Value		};
 	}
 }
 
@@ -783,7 +783,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-MilocInstruction.IccReg		};
+MilocInstruction.IccReg.Value		};
 	}
 }
 
@@ -826,7 +826,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-MilocInstruction.IccReg		};
+MilocInstruction.IccReg.Value		};
 	}
 }
 
@@ -869,7 +869,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-MilocInstruction.IccReg		};
+MilocInstruction.IccReg.Value		};
 	}
 }
 
@@ -912,7 +912,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-MilocInstruction.IccReg		};
+MilocInstruction.IccReg.Value		};
 	}
 }
 
@@ -997,7 +997,7 @@ public override Register[] SourceRegs
 	get
 	{
 		return new Register[] {
-MilocInstruction.IccReg		};
+MilocInstruction.IccReg.Value		};
 	}
 }
 

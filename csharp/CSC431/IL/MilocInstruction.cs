@@ -9,7 +9,7 @@ namespace CSC431.IL
     public abstract class MilocInstruction : Instruction
     {
         public const string ReadGlobalName = "ReadGlobalVarHopefullyNoProgramHasAVarNamedThisBecauseThenThingsWillBeScrewedUp";
-        public static readonly VirtualRegister IccReg = new VirtualRegister(Instruction.VirtualRegister());
+        public static readonly TaskLocal<VirtualRegister> IccReg = new TaskLocal<VirtualRegister>(() => new VirtualRegister(VirtRegAlloc.AllocSlow()));
 
         public MilocInstruction(string name)
             : base(name)

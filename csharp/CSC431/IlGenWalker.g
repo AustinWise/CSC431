@@ -75,7 +75,7 @@ decl_list[bool isLocal, Dictionary<string, string> typeMap]
 					if (Options.Llvm.Value)
 						localMap.Add(id, new VarLocal(id, t));
 					else
-						localMap.Add(id, new VarReg(Instruction.VirtualRegister(), t));
+						localMap.Add(id, new VarReg(regAlloc.Alloc(), t));
 				}
 				else
 				{
@@ -120,7 +120,7 @@ function returns [FunctionBlock<MilocInstruction> f]
 				returnBlock.Add(new RetInstruction());
 			else if (Options.Llvm.Value)
 			{
-				int llvmDummyReturnReg = Instruction.VirtualRegister();
+				int llvmDummyReturnReg = regAlloc.Alloc();
 				returnBlock.Add(new LoadiInstruction(0, llvmDummyReturnReg) { IsNull = retType != null});
 				returnBlock.Add(new StoreretInstruction(llvmDummyReturnReg) { CurrentFunction = currentFunction });
 			}
@@ -144,12 +144,12 @@ parameters[BasicBlock<MilocInstruction> b]
 param_decl[BasicBlock<MilocInstruction> b, int ndx]
    :  ^(DECL ^(TYPE t=type) id=ID)
    	{
-   		int regDest = Instruction.VirtualRegister();
+   		int regDest = regAlloc.Alloc();
    		VarBase localContainer;
    		if (Options.Llvm.Value)
    			localContainer = new VarLocal($id.text, t) { ArgIndex = ndx };
    		else
-   			localContainer = new VarReg(Instruction.VirtualRegister(), t) { ArgIndex = ndx };
+   			localContainer = new VarReg(regAlloc.Alloc(), t) { ArgIndex = ndx };
    		localMap[$id.text] = localContainer;
    		
    		$b.Add(new LoadinargumentInstruction($id.text, ndx, regDest));
@@ -214,8 +214,8 @@ print returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>
 read returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()]
 	: ^(READ dest=lvalue[b])
 		{
-			int addressReg = Instruction.VirtualRegister();
-			int valueReg = Instruction.VirtualRegister();
+			int addressReg = regAlloc.Alloc();
+			int valueReg = regAlloc.Alloc();
 			$b.Add(new ComputeglobaladdressInstruction(MilocInstruction.ReadGlobalName, addressReg));
 			$b.Add(new ReadInstruction(addressReg));
 			$b.Add(new LoadglobalInstruction(MilocInstruction.ReadGlobalName, valueReg));
@@ -227,7 +227,7 @@ conditional returns [IfBlock<MilocInstruction> b]
 @init { var lab = new Label(); }
 	: ^(IF e=expression t=block (f=block)?)
 		{
-			int reg = Instruction.VirtualRegister();
+			int reg = regAlloc.Alloc();
 			f = f ?? new SeqBlock<MilocInstruction>();
 			
 			e.Add(new LoadiInstruction(1, reg));
@@ -247,7 +247,7 @@ loop returns [LoopBlock<MilocInstruction> b]
 		{
 			body.Add(new JumpiInstruction(e.Label));
 			
-			int reg = Instruction.VirtualRegister();
+			int reg = regAlloc.Alloc();
 			e.Add(new LoadiInstruction(1, reg));
 			e.Add(new CompInstruction(e.Reg, reg));
 			e.Add(new CbreqInstruction(body.Label, lab));			
@@ -281,7 +281,7 @@ invocation returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruc
 lvalue[BasicBlock<MilocInstruction> b] returns [VarBase dest]
 	: ^(DOT lv=lvalue[b] id=ID)
 		{
-			var reg = Instruction.VirtualRegister();
+			var reg = regAlloc.Alloc();
 			b.Add(lv.Load(reg));
 			$dest = new VarField($id.text, reg, lv.Type, getMemberType(lv.Type, $id.text), getFieldIndex(lv.Type, $id.text));
 			
@@ -290,7 +290,7 @@ lvalue[BasicBlock<MilocInstruction> b] returns [VarBase dest]
 	;
 
 expression returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()]
-@init { int reg = Instruction.VirtualRegister(); $b.Reg = reg; }
+@init { int reg = regAlloc.Alloc(); $b.Reg = reg; }
 	: ^(AND e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new AndInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(OR e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new OrInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(EQ e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new LoadiInstruction(0, reg)); $b.Add(new CompInstruction(e1.Reg, e2.Reg) { StructType1 = e1.StructType, StructType2 = e2.StructType}); $b.Add(new MoveqInstruction(1, reg)); }
@@ -304,7 +304,7 @@ expression returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruc
 	| ^(TIMES e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new MultInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(DIVIDE e1=expression e2=expression) { $b.Add(e1); $b.Add(e2); $b.Add(new DivInstruction(e1.Reg, e2.Reg, reg)); }
 	| ^(NOT e=expression) { $b.Add(e); $b.Add(new XoriInstruction(e.Reg, 1, reg)); }
-	| ^(NEG e=expression) { $b.Add(e); int negZeroReg = Instruction.VirtualRegister(); $b.Add(new LoadiInstruction(0, negZeroReg)); $b.Add(new SubInstruction(negZeroReg, e.Reg, reg)); }
+	| ^(NEG e=expression) { $b.Add(e); int negZeroReg = regAlloc.Alloc(); $b.Add(new LoadiInstruction(0, negZeroReg)); $b.Add(new SubInstruction(negZeroReg, e.Reg, reg)); }
 	| s=selector { $b = s; }
 	;
 
@@ -312,7 +312,7 @@ selector returns [BasicBlock<MilocInstruction> b]
 	: ^(DOT s=selector id=ID)
 		{
 			$b = new BasicBlock<MilocInstruction>();
-			int reg = Instruction.VirtualRegister();
+			int reg = regAlloc.Alloc();
 			$b.Reg = reg;
 			$b.Add(s);
 			$b.Add(new LoadaiFieldInstruction(s.Reg, $id.text, reg) { ContainingType = s.StructType, FieldIndex = getFieldIndex(s.StructType, $id.text) });
@@ -322,7 +322,7 @@ selector returns [BasicBlock<MilocInstruction> b]
 	;
 
 factor returns [BasicBlock<MilocInstruction> b = new BasicBlock<MilocInstruction>()]
-@init { int reg = Instruction.VirtualRegister(); $b.Reg = reg; }
+@init { int reg = regAlloc.Alloc(); $b.Reg = reg; }
 	: ^(INVOKE id=ID regLocs=arguments[b])
 		{
 			doInvoke($id.text, $b, regLocs);

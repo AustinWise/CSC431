@@ -49,15 +49,20 @@ namespace CSC431.Sparc
 
         //this is so that virtual registers and sparc registers
         //can be placed into a bit array together
-        public static readonly int[] IntValueMap;
+        public static readonly TaskLocal<int[]> IntValueMap;
         static SparcRegister()
         {
-            var vals = Enum.GetValues(typeof(SparcReg));
-            IntValueMap = new int[vals.Length];
-            foreach (var v in vals)
+            IntValueMap = new TaskLocal<int[]>(() =>
             {
-                IntValueMap[(int)v] = Instruction.VirtualRegister();
-            }
+                var vals = Enum.GetValues(typeof(SparcReg));
+                var ret = new int[vals.Length];
+                var ra = VirtRegAlloc.Instance;
+                foreach (var v in vals)
+                {
+                    ret[(int)v] = ra.Alloc();
+                }
+                return ret;
+            });
         }
 
         /// <summary>
@@ -66,7 +71,7 @@ namespace CSC431.Sparc
         /// <returns></returns>
         public static int EnsureMap()
         {
-            return IntValueMap[0];
+            return IntValueMap.Value[0];
         }
 
         private SparcReg val;
@@ -78,7 +83,7 @@ namespace CSC431.Sparc
 
         public override int IntVal
         {
-            get { return IntValueMap[(int)val]; }
+            get { return IntValueMap.Value[(int)val]; }
         }
 
         public override string ToString()
