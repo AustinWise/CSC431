@@ -91,6 +91,13 @@ namespace CSC431
             }
 
             var typeChecked = pipe.FollowWith(FrontEndSteps.TypeCheck());
+
+            if (!string.IsNullOrEmpty(Options.ClrExec.Value))
+            {
+                typeChecked.FollowWith(StackSteps.MakeClrExe());
+                return typeChecked.AsStep();
+            }
+
             var flow = typeChecked.FollowWith(IlSteps.MakeCFG()).FollowWith(IlSteps.CleanUpCfg());
 
             if (Options.DumpIL.Value)
@@ -128,9 +135,6 @@ namespace CSC431
                 sparc.FollowWith(SparcSteps.SetStacks())
                      .FollowWith(SparcSteps.PrintCFG(outfile));
             }
-
-            if (!string.IsNullOrEmpty(Options.ClrExec.Value))
-                typeChecked.FollowWith(StackSteps.MakeClrExe());
 
             return pipe.AsStep();
         }

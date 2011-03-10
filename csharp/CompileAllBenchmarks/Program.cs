@@ -26,6 +26,7 @@ namespace CompileAllBenchmarks
             List<Task<string>> tasks = new List<Task<string>>();
             tasks.AddRange(compileBenchmarks("code.s", () => { }));
             tasks.AddRange(compileBenchmarks("noopt.s", () => { Options.DisableOpt.Value = true; }));
+            tasks.AddRange(compileBenchmarks("clr.txt", dir => { Options.ClrExec.Value = Path.Combine(dir, "EvilProg.exe"); }));
             //tasks.AddRange(compileBenchmarks("llvm.s", () => { Options.Llvm.Value = true; }));
 
             var taskArr = tasks.ToArray();
@@ -52,7 +53,14 @@ namespace CompileAllBenchmarks
             Console.WriteLine("Done compiling.");
         }
 
+
+
         private static List<Task<string>> compileBenchmarks(string outputFileName, Action setOptions)
+        {
+            return compileBenchmarks(outputFileName, _ => setOptions());
+        }
+
+        private static List<Task<string>> compileBenchmarks(string outputFileName, Action<string> setOptions)
         {
             List<Task<string>> tasks = new List<Task<string>>();
             foreach (var dontUseDir in Directory.GetDirectories(benchDir))
@@ -64,7 +72,7 @@ namespace CompileAllBenchmarks
 
                     var input = new FileStream(evFile, FileMode.Open, FileAccess.Read);
                     Options.InputSource.Value = input;
-                    setOptions();
+                    setOptions(myDir);
 
                     var outpath = Path.Combine(myDir, outputFileName);
                     var output = new StreamWriter(outpath, false, Encoding.ASCII);
@@ -78,7 +86,7 @@ namespace CompileAllBenchmarks
                     }
                     catch (Exception ex)
                     {
-                        ret = string.Format("{0}\n\t{1}\n", evFile.Substring(evFile.LastIndexOf('\\') + 1), ex.Message);
+                        ret = string.Format("{0}\n\t{1}\n", evFile.Substring(evFile.LastIndexOf('\\') + 1), ex.ToString());
                     }
                     finally
                     {

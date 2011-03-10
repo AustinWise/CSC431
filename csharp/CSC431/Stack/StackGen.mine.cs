@@ -29,9 +29,9 @@ namespace CSC431.Stack
 
         public void Program()
         {
-            AssemblyName aName = new AssemblyName(Options.ClrExec.Value);
+            AssemblyName aName = new AssemblyName("EvilProg-" + Guid.NewGuid().ToString());
             AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(aName, AssemblyBuilderAccess.Save);
-            programModule = ab.DefineDynamicModule(aName.Name, aName.Name + ".exe", true);
+            programModule = ab.DefineDynamicModule(aName.Name, "EvilProg-" + Guid.NewGuid().ToString() + ".exe", true);
             programType = programModule.DefineType("Program", TypeAttributes.Public);
 
             createReadInInt();
@@ -44,7 +44,15 @@ namespace CSC431.Stack
             ab.SetEntryPoint(main);
 
             programType.CreateType();
-            ab.Save(aName.Name + ".exe");
+
+            string tempPath = "EvilProg-" + Guid.NewGuid().ToString() + ".exe";
+            ab.Save(tempPath);
+
+            if (File.Exists(Options.ClrExec.Value))
+                File.Delete(Options.ClrExec.Value);
+
+            File.Move(tempPath, Options.ClrExec.Value);
+            File.Delete(tempPath);
         }
 
         private VarBase getVar(string id)
