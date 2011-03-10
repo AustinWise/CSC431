@@ -26,7 +26,7 @@ namespace CompileAllBenchmarks
             List<Task<string>> tasks = new List<Task<string>>();
             tasks.AddRange(compileBenchmarks("code.s", () => { }));
             tasks.AddRange(compileBenchmarks("noopt.s", () => { Options.DisableOpt.Value = true; }));
-            tasks.AddRange(compileBenchmarks("clr.txt", dir => { Options.ClrExec.Value = Path.Combine(dir, "EvilProg.exe"); }));
+            //tasks.AddRange(compileBenchmarks("clr.txt", dir => { Options.ClrExec.Value = Path.Combine(dir, "EvilProg.exe"); }));
             //tasks.AddRange(compileBenchmarks("llvm.s", () => { Options.Llvm.Value = true; }));
 
             var taskArr = tasks.ToArray();
@@ -86,7 +86,7 @@ namespace CompileAllBenchmarks
                     }
                     catch (Exception ex)
                     {
-                        ret = string.Format("{0}\n\t{1}\n", evFile.Substring(evFile.LastIndexOf('\\') + 1), ex.ToString());
+                        ret = string.Format("{0}\n\t{1}\n", evFile.Substring(evFile.LastIndexOf('\\') + 1), ex.Message);
                     }
                     finally
                     {

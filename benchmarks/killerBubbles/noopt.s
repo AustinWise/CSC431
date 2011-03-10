@@ -21,7 +21,7 @@ save %sp, -96, %sp
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %l1
-.L18980:
+.L18528:
 or %l1, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -32,17 +32,17 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L18986
+be %icc, .L18534
 nop
-ba %icc, .L19075
+ba %icc, .L18623
 nop
-.L18986:
+.L18534:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %l1
 mov %i0, %l0
 or %l0, 0, %l0
-.L18997:
+.L18545:
 or %l0, 0, %l2
 ldsw [%l2 + 8], %l3
 mov %i0, %l2
@@ -53,11 +53,11 @@ movne %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L19005
+be %icc, .L18553
 nop
-ba %icc, .L19073
+ba %icc, .L18621
 nop
-.L19005:
+.L18553:
 or %l0, 0, %l3
 or %l0, 0, %l2
 ldsw [%l2 + 8], %l2
@@ -75,11 +75,11 @@ movg %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L19019
+be %icc, .L18567
 nop
-ba %icc, .L19046
+ba %icc, .L18594
 nop
-.L19019:
+.L18567:
 or %l0, 0, %l1
 ldsw [%l1 + 0], %l1
 or %l1, 0, %l3
@@ -95,21 +95,21 @@ stw %l1, [%l2 + 0]
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 or %l1, 0, %l1
-ba %icc, .L19051
+ba %icc, .L18599
 nop
-.L19046:
-ba %icc, .L19051
+.L18594:
+ba %icc, .L18599
 nop
-.L19051:
+.L18599:
 or %l0, 0, %l0
 ldsw [%l0 + 8], %l0
 or %l0, 0, %l0
-ba %icc, .L18997
+ba %icc, .L18545
 nop
-.L19073:
-ba %icc, .L18980
+.L18621:
+ba %icc, .L18528
 nop
-.L19075:
+.L18623:
 ret
 restore
 	.size    deathSort, .-deathSort
@@ -132,7 +132,7 @@ mov %i0, %l0
 mov %l0, %o0
 call free
 nop
-.L19097:
+.L18645:
 or %l1, 0, %l2
 mov %i0, %l0
 sethi %hi(0), %l3
@@ -142,11 +142,11 @@ movne %icc, 1, %l3
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l3, %l0
-be %icc, .L19104
+be %icc, .L18652
 nop
-ba %icc, .L19135
+ba %icc, .L18683
 nop
-.L19104:
+.L18652:
 or %l1, 0, %l0
 or %l0, 0, %l0
 or %l1, 0, %l2
@@ -163,9 +163,9 @@ or %l0, 0, %l0
 mov %l0, %o0
 call free
 nop
-ba %icc, .L19097
+ba %icc, .L18645
 nop
-.L19135:
+.L18683:
 ret
 restore
 	.size    printEVILList, .-printEVILList
@@ -196,11 +196,11 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L19153
+be %icc, .L18701
 nop
-ba %icc, .L19163
+ba %icc, .L18711
 nop
-.L19153:
+.L18701:
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 sethi %hi(0), %l0
@@ -219,12 +219,12 @@ sub %l0, %l1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L19168
+ba %icc, .L18716
 nop
-.L19163:
-ba %icc, .L19168
+.L18711:
+ba %icc, .L18716
 nop
-.L19168:
+.L18716:
 or %l3, 0, %l1
 sethi %hi(1000), %l0
 or %l0, %lo(1000), %l0
@@ -254,7 +254,7 @@ sub %l2, %l0, %l0
 or %l0, 0, %l2
 or %l1, 0, %l0
 or %l0, 0, %l0
-.L19216:
+.L18764:
 or %l2, 0, %l4
 sethi %hi(0), %l3
 or %l3, %lo(0), %l3
@@ -265,11 +265,11 @@ movg %icc, 1, %l5
 sethi %hi(1), %l3
 or %l3, %lo(1), %l3
 cmp %l5, %l3
-be %icc, .L19222
+be %icc, .L18770
 nop
-ba %icc, .L19273
+ba %icc, .L18821
 nop
-.L19222:
+.L18770:
 or %g0, 1, %o0
 or %g0, 12, %o1
 call calloc
@@ -295,9 +295,9 @@ sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 sub %l3, %l2, %l2
 or %l2, 0, %l2
-ba %icc, .L19216
+ba %icc, .L18764
 nop
-.L19273:
+.L18821:
 or %l1, 0, %l0
 mov %l0, %o0
 call deathSort

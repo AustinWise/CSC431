@@ -4,7 +4,7 @@
 .type    wait, #function
 wait:
 save %sp, -96, %sp
-.L17254:
+.L16802:
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -15,19 +15,19 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L17260
+be %icc, .L16808
 nop
-ba %icc, .L17278
+ba %icc, .L16826
 nop
-.L17260:
+.L16808:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sub %l1, %l0, %l0
 mov %l0, %i0
-ba %icc, .L17254
+ba %icc, .L16802
 nop
-.L17278:
+.L16826:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
@@ -42,7 +42,7 @@ save %sp, -96, %sp
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %l3
-.L17293:
+.L16841:
 mov %i1, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -53,11 +53,11 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L17299
+be %icc, .L16847
 nop
-ba %icc, .L17326
+ba %icc, .L16874
 nop
-.L17299:
+.L16847:
 or %l3, 0, %l1
 mov %i0, %l0
 mulx %l1, %l0, %l0
@@ -67,9 +67,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sub %l1, %l0, %l0
 mov %l0, %i1
-ba %icc, .L17293
+ba %icc, .L16841
 nop
-.L17326:
+.L16874:
 or %l3, 0, %l0
 or %l0, 0, %i0
 ret
@@ -90,11 +90,11 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L17345
+be %icc, .L16893
 nop
-ba %icc, .L17421
+ba %icc, .L16969
 nop
-.L17345:
+.L16893:
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 or %l0, 0, %l1
@@ -122,11 +122,11 @@ move %icc, 1, %l3
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l3, %l0
-be %icc, .L17382
+be %icc, .L16930
 nop
-ba %icc, .L17398
+ba %icc, .L16946
 nop
-.L17382:
+.L16930:
 mov %i1, %l0
 or %l1, 0, %l2
 mov %i2, %l1
@@ -137,12 +137,12 @@ nop
 mov %o0, %l1
 add %l0, %l1, %l0
 mov %l0, %i1
-ba %icc, .L17403
+ba %icc, .L16951
 nop
-.L17398:
-ba %icc, .L17403
+.L16946:
+ba %icc, .L16951
 nop
-.L17403:
+.L16951:
 mov %i0, %l1
 sethi %hi(10), %l0
 or %l0, %lo(10), %l0
@@ -161,12 +161,12 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L17426
+ba %icc, .L16974
 nop
-.L17421:
-ba %icc, .L17426
+.L16969:
+ba %icc, .L16974
 nop
-.L17426:
+.L16974:
 mov %i1, %l0
 or %l0, 0, %i0
 ret
@@ -218,7 +218,7 @@ or %l1, 0, %l2
 or %l1, 0, %l0
 mulx %l2, %l0, %l0
 or %l0, 0, %l0
-.L17481:
+.L17029:
 or %l0, 0, %l3
 sethi %hi(0), %l2
 or %l2, %lo(0), %l2
@@ -229,11 +229,11 @@ movg %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L17487
+be %icc, .L17035
 nop
-ba %icc, .L17509
+ba %icc, .L17057
 nop
-.L17487:
+.L17035:
 or %l0, 0, %l2
 mov %l2, %o0
 call wait
@@ -243,9 +243,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sub %l2, %l0, %l0
 or %l0, 0, %l0
-ba %icc, .L17481
+ba %icc, .L17029
 nop
-.L17509:
+.L17057:
 or %l1, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0

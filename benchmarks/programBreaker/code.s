@@ -14,18 +14,18 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L10677
+be %icc, .L10209
 nop
-ba %icc, .L10683
+ba %icc, .L10215
 nop
-.L10677:
+.L10209:
 mov %i1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L10700
+ba %icc, .L10232
 nop
-.L10683:
+.L10215:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -39,9 +39,9 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L10700
+ba %icc, .L10232
 nop
-.L10700:
+.L10232:
 	.size    fun2, .-fun2
 	.align 4
 	.global fun1
@@ -70,11 +70,11 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L10741
+be %icc, .L10273
 nop
-ba %icc, .L10752
+ba %icc, .L10284
 nop
-.L10741:
+.L10273:
 or %l4, 0, %l1
 mov %i0, %l0
 mov %l1, %o0
@@ -85,9 +85,9 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L10786
+ba %icc, .L10318
 nop
-.L10752:
+.L10284:
 sethi %hi(5), %l1
 or %l1, %lo(5), %l1
 sethi %hi(6), %l0
@@ -106,11 +106,11 @@ and %l3, %l2, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L10767
+be %icc, .L10299
 nop
-ba %icc, .L10778
+ba %icc, .L10310
 nop
-.L10767:
+.L10299:
 or %l4, 0, %l1
 mov %i1, %l0
 mov %l1, %o0
@@ -121,15 +121,15 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L10784
+ba %icc, .L10316
 nop
-.L10778:
-ba %icc, .L10784
+.L10310:
+ba %icc, .L10316
 nop
-.L10784:
-ba %icc, .L10786
+.L10316:
+ba %icc, .L10318
 nop
-.L10786:
+.L10318:
 or %l4, 0, %l0
 or %l0, 0, %i0
 ret
@@ -147,7 +147,7 @@ call scanf
 nop
 ldsw [%sp + 92], %l0
 or %l0, 0, %l0
-.L10802:
+.L10334:
 or %l0, 0, %l2
 sethi %hi(10000), %l1
 or %l1, %lo(10000), %l1
@@ -158,11 +158,11 @@ movl %icc, 1, %l3
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 cmp %l3, %l1
-be %icc, .L10808
+be %icc, .L10340
 nop
-ba %icc, .L10836
+ba %icc, .L10368
 nop
-.L10808:
+.L10340:
 sethi %hi(3), %l3
 or %l3, %lo(3), %l3
 or %l0, 0, %l2
@@ -184,9 +184,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
 or %l0, 0, %l0
-ba %icc, .L10802
+ba %icc, .L10334
 nop
-.L10836:
+.L10368:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0

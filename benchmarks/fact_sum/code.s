@@ -34,22 +34,22 @@ or %l3, %l2, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L4207
+be %icc, .L3609
 nop
-ba %icc, .L4212
+ba %icc, .L3614
 nop
-.L4207:
+.L3609:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L4217
+ba %icc, .L3619
 nop
-.L4212:
-ba %icc, .L4217
+.L3614:
+ba %icc, .L3619
 nop
-.L4217:
+.L3619:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -60,11 +60,11 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L4223
+be %icc, .L3625
 nop
-ba %icc, .L4235
+ba %icc, .L3637
 nop
-.L4223:
+.L3625:
 sethi %hi(-1), %l1
 or %l1, %lo(-1), %l1
 mov %i0, %l0
@@ -76,12 +76,12 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L4240
+ba %icc, .L3642
 nop
-.L4235:
-ba %icc, .L4240
+.L3637:
+ba %icc, .L3642
 nop
-.L4240:
+.L3642:
 mov %i0, %l0
 mov %i0, %l2
 sethi %hi(1), %l1
@@ -105,7 +105,7 @@ main:
 save %sp, -96, %sp
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-.L4268:
+.L3670:
 or %l0, 0, %l1
 sethi %hi(-1), %l0
 or %l0, %lo(-1), %l0
@@ -116,11 +116,11 @@ movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L4275
+be %icc, .L3677
 nop
-ba %icc, .L4315
+ba %icc, .L3733
 nop
-.L4275:
+.L3677:
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
 add %sp, 92, %o1
@@ -166,9 +166,9 @@ call scanf
 nop
 ldsw [%sp + 92], %l0
 or %l0, 0, %l0
-ba %icc, .L4268
+ba %icc, .L3670
 nop
-.L4315:
+.L3733:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0

@@ -14,22 +14,22 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L4637
+be %icc, .L4523
 nop
-ba %icc, .L4644
+ba %icc, .L4530
 nop
-.L4637:
+.L4523:
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L4649
+ba %icc, .L4535
 nop
-.L4644:
-ba %icc, .L4649
+.L4530:
+ba %icc, .L4535
 nop
-.L4649:
+.L4535:
 mov %i0, %l1
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
@@ -121,7 +121,7 @@ call printf
 nop
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-.L4741:
+.L4627:
 or %l0, 0, %l5
 sethi %hi(50), %l4
 or %l4, %lo(50), %l4
@@ -132,14 +132,14 @@ movl %icc, 1, %l6
 sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 cmp %l6, %l4
-be %icc, .L4747
+be %icc, .L4633
 nop
-ba %icc, .L4893
+ba %icc, .L4779
 nop
-.L4747:
+.L4633:
 sethi %hi(0), %l3
 or %l3, %lo(0), %l3
-.L4753:
+.L4639:
 or %l3, 0, %l5
 sethi %hi(end), %l4
 or %l4, %lo(end), %l4
@@ -151,11 +151,11 @@ movle %icc, 1, %l6
 sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 cmp %l6, %l4
-be %icc, .L4760
+be %icc, .L4646
 nop
-ba %icc, .L4877
+ba %icc, .L4763
 nop
-.L4760:
+.L4646:
 sethi %hi(39916800), %l2
 or %l2, %lo(39916800), %l2
 or %l3, 0, %l4
@@ -198,34 +198,34 @@ movle %icc, 1, %l6
 sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 cmp %l6, %l4
-be %icc, .L4848
+be %icc, .L4734
 nop
-ba %icc, .L4854
+ba %icc, .L4740
 nop
-.L4848:
+.L4734:
 sethi %hi(1), %l7
 or %l7, %lo(1), %l7
-ba %icc, .L4859
+ba %icc, .L4745
 nop
-.L4854:
-ba %icc, .L4859
+.L4740:
+ba %icc, .L4745
 nop
-.L4859:
+.L4745:
 or %l3, 0, %l4
 or %l7, 0, %l3
 add %l4, %l3, %l3
 or %l3, 0, %l3
-ba %icc, .L4753
+ba %icc, .L4639
 nop
-.L4877:
+.L4763:
 or %l0, 0, %l4
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l4, %l0, %l0
 or %l0, 0, %l0
-ba %icc, .L4741
+ba %icc, .L4627
 nop
-.L4893:
+.L4779:
 or %l3, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0

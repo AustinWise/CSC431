@@ -27,18 +27,18 @@ move %icc, 1, %l3
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l3, %l0
-be %icc, .L2809
+be %icc, .L69
 nop
-ba %icc, .L2815
+ba %icc, .L75
 nop
-.L2809:
+.L69:
 or %l1, 0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L2835
+ba %icc, .L271
 nop
-.L2815:
+.L75:
 or %l1, 0, %l2
 or %l4, 0, %l0
 stw %l0, [%l2 + 0]
@@ -51,9 +51,9 @@ or %l1, 0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L2835
+ba %icc, .L271
 nop
-.L2835:
+.L271:
 	.size    getIntList, .-getIntList
 	.align 4
 	.global biggest
@@ -69,25 +69,25 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L2850
+be %icc, .L710
 nop
-ba %icc, .L2856
+ba %icc, .L721
 nop
-.L2850:
+.L710:
 mov %i0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L2865
+ba %icc, .L734
 nop
-.L2856:
+.L721:
 mov %i1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L2865
+ba %icc, .L734
 nop
-.L2865:
+.L734:
 	.size    biggest, .-biggest
 	.align 4
 	.global biggestInList
@@ -97,7 +97,7 @@ save %sp, -96, %sp
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
 or %l0, 0, %l3
-.L2878:
+.L766:
 mov %i0, %l0
 ldsw [%l0 + 4], %l1
 sethi %hi(0), %l0
@@ -109,11 +109,11 @@ movne %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L2885
+be %icc, .L773
 nop
-ba %icc, .L2913
+ba %icc, .L801
 nop
-.L2885:
+.L773:
 or %l3, 0, %l1
 mov %i0, %l0
 ldsw [%l0 + 0], %l0
@@ -126,9 +126,9 @@ or %l0, 0, %l3
 mov %i0, %l0
 ldsw [%l0 + 4], %l0
 mov %l0, %i0
-ba %icc, .L2878
+ba %icc, .L766
 nop
-.L2913:
+.L801:
 or %l3, 0, %l0
 or %l0, 0, %i0
 ret

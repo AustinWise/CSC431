@@ -321,7 +321,7 @@ save %sp, -96, %sp
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %l3
-.L20295:
+.L19843:
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -332,11 +332,11 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L20301
+be %icc, .L19849
 nop
-ba %icc, .L20328
+ba %icc, .L19876
 nop
-.L20301:
+.L19849:
 or %l3, 0, %l1
 mov %i0, %l0
 add %l1, %l0, %l0
@@ -346,9 +346,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sub %l1, %l0, %l0
 mov %l0, %i0
-ba %icc, .L20295
+ba %icc, .L19843
 nop
-.L20328:
+.L19876:
 or %l3, 0, %l0
 or %l0, 0, %i0
 ret
@@ -411,11 +411,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L20384
+be %icc, .L19932
 nop
-ba %icc, .L20392
+ba %icc, .L19940
 nop
-.L20384:
+.L19932:
 sethi %hi(10000), %l0
 or %l0, %lo(10000), %l0
 mov %l0, %o0
@@ -423,9 +423,9 @@ call sum
 nop
 mov %o0, %l0
 or %l0, 0, %l3
-ba %icc, .L20435
+ba %icc, .L19983
 nop
-.L20392:
+.L19940:
 sethi %hi(global2), %l0
 or %l0, %lo(global2), %l0
 ldsw [%l0 + 0], %l1
@@ -438,11 +438,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L20400
+be %icc, .L19948
 nop
-ba %icc, .L20408
+ba %icc, .L19956
 nop
-.L20400:
+.L19948:
 sethi %hi(20000), %l0
 or %l0, %lo(20000), %l0
 mov %l0, %o0
@@ -450,12 +450,12 @@ call sum
 nop
 mov %o0, %l0
 or %l0, 0, %l3
-ba %icc, .L20413
+ba %icc, .L19961
 nop
-.L20408:
-ba %icc, .L20413
+.L19956:
+ba %icc, .L19961
 nop
-.L20413:
+.L19961:
 sethi %hi(global3), %l0
 or %l0, %lo(global3), %l0
 ldsw [%l0 + 0], %l1
@@ -468,11 +468,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L20419
+be %icc, .L19967
 nop
-ba %icc, .L20427
+ba %icc, .L19975
 nop
-.L20419:
+.L19967:
 sethi %hi(30000), %l0
 or %l0, %lo(30000), %l0
 mov %l0, %o0
@@ -480,15 +480,15 @@ call sum
 nop
 mov %o0, %l0
 or %l0, 0, %l3
-ba %icc, .L20433
+ba %icc, .L19981
 nop
-.L20427:
-ba %icc, .L20433
+.L19975:
+ba %icc, .L19981
 nop
-.L20433:
-ba %icc, .L20435
+.L19981:
+ba %icc, .L19983
 nop
-.L20435:
+.L19983:
 or %l3, 0, %l0
 or %l0, 0, %i0
 ret
@@ -501,388 +501,390 @@ commonSubexpressionElimination:
 save %sp, -144, %sp
 sethi %hi(11), %l0
 or %l0, %lo(11), %l0
-or %l0, 0, %g5
+or %l0, 0, %l1
+stw %l1, [%sp + 140]
 sethi %hi(22), %l0
 or %l0, %lo(22), %l0
-or %l0, 0, %l2
-stw %l2, [%sp + 140]
+or %l0, 0, %g5
 sethi %hi(33), %l0
 or %l0, %lo(33), %l0
 or %l0, 0, %l1
 stw %l1, [%sp + 136]
 sethi %hi(44), %l0
 or %l0, %lo(44), %l0
-or %l0, 0, %l1
-stw %l1, [%sp + 132]
+or %l0, 0, %g4
 sethi %hi(55), %l0
 or %l0, %lo(55), %l0
-or %l0, 0, %g4
+or %l0, 0, %l3
+stw %l3, [%sp + 132]
 sethi %hi(66), %l0
 or %l0, %lo(66), %l0
-or %l0, 0, %l2
-stw %l2, [%sp + 128]
+or %l0, 0, %l3
+stw %l3, [%sp + 128]
 sethi %hi(77), %l0
 or %l0, %lo(77), %l0
 or %l0, 0, %l0
 stw %l0, [%sp + 124]
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
 mulx %l1, %l0, %l0
+or %l0, 0, %g1
+ldsw [%sp + 136], %l1
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
 or %l0, 0, %l0
 stw %l0, [%sp + 120]
-ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-or %l0, 0, %g1
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+ldsw [%sp + 132], %l3
+or %l3, 0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
 mulx %l1, %l0, %l0
 or %l0, 0, %l0
 stw %l0, [%sp + 116]
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l3
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
+mulx %l1, %l0, %l2
 ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-add %l3, %l0, %l3
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 132], %l3
+or %l3, 0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
 mulx %l1, %l0, %l0
-sub %l3, %l0, %l1
+sub %l2, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
-or %l0, 0, %l0
-stw %l0, [%sp + 96]
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l3
+or %l0, 0, %o5
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
+mulx %l1, %l0, %l2
 ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-add %l3, %l0, %l3
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 132], %l3
+or %l3, 0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
 mulx %l1, %l0, %l0
-sub %l3, %l0, %l1
+sub %l2, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
 or %l0, 0, %l0
 stw %l0, [%sp + 92]
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l3
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
+mulx %l1, %l0, %l2
 ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-add %l3, %l0, %l3
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 132], %l3
+or %l3, 0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
 mulx %l1, %l0, %l0
-sub %l3, %l0, %l1
+sub %l2, %l0, %l1
+ldsw [%sp + 124], %l0
+or %l0, 0, %l0
+add %l1, %l0, %l0
+or %l0, 0, %l0
+stw %l0, [%sp + 96]
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
+mulx %l1, %l0, %l2
+ldsw [%sp + 136], %l1
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 132], %l3
+or %l3, 0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
+mulx %l1, %l0, %l0
+sub %l2, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
 or %l0, 0, %l0
 stw %l0, [%sp + 100]
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l3
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
+mulx %l1, %l0, %l2
 ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-add %l3, %l0, %l3
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 132], %l3
+or %l3, 0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
 mulx %l1, %l0, %l0
-sub %l3, %l0, %l1
+sub %l2, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
 or %l0, 0, %l0
 stw %l0, [%sp + 104]
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l3
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
+mulx %l1, %l0, %l2
 ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-add %l3, %l0, %l3
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 132], %l3
+or %l3, 0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
 mulx %l1, %l0, %l0
-sub %l3, %l0, %l1
+sub %l2, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
 or %l0, 0, %l0
 stw %l0, [%sp + 108]
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l3
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
+mulx %l1, %l0, %l2
 ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-add %l3, %l0, %l3
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 132], %l3
+or %l3, 0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
 mulx %l1, %l0, %l0
-sub %l3, %l0, %l1
+sub %l2, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
 or %l0, 0, %l0
 stw %l0, [%sp + 112]
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l3
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
+mulx %l1, %l0, %l2
 ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-add %l3, %l0, %l3
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 132], %l3
+or %l3, 0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
 mulx %l1, %l0, %l0
-sub %l3, %l0, %l1
-ldsw [%sp + 124], %l0
-or %l0, 0, %l0
-add %l1, %l0, %l0
-or %l0, 0, %o5
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l3
-ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-add %l3, %l0, %l3
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l0
-sub %l3, %l0, %l1
+sub %l2, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
 or %l0, 0, %o4
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l3
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
+mulx %l1, %l0, %l2
 ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-add %l3, %l0, %l3
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 132], %l3
+or %l3, 0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
 mulx %l1, %l0, %l0
-sub %l3, %l0, %l1
+sub %l2, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
 or %l0, 0, %o3
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l3
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
+mulx %l1, %l0, %l2
 ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-add %l3, %l0, %l3
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 132], %l3
+or %l3, 0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
 mulx %l1, %l0, %l0
-sub %l3, %l0, %l1
+sub %l2, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
 or %l0, 0, %o2
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l3
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
+mulx %l1, %l0, %l2
 ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-add %l3, %l0, %l3
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 132], %l3
+or %l3, 0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
 mulx %l1, %l0, %l0
-sub %l3, %l0, %l1
+sub %l2, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
 or %l0, 0, %o1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l1
-or %g5, 0, %l0
-mulx %l1, %l0, %l3
-ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
+or %g5, 0, %l2
+ldsw [%sp + 140], %l1
 or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-add %l3, %l0, %l3
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+mulx %l2, %l0, %l2
+ldsw [%sp + 136], %l1
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 132], %l3
+or %l3, 0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
 mulx %l1, %l0, %l0
-sub %l3, %l0, %l1
+sub %l2, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
 or %l0, 0, %l7
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l3
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
+mulx %l1, %l0, %l2
 ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l0
-add %l3, %l0, %l3
-ldsw [%sp + 128], %l2
-or %l2, 0, %l1
+or %l1, 0, %l1
 or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 128], %l3
+or %l3, 0, %l1
+ldsw [%sp + 132], %l3
+or %l3, 0, %l0
 mulx %l1, %l0, %l0
-sub %l3, %l0, %l1
+sub %l2, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
 or %l0, 0, %l6
 ldsw [%sp + 124], %l0
-or %l0, 0, %l3
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-mulx %l1, %l0, %l0
-add %l3, %l0, %l0
-ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
+or %l0, 0, %l2
+ldsw [%sp + 140], %l1
 or %l1, 0, %l1
-sdivx %l2, %l1, %l1
-add %l0, %l1, %l3
-or %g4, 0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+or %g5, 0, %l0
 mulx %l1, %l0, %l0
-sub %l3, %l0, %l0
+add %l2, %l0, %l2
+ldsw [%sp + 136], %l1
+or %l1, 0, %l1
+or %g4, 0, %l0
+sdivx %l1, %l0, %l0
+add %l2, %l0, %l0
+ldsw [%sp + 132], %l3
+or %l3, 0, %l2
+ldsw [%sp + 128], %l3
+or %l3, 0, %l1
+mulx %l2, %l1, %l1
+sub %l0, %l1, %l0
 or %l0, 0, %l5
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
 mulx %l1, %l0, %l0
 ldsw [%sp + 136], %l1
 or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l1
+or %g4, 0, %l1
 sdivx %l2, %l1, %l1
 add %l0, %l1, %l0
-or %g4, 0, %l3
-ldsw [%sp + 128], %l2
-or %l2, 0, %l1
-mulx %l3, %l1, %l1
+ldsw [%sp + 132], %l3
+or %l3, 0, %l2
+ldsw [%sp + 128], %l3
+or %l3, 0, %l1
+mulx %l2, %l1, %l1
 sub %l0, %l1, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
 or %l0, 0, %l4
 ldsw [%sp + 136], %l1
-or %l1, 0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-sdivx %l2, %l0, %l1
-or %g5, 0, %l0
-ldsw [%sp + 140], %l2
-or %l2, 0, %l2
-mulx %l0, %l2, %l0
-add %l1, %l0, %l1
+or %l1, 0, %l1
 or %g4, 0, %l0
-ldsw [%sp + 128], %l2
-or %l2, 0, %l2
+sdivx %l1, %l0, %l0
+ldsw [%sp + 140], %l1
+or %l1, 0, %l2
+or %g5, 0, %l1
+mulx %l2, %l1, %l1
+add %l0, %l1, %l1
+ldsw [%sp + 132], %l3
+or %l3, 0, %l0
+ldsw [%sp + 128], %l3
+or %l3, 0, %l2
 mulx %l0, %l2, %l0
 sub %l1, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l0
-or %l0, 0, %l3
-or %g5, 0, %l1
-ldsw [%sp + 140], %l2
-or %l2, 0, %l0
-add %l1, %l0, %l2
+or %l0, 0, %l2
+ldsw [%sp + 140], %l1
+or %l1, 0, %l1
+or %g5, 0, %l0
+add %l1, %l0, %l3
 ldsw [%sp + 136], %l1
 or %l1, 0, %l0
-add %l2, %l0, %l2
-ldsw [%sp + 132], %l1
-or %l1, 0, %l0
-add %l2, %l0, %l1
+add %l3, %l0, %l1
 or %g4, 0, %l0
 add %l1, %l0, %l1
-ldsw [%sp + 128], %l2
-or %l2, 0, %l0
+ldsw [%sp + 132], %l3
+or %l3, 0, %l0
+add %l1, %l0, %l1
+ldsw [%sp + 128], %l3
+or %l3, 0, %l0
 add %l1, %l0, %l1
 ldsw [%sp + 124], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l1
+or %g1, 0, %l0
+add %l1, %l0, %l1
 ldsw [%sp + 120], %l0
 or %l0, 0, %l0
-add %l1, %l0, %l1
-or %g1, 0, %l0
 add %l1, %l0, %l1
 ldsw [%sp + 116], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l1
-ldsw [%sp + 96], %l0
-or %l0, 0, %l0
+or %o5, 0, %l0
 add %l1, %l0, %l1
 ldsw [%sp + 92], %l0
+or %l0, 0, %l0
+add %l1, %l0, %l1
+ldsw [%sp + 96], %l0
 or %l0, 0, %l0
 add %l1, %l0, %l1
 ldsw [%sp + 100], %l0
@@ -896,8 +898,6 @@ or %l0, 0, %l0
 add %l1, %l0, %l1
 ldsw [%sp + 112], %l0
 or %l0, 0, %l0
-add %l1, %l0, %l1
-or %o5, 0, %l0
 add %l1, %l0, %l1
 or %o4, 0, %l0
 add %l1, %l0, %l1
@@ -915,7 +915,7 @@ or %l5, 0, %l0
 add %l1, %l0, %l1
 or %l4, 0, %l0
 add %l1, %l0, %l1
-or %l3, 0, %l0
+or %l2, 0, %l0
 add %l1, %l0, %l0
 or %l0, 0, %i0
 ret
@@ -941,7 +941,7 @@ or %l0, 0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %l0
-.L21094:
+.L20642:
 or %l0, 0, %l6
 sethi %hi(1000000), %l5
 or %l5, %lo(1000000), %l5
@@ -952,11 +952,11 @@ movl %icc, 1, %l7
 sethi %hi(1), %l5
 or %l5, %lo(1), %l5
 cmp %l7, %l5
-be %icc, .L21100
+be %icc, .L20648
 nop
-ba %icc, .L21148
+ba %icc, .L20696
 nop
-.L21100:
+.L20648:
 sethi %hi(5), %l5
 or %l5, %lo(5), %l5
 or %l5, 0, %l5
@@ -977,9 +977,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l5, %l0, %l0
 or %l0, 0, %l0
-ba %icc, .L21094
+ba %icc, .L20642
 nop
-.L21148:
+.L20696:
 or %l3, 0, %l0
 or %l0, 0, %i0
 ret
@@ -1009,11 +1009,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L21176
+be %icc, .L20724
 nop
-ba %icc, .L21219
+ba %icc, .L20767
 nop
-.L21176:
+.L20724:
 sethi %hi(20), %l0
 or %l0, %lo(20), %l0
 or %l0, 0, %l0
@@ -1027,20 +1027,20 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L21188
+be %icc, .L20736
 nop
-ba %icc, .L21198
+ba %icc, .L20746
 nop
-.L21188:
+.L20736:
 sethi %hi(200), %l0
 or %l0, %lo(200), %l0
 or %l0, 0, %l0
 sethi %hi(300), %l0
 or %l0, %lo(300), %l0
 or %l0, 0, %l0
-ba %icc, .L21215
+ba %icc, .L20763
 nop
-.L21198:
+.L20746:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %l4
@@ -1050,18 +1050,18 @@ or %l0, 0, %l0
 sethi %hi(3), %l0
 or %l0, %lo(3), %l0
 or %l0, 0, %l0
-ba %icc, .L21215
+ba %icc, .L20763
 nop
-.L21215:
+.L20763:
 sethi %hi(50), %l0
 or %l0, %lo(50), %l0
 or %l0, 0, %l3
-ba %icc, .L21224
+ba %icc, .L20772
 nop
-.L21219:
-ba %icc, .L21224
+.L20767:
+ba %icc, .L20772
 nop
-.L21224:
+.L20772:
 or %l3, 0, %l0
 or %l0, 0, %i0
 ret
@@ -1198,18 +1198,18 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L21414
+be %icc, .L20962
 nop
-ba %icc, .L21420
+ba %icc, .L20968
 nop
-.L21414:
+.L20962:
 mov %i1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L21441
+ba %icc, .L20989
 nop
-.L21420:
+.L20968:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -1225,9 +1225,9 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L21441
+ba %icc, .L20989
 nop
-.L21441:
+.L20989:
 	.size    tailRecursionHelper, .-tailRecursionHelper
 	.align 4
 	.global tailRecursion
@@ -1257,7 +1257,7 @@ or %l0, 0, %l4
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 or %l0, 0, %l3
-.L21470:
+.L21018:
 or %l4, 0, %l1
 sethi %hi(1000000), %l0
 or %l0, %lo(1000000), %l0
@@ -1268,11 +1268,11 @@ movl %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L21476
+be %icc, .L21024
 nop
-ba %icc, .L21515
+ba %icc, .L21063
 nop
-.L21476:
+.L21024:
 or %l3, 0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
@@ -1283,30 +1283,30 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L21484
+be %icc, .L21032
 nop
-ba %icc, .L21494
+ba %icc, .L21042
 nop
-.L21484:
+.L21032:
 or %l4, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
 or %l0, 0, %l4
-ba %icc, .L21513
+ba %icc, .L21061
 nop
-.L21494:
+.L21042:
 or %l4, 0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 add %l1, %l0, %l0
 or %l0, 0, %l4
-ba %icc, .L21513
+ba %icc, .L21061
 nop
-.L21513:
-ba %icc, .L21470
+.L21061:
+ba %icc, .L21018
 nop
-.L21515:
+.L21063:
 or %l4, 0, %l0
 or %l0, 0, %i0
 ret
@@ -1323,7 +1323,7 @@ or %l0, 0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %l0
-.L21534:
+.L21082:
 or %l1, 0, %l3
 mov %i0, %l2
 sethi %hi(0), %l4
@@ -1333,11 +1333,11 @@ movl %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L21541
+be %icc, .L21089
 nop
-ba %icc, .L21647
+ba %icc, .L21195
 nop
-.L21541:
+.L21089:
 sethi %hi(4), %l2
 or %l2, %lo(4), %l2
 or %l2, 0, %l3
@@ -1394,9 +1394,9 @@ sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 add %l2, %l1, %l1
 or %l1, 0, %l1
-ba %icc, .L21534
+ba %icc, .L21082
 nop
-.L21647:
+.L21195:
 or %l0, 0, %l0
 or %l0, 0, %i0
 ret
@@ -1419,7 +1419,7 @@ or %l0, 0, %l4
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %l3
-.L21671:
+.L21219:
 or %l3, 0, %l1
 mov %i0, %l0
 sethi %hi(0), %l2
@@ -1429,11 +1429,11 @@ movl %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L21678
+be %icc, .L21226
 nop
-ba %icc, .L21716
+ba %icc, .L21264
 nop
-.L21678:
+.L21226:
 or %l4, 0, %l1
 or %l5, 0, %l0
 add %l1, %l0, %l0
@@ -1447,9 +1447,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
 or %l0, 0, %l3
-ba %icc, .L21671
+ba %icc, .L21219
 nop
-.L21716:
+.L21264:
 or %l4, 0, %l0
 or %l0, 0, %i0
 ret
@@ -1478,18 +1478,18 @@ or %l3, %l2, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L21740
+be %icc, .L21288
 nop
-ba %icc, .L21746
+ba %icc, .L21294
 nop
-.L21740:
+.L21288:
 mov %i0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L21769
+ba %icc, .L21317
 nop
-.L21746:
+.L21294:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -1510,9 +1510,9 @@ add %l0, %l1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L21769
+ba %icc, .L21317
 nop
-.L21769:
+.L21317:
 	.size    recursiveFibonacci, .-recursiveFibonacci
 	.align 4
 	.global main
@@ -1529,7 +1529,7 @@ or %l0, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %l0
-.L21781:
+.L21329:
 or %l0, 0, %l3
 or %l1, 0, %l2
 sethi %hi(0), %l4
@@ -1539,11 +1539,11 @@ movl %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L21788
+be %icc, .L21336
 nop
-ba %icc, .L21940
+ba %icc, .L21488
 nop
-.L21788:
+.L21336:
 call constantFolding
 nop
 mov %o0, %l2
@@ -1706,9 +1706,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l2, %l0, %l0
 or %l0, 0, %l0
-ba %icc, .L21781
+ba %icc, .L21329
 nop
-.L21940:
+.L21488:
 sethi %hi(9999), %l0
 or %l0, %lo(9999), %l0
 sethi %hi(.ConstantString1), %o0
