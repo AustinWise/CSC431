@@ -72,7 +72,7 @@ namespace CSC431.Analysis
         private int? getValue(MilocInstruction instr, int reg)
         {
             var d = defs.GetDef(instr, reg);
-            if (d.Count != 0)
+            if (d.Count != 1)
                 return null;
             if (!instrValues.ContainsKey(d[0]))
                 return null;
