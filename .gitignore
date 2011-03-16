@@ -9,3 +9,8 @@ obj/*
 output.ev
 a.out
 
+*.dvi
+*.aux
+*.log
+*.pdf
+*.toc
