@@ -10,11 +10,6 @@ namespace CSC431
 {
     public static class OptSteps
     {
-        public static TransformStep<ProgramBlock<IL.MilocInstruction>> CommonSubExprElim()
-        {
-            return new TransformStep<ProgramBlock<IL.MilocInstruction>>(Analysis.CommonSubExprElim.DoOpt);
-        }
-
         public static TransformStep<ProgramBlock<IL.MilocInstruction>> UselessCodeRemoval()
         {
             return new TransformStep<ProgramBlock<IL.MilocInstruction>>(Analysis.UselessCodeRemoval.DoOpt);

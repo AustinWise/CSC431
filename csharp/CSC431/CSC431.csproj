@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analysis\CommonSubExprElim.cs" />
     <Compile Include="Analysis\ConstantFinder.cs" />
     <Compile Include="Analysis\ConstantFoldingConverter.cs" />
     <Compile Include="Analysis\CopyPropagation.cs" />
@@ -59,13 +58,11 @@
     <Compile Include="CFG\Printer.cs" />
     <Compile Include="CFG\Register.cs" />
     <Compile Include="CFG\VirtRegAlloc.cs" />
-    <Compile Include="Ensure.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="IL\IArithmeticInstruction.cs" />
     <Compile Include="IL\ITyped.cs" />
     <Compile Include="LLVM\LlvmRegister.cs" />
     <Compile Include="Analysis\NullPointerConverter.cs" />
-    <Compile Include="Multimap.cs" />
     <Compile Include="OptSteps.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
