@@ -37,6 +37,7 @@ Next, using our Step.DoAll function we execute each step in a topological sorted
 \subsection{Instructions}
 base instruction class has source and destination sources to assist with optimizations and register allocation
 for each instruction type we use a T4 template to generate specific subclasses for each individual instruction
+also each instruction has flags annotations that influence code generation
 these templates also generate a miloc converter and imiloc translator to aid in translating miloc to sparc
 
 \subsection{Control Flow Graph}
@@ -58,9 +59,12 @@ After traversing each block individually we iteratively visit each block again l
 We use reaching definitions of the source registers to check if they have a constant value.
 The resulting map of instructions to constant values is used by ConstantFoldingConverter (an implementation of IInstructionConverter) to replace the instructions with loads.
 \subsection{Power Reduction}
-power reduction and shit
+We use our IInstructionConverter interface to implement a class that primarily passes through instructions unchanged.
+However, when it encounters a multiply or divide instruction whose second argument is a constant value that is a power of two, instead we yield a shift instruction.
 \subsection{Useless Code Removal}
-useless code removal and shit
+In our T4 template, important instructions are defined as critical, this causes the generated class to set the critical flag to true such as return, branch, calls, etc.
+Using reaching definitions we mark all instructions that the critical instructions depend upon.
+We then sweep all unmarked instructions by using an IInstructionConverter that skips all marked instructions.
 \section{Performance of the Benchmarks}
   
 \end{document}
