@@ -1,0 +1,22 @@
+name,Our Opt,Our NoOpt,GCCO0,GCC3.s,CLR
+BenchMarkishTopics,0.00,0.00,0.00,0.00,0.26
+Fibonacci,38.61,48.25,8.11,38.61,35.39
+GeneralFunctAndOptimize,7.34,12.02,2.09,16.96,0.10
+OptimizationBenchmark,0.27,0.42,0.00,0.32,0.48
+TicTac,0.00,0.00,0.00,0.00,0.27
+bert,0.00,0.00,0.00,0.00,0.10
+biggest,0.01,0.00,0.00,0.00,0.30
+binaryConverter,29.02,39.10,0.00,29.01,0.10
+creativeBenchMarkName,33.20,44.73,0.00,33.74,28.01
+fact_sum,0.01,0.01,0.00,0.01,0.38
+hailstone,0.00,0.00,0.00,0.00,0.27
+hanoi_benchmark,100.26,112.87,46.59,98.71,77.62
+killerBubbles,43.82,57.02,18.30,43.56,42.32
+mile1,0.29,0.32,0.10,0.29,0.45
+mixed,9.63,18.70,5.71,16.09,19.92
+primes,2.56,3.64,1.14,2.58,4.04
+programBreaker,0.04,0.05,0.02,0.04,1.19
+stats,0.00,0.00,0.00,0.00,0.27
+uncreativeBenchmark,0.00,0.00,0.00,0.00,0.09
+wasteOfCycles,0.01,0.00,0.00,0.00,0.09
+Press any key to continue . . .

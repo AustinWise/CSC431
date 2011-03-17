@@ -87,15 +87,30 @@ However, when it encounters a multiply or divide instruction whose second argume
 
 \subsection{Useless Code Removal}
 \paragraph{}
-In our T4 template, important instructions such as returns, branchs, and memory access are defined as critical.
+In our T4 template, important instructions such as returns, branches, and memory access are defined as critical.
 Using reaching definitions we mark all instructions that the critical instructions depend upon.
 We then sweep all unmarked instructions by using an IInstructionConverter that skips all marked instructions.
 
 \section{Performance of the Benchmarks}
 \subsection{Methodology}
 \paragraph{}
-We compiled benchmarks with compiler both with and without optimizations.  GCC was also usecd to compile the C version of the benchmarks with -O0 and -O3.
-The LLVM and .NET backends do not yet run correctly on SPARC so they are not included in graphs.
+We compiled benchmarks with compiler both with and without optimizations.  GCC was also used to compile the C version of the benchmarks with -O0 and -O3.
+The LLVM and .NET back-ends do not yet run correctly on SPARC so they are not included in graphs.
 
-  
+\subsection{Results}
+\paragraph{}
+GCC with O0 consistently has the worse run time.
+This is probably because it stores all local variables on the stack while we only use the stack if we need to spill in register allocation.
+Because of the limited number of optimizations we implemented, the only benchmarks that showed speed ups were GeneralFunctAndOptimize and mixed.
+These had useless code, divides by powers of two, and constant expressions inside inner loops, allowing for our compiler to make a big difference.
+Our optimized code is still pretty messy, so GCC is able to throughly trounce our compiler in all benchmarks.
+
+
+\begin{figure}
+\includegraphics{Chart.png}
+\caption{Runtime of benchmarks using different compiler settings.}
+\label{chart}
+\end{figure}
+
+
 \end{document}
