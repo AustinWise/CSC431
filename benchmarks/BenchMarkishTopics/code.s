@@ -14,22 +14,22 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L45
+be %icc, .L27
 nop
-ba %icc, .L59
+ba %icc, .L38
 nop
-.L45:
+.L27:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L83
+ba %icc, .L48
 nop
-.L59:
-ba %icc, .L83
+.L38:
+ba %icc, .L48
 nop
-.L83:
+.L48:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 mov %i0, %l1
@@ -58,11 +58,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L407
+be %icc, .L102
 nop
-ba %icc, .L455
+ba %icc, .L133
 nop
-.L407:
+.L102:
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
@@ -76,12 +76,12 @@ mov %i0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L462
+ba %icc, .L138
 nop
-.L455:
-ba %icc, .L462
+.L133:
+ba %icc, .L138
 nop
-.L462:
+.L138:
 or %g0, 1, %o0
 or %g0, 8, %o1
 call calloc
@@ -114,22 +114,22 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L559
+be %icc, .L206
 nop
-ba %icc, .L570
+ba %icc, .L215
 nop
-.L559:
+.L206:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L575
+ba %icc, .L223
 nop
-.L570:
-ba %icc, .L575
+.L215:
+ba %icc, .L223
 nop
-.L575:
+.L223:
 mov %i0, %l0
 or %l0, 0, %l1
 mov %i0, %l0
@@ -162,7 +162,7 @@ sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 sethi %hi(0), %l1
 or %l1, %lo(0), %l1
-.L829:
+.L468:
 sethi %hi(intList), %l2
 or %l2, %lo(intList), %l2
 ldsw [%l2 + 0], %l3
@@ -175,11 +175,11 @@ movg %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L898
+be %icc, .L607
 nop
-ba %icc, .L1008
+ba %icc, .L1506
 nop
-.L898:
+.L607:
 or %l1, 0, %l2
 sethi %hi(intList), %l1
 or %l1, %lo(intList), %l1
@@ -206,9 +206,9 @@ sub %l3, %l2, %l3
 sethi %hi(intList), %l2
 or %l2, %lo(intList), %l2
 stw %l3, [%l2 + 0]
-ba %icc, .L829
+ba %icc, .L468
 nop
-.L1008:
+.L1506:
 or %l1, 0, %l2
 mov %l2, %o0
 call length
@@ -219,7 +219,7 @@ or %o0, %lo(.ConstantString0), %o0
 mov %l2, %o1
 call printf
 nop
-.L1014:
+.L1512:
 or %l1, 0, %l2
 mov %l2, %o0
 call length
@@ -234,11 +234,11 @@ movg %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L1022
+be %icc, .L1520
 nop
-ba %icc, .L1057
+ba %icc, .L1555
 nop
-.L1022:
+.L1520:
 or %l0, 0, %l2
 or %l1, 0, %l0
 ldsw [%l0 + 0], %l0
@@ -260,9 +260,9 @@ call deleteFirst
 nop
 mov %o0, %l1
 or %l1, 0, %l1
-ba %icc, .L1014
+ba %icc, .L1512
 nop
-.L1057:
+.L1555:
 or %l0, 0, %l0
 sethi %hi(.ConstantString1), %o0
 or %o0, %lo(.ConstantString1), %o0

@@ -34,22 +34,22 @@ or %l3, %l2, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L17497
+be %icc, .L17949
 nop
-ba %icc, .L17502
+ba %icc, .L17954
 nop
-.L17497:
+.L17949:
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L17507
+ba %icc, .L17959
 nop
-.L17502:
-ba %icc, .L17507
+.L17954:
+ba %icc, .L17959
 nop
-.L17507:
+.L17959:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -60,11 +60,11 @@ movle %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L17513
+be %icc, .L17965
 nop
-ba %icc, .L17525
+ba %icc, .L17977
 nop
-.L17513:
+.L17965:
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 sethi %hi(0), %l0
@@ -79,12 +79,12 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L17530
+ba %icc, .L17982
 nop
-.L17525:
-ba %icc, .L17530
+.L17977:
+ba %icc, .L17982
 nop
-.L17530:
+.L17982:
 mov %i0, %l0
 mov %i0, %l2
 sethi %hi(1), %l1
@@ -109,7 +109,7 @@ save %sp, -96, %sp
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %l0
-.L17558:
+.L18010:
 or %l0, 0, %l2
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
@@ -123,11 +123,11 @@ movne %icc, 1, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L17565
+be %icc, .L18017
 nop
-ba %icc, .L17605
+ba %icc, .L18057
 nop
-.L17565:
+.L18017:
 sethi %hi(.ConstantString2), %o0
 or %o0, %lo(.ConstantString2), %o0
 add %sp, 92, %o1
@@ -173,9 +173,9 @@ call scanf
 nop
 ldsw [%sp + 92], %l0
 or %l0, 0, %l0
-ba %icc, .L17558
+ba %icc, .L18010
 nop
-.L17605:
+.L18057:
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
 or %l0, 0, %i0

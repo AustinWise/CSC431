@@ -54,7 +54,7 @@ sum:
 save %sp, -96, %sp
 sethi %hi(0), %l3
 or %l3, %lo(0), %l3
-.L7834:
+.L7678:
 mov %i0, %l1
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
@@ -65,11 +65,11 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L7840
+be %icc, .L7684
 nop
-ba %icc, .L7867
+ba %icc, .L7711
 nop
-.L7840:
+.L7684:
 or %l3, 0, %l1
 mov %i0, %l0
 add %l1, %l0, %l0
@@ -79,9 +79,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sub %l1, %l0, %l0
 mov %l0, %i0
-ba %icc, .L7834
+ba %icc, .L7678
 nop
-.L7867:
+.L7711:
 or %l3, 0, %l0
 or %l0, 0, %i0
 ret
@@ -137,11 +137,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L7923
+be %icc, .L7767
 nop
-ba %icc, .L7931
+ba %icc, .L7775
 nop
-.L7923:
+.L7767:
 sethi %hi(10000), %l0
 or %l0, %lo(10000), %l0
 mov %l0, %o0
@@ -149,9 +149,9 @@ call sum
 nop
 mov %o0, %l0
 or %l0, 0, %l3
-ba %icc, .L7974
+ba %icc, .L7818
 nop
-.L7931:
+.L7775:
 sethi %hi(global2), %l0
 or %l0, %lo(global2), %l0
 ldsw [%l0 + 0], %l1
@@ -164,11 +164,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L7939
+be %icc, .L7783
 nop
-ba %icc, .L7947
+ba %icc, .L7791
 nop
-.L7939:
+.L7783:
 sethi %hi(20000), %l0
 or %l0, %lo(20000), %l0
 mov %l0, %o0
@@ -176,12 +176,12 @@ call sum
 nop
 mov %o0, %l0
 or %l0, 0, %l3
-ba %icc, .L7952
+ba %icc, .L7796
 nop
-.L7947:
-ba %icc, .L7952
+.L7791:
+ba %icc, .L7796
 nop
-.L7952:
+.L7796:
 sethi %hi(global3), %l0
 or %l0, %lo(global3), %l0
 ldsw [%l0 + 0], %l1
@@ -194,11 +194,11 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L7958
+be %icc, .L7802
 nop
-ba %icc, .L7966
+ba %icc, .L7810
 nop
-.L7958:
+.L7802:
 sethi %hi(30000), %l0
 or %l0, %lo(30000), %l0
 mov %l0, %o0
@@ -206,15 +206,15 @@ call sum
 nop
 mov %o0, %l0
 or %l0, 0, %l3
-ba %icc, .L7972
+ba %icc, .L7816
 nop
-.L7966:
-ba %icc, .L7972
+.L7810:
+ba %icc, .L7816
 nop
-.L7972:
-ba %icc, .L7974
+.L7816:
+ba %icc, .L7818
 nop
-.L7974:
+.L7818:
 or %l3, 0, %l0
 or %l0, 0, %i0
 ret
@@ -236,11 +236,9 @@ restore
 .type    hoisting, #function
 hoisting:
 save %sp, -96, %sp
-sethi %hi(2), %l4
-or %l4, %lo(2), %l4
 sethi %hi(0), %l3
 or %l3, %lo(0), %l3
-.L8633:
+.L8477:
 or %l3, 0, %l1
 sethi %hi(1000000), %l0
 or %l0, %lo(1000000), %l0
@@ -251,20 +249,21 @@ movl %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L8639
+be %icc, .L8483
 nop
-ba %icc, .L8687
+ba %icc, .L8531
 nop
-.L8639:
+.L8483:
 or %l3, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
 or %l0, 0, %l3
-ba %icc, .L8633
+ba %icc, .L8477
 nop
-.L8687:
-or %l4, 0, %l0
+.L8531:
+sethi %hi(2), %l0
+or %l0, %lo(2), %l0
 or %l0, 0, %i0
 ret
 restore
@@ -274,9 +273,8 @@ restore
 .type    doubleIf, #function
 doubleIf:
 save %sp, -96, %sp
-sethi %hi(1), %l4
-or %l4, %lo(1), %l4
-or %l4, 0, %l1
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sethi %hi(0), %l2
@@ -286,12 +284,13 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L8715
+be %icc, .L8559
 nop
-ba %icc, .L8758
+ba %icc, .L8602
 nop
-.L8715:
-or %l4, 0, %l1
+.L8559:
+sethi %hi(1), %l1
+or %l1, %lo(1), %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 sethi %hi(0), %l2
@@ -301,26 +300,25 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L8727
+be %icc, .L8571
 nop
-ba %icc, .L8737
+ba %icc, .L8581
 nop
-.L8727:
-ba %icc, .L8754
+.L8571:
+ba %icc, .L8598
 nop
-.L8737:
-ba %icc, .L8754
+.L8581:
+ba %icc, .L8598
 nop
-.L8754:
-sethi %hi(50), %l3
-or %l3, %lo(50), %l3
-ba %icc, .L8763
+.L8598:
+ba %icc, .L8607
 nop
-.L8758:
-ba %icc, .L8763
+.L8602:
+ba %icc, .L8607
 nop
-.L8763:
-or %l3, 0, %l0
+.L8607:
+sethi %hi(50), %l0
+or %l0, %lo(50), %l0
 or %l0, 0, %i0
 ret
 restore
@@ -362,18 +360,18 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L9083
+be %icc, .L8797
 nop
-ba %icc, .L9096
+ba %icc, .L8803
 nop
-.L9083:
+.L8797:
 mov %i1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L9138
+ba %icc, .L8824
 nop
-.L9096:
+.L8803:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -389,9 +387,9 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L9138
+ba %icc, .L8824
 nop
-.L9138:
+.L8824:
 	.size    tailRecursionHelper, .-tailRecursionHelper
 	.align 4
 	.global tailRecursion
@@ -415,12 +413,10 @@ restore
 .type    unswitching, #function
 unswitching:
 save %sp, -96, %sp
-sethi %hi(1), %l4
-or %l4, %lo(1), %l4
-sethi %hi(2), %l3
-or %l3, %lo(2), %l3
-.L9200:
-or %l4, 0, %l1
+sethi %hi(1), %l3
+or %l3, %lo(1), %l3
+.L8853:
+or %l3, 0, %l1
 sethi %hi(1000000), %l0
 or %l0, %lo(1000000), %l0
 sethi %hi(0), %l2
@@ -430,12 +426,13 @@ movl %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L9212
+be %icc, .L8859
 nop
-ba %icc, .L9268
+ba %icc, .L8898
 nop
-.L9212:
-or %l3, 0, %l1
+.L8859:
+sethi %hi(2), %l1
+or %l1, %lo(2), %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 sethi %hi(0), %l2
@@ -445,31 +442,31 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L9226
+be %icc, .L8867
 nop
-ba %icc, .L9243
+ba %icc, .L8877
 nop
-.L9226:
-or %l4, 0, %l1
+.L8867:
+or %l3, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
-or %l0, 0, %l4
-ba %icc, .L9266
+or %l0, 0, %l3
+ba %icc, .L8896
 nop
-.L9243:
-or %l4, 0, %l1
+.L8877:
+or %l3, 0, %l1
 sethi %hi(2), %l0
 or %l0, %lo(2), %l0
 add %l1, %l0, %l0
-or %l0, 0, %l4
-ba %icc, .L9266
+or %l0, 0, %l3
+ba %icc, .L8896
 nop
-.L9266:
-ba %icc, .L9200
+.L8896:
+ba %icc, .L8853
 nop
-.L9268:
-or %l4, 0, %l0
+.L8898:
+or %l3, 0, %l0
 or %l0, 0, %i0
 ret
 restore
@@ -483,7 +480,7 @@ sethi %hi(0), %l4
 or %l4, %lo(0), %l4
 sethi %hi(0), %l0
 or %l0, %lo(0), %l0
-.L9287:
+.L8917:
 or %l4, 0, %l2
 mov %i0, %l1
 sethi %hi(0), %l3
@@ -493,11 +490,11 @@ movl %icc, 1, %l3
 sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 cmp %l3, %l1
-be %icc, .L9294
+be %icc, .L8924
 nop
-ba %icc, .L9400
+ba %icc, .L9030
 nop
-.L9294:
+.L8924:
 or %l0, 0, %l1
 sethi %hi(19), %l0
 or %l0, %lo(19), %l0
@@ -538,9 +535,9 @@ sethi %hi(1), %l1
 or %l1, %lo(1), %l1
 add %l2, %l1, %l1
 or %l1, 0, %l4
-ba %icc, .L9287
+ba %icc, .L8917
 nop
-.L9400:
+.L9030:
 or %l0, 0, %l0
 or %l0, 0, %i0
 ret
@@ -557,7 +554,7 @@ sethi %hi(1), %l4
 or %l4, %lo(1), %l4
 sethi %hi(0), %l3
 or %l3, %lo(0), %l3
-.L9424:
+.L9054:
 or %l3, 0, %l1
 mov %i0, %l0
 sethi %hi(0), %l2
@@ -567,11 +564,11 @@ movl %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L9431
+be %icc, .L9061
 nop
-ba %icc, .L9469
+ba %icc, .L9099
 nop
-.L9431:
+.L9061:
 or %l4, 0, %l1
 or %l5, 0, %l0
 add %l1, %l0, %l0
@@ -585,9 +582,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l1, %l0, %l0
 or %l0, 0, %l3
-ba %icc, .L9424
+ba %icc, .L9054
 nop
-.L9469:
+.L9099:
 or %l4, 0, %l0
 or %l0, 0, %i0
 ret
@@ -616,18 +613,18 @@ or %l3, %l2, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l1, %l0
-be %icc, .L9493
+be %icc, .L9123
 nop
-ba %icc, .L9499
+ba %icc, .L9129
 nop
-.L9493:
+.L9123:
 mov %i0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L9522
+ba %icc, .L9152
 nop
-.L9499:
+.L9129:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -648,9 +645,9 @@ add %l0, %l1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L9522
+ba %icc, .L9152
 nop
-.L9522:
+.L9152:
 	.size    recursiveFibonacci, .-recursiveFibonacci
 	.align 4
 	.global main
@@ -666,7 +663,7 @@ ldsw [%sp + 92], %l0
 or %l0, 0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
-.L9534:
+.L9164:
 or %l0, 0, %l3
 or %l1, 0, %l2
 sethi %hi(0), %l4
@@ -676,11 +673,11 @@ movl %icc, 1, %l4
 sethi %hi(1), %l2
 or %l2, %lo(1), %l2
 cmp %l4, %l2
-be %icc, .L9541
+be %icc, .L9171
 nop
-ba %icc, .L9693
+ba %icc, .L9323
 nop
-.L9541:
+.L9171:
 call constantFolding
 nop
 mov %o0, %l2
@@ -843,9 +840,9 @@ sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 add %l2, %l0, %l0
 or %l0, 0, %l0
-ba %icc, .L9534
+ba %icc, .L9164
 nop
-.L9693:
+.L9323:
 sethi %hi(9999), %l0
 or %l0, %lo(9999), %l0
 sethi %hi(.ConstantString1), %o0

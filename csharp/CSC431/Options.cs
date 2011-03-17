@@ -117,7 +117,6 @@ namespace CSC431
                 flow = flow.FollowWith(OptSteps.ConstantFolding());
                 flow = flow.FollowWith(OptSteps.PowerReduction());
                 flow = flow.FollowWith(OptSteps.UselessCodeRemoval());
-                //flow = flow.FollowWith(OptSteps.CommonSubExprElim());
 
                 if (Options.DumpIL.Value)
                     flow.FollowWith(IlSteps.PrintCFG("afterOpt.il"));
