@@ -18,35 +18,51 @@
 
 A small data flow engine hooks all the pieces of the compiler together.
 First we parse the command line arguments.
-Based on the values we obtain from the argument parser we construct a tree of tasks that represents the actions we are going to perform.
-The nodes in the tree represent the actions, the edges pass data from one node to its dependants.
-Next, using our Step.DoAll function we execute each step in a topological sorted order.
+Based on the values we obtain from the argument parser we construct a tree of tasks that represents the actions we want to perform.
+The nodes in the tree represent the actions and the edges pass data from one node to its dependants.
+Using our Step.DoAll function we execute each step in a topological sorted order, passing the output of each step to the input of the steps that depend on it.
 
-\begin{figure}
-\includegraphics{compSteps.png}
-\caption{Handling the two exceptions.}
-\label{success}
-\end{figure}
+
+The tree of tasks is designed to be run inside of a .NET Task.
+A TaskLocal class allows for global variables that have a specific value for each task, similar to thread local storage.
+This allows many files to be compiled simultaneously inside one process.
+The CompileAllBenchmarks.exe program takes advantage of this to compile all the benchmarks quickly.
+
+%\begin{figure}
+%\includegraphics{compSteps.png}
+%\caption{Handling the two exceptions.}
+%\label{success}
+%\end{figure}
 
 	
-\pagebreak
+%\pagebreak
 
 \section{Representation of Key Data}
 
 
 \subsection{Instructions}
-base instruction class has source and destination sources to assist with optimizations and register allocation
-for each instruction type we use a T4 template to generate specific subclasses for each individual instruction
-also each instruction has flags annotations that influence code generation
-these templates also generate a miloc converter and imiloc translator to aid in translating miloc to sparc
+All instruction classes inherit from the abstract Instruction class.
+This class has a couple properties, such as the source and destination registers, which allow optimizations and register allocation to be written in a generic way.
+There are also abstract instruction classes in the type hierarchy for SPARC, Miloc, and LLVM that carry extra information for those types of instructions.
+
+
+We use the T4 templating engine to generate one class for each instruction.
+Each instruction is defined with a single line that gives its name and operands.
+Optionally flags can be used to mark an instruction as critical or otherwise change their functionality.
+Additionally the templates generate classes and interfaces to aid in the translation of instructions from one type to another (i.e. Miloc to SPARC).
 
 \subsection{Control Flow Graph}
-base node class represents abstract node
-specific nodes for if/loop/basic blocks/series of nodes
-all nodes have a generic type parameter to ensure that they only hold instructions of one type, e.g. sparc/miloc
-all nodes in the control flow graph have the ability to copy their structure while at the same time applying a supplied implementation of the IInstructionConverter Interface to convert instructions in basic blocks from one type of instruction to another
-this facility is used both for converting between instruction types and for doing code transformations on a single instruction type.
-the IInstructionConverter allows n:m mapping between instructions. the code is sexy, look at it.
+All nodes in the control flow graph inherit from the Node class.
+The node classes have a generic type parameter that can be used to limit them to holding one type of instruction at a time.
+This abstract base class provides information such as a next list and label number to aid in optimizations and printing.
+There are subclasses of Node for conditionals, loops, and basic blocks.
+
+
+All nodes have the ability to copy themselves using the Convert function.
+The Convert function takes an implementation of the IInstructionConverter interface to convert its instructions.
+The IInstructionConverter interface allows for an n:m mapping of instructions.
+This facility is used both for converting between instruction types and for doing code transformations on a single instruction type.
+
 
 \section{Optimizations Implemented}
 
@@ -57,7 +73,8 @@ The local table is constantly being updated with values of registers that are kn
 When we encounter an unknown instruction we remove all of its destination registers from the local table.
 After traversing each block individually we iteratively visit each block again looking for cross block constant expressions until we can find no more.
 We use reaching definitions of the source registers to check if they have a constant value.
-The resulting map of instructions to constant values is used by ConstantFoldingConverter (an implementation of IInstructionConverter) to replace the instructions with loads.
+The resulting map of instructions to constant values is used by ConstantFoldingConverter (an implementation of IInstructionConverter)
+to replace the instructions with loads.
 \subsection{Power Reduction}
 We use our IInstructionConverter interface to implement a class that primarily passes through instructions unchanged.
 However, when it encounters a multiply or divide instruction whose second argument is a constant value that is a power of two, instead we yield a shift instruction.
