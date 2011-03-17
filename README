@@ -1,0 +1,14 @@
+The solution file csharp/CSC431.sln can be compiled either using Visual Studio
+2010 on a lab computer or using the xbuild command from Mono
+(http://www.mono-project.com/).  You will need Mono 2.8 or higher.
+
+The compiler exe should be placed at csharp/CSC431/bin/Debug/CSC431.exe.  It can
+be run with this command:
+  mono --runtime=v4.0.30319 CSC431.exe
+The lower caseness of the v is important. 
+
+By default it will read a program from standard in.  You can also provide a file
+name as an argument.  Add --help  to see a list of command line arguments.
+
+Compiling with LLVM will only work on Windows and the generated LLVM bitcode
+only translates correctly on x86 or x64.
