@@ -14,18 +14,18 @@ move %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L10677
+be %icc, .L10642
 nop
-ba %icc, .L10683
+ba %icc, .L10651
 nop
-.L10677:
+.L10642:
 mov %i1, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L10700
+ba %icc, .L10678
 nop
-.L10683:
+.L10651:
 mov %i0, %l1
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
@@ -39,9 +39,9 @@ mov %o0, %l0
 or %l0, 0, %i0
 ret
 restore
-ba %icc, .L10700
+ba %icc, .L10678
 nop
-.L10700:
+.L10678:
 	.size    fun2, .-fun2
 	.align 4
 	.global fun1
@@ -70,11 +70,11 @@ movg %icc, 1, %l2
 sethi %hi(1), %l0
 or %l0, %lo(1), %l0
 cmp %l2, %l0
-be %icc, .L10741
+be %icc, .L10738
 nop
-ba %icc, .L10752
+ba %icc, .L10749
 nop
-.L10741:
+.L10738:
 or %l4, 0, %l1
 mov %i0, %l0
 mov %l1, %o0
@@ -87,7 +87,7 @@ ret
 restore
 ba %icc, .L10786
 nop
-.L10752:
+.L10749:
 sethi %hi(5), %l1
 or %l1, %lo(5), %l1
 sethi %hi(6), %l0
