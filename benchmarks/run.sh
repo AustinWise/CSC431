@@ -11,6 +11,13 @@ foreach dir (`find -mindepth 1 -type d`)
      diff -wb ${asmfile}.output.ev output >&! /dev/null
      echo "    ${status}"
    end
+   foreach exefile (*.exe)
+    echo "  ** ${exefile} **"
+	mono --runtime=v4.0.30319 ${exefile} < input >&! ${exefile}.output.ev
+    diff -wb ${exefile}.output.ev output >&! /dev/null
+    echo "    ${status}"
+
+   end
    
    cd ..
 end
