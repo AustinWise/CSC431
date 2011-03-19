@@ -10,5 +10,22 @@ The lower caseness of the v is important.
 By default it will read a program from standard in.  You can also provide a file
 name as an argument.  Add --help  to see a list of command line arguments.
 
+To quickly compile all the benchmarks, run the CompileAllBenchmarks program.
+The working directory has to be the Debug folder in which the program is placed,
+as it looks for the benchmark directory reltive to the currect directory.
+
+  cd csharp/CompileAllBenchmarks/bin/Debug
+  mono --runtime=v4.0.30319 CompileAllBenchmarks.exe
+
+A compiled version of each benchmark is already included both with and without
+optimizations as code.s and noopt.s in each benchmark folder, respectivly.
+
 Compiling with LLVM will only work on Windows and the generated LLVM bitcode
 only translates correctly on x86 or x64.
+
+
+Third Party Code
+----------------
+
+We use the NDesk.Options library, in NDesk.Options.cs, to parse command line
+arguments.
