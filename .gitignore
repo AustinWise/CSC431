@@ -9,6 +9,7 @@ bin/*
 obj/*
 *.cache
 *.tokens
+.vs/
 output.ev
 a.out
 
