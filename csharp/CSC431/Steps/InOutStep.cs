@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CSC431.Steps
 {
@@ -17,6 +14,18 @@ namespace CSC431.Steps
 
         public In Input { get; set; }
         public Out Output { get; set; }
+
+        object IInStep.InputAsObject
+        {
+            get => Input;
+            set => Input = (In)value;
+        }
+
+        object IOutStep.OutputAsObject
+        {
+            get => Output;
+            set => Output = (Out)value;
+        }
 
         protected override void Process()
         {

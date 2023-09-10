@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CSC431.Steps
+﻿namespace CSC431.Steps
 {
-    public interface IInStep<T> : IStep
+    public interface IInStep : IStep
+    {
+        object InputAsObject { get; set; }
+    }
+
+    public interface IInStep<T> : IInStep
     {
         T Input { get; set; }
     }

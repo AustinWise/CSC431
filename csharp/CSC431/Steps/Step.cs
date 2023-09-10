@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Reflection;
 
 namespace CSC431.Steps
 {
@@ -18,7 +17,7 @@ namespace CSC431.Steps
         }
 
         private Step parent;
-        private List<Step> nexts = new List<Step>();
+        private List<IInStep> nexts = new List<IInStep>();
         public string Name { get; private set; }
 
         protected void SetName(MethodInfo meth)
@@ -46,41 +45,19 @@ namespace CSC431.Steps
             Name = className + "." + methName;
         }
 
-        protected void AddNext(Step next)
+        protected void AddNext(IInStep next)
         {
             if (next == null)
                 throw new ArgumentNullException();
-            next.parent = this;
+
+            var s = next.AsStep();
+            s.parent = this;
             nexts.Add(next);
         }
 
         public Step AsStep()
         {
             return this;
-        }
-
-        private static bool isOut(System.Type t)
-        {
-            foreach (var i in t.GetInterfaces())
-            {
-                if (!i.IsGenericType)
-                    continue;
-                if (typeof(IOutStep<>).IsAssignableFrom(i.GetGenericTypeDefinition()))
-                    return true;
-            }
-            return false;
-        }
-
-        private static bool isIn(System.Type t)
-        {
-            foreach (var i in t.GetInterfaces())
-            {
-                if (!i.IsGenericType)
-                    continue;
-                if (typeof(IInStep<>).IsAssignableFrom(i.GetGenericTypeDefinition()))
-                    return true;
-            }
-            return false;
         }
 
         public static void DoAll(Step s)
@@ -98,17 +75,14 @@ namespace CSC431.Steps
                 s = toDos.Dequeue();
                 s.Process();
 
-                if (isOut(s.GetType()))
+                if (s is IOutStep outStep)
                 {
-                    //it ~should~ be ok to use dynamic like this as the 
-                    //FollowWith functions should have ensured that types lined up
-                    dynamic ds = s;
-                    dynamic res = ds.Output;
+                    // FollowWith should have made sure the types are compatible.
+                    object res = outStep.OutputAsObject;
                     foreach (var n in s.nexts)
                     {
-                        dynamic dn = n;
-                        dn.Input = res;
-                        toDos.Enqueue(n);
+                        n.InputAsObject = res;
+                        toDos.Enqueue(n.AsStep());
                     }
                 }
                 else
@@ -149,24 +123,21 @@ namespace CSC431.Steps
                 else
                     t = map[s.parent].ContinueWith(_ => s.Process());
 
-                if (isOut(s.GetType()))
+                if (s is IOutStep outStep)
                 {
                     t = t.ContinueWith(_ =>
                     {
-                        //it ~should~ be ok to use dynamic like this as the 
-                        //FollowWith functions should have ensured that types lined up
-                        dynamic ds = s;
-                        dynamic res = ds.Output;
+                        // FollowWith should have made sure the types are compatible.
+                        object res = outStep.OutputAsObject;
                         foreach (var n in s.nexts)
                         {
-                            dynamic dn = n;
-                            dn.Input = res;
+                            n.InputAsObject = res;
                         }
                     });
 
                     foreach (var n in s.nexts)
                     {
-                        toDos.Enqueue(n);
+                        toDos.Enqueue(n.AsStep());
                     }
                 }
                 else
@@ -200,11 +171,11 @@ namespace CSC431.Steps
                 s = toDos.Dequeue();
                 allSteps.Add(s);
 
-                if (isOut(s.GetType()))
+                if (s is IOutStep)
                 {
                     foreach (var n in s.nexts)
                     {
-                        toDos.Enqueue(n);
+                        toDos.Enqueue(n.AsStep());
                     }
                 }
                 else
@@ -227,7 +198,7 @@ namespace CSC431.Steps
             {
                 foreach (var next in allSteps[i].nexts)
                 {
-                    sb.AppendFormat("\tn{0} -> n{1}", i, allSteps.IndexOf(next));
+                    sb.AppendFormat("\tn{0} -> n{1}", i, allSteps.IndexOf(next.AsStep()));
                     sb.AppendLine();
                 }
             }

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CSC431.Steps
+﻿namespace CSC431.Steps
 {
-    public interface IOutStep<T> : IStep
+    public interface IOutStep : IStep
+    {
+        object OutputAsObject { get; set; }
+    }
+
+    public interface IOutStep<T> : IOutStep
     {
         T Output { get; set; }
         void FollowWith(InStep<T> next);
